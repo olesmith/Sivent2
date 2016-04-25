@@ -5,7 +5,7 @@ array
    'Host' => '127.0.0.1',
    'DB' => 'sivent2',
    'User' => 'sivent2',
-   'Password' => '1gl.oexe',
+   'Password' => 'password',
    
    'Mod' => TRUE,
    'Debug' => TRUE,
