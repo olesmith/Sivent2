@@ -1,0 +1,634 @@
+  	  	*
+	  	{
+	  		font-size: 12px;
+            font-family: Verdana, Geneva, sans-serif;
+	  	}
+	  	body
+        { 
+	  		background: $DarkBlue;
+	  	}
+	  	*.ModuleCell
+        {
+          background: $Blue;
+	  	}
+	  	*.Bold
+        {
+	  		font-weight: Bold;
+	  	}
+	  	*.Italic
+        {
+	  		font-style: Italic;
+	  	}
+	  	*.Underline
+        {
+	  		text-decoration: underline;
+	  	}
+	  	*.applicationtitle
+        {
+	  		color: $LightDark: 
+	  		font-size: 18px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            text-align: left;
+            vertical-align: middle;
+	  	}
+	  	*.applicationname
+        {
+	  		color: $LightDark;
+	  		font-size: 22px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            text-align: center;
+            vertical-align: middle;
+	  	}
+	  	*.inactivemenuitem{
+	  		color: $Grey;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.activemenuitem{
+	  		color: $Dark;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-style: Italic;
+	  	}
+	  	a.ptablemenu{
+	  		color: $Yellow;
+	  		background: $DarkBlue;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  		font-family: Roman;
+	  	}
+	  	a.stablemenu
+        {
+	  		color: $Yellow;
+	  		background: $DarkBlue;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	a.atablemenu
+        {
+	  		color: $Yellow;
+	  		background: $DarkBlue;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	a
+        {
+	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: underline;
+	  		font-weight: Bold;
+	  	}
+	  	a:hover
+        {
+	  		background: $Dark;
+	  		color: $White;
+	  	}
+	  	h1
+	  	{
+  	  		color: $Black;
+	  		font-size: 20px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	h2
+	  	{
+  	  		color: $Black;
+	  		font-size: 18px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	h3
+	  	{
+  	  		color: $Black;
+	  		font-size: 16px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	h4
+	  	{
+  	  		color: $Black;
+	  		font-size: 14px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	h5
+	  	{
+  	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	h6
+	  	{
+  	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	button
+	  	{
+  	  		color: $Yellow;
+  	  		background: $DarkBlue;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	button:hover
+	  	{
+  	  		color: $White;
+  	  		/* background: $Black; 8*/
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	select
+	  	{
+  	  		color: $Dark;
+  	  		background: $White;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	area
+	  	{
+  	  		color: $Dark;
+  	  		background: $Light;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	input
+	  	{
+  	  		color: $Dark;
+  	  		background: $White;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	checkbox,
+	  	{
+  	  		color: $Dark;
+  	  		background: $Light;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	option
+	  	{
+  	  		color: $Black;
+  	  		background: $Light;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  	}
+	  	option.disabled
+	  	{
+  	  		color: $White;
+  	  		background: $Dark;
+	  		font-size: 10px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  	}
+	  	*.supporttable
+	    {
+	  		color: $Black;
+	  		background: $LightDark;
+	  	}
+	  	*.colaboratortable
+	    {
+	  		color: $Black;
+	  		background: $LightDark;
+	  	}
+	  	a.even
+	    {
+	  		color: $Black;
+	  		background: $LightDark;
+	  	}
+	  	td
+        {
+	  		vertical-align: top;
+	  		text-align: left;
+	  	}
+	  	td.center
+        {
+	  		vertical-align: middle;
+	  		text-align: center;
+	  	}
+	  	*.head
+	    {
+	  		font-size: 14px;
+	  		text-decoration: bold;
+	  		color: $Blue;
+	  		text-align: center;
+	  		background: $DarkBlue;
+	  	}
+	  	th.head
+	    {
+	  		font-size: 14px;
+	  		text-decoration: bold;
+	  		color: $Blue;
+	  		text-align: center;
+	  		background: $DarkBlue;
+	  	}
+	  	tr.head
+	    {
+	  		color: $Blue;
+	  		background: $DarkBlue;
+	  	}
+	  	tr.ceven
+	    {
+	  		color: $Yellow;
+	  		background: $DarkBlue;
+	  	}
+	  	tr.codd
+	    {
+	  		color: $Black;
+	  		background: $Blue;
+	  	}
+
+	  	tr.even
+	    {
+	  		color: $White;
+	  		background: $DarkBlue;
+	  	}
+	  	tr.even:hover
+        {
+	  		color: $Yellow;
+	  	}
+
+
+	  	tr.odd
+	    {
+	  		color: $Black;
+	  		background: $Blue;
+	  	}
+	  	tr.odd:hover
+        {
+	  		color: $Yellow;
+	  	}
+	  	td.ceven
+	    {
+	  		color: $Black;
+	  	}
+	  	td.codd
+	    {
+	  		color: $White;
+	  		/* background: $DarkLight; */
+	  	}
+	  	td.even
+	    {
+	  		color: $Black;
+	  		/* background: $LightDark; */
+	  	}
+	  	td.odd
+	    {
+	  		color: $White;
+	  		/* background: $Dark; */
+	  	}
+	  	td.odd:hover
+        {
+	  		color: $Black;
+	  		/* background: $Light; */
+	  	}
+	  	td.even:hover
+        {
+	  		color: $White;
+	  	}
+	  	*.pagingtitle
+	  	{
+  	  		color: #007700;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.menuitem
+        {
+	  		color: #000099;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.menuinactive
+        {
+	  		color: #000033;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.menutitle
+        {
+	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            font-style: Italic;
+	  	}
+	  	*.datagroupmenuitem
+        {
+	  		color: #000099;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.datagroupmenuinactive
+        {
+	  		color: #336633;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.datagroupmenutitle
+        {
+	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            font-style: Italic;
+	  	}
+	  	*.periodtitle
+	  	{
+  	  		color: $Light;
+	  		font-size: 16px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	*.userinfotable
+	  	{
+  	  		color: $Yellow;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  		font-weight: Bold;
+	  	}
+	  	*.leftmenuperiod
+	  	{
+  	  		color: #990000;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	*.leftmenulist
+        {
+            background-color: $DarkBlue;
+	  		color: $Yellow;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            font-style: Italic;
+            list-style-type: none;
+	  	}
+	  	*.leftmenutitle
+        {
+            background-color: $Dark;
+	  		color: $White;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+            font-style: Italic;
+	  	}
+	  	a.leftmenulinks
+        {
+	  		color: $Yellow;
+	  	/*	background: $LightDark;*/
+	  		font-size: 12px;
+	  		text-decoration: underline;
+	  		font-weight: Bold;
+	  	}
+	  	a.leftmenulinks:hover
+        {
+	  	/*	background: $LightDark;*/
+	  		color: $Grey;
+	  	}
+	  	*.periodphrase
+	  	{
+  	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  		font-weight: Bold;
+	  	}
+	  	*.phrase
+	  	{
+  	  		color: $Black;
+	  		font-size: 16px;
+	  		font-style: Italic;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	*.searchrow
+        {
+	  		color: $White;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.searchtable
+	  	{
+	  		font-size: 16px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	*.searchtabletitle
+	  	{
+  	  		color: $LightDark;
+	  		font-size: 16px;
+	  		text-decoration: None;
+	  		text-align: center;
+	  		font-weight: Bold;
+	  	}
+	  	*.searchtitle
+	  	{
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  		font-weight: Bold;
+	  	}
+	  	*.printformtitle
+	  	{
+  	  		color: $Black;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  		font-weight: Bold;
+	  	}
+	  	*.datatitle
+        {
+	  		color: #0000FF;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.datatitlelink
+        {
+	  		font-size: 14px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.datatitleimg
+        {
+            background-color: $LightDark;
+	  		color: $Dark;
+	  	}
+	  	*.data
+        {
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		font-weight: Normal;
+	  	}
+	  	*.center
+	  	{
+	  		text-align: center;
+	  	}
+	  	*.left
+	  	{
+	  		text-align: left;
+	  	}
+	  	*.right
+	  	{
+	  		text-align: right;
+	  	}
+	  	*.top
+	  	{
+	  		vertical-align: top;
+	  	}
+	  	*.errors
+        {
+	  		color: #Black;
+	  		font-size: 14px;
+	  		text-decoration: None;
+	  		font-weight: Bold;
+	  	}
+	  	*.warning
+        {
+	  		color: #$Dark;
+	  		font-size: 12px;
+	  		font-weight: Bold;
+        }
+	  	*.success
+        {
+	  		color: #0077FF;
+	  		font-size: 14px;
+	  		font-weight: Bold;
+	  	}
+ 	  	*.left
+        {
+	  		text-align: left;
+	  	}
+ 	  	*.right
+        {
+	  		text-align: right;
+	  	}
+ 	  	*.center
+        {
+	  		text-align: center;
+	  	}
+        *.leftmenu
+        {
+                        font-size: 14px;
+                        text-decoration: None;
+                        font-weight: Bold;
+        }
+	  	*.headtable
+        {
+	  		font-size: 16px;
+	  		text-align: center;
+	  		font-style: Italic;
+	  	}
+	  	*.headinst
+        {
+	  		font-size: 24px;
+            font-weight: Bold;
+            color: $LightGrey;
+	  	}
+	  	*.headdept
+        {
+	  		font-size: 22px;
+            font-weight: Bold;
+            color: $LightGrey;
+	  	}
+	  	*.headtitle
+        {
+	  		font-size: 20px;
+            font-weight: Bold;
+	  	}
+	  	*.headaddress
+        {
+	  		font-size: 18px;
+            font-weight: Bold;
+            color: $LightGrey;
+	  	}
+	  	*.headcity
+        {
+	  		font-size: 16px;
+            font-weight: Bold;
+            color: $LightGrey;
+	  	}
+	  	*.headcontacts
+        {
+	  		font-size: 14px;
+            font-weight: Bold;
+            color: $LightGrey;
+	  	}
+	  	*.postloginmsg
+        {
+	  		color: #222222;
+	  		font-size: 14px;
+	  		font-weight: Bold;
+	  	}
+	  	*.spammsg
+        {
+	  		color: #888888;
+	  		font-size: 12px;
+	  		font-weight: Bold;
+	  	}
+	  	*.uploadmsg
+        {
+	  		color: #007700;
+	  		font-size: 10px;
+	  		font-weight: Bold;
+	  	}
+        *.diagnostics
+        {
+          color: #0000FF;
+          font-size: 10px;
+          text-decoration: none;
+        }
+        *.diagnosticstitle
+        {
+          color: #0077FF;
+          font-size: 12px;
+          text-decoration: underline;
+          font-weight: Bold;
+          font-style: Italic;
+        }
+        *.helplink
+        {
+          color: #0033BB;
+          background-color: $White;
+          font-size: 16px;
+          text-decoration: underline;
+          font-weight: Bold;
+        }
+        *.helptext
+        {
+          color: $Black;
+          font-size: 16px;
+          text-decoration: none;
+          font-weight: Bold;
+        }
