@@ -1,0 +1,10 @@
+array
+(
+   'ModuleName' => 'Events',
+   'SqlTable' => '#Unit_Events',
+   'ItemPostProcessor' => 'PostProcess',
+   'ItemName' => 'Edital',
+   'ItemsName' => 'Editais',
+   'ItemNamer' => 'Name',
+   'Masculine' => '0',
+);

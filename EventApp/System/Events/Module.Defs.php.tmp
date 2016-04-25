@@ -1,0 +1,11 @@
+           array
+           (
+              "Module" => array
+              (
+                 "DefFile"     => "#Setup/Module.Defs.php",
+                 "File"     => "#Setup/Events/Vars.php",
+                 "Title"       => "Parâmetros de Editais",
+                 "Name"        => "Editais",
+                 "Destination" => "",
+              ),
+           );
