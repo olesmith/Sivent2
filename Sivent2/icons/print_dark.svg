@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg448"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   width="210mm"
+   height="297mm"
+   sodipodi:docname="print_dark.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata453">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs451">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective455" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="480"
+     inkscape:window-width="640"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false" />
+  <g
+     id="PDF_Dark"
+     transform="translate(-102.21124,-435.16804)">
+    <rect
+       ry="3.4032497"
+       rx="3.4032497"
+       y="432.99207"
+       x="102.16556"
+       height="64"
+       width="64"
+       id="rect3568"
+       style="fill:#464e4f;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3563"
+       d="M 118.47896,440.39241 L 118.47896,489.59173 L 149.85215,489.57153 L 149.52767,445.3611 L 143.34226,440.39249 L 118.47896,440.39249 L 118.47896,440.39241 z M 119.91884,459.98291 L 124.19793,459.98291 C 125.47493,459.98292 126.45745,460.26563 127.13853,460.83467 C 127.82407,461.39925 128.1728,462.19951 128.17281,463.24799 C 128.1728,464.30097 127.82407,465.11254 127.13853,465.68159 C 126.45745,466.24617 125.47493,466.53336 124.19793,466.53335 L 122.4944,466.53335 L 122.4944,470.02151 L 119.91884,470.02151 L 119.91884,459.98291 L 119.91884,459.98291 z M 129.99801,459.98291 L 132.71553,459.98291 C 134.23898,459.98292 135.37877,460.08784 136.12258,460.30739 C 136.87085,460.52247 137.51597,460.90303 138.04918,461.42279 C 138.51965,461.87535 138.85493,462.3929 139.08346,462.98435 C 139.31196,463.57581 139.42821,464.24379 139.42822,464.99207 C 139.42821,465.74932 139.31196,466.42414 139.08346,467.02007 C 138.85493,467.61153 138.51965,468.12908 138.04918,468.58163 C 137.51148,469.1014 136.85505,469.47748 136.1023,469.69703 C 135.34953,469.91211 134.22106,470.02151 132.71553,470.02151 L 129.99801,470.02151 L 129.99801,459.98291 L 129.99801,459.98291 z M 141.41566,459.98291 L 148.39199,459.98291 L 148.39199,461.92979 L 144.0115,461.92979 L 144.0115,463.81583 L 148.14863,463.81583 L 148.14863,465.76271 L 144.0115,465.76271 L 144.0115,470.02151 L 141.41566,470.02151 L 141.41566,459.98291 L 141.41566,459.98291 z M 122.4944,461.84867 L 122.4944,464.66759 L 123.93429,464.66759 C 124.43612,464.6676 124.81692,464.54451 125.09025,464.30255 C 125.36357,464.05611 125.49584,463.69607 125.49585,463.24799 C 125.49584,462.79992 125.36357,462.45567 125.09025,462.21371 C 124.81692,461.97176 124.43612,461.84867 123.93429,461.84867 L 122.4944,461.84867 L 122.4944,461.84867 z M 132.57357,461.92977 L 132.57357,468.05433 L 133.50645,468.05433 C 134.5639,468.05433 135.36416,467.80794 135.91978,467.28369 C 136.47986,466.75945 136.77153,465.99125 136.77154,464.99205 C 136.77153,463.99734 136.49566,463.24046 135.94006,462.72069 C 135.38444,462.20093 134.56838,461.92977 133.50645,461.92977 L 132.57357,461.92977 L 132.57357,461.92977 z"
+       style="fill:#dcf7fa;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+  </g>
+</svg>

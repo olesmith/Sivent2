@@ -1,0 +1,45 @@
+\documentclass[letterpaper,10pt]{report}
+
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage
+[
+   a4paper,
+   left=0.5cm,
+   right=0.5cm,
+   top=0.5cm,
+   bottom=0.75cm,
+   includehead,
+   includefoot,
+   headheight=2.5cm,
+   headsep=0.75cm
+]{geometry}
+
+
+\lhead{\includegraphics*[height=2cm]{#LatexIcon1}\\}
+\rhead{\includegraphics*[height=2cm]{#LatexIcon2}\\}
+\chead{
+      \textbf{
+           \begin{Large}#Unit_Title\end{Large}\\
+           \begin{large}#Unit_Name\end{large}\\
+           #Event_Title\\
+           \begin{small}#Event_Url - #Event_Email\end{small}
+      }
+}
+
+\lfoot{\small{\textbf{SiVent2: Sistema de Gestão de Evento}}}
+\cfoot{\thepage}
+\rfoot{\small{\textbf{\today}}}
+
+\pagestyle{fancy}
+\begin{document}
+\begin{center}
