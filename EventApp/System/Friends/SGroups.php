@@ -48,7 +48,7 @@ array
        "Person" => 0,
        "Public" => 0,
 
-       "Friend" => 0,
+       "Friend" => 1,
        "Coordinator" => 1,
     ),
    "Confirm" => array
