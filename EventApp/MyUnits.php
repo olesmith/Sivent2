@@ -3,8 +3,9 @@
 include_once("MyUnits/Access.php");
 include_once("MyUnits/Mails.php");
 include_once("MyUnits/MailsTypes.php");
+include_once("MyUnits/Events.php");
 
-class MyUnits extends MyUnitsMailsTypes
+class MyUnits extends MyUnitsEvents
 {
     var $MailsPath="../EventApp/System/Units/Emails";
     
@@ -13,9 +14,9 @@ class MyUnits extends MyUnitsMailsTypes
        "Register",
        "Confirm","Confirm_Resend",
        "Password_Reset",
-       //"Password_Changed",
-       "Email_Change","Email_Changed",
+       "Password_Changed",
        "Email_Created",
+       "Email_Change","Email_Changed",
     );
     
     //*

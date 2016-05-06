@@ -118,9 +118,7 @@ class DBDataObj extends Table
                 {
                     if (!empty($def[ $key.$lang ]))
                     {
-                        $def[ $key.$lang ]=
-                            //$n.": ".
-                            $def[ $key.$lang ];
+                        $def[ $key.$lang ]=$def[ $key.$lang ];
                     }
                 }
             }
@@ -133,7 +131,6 @@ class DBDataObj extends Table
 
             array_push($this->DatasGroups,$group[ "ID" ]);
         }
-
         $this->ItemDataSGroups=array_merge($this->ItemDataSGroups,$sgroups);
     }
 

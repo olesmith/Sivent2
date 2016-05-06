@@ -74,6 +74,21 @@ class Sivent2 extends AppHandle
         $args[ "SavePath" ]="?Unit=".$unit."&Action=Start";
         
         parent::Application($args);
+
+        $event=$this->CGI_GETint("Event");
+        if (!empty($event))
+        {
+            //var_dump("1".$this->URL_CommonArgs);
+            $args=$this->Query2Hash($this->URL_CommonArgs);           
+            //var_dump($args);
+           $args[ "Event" ]=$event;
+
+           $add="Event=".$event;
+           if (!empty($this->URL_CommonArgs)) { $add="&".$add; }
+           
+           $this->URL_CommonArgs.=$add;
+           //var_dump("1".$this->URL_CommonArgs);
+        }
    }
     
     //*
@@ -140,6 +155,7 @@ $application=new Sivent2
    array
    (
       "AppName" => "SiVent2",
+      "Sponsors" => TRUE,
       "PublicAllow" => TRUE,
       "SessionsTable" => "Sessions",
       "MayCreateSessionTable" => TRUE,

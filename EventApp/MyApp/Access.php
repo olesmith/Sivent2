@@ -67,5 +67,30 @@ class MyEventAppAccess extends MyEventAppAccessors
         
         return TRUE; 
     }
+    
+    //*
+    //* function AppHasSponsors, Parameter list: $event=array(),$user=array(),$profile=""
+    //*
+    //* Gets user event access. If false, aborts.
+    //*
+
+    function AppHasSponsors()
+    {
+        return $this->Sponsors;
+    }
+    
+    //*
+    //* function FriendIsInscribed, Parameter list: $event=array(),$friend=array()
+    //*
+    //* Gets user event access. If false, aborts.
+    //*
+
+    function FriendIsInscribed($event=array(),$friend=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        if (empty($friend)) { $friend=$this->LoginData(); }
+        
+        return $this->EventsObj()->FriendIsInscribed($event,$friend);
+    }
 }
 ?>

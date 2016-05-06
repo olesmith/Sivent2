@@ -9,7 +9,7 @@ array
          "Event",
          "Status",
          "Title","Title_UK",
-         "Type","Area","Level",
+         "Type","Area","Level","Certificate","Certificate_TimeLoad",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -24,7 +24,7 @@ array
        "Name_UK" => "Authors",
        "Data" => array
        (
-           "Friend","Author1","Author2","Author3",
+           "Friend","Author1","Friend2","Author2","Friend3","Author3",
         ),
 
        "Person" => 0,

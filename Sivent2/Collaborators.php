@@ -2,11 +2,14 @@
 
 include_once("Collaborators/Access.php");
 include_once("Collaborators/Table.php");
+include_once("Collaborators/Certificate.php");
 
 
 
-class Collaborators extends CollaboratorsTable
+class Collaborators extends CollaboratorsCertificate
 {
+    var $Certificate_Type=3;
+    
     //*
     //* function Units, Parameter list: $args=array()
     //*
@@ -137,9 +140,11 @@ class Collaborators extends CollaboratorsTable
 
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
+        $this->Sql_Select_Hash_Datas_Read($item,array("Friend","Collaboration","TimeLoad","Homologated","Name"));
+
         $updatedatas=array();
         
-        $this->Sql_Select_Hash_Datas_Read($item,array("TimeLoad","Collaboration","Homologated"));
+        
         if (
               empty($item[ "TimeLoad" ])
               &&
@@ -161,13 +166,117 @@ class Collaborators extends CollaboratorsTable
             $item[ "Homologated" ]=1;
             array_push($updatedatas,"Homologated");
         }
+
+        $names=array();
+        if (!empty($item[ "Collaboration" ]))
+        {
+            array_push($names,$this->CollaborationsObj()->Sql_Select_Hash_Value($item[ "Collaboration" ],"Name"));
+        }
+        
+        if (!empty($item[ "Friend" ]))
+        {
+            array_push($names,$this->FriendsObj()->Sql_Select_Hash_Value($item[ "Friend" ],"Name"));
+        }
+
+        $name=join(", ",$names);
+        if ($item[ "Name" ]!=$name)
+        {
+            $item[ "Name" ]=$name;
+            array_push($updatedatas,"Name");
+        }
  
+        $this->PostProcess_Code($item,$updatedatas);        
+        $this->PostProcess_Certificate($item);
+        
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
         }
         
         return $item;
+    }
+    
+    //*
+    //* function Certificate_Code, Parameter list: $item
+    //*
+    //* Generates certificate code.
+    //*
+
+    function Certificate_Code($item)
+    {
+        return $this->CertificatesObj()->Certificate_Code($item,$this->Certificate_Type);
+    }
+    
+    //*
+    //* function PostProcess_Code, Parameter list: &$item,&$updatedatas
+    //*
+    //* Postprocesses inscription code.
+    //*
+
+    function PostProcess_Code(&$item,&$updatedatas)
+    {
+        if (
+              !empty($item[ "ID" ])
+              &&
+              !empty($item[ "Friend" ])
+              &&
+              !empty($item[ "Event" ])
+           )
+        {
+            $code=$this->Certificate_Code($item,$this->Certificate_Type);
+            if (!empty($code) && empty($item[ "Code" ]) || $item[ "Code" ]!=$code)
+            {
+                $item[ "Code" ]=$code;
+                array_push($updatedatas,"Code");
+            }
+        }
+    }
+    
+    //*
+    //* function PostProcess_Certificate, Parameter list: &$item,&$updatedatas
+    //*
+    //* Postprocesses $item collaboration certificate.
+    //*
+
+    function PostProcess_Certificate(&$item)
+    {
+        if (!empty($item[ "Certificate" ]))
+        {
+            foreach (array("Friend") as $fdata)
+            {
+                if (empty($item[ $fdata ])) { continue; }
+                
+                $where=$this->Collaborator_Certificate_Where($item,$item[ $fdata ]);
+                $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
+                if ($item[ "Certificate" ]==1)
+                {
+                    if (count($certs)>0)
+                    {
+                        $this->CertificatesObj()->Sql_Delete_Items($where);
+                    }
+                }
+                elseif ($item[ "Certificate" ]==2)
+                {
+                    if (empty($certs))
+                    {
+                        $cert=
+                            array
+                            (
+                               "Collaborator" => $item[ "ID" ],
+                               "Collaboration" => $item[ "Collaboration" ],
+                               "Unit"        => $this->Unit("ID"),
+                               "Event"        => $item[ "Event" ],
+                               "Friend"       => $item[ $fdata ],
+                               "Type"         => $this->Certificate_Type,
+                               "Name"         => $item[ "Name" ],
+                               "Code"         => $item[ "Code" ],
+                            );
+
+                        $this->CertificatesObj()->Sql_Insert_Item($cert);
+                    }
+                }
+            }
+        }
     }
 }
 

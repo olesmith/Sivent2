@@ -19,6 +19,8 @@ include_once("Inscriptions/Handle.php");
 
 class Inscriptions extends InscriptionsHandle
 {
+    var $Certificate_Type=1;
+    
     //*
     //* function Inscriptions, Parameter list: $args=array()
     //*
@@ -209,82 +211,16 @@ class Inscriptions extends InscriptionsHandle
     }
     
     //*
-    //* function PostProcessCertificate, Parameter list: &$item,&$updatedatas
+    //* function Certificate_Code, Parameter list: $item
     //*
-    //* Postprocesses inscription certificate.
+    //* Generates certificate code.
     //*
 
-    function PostProcess_Certificate(&$item)
+    function Certificate_Code($item)
     {
-        if (!empty($item[ "Certificate" ]))
-        {
-            $where=$this->CertificatesObj()->Certificate_Where($item,1);
-
-            $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
-
-            if ($item[ "Certificate" ]==1)
-            {
-                if (count($certs)>0)
-                {
-                    $this->CertificatesObj()->Sql_Delete_Items($where);
-                }
-            }
-            elseif ($item[ "Certificate" ]==2)
-            {
-                if (empty($certs))
-                {
-                    $cert=
-                        array
-                        (
-                           "Inscription" => $item[ "ID" ],
-                           "Unit"        => $item[ "Unit" ],
-                           "Event"        => $item[ "Event" ],
-                           "Friend"       => $item[ "Friend" ],
-                           "Type"         => 1,
-                           "Name"         => $item[ "Name" ],
-                           "Code"         => $item[ "Code" ],
-                        );
-
-                    $this->CertificatesObj()->Sql_Insert_Item($cert);
-                }
-            }
-        }
+        return $this->CertificatesObj()->Certificate_Code($item,$this->Certificate_Type);
     }
-
     
-    //*
-    //* function PostProcessCode, Parameter list: &$item,&$updatedatas
-    //*
-    //* Postprocesses inscription code.
-    //*
-
-    function PostProcess_Code(&$item,&$updatedatas)
-    {
-        if (
-              empty($item[ "Code" ])
-              &&
-              !empty($item[ "ID" ])
-              &&
-              !empty($item[ "Friend" ])
-              &&
-              !empty($item[ "Event" ])
-           )
-        {
-            $code=
-                sprintf("%03d",$this->Unit("ID")).".".
-                sprintf("%03d",$item[ "Event" ]).".".
-                sprintf("%06d",$item[ "Friend" ]).".".
-                sprintf("%06d",$item[ "ID" ]).
-                "";
-
-            if (empty($item[ "Code" ]) || $item[ "Code" ]!=$code)
-            {
-                $item[ "Code" ]=$code;
-                array_push($updatedatas,"Code");
-            }
-        }
-    }
-
     
     //*
     //* function PostProcessFriendData, Parameter list: &$item,&$updatedatas
@@ -311,6 +247,77 @@ class Inscriptions extends InscriptionsHandle
             array_push($updatedatas,"Name","SortName","Email");
         }
     }
+    
+    //*
+    //* function PostProcessCertificate, Parameter list: &$item,&$updatedatas
+    //*
+    //* Postprocesses inscription certificate.
+    //*
+
+    function PostProcess_Certificate(&$item)
+    {
+        if (!empty($item[ "Certificate" ]))
+        {
+            $where=$this->Inscription_Certificate_Where($item,$this->Certificate_Type);
+
+            $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
+
+            if ($item[ "Certificate" ]==1)
+            {
+                if (count($certs)>0)
+                {
+                    $this->CertificatesObj()->Sql_Delete_Items($where);
+                }
+            }
+            elseif ($item[ "Certificate" ]==2)
+            {
+                if (empty($certs))
+                {
+                    $cert=
+                        array
+                        (
+                           "Inscription" => $item[ "ID" ],
+                           "Unit"        => $item[ "Unit" ],
+                           "Event"        => $item[ "Event" ],
+                           "Friend"       => $item[ "Friend" ],
+                           "Type"         => $this->Certificate_Type,
+                           "Name"         => $item[ "Name" ],
+                           "Code"         => $item[ "Code" ],
+                        );
+
+                    $this->CertificatesObj()->Sql_Insert_Item($cert);
+                }
+            }
+        }
+    }
+
+    
+    //*
+    //* function PostProcessCode, Parameter list: &$item,&$updatedatas
+    //*
+    //* Postprocesses inscription code.
+    //*
+
+    function PostProcess_Code(&$item,&$updatedatas)
+    {
+        if (
+              !empty($item[ "ID" ])
+              &&
+              !empty($item[ "Friend" ])
+              &&
+              !empty($item[ "Event" ])
+           )
+        {
+            $code=$this->Certificate_Code($item);
+            if (!empty($code) && empty($item[ "Code" ]) || $item[ "Code" ]!=$code)
+            {
+                $item[ "Code" ]=$code;
+                array_push($updatedatas,"Code");
+            }
+        }
+    }
+
+    
 
     //*
     //* function PostProcess_Certificate, Parameter list: &$item,&$updatedatas

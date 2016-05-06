@@ -2,21 +2,55 @@ array
 (
    "01_ShowEvent" => array
    (
+      "Name" => "Sobre o Evento",
+      "Title" => "Informações do Evento",
+      "Name_UK" => "About the Event",
+      "Title_UK" => "Event Info",
+
+      'Href' => '?Unit=#Unit&ModuleName=Events&Action=Show&Event=#Event',
+
+      'Public'    => 1,
+      'Person'    => 0,
+      'Admin'     => 0,
+
+      'Friend'     => 1,
+      'Coordinator' => 0,
+   ),
+   "01_EditEvent" => array
+   (
+
       "Name" => "Dados do Evento",
       "Title" => "Editar Dados do Evento",
       "Name_UK" => "Event Data",
       "Title_UK" => "Edit Event Data",
 
-      'Href' => '?Unit=#Unit&ModuleName=Events&Action=Edit&Event=#Event',
+       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Edit&Event=#Event',
 
-      'Public'    => 1,
+      'Public'    => 0,
       'Person'    => 0,
       'Admin'     => 1,
 
       'Friend'     => 0,
       'Coordinator' => 1,
    ),
-   "020_Inscriptions" => array
+   "021_Inscription" => array
+   (
+      "Name" => "Inscrição",
+      "Title" => "Minha Inscrição",
+      "Name_UK" => "Inscription",
+      "Title_UK" => "My Inscription",
+
+      'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=Inscription&Event=#Event',
+
+      'AccessMethod'    => "FriendIsInscribed",
+      'Public'    => 0,
+      'Person'    => 0,
+      'Admin'     => 0,
+
+      'Friend'     => 1,
+      'Coordinator' => 0,
+   ),
+   "022_Inscriptions" => array
    (
       "Name" => "Inscrições",
       "Title" => "Inscrições do Evento",
@@ -24,7 +58,6 @@ array
       "Title_UK" => "Event Inscriptions",
 
       'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasCertificates',
 
       'Public'    => 0,
       'Person'    => 0,
@@ -35,12 +68,11 @@ array
    ),
    "021_Certificates" => array
    (
-      "Name" => "Certificados",
-      "Title" => "Certificates",
-      "Name_UK" => "Certificados",
-      "Title_UK" => "Certificates",
+      "Name" => "Presenças e Certificados",
+      "Name_UK" => "Presences and Certificates",
 
       'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=EditList&Event=#Event&Inscriptions_GroupName=Certificates',
+      'AccessMethod' => 'HasCertificates',
 
       'Public'    => 0,
       'Person'    => 0,
@@ -117,7 +149,7 @@ array
       'Friend'     => 0,
       'Coordinator' => 1,
    ),
-   "06_Submissions" => array
+   "061_Submissions" => array
    (
       "Name" => "Submissões",
       "Title" => "Gerenciar Submissões",
@@ -127,11 +159,28 @@ array
       'Href' => '?Unit=#Unit&ModuleName=Submissions&Action=Search&Event=#Event',
       'AccessMethod' => 'HasSubmissions',
 
-      'Public'    => 1,
+      'Public'    => 0,
       'Person'    => 0,
       'Admin'     => 1,
 
       'Friend'     => 0,
       'Coordinator' => 1,
+   ),
+   "062_Submissions_Pub" => array
+   (
+      "Name" => "Palestres",
+      "Title" => "Palestres do Event",
+      "Name_UK" => "Talks",
+      "Title_UK" => "Talks at the Event",
+
+      'Href' => '?Unit=#Unit&ModuleName=Submissions&Action=Search&Event=#Event',
+      'AccessMethod' => 'SubmissionsPublic',
+
+      'Public'    => 1,
+      'Person'    => 0,
+      'Admin'     => 0,
+
+      'Friend'     => 1,
+      'Coordinator' => 0,
    ),
 );

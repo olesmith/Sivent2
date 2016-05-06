@@ -123,6 +123,7 @@ class ItemForms extends Fields
     function EditForm($title,$item=array(),$edit=0,$noupdate=FALSE,$datas=array(),$echo=TRUE,$extrarows=array(),$formurl=NULL,$buttons="",$cgiupdatevar="Update")
     {
         if (empty($buttons)) { $buttons=$this->Buttons(); }
+        
         $html="";
         if (count($item)==0) { $item=$this->ItemHash; }
 
@@ -176,21 +177,30 @@ class ItemForms extends Fields
  
                 $table=$this->ItemTableDataSGroup($edit,$item,$group);
 
-                if (!empty($groupdef[ "Single" ]))
-                {
-                    array_push($tables,$table);
-                    continue;
-                    //$table=$this->MultiCell(2,$table);
-                }
 
                 if (!empty($table[0]))
                 {
+                    if (!empty($groupdef[ "Single" ]))
+                    {
+                        array_push($tables,$table);
+                        if ($edit==1 && !empty($buttons))
+                        {
+                            array_push($tables,$buttons);
+                        }
+                        continue;
+                    }
+                    
                     array_push($row,$table);
-                }
+                 }
 
                 if (count($row)==2 || !empty($groupdef[ "Single" ]))
                 {
                     array_push($tables,$row);
+                    if ($edit==1 && !empty($buttons))
+                    {
+                        array_push($tables,$buttons);
+                    }
+                    
                     $row=array();
                 }
             }
@@ -198,6 +208,10 @@ class ItemForms extends Fields
             if (count($row)>0)
             {
                 array_push($tables,$row);
+                if ($edit==1 && !empty($buttons))
+                {
+                    array_push($tables,$buttons);
+                }
             }
 
             $tbl=$tables;
@@ -221,7 +235,6 @@ class ItemForms extends Fields
         if ($edit==1 && !empty($buttons))
         {
             array_unshift($tbl,$buttons);
-            array_push($tbl,$buttons);
         }
         
         $tbl=

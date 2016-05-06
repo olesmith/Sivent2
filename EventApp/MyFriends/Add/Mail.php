@@ -13,35 +13,52 @@ class MyFriendsAddMail extends MyFriendsGroups
         $this->MailTexts=$this->MyMod_Mail_Texts_Get();
 
         $args=$this->CGI_URI2Hash();
- 
-        $href=$this->ScriptExec($this->CGI_Hash2URI($args));
-        $href=preg_replace('/index.php/',"",$this->A($href));
 
-        $args[ "Action" ]="Recover";
-        $rhref=$this->ScriptExec($this->CGI_Hash2URI($args));
-        $rhref=preg_replace('/index.php/',"",$this->A($rhref));
+        
+        $args[ "Action" ]="Login";
 
-        $field="SendPassword";
-
-        //Store in $friend in order to values being filtered.
-        $friend[ "Href1" ]=$href;
-        $friend[ "Href2" ]=$rhref;
+        $rargs=$args;
+        $rargs[ "Action" ]="Recover";
+        
         $friend[ "Login_Name" ]=$this->LoginData[ "Name" ];
 
-        $this->ApplicationObj->ApplicationSendEmail
+        $mailtype="Email_Created";
+
+        $this->MyMod_Mail_Typed_Send
         (
+           $mailtype,
            $friend,
+           $this->Unit(),
            array
            (
-              "Subject" => $this->GetRealNameKey($this->MailTexts[ $field ],"Subject"),
-              "Body"    =>
-                 $this->GetRealNameKey($this->MailTexts[ "MailHead" ],"Head").
-                 "\n\n".
-                 $this->GetRealNameKey($this->MailTexts[ $field ],"Body").
-                 "\n\n---\n".
-                 $this->GetRealNameKey($this->MailTexts[ "MailTail" ],"Tail")
+              "LoginLink" => $this->ScriptExec
+              (
+                  $this->CGI_Hash2URI($args)
+              ),
+              "RecoverLoginLink" => $this->ScriptExec
+              (
+                  $this->CGI_Hash2URI($rargs)
+              ),
            )
         );
+
+        /* $field="SendPassword"; */
+
+        
+        /* $this->ApplicationObj->ApplicationSendEmail */
+        /* ( */
+        /*    $friend, */
+        /*    array */
+        /*    ( */
+        /*       "Subject" => $this->GetRealNameKey($this->MailTexts[ $field ],"Subject"), */
+        /*       "Body"    => */
+        /*          $this->GetRealNameKey($this->MailTexts[ "MailHead" ],"Head"). */
+        /*          "\n\n". */
+        /*          $this->GetRealNameKey($this->MailTexts[ $field ],"Body"). */
+        /*          "\n\n---\n". */
+        /*          $this->GetRealNameKey($this->MailTexts[ "MailTail" ],"Tail") */
+        /*    ) */
+        /* ); */
    }
 }
 

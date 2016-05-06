@@ -13,7 +13,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -35,7 +35,7 @@ array
       "Title_UK" => "Inscriptions Begins, Date",
       "Sql" => "INT",
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -56,7 +56,7 @@ array
       "Title_UK" => "Inscriptions Untill, Date",
       "Sql" => "INT",
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -77,7 +77,7 @@ array
       "Regexp" => '^\d+$',
       "Size" => 2,
      
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -97,7 +97,7 @@ array
       "Size" => 2,
       "Regexp" => '^\d+$',
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,

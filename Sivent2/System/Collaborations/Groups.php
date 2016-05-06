@@ -7,7 +7,7 @@ array
       "Data" => array
       (
          "No","Show","Edit","Delete",
-         "Unit","Event","Name","TimeLoad","Inscriptions","CertText",
+         "Unit","Event","Name","Name_UK","TimeLoad","Inscriptions","CertText","CertText_UK",
          "Collaborations_Collaborators_Noof_Cell",
          "Collaborations_Collaborators_NHomologated_Cell"
       ),

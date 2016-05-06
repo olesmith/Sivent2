@@ -13,7 +13,7 @@ array
       "Default"  => 1,
       "SelectCheckBoxes"  => 2,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -32,7 +32,7 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -51,7 +51,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -73,7 +73,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -94,7 +94,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -110,7 +110,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -126,7 +126,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -146,7 +146,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -162,7 +162,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -178,7 +178,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -199,7 +199,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -215,7 +215,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -231,7 +231,7 @@ array
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -240,14 +240,67 @@ array
    ),
    "Certificates_Latex" => array
    (
-      "Name" => "Latex",
+      "Name" => "Texto, Certificado (LaTeX)",
+      "Name_UK" => "Text, Certificate (LaTeX)",
 
       "Sql" => "TEXT",
-      "Size" => "100x20",
+      "Size" => "100x10",
 
       "Search" => FALSE,
 
-      "Public"   => 1,
+      
+      "Default" =>
+
+      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
+
+      "\\begin{Large}\n".
+      "Certificamos que:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Friend_Name}}\\end{center}\n\n".
+      
+      "\\vspace{0.25cm}\n\n".
+
+      "participou do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
+      "no dia \\textit{#Event_DateSpan},\n".
+      "com carga horária de \\textbf{#Inscription_Certificate_CH horas}.\n".
+      "\\end{Large}\n".
+      "",
+
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+   "Certificates_Latex_UK" => array
+   (
+      "Name" => "Texto, Certificado (UK)",
+      "Name_UK" => "Text, Certificate (UK)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x10",
+      "Default" =>
+      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
+
+      "\\begin{Large}\n".
+      "We hereby certify, that:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Friend_Name}}\\end{center}\n".
+      "\\vspace{0.25cm}\n\n".
+
+      "participated in \\textbf{#Event_Name}, #Event_Title, held at \\textbf{#Event_Place},\n".
+      "at the \\textit{#Event_DateSpan},\n\n".
+      "with timeload \\textbf{#Inscription_Certificate_CH hours}.\n".
+      "\\end{Large}\n\n".
+      
+      "",
+
+
+      "Search" => FALSE,
+
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,

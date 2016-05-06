@@ -55,7 +55,7 @@ array
       "Sql" => "INT",
 
       "SqlClass" => "Friends",
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -87,7 +87,7 @@ array
       "Sql" => "INT",
 
       "SqlClass" => "Friends",
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -101,6 +101,7 @@ array
       "Name_UK" => "Coauthor #1",
 
       "Sql" => "VARCHAR(256)",
+      "Search" => TRUE,
 
       "Size" => 50,
 
@@ -117,6 +118,7 @@ array
       "Name_UK" => "Coauthor #2",
 
       "Sql" => "VARCHAR(256)",
+      "Search" => TRUE,
 
       "Size" => 50,
 
@@ -135,7 +137,7 @@ array
       "Sql" => "INT",
 
       "SqlClass" => "Friends",
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -298,7 +300,7 @@ array
       "Sql" => "ENUM",
 
       "Search" => FALSE,
-      "Values" => array("Aguardando Avaliação","Aprovado","Reprovado"),
+      "Values" => array("Aguardando Avaliação","Deferido","Indeferido"),
       "Values_UK" => array("Awaiting Assessment","Selected","Refused"),
       "Default"  => 1,
 
@@ -308,6 +310,44 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
    ),
+   "Certificate" => array
+   (
+      "Name" => "Certificado Liberado",
+      "Name_UK" => "Certificate Avaliable",
+
+      "Sql" => "ENUM",
+
+      "Search" => FALSE,
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+   ),
+   "Certificate_TimeLoad" => array
+   (
+      "Name" => "Certificado CH",
+      "Name_UK" => "Certificate TimeLoad",
+
+      "Sql" => "VARCHAR(8)",
+      "Size" => 2,
+
+      "Search" => FALSE,
+      "Regexp" => '^\d+$',
+      "Default" => 2,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+   
    "Summary" => array
    (
       "Name" => "Resumo",
@@ -341,5 +381,23 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+   ),
+   "Code" => array
+   (
+      "Name" => "Código",
+      "Title" => "Código do Certificado",
+      "Name_UK" => "Code",
+      "Title_UK" => "Certificate Code",
+
+      "Size" => "50",
+      "Sql" => "VARCHAR(64)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => TRUE,
    ),
 );

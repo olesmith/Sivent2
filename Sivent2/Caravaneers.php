@@ -7,6 +7,8 @@ include_once("Caravaneers/Table.php");
 
 class Caravaneers extends CaravaneersTable
 {
+    var $Certificate_Type=1;
+    
     //*
     //* function Units, Parameter list: $args=array()
     //*

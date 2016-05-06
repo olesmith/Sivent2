@@ -121,13 +121,14 @@ class UsersRegistrationHandle extends UsersRegistrationHandlers
     {
         $friend=array
         (
-           "CondEmail"   => $this->CGI2NewEmail(),
-           "Password"    => md5($this->GetGETOrPOST("Pwd1")),
-           "Name"        => $this->GetGETOrPOST("Name"),
-           "ConfirmCode" => rand(),
-           "CTime"       => time(),
-           "ATime"       => time(),
-           "MTime"       => time(),
+           "CondEmail"      => $this->CGI2NewEmail(),
+           "Password"       => md5($this->GetGETOrPOST("Pwd1")),
+           "Name"           => $this->GetGETOrPOST("Name"),
+           "Profile_Friend" => 2,
+           "ConfirmCode"    => rand(),
+           "CTime"          => time(),
+           "ATime"          => time(),
+           "MTime"          => time(),
         );
 
         $this->FriendsObj()->MySqlInsertItem("",$friend);

@@ -10,9 +10,15 @@ trait ShowDir
 
     function ShowDir_Handle($path="Uploads")
     {
+        if ($this->CGI_GET("Zip")==1)
+        {
+            $this->ZipTree($path);
+            exit();
+        }
         $this->MyApp_Interface_Head();
         $table=array();
 
+        
         $subdirs=$this->TreeSubdirs($path);
         sort($subdirs);
         
@@ -25,8 +31,12 @@ trait ShowDir
             );
         }
 
+        $args=$this->CGI_URI2Hash();
+        $args[ "Zip" ]=1;
+        
         echo
-            $this->H(1,"Files in directory: ".$dir).
+            $this->H(1,"Files in directory: ".$path).
+            $this->Center($this->B("ZIP: ".$this->Href("?".$this->CGI_Hash2URI($args),"ZIP"))).
             $this->Html_Table
             (
                array
@@ -117,6 +127,33 @@ trait ShowDir
                 }
             }
         }
+        
+        $comps=preg_split('/\./',$filename);
+
+        $name=$comps[0];
+        $comps=preg_split('/_/',$comps[0]);
+
+        if (count($comps)==2)
+        {
+            $args=$this->CGI_URI2Hash();
+
+            $args[ "ModuleName" ]=$module;
+            $args[ "Action" ]="Download";
+            $args[ "Data" ]=$comps[0];
+            $args[ "ID" ]=$comps[1];
+
+            $module.="Obj";
+            foreach ($this->$module()->Uploads_Item2GGI as $var)
+            {
+                if (count($paths)>0)
+                {
+                    $args[ $var ]=array_pop($paths);
+                }
+            }
+
+            $filename=$this->Href("?".$this->CGI_Hash2URI($args),$filename);
+        }
+        
         
         return
             array

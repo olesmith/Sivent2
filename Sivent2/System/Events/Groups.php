@@ -6,13 +6,16 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
-         "Datas","GroupDatas",
-         "Date","Name",
+         "No",
+         "Edit",
+         "Delete",
+         //"Datas","GroupDatas",
+         "Date","Title","Place",
          "EventStart","EventEnd",
          "Status",
          "Inscribe","Inscription",
-         "NoOfInscriptionsCell"
+         "NoOfInscriptionsCell",
+         "Event_Inscriptions_InfoCell"
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -28,7 +31,8 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
-         "Title","Announcement",
+         "Title",
+         "Event_Date_Span",
          "StartDate","EndDate","EditDate",
          "InscribeLink",
       ),
@@ -51,7 +55,7 @@ array
         ),
 
        "Person" => 1,
-       "Public" => 1,
+       "Public" => 0,
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
@@ -69,7 +73,7 @@ array
         ),
 
        "Person" => 1,
-       "Public" => 1,
+       "Public" => 0,
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
@@ -82,11 +86,11 @@ array
        (
           "No","Edit","Delete",
           "Event","Friend",
-          "Caravans","Caravans_StartDate","Caravans_EndDate","Caravans_Min","Caravans_Max"
+          "Caravans","Caravans_StartDate","Caravans_EndDate","Caravans_Min","Caravans_Max","Caravans_Public"
         ),
 
        "Person" => 1,
-       "Public" => 1,
+       "Public" => 0,
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
@@ -99,11 +103,13 @@ array
        (
           "No","Edit","Delete",
           "Event","Friend",
-          "Submissions","Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate","Caravans_Public"
+          "Submissions","Submission_Public",
+          "Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate",
+          "Certificate_Submission_TimeLoad"
         ),
 
        "Person" => 1,
-       "Public" => 1,
+       "Public" => 0,
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,

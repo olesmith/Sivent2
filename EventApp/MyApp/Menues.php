@@ -3,12 +3,90 @@
 class MyEventAppMenues extends MyEventAppAccess
 {
     //*
+    //* function  MyEvent_App_Menues_Unit_Paths, Parameter list: 
+    //*
+    //* Returns paths to menus paths. Optionally overwritten.
+    //*
+
+    function MyEvent_App_Menues_Unit_Paths()
+    {
+        return array("../EventApp/System/Units","System/Units");
+    }
+    
+    //*
+    //* function  MyEvent_App_Menues_Sys_Paths, Parameter list: 
+    //*
+    //* Returns paths to menus files. Optionally overwritten.
+    //*
+
+    function MyEvent_App_Menues_Sys_Files()
+    {
+        return array("LeftMenu.php");
+    }
+    
+    //*
+    //* function  MyEvent_App_Menues_Unit_Files, Parameter list: 
+    //*
+    //* Generates Unit menu.
+    //*
+
+    function MyEvent_App_Menues_Unit_Files()
+    {
+        $files=array();
+        foreach ($this->MyEvent_App_Menues_Unit_Paths() as $path)
+        {
+            foreach ($this->MyEvent_App_Menues_Sys_Files() as $file)
+            {
+                $rfile=$path."/".$file;
+                if (file_exists($rfile))
+                {
+                    array_push($files,$rfile);
+                }
+            }
+        }
+
+        return $files;
+    }
+
+    //*
+    //* function  MyEvent_App_Menues_Unit_Menu, Parameter list: 
+    //*
+    //* Generates Unit menu.
+    //*
+
+    function MyEvent_App_Menues_Unit_Menu($unit)
+    {
+        $title=$unit[ "Name" ];
+
+        $menu="";
+        foreach ($this->MyEvent_App_Menues_Unit_Files() as $file)
+        {
+            $submenu=$this->ReadPHPArray($file);
+            if (!empty($submenu))
+            {
+                $menu.=
+                    "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
+                    $title.
+                    $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$unit).
+                    "";
+                $title="";
+            }
+                
+        }
+
+        return
+            $menu.
+            join("",$this->HtmlEventsMenu()).
+            "";
+     }
+    
+    //*
     //* function  HtmlUnitMenu, Parameter list: 
     //*
     //* Generates Unit menu.
     //*
 
-    function HtmlUnitMenu()
+    function HtmlUnitMenu($menufile="LeftMenu.php")
     {
         $args=$this->ScriptQueryHash();
         if ($this->Unit) { $args[ "Unit" ]=$this->Unit[ "ID" ]; }
@@ -51,23 +129,10 @@ class MyEventAppMenues extends MyEventAppAccess
             }
             else
             {
-                $submenu=array();
-                foreach (array("System/Units/LeftMenu.php","../EventApp/System/Units/LeftMenu.php") as $file)
-                {
-                    if (file_exists($file))
-                    {
-                        $submenu=$this->ReadPHPArray($file,$submenu);
-                        break;
-                    }
-                }
-
                 array_push
                 (
                    $links,
-                   "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-                   $unit[ "Name" ].
-                   $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$unit).
-                   join("",$this->HtmlEventsMenu())
+                   $this->MyEvent_App_Menues_Unit_Menu($unit)
                 );
            }
         }      
@@ -106,13 +171,13 @@ class MyEventAppMenues extends MyEventAppAccess
         (
            "",
            array("Unit" => $args[ "Unit" ]),
-           array("ID","Name"),
+           array("ID","Name","Date"),
            FALSE,
-           "Name"
+           "Date,ID"
         );
 
         $links=array();
-        foreach ($events as $event)
+        foreach (array_reverse($events) as $event)
         {
             $eventid=$event[ "ID" ];
             if ($eventid!=$currenteventid)

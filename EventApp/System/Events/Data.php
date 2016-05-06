@@ -58,7 +58,7 @@ array
       "Coordinator" => 2,
       
       "Search"  => TRUE,
-      "Compulsory"  => TRUE,
+      "Compulsory"  => FALSE,
    ),
    "Title" => array
    (
@@ -88,7 +88,7 @@ array
       "Coordinator" => 2,
       
       "Search"  => TRUE,
-      "Compulsory"  => TRUE,
+      "Compulsory"  => FALSE,
    ),
    /* "AnnouncementLink" => array */
    /* ( */

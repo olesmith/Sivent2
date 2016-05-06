@@ -27,6 +27,8 @@ class ItemsGroupTable extends ItemsTable
         }
 
         $datas=$this->GetGroupDatas($group);
+
+
         if (!empty($this->ItemDataGroups[ $group ][ "GenTableMethod" ]))
         {
             $method=$this->ItemDataGroups[ $group ][ "GenTableMethod" ];

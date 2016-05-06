@@ -55,8 +55,7 @@ class InscriptionsAccess extends MyInscriptions
         if (empty($item)) { return TRUE; }
         
         $res=FALSE;
-        
-        if ($item[ "Certificate" ]==2)
+        if (!empty($item[ "Certificate" ]) && $item[ "Certificate" ]==2)
         {
             $res=TRUE;
         }

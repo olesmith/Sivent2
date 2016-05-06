@@ -6,8 +6,9 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Unit","Event","Friend","Collaboration","TimeLoad",
-         "CTime","Homologated",
+         "CTime","Unit","Event","Friend","Collaboration","TimeLoad",
+         "Homologated",
+         "Certificate","Code"
       ),
       "Admin" => 1,
       "Person" => 0,

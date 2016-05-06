@@ -24,6 +24,15 @@ class InscriptionsTables extends InscriptionsRead
            $buttons
         );
 
+        if (
+              $this->EventsObj()->Event_Certificates_Published()
+              &&
+              $inscription[ "Certificate" ]==2
+           )
+        {
+            array_push($table,$this->Inscription_Certificate_Table($edit,$inscription));
+        }
+
         array_unshift($table,$this->InscriptionDiagList($inscription));
         array_unshift($table,$this->InscriptionMessageRow($inscription));
 

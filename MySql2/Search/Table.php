@@ -32,6 +32,20 @@ class SearchTable extends SearchFields
 
         foreach (array_keys($this->ItemData) as $var)
         {
+            if (!empty($this->ItemData[ $var ][ "Search_Depends" ]))
+            {
+                $depends=$this->ItemData[ $var ][ "Search_Depends" ];
+                if (!empty($this->ItemData[ $depends ]))
+                {
+                    $dependssearchvalue=$this->GetSearchVarCGIValue($depends);
+                    if (empty($dependssearchvalue))
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            
             //Search may have been disabled, since call to InitSearchVars - so check again
             if (empty($this->ItemData[ $var ][ "Search" ])) { continue; }
             if (!empty($this->ItemData[ $var ][ "NoSearchRow" ]))   { continue; }

@@ -77,7 +77,7 @@ array
       ),
       'Download' => array
       (
-         'Public' => 0,
+         'Public' => 1,
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,

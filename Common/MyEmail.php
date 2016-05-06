@@ -15,15 +15,30 @@ trait MyEmail
     function ValidEmailAddress($email)
     {
         $email=strtolower($email);
-        if (preg_match('/^[a-z0-9\._]+@[a-z0-9\._]+$/',$email)) { return TRUE; }
 
-        return FALSE;
+        $res=FALSE;
+
+        $comps=preg_split('/@/',$email);
+
+        if (count($comps)!=2) { $res=FALSE; }
+        else
+        {
+            if (
+                  preg_match('/^[a-z0-9\._]+$/',$comps[0])
+                  &&
+                  preg_match('/^[a-z0-9\._]+$/',$comps[1])
+                ) { $res=TRUE; }
+
+            if (!preg_match('/\./',$comps[1])) { $res=FALSE; }
+        }
+
+        return $res;
     }
 
     //*
     //* function EmailInitSMTP, Parameter list: $setup
     //*
-    //* Sts email headers.
+    //* Sets email headers.
     //*
 
     function EmailInitSMTP($setup)

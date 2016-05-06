@@ -85,7 +85,6 @@ class MyInscriptionsQuest extends MyInscriptionsAccess
             {
                 unset($this->ItemDataSGroups[ $group ]); 
             }
-            //else { var_dump($this->ItemDataSGroups[ $group ][ "Data" ]); }
         }
         
         return

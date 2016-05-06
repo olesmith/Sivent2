@@ -17,7 +17,7 @@ class MyFriendsAddTable extends MyFriendsAddNew
                $this->ItemsTable
                (
                   "",
-                  $edit,
+                  0,
                   $this->FriendSelectDatas,
                   $friends
                );
@@ -26,9 +26,29 @@ class MyFriendsAddTable extends MyFriendsAddNew
         {
             foreach (array_keys($table) as $id)
             {
+                $inscription=
+                    $this->InscriptionsObj()->Sql_Select_Hash
+                    (
+                       array("Friend" => $friends[ $id ][ "ID" ],)
+                    );
+
                 foreach ($this->SubObjectData as $data)
                 {
-                    array_push($table[ $id ],$this->SubObject->$data($friends[ $id ]));
+                    $cell="---";
+                    if (!empty($this->SubObject->ItemData[ $data ]))
+                    {
+                        if (empty($inscription)) { $cell=""; }
+                        else
+                        {
+                            $cell=$this->SubObject->MyMod_Data_Field(1,$inscription,$data,TRUE);
+                        }
+                    }
+                    else
+                    {
+                        $cell=$this->SubObject->$data($friends[ $id ]);
+                    }
+                 
+                    array_push($table[ $id ],$cell);
                 }
             }
         }
@@ -50,7 +70,17 @@ class MyFriendsAddTable extends MyFriendsAddNew
         {
             foreach ($this->SubObjectData as $data)
             {
-                array_push($titles,$this->SubObject->$data());
+                $cell="";
+                if (!empty($this->SubObject->ItemData[ $data ]))
+                {
+                    $cell=$this->SubObject->GetDataTitle($data);
+                }
+                else
+                {
+                    $cell=$this->SubObject->$data();
+                }
+                 
+                array_push($titles,$cell);
             }
         }
 
@@ -130,46 +160,35 @@ class MyFriendsAddTable extends MyFriendsAddNew
 
         foreach (array_keys($friends) as $id)
         {
+            $inscription=
+                $this->InscriptionsObj()->Sql_Select_Hash
+                (
+                   array("Friend" => $friends[ $id ][ "ID" ],)
+                );
+
+            //Not inscribed?
+            if (empty($inscription)) { continue; }
+            
             $updatedatas=array();
-            $advisor=$this->GetPOST($friends[ $id ][ "ID" ]."_Profile_Advisor");
-
-            if (empty($friends[ $id ][ "Profile_Advisor" ]))
+            foreach ($this->SubObjectData as $data)
             {
-                continue;
-            }
-
-            if ($advisor==2 && $friends[ $id ][ "Profile_Advisor" ]!=$advisor)
-            {
-                $friends[ $id ][ "Profile_Advisor" ]=$advisor;
-                array_push($updatedatas,"Profile_Advisor");
-
-                if (empty($friends[ $id ][ "Unit" ]))
+                if (!empty($this->SubObject->ItemData[ $data ]))
                 {
-                    $unit=$this->ApplicationObj->LoginData[ "Unit" ];
-                    $friends[ $id ][ "Unit" ]=$unit;
-                    array_push($updatedatas,"Unit");
-                }
-            }
-            elseif ($advisor!=2 && $friends[ $id ][ "Profile_Advisor" ]!=$advisor)
-            {
-                $friends[ $id ][ "Profile_Advisor" ]=$advisor;
-                array_push($updatedatas,"Profile_Advisor");
-            }
-
-            if ($this->Profile=="Admin")
-            {
-                $unit=$this->GetPOST($friends[ $id ][ "ID" ]."_Unit");
-                if ($friends[ $id ][ "Profile_Advisor" ]!=$unit)
-                {
-                    $friends[ $id ][ "Unit" ]=$unit;
-                    array_push($updatedatas,"Unit");
-                }
-                
+                    $cgikey=$inscription[ "ID" ]."_".$data;
+                    $cgivalue=$this->CGI_POST($cgikey);
+                    if ($inscription[ $data ]!=$cgivalue)
+                    {
+                        $inscription[ $data ]=$cgivalue;
+                        array_push($updatedatas,$data);
+                    }
+               }
             }
             
+            $this->SubObject->PostProcess($inscription);
+
             if (count($updatedatas)>0)
             {
-                $this->MySqlSetItemValues("",$updatedatas,$friends[ $id ]);
+                $this->SubObject->MySqlSetItemValues("",$updatedatas,$inscription);
             }
         }
      }

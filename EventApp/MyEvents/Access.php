@@ -9,6 +9,7 @@ class MyEventsAccess extends ModulesCommon
        "Delete"   => "CheckDeleteAccess",
     );
 
+
     //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*

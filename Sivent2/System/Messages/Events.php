@@ -1,5 +1,10 @@
 array
 (
+   "Event_DateSpan_Title" => array
+   (
+      "Name" => "Período do Evento",
+      "Name_UK" => "Event Period",
+   ),
    "Events_Closed_Title" => array
    (
       "Name" => "Inscrições Fechadas",
@@ -44,5 +49,30 @@ array
    (
       "Name" => "Inscrições Abertas",
       "Name_UK" => "Inscriptions Open",
+   ),
+   "Event_Inscriptions_InfoCell_Title" => array
+   (
+      "Name" => "Informações",
+      "Name_UK" => "Informations",
+   ),
+   "Event_Inscriptions_InfoCell_Message" => array
+   (
+      "Name" => "Inscreve-se para Candidatar",
+      "Name_UK" => "Please Inscribe to Candidate",
+   ),
+   "Event_Inscriptions_Collaborations_Has" => array
+   (
+      "Name" => "Chamada de Colaboradores Abertas",
+      "Name_UK" => "Call for Collaborators Open",
+   ),
+   "Event_Inscriptions_Submissions_Has" => array
+   (
+      "Name" => "Chamada de Trabalhos Abertas",
+      "Name_UK" => "Call for Papers Open",
+   ),
+   "Event_Inscriptions_Caravans_Has" => array
+   (
+      "Name" => "Chamada de Caravanas Abertas",
+      "Name_UK" => "Call for Caravanas Open",
    ),
 );

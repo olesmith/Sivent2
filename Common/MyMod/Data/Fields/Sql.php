@@ -43,6 +43,12 @@ trait MyMod_Data_Fields_Sql
             }
         }
 
+
+        //Where clause in module sql table
+        $where=$this->Module2Object($data)->MyMod_Data_Fields_Sql_Where($data);
+        
+        if (!is_array($where)) { $where=$this->Hash2SqlWhere($where); }
+
         //Get values present in table.
         $colvalues=$this->MySqlUniqueColValues
         (
@@ -51,19 +57,69 @@ trait MyMod_Data_Fields_Sql
            $this->MyMod_Data_Fields_Sql_Where($data)
         );
 
-        if (empty($colvalues)) { return "-"; }
+        //if (empty($colvalues)) { return "-"; }
         
-
-        //Where clause in module sql table
-        $where=$this->Module2Object($data)->MyMod_Data_Fields_Sql_Where($data);
-        
-        if (!is_array($where)) { $where=$this->Hash2SqlWhere($where); }
-        
-        $where[ "ID" ]=$this->Sql_Where_IN($colvalues);
+        if (!empty($colvalues))
+        {
+            $in=$this->Sql_Where_IN($colvalues);
+            if (!empty($in))
+            {
+                $where[ "ID" ]=$in;
+            }
+        }
 
         $datas=$this->MyMod_Data_Fields_Module_Datas($data);
         $datas=preg_grep('/^ID$/',$datas,PREG_GREP_INVERT);
         array_push($datas,"ID");
+
+        $hashes=array();
+        if (!empty($this->ItemData[ $data ][ "SqlTables_Regex" ]))
+        {
+            $class=$this->ItemData[ $data ][ "SqlClass" ];
+            
+            $hashes=
+                $this->Module2Object($data)->Sql_Tables_Select_Hashes
+                (
+                   $this->ItemData[ $data ][ "SqlTables_Regex" ],
+                   $where,
+                   $datas
+                );
+        }
+        elseif (!empty($this->ItemData[ $data ][ "Search_Vars" ]))
+        {
+            $class=$this->ItemData[ $data ][ "SqlClass" ];
+            $sqltable=$this->ApplicationObj()->SubModulesVars[ $class ][ "SqlTable" ];
+
+            foreach ($this->ItemData[ $data ][ "Search_Vars" ] as $searchvar)
+            {
+                $sqltable=
+                    preg_replace
+                    (
+                       '/#'.$searchvar.'/',
+                       $this->GetSearchVarCGIValue($searchvar),
+                       $sqltable
+                    );
+            }
+            
+            $hashes=
+                $this->Module2Object($data)->Sql_Select_Hashes
+                (
+                   $where,
+                   $datas,
+                   "",FALSE,
+                   $sqltable
+                );
+        }
+        else
+        {
+            $hashes=
+                $this->Module2Object($data)->Sql_Select_Hashes
+                (
+                   $where,
+                   $datas
+                );
+        }
+        
         
         $rvalue=$this->Html_Select_Hashes2Field
         (
@@ -71,15 +127,7 @@ trait MyMod_Data_Fields_Sql
            $this->MyMod_Data_Fields_Module_SubItems_2Options
            (
               $data,
-              $this->SortList
-              (
-                 $this->Module2Object($data)->Sql_Select_Hashes
-                 (
-                    $where,
-                    $datas
-                 ),
-                 $datas
-              )
+              $this->SortList($hashes,$datas)
            ),
            $value
         );

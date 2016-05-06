@@ -31,7 +31,11 @@ class HandleDownload extends Menues
               $origname=$this->MySqlItemValue("","ID",$this->ItemHash[ "ID" ],$data."_OrigName");
           }
 
-          
+          if (empty($file) || !file_exists($file))
+          {
+              echo "No such file: '".$file."'";
+              exit();
+          }
           $content=join("",$this->MyReadFile($file));
  
           $matches=array();

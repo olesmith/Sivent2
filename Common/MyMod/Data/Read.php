@@ -49,6 +49,11 @@ trait MyMod_Data_Read
         $itemdatas=$this->ReadPHPArray($file);
         foreach (array_keys($itemdatas) as $data)
         {
+            if (!is_array($itemdatas[ $data ]))
+                {
+                    var_dump($data);
+                    var_dump($itemdatas[ $data ]);
+                }
             $itemdatas[ $data ][ "File" ]=$file;
             $this->MyMod_Data_Add_Data($data,$itemdatas[ $data ]);
         }

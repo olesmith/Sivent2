@@ -19,89 +19,89 @@ class Sponsors extends MySponsors
     }
 
 
-    //*
-    //* function PreActions, Parameter list:
-    //*
-    //* 
-    //*
+   /*  //\* */
+   /*  //\* function PreActions, Parameter list: */
+   /*  //\* */
+   /*  //\*  */
+   /*  //\* */
 
-    function PreActions()
-    {
-        parent::PreActions();
-    }
+   /*  function PreActions() */
+   /*  { */
+   /*      parent::PreActions(); */
+   /*  } */
 
 
-    //*
-    //* function PostActions, Parameter list:
-    //*
-    //* 
-    //*
+   /*  //\* */
+   /*  //\* function PostActions, Parameter list: */
+   /*  //\* */
+   /*  //\*  */
+   /*  //\* */
 
-    function PostActions()
-    {
-        parent::PostActions();
-    }
+   /*  function PostActions() */
+   /*  { */
+   /*      parent::PostActions(); */
+   /*  } */
 
     
-    //*
-    //* function PreProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
+   /*  //\* */
+   /*  //\* function PreProcessItemDataGroups, Parameter list: */
+   /*  //\* */
+   /*  //\*  */
+   /*  //\* */
 
-    function PreProcessItemDataGroups()
-    {
-        parent::PreProcessItemDataGroups();
-    }
+   /*  function PreProcessItemDataGroups() */
+   /*  { */
+   /*      parent::PreProcessItemDataGroups(); */
+   /*  } */
 
-    //*
-    //* function PostProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
+   /*  //\* */
+   /*  //\* function PostProcessItemDataGroups, Parameter list: */
+   /*  //\* */
+   /*  //\*  */
+   /*  //\* */
 
-    function PostProcessItemDataGroups()
-    {
-         parent::PostProcessItemDataGroups();
-   }
+   /*  function PostProcessItemDataGroups() */
+   /*  { */
+   /*       parent::PostProcessItemDataGroups(); */
+   /* } */
 
-    //*
-    //* function PreProcessItemData, Parameter list:
-    //*
-    //* Pre process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
+   /*  //\* */
+   /*  //\* function PreProcessItemData, Parameter list: */
+   /*  //\* */
+   /*  //\* Pre process item data; this function is called BEFORE */
+   /*  //\* any updating DB cols, so place any additonal data here. */
+   /*  //\* */
 
-    function PreProcessItemData()
-    {
-        parent::PreProcessItemData();
-    }
+   /*  function PreProcessItemData() */
+   /*  { */
+   /*      parent::PreProcessItemData(); */
+   /*  } */
     
    
-    //*
-    //* function PostProcessItemData, Parameter list:
-    //*
-    //* Post process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
+   /*  //\* */
+   /*  //\* function PostProcessItemData, Parameter list: */
+   /*  //\* */
+   /*  //\* Post process item data; this function is called BEFORE */
+   /*  //\* any updating DB cols, so place any additonal data here. */
+   /*  //\* */
 
-    function PostProcessItemData()
-    {
-        parent::PostProcessItemData();
-    }
+   /*  function PostProcessItemData() */
+   /*  { */
+   /*      parent::PostProcessItemData(); */
+   /*  } */
 
     
     
-    //*
-    //* function PostInit, Parameter list:
-    //*
-    //* Runs right after module has finished initializing.
-    //*
+   /*  //\* */
+   /*  //\* function PostInit, Parameter list: */
+   /*  //\* */
+   /*  //\* Runs right after module has finished initializing. */
+   /*  //\* */
 
-    function PostInit()
-    {
-        parent::PostInit();
-    }
+   /*  function PostInit() */
+   /*  { */
+   /*      parent::PostInit(); */
+   /*  } */
 
     //*
     //* function PostProcess, Parameter list: $item

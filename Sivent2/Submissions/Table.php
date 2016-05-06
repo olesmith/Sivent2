@@ -14,7 +14,13 @@ class SubmissionsTable extends SubmissionsAccess
     function Submissions_Table_Read($inscription)
     {
         return 
-            $this->Sql_Select_Hashes(array("Friend" => $inscription[ "Friend" ]),array(),"ID");
+            $this->Sql_Select_Hashes
+            (
+               array("Friend" => $inscription[ "Friend" ]),
+               array(),
+               "ID",
+               TRUE
+            );
     }
 
     //*

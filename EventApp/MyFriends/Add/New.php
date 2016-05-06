@@ -40,10 +40,10 @@ class MyFriendsAddNew extends MyFriendsAddMail
            $table,
            array
            (
-              $this->B("Enviar Email para Cadastrante:"),
+              $this->B($this->MyLanguage_GetMessage("Friend_Select_Search_SendMail").":"),
               $this->MakeCheckBox("SendMail",1,TRUE),
            ),
-           $this->Button("submit",$this->FriendSelectNewButton)
+           $this->Button("submit",$this->MyLanguage_GetMessage("Friend_Select_Search_Button_New"))
         );
 
         return $table;
@@ -62,7 +62,14 @@ class MyFriendsAddNew extends MyFriendsAddMail
         $name=$this->Html2Sort($newitem[ "Name" ]);
         $name=$this->Text2Sort($name); 
         $newitem[ "TextName" ]=$name;
+        $newitem[ "Profile_Friend" ]=2;
 
+        if (empty($newitem[ "Password" ]))
+        {
+            list($usec, $sec) = explode(' ', microtime());
+            $newitem[ "Password" ]=(float) $sec + ((float) $usec * 100000);
+        }
+        
         $add=TRUE;
         $msgs=array();
         foreach ($newitem as $key => $value)
@@ -70,25 +77,31 @@ class MyFriendsAddNew extends MyFriendsAddMail
             if (empty($value))
             {
                 $add=FALSE;
-                array_push($msgs,$this->GetDataTitle($key)." indefinido.");
+                array_push
+                (
+                   $msgs,
+                   $this->GetDataTitle($key).": ".
+                   $this->MyLanguage_GetMessage("Friend_Undefined").
+                   ""
+                );
             }
         }
 
-        $msg="Cadastro não Adicionado:";
+        $msg=$this->MyLanguage_GetMessage("Friend_Select_Add_Not");
         if ($add)
         {
             if ($this->MySqlNEntries("",array("Email" => $newitem[ "Email" ]))>0)
             {
-                $msg="Email existente! Cadastro não Adicionado";
+                $msg=$this->MyLanguage_GetMessage("Friend_Select_Add_Email_Already");
             }
             else
             {
                 $this->SendPasswordMail($newitem);
 
                 $newitem[ "Password" ]=md5($newitem[ "Password" ]);
+                $newitem[ "Status" ]=2;
                 $this->MySqlInsertItem("",$newitem);
-                $msg="Cadastro Adicionado com Êxito!";
-
+                $msg=$this->MyLanguage_GetMessage("Friend_Select_Add_Success");
             }
         }
 

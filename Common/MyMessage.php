@@ -57,16 +57,17 @@ trait MyMessage
                 $this->MyApp_Interface_Head();
         }
 
-
-        echo "Error! ";
-
         if (
-              !empty($this->ApplicationObj()->DBHash[ "Debug" ])
-              ||
               empty($this->ApplicationObj()->DBHash)
-           )
+              ||
+              (
+                 !empty($this->ApplicationObj()->DBHash[ "Debug" ])
+                 &&
+                 intval($this->ApplicationObj()->DBHash[ "Debug" ])==2
+              )
+          )
         {
-            $this->MyMessage_DebugMessage($msg,$info1,$info2,$info3,$info4,$info5);
+           $this->MyMessage_DebugMessage($msg,$info1,$info2,$info3,$info4,$info5);
         }
         else
         {

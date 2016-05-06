@@ -30,7 +30,6 @@ trait MyMod_Access
                 }
             }
         }
-        
         if ($res>0)
         {
             if (!empty($hash[ "AccessMethod" ]))

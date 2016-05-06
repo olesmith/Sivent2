@@ -27,6 +27,8 @@ array
          "Friend" => array
          (
             "Show" => 1,
+            "SeeFriend" => 1,
+            "GenCert" => 1,
          ),
          'Assessor' => array
          (
@@ -36,11 +38,16 @@ array
             'Show' => 1,
             'Edit' => 1,
             'Delete' => 1,
+            "SeeFriend" => 1,
+            "GenCert" => 1,
          ),
          'Admin' => array
          (
+            'Show' => 1,
             'Edit' => 1,
             'Delete' => 1,
+            "SeeFriend" => 1,
+            "GenCert" => 1,
          ),
       ),
       'Plural' => array

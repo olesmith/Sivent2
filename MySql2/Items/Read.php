@@ -67,12 +67,15 @@ class ItemsRead extends ItemsLatex
             {
                 $rwhere=$this->SqlClause2Hash($rwhere);
             }
-
-            $rwhere=array_merge
-            (
-               $rwhere,
-               $this->GetPreSearchVars()
-            );
+            if ($includeall!=2)
+            {
+                $rwhere=array_merge
+                (
+                   $rwhere,
+                   $this->GetPreSearchVars()
+                );
+            }
+            
 
             if ($this->OnlyReadIDs)
             {

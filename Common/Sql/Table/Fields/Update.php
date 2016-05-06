@@ -37,7 +37,6 @@ trait Sql_Table_Fields_Update
             }
         }
 
-        //$updateds=$this->Sql_Table_Fields_Enum_Update($enums,$table);
         if (method_exists($this,"PostCreateTable"))
         {
             $this->PostCreateTable();
@@ -59,7 +58,6 @@ trait Sql_Table_Fields_Update
         
 
         $info=$this->Sql_Table_Column_Info($data,$table);
-        
         if (!empty($info))
         {
             if ($datadef[ "Sql" ]=="ENUM")
@@ -67,7 +65,8 @@ trait Sql_Table_Fields_Update
                 $this->Sql_Table_Field_Enum_Update($data,$datadef,$info,$table);
             }
 
-            $datadef[ "Default" ]=preg_replace('/\s+/',"",$datadef[ "Default" ]);
+            $datadef[ "Default" ]=preg_replace('/\s+/'," ",$datadef[ "Default" ]);
+
             $default=$this->Sql_Table_Column_Info_2_Default($info);
             if (
                   !empty($datadef[ "Default" ])

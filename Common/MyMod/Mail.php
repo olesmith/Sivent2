@@ -4,6 +4,23 @@ trait MyMod_Mail
 {
     
     //*
+    //* function MyMod_Mail_Text_Filter, Parameter list: $user,$text
+    //*
+    //* Sends item typed email. Destination info in $user.
+    //* $type_Subject and $type_Body should have languaged
+    //* key entries in $item.
+    //*
+
+    function  MyMod_Mail_Text_Filter($user,$text)
+    {
+        $text=$this->FilterHash($text,$this->Unit(),"Unit_");
+        $text=$this->FilterHash($text,$user);
+
+        return $text;
+    }
+
+    
+    //*
     //* function MyMod_Mail_Typed_Send, Parameter list: $type,$user,$item,$hrefs=array()
     //*
     //* Sends item typed email. Destination info in $user.
@@ -17,18 +34,25 @@ trait MyMod_Mail
         {
             $user[ $key ]=preg_replace('/index\.php/',"",$url);
         }
+        //var_dump($item);
 
-        $subject=$this->FilterHash($this->GetRealNameKey($item,$type."_Subject"),$user);
-        $body=
-            $this->FilterHash
+        $subject=
+            $this->MyMod_Mail_Text_Filter
             (
+               $user,
+               $this->GetRealNameKey($item,$type."_Subject")
+            );
+        
+        $body=
+            $this->MyMod_Mail_Text_Filter
+            (
+               $user,
                $this->GetRealNameKey($item,"MailHead")."\n\n".
                $this->GetRealNameKey($item,$type."_Body")."\n\n".
-               $this->GetRealNameKey($item,"MailTail"),
-               $user
+               $this->GetRealNameKey($item,"MailTail")
             );
 
-        $this->ApplicationSendEmail
+        $this->ApplicationObj()->ApplicationSendEmail
         (
            $user,
            array

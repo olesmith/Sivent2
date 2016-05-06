@@ -5,8 +5,10 @@ include_once("../EventApp/MyFriends.php");
 include_once("Friends/Clean.php");
 include_once("Friends/Collaborations.php");
 include_once("Friends/Events.php");
+include_once("Friends/Inscriptions.php");
+include_once("Friends/Handle.php");
 
-class Friends extends FriendsEvents
+class Friends extends FriendsHandle
 {
     var $StateKeys=array("Address_State","RG_UF");
     var $FriendDataMessages="Friends.php";

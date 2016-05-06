@@ -34,20 +34,21 @@ class MyFriends extends MyFriendsAccess
 
     var $FriendSelectDatas=array("ID","Name","Email","Unit","Profile_Advisor","Profile_Coordinator");
     var $FriendSelectNewDatas=array("Name","Email","Password","Unit");
+    var $InscriptionSelectDatas=array();
 
-    var $FriendSelectSearchTitle="Digite (parte do) nome/email do cadastro";
-    var $FriendSelectSearchButton="Pesquisar Cadastros";
+    /* //var $FriendSelectSearchTitle="Digite (parte do) nome/email do cadastro"; */
+    /* //var $FriendSelectSearchButton="Pesquisar Cadastros"; */
 
-    var $FriendSelectNewButton="Adicionar Cadastro";
+    /* //var $FriendSelectNewButton="Adicionar Cadastro"; */
 
-    var $FriendSelectTitle="Cadastros";
-    var $FriendSelectTableTitle="Cadastros conformando à Pesquisa";
-    var $FriendSelectTableEmpty="Nenhum Cadastro encontrado. Deseja adicionar Cadastro?";
-    var $FriendSelectPromoteMsg="";
-    var $FriendSelectInfoMsg=
-        "Cadastrantes adicionados neste tela, pode obter acesso a sistema,<BR>,
-         usando o link 'Recuperar Senha' no menu esquerda da tela de Login!<P>\n
-         No primeiro acesso ao sistema, o preenchimento dos dados pessoais será exigido do cadastrante.\n";
+    /* //var $FriendSelectTitle="Cadastros"; */
+    /* //var $FriendSelectTableTitle="Cadastros conformando à Pesquisa"; */
+    /* //var $FriendSelectTableEmpty="Nenhum Cadastro encontrado. Deseja adicionar Cadastro?"; */
+    /* var $FriendSelectPromoteMsg=""; */
+    /* var $FriendSelectInfoMsg= */
+    /*     "Cadastrantes adicionados neste tela, pode obter acesso a sistema,<BR>, */
+    /*      usando o link 'Recuperar Senha' no menu esquerda da tela de Login!<P>\n */
+    /*      No primeiro acesso ao sistema, o preenchimento dos dados pessoais será exigido do cadastrante.\n"; */
 
 
     //*

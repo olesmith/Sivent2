@@ -152,7 +152,7 @@ array
       'Subject' => 'Cadastro de Usário Efetuada, #Institution',
       'Subject_UK' => 'User Registration Comitted, #Institution',
       'Body' => 
-        "Conforme solicitado por #Login_Name, informamos seu Login e senha no SiMon/UFG:\n\n".
+        "Conforme solicitado por #Login_Name, informamos seu Login e senha no #ApplicationName, #Unit_Title:\n\n".
         "Acesso: #Href1\n\n".
         "Login: #Email\n".
         "Senha: #Password\n\n".
@@ -161,11 +161,7 @@ array
         "",
 
       'Body_UK' => 
-        "Conforme solicitado no nosso site, efetuamos sua inscrição para o Processo Seletivo no Programa de Pós-Graduação, ".
-        "#Institution, Coordenação do Programa de Pós-Graduação, ".
-        "#Unit_Name".
-        ", conforme Edital ".
-        "#Announcement_Name".
+        "As solicited by #Login_Name, we hereby inform you your Login and Password to #ApplicationName, #Unit_Title:\Conforme solicitado no nosso site, efetuamos sua inscrição para o Processo Seletivo no Programa de Pós-Graduação, ".
         "",
 
    ),

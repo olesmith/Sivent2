@@ -20,9 +20,11 @@ class Certificates_Validate extends Certificates_Access
     //* Handles cert validation process.
     //*
 
-    function Certificates_Validate_Where($code="")
+    function Certificates_Validate_Where($code)
     {
-        if (empty($code)) { $code=$this->Certificates_Validate_CGI2Code(); }
+        $comps=preg_split('/\./',$code);
+
+        return $this-> Certificate_Decode($code);
         
         return
              array
@@ -37,9 +39,9 @@ class Certificates_Validate extends Certificates_Access
     //* Handles cert validation process.
     //*
 
-    function Certificates_Validate_Read($code="",$datas=array())
+    function Certificates_Validate_Read($code,$datas=array())
     {
-         return
+        return
              $this->Sql_Select_Hashes
              (
                 $this->Certificates_Validate_Where($code),
@@ -56,6 +58,8 @@ class Certificates_Validate extends Certificates_Access
 
     function Certificates_Validate_NMatch($code="")
     {
+        if (empty($code)) { $code=$this->Certificates_Validate_CGI2Code(); }
+        
         return
              $this->Sql_Select_NHashes
              (
@@ -69,34 +73,23 @@ class Certificates_Validate extends Certificates_Access
     //* Acts on entered code and shows list of certs.
     //*
 
-    function Certificates_Validate_Show($code="")
+    function Certificates_Validate_Show($code)
     {
-        if (empty($code)) { $code=$this->Certificates_Validate_CGI2Code(); }
-
         $html="";
-        if (preg_match('/^\d{3}\.\d{3}\.\d{6}\.\d{6}$/',$code))
-        {
-            $certs=$this->Certificates_Validate_Read();
+        
+        $certs=$this->Certificates_Validate_Read($code);
             
-            if (count($certs)>0)
-            {
-                $html.=
-                    $this->H(2,$this->MyLanguage_GetMessage("Certificates_Validation_Table_Title")).
-                    $this->H(3,$code).
-                    $this->MyMod_Items_Table_Html(0,$certs,"Validate");
-            }
-            else
-            {
-                $html.=
-                    $this->H(2,$this->MyLanguage_GetMessage("Certificates_Validation_Table_Empty")).
-                    $this->H(3,$code).
-                    "";
-            }
+        if (count($certs)>0)
+        {
+              $html.=
+                  $this->H(2,$this->MyLanguage_GetMessage("Certificates_Validation_Table_Title")).
+                  $this->H(3,$code).
+                  $this->MyMod_Items_Table_Html(0,$certs,"Validate");
         }
         else
         {
             $html.=
-                $this->H(1,$this->MyLanguage_GetMessage("Certificates_Validation_Empty").": ".$code).
+                $this->H(2,$this->MyLanguage_GetMessage("Certificates_Validation_Table_Empty")).
                 $this->H(3,$code).
                 "";
         }
@@ -114,7 +107,6 @@ class Certificates_Validate extends Certificates_Access
     {
         $code=$this->Certificates_Validate_CGI2Code();
 
-        
         echo
             $this->H(1,$this->MyLanguage_GetMessage("Certificates_Validation_Form_Title")).
             $this->StartForm().

@@ -54,7 +54,7 @@ array
       ),
       'Download' => array
       (
-         'Public' => 0,
+         'Public' => 1,
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
@@ -72,6 +72,25 @@ array
       
       //"Handler"   => "Inscription_Collaborations_Inscription_Handle",
 
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+  ),
+   "GenCert" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=GenCert&Latex=1&ID=#ID",
+      "Title"    => "Gerar Certificado",
+      "Title_UK" => "Generate Certificate",
+      "Name"     => "Certificado",
+      "Name_UK"   => "Certificado",
+      
+      "Handler"   => "Submission_Handle_Certificate_Generate",
+      "AccessMethod"  => "CheckCertAccess",
+
+      "Icon"   => "print_dark.png",
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,

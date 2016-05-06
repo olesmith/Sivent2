@@ -121,4 +121,58 @@ array
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
    ),
+   "Name" => array
+   (
+      "Name" => "Nome",
+      "Title" => "Nome",
+      "Name_UK" => "Name",
+      "Title_UK" => "Name",
+
+      
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+   ),
+   "Certificate" => array
+   (
+      "Name" => "Certificado Liberado",
+      "Name_UK" => "Certificate Avaliable",
+
+      "Sql" => "ENUM",
+
+      "Search" => FALSE,
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+   ),
+   "Code" => array
+   (
+      "Name" => "Código",
+      "Title" => "Código do Certificado",
+      "Name_UK" => "Code",
+      "Title_UK" => "Certificate Code",
+
+      "Size" => "50",
+      "Sql" => "VARCHAR(64)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => TRUE,
+   ),
 );

@@ -2,7 +2,7 @@ array
 (     
    "Status" => array
    (
-      "Name" => "Ativo",
+      "Name" => "Status",
       "Sql" => "ENUM",
       "Values" => array("Aguardando Início das Inscrições","Inscrições Abertas","Inscrições Encerradas"),
       "Values_UK" => array("Awaiting Inscriptions to Open","Inscriptions Open","Inscriptions Closed"),
@@ -94,5 +94,23 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
       "Assessor"  => 0,
+   ),
+   "Place" => array
+   (
+      "Name" => "Local do Evento",
+      "Name_UK" => "Place where Event Occurs",
+
+      "Sql" => "VARCHAR(256)",
+      "Size" => 50,
+
+      "Search" => FALSE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+      "Compulsory"  => TRUE,
    ),
 );

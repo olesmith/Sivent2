@@ -64,21 +64,6 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
-   "Inscription" => array
-   (
-      "Name" => "Inscrição",
-      "Name_UK" => "Inscription",
-      "SqlClass" => "Inscriptions",
-      "Search" => TRUE,
-      "Compulsory"  => TRUE,
-
-      "Sql" => "INT",
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 1,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-   ),
    "Name" => array
    (
       "Name" => "Destinatário",
@@ -124,9 +109,10 @@ array
 
       "Size" => "50",
       "Sql" => "ENUM",
-      "Values" => array("Participante","Participante de Caravana","Colaborador","Palestrante"),
-      "Values_UK" => array("Participant","Caravaneer","Collaborator","Speaker"),
+      "Values" => array("Participante","Participante de Caravana","Colaborador","Palestrante",),
+      "Values_UK" => array("Participant","Caravaneer","Collaborator","Speaker",),
       "Default" => 1,
+      
 
       "Public"   => 1,
       "Person"   => 0,
@@ -182,5 +168,86 @@ array
       
       "Search"  => FALSE,
       "Compulsory"  => FALSE,
+   ),
+   "Inscription" => array
+   (
+      "Name" => "Inscrição",
+      "Name_UK" => "Inscription",
+      "SqlClass" => "Inscriptions",
+
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "SqlTables_Regex"  => "#Unit__\d+__Inscriptions",
+      
+      "Compulsory"  => FALSE,
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Submission" => array
+   (
+      "Name" => "Submissão",
+      "Name_UK" => "Submission",
+      "SqlClass" => "Submissions",
+      
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "Search_Vars" => array("Unit","Event"),
+      
+      "Compulsory"  => FALSE,
+      //"SqlTables_Regex"  => "#Unit__\d+__Submissions",
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Collaborator" => array
+   (
+      "Name" => "Colaborador",
+      "Name_UK" => "Collaborator",
+      "SqlClass" => "Collaborators",
+      
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "Search_Vars" => array("Unit","Event"),
+      
+      //"SqlTables_Regex"  => "#Unit__\d+__Collaborations",
+  
+      "Compulsory"  => FALSE,
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Caravaneer" => array
+   (
+      "Name" => "Caravaneiros",
+      "Name_UK" => "Caravaneers",
+      "SqlClass" => "Caravaneers",
+      
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "Search_Vars" => array("Unit","Event"),
+      
+      //"SqlTables_Regex"  => "#Unit__\d+__Caravaneers",
+
+      "Compulsory"  => FALSE,
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
    ),
 );

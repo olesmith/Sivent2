@@ -25,7 +25,7 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
-         "Title","Announcement",
+         "Title","Announcement","Events_Dates_Span_Text",
          "StartDate","EndDate","EditDate",
          "InscribeLink",
       ),

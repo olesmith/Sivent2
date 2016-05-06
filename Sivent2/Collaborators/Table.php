@@ -38,7 +38,6 @@ class CollaboratorsTable extends CollaboratorsTableUpdate
 
     function Collaborators_User_Table_Show($edit,$userid,$group="Basic")
     {
-        
         $this->ItemData("ID");
         $this->ItemDataGroups($group);
         $this->Collaborators_User_Table_Read($userid);

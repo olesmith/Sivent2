@@ -70,7 +70,7 @@ class MyInscriptions extends MyInscriptionsAdd
 
     function PreActions()
     {
-        array_unshift($this->ActionPaths,"../EventApp/System/Inscriptions");
+        array_push($this->ActionPaths,"../EventApp/System/Inscriptions");
     }
 
 

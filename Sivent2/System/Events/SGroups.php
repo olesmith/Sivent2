@@ -7,7 +7,7 @@ array
 
       "Data" => array
       (
-         "Name","Title","Name_UK","Title_UK",
+         "Name","Title","Place",
          "EventStart","EventEnd",
          "Date","AnnouncementLink","Announcement"
       ),
@@ -28,7 +28,7 @@ array
           "Collaborations","Collaborations_Inscriptions","Collaborations_StartDate","Collaborations_EndDate",
        ),
 
-       "Person" => 1,
+       "Person" => 0,
        "Public" => 1,
        "Admin" => 1,
        "Friend"     => 1,
@@ -76,10 +76,10 @@ array
         "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
         ),
 
-       "Person" => 1,
+       "Person" => 0,
        "Public" => 1,
        "Admin" => 1,
-       "Friend"     => 1,
+       "Friend"     => 0,
        "Coordinator" => 1,
        "GenTableMethod" => "Event_Certificate_Table",
     ),
@@ -94,28 +94,66 @@ array
           "Certificates_Signature_3","Certificates_Signature_3_Text1","Certificates_Signature_3_Text2",
         ),
 
-       "Person" => 1,
+       "Person" => 0,
        "Public" => 1,
        "Admin" => 1,
-       "Friend"     => 1,
+       "Friend"     => 0,
        "Coordinator" => 1,
        "AccessMethod" => "Event_Certificates_Has",
     ),
     "Certificate_Latex" => array
     (
-       "Name" => "Certificados, Texto",
-       "Name_UK" => "Certificates, Text",
+       "Name" => "Certificados, Participante",
+       "Name_UK" => "Certificates, Participant",
        "Data" => array
        (
-          "Certificates_Latex",
+          "Certificates_Latex","Certificates_Latex_UK",
         ),
 
-       "Person" => 1,
+       "Person" => 0,
        "Public" => 1,
        "Admin" => 1,
-       "Friend"     => 1,
+       "Friend"     => 0,
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => "Event_Certificates_Has",
+    ),
+    "Submissions_Latex" => array
+    (
+       "Name" => "Submissões, Certificados",
+       "Name_UK" => "Submissions, Certificates",
+       "Data" => array
+       (
+          "Certificates_Submissions_TimeLoad",
+          "Certificates_Submissions_Latex",
+          "Certificates_Submissions_Latex_UK",
+          
+        ),
+
+       "Person" => 0,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 0,
+       "Coordinator" => 1,
+       "Single" => 1,
+       "AccessMethod" => "Event_Submissions_Has",
+    ),
+    "Collaborators_Latex" => array
+    (
+       "Name" => "Colaborações, Certificados",
+       "Name_UK" => "Collaborators, Certificates",
+       "Data" => array
+       (
+          "Certificates_Collaborations_Latex",
+          "Certificates_Collaborations_Latex_UK",         
+        ),
+
+       "Person" => 0,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 0,
+       "Coordinator" => 1,
+       "Single" => 1,
+       "AccessMethod" => "Event_Collaborators_Has",
     ),
 );

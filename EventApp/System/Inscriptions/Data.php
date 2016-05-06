@@ -64,6 +64,25 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   "Status" => array
+   (
+      "Name" => "Status",
+      "Name_UK" => "Status",
+
+      "Sql" => "ENUM",
+
+      "Search" => FALSE,
+      "Values" => array("Não Inscrito","Inscrito"),
+      "Values_UK" => array("Not Inscribed","Inscribed"),
+      "Default"  => 2,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Assessor"  => 0,
+   ),
    "Homologated" => array
    (
       "Name" => "Homologado",

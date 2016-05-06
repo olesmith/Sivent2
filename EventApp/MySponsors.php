@@ -52,7 +52,7 @@ class MySponsors extends MySponsorsAccess
 
     function PreActions()
     {
-       array_unshift($this->ActionPaths,"../EventApp/System/Sponsors");
+       array_push($this->ActionPaths,"../EventApp/System/Sponsors");
      }
 
 
@@ -205,6 +205,14 @@ class MySponsors extends MySponsorsAccess
 
     function SponsorsCell($sponsor)
     {
+        $args=array
+        (
+           "Unit"       => $this->Unit("ID"),
+           "ModuleName" => "Sponsors",
+           "ID"         => $sponsor[ "ID" ],
+           "Action"     => "Download",
+           "Data"       => "Logo",
+        );
         $cell=
             //$this->Div($sponsor[ "Initials" ].":",array("CLASS" => 'sponsortitle')).
             $this->A
@@ -212,7 +220,7 @@ class MySponsors extends MySponsorsAccess
                $sponsor[ "URL" ],
                $this->IMG
                (
-                  $sponsor[ "Logo" ],
+                  "?".$this->CGI_Hash2URI($args),
                   $sponsor[ "Text" ],
                   $sponsor[ "Height" ],
                   $sponsor[ "Width" ],

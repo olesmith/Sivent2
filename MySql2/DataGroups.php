@@ -320,34 +320,34 @@ class DataGroups extends DataSGroups
                         array_push($rdatas,$rdata);
                     }
                 }
-                elseif (isset($this->Actions[ $rdata ]))
-                {
-                     if ($this->MyMod_Access_HashAccess($this->Actions[ $rdata ],array(1,2)))
-                    {
-                        array_push($rdatas,$rdata);
-                    }
-                }
                 /* elseif (isset($this->Actions[ $rdata ])) */
                 /* { */
-                /*     $action=$data; */
-                /*     if ($this->MyAction_Allowed($rdata)) */
+                /*     if ($this->MyMod_Access_HashAccess($this->Actions[ $rdata ],array(1,2))) */
                 /*     { */
                 /*         array_push($rdatas,$rdata); */
                 /*     } */
-                /*     else */
-                /*     { */
-                /*         if ( */
-                /*             isset($this->Actions[ $rdata ][ "AltAction" ]) */
-                /*            ) */
-                /*         { */
-                /*             $altaction=$this->Actions[ $rdata ][ "AltAction" ]; */
-                /*             if ($this->MyAction_Allowed($altaction)) */
-                /*             { */
-                /*                 array_push($rdatas,$altaction); */
-                /*             } */
-                /*         } */
-                /*     } */
                 /* } */
+                elseif (isset($this->Actions[ $rdata ]))
+                {
+                    $action=$data;
+                    if ($this->MyAction_Allowed($rdata))
+                    {
+                        array_push($rdatas,$rdata);
+                    }
+                    else
+                    {
+                        if (
+                            isset($this->Actions[ $rdata ][ "AltAction" ])
+                           )
+                        {
+                            $altaction=$this->Actions[ $rdata ][ "AltAction" ];
+                            if ($this->MyAction_Allowed($altaction))
+                            {
+                                array_push($rdatas,$altaction);
+                            }
+                        }
+                    }
+                }
                 elseif (method_exists($this,$rdata))
                 {
                     array_push($rdatas,$rdata);

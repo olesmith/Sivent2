@@ -51,11 +51,22 @@ trait MyMod_Item_Update
                         $update++;
                     }
                 }
-                elseif ($this->ItemData[ $data ][ "Derived" ]=="" && 
-                        $this->ItemData[ $data ][ "TimeType" ]=="")
+                elseif (
+                          empty($this->ItemData[ $data ][ "Derived" ])
+                          && 
+                          empty($this->ItemData[ $data ][ "TimeType" ])
+                       )
                 {
                     $newvalue=$this->TestUpdateItem($data,$item,FALSE,$prepost);
 
+
+                    $default=$this->ItemData($data,"Default");
+                    if (empty($newvalue) && !empty($default))
+                    {
+                        $newvalue=htmlentities($default);
+                        $newvalue=preg_replace('/\\\\/',"&#92;",$newvalue);
+                    }
+                    
                     if (!isset($item[ $data ]) || $newvalue!=$item[ $data ])
                     {
                         if ($this->TriggerFunction($data))

@@ -41,6 +41,7 @@ array
             'EditList' => 1,
             'Delete' => 1,
             'Copy' => 1,
+            'Zip' => 1,
          ),
       ),
       'Plural' => array

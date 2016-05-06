@@ -33,7 +33,8 @@ trait MyMod_Item_Group
         {
             $res=TRUE;
         }
-        if (count($item)>0)
+
+        if ($res && count($item)>0)
         {
             if (!empty($groupdef[ "AccessMethod" ]))
             {

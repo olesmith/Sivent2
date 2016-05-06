@@ -13,7 +13,7 @@ class CollaboratorsTableRead extends CollaboratorsTableRow
         $where=array();
         $where[ "Event" ]=$this->Event("ID");
         
-        $collaborations=$this->CollaborationsObj()->Sql_Select_Hashes($where);
+        $collaborations=$this->CollaborationsObj()->Sql_Select_Hashes($where,array(),"Name");
 
         return $collaborations;
     }

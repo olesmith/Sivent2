@@ -13,11 +13,11 @@ trait Sql_Table_Structure_Column_Rename
     function Sql_Table_Column_Rename_Query($name,$newname,$table="")
     {
         $dialect=$this->DB_Dialect();
-        
-
         $query="";
         if ($dialect=="mysql")
         {
+            $oldcolinfo=$this->Sql_Table_Column_Info($name);
+
             $query=
                 "ALTER TABLE ".
                 $this->Sql_Table_Name_Qualify($table).
@@ -26,7 +26,7 @@ trait Sql_Table_Structure_Column_Rename
                 " ".
                 $this->Sql_Table_Column_Name_Qualify($newname).
                 " ".
-                $oldcolinfo[ "Type" ];
+                $oldcolinfo[ "column_type" ];
         }
         elseif ($dialect=="pgsql")
         {
@@ -58,7 +58,7 @@ trait Sql_Table_Structure_Column_Rename
         {
             if ($this->Sql_Table_Field_Exists($name,$table))
             {
-                $oldcolinfo=$this->Sql_Table_Column_Info($name,$table);
+                //$oldcolinfo=$this->Sql_Table_Column_Info($name,$table);
                 $query=$this->Sql_Table_Column_Rename_Query($name,$newname,$table);
                 $this->DB_Query($query);
             }

@@ -120,7 +120,8 @@ class Filters extends Time
 
             if (!is_array($value))
             {
-                $lines=preg_replace("/#$rdata\b/",$value,$lines);
+                $lines=preg_replace('/#'.$rdata.'\b/',$value,$lines);
+                $lines=preg_replace('/#'.$rdata.'_/',$value."_",$lines);
                 while (preg_match("/#{([^}]+)}$rdata/",$lines,$matches))
                 {
                     $format=$matches[1];

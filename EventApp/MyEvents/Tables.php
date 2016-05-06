@@ -12,7 +12,7 @@ class MyEventsTables extends MyEventsTablesEvents
 
     function EventsTable($candname=FALSE)
     {
-        return
+        return 
             $this->ItemsTableDataGroup
             (
                "",
@@ -36,6 +36,33 @@ class MyEventsTables extends MyEventsTablesEvents
                 "",
                 $this->EventsTable()
             );
+    }
+    
+    //*
+    //* function ShowEvents, Parameter list:
+    //*
+    //* Generates events table matrix.
+    //*
+
+    function ReadEvents()
+    {
+        $this->ApplicationObj()->Events=$this->Sql_Select_Hashes(array(),array(),array("StartDate","ID"));
+        $this->ApplicationObj()->Events=array_reverse($this->ApplicationObj()->Events);
+    }
+    
+    //*
+    //* function ShowEvents, Parameter list:
+    //*
+    //* Generates events table matrix.
+    //*
+
+    function ShowEvents()
+    {
+        $this->ReadEvents();
+        echo
+            $this->H(1,$this->MyLanguage_GetMessage("Events_Table_Title")).
+            $this->EventsHtmlTable(),
+            "";
     }
 }
 

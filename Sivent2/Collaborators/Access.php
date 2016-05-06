@@ -57,6 +57,44 @@ class CollaboratorsAccess extends ModulesCommon
         
         return $res;
     }
+    
+    //*
+    //* function CheckCertAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may generate certificate.
+    //*
+
+    function CheckCertAccess($item=array())
+    {
+        if (empty($item)) { return TRUE; }
+      
+        $res=$this->Current_User_Event_Coordinator_Is();
+
+        if (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            if (
+                  !empty($item[ "Friend" ])
+                  &&
+                  $item[ "Friend" ]==$this->LoginData("ID")
+               )
+            {            
+                $res=TRUE;
+            }
+        }
+
+        if (empty($item[ "Certificate" ]) || $item[ "Certificate" ]!=2)
+        {
+            $res=FALSE;
+        }
+
+        if (preg_match('/^(Public)$/',$this->Profile()))
+        {
+            $res=FALSE;
+            //Todo: Check via code.
+        }
+
+        return $res;
+    }
 }
 
 ?>

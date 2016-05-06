@@ -41,7 +41,6 @@ class LoginPasswordRecoverMail extends LoginPasswordRecoverForms
         $args=$this->CGI_URI2Hash();
         $args[ "Action" ]="Login";
 
-        var_dump($user);
         $this->MyMod_Mail_Typed_Send
         (
            "Password_Changed",

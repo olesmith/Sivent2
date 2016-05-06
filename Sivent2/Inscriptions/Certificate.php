@@ -3,6 +3,53 @@
 
 class InscriptionsCertificate extends InscriptionsSubmissions
 {
+    //*
+    //* function Certificate_Where, Parameter list: $inscription
+    //*
+    //* Checks whether certificate has been generated.
+    //*
+
+    function Inscription_Certificate_Where($inscription)
+    {
+        $where=
+            array
+            (
+               "Unit"        => $inscription[ "Unit" ],
+               "Event"       => $inscription[ "Event" ],
+               "Friend"      => $inscription[ "Friend" ],
+               "Inscription" => $inscription[ "ID" ],
+               "Type"        => $this->Certificate_Type,
+            );
+
+        return $where;
+    }
+ 
+    //*
+    //* function Certificate_Where, Parameter list: $inscription
+    //*
+    //* Checks whether certificate has been generated.
+    //*
+
+    function Inscription_Certificates_Where($inscription)
+    {
+        $type=$this->CGI_GET("Type");
+        
+        $where=
+            array
+            (
+               "Unit"        => $inscription[ "Unit" ],
+               "Event"       => $inscription[ "Event" ],
+               "Friend"      => $inscription[ "Friend" ],
+            );
+
+        if ($type==1)
+        {
+            $where[ "Inscription" ]=$inscription[ "ID" ];
+            $where[ "Type" ]=$this->Certificate_Type;
+        }
+
+        return $where;
+    }
  
     //*
     //* function Inscription_Certificate_Latex, Parameter list: $inscription,$friend=array()
@@ -10,11 +57,9 @@ class InscriptionsCertificate extends InscriptionsSubmissions
     //* Generates certificate Latex code.
     //*
 
-    function Inscription_Certificate_Latex($inscription,$friend=array())
+    function Inscription_Certificate_Latex($cert)
     {
-        $cert=$this->CertificatesObj()->Sql_Select_Hash($where,array("ID","Generated"));
-        
-        return $this->CertificatesObj()->Certificate_Generate($cert,$inscription,$friend);
+        return $this->CertificatesObj()->Certificate_Generate($cert);
     }
     
     //*
@@ -27,23 +72,19 @@ class InscriptionsCertificate extends InscriptionsSubmissions
     {
         $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $this->ItemHash[ "Friend" ]));
         
-        $where=$this->Inscription_Certificate_Where($this->ItemHash);
+        $where=$this->Inscription_Certificates_Where($this->ItemHash);
             
-        $cert=$this->CertificatesObj()->Sql_Select_Hash($where);
+        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
 
-        $latex=
-            $this->CertificatesObj()->Certificate_Latex_Head().
-            "\n\n".
-            $this->CertificatesObj()->Certificate_Generate($cert,$this->ItemHash,$friend).
-            "\n\n".
-            $this->CertificatesObj()->Certificate_Latex_Tail().
-            "";
+        $latex="";
+        foreach ($certs as $cert)
+        {
+            $latex.=$this->CertificatesObj()->Certificate_Generate($cert);
+        }
         
-        
-        $latex=$this->FilterHash($latex,$this->Event(),"Event_");
-        $latex=$this->FilterHash($latex,$this->Unit(),"Unit_");
-        
-        $this->CertificatesObj()->Certificate_Set_Generated($this->ItemHash,1);
+        $latex=$this->CertificatesObj()->Certificates_Latex_Ambles_Put($latex);
+
+        $this->CertificatesObj()->Certificate_Set_Generated($cert);
         
         if ($this->CGI_GET("Latex")!=1)
         {
@@ -53,17 +94,6 @@ class InscriptionsCertificate extends InscriptionsSubmissions
         return $this->RunLatexPrint($this->CertificatesObj()->Certificate_TexName($friend[ "Name" ]),$latex);
     }
 
-    //*
-    //* function Inscription_Certificate_Where, Parameter list: $inscription
-    //*
-    //* Checks whether certificate has been generated.
-    //*
-
-    function Inscription_Certificate_Where($inscription)
-    {
-        return $this->CertificatesObj()->Certificate_Where($inscription,1);
-    }
-    
     //*
     //* function Inscription_Certificate_Generated_Cell, Parameter list: $inscription=array()
     //*
@@ -79,7 +109,7 @@ class InscriptionsCertificate extends InscriptionsSubmissions
         $cert=$this->CertificatesObj()->Sql_Select_Hash($where,array("ID","Generated"));
 
         $cell="-";
-        if (!empty($cert))
+        if (!empty($cell))
         {
             $cell=$this->CertificatesObj()->MyMod_Data_Fields_Show("Generated",$cert,TRUE);
         }

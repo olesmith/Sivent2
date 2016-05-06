@@ -204,7 +204,36 @@ array
          ),
       ),
 
+      "01_Sponsors" => array
+      (
+         'Title' => 'Patrocinadores:',
+         'Title_UK' => 'Sponsors:',
 
+         'Public'   => 1,
+         'Person'   => 0,
+         "Admin"    => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "Assessor"  => 1,
+         
+         "1_Sponsors" => array
+         (
+            "Name" => "Patrocinadores",
+            "Title" => "Visualizar Patrocinadores",
+            "Name_UK" => "Sponsors",
+            "Title_UK" => "See Sponsors",
+
+            'Href' => '?Unit=#Unit&ModuleName=Sponsors&Action=Search',
+            'AccessMethod' => "AppHasSponsors",
+
+            'Public'    => 1,
+            'Person'    => 0,
+            'Admin'     => 1,
+
+            'Friend'     => 0,
+            'Coordinator' => 1,
+         ),
+      ),
 
       "01_Profile" => array
       (

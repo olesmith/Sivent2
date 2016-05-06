@@ -21,7 +21,7 @@ array
    "GenCert" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=GenCert&Latex=1&ID=#ID",
+      "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=GenCert&Latex=1&ID=#ID",
       "Title"    => "Gerar Certificado (PDF)",
       "Title_UK" => "Generate Certificate (PDF)",
       "ShortName"     => "Certificado",

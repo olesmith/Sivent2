@@ -1,6 +1,7 @@
 <?php
 
 include_once("MyEvents/Access.php");
+include_once("MyEvents/Friend.php");
 include_once("MyEvents/Cells.php");
 include_once("MyEvents/Datas.php");
 include_once("MyEvents/DataGroups.php");
@@ -68,7 +69,7 @@ class MyEvents extends MyEventsHandle
 
     function PreActions()
     {
-        array_unshift($this->ActionPaths,"../EventApp/System/Events");
+        array_push($this->ActionPaths,"../EventApp/System/Events");
     }
 
 

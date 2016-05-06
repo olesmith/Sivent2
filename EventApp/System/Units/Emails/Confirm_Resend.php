@@ -13,8 +13,8 @@ array
       "Size" => "50",
       "Sql"          => "TEXT",
       
-      "Default"      => "#ApplicationName: Reenvio de Código de Confirmação, #Unit_Title, #Institution",
-      "Default_UK"   => "#ApplicationName: Resending Confirmation Code, #Unit_Title, #Institution",
+      "Default"      => "#ApplicationName: Reenvio de Código de Confirmação, #Unit_Name, #Unit_Title",
+      "Default_UK"   => "#ApplicationName: Resending Confirmation Code, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
       "Person"   => 1,
@@ -28,26 +28,26 @@ array
       "Sql"          => "TEXT",
       
       "Default"      =>
-        "Conforme solicitado no nosso site, enviamos o código de confirmação do cadastro do #Institution\n".
-        "\n".
-        "Para confirmar seu cadastro, por favor acesse o link:\n\n".
-        "#Href1\n\n".
-        "Se prefere, utilize o formulário de confirmação:\n\n".
-        "#Href2,\n\n".
-        "preenchendo os dados:\n\n".
-        "Email: #CondEmail\n".
-        "Código de Confirmação: #ConfirmCode."
+        "Recebemos uma solicitação de reenvio de do código de confirmação. Para completar o cadastro, por favor acesse o link:\n\n".
+        "#ConfirmLink\n\n".
+        "Você também pode confirmar seu cadastro, através do link:\n\n".
+        "#ConfirmLinkForm,\n\n".
+        "informando seu email como login no sistema junto com o código de confirmação abaixo:\n\n".
+        "Usuário: #Email\n".
+        "Code de Confirmação: #ConfirmCode\n\n".
+        "Para reenviar sua senha, por favor acesse:\n\n".
+        "#ResendCodeLink\n\n"
       ,
       "Default_UK"   =>
-        "As solicited on our site, we are hereby sending you the code needed to confirm you registry at\n\n".
-        "#Institution\n\n".
-        "In order to complete your registration, please visit the link:\n\n".
-        "#Href1\n\n".
-        "Or if you prefer, use the confirmation form at:\n\n".
-        "#Href2,\n\n".
-        "using the following credentials:\n\n".
-        "Email: #CondEmail\n".
-        "Confirm Code: #ConfirmCode."
+       "We have received a solicitation to resend your confirmation code.  In order to complete your registration, please access the link:\n\n".
+       "#ConfirmLink\n\n".
+       "You may also complete your registration, acessing:\n\n".
+       "#ConfirmLinkForm\n\n".
+       "providing the following information:\n\n".
+       "User: #Email\n".
+       "Confirmation Code: #ConfirmCode\n\n".
+       "If needed, you may have the current confirmation code resent, please use:\n\n".
+       "#ResendCodeLink\n\n"
       ,
       
       "Public"   => 0,

@@ -86,10 +86,11 @@ trait Sql_Select_Hashes
 
     function Sql_Select_Hashes($where="",$fieldnames=array(),$orderby="",$postprocess=FALSE,$table="")
     {
-               
+        if (!$this->Sql_Table_Exists($table)) { return array(); }
+        
         $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table);
         $result = $this->DB_Query_2Assoc_List($this->LastSqlWhere);
-        
+
         if ($result && $postprocess)
         {
             $this->PostProcessItemList($result);

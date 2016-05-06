@@ -13,8 +13,8 @@ array
       "Size" => "50",
       "Sql"          => "TEXT",
       
-      "Default"      => "#ApplicationName: Recuperação de Senha, #Unit_Title, #Institution",
-      "Default_UK"   => "#ApplicationName: Recover Password, #Unit_Title, #Institution",
+      "Default"      => "#ApplicationName: Recuperação de Senha, #Unit_Name, #Unit_Title",
+      "Default_UK"   => "#ApplicationName: Recover Password, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
       "Person"   => 1,
@@ -28,12 +28,19 @@ array
       "Sql"          => "TEXT",
       
       "Default"      =>
-        "Conforme solicitado no nosso site, enviamos link para a recuperar sua senha:\n\n".
-        "#Href"
+       "Recebemos uma solicitação de recuperar a senha do login (email) #Email. ".
+      "Em baixo inlcuimos um código gerado aleatóriamente, permitindo a alteração da senha, ".
+      "por favor acesse este link:\n\n".
+      "#RecoverLink\n\n".
+      "Ao completar a alteração, você receberá um email informativo pelo sistema.\n\n"
       ,
+
+      
       "Default_UK"   =>
-        "As solicited on our site, we are hereby sending link for recovering your password:\n\n".
-        "#Href"
+      "We have received a solicitation to recover login to the account (email) #Email. ".
+      "Below we include a randomnly generated code, permitting you to change the password accessing:\n\n".
+      "#RecoverLink\n\n".
+      "Completing the alteration, you will receive an informative email by the system.\n\n"
       ,
       
       "Public"   => 0,

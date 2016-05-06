@@ -1,22 +1,5 @@
 array
 (
-   "0_Start" => array
-   (
-      "Name" => "Início",
-      "Title" => "Start",
-      "Name_UK" => "Start",
-      "Title_UK" => "Start",
-
-      'Href' => '?Unit=#Unit&Action=Start',
-
-      'Public'    => 1,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      "Friend"     => 1,
-      'Coordinator' => 1,
-      'Assessor'     => 1,
-   ),
    "11_ShowUnit" => array
    (
       "Name" => "Unidade",
@@ -43,7 +26,7 @@ array
 
       'Href' => '?Unit=#Unit&ModuleName=Units&Action=Edit&ID=#Unit',
 
-      'Public'    => 1,
+      'Public'    => 0,
       'Person'    => 0,
       'Admin'     => 1,
 
@@ -60,7 +43,7 @@ array
 
       'Href' => '?Unit=#Unit&ModuleName=Friends&Action=Search',
 
-      'Public'    => 1,
+      'Public'    => 0,
       'Person'    => 0,
       'Admin'     => 1,
 
@@ -70,10 +53,10 @@ array
    ),
    "3_Events" => array
    (
-      "Name" => "Editais",
-      "Title" => "Editais",
-      "Name_UK" => "Announcements",
-      "Title_UK" => "Announcements",
+      "Name" => "Eventos",
+      "Title" => "Eventos",
+      "Name_UK" => "Events",
+      "Title_UK" => "Events",
 
       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Search',
 
@@ -81,8 +64,37 @@ array
       'Person'    => 0,
       'Admin'     => 1,
 
-      "Friend"     => 0,
+      "Friend"     => 1,
       'Coordinator' => 1,
-      'Assessor'     => 0,
+      'Assessor'     => 1,
+   ),
+   "4_Permissions" => array
+   (
+      "Name" => "Permissões",
+      "Title" => "Gerenciar Permissões",
+      "Name_UK" => "Permissions",
+      "Title_UK" => "Manage Permissions",
+
+      'Href' => '?Unit=#Unit&ModuleName=Permissions&Action=Search',
+
+      'Public'    => 0,
+      'Person'    => 0,
+      'Admin'     => 1,
+
+      'Friend'     => 0,
+      'Coordinator' => 1,
+   ),
+   '5_Uploads' => array
+   (
+      'Name' => 'Uploads',
+      'Title' => 'Gerenciar Uploads',
+      'Href' => '?Unit=#Unit&Action=Uploads',
+
+      'Public'   => 0,
+      'Person'   => 0,
+      'Admin'    => 1,
+      "Monitor"     => 0,
+      "Coordinator" => 1,
+      "Advisor"  => 0,
    ),
 );

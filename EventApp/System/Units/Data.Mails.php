@@ -27,8 +27,8 @@ array
       "Name_UK"      => "Tails",
       "Title"        => "Rodapé dos Emails",
       "Title_UK"     => "Email Tails",
-      "Default"      => "Atenciosamente,\n#Department\n#Institution",
-      "Default_UK"   => "Regards,\n#Department\n#Institution",
+      "Default"      => "Atenciosamente,\n#Unit_Name\n#Unit_Title",
+      "Default_UK"   => "Regards,\n#Unit_Name\n#Unit_Title",
 
       
       "Size" => "50x3",

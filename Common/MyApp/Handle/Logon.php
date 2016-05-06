@@ -29,7 +29,7 @@ trait MyApp_Handle_Logon
             }
 
             $this->MyApp_Login_Form();
-            $this->DoExit();
+            //$this->DoExit();
         }
         else
         {

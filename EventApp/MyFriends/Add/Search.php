@@ -15,7 +15,7 @@ class MyFriendsAddSearch extends MyFriendsAddTable
            $table,
            array
            (
-              $this->H(5,$this->FriendSelectSearchTitle),
+            $this->H(5,$this->MyLanguage_GetMessage("Friend_Select_Search_Title")),
            )
         );
 
@@ -41,17 +41,17 @@ class MyFriendsAddSearch extends MyFriendsAddTable
            $table,
            array
            (
-              $this->B("Nome:"),
+              $this->B($this->MyLanguage_GetMessage("Friend_Add_Name").":"),
               $this->MakeInput("Name",$hash[ "Name" ],25),
            ),
            array
            (
-              $this->B("Email (login):"),
+              $this->B($this->MyLanguage_GetMessage("Friend_Add_Email").":"),
               $this->MakeInput("Email",$hash[ "Email" ],25),
            ),
            array
            (
-              $this->Button("submit",$this->FriendSelectSearchButton),
+              $this->Button("submit",$this->MyLanguage_GetMessage("Friend_Select_Search_Button")),
            )
         );
 
@@ -67,7 +67,7 @@ class MyFriendsAddSearch extends MyFriendsAddTable
     function FriendSelectSearchForm($leadingrows=array())
     {
         return
-            $this->H(1,$this->FriendSelectTitle).
+            $this->H(1,$this->MyLanguage_GetMessage("Friend_Select_Title")).
             $this->StartForm("","post",0,array(),array("Friend")).
             $this->Html_Table
             (
@@ -108,7 +108,7 @@ class MyFriendsAddSearch extends MyFriendsAddTable
             $where[ "__Email" ]=
                 "LOWER(".
                 $this->Sql_Table_Column_Name_Qualify("Email").
-                " LIKE ".
+                ") LIKE ".
                 $this->Sql_Table_Column_Value_Qualify('%'.$email.'%');
         }
 
@@ -117,7 +117,7 @@ class MyFriendsAddSearch extends MyFriendsAddTable
             $where[ "__Name" ]= 
                 "LOWER(".
                 $this->Sql_Table_Column_Name_Qualify("TextName").
-                " LIKE ".
+                ") LIKE ".
                 $this->Sql_Table_Column_Value_Qualify('%'.join("%",$names).'%');
         }
 

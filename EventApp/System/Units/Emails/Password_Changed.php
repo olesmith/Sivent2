@@ -13,8 +13,8 @@ array
       "Size" => "50",
       "Sql"          => "TEXT",
       
-      "Default"      => "#ApplicationName: Senha alterada, #Unit_Title, #Institution",
-      "Default_UK"   => "#ApplicationName: Password changed, #Unit_Title, #Institution",
+      "Default"      => "#ApplicationName: Senha alterada, #Unit_Name, #Unit_Title",
+      "Default_UK"   => "#ApplicationName: Password changed, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
       "Person"   => 1,
@@ -30,16 +30,16 @@ array
       "Default"      =>
         "Informamos que sua senha foi alterada:\n\n".
         "Usuário: #Email\n".
-        "Senha: #Password\n\n".
+        "Senha: #NewPassword\n\n".
         "Por favor, acesse seu cadastro, utilizando o seguinte link:\n\n".
-        "#Href"
+        "#LoginLink"
       ,
       "Default_UK"   =>
         "We hereby inform, that yoour password has been changed:\n\n".
         "User: #Email\n".
-        "Password: #Password\n\n".
+        "Password: #NewPassword\n\n".
         "Please use the following link to access your registration:\n\n".
-        "#Href"
+        "#LoginLink"
       ,
       
       "Public"   => 0,

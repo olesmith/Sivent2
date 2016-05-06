@@ -45,4 +45,9 @@ array
       "Name" => "Editar Dados do Cadastro",
       "Name_UK" => "Edit Registration Data",
    ),
+   "Friend_Inscriptions_Table_Title" => array
+   (
+      "Name" => "Inscrições deste Usuário",
+      "Name_UK" => "Inscriptions of this User",
+   ),
 );

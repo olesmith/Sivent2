@@ -22,7 +22,7 @@ array
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
-         //"AccessMethod" => "CheckShowAccess",
+         "AccessMethod" => "CheckShowAccess",
       ),
       'Edit' => array
       (
@@ -53,11 +53,12 @@ array
       ),
       'Download' => array
       (
-         'Public' => 0,
+         'Public' => 1,
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
+         "AccessMethod" => "CheckShowAccess",
       ),
    "Datas" => array
    (
@@ -169,6 +170,25 @@ array
       "Title_UK" => "Search Inscriptions",
       "Name"     => "Inscrições",
       "Name_UK"   => "Inscriptions",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"       => 1,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+
+      "Singular"   => TRUE,
+      "Handler"   => "",
+      "Icon"   => "students_light.png",
+   ),
+   "Inscriptions_Add" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?Event=#ID&ModuleName=Inscriptions&Action=Add",
+      "Title"    => "Inscrição Avulsa",
+      "Title_UK" => "Add Inscriptions",
+      "Name"     => "Inscrição Avulsa",
+      "Name_UK"   => "Add Inscriptions",
 
       "Public"   => 0,
       "Person"   => 0,

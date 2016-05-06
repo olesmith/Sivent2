@@ -137,7 +137,7 @@ class Zip extends OptionsTable
         $outname=preg_replace('/\//',"-",$outname);
 
 
-        $outname=$this->ModuleName."-".$outname."-".$mtime;
+        $outname=$this->ApplicationName."-".$outname."-".$mtime;
 
         //Tmp file name
         $outfile="/tmp/".$mtime;
@@ -146,27 +146,28 @@ class Zip extends OptionsTable
         $zip = new ZipArchive();
         if ($zip->open($outfile,ZipArchive::CREATE))
         {
-            $dirs=$this->TreeSubdirs($this->GetUploadPath());
+            $dirs=$this->TreeSubdirs($path);
             foreach ($dirs as $id => $dir)
             {
-                $zip->addEmptyDir($dir); 
+                $zip->addEmptyDir($dir);
             }
 
             $items=array();
 
-            $files=$this->TreeFiles($this->GetUploadPath());
+            $files=$this->TreeFiles($path);
             foreach ($files as $id => $file)
             {
                 $path=dirname($file);
                 $fname=basename($file);
 
-                $zip->addFile($file); 
+                $res=$zip->addFile($file); 
             }
 
             $zip->close();
             $contents=$this->MyReadFile($outfile);
+
             $this->SendDocHeader("zip",$outname);
-            print join("",$this->MyReadFile($outfile));
+            echo join("",$this->MyReadFile($outfile));
 
             unlink($outfile);
             exit();

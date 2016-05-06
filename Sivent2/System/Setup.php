@@ -86,6 +86,7 @@
              "SqlHref" => TRUE,
              "SqlTable" => "Friends",
              "SqlFilter" => "#Name (#Email)",
+             "SqlFilter_Public" => "#Name",
              "SqlDerivedData" => array("Name","Email"),
 
              "ItemName"      => "Usuário",

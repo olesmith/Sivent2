@@ -165,7 +165,7 @@ trait MyApp_Profiles
     //*
     //* function MyApp_Profile_Trust, Parameter list:
     //*
-    //* Sends the Profile cookie.
+    //* Returns trust value of Profile.
     //*
 
     function MyApp_Profile_Trust($profile="")

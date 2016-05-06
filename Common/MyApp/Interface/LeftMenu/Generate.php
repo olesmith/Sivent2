@@ -60,7 +60,17 @@ trait MyApp_Interface_LeftMenu_Generate
        return $html;
     }
 
+    //*
+    //* function MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has, Parameter list:
+    //*
+    //* Generates (returns) the Left menu list.
+    //*
 
+    function MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenuitem)
+    {
+        return $this->MyMod_Access_HashAccess($submenuitem,1);
+    }
+    
     //*
     //* function MyApp_Interface_LeftMenu_Generate_SubMenu_List, Parameter list:
     //*
@@ -82,28 +92,51 @@ trait MyApp_Interface_LeftMenu_Generate
 
             foreach ($menuids as $menuid)
             {
-                if (!is_array($submenu[ $menuid ])) { continue; }
-                if (!$this->MyMod_Access_HashAccess($submenu[ $menuid ],1)) { continue; }
+                if (
+                      !is_array($submenu[ $menuid ])
+                      ||
+                      !$this->MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenu[ $menuid ])
+                   )
+                { continue; }
 
-                $url=$submenu[ $menuid ][ "Href" ];
+                $url="";
+                if (!empty($submenu[ $menuid ][ "Href" ])) { $url=$submenu[ $menuid ][ "Href" ]; }
+
+                
                 if (preg_match('/#/',$url))
                 {
                     $url=$this->Filter($url,$_GET);
                 }
 
-                array_push
-                (
-                   $list,
-                   $this->MyApp_Interface_LeftMenu_Bullet("+").
-                   $this->Href
-                   (
-                      $url,
-                      $this->GetRealNameKey($submenu[ $menuid ],"Name"),
-                      $this->GetRealNameKey($submenu[ $menuid ],"Title"),
-                      $this->GetRealNameKey($submenu[ $menuid ],"Target"),
-                      "leftmenulinks"
-                   )
-                );
+                if (!empty($url))
+                {
+                    $url=
+                        $this->MyApp_Interface_LeftMenu_Bullet("+").
+                        $this->Href
+                        (
+                           $url,
+                           $this->GetRealNameKey($submenu[ $menuid ],"Name"),
+                           $this->GetRealNameKey($submenu[ $menuid ],"Title"),
+                           $this->GetRealNameKey($submenu[ $menuid ],"Target"),
+                           "leftmenulinks"
+                        );
+                }
+                else
+                {
+                    $url=
+                        $this->MyApp_Interface_LeftMenu_Bullet("*").
+                        $this->Span
+                        (
+                           $this->GetRealNameKey($submenu[ $menuid ],"Name"),
+                           array
+                           (
+                              "TITLE" => $this->GetRealNameKey($submenu[ $menuid ],"Title"),
+                           )
+                        ).
+                        "";
+                }
+
+                array_push($list,$url);
             }
         }
 

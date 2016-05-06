@@ -54,7 +54,7 @@ array
       "Name_UK" => "Title (PT)",
       "Title_UK" => "Title (PT)",
 
-      "Size" => "50",
+      "Size" => "35",
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
       "Person"   => 0,
@@ -72,7 +72,7 @@ array
       "Name_UK" => "Title (UK)",
       "Title_UK" => "Title (UK)",
 
-      "Size" => "50",
+      "Size" => "35",
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
       "Person"   => 0,
@@ -109,7 +109,7 @@ array
       "Name_UK" => "Text (Cert)",
       "Title_UK" => "Text (Certificate)",
 
-      "Size" => "50",
+      "Size" => "15",
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
       "Person"   => 0,
@@ -117,7 +117,25 @@ array
       "Friend" => 1,
       "Coordinator" => 2,
       
-      "Search"  => TRUE,
+      "Search"  => FALSE,
+      "Compulsory"  => FALSE,
+   ),
+   "CertText_UK" => array
+   (
+      "Name" => "Texto/UK (Cert)",
+      "Title" => "Texto/UK (Certificado)",
+      "Name_UK" => "Text/UK (Cert)",
+      "Title_UK" => "Text/UK (Certificate)",
+
+      "Size" => "15",
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => FALSE,
       "Compulsory"  => FALSE,
    ),
    "Inscriptions" => array
@@ -136,6 +154,23 @@ array
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+   ),
+   "Comment" => array
+   (
+      "Name" => "Comentário",
+      "Name_UK" => "Comment",
+      
+      "Sql" => "VARCHAR(256)",
+      "Size" => "30",
+      
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 2,
       "Coordinator" => 2,
       
       "Search"  => TRUE,

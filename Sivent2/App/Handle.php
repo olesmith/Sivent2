@@ -3,6 +3,34 @@
 class AppHandle extends EventApp
 {
     //*
+    //* function EventSelect, Parameter list: $data,$item,$edit,$rdata=""
+    //*
+    //* Creates event select field. If Unit is set, restricts to unit city.
+    //*
+
+    function EventSelect($data,$item,$edit,$rdata="")
+    {
+        $cell="";
+        $where=array();
+
+        if (!empty($item[ "ID" ])) { $item[ "Event" ]=$item[ "ID" ]; }
+        
+        $cell=
+            $this->EventsObj()->MakeSelectFieldWithWhere
+            (
+               $edit,
+               "Event",
+               $where,
+               array("ID","Name"),
+               "#Name",
+               "Name",
+               $item,
+               $rdata
+            );
+
+        return $cell;
+    }
+    //*
     //* function HasCollaborations, Parameter list:
     //*
     //* Checks whether current event has collaborations.
@@ -36,6 +64,18 @@ class AppHandle extends EventApp
     function HasSubmissions()
     {
         return $this->EventsObj()->Event_Submissions_Has();
+    }
+    
+    //*
+    //* function SubmissionsPublic, Parameter list:
+    //*
+    //* Checks whether current event has Submissions.
+    //* 
+    //*
+
+    function SubmissionsPublic()
+    {
+        return $this->EventsObj()->Event_Submissions_Public();
     }
     
     //*
@@ -151,18 +191,30 @@ class AppHandle extends EventApp
             $this->ResetCookieVars();
         }
 
+        $this->EventsObj()->ItemData();
+        $this->EventsObj()->ItemDataGroups();
+        $this->EventsObj()->Actions();
+
         $this->MyApp_Interface_Head();
 
         echo
             $this->AppInfo();
 
-       if ($this->Profile=="Friend")
+        if ($this->Profile=="Friend")
         {
             $this->HandleFriend();
         }
         elseif ($this->Profile=="Coordinator")
         {
             $this->HandleCoordinator();
+        }
+        elseif ($this->Profile=="Public")
+        {
+            $this->HandlePublic();
+        }
+        else
+        {
+            $this->EventsObj()->ShowEvents();
         }
     }
 
@@ -207,12 +259,8 @@ class AppHandle extends EventApp
 
     function HandleCoordinator()
     {
-        $this->EventsObj()->ItemData();
-        $this->EventsObj()->ItemDataGroups();
-        $this->EventsObj()->Actions();
-
-        
         echo
+            $this->H(1,$this->MyLanguage_GetMessage("Events_Table_Title")).
             $this->Html_Table
             (
                "",
@@ -238,6 +286,31 @@ class AppHandle extends EventApp
     function HandleFriend()
     {
         $this->FriendsObj()->Friend_Events_Table();
+    }
+
+    //*
+    //* function HandlePublic, Parameter list: 
+    //*
+    //* Handle public action Start·
+    //*
+
+    function HandlePublic()
+    {
+        $this->MyApp_Login_Form();
+        
+        $this->EventsObj()->ShowEvents();
+    }
+
+    //*
+    //* function MyApp_Handle_Logon, Parameter list: 
+    //*
+    //* Handle Ligin Form, add events listing.
+    //*
+
+    function MyApp_Handle_Logon()
+    {
+        parent::MyApp_Handle_Logon();
+        $this->EventsObj()->ShowEvents();
     }
 
 }

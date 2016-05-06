@@ -78,7 +78,6 @@ trait MyApp_Login_Form
         $formtitle=$this->GetMessage($this->LoginMessages,"Login");
 
         echo 
-            /* $this->H(1,$title). */
             $premsg.
             $this->H(3,$msg1).
             $this->H(2,$formtitle).
@@ -101,7 +100,8 @@ trait MyApp_Login_Form
             $this->H(3,$msg2).
             $this->Div($this->Auth_Message,array("CLASS" => 'errors')).
             $this->MyApp_Login_PostMessage().
-            "<BR><BR>";
+            $this->BR().$this->BR().
+            "";
     }
 
     //*

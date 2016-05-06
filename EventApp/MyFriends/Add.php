@@ -50,6 +50,10 @@ class MyFriendsAdd extends MyFriendsAddSearch
 
     function HandleFriendSelect($newitem,$editlist=TRUE,$leadingrows=array(),$resulthiddens=array())
     {
+        $newitem[ "Email" ]=preg_replace('/\s+/',"",$newitem[ "Email" ]);
+        $newitem[ "Name" ]=preg_replace('/^\s+/',"",$newitem[ "Name" ]);
+        $newitem[ "Name" ]=preg_replace('/\s+$/',"",$newitem[ "Name" ]);
+        
         $this->ItemData[ "Name" ][ $this->Profile() ]=1;
         $this->ItemData[ "Email" ][ $this->Profile() ]=1;
 
@@ -70,7 +74,7 @@ class MyFriendsAdd extends MyFriendsAddSearch
         {
            if (count($friends)>0)
             {
-                $subtitle=$this->FriendSelectTableTitle;
+                $subtitle=$this->MyLanguage_GetMessage("Friend_Select_Table_Title");
             }
         }
 
@@ -90,8 +94,10 @@ class MyFriendsAdd extends MyFriendsAddSearch
         }
 
         $html.=
-             $this->FriendSelectResultForm($editlist,$subtitle,$friends,$resulthiddens).
+            $this->FriendSelectResultForm($editlist,$subtitle,$friends,$resulthiddens).
             "";
+
+        
 
         if (count($friends)>0)
         {
@@ -99,27 +105,33 @@ class MyFriendsAdd extends MyFriendsAddSearch
                 $this->H
                 (
                    6,
-                   $this->FriendSelectPromoteMsg
+                   $this->MyLanguage_GetMessage("Friend_Select_Table_Promote_Msg")
                 ).
                 ""; 
         }
-        elseif ($this->GetPOST("Search")==1 || $this->GetPOST("AddFriend")==1)
+
+        if (!empty($newitem[ "Name" ]) && !empty($newitem[ "Email" ]) && $this->ValidEmailAddress($newitem[ "Email" ]))
         {
-            $html.=
-               $this->H
-                (
-                   6,
-                   $this->FriendSelectTableEmpty
-                ).
-                $this->FriendSelectNewForm($newitem).
-                ""; 
+            $friends=$this->Sql_Select_Hashes(array("Email" => $newitem[ "Email" ]));
+
+            if (count($friends)==0 && $this->GetPOST("Search")==1 || $this->GetPOST("AddFriend")==1)
+            {
+                $html.=
+                   $this->H
+                    (
+                       6,
+                       $this->MyLanguage_GetMessage("Friend_Select_Table_Empty")
+                    ).
+                    $this->FriendSelectNewForm($newitem).
+                    "";
+            }
         }
 
         $html.=
             $this->H
             (
                5,
-               $this->FriendSelectInfoMsg
+               $this->MyLanguage_GetMessage("Friend_Select_Table_Info_Msg")
             ).                
             "";
 

@@ -35,6 +35,8 @@ include_once("MyApp/Menues.php");
 class EventApp extends MyEventAppMenues
 {
     use _accessor_;
+
+    var $EventGroup="Inscriptions";
     
     var $Unit2MailInfo=array
     (
@@ -93,6 +95,9 @@ class EventApp extends MyEventAppMenues
        ),
     );
 
+    var $Sponsors=FALSE;
+
+    
     var $Event=array();
     var $Unit=array();
     var $Units=array();
@@ -177,7 +182,16 @@ class EventApp extends MyEventAppMenues
         $unit=$this->Unit();
         if (!empty($unit))
         {
-            return $unit[ "HtmlIcon".$n ];
+            $args=array
+            (
+               "ModuleName" => "Units",
+               "Action" => "Download",
+               "Unit" => $unit[ "ID" ],
+               "Data" => "HtmlIcon".$n,
+            );
+            $icon="?".$this->CGI_Hash2URI($args);
+
+            return $icon;    
         }
         
         return parent::MyApp_Interface_Icon_Get($n);
@@ -313,12 +327,19 @@ class EventApp extends MyEventAppMenues
            array(array("Title","Url","Email"))
         );
 
+        array_unshift
+        (
+           $table,
+           array($this->H(3,$this->Unit("Title")))
+        );
+
         $event=$this->Event();
         if (!empty($event))
         {
             $table=array_merge
             (
                $table,
+               array($this->H(3,$this->GetRealNameKey($event,"Title"))),
                $this->EventsObj()->MyMod_Item_Table
                (
                   0,
@@ -327,7 +348,7 @@ class EventApp extends MyEventAppMenues
                   (
                      array
                      (
-                        "Name","Announcement","AnnouncementLink"
+                        "Name","Date","Announcement"
                      ),
                      array
                      (

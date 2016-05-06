@@ -1,10 +1,10 @@
  array
     (
-       "Name" => "Certificados",
-       "Name_UK" => "Certificates",
+       "Name" => "Certificado",
+       "Name_UK" => "Certificate",
        "Data" => array
        (
-          "Certificate","Certificate_Generated","Certificate_Mailed"
+          "Certificate","GenCert","Certificate_Generated","Certificate_Mailed"
         ),
 
        "Single" => TRUE,

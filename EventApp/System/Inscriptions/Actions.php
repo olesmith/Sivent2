@@ -12,7 +12,7 @@ array
       (
          'Public' => 0,
          'Person' => 0,
-         "Admin" => 10,
+         "Admin" => 1,
          "Friend"     => 0,
          "Coordinator" => 1,
       ),
@@ -26,6 +26,7 @@ array
       ),
       'Show' => array
       (
+         "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=Edit&ID=#ID",
          'Public' => 1,
          'Person' => 0,
          "Admin" => 1,
@@ -43,6 +44,7 @@ array
       ),
       'Edit' => array
       (
+         "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=Edit&ID=#ID",
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,

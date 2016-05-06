@@ -68,12 +68,22 @@ class MyUnitsMailsTypes extends MyUnitsMails
                 }
                     
                 foreach ($this->ApplicationObj()->GetProfiles() as $profile => $def)
-                {                        
+                {
+                    if (empty($rmaildatas[ $lang ][ $destkey ][ $profile ]))
+                    {
+                        $rmaildatas[ $lang ][ $destkey ][ $profile ]=1;
+                    }
+                    
+                    if (empty($maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]))
+                    {
+                        $maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]=1;
+                    }
+                    
                     $rmaildatas[ $lang ][ $destkey ][ $profile ]=
                         $this->Max
                         (
-                         $rmaildatas[ $lang ][ $destkey ][ $profile ],
-                         $maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]
+                           $rmaildatas[ $lang ][ $destkey ][ $profile ],
+                           $maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]
                          );
                 }
             }

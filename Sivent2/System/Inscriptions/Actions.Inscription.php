@@ -53,21 +53,21 @@ array
       "TitleMethod"    => "Inscriptions_Submissions_Show_Title",
       "AccessMethod"    => "Inscriptions_Submissions_Show_Should",
   ),
-   "Certificate" => array
-   (
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Certificate&Friend=#Friend#1",
+  /*  "Certificate" => array */
+  /*  ( */
+  /*     "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Certificate&Friend=#Friend#1", */
       
-      "Title"    => "Certificados",
-      "Title_UK" => "Certificates",
-      "Name"     => "Certificados",
-      "Name_UK"   => "Certificates",
+  /*     "Title"    => "Certificados", */
+  /*     "Title_UK" => "Certificates", */
+  /*     "Name"     => "Certificados", */
+  /*     "Name_UK"   => "Certificates", */
       
 
-      "Public"   => 0,
-      "Person"   => 0,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-      "Admin"    => 1,
-      "AccessMethod"    => "Inscriptions_Certificates_Published",
-  ),
+  /*     "Public"   => 0, */
+  /*     "Person"   => 0, */
+  /*     "Friend"     => 1, */
+  /*     "Coordinator" => 1, */
+  /*     "Admin"    => 1, */
+  /*     "AccessMethod"    => "Inscriptions_Certificates_Published", */
+  /* ), */
  );

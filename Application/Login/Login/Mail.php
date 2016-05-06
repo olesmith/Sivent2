@@ -11,14 +11,15 @@ class LoginLoginMail extends LoginPassword
     function SendChangeLoginMail($newemail,$user)
     {
         $user[ "NewEmail" ]=$newemail;
-        $user[ "Email" ]=$user[ "Email" ].";".$newemail;
-        $this->ApplicationSendEmail
+        $user[ "Email" ]=$user[ "Email" ];                
+        
+        $this->MyMod_Mail_Typed_Send
         (
+           "Email_Change",
            $user,
+           $this->Unit(),
            array
            (
-              "Subject" => $this->GetMessage($this->LoginMessages,"Recover_Login_Mail_Subject"),
-              "Body"    => $this->GetMessage($this->LoginMessages,"Recover_Login_Mail_Body"),
            )
         );
     }
@@ -32,14 +33,14 @@ class LoginLoginMail extends LoginPassword
     function  SendChangedLoginMail($oldemail,$user)
     {
         $user[ "OldEmail" ]=$oldemail;
-        $user[ "Email" ]=$user[ "Email" ].";".$oldemail;
-        $this->ApplicationSendEmail
+        $user[ "Email" ]=$user[ "Email" ];
+        $this->MyMod_Mail_Typed_Send
         (
+           "Email_Changed",
            $user,
+           $this->Unit(),
            array
            (
-              "Subject" => $this->GetMessage($this->LoginMessages,"Recovered_Login_Mail_Subject"),
-              "Body"    => $this->GetMessage($this->LoginMessages,"Recovered_Login_Mail_Body"),
            )
         );
     }

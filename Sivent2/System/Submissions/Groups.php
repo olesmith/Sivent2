@@ -6,10 +6,17 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
+         "No","Edit","Delete","GenCert",
+         "Status",
+         "Event","Type","Area","Level",
+         "Friend","Title","File"
+      ),
+      "Data_UK" => array
+      (
          "No","Edit","Delete",
          "Status",
          "Event","Type","Area","Level",
-         "Friend","Title","Title_UK",
+         "Friend","Title_UK",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -19,13 +26,14 @@ array
    ),
     "Authors" => array
     (
-       "Name" => "Autores",
-       "Name_UK" => "Authors",
+       "Name" => "Autores & Certificados",
+       "Name_UK" => "Authors & Certificates",
        "Data" => array
        (
-          "No","Edit","Delete",
+          "No","Edit","Delete","GenCert",
           "Status",
-          "Event","Selected","Author1","Author2","Author3",
+          "Event","Selected","Certificate","Certificate_TimeLoad",
+          "Author1","Author2","Author3",
         ),
 
        "Admin" => 1,
@@ -36,14 +44,14 @@ array
     ),
    "Submission" => array
    (
-      "Name" => "Básicos",
-      "Name_UK" => "Basic",
+      "Name" => "Detalhes",
+      "Name_UK" => "Details",
       "Data" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","GenCert",
          "Status",
          "Type","Area","Level",
-         "Title","Title_UK",
+         "Title","Title_UK","Title_UK",
       ),
       "Admin" => 1,
       "Person" => 0,

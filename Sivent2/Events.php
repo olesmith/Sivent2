@@ -30,6 +30,17 @@ class Events extends EventsCertificates
 
 
     //*
+    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //*
+    //* Returns name of file with Permissions and Accesses to Modules.
+    //* Overrides trait!
+    //*
+
+    function MyMod_Setup_ProfilesDataFile()
+    {
+        return "System/Events/Profiles.php";
+    }
+    //*
     //* function SqlTableName, Parameter list: $table=""
     //*
     //* Overrides SqlTableName, prepending period id.
@@ -73,6 +84,18 @@ class Events extends EventsCertificates
         
         parent::PreProcessItemData();
     }
+
+    //*
+    //* function PreActions, Parameter list:
+    //*
+    //* 
+    //*
+
+    function PreActions()
+    {
+        array_push($this->ActionPaths,"../EventApp/System/Events");
+    }
+
 
     //*
     //* function PostProcessItemData, Parameter list:

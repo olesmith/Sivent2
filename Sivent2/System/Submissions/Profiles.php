@@ -35,14 +35,14 @@ array
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
-            "Collaboration" => 1,
+            "GenCert" => 1,
          ),
          'Admin' => array
          (
             'Edit' => 1,
             'Copy' => 1,
-            "Collaboration" => 1,
             'Delete' => 1,
+            "GenCert" => 1,
          ),
       ),
       'Plural' => array
@@ -59,7 +59,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Emails" => 1,
-            "Collaborations" => 1,
+            "GenCert" => 1,
          ),
          'Admin' => array
          (
@@ -67,7 +67,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Emails" => 1,
-            "Collaborations" => 1,
+            "GenCert" => 1,
          ),
       ),
       'SingularPlural' => array

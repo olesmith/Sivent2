@@ -4,6 +4,18 @@
 class MyInscriptionsAdd extends MyInscriptionsHandle
 {
     //*
+    //* function FriendInscribedInEvent, Parameter list: $event,$friend
+    //*
+    //* Returns TRUE if $friend inscribed in $event.
+    //*
+
+    function FriendInscribedInEvent($event,$friend)
+    {
+        return $this->EventsObj()->FriendIsInscribed($event,$friend);
+    }
+
+    
+    //*
     //* function AddIsInscribedCell, Parameter list: $friend=array()
     //*
     //* Generate inscription yes/no cell for $friend.
@@ -13,17 +25,19 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
     {
         if (empty($friend)) { return "Inscrito"; }
 
-        if (empty($this->Announcement))
+        $event=$this->Event();
+        
+        if (empty($event))
         {
-            $this->CGI2Announcement();
+            $this->CGI2Event();
         }
         
-        if (empty($this->Announcement))
+        if (empty($event))
         {
-            return "Sem Editais...";
+            return "No event...";
         }
 
-        $res=$this->FriendInscribedInAnnoucement($this->Announcement,$friend);
+        $res=$this->FriendInscribedInEvent($event,$friend);
 
         if ($res) { $res="Sim"; }
         else      { $res="Não"; }
@@ -64,7 +78,7 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
     {
         if (empty($friend)) { return "Inscrever"; }
 
-        $res=$this->FriendInscribedInAnnoucement($this->Announcement,$friend);
+        $res=$this->FriendInscribedInEvent($this->Event(),$friend);
 
         $res=$this->MakeCheckBox
         (
@@ -87,7 +101,7 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
     {
         if (empty($friend)) { return "Status"; }
 
-        $res=$this->FriendInscribedInAnnoucement($this->Announcement,$friend);
+        $res=$this->FriendInscribedInEvent($this->Event(),$friend);
 
         $cell="-";
         if ($res)
@@ -97,7 +111,7 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
                "",
                array
                (
-                  "Announcement" => $this->Announcement[ "ID" ],
+                  "Event" => $this->Event("ID"),
                   "Friend" => $friend[ "ID" ],
                ),
                FALSE,
@@ -123,7 +137,7 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
         $friends=$this->FriendsObj()->AddReadFriends();
         foreach ($friends as $friend)
         {
-            $res=$this->FriendInscribedInAnnoucement($this->Announcement,$friend);
+            $res=$this->FriendInscribedInEvent($this->Event(),$friend);
 
             $value=$this->AddInscribeCGIValue($friend);
             if (!$res)
@@ -132,32 +146,18 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
                 {
                     $where=array
                     (
-                       "Announcement" => $this->Announcement[ "ID" ],
+                       "Event" => $this->Event("ID"),
                        "Friend" => $friend[ "ID" ],
                     ); 
 
                     $newitem=$where;
 
-                    $newitem[ "Unit" ]=$this->AnnouncementsObj()->MySqlItemValue
+                    $newitem[ "Unit" ]=$this->EventsObj()->MySqlItemValue
                     (
                        "",
                        "ID",
-                       $this->Announcement[ "ID" ],
+                       $this->Event("ID"),
                        "Unit"
-                    );
-                    $newitem[ "Period" ]=$this->AnnouncementsObj()->MySqlItemValue
-                    (
-                       "",
-                       "ID",
-                       $this->Announcement[ "ID" ],
-                       "Period"
-                    );
-                    $newitem[ "City" ]=$this->AnnouncementsObj()->MySqlItemValue
-                    (
-                       "",
-                       "ID",
-                       $this->Announcement[ "ID" ],
-                       "City"
                     );
 
                     $newitem[ "Name" ]=$this->FriendsObj()->MySqlItemValue
@@ -185,28 +185,12 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
 
     function CGI2Event()
     {
-        $this->Event=array();
+        $this->ApplicationObj()->Event=array();
+        $event=$this->CGI_GETOrPOSTint("Event");
 
-        $unit=$this->Unit("ID");
-
-        $where=array();
-        if (preg_match('/^(Coordinator)$/',$this->Profile()))
-        {
-            $unit=$this->ApplicationObj()->LoginData[ "Unit" ];
-            $where=array("Unit" => $unit);
-        }
-
-
-        $event=$this->GetGETOrPOST("Event");
         if (!empty($event))
         {
-            $this->Event[ "ID" ]=$event;
-        }
-        elseif (!empty($where))
-        {
-            $ids=$this->EventsObj()->Sql_Select_Unique_Col_Values("ID",$where);
-
-            $this->Event[ "ID" ]=array_pop($ids);
+            $this->ApplicationObj()->Event=$this->EventsObj()->Sql_Select_Hash(array("ID" => $event));
         }
     }
 
@@ -219,22 +203,29 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
 
     function HandleAdd($echo=TRUE)
     {
+        $this->IDGETVar="";
         $this->PrintDocHeadsAndInterfaceMenu(); 
         $this->FriendsObj()->InitActions();
 
         array_push($this->FriendsObj()->FriendSelectNewDatas,"Profile_Monitor");
 
         $this->FriendsObj()->FriendSelectNewDatas=array("Name","Email","Password",);
-        $this->FriendsObj()->FriendSelectDatas=array("ID","Name","Email","Profile_Monitor");
-        $this->FriendsObj()->FriendSelectTitle="Adicionar Inscrição ou Cadastro";
+        $this->FriendsObj()->FriendSelectDatas=array("ID","Name","Email","Profile_Friend");
+        $this->FriendsObj()->InscriptionSelectDatas=array("Certificate","Certificate_CH");
+        //$this->FriendsObj()->FriendSelectTitle="Adicionar Inscrição ou Cadastro";
         $this->FriendsObj()->FriendSelectProfileName="Candidato";
-        $this->FriendsObj()->FriendSelectProfile="Monitor";
+        $this->FriendsObj()->FriendSelectProfile="Friend";
 
         $this->FriendsObj()->FriendSelectNewButton="Adicionar Candidato";
 
 
         $this->FriendsObj()->SubObject=$this;
         $this->FriendsObj()->SubObjectData=array("AddIsInscribedCell","AddInscribeCell","InscriptionStatusCell");
+        if ($this->EventsObj()->Event_Certificates_Has())
+        {
+            array_push($this->FriendsObj()->SubObjectData,"Certificate","Certificate_CH");
+        }
+
 
         $this->CGI2Event();
         
@@ -253,18 +244,18 @@ class MyInscriptionsAdd extends MyInscriptionsHandle
         (
            array
            (
-              $this->B("Selecione Evento:"),
-              $this->AnnouncementSelect
+              $this->B($this->MyLanguage_GetMessage("Inscriptions_Add_Event_Title").":"),
+              $this->ApplicationObj()->EventSelect
               (
                  "Event",
-                 $this->Announcement,
+                 $this->Event(),
                  1
               )
            )
         );
 
         echo 
-            $this->FriendsObj()->HandleFriendSelect($newitem,1,$leadingrows,$resulthiddens);
+            $this->FriendsObj()->HandleFriendSelect($newitem,TRUE,$leadingrows,$resulthiddens);
     }
 }
 

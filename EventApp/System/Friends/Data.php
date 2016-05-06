@@ -308,7 +308,7 @@ array
    "Lattes"       => array
    (
       "Sql" => "VARCHAR(256)",
-      "Name"  => "Currículo Lattes",
+      "Name"  => "Currículo (Lattes)",
       "Name_UK"  => "Curriculum",
       "Title"  => "Currículo Lattes (URL)",
       "Title_UK"  => "Curriculum (URL)",

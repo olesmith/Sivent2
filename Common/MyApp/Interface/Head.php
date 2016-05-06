@@ -1,7 +1,5 @@
 <?php
 
-//include_once("Tail/Thanks.php");
-
 
 trait MyApp_Interface_Head
 {

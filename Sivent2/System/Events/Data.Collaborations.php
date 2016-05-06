@@ -13,7 +13,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -34,7 +34,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -56,7 +56,7 @@ array
       "Title_UK" => "Inscriptions Begins, Date",
       "Sql" => "INT",
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -77,7 +77,7 @@ array
       "Title_UK" => "Inscriptions Untill, Date",
       "Sql" => "INT",
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -86,5 +86,84 @@ array
       "Compulsory" => FALSE,
       "Search" => FALSE,
       "IsDate"  => TRUE,
+   ),
+   "Certificates_Collaborations_Latex" => array
+   (
+      "Name" => "Colaborações, Certificado (LaTeX)",
+      "Name_UK" => "Collaborations, Certificate (LaTeX)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x10",
+
+      "Search" => FALSE,
+      "Default" =>
+
+      "\n\n\\hspace{1cm}\\vspace{4.5cm}\n\n".
+
+      "\\begin{Large}\n".
+      "Certificamos que:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Friend_Name}}\\end{center}\n\n".
+      
+      "\\vspace{0.25cm}\n\n".
+
+      "participou do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
+      "no dia \\textit{#Event_DateSpan},\n".
+      "#Collaboration_CertText :\n\n".
+      
+      "\\begin{center}\\huge{\\textbf{#Collaboration_Name}}\\end{center}\n\n".
+
+      "\\vspace{0.25cm}\n\n".
+      
+     "Carga horária: \\textbf{#Collaborator_TimeLoad horas}.\n".
+      "\\end{Large}\n\n".
+      "",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+   "Certificates_Collaborations_Latex_UK" => array
+   (
+      "Name" => "Colaborações, Certificado (UK)",
+      "Name_UK" => "Collaborations, Certificate (UK)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x10",
+
+      "Search" => FALSE,
+      "Default" =>
+      
+      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
+
+      "\\begin{Large}\n".
+      "We hereby certify, that:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Friend_Name}}\\end{center}\n".
+      "\\vspace{0.25cm}\n\n".
+
+      "participated in \\textbf{#Event_Name}, #Event_Title, held at \\textbf{#Event_Place},\n".
+      "at the \\textit{#Event_DateSpan},\n".
+      
+      "#Collaboration_CertText_UK:\n\n".
+      
+      "\\begin{center}\\huge{\\textbf{#Collaboration_Name_UK}}\\end{center}\n\n".
+
+      "\\vspace{0.25cm}\n\n".
+      
+     "Timeload: \\textbf{#Collaborator_TimeLoad horas}.\n".
+      "\\end{Large}\n\n".
+     
+      "",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
    ),
 );

@@ -1,7 +1,30 @@
 <?php
 
-class MyEventsCells extends MyEventsAccess
+class MyEventsCells extends MyEventsFriend
 {
+    //*
+    //* function Event_Date_Span, Parameter list: $item=array()
+    //*
+    //* Generates and returns event date span.
+    //*
+
+    function Event_Date_Span($item=array())
+    {
+        if (empty($item)) { return $this->MyLanguage_GetMessage("Event_DateSpan_Title"); }
+        
+        $cell=$this->MyTime_Sort2Date($item[ "EventStart" ]);
+
+        if ($item[ "EventStart" ]!=$item[ "EventEnd" ])
+        {
+            $cell.=
+                " - ".
+                $this->MyTime_Sort2Date($item[ "EventEnd" ]);
+        }
+
+        return $cell;
+    }
+
+    
     //*
     //* function InscribeLink, Parameter list:$event=array(),$edit=0
     //*
@@ -177,6 +200,8 @@ class MyEventsCells extends MyEventsAccess
                "ID"
             );
     }
+
+    
 }
 
 ?>

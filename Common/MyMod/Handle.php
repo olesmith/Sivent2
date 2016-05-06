@@ -1,10 +1,14 @@
 <?php
 
 include_once("Handle/Help.php");
+include_once("Handle/Show.php");
+include_once("Handle/Edit.php");
 
 trait MyMod_Handle
 {
-    use MyMod_Handle_Help;
+    use MyMod_Handle_Help,
+        MyMod_Handle_Show,
+        MyMod_Handle_Edit;
     
     //*
     //* function MyMod_Handle, Parameter list:$args=array()

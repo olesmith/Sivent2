@@ -13,8 +13,8 @@ array
       "Size" => "50",
       "Sql"          => "TEXT",
       
-      "Default"      => "#ApplicationName: Cadastro de Usário Efetuada, #Unit_Title, #Institution",
-      "Default_UK"   => "#ApplicationName: Informing User Registration, #Unit_Title, #Institution",
+      "Default"      => "#ApplicationName: Cadastro de Usário Efetuada, #Unit_Name, #Unit_Title",
+      "Default_UK"   => "#ApplicationName: Informing User Registration, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
       "Person"   => 1,
@@ -28,20 +28,28 @@ array
       "Sql"          => "TEXT",
       
       "Default"      =>
-        "Informamos seu Login e senha no #ApplicationName foram cadastrados.\n\n".
-        "Acesso: #Href1\n\n".
-        "Login: #Email\n".
-        "Senha: #Password\n\n".
-        "É recomendável alterar a senha no primeiro acesso. Para esse fim use o link:\n\n".
-        "#Href2"
+      "Enviamos este email, para confirmar seu cadastro do #ApplicationName, #Unit_Name, #Unit_Title.\n\n".
+      "Para acessar seu cadastro, por favor utilize o link:\n\n".
+
+      "#LoginLink\n\n".
+
+      "Utilizando os Credencias:\n\n".
+
+      "Usuário: #Email\n".
+      "Senha: #Password\n\n".
+      "Se você não está conseguindo efetuar login, por favor, tente recuparar sua senha, acessando:\n\n".
+      "#RecoverLoginLink.\n\n".
+      "Recomandamos a alteração da senha no primeiro acesso ao sistema"
       ,
       "Default_UK"   =>
-        "We hereby inform you, that you have been registered in #ApplicationName.\n\n".
-        "Access: #Href1\n\n".
-        "Login: #Email\n".
-        "Password: #Password\n\n".
-        "We recomend that you change your password upon first logon. Please access:\n\n".
-        "#Href2"
+      "We are sending you this mail in order to confirm you registration at #ApplicationName, #Unit_Name, #Unit_Title.\n\n".
+      "Please, access your registration, using the following link:\n\n".
+      "#LoginLink\n\n".
+      "Providing the following credentials:\n\n".
+      "Usuário: #Email\n".
+      "Senha: #Password\n\n".
+      "If you are unable to Login, please to recover your password, acessing:\n\n".
+      "#RecoverLoginLink.\n\n"
       ,
       
       "Public"   => 0,

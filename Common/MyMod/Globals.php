@@ -82,7 +82,13 @@ trait MyMod_Globals
 
     function SubModulesVars($module,$key="")
     {
-        return $this->MyHash_HashHashes_Get($this->ApplicationObj()->SubModulesVars,$module,$key);
+        if (!empty($this->ApplicationObj()->SubModulesVars[ $module ][ $key."_".$this->Profile() ]))
+        {
+            $key=$key."_".$this->Profile();
+        }
+        
+        return
+            $this->MyHash_HashHashes_Get($this->ApplicationObj()->SubModulesVars,$module,$key);
     }
 
     //*

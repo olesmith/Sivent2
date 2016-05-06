@@ -19,6 +19,8 @@ class MyUnitsAccess extends ModulesCommon
 
     function CheckShowAccess($item=array())
     {
+        if (empty($item)) { return TRUE; }
+        
         $res=TRUE;
 
         return $res;

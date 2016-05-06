@@ -11,7 +11,8 @@ class CollaboratorsTableCell extends CollaboratorsAccess
     function Collaborators_Table_Collaborations_Cell_Name($collaboration)
     {
         return $collaboration[ "ID" ]."_Collaboration";
-   }
+    }
+    
     //*
     //* function Collaborators_Table_Collaborations_Inscribe_Cell, Parameter list: $edit,$collaboration
     //*

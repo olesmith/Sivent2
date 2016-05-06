@@ -51,9 +51,9 @@ class EventsSubmissions extends EventsCaravans
         if (empty($item)) { $item=$this->Event(); }
 
         $res=$this->Event_Submissions_Has($item);
-        if (!empty($item[ "Submissions_Public" ]) && $item[ "Submissions_Public" ]==2)
+        if (empty($item[ "Submissions_Public" ]) || $item[ "Submissions_Public" ]!=2)
         {
-            $res=TRUE;
+            $res=FALSE;
         }
 
         return $res;

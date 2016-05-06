@@ -64,6 +64,7 @@ trait MyApp_Interface_Icons
 
     function MyApp_Interface_Icon($n)
     {
+        
         return $this->Center
         (
            $this->Img

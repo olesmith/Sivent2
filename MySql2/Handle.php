@@ -43,26 +43,7 @@ class Handle extends HandleLatex
 
   function HandleShow($title="")
   {
-      if ($this->GetGETOrPOST("LatexDoc")>0)
-      {
-          $this->HandlePrint();
-      }
-
-      if (empty($title))
-      {
-          $title=$this->GetRealNameKey($this->Actions[ "Show" ]);
-      }
-
-      if (count($this->ItemHash)>0)
-      {
-          return $this->EditForm
-          (
-             $title,
-             $this->ItemHash,
-             0
-          );
-      }
-      else { $this->Warn($this->ItemName." not found!",$this->ModuleName,$this->ItemHash); }
+      $this->MyMod_Handle_Show($title);
   }
 
   //*
@@ -73,29 +54,7 @@ class Handle extends HandleLatex
 
   function HandleEdit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
   {
-      if ($this->GetGETOrPOST("LatexDoc")>0)
-      {
-          $this->HandlePrint();
-      }
-
-      if (empty($title)) { $title=$this->GetRealNameKey($this->Actions[ "Edit" ]); }
-
-      if (count($this->ItemHash)>0)
-      {
-          return $this->EditForm
-          (
-             $title,
-             $this->ItemHash,
-             1,
-             $noupdate,
-             array(),
-             $echo,
-             array(),
-             $formurl
-          );
-      }
-      else { $this->Warn( $this->ItemName." not found!",$this->ItemHash); }
-
+      $this->MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
   }
 
   //*
