@@ -112,8 +112,6 @@ class Collaborators extends CollaboratorsCertificate
         }
     }
 
-    
-    
     //*
     //* function PostInit, Parameter list:
     //*
@@ -122,6 +120,7 @@ class Collaborators extends CollaboratorsCertificate
 
     function PostInit()
     {
+        $this->CertificatesObj()->Sql_Table_Structure_Update();
     }
 
     //*

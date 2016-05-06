@@ -229,6 +229,27 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   "Collaboration" => array
+   (
+      "Name" => "Colaboração",
+      "Name_UK" => "Collaboration",
+      "SqlClass" => "Collaborations",
+      
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "Search_Vars" => array("Unit","Event"),
+      
+      //"SqlTables_Regex"  => "#Unit__\d+__Collaborations",
+  
+      "Compulsory"  => FALSE,
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
    "Caravaneer" => array
    (
       "Name" => "Caravaneiros",
