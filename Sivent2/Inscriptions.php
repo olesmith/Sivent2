@@ -71,7 +71,7 @@ class Inscriptions extends InscriptionsHandle
     function PreProcessItemDataGroups()
     {
         parent::PreProcessItemDataGroups();
-        array_unshift($this->ItemDataGroupPaths,"../EventApp/System/Inscriptions");
+        array_push($this->ItemDataGroupPaths,"../EventApp/System/Inscriptions");
     }
     
     //*

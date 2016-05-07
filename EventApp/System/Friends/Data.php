@@ -92,7 +92,7 @@ array
       "Public" => 0,
       "Friend"     => 1,
       "Coordinator" => 1,
-      "Search"  => FALSE,
+      "Search"  => TRUE,
    ),
    "Email"        => array
    (

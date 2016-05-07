@@ -26,8 +26,8 @@ array
       "Title_UK" => "Generate Certificate (PDF)",
       "ShortName"     => "Certificado",
       "ShortName_UK"   => "Certificate",
-      "Name"     => "Colaborações",
-      "Name_UK"   => "Collaborations",
+      "Name"     => "Certificado",
+      "Name_UK"   => "Certificate",
       
       "Handler"   => "Inscription_Handle_Certificate_Generate",
       "Icon"   => "copy_dark.png",

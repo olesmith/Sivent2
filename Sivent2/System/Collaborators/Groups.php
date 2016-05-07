@@ -7,7 +7,7 @@ array
       "Data" => array
       (
          "No","Show","Edit","Delete","SeeFriend","GenCert",
-         "Unit","Event","Name","TimeLoad","Homologated",
+         "Unit","Event","Friend","Collaboration","TimeLoad","Homologated","Certificate",
       ),
       "Admin" => 1,
       "Person" => 0,

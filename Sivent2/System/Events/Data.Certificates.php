@@ -238,6 +238,49 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
+
+   
+   "Certificates_Latex_Sep_Vertical" => array
+   (
+      "Name" => "Recuo Verticial (cm)",
+      "Name_UK" => "Vertical Dsiplacement (cm)",
+
+      "Sql" => "REAL",
+      "Size" => "3",
+      "Default" => 5.5,
+
+      "Search" => FALSE,
+
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+
+   "Certificates_Latex_Sep_Horisontal" => array
+   (
+      "Name" => "Recuo Horizontal (cm)",
+      "Name_UK" => "Horizontal Displacement (cm)",
+
+      "Sql" => "REAL",
+      "Size" => "3",
+      "Default" => 3,
+
+      "Search" => FALSE,
+
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+
+   
    "Certificates_Latex" => array
    (
       "Name" => "Texto, Certificado (LaTeX)",

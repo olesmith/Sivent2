@@ -32,7 +32,7 @@ array
        (
           "No","Edit","Delete","GenCert",
           "Status",
-          "Event","Selected","Certificate","Certificate_TimeLoad",
+          "Event","Title","Selected","Certificate","Certificate_TimeLoad",
           "Author1","Author2","Author3",
         ),
 

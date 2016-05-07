@@ -398,6 +398,6 @@ array
       "Coordinator" => 1,
       
       "Search"  => TRUE,
-      "Compulsory"  => TRUE,
+      "Compulsory"  => FALSE,
    ),
 );

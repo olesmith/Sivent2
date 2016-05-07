@@ -2,7 +2,7 @@ array
 (
       'Search' => array
       (
-         'Public' => 1,
+         'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,

@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "CTime","Friend"
+       "CTime","Event","Friend","Status"
       ),
       "Admin" => 1,
       "Person" => 0,

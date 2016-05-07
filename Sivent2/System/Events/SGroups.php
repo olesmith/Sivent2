@@ -73,7 +73,7 @@ array
        "Name_UK" => "Certificates",
        "Data" => array
        (
-        "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
+          "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
         ),
 
        "Person" => 0,
@@ -107,7 +107,10 @@ array
        "Name_UK" => "Certificates, Participant",
        "Data" => array
        (
+          "Certificates_Latex_Sep_Vertical",
+          "Certificates_Latex_Sep_Horisontal",
           "Certificates_Latex","Certificates_Latex_UK",
+          "GenCert"
         ),
 
        "Person" => 0,
