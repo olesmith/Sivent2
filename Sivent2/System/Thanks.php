@@ -4,7 +4,7 @@ array
    (
       "Filipe Bezerra",
       "Mobile Developer",
-      "posso colocar um link aqui!!!",
+      "http://filipebezerra.github.io/",
    ),
    array
    (
