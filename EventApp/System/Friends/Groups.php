@@ -5,7 +5,7 @@ array
        "Name" => "Default",
        "Data" => array
        (
-          "No","Show","Edit","Groups",
+          "No","Show","Edit","Delete","Groups",
           "Volatile","Name","Email","Phone","Cell",
           "CTime","MTime"
        ), 

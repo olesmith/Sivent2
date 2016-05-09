@@ -47,7 +47,7 @@ class CollaboratorsCertificate extends CollaboratorsTable
         }
 
         return
-            $this->RunLatexPrint
+            $this->Latex_PDF
             (
                $this->CertificatesObj()->Certificate_TexName
                (
@@ -56,5 +56,56 @@ class CollaboratorsCertificate extends CollaboratorsTable
                $latex
              );
     }
+    
+    //*
+    //* function Collaborator_Handle_Certificate_Generate, Parameter list: 
+    //*
+    //* Generates submission certificate in Latex, generates and sends the PDF.
+    //*
+
+    function Collaborator_Handle_Certificate_Mail_Send()
+    {
+        $this->CertificatesObj()->Certificates_Generate_Mail_Send
+        (
+           $this->FriendsObj()->Sql_Select_Hash(array("ID" => $this->ItemHash[ "Friend" ])),
+           $this->Collaborator_Certificate_Where($this->ItemHash)
+        );
+    }
+    
+    //*
+    //* function Collaborator_Certificates_Where, Parameter list: 
+    //*
+    //* Returns $where clause for all submission certificates.
+    //*
+
+    function Collaborator_Certificates_Where()
+    {
+        return
+            array
+            (
+               "Unit"        => $this->Unit("ID"),
+               "Event"       => $this->Event("ID"),
+               "Type"        => $this->Certificate_Type,
+            );
+    }
+
+    //*
+    //*
+    //* function Collaborator_Handle_Certificates_Generate, Parameter list: 
+    //*
+    //* Generates certificate in Latex, generates and sends the PDF.
+    //*
+
+    function Collaborator_Handle_Certificates_Generate()
+    {
+        return
+            $this->CertificatesObj()->Certificates_Generate_Handle
+            (
+               $this->Collaborator_Certificates_Where(),
+               "Certs.Collaborators.".
+               $this->Event("Name")
+            );
+    }
+    
 }
 ?>

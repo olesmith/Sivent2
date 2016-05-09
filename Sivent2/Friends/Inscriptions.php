@@ -28,12 +28,20 @@ class FriendsInscriptions extends FriendsEvents
             $inscriptions[ $eventid ]=
                 $this->InscriptionsObj()->Sql_Select_Hashes
                 (
-                   array("Friend" =>$friend[ "ID" ])
+                   array("Friend" =>$friend[ "ID" ]),
+                   array(),
+                   "",
+                   FALSE,
+                   $table
                 );
+
+            foreach (array_keys($inscriptions[ $eventid ]) as $id)
+            {
+                $inscriptions[ $eventid ][ $id ][ "Table" ]=$table;
+            }
         }
-        
+
         return $inscriptions;
-        
     }
 
     //*

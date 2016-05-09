@@ -1,6 +1,6 @@
 array
 (
-   "11_ShowUnit" => array
+   "1_ShowUnit" => array
    (
       "Name" => "Unidade",
       "Title" => "Dados, Unidade Acadêmica",
@@ -11,28 +11,11 @@ array
 
       'Public'    => 1,
       'Person'    => 0,
-      'Admin'     => 0,
-
-      "Friend"     => 1,
-      'Coordinator' => 0,
-      'Assessor'     => 1,
-   ),
-   "12_EditUnit" => array
-   (
-      "Name" => "Unidade",
-      "Title" => "Dados, Unidade Acadêmica",
-      "Name_UK" => "Department",
-      "Title_UK" => "Department Data",
-
-      'Href' => '?Unit=#Unit&ModuleName=Units&Action=Edit&ID=#Unit',
-
-      'Public'    => 0,
-      'Person'    => 0,
       'Admin'     => 1,
 
-      "Friend"     => 0,
+      "Friend"     => 1,
       'Coordinator' => 1,
-      'Assessor'     => 0,
+      'Assessor'     => 1,
    ),
    "2_Friends" => array
    (

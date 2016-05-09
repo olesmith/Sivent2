@@ -9,7 +9,7 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes_Query($where="",$fields,$orderby="",$table="")
+    function Sql_Select_Hashes_Query($where="",$fields,$orderby="",$table="",$limit="")
     {
         if (empty($table)) { $table=$this->SqlTableName(); }
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
@@ -48,6 +48,11 @@ trait Sql_Select_Hashes
                 ' ORDER BY '.
                 $this->Sql_Table_Column_Names_Qualify($orderby);
         }
+        if (!empty($limit))
+        {
+            $query.=
+                ' LIMIT '.$limit;
+        }
 
         return $query;
     }
@@ -55,7 +60,7 @@ trait Sql_Select_Hashes
     //*
     //* function Sql_Select_Hashes_Queries, Parameter list: $where,$fields,$orderby="",$table=""
     //*
-    //* Generates the SQL select hashes query.
+    //* Generates several select queries, pone for each clause in $wheres.
     //*
     //* 
 
@@ -76,7 +81,7 @@ trait Sql_Select_Hashes
     
     
     //*
-    //* function Sql_Select_Hashes, Parameter list: $where,$fieldnames,$orderby="",$postprocess=FALSE,$table=""
+    //* function Sql_Select_Hashes, Parameter list: $where,$fieldnames,$orderby="",$postprocess=FALSE,$table="",$limit=""
     //*
     //* Perform a select query on Table $table in the current DB.
     //* Returns each match as a hash of the field names in
@@ -84,11 +89,11 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes($where="",$fieldnames=array(),$orderby="",$postprocess=FALSE,$table="")
+    function Sql_Select_Hashes($where="",$fieldnames=array(),$orderby="",$postprocess=FALSE,$table="",$limit="")
     {
         if (!$this->Sql_Table_Exists($table)) { return array(); }
         
-        $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table);
+        $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table,$limit);
         $result = $this->DB_Query_2Assoc_List($this->LastSqlWhere);
 
         if ($result && $postprocess)

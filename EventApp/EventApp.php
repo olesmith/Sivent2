@@ -30,9 +30,10 @@ include_once("MyApp/CGIVars.php");
 include_once("MyApp/Accessors.php");
 include_once("MyApp/Access.php");
 include_once("MyApp/Menues.php");
+include_once("MyApp/Mail.php");
 
 
-class EventApp extends MyEventAppMenues
+class EventApp extends MyEventAppMail
 {
     use _accessor_;
 
@@ -391,50 +392,6 @@ class EventApp extends MyEventAppMenues
         exit();
     }
 
-     //*
-    //* function MailInfo, Parameter list: 
-    //*
-    //* Returns mail info, that is, content of $this->MailInfo.
-    //* Supposed to be overwritten by and ApplicationObj.
-    //*
-
-    function MailInfo()
-    {
-        $mailinfo=parent::MailInfo();
-        $unit=$this->Unit();
-        if (!empty($unit))
-        {
-            foreach ($this->Unit2MailInfo as $key)
-            {
-                if (
-                      !empty($unit[ $key ])
-                      &&
-                      $mailinfo[ $key ]!=$unit[ $key ]
-                   )
-                {
-                    $mailinfo[ $key ]=$unit[ $key ];
-                }
-            }
-
-            $event=$this->Event();
-            if (!empty($event))
-            {
-                foreach ($this->Event2MailInfo as $key)
-                {
-                    if (
-                          !empty($event[ $key ])
-                          &&
-                          $mailinfo[ $key ]!=$event[ $key ]
-                       )
-                    {
-                        $mailinfo[ $key ]=$event[ $key ];
-                    }
-                }
-            }
-        }
-
-        return $mailinfo;
-    }
 
     //*
     //* function ApplicationWindowTitle, Parameter list: 

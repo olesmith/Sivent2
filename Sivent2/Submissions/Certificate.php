@@ -53,8 +53,6 @@ class SubmissionsCertificate extends SubmissionsTable
     function Submission_Handle_Certificate_Generate()
     {
         $where=$this->Submission_Certificate_Where($this->ItemHash);
-
-        
         $cert=$this->CertificatesObj()->Sql_Select_Hash($where);            
 
         $latex=
@@ -71,7 +69,7 @@ class SubmissionsCertificate extends SubmissionsTable
         }
 
         return
-            $this->RunLatexPrint
+            $this->Latex_PDF
             (
                $this->CertificatesObj()->Certificate_TexName
                (
@@ -80,5 +78,55 @@ class SubmissionsCertificate extends SubmissionsTable
                $latex
              );
     }
+    
+    //*
+    //* function Submission_Handle_Certificate_Generate, Parameter list: 
+    //*
+    //* Generates submission certificate in Latex, generates and sends the PDF.
+    //*
+
+    function Submission_Handle_Certificate_Mail_Send()
+    {
+        $this->CertificatesObj()->Certificates_Generate_Mail_Send
+        (
+           $this->FriendsObj()->Sql_Select_Hash(array("ID" => $this->ItemHash[ "Friend" ])),
+           $this->Submission_Certificate_Where($this->ItemHash)
+        );
+    }
+    
+    //*
+    //* function Submission_Certificates_Where, Parameter list: 
+    //*
+    //* Returns $where clause for all submission certificates.
+    //*
+
+    function Submission_Certificates_Where()
+    {
+        return
+            array
+            (
+               "Unit"        => $this->Unit("ID"),
+               "Event"       => $this->Event("ID"),
+               "Type"        => $this->Certificate_Type,
+            );
+    }
+
+    //*
+    //* function Submission_Handle_Certificates_Generate, Parameter list: 
+    //*
+    //* Generates certificate in Latex, generates and sends the PDF.
+    //*
+
+    function Submission_Handle_Certificates_Generate()
+    {
+        return
+            $this->CertificatesObj()->Certificates_Generate_Handle
+            (
+               $this->Submission_Certificates_Where(),
+               "Certs.Submissions.".
+               $this->Event("Name")
+            );
+    }
+    
 }
 ?>

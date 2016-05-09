@@ -124,4 +124,14 @@ array
       "Name" => "Enviado",
       "Name_UK" => "Mailed",
    ),
+   "Inscriptions_Certificate_Mail_Subject" => array
+   (
+      "Name" => "Certificado de Participação, #Event_Title",
+      "Name_UK" => "Certificate, Participation, #Event_Title",
+   ),
+   "Inscriptions_Certificate_Mail_Body" => array
+   (
+      "Name" => "Em anexo, certificado da sua participação, #Event_Title.",
+      "Name_UK" => "Attached, certificate for your participation, #Event_Title",
+   ),
 );

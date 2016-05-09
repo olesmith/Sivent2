@@ -9,8 +9,9 @@ include_once("Events/Collaborations.php");
 include_once("Events/Caravans.php");
 include_once("Events/Submissions.php");
 include_once("Events/Certificates.php");
+include_once("Events/Certificate.php");
 
-class Events extends EventsCertificates
+class Events extends EventsCertificate
 {
     //*
     //* function Units, Parameter list: $args=array()

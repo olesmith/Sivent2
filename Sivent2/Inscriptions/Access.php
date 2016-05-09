@@ -60,7 +60,6 @@ class InscriptionsAccess extends MyInscriptions
             $res=TRUE;
         }
 
-
         return
             $res
             &&

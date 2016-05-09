@@ -71,7 +71,23 @@ class Inscriptions extends InscriptionsHandle
     function PreProcessItemDataGroups()
     {
         parent::PreProcessItemDataGroups();
-        array_push($this->ItemDataGroupPaths,"../EventApp/System/Inscriptions");
+        
+        $event=$this->Event();
+        if ($this->EventsObj()->Event_Certificates_Has($event))
+        {
+            array_push($this->ItemDataSGroupFiles,"SGroups.Certificates.php");
+        }
+        
+        if ($this->EventsObj()->Event_Collaborations_Has($event))
+        {
+            array_push($this->ItemDataSGroupFiles,"SGroups.Collaborations.php");
+        }
+        
+        if ($this->EventsObj()->Event_Caravans_Has($event))
+        {
+            array_push($this->ItemDataSGroupFiles,"SGroups.Caravans.php");
+        }
+        
     }
     
     //*

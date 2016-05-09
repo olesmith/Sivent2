@@ -81,6 +81,7 @@ array
       "Name_UK" => "Password",
       "Size" => 15,
       "Sql" => "VARCHAR(256)",
+      "Password" => 1,
       "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,

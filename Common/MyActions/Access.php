@@ -12,7 +12,8 @@ trait MyActions_Access
     {
         if (!$this->Actions) { $this->MyActions_Init(); }
 
-        if (empty($item) && isset($this->ItemHash)) { $item=$this->ItemHash; }
+        //When checking for title access, shouldn't take $this->ItemHash as default
+        //08/05/2016 if (empty($item) && isset($this->ItemHash)) { $item=$this->ItemHash; }
 
         $logintype=$this->LoginType;
         if ($logintype=="") { $logintype="Public"; }

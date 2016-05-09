@@ -89,13 +89,25 @@ trait MyMod_Data_Fields_Show
             return $this->MyMod_Data_Field_Info($data);
         }
         elseif (
-                  !empty($this->ItemData[ $data ][ "Type" ])
-                  &&
-                  $this->ItemData[ $data ][ "Type" ]=="TEXT"
+                  $this->ItemData[ $data ][ "Sql" ]=="TEXT"
+                  ||
+                  (
+                     !empty($this->ItemData[ $data ][ "Size" ])
+                     &&
+                     preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
+                  )
                )
         {
-            return "text";
+            $value=$this->MyMod_Data_Fields_Text_Show($data,$item,$value);
         }
+        /* elseif ( */
+        /*           !empty($this->ItemData[ $data ][ "Type" ]) */
+        /*           && */
+        /*           $this->ItemData[ $data ][ "Type" ]=="TEXT" */
+        /*        ) */
+        /* { */
+        /*     return "text"; */
+        /* } */
         elseif (
                   $this->ItemData[ $data ][ "Sql" ]=="TEXT"
                   ||
@@ -116,6 +128,10 @@ trait MyMod_Data_Fields_Show
 
             $rvalue=$this->FileFieldDecorator($data,$item,$plural,0);
             $value=$rvalue;
+        }
+        elseif ($this->ItemData[ $data ][ "Password" ])
+        {
+            $value=$this->ShowPasswordField($data,$value);
         }
         elseif (!empty($this->ItemData[ $data ][ "TimeType" ]))
         {

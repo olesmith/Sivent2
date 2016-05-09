@@ -4,6 +4,7 @@ include_once("Certificates/Access.php");
 include_once("Certificates/Validate.php");
 include_once("Certificates/Latex.php");
 include_once("Certificates/Generate.php");
+include_once("Certificates/Mail.php");
 include_once("Certificates/Code.php");
 
 

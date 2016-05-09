@@ -96,5 +96,44 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
-  ),
+   ),
+   "MailCert" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=MailCert&ID=#ID",
+      "Title"    => "Enviar Certificado por Email",
+      "Title_UK" => "Send Certificate by Email",
+      "Name"     => "Enviar Certificado",
+      "Name_UK"   => "Send Certificate",
+      
+      
+      "Handler"   => "Submission_Handle_Certificate_Mail_Send",
+      "AccessMethod"  => "CheckCertAccess",
+      "Target"   => "_blank",
+
+      "Icon"   => "copy_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
+   "GenCerts" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=GenCerts&Latex=1",
+      "Title"    => "Gerar todos os Certificados de Palestrantes",
+      "Title_UK" => "Generate All Speaker Certificates",
+      "Name"     => "Certificados de Palestrantes",
+      "Name_UK"   => "Speaker Certificates",
+      
+      "Handler"   => "Submission_Handle_Certificates_Generate",
+
+      "Icon"   => "print_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
 );

@@ -4,7 +4,7 @@ array
    (
       "Filipe Bezerra",
       "Mobile Developer",
-      "http://filipebezerra.github.io/",
+      "<A HREF='http://filipebezerra.github.io' TARGET='_blank'>http://filipebezerra.github.io</A>",
    ),
    array
    (

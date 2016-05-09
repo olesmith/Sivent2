@@ -50,12 +50,6 @@ trait MyLatex
 
     function Latex_Command($path,$texfilename)
     {
-        /* $command= */
-        /*     $this->LatexScript. */
-        /*     " -interaction nonstopmode ". */
-        /*     "-output-directory $path $path $texfilename >". */
-        /*     " $path/latex.log 2>&1"; */
-        
         $command=
             $this->LatexScript." ".
             $path." ".

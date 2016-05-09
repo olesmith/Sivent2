@@ -84,11 +84,22 @@ class Certificates_Generate extends Certificates_Latex
             ":/".
             preg_replace('/index\.php/',"",$_SERVER[ 'SCRIPT_NAME' ]).
             "?Unit=".$this->Unit("ID")."\&Action=Validate";
+
+        $code="Certificate Code";
+        if (!empty($cert[ "Code" ]))
+        {
+            $code=$cert[ "Code" ];
+        }
         
         return
-            "\\let\\thefootnote\\relax\\footnote{Este certificado possui código de verificação: ".
-            preg_replace('/0+/',"",$cert[ "Code" ]).
-            ". Para Verificar, acesse: ".
+            "%%! Omit footnote texting\n".
+            "\\let\\thefootnote\\relax\n\\footnote{\n".
+            $this->MyLanguage_GetMessage("Certificates_Validation_Message1").
+            ": ".
+            preg_replace('/0+/',"",$code).
+            ".".
+            $this->MyLanguage_GetMessage("Certificates_Validation_Message2").
+            ": ".
             $url.
             "}";
     }
@@ -101,7 +112,7 @@ class Certificates_Generate extends Certificates_Latex
 
     function Certificate_Text($cert)
     {
-        $eventkey=$this-> Type2LatexKey($cert);
+        $eventkey=$this->Type2LatexKey($cert);
 
         $text="Invalid Certificate Type";
         if (!empty($eventkey))
@@ -110,10 +121,19 @@ class Certificates_Generate extends Certificates_Latex
 
             $text=$this->GetRealNameKey($event,$eventkey);
             $text=html_entity_decode($text);
-       }
+        }
 
+        $key="Certificates_Latex_Sep_Vertical";
+        $vspace=$this->Event($key);
+
+        
+        $key="Certificates_Latex_Sep_Horisontal";
+        $hspace=$this->Event($key);
+
+        $width=22-2*$hspace;
         return
-            $this->Latex_Minipage(18,$text,"c","l").
+            "\n\n\\hspace{1cm}\\vspace{".$vspace."cm}\n\n".
+            $this->Latex_Minipage($width,$text,"c","l").
             "";
     }
     
@@ -128,12 +148,15 @@ class Certificates_Generate extends Certificates_Latex
 
     function Certificate_Set_Generated($cert)
     {
-        $this->Sql_Update_Item
-        (
-           array("Generated" => time()),
-           array("ID" => $cert[ "ID" ]),
-           array("Generated")
-        );
+        if (!empty($item[ "ID" ]))
+        {
+            $this->Sql_Update_Item
+            (
+               array("Generated" => time()),
+               array("ID" => $cert[ "ID" ]),
+               array("Generated")
+            );
+        }
     }
     
     //*
@@ -217,13 +240,12 @@ class Certificates_Generate extends Certificates_Latex
         $cert=$this->Certificate_Read($cert);
 
         $latex=
-            "%%%!  Certificate_Generate: ".$cert[ "Friend_Hash" ][ "Name" ]."\n".
-            "\\begin{center}\n".
+            //"\\begin{center}\n".
             $this->Certificate_Text($cert).
             "\n\n".
             $this->Certificate_Signatures(18).
             "\n\n".
-            "\\end{center}\n".
+            //"\\end{center}\n".
             $this->Certificate_Verification_Info($cert).
             "\n\n".
             "\n\n\\clearpage\n\n".
@@ -313,12 +335,12 @@ class Certificates_Generate extends Certificates_Latex
 
     
     //*
-    //* function Certificates_Generate_Handle, Parameter list: 
+    //* function Certificates_Generate_Handle_ByCode, Parameter list: 
     //*
     //* Generates cert.
     //*
 
-    function Certificates_Generate_Handle()
+    function Certificates_Generate_Handle_ByCode()
     {
         $code=$this->CGI_GET("Code");
         $certs=$this->Certificate_Code2Cert($code);
@@ -335,7 +357,34 @@ class Certificates_Generate extends Certificates_Latex
             return $this->ShowLatexCode($latex);
         }
         
-        return $this->RunLatexPrint($this->CertificatesObj()->Certificate_TexName($name),$latex);
+        return $this->Latex_PDF($this->CertificatesObj()->Certificate_TexName($name),$latex);
+    }
+    
+    //*
+    //* function Certificates_Generate_Handle, Parameter list: 
+    //*
+    //* Generates cert.
+    //*
+
+    function Certificates_Generate_Handle($where,$latexname)
+    {
+        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);            
+
+        $latex=$this->CertificatesObj()->Certificates_Generate($certs);
+
+        $latex=$this->CertificatesObj()->Certificates_Latex_Ambles_Put($latex);
+        
+        if ($this->CGI_GET("Latex")!=1)
+        {
+            $this->ShowLatexCode($latex);
+        }
+
+        return
+            $this->Latex_PDF
+            (
+               $this->CertificatesObj()->Certificate_TexName($latexname),
+               $latex
+             );
     }
     
 }

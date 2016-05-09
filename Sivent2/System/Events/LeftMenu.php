@@ -1,6 +1,6 @@
 array
 (
-   "01_ShowEvent" => array
+   "011_ShowEvent" => array
    (
       "Name" => "Sobre o Evento",
       "Title" => "Informações do Evento",
@@ -16,15 +16,15 @@ array
       'Friend'     => 1,
       'Coordinator' => 0,
    ),
-   "01_EditEvent" => array
+   "012_ShowEvent" => array
    (
 
       "Name" => "Dados do Evento",
-      "Title" => "Editar Dados do Evento",
+      "Title" => "Dados do Evento",
       "Name_UK" => "Event Data",
-      "Title_UK" => "Edit Event Data",
+      "Title_UK" => "Event Data",
 
-       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Edit&Event=#Event',
+       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Show&Event=#Event',
 
       'Public'    => 0,
       'Person'    => 0,

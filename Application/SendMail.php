@@ -139,6 +139,8 @@ class SendMail extends LeftMenu
 
     function  ApplicationSendEmail($user,$mailhash,$filters=array(),$attachments=array())
     {
+        if (!is_array($attachments)) { $attachments=array($attachments); }
+        
         $this->Mail2Recipients($mailhash);
 
         if (!empty($user))
@@ -156,7 +158,7 @@ class SendMail extends LeftMenu
         }
         
         $mailhash[ "Body" ].=
-            "\n\n".
+            "\n-----\n".
             "####################################################################################\n".
             $this->MyLanguage_GetMessage("MailTrailer").
             "####################################################################################";
@@ -175,7 +177,6 @@ class SendMail extends LeftMenu
         $this->EmailStatus=FALSE;
         if (!empty($this->DBHash[ "MailDebug" ]))
         {
-            $this->MailInfo();
             echo 
                 "Fake sending...<BR>".
                 "To: ".
@@ -192,6 +193,15 @@ class SendMail extends LeftMenu
                 "Body: ".preg_replace('/\n/',"<BR>",$mailhash[ "Body" ]).
                 "<BR>".
                 "";
+
+            if (!empty($attachments))
+            {
+                echo
+                    "Attachments:".
+                    $this->BR().
+                    join($this->BR(),$attachments).
+                    "";
+            }
             $this->EmailStatus=TRUE;
         }
         else

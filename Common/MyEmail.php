@@ -191,5 +191,53 @@ trait MyEmail
 
         return $this->Email_PHPMailer->Send();
     }
-}
+    
+    //*
+    //* function MyEmail_Mail_Comp_Get, Parameter list: $key
+    //*
+    //* Returns unit mail leader.
+    //* 
+    //*
+
+    function MyEmail_Mail_Comp_Get($key)
+    {
+        $unit=$this->Unit();
+        
+        return
+            $this->FilterHash
+            (
+               $this->GetRealNameKey($unit,$key).
+               "",
+               $unit,
+               "Unit_"
+            );
+               
+    }
+    //*
+    //* function MyEmail_Mail_Head_Get, Parameter list: 
+    //*
+    //* Returns unit mail leader.
+    //* 
+    //*
+
+    function MyEmail_Mail_Head_Get()
+    {
+        return
+            $this->MyEmail_Mail_Comp_Get("MailHead").
+            "\n\n".
+            "";
+    }
+    
+    //*
+    //* function MyEmail_Mail_Tail_Get, Parameter list: 
+    //*
+    //* Returns unit mail trailer.
+    //* 
+    //*
+
+    function MyEmail_Mail_Tail_Get()
+    {
+        return $this->MyEmail_Mail_Comp_Get("MailTail");
+    }
+ }
 ?>

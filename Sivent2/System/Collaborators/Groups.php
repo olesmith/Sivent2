@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete","SeeFriend","GenCert",
+         "No","Show","Edit","Delete","SeeFriend","GenCert","MailCert",
          "Unit","Event","Friend","Collaboration","TimeLoad","Homologated","Certificate",
       ),
       "Admin" => 1,
@@ -22,7 +22,7 @@ array
       "Name_UK" => "Details",
       "Data" => array
       (
-         "No","Show","Edit","Delete","SeeFriend","GenCert",
+         "No","Show","Edit","Delete","SeeFriend","GenCert","MailCert",
          "Unit","Event","Friend","Collaboration","TimeLoad","Homologated","Certificate","Code",
       ),
       "Admin" => 1,

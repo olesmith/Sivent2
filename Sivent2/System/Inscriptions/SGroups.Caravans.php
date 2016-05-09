@@ -1,4 +1,6 @@
- array
+array
+(
+    "Caravans" => array
     (
        "Name" => "Inscrições para Caravanas",
        "Name_UK" => "Inscriptions for Caravans",
@@ -13,4 +15,5 @@
        "Friend"     => 2,
        "Coordinator" => 2,
        //"GenTableMethod" => "Inscription_Caravans_Table",
-     );
+     ),
+);

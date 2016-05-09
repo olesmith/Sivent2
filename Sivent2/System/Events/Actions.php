@@ -3,14 +3,14 @@ array
    "GenCert" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Events&Event=#Event&Action=GenCert&Latex=1",
+      "HrefArgs" => "?ModuleName=Events&Event=#ID&Action=GenCert&Latex=1",
       "Title"    => "Visualizar Certificado",
       "Title_UK" => "Visualize Certificate",
       "Name"     => "Visualizar",
       "Name_UK"   => "Visualize",
       
       "Handler"   => "Event_Handle_Certificate_Generate",
-      "Icon"   => "copy_dark.png",
+      "Icon"   => "print_dark.png",
 
       "Public"   => 0,
       "Person"   => 0,

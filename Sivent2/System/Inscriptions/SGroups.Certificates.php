@@ -1,4 +1,6 @@
- array
+array
+(
+    "Certificates" => array
     (
        "Name" => "Certificado",
        "Name_UK" => "Certificate",
@@ -14,4 +16,5 @@
        "Friend"     => 1,
        "Coordinator" => 2,
        //"GenTableMethod" => "InscriptionCertificateTable",
-     );
+     ),
+);

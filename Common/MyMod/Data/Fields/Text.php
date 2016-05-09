@@ -40,6 +40,23 @@ trait MyMod_Data_Fields_Text
 
         return $value;
     }
+    
+    //*
+    //* function MyMod_Data_Fields_Text_Show, Parameter list: $data,$item,$value="",$tabindex="",$plural=FALSE,$links=TRUE,$callmethod=TRUE,$options=array(),$rdata=""
+    //*
+    //* Creates TEXT AREA inout field.
+    //*
+
+    function MyMod_Data_Fields_Text_Show($data,$item,$value="",$options=array())
+    {
+        $value=preg_replace('/\n/',$this->BR(),$value);
+        $value=preg_replace('/^\s+/',"",$value);
+        $value=preg_replace('/\s+$/',"",$value);
+
+
+        return $value;
+    }
+    
  }
 
 ?>

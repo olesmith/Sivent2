@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Edit","Delete","GenCert",
+         "No","Edit","Delete","GenCert","MailCert",
          "Event","Friend","Status",
          "Inscription",
          "Code",
@@ -28,7 +28,7 @@ array
           "Event","Friend",
           "Status","Certificate","Certificate_CH",
           "Inscription_Certificate_Generated_Cell","GenCert",
-          "Inscription_Certificate_Mailed_Cell",
+          "Inscription_Certificate_Mailed_Cell","MailCert",
           "Code",
         ),
 

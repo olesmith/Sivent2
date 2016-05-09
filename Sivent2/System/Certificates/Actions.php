@@ -88,7 +88,7 @@ array
       "Icon"    => "print_dark.png",
       
       "AccessMethod"    => "CheckGenerateAccess",
-      "Handler"    => "Certificates_Generate_Handle",
+      "Handler"    => "Certificates_Generate_Handle_ByCode",
       /* "NameMethod"    => "Inscriptions_Collaborations_Show_Name", */
       /* "TitleMethod"    => "Inscriptions_Collaborations_Show_Title", */
       /* "AccessMethod"    => "Inscriptions_Collaborations_Show_Should", */

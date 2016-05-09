@@ -196,8 +196,9 @@ array
       (
          'Public' => 0,
          'Person' => 0,
-         "Admin" => 0,
+         "Admin" => 1,
          "Friend"     => 0,
-         "Coordinator" => 0,
+         "Coordinator" => 1,
+         "AccessMethod"  => "CheckDeleteAccess",
       ),
  );

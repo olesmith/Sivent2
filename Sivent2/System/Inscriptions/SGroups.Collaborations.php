@@ -1,4 +1,6 @@
- array
+array
+(
+    "Collaborations" => array
     (
        "Name" => "Inscrições para Colaboração",
        "Name_UK" => "Inscriptions for Collaborations",
@@ -13,4 +15,5 @@
        "Friend"     => 2,
        "Coordinator" => 2,
        "GenTableMethod" => "Inscription_Collaborations_Table",
-     );
+    ),
+);

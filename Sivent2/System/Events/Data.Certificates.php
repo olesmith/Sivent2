@@ -247,7 +247,7 @@ array
 
       "Sql" => "REAL",
       "Size" => "3",
-      "Default" => 5.5,
+      "Default" => 3.5,
 
       "Search" => FALSE,
 
@@ -267,7 +267,7 @@ array
 
       "Sql" => "REAL",
       "Size" => "3",
-      "Default" => 3,
+      "Default" => 2,
 
       "Search" => FALSE,
 

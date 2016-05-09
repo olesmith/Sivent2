@@ -26,12 +26,15 @@ trait Sql_Tables
                $sqltable
             );
 
-            foreach (array_keys($ritems) as $id)
+            if (count($ritems)>0)
             {
-                $ritems[ $id ][ "SQLTable" ]=$sqltable;
-            }
+                foreach (array_keys($ritems) as $id)
+                {
+                    $ritems[ $id ][ "SQLTable" ]=$sqltable;
+                }
             
-            array_push($items,$ritems);
+                array_push($items,$ritems);
+            }
         }
  
         return $items;

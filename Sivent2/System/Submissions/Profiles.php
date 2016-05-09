@@ -59,7 +59,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Emails" => 1,
-            "GenCert" => 1,
+            "GenCerts" => 1,
          ),
          'Admin' => array
          (
@@ -67,7 +67,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Emails" => 1,
-            "GenCert" => 1,
+            "GenCerts" => 1,
          ),
       ),
       'SingularPlural' => array

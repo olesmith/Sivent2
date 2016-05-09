@@ -308,11 +308,9 @@ array
        (
         "Name" => 
           "Esta mensagem foi gerado automáticalmente pelo #ApplicationName, #ApplicationTitle.\n".
-          "#Institution, #Department.\n".
-        "Caso considere desnecessário,  por favor, entre em contato: #AdmEmail\n",
+          "Caso considere desnecessário,  por favor, entre em contato: #AdmEmail\n",
         "Name_UK" => 
           "This message was generated automatically by #ApplicationName, #ApplicationTitle.\n".
-          "#Institution, #Department..\n".
           "If considered inappropriate, please contact: #AdmEmail\n",
        ),
     );

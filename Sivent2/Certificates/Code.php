@@ -1,7 +1,7 @@
 <?php
 
 
-class Certificates_Code extends Certificates_Generate
+class Certificates_Code extends Certificates_Mail
 {
     var $Code_Data=array
     (

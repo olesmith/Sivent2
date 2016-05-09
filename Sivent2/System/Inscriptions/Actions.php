@@ -24,13 +24,50 @@ array
       "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=GenCert&Latex=1&ID=#ID",
       "Title"    => "Gerar Certificado (PDF)",
       "Title_UK" => "Generate Certificate (PDF)",
-      "ShortName"     => "Certificado",
-      "ShortName_UK"   => "Certificate",
       "Name"     => "Certificado",
       "Name_UK"   => "Certificate",
       
       "Handler"   => "Inscription_Handle_Certificate_Generate",
+      "Icon"   => "print_dark.png",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "AccessMethod"    => "CheckCertificateAccess",
+   ),
+   "MailCert" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=MailCert&ID=#ID",
+      "Title"    => "Enviar Certificado por Email",
+      "Title_UK" => "Send Certificate by Email",
+      "Name"     => "Enviar Certificado",
+      "Name_UK"   => "Send Certificate",
+      
+      "Handler"   => "Inscription_Handle_Certificate_Mail_Send",
       "Icon"   => "copy_dark.png",
+      "Target"   => "_blank",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "AccessMethod"    => "CheckCertificateAccess",
+   ),
+   "GenCerts" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=GenCerts&Latex=1",
+      "Title"    => "Gerar Certificados de todos os Participantes",
+      "Title_UK" => "Generate Certificates for all Participants",
+      "Name"     => "Certificados, todos os Participantes",
+      "Name_UK"   => "Certificates, all Participants",
+      
+      "Handler"   => "Inscription_Handle_Certificates_Generate",
+      "Icon"   => "print_dark.png",
 
       "Public"   => 0,
       "Person"   => 0,
@@ -39,23 +76,4 @@ array
       "Admin"    => 1,
       "AccessMethod"    => "CheckCertificateAccess",
   ),
-  /*  "Collaborations" => array */
-  /*  ( */
-  /*     "Href"     => "", */
-  /*     "HrefArgs" => "?ModuleName=Friends&Action=Collaborations", */
-  /*     "Title"    => "Colaborações", */
-  /*     "Title_UK" => "Collaborations", */
-  /*     "ShortName"     => "Colaborações", */
-  /*     "ShortName_UK"   => "Collaborations", */
-  /*     "Name"     => "Colaborações", */
-  /*     "Name_UK"   => "Collaborations", */
-      
-  /*     //"Handler"   => "Handle_Inscription_Collaborations", */
-
-  /*     "Public"   => 0, */
-  /*     "Person"   => 0, */
-  /*     "Friend"     => 0, */
-  /*     "Coordinator" => 1, */
-  /*     "Admin"    => 1, */
-  /* ), */
 );

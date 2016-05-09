@@ -179,9 +179,8 @@ class SubmissionsAccess extends ModulesCommon
         if (preg_match('/^(Public)$/',$this->Profile()))
         {
             $res=FALSE;
-            //Todo: Check via code.
         }
-
+        
         return $res;
     }
 }

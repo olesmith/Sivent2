@@ -53,9 +53,7 @@ array
       "Name_UK" => "Registration",
       "SqlClass" => "Friends",
       "Search" => TRUE,
-      "SqlTextSearch" => TRUE,
       "Compulsory"  => TRUE,
-      "Size"  => 20,
 
       "GETSearchVarName"  => "Friend",
       "Size" => "20",

@@ -41,24 +41,6 @@ class MyFriendsAddMail extends MyFriendsGroups
               ),
            )
         );
-
-        /* $field="SendPassword"; */
-
-        
-        /* $this->ApplicationObj->ApplicationSendEmail */
-        /* ( */
-        /*    $friend, */
-        /*    array */
-        /*    ( */
-        /*       "Subject" => $this->GetRealNameKey($this->MailTexts[ $field ],"Subject"), */
-        /*       "Body"    => */
-        /*          $this->GetRealNameKey($this->MailTexts[ "MailHead" ],"Head"). */
-        /*          "\n\n". */
-        /*          $this->GetRealNameKey($this->MailTexts[ $field ],"Body"). */
-        /*          "\n\n---\n". */
-        /*          $this->GetRealNameKey($this->MailTexts[ "MailTail" ],"Tail") */
-        /*    ) */
-        /* ); */
    }
 }
 

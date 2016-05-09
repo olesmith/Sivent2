@@ -49,7 +49,8 @@ trait MyMod_Mail
                $user,
                $this->GetRealNameKey($item,"MailHead")."\n\n".
                $this->GetRealNameKey($item,$type."_Body")."\n\n".
-               $this->GetRealNameKey($item,"MailTail")
+               $this->GetRealNameKey($item,"MailTail").
+               ""
             );
 
         $this->ApplicationObj()->ApplicationSendEmail

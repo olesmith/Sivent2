@@ -56,6 +56,32 @@ class MyFriendsAccess extends MyFriendsFriend
         }
         return $res;
     }
+    
+    //*
+    //* function CheckDeleteAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be deleted.
+    //* Allowed if may edit, AND no child entries:
+    //* Inscriptions.
+    //*
+
+    function CheckDeleteAccess($item=array())
+    {
+        if (empty($item)) { return TRUE; }
+        
+        $res=$this->CheckEditAccess($item);
+
+        if ($res)
+        {
+            $regexp='_(Inscriptions|Collaborators|Submissions|Certificates)';
+            $entries=$this->Sql_Tables_Select_Hashes($regexp,array("Friend" => $item[ "ID" ]),array("ID"));
+            
+            if (count($entries)>0) { $res=FALSE; }
+        }
+
+        
+        return $res;
+    }
 }
 
 ?>

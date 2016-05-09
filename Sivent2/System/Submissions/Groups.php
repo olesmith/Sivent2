@@ -30,9 +30,12 @@ array
        "Name_UK" => "Authors & Certificates",
        "Data" => array
        (
-          "No","Edit","Delete","GenCert",
+          "No","Edit",
+          //"Delete",
+          "GenCert","MailCert",
           "Status",
-          "Event","Title","Selected","Certificate","Certificate_TimeLoad",
+          "Event","Title","Selected",
+          "Certificate","Certificate_TimeLoad",
           "Author1","Author2","Author3",
         ),
 

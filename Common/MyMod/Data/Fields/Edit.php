@@ -56,18 +56,26 @@ trait MyMod_Data_Fields_Edit
                $rdata
             );
         }
-        elseif ($sql=="TEXT")
-        {
-            $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
-        }
         elseif (
-                  !empty($this->ItemData[ $data ][ "Size" ])
-                  &&
-                  preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
+                  $sql=="TEXT"
+                  ||
+                  (
+                     !empty($this->ItemData[ $data ][ "Size" ])
+                     &&
+                     preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
+                  )
                )
         {
             $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
         }
+        /* elseif ( */
+        /*           !empty($this->ItemData[ $data ][ "Size" ]) */
+        /*           && */
+        /*           preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ]) */
+        /*        ) */
+        /* { */
+        /*     $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata); */
+        /* } */
         elseif ($this->MyMod_Data_Fields_Module_Class($data))
         {
             $value=$this->MyMod_Data_Fields_Module_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);

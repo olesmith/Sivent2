@@ -107,10 +107,10 @@ array
        "Name_UK" => "Certificates, Participant",
        "Data" => array
        (
+          "GenCert",
           "Certificates_Latex_Sep_Vertical",
           "Certificates_Latex_Sep_Horisontal",
-          "Certificates_Latex","Certificates_Latex_UK",
-          "GenCert"
+          "Certificates_Latex","Certificates_Latex_UK"
         ),
 
        "Person" => 0,

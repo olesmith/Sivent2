@@ -9,5 +9,5 @@ array
    
    'Mod' => TRUE,
    'Debug' => 2,
-   'MailDebug' => TRUE,
+   'MailDebug' => FALSE,
 );

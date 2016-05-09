@@ -17,6 +17,17 @@ class InputPassword extends SelectFields
 
         return $this->MakePassword($data,$value,$size);
     }
+    
+    //*
+    //* function ShowPasswordField, Parameter list: $data,$value="
+    //*
+    //* Based on profile, generates suitable sql where clause.
+    //*
+
+    function ShowPasswordField($data,$value="")
+    {
+        return "**********";
+    }
 }
 
 ?>
