@@ -1,5 +1,20 @@
 array
 (
+      "Start" => array
+      (
+         "Href"     => "",
+         "HrefArgs" => "Unit=#ID&ModuleName=Application&Action=Start",
+         "Title"    => "Início",
+         "Title_UK" => "Start",
+         "Name"     => "Início",
+         "Name_UK"   => "Start",
+ 
+         "Public"   => 1,
+         "Person"   => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "Admin"    => 1,
+      ),
       'Search' => array
       (
          'Public' => 0,

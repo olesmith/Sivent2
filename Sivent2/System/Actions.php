@@ -304,4 +304,38 @@ array
         "Admin"   => 1,
         "Handler"   => "Certificates_Handle_Verify",
        ),
+       "Uploads" => array
+        (
+           "Href"     => "",
+           "HrefArgs" => "?Action=Uploads",
+           "Title"    => "Arquivos Carregados",
+           "Title_UK" => "Uploaded Files",
+           "Name"     => "Gerenciar Arquivos Carregados",
+           "Name_UK"     => "Administer Uploaded Files",
+
+           "Public"   => 0,
+           "Person"   => 0,
+           "Admin"    => 1,
+           "Monitor"   => 0,
+           "Coordinator"   => 1,
+           "Advisor"    => 0,
+           "Handler"    => "ShowDir_Handle",
+        ),
+     "ZIP" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?Action=Uploads&Zip=1",
+        "Title"    => "ZIP Arquivos Carregados",
+        "Title_UK" => "ZIP Uploaded Files",
+        "Name"     => "ZIP Arquivos Carregados",
+        "Name_UK"     => "ZIP Uploaded Files",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Monitor"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "Handler"    => "ShowDir_Handle",
+      ),
     );

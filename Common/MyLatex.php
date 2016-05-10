@@ -85,7 +85,8 @@ trait MyLatex
         $latex=$this->Text2Tex($latex);
 
         $this->MyWriteFile($path."/".$texfilename,$latex);
-
+        //$this->ShowLatexCode($latex); exit();
+        
         $command=$this->Latex_Command($path,$texfilename);
         
         //Run pdflatex first time
@@ -178,7 +179,14 @@ trait MyLatex
             $this->ApplicationObj->UnSetLatexMode();
             $this->ApplicationObj->MyApp_Interface_Head();
 
-            echo "Error gerando latex ($path/$texfilename):<BR>";
+            echo
+                "Error generating latex ($path/$texfilename):".
+                $this->BR().
+                "Caller 1: ".$this->Caller(1).".".
+                $this->BR().
+                "Caller 2: ".$this->Caller(2).".".
+                $this->BR().
+                "";
 
             if (!file_exists($logfilename))
             {

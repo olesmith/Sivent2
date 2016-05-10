@@ -3,6 +3,8 @@
 
 class EventMod extends DBDataObj
 {
+    var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
+    
     //*
     //* function InitActions, Parameter list:
     //*

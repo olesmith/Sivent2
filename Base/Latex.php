@@ -109,16 +109,24 @@ class Latex extends CSV
     function GetLatexSkel($latexdoc,$nocomment=FALSE)
     {
         $latex="";
-        
+
         $latexdocs=$latexdoc;
         if (!is_array($latexdocs)) { $latexdocs=array($latexdocs); }
-            
+
+        $path=$this->LatexSkelPath();
+        $path=preg_replace('/#Setup/',$this->ApplicationObj->SetupPath,$path);
+        $path=preg_replace('/#Module/',$this->ModuleName,$path);
+
         foreach ($latexdocs as $latexdoc)
         {
-            $latexdoc=join("/",array($this->LatexSkelPath(),$latexdoc));
             $latexdoc=preg_replace('/#Setup/',$this->ApplicationObj->SetupPath,$latexdoc);
-            $latexdocs=preg_replace('/#Module/',$this->ModuleName,$latexdoc);
-                
+            $latexdoc=preg_replace('/#Module/',$this->ModuleName,$latexdoc);
+            
+            if (!file_exists($latexdoc))
+            {
+                $latexdoc=join("/",array($this->LatexSkelPath(),$latexdoc));
+            }
+            
             if (is_file($latexdoc))
             {
                 if (!$nocomment)
@@ -132,7 +140,7 @@ class Latex extends CSV
             }
             else
             {
-                $latex.="%%%!! Not found! ".$latexdoc;
+                $latex.="%%%!! Not found: ".$latexdoc;
             }
         }
 

@@ -361,17 +361,20 @@ class MyUnits extends MyUnitsEvents
 
     function ShowUnits($edit)
     {
+        $units=$this->Sql_Select_Hashes();
+        
         return 
             $this->H
             (
                3,
-               "Entidades, ".
+               $this->GetRealNameKey($this->ApplicationObj()->SubModulesVars[ "Units" ],"ItemsName").
+               ": ".
                $this->GetRealNameKey($this->ApplicationObj()->HtmlSetupHash,"ApplicationName")
             ).
             $this->Html_Table
             (
                 "",
-                $this->ItemsTableDataGroup("",$edit,"Basic")
+                $this->ItemsTableDataGroup("",$edit,"Basic",$units)
              );
     }
 

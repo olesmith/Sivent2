@@ -61,9 +61,12 @@ trait Sql_Select_Calc
             $rfield=
                 $function.
                 "(".
-                $this->Sql_Table_Name_Qualify($field).
+                //$this->Sql_Table_Name_Qualify
+                //(.
+                 $field.
+                //).
                 ")";
-            if (!empty($res[ $rfield ]))
+           if (!empty($res[ $rfield ]))
             {
                 $result[ $field ]=$res[ $rfield ];
             }
