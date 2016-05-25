@@ -38,16 +38,21 @@ trait MyMod_Item_Group
         {
             if (!empty($groupdef[ "AccessMethod" ]))
             {
-                $accessmethod=$groupdef[ "AccessMethod" ];
-                if (method_exists($this,$accessmethod))
+                $accessmethods=$groupdef[ "AccessMethod" ];
+                if (!is_array($accessmethods)) { $accessmethods=array($accessmethods); }
+
+                foreach ($accessmethods as $accessmethod)
                 {
-                     return $this->$accessmethod($item);
-                }
-                else
-                {
-                    $this->Debug=1;
-                    $this->AddMsg("Warning: Invalid group def access method: ".
-                                  $accessmethod.", ignored");
+                   if (method_exists($this,$accessmethod))
+                    {
+                        if (!$this->$accessmethod($item)) { return FALSE; }
+                    }
+                    else
+                    {
+                        $this->Debug=1;
+                        $this->AddMsg("Warning: Invalid group def access method: ".
+                                      $accessmethod.", ignored");
+                    }
                 }
             }
         }

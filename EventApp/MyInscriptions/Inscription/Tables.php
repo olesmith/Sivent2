@@ -74,14 +74,8 @@ class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
                $this->Messages("Friend_Table_Title")
             )
         );
-        
-        return 
-            $this->FrameIt
-            (
-                $this->Html_Table("",$table)
-            ).
-            $this->BR().
-            "";
+
+        return $table;
     }
     
 

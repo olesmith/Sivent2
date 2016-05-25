@@ -7,7 +7,7 @@ trait MyMod_HorMenu_Action
     //*
     //* Generates and prints menu of actions as in $pactions,
     //* using $cssclass as CSS class parameter to ActionEntry.
-    //* Prints horisontal menu of Singular and Plural actions.
+    //* Prints horisontal menu of actions.
     //*
 
     function MyMod_HorMenu_Action($pactions,$cssclass="",$id="",$item=array(),$title="",$caction="")

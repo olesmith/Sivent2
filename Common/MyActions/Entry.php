@@ -207,7 +207,7 @@ trait MyActions_Entry
 
         foreach ($rargs as $key => $value) { $args[ $key ]=$value; }
 
-        if ($this->Actions[ $data ][ "HrefArgs" ]!="")
+        if (!empty($this->Actions[ $data ][ "HrefArgs" ]))
         {
             $args=$this->CGI_URI2Hash($this->Actions[ $data ][ "HrefArgs" ],$args);
         }
@@ -244,6 +244,12 @@ trait MyActions_Entry
         if (!empty($this->IDGETVar))
         {
             $action=preg_replace('/\&?ID=/',"&".$this->IDGETVar."=",$action);
+        }
+
+        $anchor=$this->Actions($data,"Anchor");
+        if (!empty($anchor))
+        {
+            $action.="#".$anchor;
         }
 
         return $action;

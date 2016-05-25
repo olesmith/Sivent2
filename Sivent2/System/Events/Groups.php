@@ -10,9 +10,9 @@ array
          "Edit",
          "Delete",
          //"Datas","GroupDatas",
-         "Date","Title","Place",
+         "Date","Title","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
-         "Status",
+         "Status","Inscriptions_Public",
          "Inscribe","Inscription",
          "NoOfInscriptionsCell",
          "Event_Inscriptions_InfoCell"
@@ -32,7 +32,7 @@ array
       (
          "No","Edit","Delete",
          "Title",
-         "Event_Date_Span",
+         "Event_Date_Span","Inscription",
          "StartDate","EndDate","EditDate",
          "InscribeLink",
       ),
@@ -86,7 +86,9 @@ array
        (
           "No","Edit","Delete",
           "Event","Friend",
-          "Caravans","Caravans_StartDate","Caravans_EndDate","Caravans_Min","Caravans_Max","Caravans_Public"
+          "Caravans","Caravans_StartDate","Caravans_EndDate",
+          "Caravans_Min","Caravans_Max",
+          "Caravans_Public","Caravans_Timeload",
         ),
 
        "Person" => 1,

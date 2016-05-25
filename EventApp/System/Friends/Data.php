@@ -269,6 +269,7 @@ array
       "Type"  => "",
       "Size" => "13",
       "Compulsory" => FALSE,
+      
       "Admin" => 2,
       "Person" => 0,
       "Public" => 0,

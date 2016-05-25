@@ -2,12 +2,13 @@
 
 include_once("Caravaneers/Access.php");
 include_once("Caravaneers/Table.php");
+include_once("Caravaneers/Certificate.php");
 
 
 
-class Caravaneers extends CaravaneersTable
+class Caravaneers extends CaravaneersCertificate
 {
-    var $Certificate_Type=1;
+    var $Certificate_Type=2;
     
     //*
     //* function Units, Parameter list: $args=array()
@@ -18,7 +19,7 @@ class Caravaneers extends CaravaneersTable
     function Caravaneers($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","TimeLoad");
+        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration");
         $this->Sort=array("Name");
     }
 
@@ -123,7 +124,7 @@ class Caravaneers extends CaravaneersTable
     function PostProcess($item)
     {
         $module=$this->GetGET("ModuleName");
-        if (!preg_match('/(Caravaneers|Friends)/',$module))
+        if (!preg_match('/(Caravaneers|Caravans|Inscriptions)/',$module))
         {
             return $item;
         }
@@ -131,9 +132,25 @@ class Caravaneers extends CaravaneersTable
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
         $updatedatas=array();
+        if (!empty($item[ "Email" ]))
+        {
+            $friend=$this->FriendsObj()->Sql_Select_Hash(array("Email" => $item[ "Email" ],array("ID")));
+            if (!empty($friend) && $item[ "Registration" ]!=$friend[ "ID" ])
+            {
+                $item[ "Registration" ]=$friend[ "ID" ];
+                array_push($updatedatas,"Registration");
+            }
+        }
+        else
+        {
+        }
         
-        //$this->Sql_Select_Hash_Datas_Read($item,array("TimeLoad","Collaboration","Homologated"));
-
+        $this->Sql_Select_Hash_Datas_Read($item,array("TimeLoad","Code","Certificate"));
+        $this->PostProcess_Certificate_TimeLoad($item,$updatedatas);
+        $this->PostProcess_Code($item,$updatedatas);
+        
+        $this->PostProcess_Certificate($item);
+        
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);

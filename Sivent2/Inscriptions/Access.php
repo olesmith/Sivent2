@@ -54,16 +54,23 @@ class InscriptionsAccess extends MyInscriptions
     {
         if (empty($item)) { return TRUE; }
         
+        if ($this->Current_User_Event_Coordinator_Is()) { return TRUE; }
+        
         $res=FALSE;
         if (!empty($item[ "Certificate" ]) && $item[ "Certificate" ]==2)
         {
             $res=TRUE;
         }
-
-        return
+        
+        
+        $res=
             $res
             &&
+            $this->Inscriptions_Certificates_Published()
+            &&
             $this->CheckShowAccess($item);
+
+        return $res;
     }
 }
 

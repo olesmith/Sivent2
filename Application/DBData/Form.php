@@ -4,6 +4,19 @@
 class DBDataForm extends DBDataUpdate
 {
     //*
+    //* function DBDataQuest, Parameter list: $event
+    //*
+    //* Displays example questionary form, when defining Quest data.
+    //*
+
+    function DBDataQuest()
+    {
+        return
+            $this->ShowQuest().
+            "";            
+    }
+    
+    //*
     //* function DBDataForm, Parameter list: $event
     //*
     //* Displays event quest lists.
@@ -80,7 +93,7 @@ class DBDataForm extends DBDataUpdate
                   "DetailsSGroups"   => "GetDetailsSGroups",
               )
             ).
-            $this->ShowQuest().
+            $this->DBDataQuest().
             "";
     }
 

@@ -131,6 +131,40 @@ trait MyMod_Data_Fields
 
         return $fieldmethod;
     }
+    
+    //*
+    //* function MyMod_Data_Field_Logo, Parameter list: $item,$data
+    //*
+    //* Creates file data entry, as a logo field.
+    //*
+
+    function MyMod_Data_Field_Logo($item,$data)
+    {
+        $access=$this->MyMod_Data_Access($data,$item);
+
+        if ($access<1) { return "Not allowed"; }
+
+        $icon=$item[ $data ];
+        
+        $args=array
+        (
+           "Unit" => $this->Unit("ID"),
+           "Event" => $this->Event("ID"),
+           "ModuleName" => $this->ModuleName,
+           "Action" => "Download",
+           "Data" => $data,
+        );
+
+        $href="?".$this->CGI_Hash2URI($args);
+        
+        $height=$item[ "HtmlLogoHeight" ];
+        $width=$item[ "HtmlLogoWidth" ];
+
+        $img="";
+        if (!empty($icon)) { $img=$this->Img($href,$this->ModuleName." logo",$height,$width); }
+
+        return $img;
+    }
 }
 
 ?>

@@ -101,9 +101,13 @@ array
          ),
          'Coordinator' => array
          (
+            "Event" => 1,
+            "Collaborators" => 1,
          ),
          'Admin' => array
          (
+            "Event" => 1,
+            "Collaborators" => 1,
          ),
       ),
       'ActionsSingular' => array

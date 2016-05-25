@@ -24,7 +24,7 @@ array
       "Name_UK" => "Event Data",
       "Title_UK" => "Event Data",
 
-       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Show&Event=#Event',
+       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Edit&Event=#Event',
 
       'Public'    => 0,
       'Person'    => 0,
@@ -115,7 +115,24 @@ array
       'Friend'     => 0,
       'Coordinator' => 1,
    ),
-   "04_Caravaneers" => array
+   "040_Caravans" => array
+   (
+      "Name" => "Caravanas",
+      "Title" => "Gerenciar Caravanas",
+      "Name_UK" => "Caravans",
+      "Title_UK" => "Manage Caravans",
+
+      'Href' => '?Unit=#Unit&ModuleName=Caravans&Action=Search&Event=#Event',
+      'AccessMethod' => 'HasCaravans',
+
+      'Public'    => 0,
+      'Person'    => 0,
+      'Admin'     => 1,
+
+      'Friend'     => 0,
+      'Coordinator' => 1,
+   ),
+   "041_Caravaneers" => array
    (
       "Name" => "Caravaneiro(a)s",
       "Title" => "Gerenciar Caravaneiro(a)s",

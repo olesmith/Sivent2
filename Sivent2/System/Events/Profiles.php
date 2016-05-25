@@ -37,16 +37,16 @@ array
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
-            'Inscriptions' => 1,
-            'Inscriptions_Add' => 1,
+            'Datas' => 1,
+            'GroupDatas' => 1,
          ),
          'Admin' => array
          (
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
-            'Inscriptions' => 1,
-            'Inscriptions_Add' => 1,
+            'Datas' => 1,
+            'GroupDatas' => 1,
          ),
       ),
       'Plural' => array
@@ -59,15 +59,9 @@ array
          ),
          'Coordinator' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
          ),
          'Admin' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
          ),
       ),
       'SingularPlural' => array
@@ -86,9 +80,15 @@ array
          ),
          'Coordinator' => array
          (
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
          ),
          'Admin' => array
          (
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
          ),
       ),
       'ActionsPlural' => array
@@ -128,15 +128,19 @@ array
          ),
         'Coordinator' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
+            "Inscriptions" => 1,
+            "Inscriptions_Add" => 1,
+            "Collaborations" => 1,
+            "Submissions" => 1,
+            "Caravans" => 1,
          ),
          'Admin' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
+            "Inscriptions" => 1,
+            "Inscriptions_Add" => 1,
+            "Collaborations" => 1,
+            "Submissions" => 1,
+            "Caravans" => 1,
          ),
       ),
    ),

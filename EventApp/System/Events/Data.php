@@ -132,6 +132,30 @@ array
       "Compulsory"  => TRUE,
       "IsDate"  => TRUE,
    ),
+   "Inscriptions_Public" => array
+   (
+      "Title" => "Inscrições Abertas ao Público",
+      "Name" => "Inscrições Públicas",
+      
+      "Name_UK" => "Public Inscriptions",
+      "ShortName_UK" => "Publication",
+      "Title_UK" => "Inscriptions are Public",
+      
+      "Sql" => "ENUM",
+      "Values" => array("Sim","Não"),
+      "Values_UK" => array("Yes","No"),
+      "Default" => 1,
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Compulsory" => 1,
+      "Search" => FALSE,
+      "Compulsory"  => TRUE,
+      "IsDate"  => TRUE,
+   ),
    "StartDate" => array
    (
       "Name" => "Início das Inscrições",

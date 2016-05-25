@@ -2,12 +2,13 @@ array
 (
    "Collaboration" => array
    (
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Collaboration&Friend=#Friend#1",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Collaboration&Friend=#Friend",
+      "Anchor" => "Menu",
       
-      "Title"    => "Inscrever-se para Colaborar com o Event",
-      "Title_UK" => "Candidate for Collaborating with the Event",
-      "Name"     => "Inscrições para Colaborações",
-      "Name_UK"   => "Collaborations, Inscriptions",
+      /* "Title"    => "Inscrever-se para Colaborar com o Event", */
+      /* "Title_UK" => "Candidate for Collaborating with the Event", */
+      /* "Name"     => "Inscrições para Colaborações", */
+      /* "Name_UK"   => "Collaborations, Inscriptions", */
       
       "Public"   => 0,
       "Person"   => 0,
@@ -20,12 +21,13 @@ array
   ),
    "Caravan" => array
    (
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Caravan&Friend=#Friend#1",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Caravan&Friend=#Friend",
+      "Anchor" => "Menu",
       
-      "Title"    => "Quero Cadastrar uma Caravana",
-      "Title_UK" => "I want to Register a Caravan",
-      "Name"     => "Cadastro de Caravana",
-      "Name_UK"   => "Caravan Registration",
+      /* "Title"    => "Quero Cadastrar uma Caravana", */
+      /* "Title_UK" => "I want to Register a Caravan", */
+      /* "Name"     => "Cadastro de Caravana", */
+      /* "Name_UK"   => "Caravan Registration", */
       
       "Public"   => 0,
       "Person"   => 0,
@@ -33,10 +35,14 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
       "AccessMethod"    => "Inscriptions_Caravans_Has",
+      "NameMethod"    => "Inscriptions_Caravans_Show_Name",
+      "TitleMethod"    => "Inscriptions_Caravans_Show_Title",
+      "AccessMethod"    => "Inscriptions_Caravans_Show_Should",
   ),
    "Submission" => array
    (
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Submission&Friend=#Friend#1",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Submission&Friend=#Friend",
+      "Anchor" => "Menu",
       
       "Title"    => "Quero Submeter Trabalho(s)",
       "Title_UK" => "I Want to Submit Proposal(s) for Presentation",
@@ -55,7 +61,8 @@ array
   ),
   /*  "Certificate" => array */
   /*  ( */
-  /*     "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Certificate&Friend=#Friend#1", */
+  /*     "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Certificate&Friend=#Friend", */
+      /* "Anchor" => "Menu", */
       
   /*     "Title"    => "Certificados", */
   /*     "Title_UK" => "Certificates", */

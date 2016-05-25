@@ -126,4 +126,54 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
+     "Collaborations" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Collaborations&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Colaborações",
+        "Title_UK" => "Manage Collaborations",
+        "Name"     => "Colaborações",
+        "Name_UK"     => "Collaborations",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Collaborations_Has",
+      ),
+     "Event" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Evento",
+        "Title_UK" => "Manage Event",
+        "Name"     => "Evento",
+        "Name_UK"     => "Event",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+      ),
+   "FriendTable" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Collaborators&Action=FriendTable&Friend=#Friend",
+      "Title"    => "Gerenciar Collaborações do Participante",
+      "Title_UK" => "Administer Participants Collaborations",
+      "Name"     => "Collaborações do Participante",
+      "Name_UK"   => "Participants Collaborations",
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "AccessMethod"    => "Event_Collaborations_Has",
+      "Handler"    => "Collaborators_Friend_Collaborations_Handle",
+   ),
 );

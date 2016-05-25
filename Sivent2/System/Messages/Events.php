@@ -1,5 +1,20 @@
 array
 (
+   "Events_Open_Title" => array
+   (
+      "Name" => "Inscrições Abertas",
+      "Name_UK" => "Inscriptions Open",
+   ),
+   "Events_Closed_Title" => array
+   (
+      "Name" => "Inscrições Encerradas",
+      "Name_UK" => "Inscriptions Closed",
+   ),
+   "Events_ToOpen_Title" => array
+   (
+      "Name" => "Inscrições à Iniciar",
+      "Name_UK" => "Inscriptions to Open",
+   ),
    "Event_DateSpan_Title" => array
    (
       "Name" => "Período do Evento",
@@ -18,7 +33,7 @@ array
    "Events_Open_Table_Title" => array
    (
       "Name" => "Inscrições Abertas",
-      "Name_UK" => "Open Inscriptions",
+      "Name_UK" => "Inscriptions Open",
    ),
    "Events_History_Table_Title" => array
    (
@@ -55,12 +70,22 @@ array
       "Name" => "Informações",
       "Name_UK" => "Informations",
    ),
-   "Event_Inscriptions_InfoCell_Message" => array
+   "Event_Inscriptions_InfoCell_Message_Inscribe" => array
    (
-      "Name" => "Inscreve-se para Candidatar",
-      "Name_UK" => "Please Inscribe to Candidate",
+      "Name" => "Inscreve-se para Candidatar.",
+      "Name_UK" => "Please Inscribe to Candidate.",
+   ),
+   "Event_Inscriptions_InfoCell_Message_Inscribed" => array
+   (
+      "Name" => "Acesse sua Inscrição para Candidatar.",
+      "Name_UK" => "Access you Inscription to Candidate.",
    ),
    "Event_Inscriptions_Collaborations_Has" => array
+   (
+      "Name" => "Chamada de Colaboradores Abertas",
+      "Name_UK" => "Call for Collaborators Open",
+   ),
+   "Event_Inscriptions_Collaborations_Open" => array
    (
       "Name" => "Chamada de Colaboradores Abertas",
       "Name_UK" => "Call for Collaborators Open",
@@ -70,9 +95,24 @@ array
       "Name" => "Chamada de Trabalhos Abertas",
       "Name_UK" => "Call for Papers Open",
    ),
+   "Event_Inscriptions_Submissions_Open" => array
+   (
+      "Name" => "Chamada de Trabalhos Abertas",
+      "Name_UK" => "Call for Papers Open",
+   ),
    "Event_Inscriptions_Caravans_Has" => array
    (
       "Name" => "Chamada de Caravanas Abertas",
       "Name_UK" => "Call for Caravanas Open",
+   ),
+   "Event_Inscriptions_Caravans_Open" => array
+   (
+      "Name" => "Chamada de Caravanas Abertas",
+      "Name_UK" => "Call for Caravanas Open",
+   ),
+   "Event_Inscriptions_Title" => array
+   (
+      "Name" => "Inscrições",
+      "Name_UK" => "Inscriptions",
    ),
 );

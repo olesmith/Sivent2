@@ -1,7 +1,7 @@
 <?php
 
 
-class DataGroups extends DataSGroups
+class DataGroups extends HashesData
 {
 
     //*
@@ -281,7 +281,6 @@ class DataGroups extends DataSGroups
             }
         }
 
-
         if (!isset($groups[ $group ]) || !is_array($groups[ $group ]))
         {
             $this->CallStack_Show();
@@ -290,7 +289,10 @@ class DataGroups extends DataSGroups
             return;
         }
 
-        if (!isset($groups[ $group ][ "Data" ]) || !is_array($groups[ $group ][ "Data" ]))
+        $datas=$this->GetRealNameKey($groups[ $group ],"Data");
+
+        //if (!isset($groups[ $group ][ "Data" ]) || !is_array($groups[ $group ][ "Data" ]))
+        if (empty($datas) || !is_array($datas))
         {
             echo $this->ModuleName." Warning: Group $group has no data defined";exit();
             $this->AddMsg("Warning: Group $group has no data defined");
@@ -300,13 +302,14 @@ class DataGroups extends DataSGroups
         $rgroups=array();
         foreach (array("Actions","ShowData","Data") as $type)
         {
-            if (!empty($groups[ $group ][ $type ]))
+            $datas=$this->GetRealNameKey($groups[ $group ],$type);
+            
+            if (!empty($datas) && is_array($datas))
             {
-                $rgroups=array_merge($rgroups,$groups[ $group ][ $type ]);
+                $rgroups=array_merge($rgroups,$datas);
             }
         }
 
-        /* $keys=array($this->Profile,$this->LoginType); */
         foreach ($rgroups as $id => $data)
         {
             if (!is_array($data)) { $data=array($data); }
@@ -320,13 +323,6 @@ class DataGroups extends DataSGroups
                         array_push($rdatas,$rdata);
                     }
                 }
-                /* elseif (isset($this->Actions[ $rdata ])) */
-                /* { */
-                /*     if ($this->MyMod_Access_HashAccess($this->Actions[ $rdata ],array(1,2))) */
-                /*     { */
-                /*         array_push($rdatas,$rdata); */
-                /*     } */
-                /* } */
                 elseif (isset($this->Actions[ $rdata ]))
                 {
                     $action=$data;

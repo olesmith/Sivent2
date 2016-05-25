@@ -89,8 +89,17 @@ class MyEventsAccess extends ModulesCommon
     function MayInscribe($event=array())
     {
         if (empty($event)) { return TRUE; }
-        
-        return !$this->IsInscribed($event);
+
+        if ($event[ "Inscriptions_Public" ]==2)
+        {
+            $res=FALSE;
+        }
+        else
+        {
+            $res=!$this->IsInscribed($event);
+        }
+
+        return $res;
     }
 
     

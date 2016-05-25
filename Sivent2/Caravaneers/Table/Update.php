@@ -136,11 +136,16 @@ class CaravaneersTableUpdate extends CaravaneersAccess
                 $caravaneer[ "Registration" ]=$friend;
                 array_push($updatedatas,"Registration");
             }
-        }
 
-        if (count($updatedatas)>0 && !empty($caravaneer[ "ID" ]))
-        {
-            $this->Sql_Update_Item_Values_Set($updatedatas,$caravaneer);
+            if (preg_match('/^(Admin|Coordinator)$/',$this->Profile()))
+            {
+                $this->Caravaneer_Table_Update_Certificate($caravaneer,$n,$updatedatas);
+            }
+
+            if (count($updatedatas)>0 && !empty($caravaneer[ "ID" ]))
+            {
+                $this->Sql_Update_Item_Values_Set($updatedatas,$caravaneer);
+            }
         }
        
         return $caravaneer;
@@ -166,7 +171,7 @@ class CaravaneersTableUpdate extends CaravaneersAccess
             }
         }
 
-         while (count($caravaneers)>0)
+        while (count($caravaneers)>0)
         {
             $caravaneer=array_shift($caravaneers);
             $this->Sql_Delete_Item($caravaneer[ "ID" ],"ID");
@@ -182,8 +187,10 @@ class CaravaneersTableUpdate extends CaravaneersAccess
     //* Puts caravaneers in alphabetical order.
     //*
 
-    function Caravaneers_Table_Inscription_Update(&$inscription,$ncaravaneers)
+    function Caravaneers_Table_Inscription_Update(&$inscription)
     {
+        $ncaravaneers=$this->CaravaneersObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ],"Status" => 1));
+        
         $updatedatas=array();
         if (
               empty($inscription[ "Caravans_NParticipants" ])
@@ -194,6 +201,7 @@ class CaravaneersTableUpdate extends CaravaneersAccess
             $inscription[ "Caravans_NParticipants" ]=$ncaravaneers;
             array_push($updatedatas,"Caravans_NParticipants");
         }
+        
 
         $status=1;
         if ($ncaravaneers>=$this->Event("Caravans_Min")) { $status=2; }
@@ -211,6 +219,30 @@ class CaravaneersTableUpdate extends CaravaneersAccess
         if (count($updatedatas)>0)
         {
             $this->InscriptionsObj()->Sql_Update_Item_Values_Set($updatedatas,$inscription);
+        }
+    }
+
+    
+     //*
+    //* function Caravaneer_Table_Update_Certificate, Parameter list: &$caravaneer,$n,&$updatedatas
+    //*
+    //* Updates certificate data for caravaneer.
+    //*
+
+    function Caravaneer_Table_Update_Certificate(&$caravaneer,$n,&$updatedatas)
+    {
+        foreach (array("Certificate","Timeload") as $data)
+        {
+            $cgikey="No_".$n."_".$data;
+            if (isset($_POST[ $cgikey ]))
+            {
+                $cgivalue=$this->CGI_POSTint($cgikey);
+                if ($caravaneer[ $data ]!=$cgivalue)
+                {
+                    $caravaneer[ $data ]=$cgivalue;
+                    array_push($updatedatas,$data);
+                }
+            }
         }
     }
 

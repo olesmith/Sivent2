@@ -17,6 +17,7 @@ class Collaborations extends CollaborationsAccess
         $this->Hash2Object($args);
         $this->AlwaysReadData=array();
         $this->Sort=array("Name");
+        $this->IncludeAllDefault=TRUE;
     }
 
     //*

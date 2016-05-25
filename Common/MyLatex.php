@@ -3,7 +3,7 @@
 trait MyLatex
 {
     var $LatexScript="../pdflatex.sh";
-    var $LatexDelete=TRUE;
+    var $LatexDelete=FALSE;
 
     
     //*

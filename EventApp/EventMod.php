@@ -93,7 +93,7 @@ class EventMod extends DBDataObj
         if (is_array($event)) { $event=$event[ "ID" ]; }
         
         $res=$this->Current_User_Admin_Is();
-        if (!$res)
+        if ($this->Current_User_Coordinator_Is() && !$res)
         {
             $events=
                 $this->PermissionsObj()->Sql_Select_Unique_Col_Values

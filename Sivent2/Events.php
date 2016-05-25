@@ -140,29 +140,29 @@ class Events extends EventsCertificate
         return parent::PostProcess($item);
     }
 
-    //*
-    //* function  EventHorisontalMenues, Parameter list: $event
-    //*
-    //* Prints horistonal menu for $event.
-    //*
+    /* //\* */
+    /* //\* function  EventHorisontalMenues, Parameter list: $event */
+    /* //\* */
+    /* //\* Prints horistonal menu for $event. */
+    /* //\* */
 
-    function EventHorisontalMenu($event)
-    {
-        if (empty($event)) { return ""; }
+    /* function EventHorisontalMenu($event) */
+    /* { */
+    /*     if (empty($event)) { return ""; } */
         
-        return 
-            $this->MyMod_HorMenu_Action
-            (
-               array
-               (
-                   "Datas","GroupDatas","Inscriptions"
-               ),
-               "atablemenu",
-               $event[ "ID" ],
-               $event
-            ).
-            "";
-    }
+    /*     return  */
+    /*         $this->MyMod_HorMenu_Action */
+    /*         ( */
+    /*            array */
+    /*            ( */
+    /*                "Datas","GroupDatas","Inscriptions" */
+    /*            ), */
+    /*            "atablemenu", */
+    /*            $event[ "ID" ], */
+    /*            $event */
+    /*         ). */
+    /*         ""; */
+    /* } */
 
     //*
     //* function PostInterfaceMenu, Parameter list: $plural=FALSE,$id=""

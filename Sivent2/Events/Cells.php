@@ -43,10 +43,19 @@ class EventsCells extends MyEvents
         $cell="";
         if (count($msgs)>0)
         {
-             $cell=
-                 $this->HtmlList($msgs).
-                 $this->MyLanguage_GetMessage("Event_Inscriptions_InfoCell_Message").
-                 "";
+            $cell=$this->HtmlList($msgs);
+            if ($this->EventsObj()->FriendIsInscribed($event,$this->LoginData()))
+            {
+                $cell.=
+                    $this->MyLanguage_GetMessage("Event_Inscriptions_InfoCell_Message_Inscribed").
+                    "";
+            }
+            else
+            {
+                $cell.=
+                    $this->MyLanguage_GetMessage("Event_Inscriptions_InfoCell_Message_Inscribe").
+                    "";
+            }
         }
         
         return $cell;

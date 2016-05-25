@@ -2,11 +2,11 @@ array
 (
     "Certificates" => array
     (
-       "Name" => "Certificado",
+       "Name" => "Certificadooo",
        "Name_UK" => "Certificate",
        "Data" => array
        (
-          "Certificate","GenCert","Certificate_Generated","Certificate_Mailed"
+          "Certificate","Certificate_CH","GenCert","Inscription_Certificate_Generated_Cell","Inscription_Certificate_Mailed_Cell"
         ),
 
        "Single" => TRUE,
@@ -16,5 +16,7 @@ array
        "Friend"     => 1,
        "Coordinator" => 2,
        //"GenTableMethod" => "InscriptionCertificateTable",
+       "Single" => TRUE,
+       "AccessMethod" => "CheckCertificateAccess",
      ),
 );

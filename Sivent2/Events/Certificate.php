@@ -11,7 +11,7 @@ class EventsCertificate extends EventsCertificates
     function Event_Handle_Certificate_Generate()
     {
         $latex="";
-        foreach (array(1,3,4) as $type)
+        foreach (array(1,2,3,4) as $type)
         {
             $cert=
                 array

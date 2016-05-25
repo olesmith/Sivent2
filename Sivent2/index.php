@@ -5,13 +5,19 @@ include_once("../Accessor.php");
 
 include_once("../EventApp/EventApp.php");
 
+include_once("App/CGIVars.php");
+include_once("App/Events.php");
+include_once("App/Head_Table.php");
+include_once("App/Has.php");
 include_once("App/Handle.php");
+include_once("App/Override.php");
+
 
 
 //For modules.
 
 
-class Sivent2 extends AppHandle
+class Sivent2 extends App_Override
 {
     var $IDGETVar="";
     var $Pertains=1; //Questionary: 1, 
@@ -91,62 +97,6 @@ class Sivent2 extends AppHandle
         }
    }
     
-    //*
-    //* function MyApp_Interface_LeftMenu, Parameter list:
-    //*
-    //* Overrides parent, calling it and adding sponsor table.
-    //*
-
-    function MyApp_Interface_LeftMenu()
-    {
-        $this->SponsorsObj()->Sql_Table_Structure_Update();
-        
-        return
-            parent::MyApp_Interface_LeftMenu().
-            $this->SponsorsObj()->ShowSponsors(1).
-            "";
-    }
-
-        //*
-    //* function MyApp_Interface_Tail_Center(), Parameter list:
-    //*
-    //* Overrides parent, calling it and adding sponsor table.
-    //*
-
-    function MyApp_Interface_Tail_Center()
-    {
-       return
-            $this->SponsorsObj()->ShowSponsors(2).
-            parent::MyApp_Interface_Tail_Center().
-            "";
-    }
-    
-    //*
-    //* sub MyApp_Interface_Status, Parameter list: 
-    //*
-    //* Overrides parent, calling it and adding sponsor table.
-    //*
-
-    function MyApp_Interface_Messages_Status()
-    {
-        return
-            parent::MyApp_Interface_Messages_Status().
-            $this->SponsorsObj()->ShowSponsors(3).
-            "";
-     }
-    
-     //*
-    //* function MyApp_Init, Parameter list: 
-    //*
-    //* Overrided function. Calls parent, then checks for event access.
-    //*
-
-    function MyApp_Login_SetData($logindata)
-    {
-        parent::MyApp_Login_SetData($logindata);
-        $this->CheckEventAccess();
-     }
-
     
 }
 

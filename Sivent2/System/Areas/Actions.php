@@ -51,4 +51,37 @@ array
          "Coordinator" => 1,
          "AccessMethod"  => "CheckDeleteAccess",
       ),
+     "Submissions" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Submissões",
+        "Title_UK" => "Manage Submissions",
+        "Name"     => "Submissões",
+        "Name_UK"     => "Submissions",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Submissions_Has",
+      ),
+     "Event" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Evento",
+        "Title_UK" => "Manage Event",
+        "Name"     => "Evento",
+        "Name_UK"     => "Event",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+      ),
 );

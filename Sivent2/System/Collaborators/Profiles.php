@@ -112,9 +112,13 @@ array
          ),
          'Coordinator' => array
          (
+            "Event" => 1,
+            "Collaborations" => 1,
          ),
          'Admin' => array
          (
+            "Event" => 1,
+            "Collaborations" => 1,
          ),
       ),
       'ActionsSingular' => array

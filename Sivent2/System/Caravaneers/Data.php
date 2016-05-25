@@ -101,6 +101,24 @@ array
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
    ),
+   "PRN" => array
+   (
+      "Name" => "RG",
+      "Title" => "RG",
+      "Name_UK" => "PRN",
+      "Title_UK" => "PRN",
+
+      "Size" => "15",
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 2,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+   ),
    "Status" => array
    (
       "Name" => "Status",
@@ -116,9 +134,9 @@ array
       "Sql" => "ENUM",
       "Public"   => 1,
       "Person"   => 0,
-      "Admin"    => 2,
-      "Friend" => 2,
-      "Coordinator" => 2,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
@@ -140,4 +158,58 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
     ),
+   "Certificate" => array
+   (
+      "Name" => "Certificado Liberado",
+      "Name_UK" => "Certificate Avaliable",
+
+      "Sql" => "ENUM",
+
+      "Search" => FALSE,
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+   ),
+   "TimeLoad" => array
+   (
+      "Name" => "CH",
+      "Title" => "CH Padrão",
+      "Name_UK" => "Timeload",
+      "Title_UK" => "Default Timeload",
+
+      "Size" => "2",
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+   ),
+   "Code" => array
+   (
+      "Name" => "Código",
+      "Title" => "Código do Certificado",
+      "Name_UK" => "Code",
+      "Title_UK" => "Certificate Code",
+
+      "Size" => "50",
+      "Sql" => "VARCHAR(64)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+   ),
 );

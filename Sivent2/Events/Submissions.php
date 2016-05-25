@@ -137,6 +137,31 @@ class EventsSubmissions extends EventsCaravans
         return $datas;
     }
     
+    //*
+    //* function Event_Submissions_Inscriptions_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Submissions_Inscriptions_DateSpan($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Interval($event,"Submissions_StartDate","Submissions_EndDate");
+    }
+    
+    //*
+    //* function Event_Submissions_Inscriptions_Status, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Submissions_Inscriptions_Status($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Status($event,"Submissions_StartDate","Submissions_EndDate");
+    }
 
      //*
     //* function Event_Submissions_Table, Parameter list: $edit,$item,$group

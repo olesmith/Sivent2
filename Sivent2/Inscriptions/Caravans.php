@@ -26,9 +26,68 @@ class InscriptionsCaravans extends InscriptionsCollaborations
     function Inscriptions_Caravans_Inscriptions_Open()
     {
         $event=$this->Event();
+
         return $this->EventsObj()->Event_Caravans_Inscriptions_Open($event);
     }
     
+    //*
+    //* function Inscriptions_Caravans_Show_Should, Parameter list: 
+    //*
+    //* Detects if current event has collaborations activated.
+    //*
+
+    function Inscriptions_Caravans_Show_Should($item=array())
+    {
+        $res=
+            $this->EventsObj()->Event_Caravans_Has($this->Event())
+            /* || */
+            /* $this->Inscription_Caravaneers_Has($item) */
+            ;
+
+        return $res;
+    }
+    
+    //*
+    //* function Inscriptions_Caravans_Show_Name, Parameter list: 
+    //*
+    //* Generates  name for Submissions link.
+    //*
+
+    function Inscriptions_Caravans_Show_Name($data,$item=array())
+    {
+        $title="";
+        if ($this->Inscriptions_Caravans_Has($item))
+        {
+            $title=$this->MyLanguage_GetMessage("Events_Caravans_Show_Has_Name");
+        }
+        else
+        {
+            $title=$this->MyLanguage_GetMessage("Events_Caravans_Show_Inscriptions_Name");
+        }
+
+        return $title;
+    }
+
+     //*
+    //* function Inscriptions_Caravans_Show_Title, Parameter list: 
+    //*
+    //* Generates title for Collaborators link.
+    //*
+
+    function Inscriptions_Caravans_Show_Title($data,$item=array())
+    {
+        $title="";
+        if ($this->Inscriptions_Caravans_Has($item))
+        {
+            $title=$this->MyLanguage_GetMessage("Events_Caravans_Show_Has_Title");
+        }
+        else
+        {
+            $title=$this->MyLanguage_GetMessage("Events_Caravans_Show_Inscriptions_Title");
+        }
+
+        return $title;
+    }
     //*
     //* function Inscription_Caravans_Table_Edit, Parameter list: $edit
     //*
@@ -55,13 +114,9 @@ class InscriptionsCaravans extends InscriptionsCollaborations
     function Inscription_Caravans_Table_DateSpan()
     {
         return
-            $this->H
-            (
-               4,
-               $this->MyTime_Sort2Date($this->Event("Caravans_StartDate")).
-               " - ".
-               $this->MyTime_Sort2Date($this->Event("Caravans_EndDate"))
-            ).
+            $this->MyTime_Sort2Date($this->Event("Caravans_StartDate")).
+            " - ".
+            $this->MyTime_Sort2Date($this->Event("Caravans_EndDate")).
             "";
     }
     
@@ -86,22 +141,56 @@ class InscriptionsCaravans extends InscriptionsCollaborations
         {
             $this->Inscription_Group_Update($group,$item);
         }
+        
+        $buttons="";
+        $html="";
+        if ($edit==1)
+        {
+            $buttons=$this->Buttons();
+            $html.=$this->StartForm();
+        }
 
         $caravanstable=$this->Inscription_Caravans_Table_Show($edit,$item);
-        
-        return
-            $this->EventsObj()->Event_Caravans_Table(0,$this->Event(),"Caravans").
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->Inscription_Caravans_Table_DateSpan().
-            $this->MyMod_Item_Table_Html
+
+        $table=
+            array_merge
             (
-               $this->Inscription_Caravans_Table_Edit($edit),
-               $item,
-               $this->GetGroupDatas($group)
-            ).
-            $this->Buttons().
-            $caravanstable.
+               $this->EventsObj()->Event_Caravans_Table(0,$this->Event(),"Caravans"),
+               array
+               (
+                  $this->H
+                  (
+                     5,
+                     $this->MyLanguage_GetMessage("Inscription_Period").
+                     ", ".
+                     $this->GetRealNameKey($this->ItemDataSGroups[ $group ]).
+                     ": ".
+                     $this->Inscription_Caravans_Table_DateSpan()
+                  )
+               ),
+               $this->MyMod_Item_Table
+               (
+                  $this->Inscription_Caravans_Table_Edit($edit),
+                 $item,
+                 $this->GetGroupDatas($group)
+               ),
+               array($buttons),
+               array($caravanstable)
+            );
+
+        
+        $html.=
+            $this->Html_Table("",$table).
             "";
+
+        if ($edit==1)
+        {
+            $html.=
+                $this->MakeHidden("Update",1).
+                $this->EndForm();
+        }
+        
+        return $this->FrameIt($html);
     }
     
     //*
@@ -112,18 +201,33 @@ class InscriptionsCaravans extends InscriptionsCollaborations
 
     function Inscription_Caravans_Table_Show($edit,&$item)
     {
-        if ($item[ "Caravans" ]==1) { return ""; }
+        if ($edit==1)
+        {
+            $this->MyMod_Item_Update_SGroup($item,"Caravans");
+        }
+                                            
+        //if ($item[ "Caravans" ]==1) { return "No"; }
 
-        //var_dump(array_keys($this->CaravaneersObj()->ItemData("ID")));
+        return $this->Inscription_Event_Caravans_Table($edit,$item);
+    }
+    
+    //*
+    //* function Inscription_Event_Caravaneers_Table, Parameter list: $edit,&$item
+    //*
+    //* Creates a table listing inscription colaborations.
+    //*
+
+    function Inscription_Event_Caravans_Table($edit,&$item)
+    {
         $this->CaravaneersObj()->ItemData("ID");
         $this->CaravaneersObj()->Sql_Table_Structure_Update();
         $this->CaravaneersObj()->Actions("Show");
-
-
+        
         return 
             $this->CaravaneersObj()->CaravaneersObj()->Caravaneers_Table_Show($edit,$item).
             "";
     }
+
 }
 
 ?>

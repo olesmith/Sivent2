@@ -16,7 +16,7 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
         $where=
             array
             (
-               "Unit"        => $inscription[ "Unit" ],
+               "Unit"        => $this->Unit("ID"),
                "Event"       => $inscription[ "Event" ],
                "Friend"      => $inscription[ "Friend" ],
                "Inscription" => $inscription[ "ID" ],

@@ -21,6 +21,7 @@ class Collaborators extends CollaboratorsCertificate
         $this->Hash2Object($args);
         $this->AlwaysReadData=array("Name","TimeLoad");
         $this->Sort=array("Name");
+        $this->IncludeAllDefault=TRUE;
     }
 
     //*

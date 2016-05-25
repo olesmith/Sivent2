@@ -49,8 +49,8 @@ array
     ),
    "Name" => array
    (
-      "Name" => "Título (PT)",
-      "Title" => "Título (PT)",
+      "Name" => "Título",
+      "Title" => "Título",
       "Name_UK" => "Title (PT)",
       "Title_UK" => "Title (PT)",
 
@@ -69,8 +69,8 @@ array
    (
       "Name" => "Título (UK)",
       "Title" => "Título (UK)",
-      "Name_UK" => "Title (UK)",
-      "Title_UK" => "Title (UK)",
+      "Name_UK" => "Title",
+      "Title_UK" => "Title",
 
       "Size" => "35",
       "Sql" => "VARCHAR(256)",

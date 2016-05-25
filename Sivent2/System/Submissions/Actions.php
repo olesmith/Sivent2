@@ -136,4 +136,54 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
+     "Areas" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Areas&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Trilhas",
+        "Title_UK" => "Manage Areas of Interest",
+        "Name"     => "Trilhas",
+        "Name_UK"     => "Areas of Interest",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Submissions_Has",
+      ),
+     "Event" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Evento",
+        "Title_UK" => "Manage Event",
+        "Name"     => "Evento",
+        "Name_UK"     => "Event",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+      ),
+   "FriendTable" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=FriendTable&Friend=#Friend",
+      "Title"    => "Gerenciar Submissões do Participante",
+      "Title_UK" => "Administer Participant's Submissions",
+      "Name"     => "Submissões do Participante",
+      "Name_UK"   => "Participant's Submissions",
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "AccessMethod"    => "Event_Submissions_Has",
+      "Handler"    => "Collaborators_Friend_Submissions_Handle",
+   ),
 );

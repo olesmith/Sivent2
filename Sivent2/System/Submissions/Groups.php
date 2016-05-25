@@ -13,10 +13,10 @@ array
       ),
       "Data_UK" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","GenCert",
          "Status",
          "Event","Type","Area","Level",
-         "Friend","Title_UK",
+         "Friend","Title_UK","File"
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -52,9 +52,16 @@ array
       "Data" => array
       (
          "No","Edit","Delete","GenCert",
-         "Status",
+         "Author1","Status",
          "Type","Area","Level",
-         "Title","Title_UK","Title_UK",
+         "Title",
+      ),
+      "Data_UK" => array
+      (
+         "No","Edit","Delete","GenCert",
+         "Author1","Status",
+         "Type","Area","Level",
+         "Title_UK",
       ),
       "Admin" => 1,
       "Person" => 0,

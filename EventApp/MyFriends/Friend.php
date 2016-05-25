@@ -2,7 +2,26 @@
 
 class MyFriendsFriend extends MyFriendsAdd
 {
+     //*
+    //* function FriendID2Name, Parameter list: $friendid
     //*
+    //* Returns friend name of friend with id $friendid.
+    //*
+
+    function FriendID2Name($friendid)
+    {
+        $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $friendid),array("Name","Email"));
+        
+        if (empty($friend))
+        {
+            $this->DoDie("Friend not found!",$friendid);
+        }
+        
+        return $friend[ "Name" ]." (".$friend[ "Email" ].")";
+    }
+
+    
+   //*
     //* function FriendDataTable, Parameter list: $edit=0,$friend=array()
     //*
     //* Creates Table with friend's event specific data.

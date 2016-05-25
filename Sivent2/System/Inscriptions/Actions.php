@@ -1,22 +1,21 @@
 array
 (
-   "Inscription" => array
+   "Friend" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Friend=#Friend#1",
-      "Title"    => "Inscrição",
-      "Title_UK" => "Inscription",
-      "Name"     => "Inscrição",
-      "Name_UK"   => "Inscrição",
+      "HrefArgs" => "?ModuleName=Friends&Action=Edit&ID=#Friend#1",
+      "Title"    => "Cadastro",
+      "Title_UK" => "Registration",
+      "Name"     => "Cadastro",
+      "Name_UK"   => "Registration",
       
-      //"Handler"   => "Inscription_Collaborations_Inscription_Handle",
-
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
       "AccessMethod"    => "CheckEditAccess",
+      "Singular"    => TRUE,
   ),
    "GenCert" => array
    (
@@ -75,5 +74,65 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
       "AccessMethod"    => "CheckCertificateAccess",
+  ),
+   "FriendCollaborations" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Collaborators&Action=FriendTable&Friend=#Friend",
+      "Title"    => "Gerenciar Collaborações do Participante",
+      "Title_UK" => "Administer Participants Collaborations",
+      "Name"     => "Collaborações do Participante",
+      "Name_UK"   => "Participant's Collaborations",
+      
+      //"Handler"   => "Inscription_Handle_Certificates_Generate",
+      //"Icon"   => "print_dark.png",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"    => 1,
+      "AccessMethod"    => "Event_Collaborations_Has",
+  ),
+   "FriendSubmissions" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=FriendTable&Friend=#Friend",
+      "Title"    => "Gerenciar Submissões do Participante",
+      "Title_UK" => "Administer Participants Submissions",
+      "Name"     => "Submissões do Participante",
+      "Name_UK"   => "Participant's Submissions",
+      
+      //"Handler"   => "Inscription_Handle_Certificates_Generate",
+      //"Icon"   => "print_dark.png",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"    => 1,
+      "AccessMethod"    => "Event_Submissions_Has",
+  ),
+   "FriendCaravan" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravans&Action=Caravaneers&ID=#ID",
+      "Title"    => "Gerenciar Caravana do Participante",
+      "Title_UK" => "Administer Participant's Caravan",
+      "Name"     => "Caravana do Participante",
+      "Name_UK"   => "Participant's Caravan",
+      
+      //"Handler"   => "Inscription_Handle_Certificates_Generate",
+      //"Icon"   => "print_dark.png",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"    => 1,
+      "AccessMethod"    => "Event_Caravans_Has",
   ),
 );

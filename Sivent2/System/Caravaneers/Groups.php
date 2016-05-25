@@ -6,8 +6,9 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
-         "Unit","Event","Friend","Name","Email","Status","Registration",
+         "No","Edit","Delete",
+         "Unit","Event","Friend","Name","Email","PRN",
+         "Status","Registration",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -22,8 +23,11 @@ array
       "Name_UK" => "Inscription",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
-         "ID","Name","Email","Status","Registration",
+         "No","Edit","Delete",
+         "Name","Email","PRN",
+         "Status",
+         "Certificate","TimeLoad","Code","GenCert",
+         "Registration",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -38,7 +42,7 @@ array
       "Name_UK" => "Times",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
+         "No","Edit","Delete",
          "Unit","Event","Name","Email",
          "CTime","MTime",
       ),

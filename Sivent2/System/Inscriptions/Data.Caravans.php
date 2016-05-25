@@ -18,6 +18,21 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
    ),
+   "Caravans_Name" => array
+   (
+      "Name" => "Nome da Caravana",
+      "Name_UK" => "Caravan Name",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Search" => TRUE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+   ),
    "Caravans_NParticipants" => array
    (
       "Name" => "No. de Participantes",

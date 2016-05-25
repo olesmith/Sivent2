@@ -6,6 +6,18 @@ include_once("Table/Update.php");
 class CaravaneersTable extends CaravaneersTableUpdate
 {
     //*
+    //* function Caravaneers_Table_ReadN, Parameter list: $inscription
+    //*
+    //* Read currently allocated Caravaneers for $inscription.
+    //*
+
+    function Caravaneers_Table_ReadN($inscription)
+    {
+        return 
+            $this->Sql_Select_NHashes(array("Friend" => $inscription[ "Friend" ]));
+    }
+
+    //*
     //* function Caravaneers_Table_Read, Parameter list: $inscription
     //*
     //* Read currently allocated Caravaneers for $inscription.
@@ -14,7 +26,7 @@ class CaravaneersTable extends CaravaneersTableUpdate
     function Caravaneers_Table_Read($inscription)
     {
         return 
-            $this->Sql_Select_Hashes(array("Friend" => $inscription[ "Friend" ]),array(),"ID");
+            $this->Sql_Select_Hashes(array("Friend" => $inscription[ "Friend" ]),array(),"ID",TRUE);
     }
 
     //*
@@ -107,7 +119,7 @@ class CaravaneersTable extends CaravaneersTableUpdate
         $caravaneers=$this->Caravaneers_Table_Sort($caravaneers);
         $min=$this->Event("Caravans_Min");
 
-        $this->Caravaneers_Table_Inscription_Update($inscription,count($caravaneers));
+        $this->Caravaneers_Table_Inscription_Update($inscription);
         
         $table=array();
         for ($n=1;$n<=$this->Event("Caravans_Max");$n++)
@@ -129,7 +141,9 @@ class CaravaneersTable extends CaravaneersTableUpdate
                    array
                    (
                       $this->HR().
-                      "Min. ".$min.
+                      $this->MyLanguage_GetMessage("Caravaneers_Minimum_Title").
+                      ": ".
+                      $min.
                       $this->HR()
                    )
                 );
@@ -150,7 +164,11 @@ class CaravaneersTable extends CaravaneersTableUpdate
         $buttons="";
         if ($edit==1) { $buttons=$this->Buttons(); }
         
-       return
+        $n=$this->Caravaneers_Table_ReadN($inscription);
+
+        if ($n==0 && $edit!=1) { return ""; }
+        
+        return
             $this->H(3,$this->MyLanguage_GetMessage("Caravaneers_Table_Title")).
             $buttons.
             $this->Html_Table

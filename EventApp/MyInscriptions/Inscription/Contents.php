@@ -31,25 +31,45 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
                 $this->Messages("Contents__Title_UnEditable_Since").
                 " ".$date; 
         }
-        
-        return
-            $this->InscriptionFriendTable(0,$this->Friend).
-            $this->Anchor("TOP").
-            $this->FrameIt
+
+        $table=
+            array_merge
             (
-               $this->InscriptionHtmlTable
+               $this->InscriptionFriendTable(0,$this->Friend),
+               $this->InscriptionTable
                (
                   $edit,
                   $buttons,
                   $this->Inscription,
-                  $this->H(1,$title1).
-                  $this->H(3,$title2),
                   TRUE
                )
+             );
+        
+        
+        return
+            $this->Anchor("TOP").
+            $this->FrameIt
+            (
+               $this->Html_Table("",$table)
             ).
             "";
     }
 
+    //*
+    //* function InscriptionFormEdit, Parameter list: $edit
+    //*
+    //* Checks whether inscription form is editable.
+    //*
+
+    function InscriptionFormEdit($edit)
+    {
+        //Prevent edit, if Event EditDate surpassed.
+        if ($this->Event("EditDate")<$this->MyTime_2Sort()) { $edit=0; }
+
+        return $edit;
+    }
+
+    
     //*
     //* function InscriptionForm, Parameter list: $edit
     //*
@@ -60,8 +80,7 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
     {
         $args=$this->CGI_URI2Hash();
 
-        //Prevent edit, if Event EditDate surpassed.
-        if ($this->Event("EditDate")<$this->MyTime_2Sort()) { $edit=0; }
+        $edit=$this->InscriptionFormEdit($edit);
        
         return
             $this->Form_Run

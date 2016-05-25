@@ -133,25 +133,7 @@ class InscriptionsCollaborations extends InscriptionsForm
         return $edit;
     }
     
-    //*
-    //* function Inscription_Collaborations_Table_DateSpan, Parameter list: $edit
-    //*
-    //* Returns date span title.
-    //*
-
-    function Inscription_Collaborations_Table_DateSpan()
-    {
-        return
-            $this->H
-            (
-               4,
-               $this->MyTime_Sort2Date($this->Event("Collaborations_StartDate")).
-               " - ".
-               $this->MyTime_Sort2Date($this->Event("Collaborations_EndDate"))
-            ).
-            "";
-    }
-    
+   
     //*
     //* function Inscription_Group_Update, Parameter list: &$item
     //*
@@ -176,7 +158,7 @@ class InscriptionsCollaborations extends InscriptionsForm
         $this->CollaboratorsObj()->Sql_Table_Structure_Update();
         
         if (empty($group)) { $group="Collaborations"; }
-        
+      
         if (empty($this->ItemDataSGroups[ $group ]))
         {
             $this->ItemDataSGroups[ $group ]=
@@ -188,9 +170,25 @@ class InscriptionsCollaborations extends InscriptionsForm
             $this->Inscription_Group_Update($group,$item);
         }
         
-        return
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->Inscription_Collaborations_Table_DateSpan().
+        $html="";
+        if ($edit==1)
+        {
+            $buttons=$this->Buttons();
+            $html.=$this->StartForm();
+        }
+
+        $html.=
+            $this->H
+            (
+               5,
+               $this->MyLanguage_GetMessage("Inscription_Period").
+               ", ".
+               $this->GetRealNameKey($this->ItemDataSGroups[ $group ]).
+               ": ".
+               $this->EventsObj()->Event_Collaborations_Inscriptions_DateSpan().
+               ". ".
+               $this->EventsObj()->Event_Collaborations_Inscriptions_Status()
+            ).
             $this->MyMod_Item_Table_Html
             (
                $this->Inscription_Collaborations_Table_Edit($edit),
@@ -199,6 +197,17 @@ class InscriptionsCollaborations extends InscriptionsForm
             ).
             $this->Inscription_Collaborations_Table_Show($edit,$item).
             "";
+        
+        if ($edit==1)
+        {
+            $html.=
+                $this->MakeHidden("Update",1).
+                $buttons.
+                $this->EndForm().
+                "";
+        }
+
+        return $this->FrameIt($html);
     }
     
     
@@ -208,14 +217,30 @@ class InscriptionsCollaborations extends InscriptionsForm
     //* Shows currently allocated collaborations for inscription in $item.
     //*
 
-    function Inscription_Collaborations_Table_Show($edit,$item)
+    function Inscription_Collaborations_Table_Show($edit,$item,$msgkey="")
     {
+        if (empty($msgkey)) { $msgkey="Collaborators_User_Inscription_Title"; }
+        
         $this->CollaborationsObj()->Sql_Table_Structure_Update();
         $this->CollaboratorsObj()->Sql_Table_Structure_Update();
 
         return
-            $this->CollaboratorsObj()->Collaborators_User_Table_Show($edit,$item[ "Friend" ]);
+            $this->CollaboratorsObj()->Collaborators_User_Table_Show($edit,$item[ "Friend" ],$msgkey);
     }
+    
+    //*
+    //* function Inscription_Event_Collaborations_Table, Parameter list: $edit
+    //*
+    //* Creates a table listing inscription colaborations.
+    //*
+
+    function Inscription_Event_Collaborations_Table($edit,$inscription)
+    {
+        return
+            $this->Inscription_Collaborations_Table_Show($edit,$inscription,"Collaborators_User_Table_Title").
+            "";
+    }
+
 }
 
 ?>

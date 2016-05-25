@@ -96,6 +96,32 @@ class EventsCollaborations extends EventsCreate
         return $datas;
     }
     
+    //*
+    //* function Event_Collaborations_Inscriptions_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Collaborations_Inscriptions_DateSpan($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Interval($event,"Collaborations_StartDate","Collaborations_EndDate");
+    }
+    
+    //*
+    //* function Event_Collaborations_Inscriptions_Status, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Collaborations_Inscriptions_Status($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Status($event,"Collaborations_StartDate","Collaborations_EndDate");
+    }
+    
 
      //*
     //* function Event_Collaborations_Table, Parameter list: $edit,$item,$group

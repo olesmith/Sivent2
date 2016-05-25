@@ -5,6 +5,7 @@ array
       "Name" => "Caravanas",
       "ShortName" => "Caravanas",
       "Title" => "Caravanas",
+      "SelectCheckBoxes"  => 2,
       
       "Name_UK" => "Caravans",
       "ShortName_UK" => "Caravans",
@@ -24,6 +25,7 @@ array
       "Search" => FALSE,
       "Compulsory"  => TRUE,
    ),
+   
    "Caravans_StartDate" => array
    (
       "Name" => "Inscrições Início",
@@ -105,5 +107,88 @@ array
       
       "Compulsory" => FALSE,
       "Search" => FALSE,
+   ),
+   "Caravans_Timeload" => array
+   (
+      "Name" => "CH Padrão",
+      "Title" => "CH Padrão (Cert)",
+      "Default" => "10",
+      
+      "Name_UK" => "Default Timeload",
+      "Title_UK" => "Default Timeload (Cert)",
+      "Sql" => "INT",
+      "Size" => 2,
+      "Regexp" => '^\d+$',
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+   ),
+   "Certificates_Caravaneers_Latex" => array
+   (
+      "Name" => "Caravaneiros, Certificado (LaTeX)",
+      "Name_UK" => "Caravaneers, Certificate (LaTeX)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x10",
+
+      "Search" => FALSE,
+      "Default" =>
+
+      "\\begin{Large}\n".
+      "Certificamos que:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Caravaneer_Name}}\\end{center}\n\n".
+      
+      "\\vspace{0.25cm}\n\n".
+
+      "participou, como participante de caravana, do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
+      "no dia \\textit{#Event_DateSpan}. Carga horária: \\textbf{#Caravaneer_TimeLoad horas}.\n".
+      "\\end{Large}\n\n".
+      
+      "",
+
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+   "Certificates_Caravaneers_Latex_UK" => array
+   (
+      "Name" => "Caravaneiros, Certificado (UK)",
+      "Name_UK" => "Caravaneers, Certificate (UK)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x10",
+
+      "Search" => FALSE,
+      "Default" =>
+      
+      "\\begin{Large}\n".
+      "We hereby certify, that:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Caravaneer_Name}}\\end{center}\n".
+      "\\vspace{0.25cm}\n\n".
+
+      "participated in \\textbf{#Event_Name}, #Event_Title, held at \\textbf{#Event_Place},\n".
+      "at the \\textit{#Event_DateSpan} as a caravan participant. Timeload: \\textbf{#Caravaneer_TimeLoad hours}.\n".
+      "\\end{Large}\n\n".
+      
+      "",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
    ),
 );

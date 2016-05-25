@@ -106,7 +106,7 @@ class Latex extends CSV
     //* Returns contents of latex skel file name including SkelPath
     //* 
 
-    function GetLatexSkel($latexdoc,$nocomment=FALSE)
+    function GetLatexSkel($latexdoc,$comment=FALSE)
     {
         $latex="";
 
@@ -124,15 +124,15 @@ class Latex extends CSV
             
             if (!file_exists($latexdoc))
             {
-                $latexdoc=join("/",array($this->LatexSkelPath(),$latexdoc));
+                $latexdoc=join("/",array($path,$latexdoc));
             }
             
             if (is_file($latexdoc))
             {
-                if (!$nocomment)
+                if ($comment)
                 {
                     $latex.=
-                        "%%%! Skel File: $latexdoc\n";
+                        "%%%%%%%! Skel File: $latexdoc\n";
                 }
 
                 $latex.=
@@ -140,7 +140,7 @@ class Latex extends CSV
             }
             else
             {
-                $latex.="%%%!! Not found: ".$latexdoc;
+                $latex.="%%%%%%%!! Not found: ".$latexdoc;
             }
         }
 

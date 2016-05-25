@@ -63,8 +63,8 @@ array
 
    "Certificates_Watermark" => array
    (
-      "Name" => "Marca de Agua",
-      "Name_UK" => "Watermark",
+      "Name" => "Arte, Marca de Agua",
+      "Name_UK" => "Graphics, Watermark",
 
       "Sql" => "FILE",
       "Extensions" => array("png","jpg"),

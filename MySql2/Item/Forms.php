@@ -177,12 +177,20 @@ class ItemForms extends Fields
  
                 $table=$this->ItemTableDataSGroup($edit,$item,$group);
 
-
                 if (!empty($table[0]))
                 {
                     if (!empty($groupdef[ "Single" ]))
                     {
-                        array_push($tables,$table);
+                        if (count($row)>0)
+                        {
+                            array_push($tables,$row,$table);
+                            $row=array();
+                        }
+                        else
+                        {
+                            array_push($tables,$table);
+                        }
+                        
                         if ($edit==1 && !empty($buttons))
                         {
                             array_push($tables,$buttons);
@@ -191,17 +199,16 @@ class ItemForms extends Fields
                     }
                     
                     array_push($row,$table);
-                 }
-
-                if (count($row)==2 || !empty($groupdef[ "Single" ]))
-                {
-                    array_push($tables,$row);
-                    if ($edit==1 && !empty($buttons))
+                    if (count($row)==2 || !empty($groupdef[ "Single" ]))
                     {
-                        array_push($tables,$buttons);
-                    }
+                        array_push($tables,$row);
+                        if ($edit==1 && !empty($buttons))
+                        {
+                            array_push($tables,$buttons);
+                        }
                     
-                    $row=array();
+                        $row=array();
+                    }
                 }
             }
 

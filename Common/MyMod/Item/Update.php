@@ -7,6 +7,21 @@ trait MyMod_Item_Update
     //* Updates item according to CGI.
     //*
 
+    function MyMod_Item_Update_SGroup($item,$group,$prepost="",$postprocess=TRUE)
+    {
+        return $this->MyMod_Item_Update_CGI
+        (
+           $item,
+           $this->GetGroupDatas($group,TRUE),
+           $prepost,
+           $postprocess
+        );
+    }
+    
+    //*
+    //* Updates item according to CGI.
+    //*
+
     function MyMod_Item_Update_CGI($item=array(),$datas=array(),$prepost="",$postprocess=TRUE)
     {
         if (count($item)==0) { $item=$this->ItemHash; }
@@ -27,6 +42,7 @@ trait MyMod_Item_Update
         {
             $rrdatas=$rrdata;
             if (!is_array($rrdata)) { $rrdatas=array($rrdata); }
+            
             foreach ($rrdatas as $data)
             {
                 $access=$this->MyMod_Data_Access($data,$item);
@@ -58,7 +74,6 @@ trait MyMod_Item_Update
                        )
                 {
                     $newvalue=$this->TestUpdateItem($data,$item,FALSE,$prepost);
-
 
                     $default=$this->ItemData($data,"Default");
                     if (empty($newvalue) && !empty($default))

@@ -338,4 +338,20 @@ array
         "Advisor"    => 0,
         "Handler"    => "ShowDir_Handle",
       ),
+     "Inscriptions" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscriptions&Event=#Event",
+        "Title"    => "Gerenciar Inscrições",
+        "Title_UK" => "Manage Inscriptions",
+        "Name"     => "Inscrições",
+        "Name_UK"     => "Inscriptions",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+      ),
     );

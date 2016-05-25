@@ -35,9 +35,12 @@ class MyInscriptionsInscriptionSGroups extends MyInscriptionsInscriptionMessages
             foreach ($rgroups as $group)
             {
                 $redit=$edit;
-                if ($edit==1) { $redit=$this->ItemDataSGroups[ $group ][ $profile ]-1; }
+                if ($this->MyMod_Item_Group_Allowed($this->ItemDataSGroups[ $group ]))
+                {
+                    if ($edit==1) { $redit=$this->ItemDataSGroups[ $group ][ $profile ]-1; }
             
-                $groups[ $row ][ $group ]=$redit;
+                    $groups[ $row ][ $group ]=$redit;
+                }
             }
         }
 

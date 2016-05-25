@@ -281,6 +281,7 @@ class MyEvents extends MyEventsHandle
 
     function EventHorisontalMenu($event)
     {
+        return "";
         if (empty($event)) { return ""; }
         
         return 

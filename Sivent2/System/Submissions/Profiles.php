@@ -109,6 +109,8 @@ array
          ),
          'Coordinator' => array
          (
+            "Event" => 1,
+            "Areas" => 1,
          ),
          'Admin' => array
          (

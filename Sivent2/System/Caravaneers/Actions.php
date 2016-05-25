@@ -22,7 +22,7 @@ array
          "Admin" => 1,
          "Friend"     => 0,
          "Coordinator" => 1,
-         //"AccessMethod" => "CheckShowAccess",
+         "AccessMethod" => "CheckShowAccess",
       ),
       'Edit' => array
       (
@@ -31,7 +31,7 @@ array
          "Admin" => 1,
          "Friend"     => 0,
          "Coordinator" => 1,
-         //"AccessMethod" => "CheckEditAccess",
+         "AccessMethod" => "CheckEditAccess",
       ),
       'EditList' => array
       (
@@ -48,6 +48,25 @@ array
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
-         //"AccessMethod"  => "CheckDeleteAccess",
+         "AccessMethod"  => "CheckDeleteAccess",
       ),
+   "GenCert" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravaneers&Action=GenCert&Latex=1&ID=#ID",
+      "Title"    => "Gerar Certificado",
+      "Title_UK" => "Generate Certificate",
+      "Name"     => "Certificado",
+      "Name_UK"   => "Certificado",
+      
+      "Handler"   => "Caravaneer_Handle_Certificate_Generate",
+      "AccessMethod"  => "CheckCertAccess",
+
+      "Icon"   => "print_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
 );

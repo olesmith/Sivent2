@@ -56,21 +56,6 @@ trait ItemForm_SGroups
         }
 
         return $groups;
-
-        /* $groups=$this->PageArray(array_keys($this->ItemDataSGroups),2); */
-
-        /* $sgroups=array(); */
-        /* foreach (array_keys($groups) as $id1) */
-        /* { */
-        /*     $sgroups[ $id1 ]=array(); */
-        /*     foreach (array_keys($groups[ $id1 ]) as $id2) */
-        /*     { */
-        /*         $group=$groups[ $id1 ][ $id2 ]; */
-        /*         $sgroups[ $id1 ][ $group ]=$edit; */
-        /*     } */
-        /* } */
-
-        /* return $sgroups; */
     }
 
     //*

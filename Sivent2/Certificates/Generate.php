@@ -130,7 +130,7 @@ class Certificates_Generate extends Certificates_Latex
         $key="Certificates_Latex_Sep_Horisontal";
         $hspace=$this->Event($key);
 
-        $width=22-2*$hspace;
+        $width=28-2*$hspace;
         return
             "\n\n\\hspace{1cm}\\vspace{".$vspace."cm}\n\n".
             $this->Latex_Minipage($width,$text,"c","l").
@@ -183,7 +183,7 @@ class Certificates_Generate extends Certificates_Latex
 
     function Certificate_Read($cert)
     {
-        foreach (array("Event","Friend","Inscription","Submission","Collaborator","Collaboration","Caravan") as $data)
+        foreach (array("Event","Friend","Inscription","Submission","Collaborator","Collaboration","Caravaneer") as $data)
         {
             $cert[ $data."_Hash" ]=array();
             if (!empty($cert[ $data ]))
@@ -194,6 +194,8 @@ class Certificates_Generate extends Certificates_Latex
                     (
                        array("ID" => $cert[ $data ],)
                     );
+
+                
             }
         }
 
@@ -208,96 +210,6 @@ class Certificates_Generate extends Certificates_Latex
         return $cert;
     }
 
-    //*
-    //* function Certificate_Latex_Filter, Parameter list: $cert,$inscription=array(),$friend=array(),$eventkey=""
-    //*
-    //* Generates cert.
-    //*
-
-    function Certificate_Latex_Filter($cert,$latex)
-    {
-        $latex=$this->FilterHash($latex,$cert[ "Event_Hash" ],"Event_");
-        $latex=$this->FilterHash($latex,$cert[ "Friend_Hash" ],"Friend_");
-        $latex=$this->FilterHash($latex,$cert[ "Inscription_Hash" ],"Inscription_");
-        $latex=$this->FilterHash($latex,$cert[ "Collaboration_Hash" ],"Collaboration_");
-        $latex=$this->FilterHash($latex,$cert[ "Collaborator_Hash" ],"Collaborator_");
-        $latex=$this->FilterHash($latex,$cert[ "Submission_Hash" ],"Submission_");
-        $latex=$this->FilterHash($latex,$cert,"Certificate_");
-        $latex=$this->FilterHash($latex,$cert[ "Inscription_Hash" ]);
-
-        return $latex;
-    }
-
-    
-    //*
-    //* function Certificate_Latex, Parameter list: $cert,$inscription=array(),$friend=array(),$eventkey=""
-    //*
-    //* Generates cert.
-    //*
-
-    function Certificate_Latex(&$cert)
-    {
-        $cert=$this->Certificate_Read($cert);
-
-        $latex=
-            //"\\begin{center}\n".
-            $this->Certificate_Text($cert).
-            "\n\n".
-            $this->Certificate_Signatures(18).
-            "\n\n".
-            //"\\end{center}\n".
-            $this->Certificate_Verification_Info($cert).
-            "\n\n".
-            "\n\n\\clearpage\n\n".
-            "";
-
-        $latex=$this->Certificate_Latex_Filter($cert,$latex);        
-
-        $this->Certificate_Set_Generated($cert);
-
-        return $latex;
-    }
-    
-    //*
-    //* function Certificates_Latex, Parameter list: $certs,&$name
-    //*
-    //* Generates cert.
-    //*
-
-    function Certificates_Latex($certs=array(),&$name)
-    {
-        if (empty($certs)) { $certs=$this->Certificates_Validate_Read(); }
-        
-        $latex="";
-        foreach ($this->Certificates_Validate_Read() as $cert)
-        {
-            $latex.=$this->Certificate_Generate($cert);
-            $name=$cert[ "Name" ];
-        }
-
-        return $latex;
-    }
-    
-    //*
-    //* function Certificate_Generate, Parameter list: &$cert
-    //*
-    //* Generates $cert.
-    //*
-
-    function Certificate_Generate(&$cert)
-    {
-        $this->Certificate_Set_Generated($cert);
-
-        return $this->FilterHash
-        (
-           $this->FilterHash
-           (
-              $this->Certificate_Latex($cert),
-              $this->Event(),"Event_"
-           ),
-           $this->Unit(),"Unit_"
-        );
-    }
 
     //*
     //* function Certificates_Generate, Parameter list: $certs

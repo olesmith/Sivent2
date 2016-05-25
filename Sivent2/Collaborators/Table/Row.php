@@ -50,11 +50,12 @@ class CollaboratorsTableRow extends CollaboratorsTableCell
                $row,
                $this->MyMod_Items_Table_Row
                (
-                  0,
+                  1,
                   0,
                   $item,
                   $datas,
-                  $plural=TRUE
+                  $plural=TRUE,
+                  $item[ "ID" ]."_"
                )
            );
         }

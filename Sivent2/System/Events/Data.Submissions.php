@@ -4,12 +4,13 @@ array
    (
       "Name" => "Submissões",
       "Name_UK" => "Submissions",
-      
+      "SelectCheckBoxes"  => 2,
+
       "Sql" => "ENUM",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -22,16 +23,14 @@ array
    ),
    "Submissions_StartDate" => array
    (
-      "Name" => "Submissões Início",
-      //"ShortName" => "Inscrições início",
-      "Title" => "Submissões Início, Data",
+      "Name" => "Inscrições Início",
+      "Title" => "Submissões, Inscrições Início, Data",
       
-      "Name_UK" => "Submissions Begins",
-      //"ShortName_UK" => "Inscriptions begins",
-      "Title_UK" => "Submissions Begins, Date",
+      "Name_UK" => "Inscriptions Begins",
+      "Title_UK" => "Submission Inscriptions Begins, Date",
       "Sql" => "INT",
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -64,16 +63,14 @@ array
    ),
    "Submissions_EndDate" => array
    (
-      "Name" => "Submissões Até",
-      //"ShortName" => "Inscrições até",
-      "Title" => "Submissões Até, Data",
+      "Name" => "Inscrições Até",
+      "Title" => "Submissões, Inscrições Até, Data",
       
-      "Name_UK" => "Submissions Untill",
-      //"ShortName_UK" => "Inscriptions untill",
-      "Title_UK" => "Submissions Untill, Date",
+      "Name_UK" => "Inscriptions Untill",
+      "Title_UK" => "Submission Inscriptions Untill, Date",
       "Sql" => "INT",
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -92,7 +89,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,

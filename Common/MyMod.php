@@ -27,7 +27,7 @@ include_once("MyMod/Language.php");
 include_once("MyMod/Mail.php");
 
 trait MyMod
-{
+{    
     use 
         _accessor_, //see SAdE/index.php
         MyFile,MyDir,MyHash,Accessor,MyActions,Sql,DB,CallStack;

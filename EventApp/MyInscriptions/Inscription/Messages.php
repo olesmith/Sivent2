@@ -24,7 +24,7 @@ class MyInscriptionsInscriptionMessages extends MyInscriptionsInscriptionRead
          
         }
 
-        return array($this->B("Status:"),$msg);
+        return array($this->B($this->MyLanguage_GetMessage("Friend_Data_Status_Title").":"),$msg);
     }
 
     //*

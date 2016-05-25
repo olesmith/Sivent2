@@ -20,6 +20,8 @@ include_once("Inscriptions/Handle.php");
 class Inscriptions extends InscriptionsHandle
 {
     var $Certificate_Type=1;
+
+    var $Load_Other_Data=TRUE;
     
     //*
     //* function Inscriptions, Parameter list: $args=array()
@@ -71,16 +73,24 @@ class Inscriptions extends InscriptionsHandle
     function PreProcessItemDataGroups()
     {
         parent::PreProcessItemDataGroups();
-        
+
         $event=$this->Event();
         if ($this->EventsObj()->Event_Certificates_Has($event))
         {
             array_push($this->ItemDataSGroupFiles,"SGroups.Certificates.php");
         }
+
+        if (!$this->Load_Other_Data) { return; }
+    
         
         if ($this->EventsObj()->Event_Collaborations_Has($event))
         {
             array_push($this->ItemDataSGroupFiles,"SGroups.Collaborations.php");
+        }
+        
+         if ($this->EventsObj()->Event_Submissions_Has($event))
+        {
+            array_push($this->ItemDataSGroupFiles,"SGroups.Submissions.php");
         }
         
         if ($this->EventsObj()->Event_Caravans_Has($event))
@@ -140,19 +150,27 @@ class Inscriptions extends InscriptionsHandle
         $event=$this->Event();
         if ($this->EventsObj()->EventCertificates($event))
         {
-            array_unshift($this->ItemDataFiles,"Data.Certificate.php");
+            array_push($this->ItemDataFiles,"Data.Certificate.php");
 
             $this->CertificatesObj()->ItemData("ID");
         }
         
+        if (!$this->Load_Other_Data) { return; }
+    
         if ($this->EventsObj()->Event_Collaborations_Has($event))
         {
-            array_unshift($this->ItemDataFiles,"Data.Collaborations.php");
+            array_push($this->ItemDataFiles,"Data.Collaborations.php");
+        }
+        
+        if ($this->EventsObj()->Event_Submissions_Has($event))
+        {
+            array_push($this->ItemDataFiles,"Data.Submissions.php");
         }
         
         if ($this->EventsObj()->Event_Caravans_Has($event))
         {
-            array_unshift($this->ItemDataFiles,"Data.Caravans.php");
+            array_push($this->ItemDataFiles,"Data.Caravans.php");
+            $this->CaravaneersObj()->ItemData("ID");
         }
     }
     
@@ -387,7 +405,7 @@ class Inscriptions extends InscriptionsHandle
     {
         if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Caravaneers_Cell_Noof_Title"); }
         
-        $ninscribed=$this->CaravaneersObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ]));
+        $ninscribed=$this->CaravaneersObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ],"Status" => 1));
 
         if (empty($ninscribed)) { $ninscribed="-"; }
         

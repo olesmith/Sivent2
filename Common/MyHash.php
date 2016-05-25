@@ -255,7 +255,7 @@ trait MyHash
     //* Tests if $hash, as an ItemData, Actions entry (or other hash), is
     //* permitted for current user.
     //*
-    //* Consdered are LoginType and Profile keys. 
+    //* Considered are LoginType and Profile keys. 
     //*
 
     function MyHash_Hash2Access($hash,$values=array(1))

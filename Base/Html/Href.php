@@ -59,6 +59,9 @@ class HtmlHref extends HtmlTable
         $href=preg_replace('/&/',$this->URL_Args_Separator,$href);
     }
 
+    $args=$this->CGI_URI2Hash($href);
+    $href="?".$this->CGI_Hash2URI($args);
+    
     $href=preg_replace('/index.php/',"",$href);
 
     if (!empty($anchor))

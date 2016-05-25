@@ -81,6 +81,7 @@ class SubmissionsAccess extends ModulesCommon
             }
         }
 
+        
         return $res;
     }
     

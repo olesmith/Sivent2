@@ -132,18 +132,18 @@ class EventApp extends MyEventAppMail
     {
     }
 
-    //*
-    //* function PreInterfaceMenu, Parameter list: 
-    //*
-    //* Called by modules TInterface menu (via ApplicationObj), before printing anything.
-    //* Displays App and Unit info.
-    //*
+    /* //\* */
+    /* //\* function PreInterfaceMenu, Parameter list:  */
+    /* //\* */
+    /* //\* Called by modules TInterface menu (via ApplicationObj), before printing anything. */
+    /* //\* Displays App and Unit info. */
+    /* //\* */
 
-    function PreInterfaceMenu()
-    {
-        echo
-            $this->AppInfo();
-    }
+    /* function PreInterfaceMenu_disabled() */
+    /* { */
+    /*     echo */
+    /*         $this->AppInfo(); */
+    /* } */
     
     //*
     //* sub MyApp_Titles, Parameter list:
@@ -321,42 +321,25 @@ class EventApp extends MyEventAppMail
 
     function AppInfo()
     {
-        $table=$this->UnitsObj()->MyMod_Item_Table
-        (
-           0,
-           $this->Unit(),
-           array(array("Title","Url","Email"))
-        );
-
-        array_unshift
-        (
-           $table,
-           array($this->H(3,$this->Unit("Title")))
-        );
-
+        $table=
+            array_merge
+            (
+               $this->UnitInfoRow(),
+               $this->UnitsObj()->MyMod_Item_Table
+               (
+                  0,
+                  $this->Unit(),
+                  array(array("Title","Url","Email"))
+               )
+            );
+       
         $event=$this->Event();
         if (!empty($event))
         {
             $table=array_merge
             (
                $table,
-               array($this->H(3,$this->GetRealNameKey($event,"Title"))),
-               $this->EventsObj()->MyMod_Item_Table
-               (
-                  0,
-                  $event,
-                  array
-                  (
-                     array
-                     (
-                        "Name","Date","Announcement"
-                     ),
-                     array
-                     (
-                        "StartDate","EndDate","EditDate",
-                     )
-                  )
-               )
+               $this->AppEventInfoTable($event)
             );            
         }
 
@@ -374,6 +357,94 @@ class EventApp extends MyEventAppMail
             $this->BR();
     }
 
+    //*
+    //* function UnitInfoRow Parameter list: $unit=array()
+    //*
+    //* Creates row with unit logos e title.
+    //*
+
+    function UnitInfoRow($unit=array())
+    {
+        if (empty($unit)) { $unit=$this->Unit(); }
+        
+        $logos=$this->UnitLogos($unit);
+ 
+        return
+            array
+            (
+               array
+               (
+                  $this->MultiCell($logos[0],2),
+                  $this->MultiCell($this->H(3,$unit[ "Title" ]),2),
+                  $this->MultiCell($logos[1],2),
+               ),
+            );
+    }
+
+    
+    //*
+    //* function UnitLogos, Parameter list: $unit=array()
+    //*
+    //* Returns unit logos as list of (2) images..
+    //*
+
+    function UnitLogos($unit=array())
+    {
+        if (empty($unit)) { $unit=$this->Unit(); }
+
+        $imgs=array();
+        for ($no=1;$no<=2;$no++)
+        {
+            $unit[ "HtmlLogoHeight" ]=$this->Interface_Icons[ $no ][ "Height" ];
+            $unit[ "HtmlLogoWidth" ]=$this->Interface_Icons[ $no ][ "Width" ];
+            
+            $img=$this->UnitsObj()->MyMod_Data_Field_Logo($unit,"HtmlIcon".$no);
+            if (!empty($img))
+            {
+                array_push($imgs,$img);
+            }
+        }
+
+        //Double if no second
+        if (count($imgs)==1) { array_push($imgs,$imsgs[0]); }
+
+        return $imgs;
+    }
+    
+    //*
+    //* function AppEventInfoTable, Parameter list: $event
+    //*
+    //* Creates application info table: Unit and Event, if defined.
+    //*
+
+    function AppEventInfoTable($event)
+    {
+        $tabledata=
+            array
+            (
+               array
+               (
+                  "Name","Date","Announcement"
+               ),
+               array
+               (
+                  "StartDate","EndDate","EditDate",
+               ),
+            );
+        return
+            array_merge
+            (
+               array($this->H(3,$this->GetRealNameKey($event,"Title"))),
+               $this->EventsObj()->MyMod_Item_Table
+               (
+                  0,
+                  $event,
+                  $tabledata
+               )
+            );            
+    }
+
+    
     //*
     //* function HandleFriend, Parameter list: 
     //*

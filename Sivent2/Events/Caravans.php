@@ -80,13 +80,33 @@ class EventsCaravans extends EventsCollaborations
 
     function Event_Caravans_Table($edit,$item,$group)
     {
-        return 
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->MyMod_Item_Table_Html
+        return
+            array_merge
             (
-               $edit,
-               $item,
-               $this->Event_Caravans_GroupDatas($item,$group)
+               array($this->H(3,$this->GetRealNameKey($this->ItemDataSGroups($group)))),
+               
+               $this->MyMod_Item_Table
+               (
+                  $edit,
+                  $item,
+                  $this->Event_Caravans_GroupDatas($item,$group)
+               )
+            );
+    }
+    
+    //*
+    //* function Event_Caravans_Table_Html, Parameter list: $edit,$item,$group
+    //*
+    //* Creates info table concerning Certificates.
+    //*
+
+    function Event_Caravans_Table_Html($edit,$item,$group)
+    {
+        return
+            $this->Html_Table
+            (
+               "",
+               $this->Event_Caravans_Table($edit,$item,$group)
             ).
             "";
     }

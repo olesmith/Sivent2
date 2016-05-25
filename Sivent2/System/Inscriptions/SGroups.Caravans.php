@@ -6,14 +6,14 @@ array
        "Name_UK" => "Inscriptions for Caravans",
        "Data" => array
        (
-          "Caravans","Caravans_NParticipants","Caravans_Status",
+          "Caravans","Caravans_Name","Caravans_NParticipants","Caravans_Status",
         ),
 
-       "Person" => 1,
-       "Public" => 1,
-       "Admin" => 2,
-       "Friend"     => 2,
-       "Coordinator" => 2,
+       "Person" => 0,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 0,
+       "Coordinator" => 1,
        //"GenTableMethod" => "Inscription_Caravans_Table",
      ),
 );

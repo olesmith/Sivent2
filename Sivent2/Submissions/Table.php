@@ -45,8 +45,9 @@ class SubmissionsTable extends SubmissionsAccess
 
     function Submissions_Table_Data()
     {
+        //return $this->GetRealNameKey($this->ItemDataGroups[ "Submission" ],"Data");
+        
         return $this->GetGroupDatas("Submission",FALSE);
-        return $this->ItemDataGroups[ "Submission" ][ "Data" ];
     }
     
    
@@ -61,6 +62,25 @@ class SubmissionsTable extends SubmissionsAccess
         return $this->SortList($submissions,array("Title"));
     }
     
+    //*
+    //* function Submissions_Table_Update, Parameter list: $submissions
+    //*
+    //* Updates Submissions
+    //*
+
+    function Submissions_Table_Update($inscription,$submissions,$datas)
+    {
+        $n=1;
+        $table=array();
+        foreach ($submissions as $id => $submission)
+        {
+            $submissions[ $id ]=$this->MyMod_Item_Update_CGI($submission,$datas,"No_".$n."_");
+            $n++;
+        }
+        
+        return $submissions;
+    }
+    
      //*
     //* function Submissions_Table, Parameter list: $edit,&$inscription
     //*
@@ -70,7 +90,8 @@ class SubmissionsTable extends SubmissionsAccess
     function Submissions_Table($edit,&$inscription)
     {
         $submissions=$this->Submissions_Table_Read($inscription);
-
+        $submissions=$this->Submissions_Table_Sort($submissions);
+        
         $datas=$this->Submissions_Table_Data();
 
         $empty=array
@@ -85,12 +106,12 @@ class SubmissionsTable extends SubmissionsAccess
         
         if ($edit==1 && $this->CGI_POSTint("Update")==1)
         {
-            $submissions=$this->Submissions_Table_Update($inscription,$submissions,$empty);
+            $submissions=$this->Submissions_Table_Update($inscription,$submissions,$datas);
         }
         
         $n=1;
         $table=array();
-        foreach ($this->Submissions_Table_Sort($submissions) as $id => $submission)
+        foreach ($submissions as $id => $submission)
         {
             array_push($table,$this->Submissions_Table_Row($edit,$inscription,$n++,$submission,$datas));
         }
@@ -123,36 +144,65 @@ class SubmissionsTable extends SubmissionsAccess
 
     function Submissions_Table_Show($edit,&$inscription)
     {
-        $buttons="";
-        if ($edit==1) { $buttons=$this->Buttons(); }
-        
+        $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $inscription[ "Friend" ],array("Name","Email")));
 
-        $msg=$this->MyLanguage_GetMessage("Submissions_Inscriptions_Closed");
-        if ($this->EventsObj()->Event_Submissions_Inscriptions_Open())
+        $startform="";
+        $endform="";
+        if ($edit==1)
         {
-            $msg=$this->MyLanguage_GetMessage("Submissions_Inscriptions_Open");
+            $startform=
+                $this->StartForm().
+                $this->Buttons().
+                "";
+            $endform =
+                $this->MakeHidden("Update",1).
+                $this->Buttons().
+                $this->EndForm().
+                "";
         }
 
         $action=$this->MyActions_Entry("Add",array(),TRUE);
         if (!empty($action))
         {
             $action=$this->Html_BR().$this->Html_BR().$action;
-            
         }
         
         return
-            $this->H
-            (
-               3,
-               $this->MyLanguage_GetMessage("Submissions_Inscriptions_Table_Title").
-               " ".
-               $msg.
-               $action
-            ).
-            $buttons.
+                $this->H
+                (
+                   3,
+                   $this->MyLanguage_GetMessage("Submissions_User_Table_Title").
+                   ": ".
+                   $this->FriendsObj()->FriendID2Name($inscription[ "Friend" ])
+                ).
+                $this->H
+                (
+                   5,
+                   $this->MyLanguage_GetMessage("Inscription_Period").
+                   ": ".
+                   $this->EventsObj()->Event_Collaborations_Inscriptions_DateSpan().
+                   ". ".
+                   $this->EventsObj()->Event_Collaborations_Inscriptions_Status()
+                ).
+            $startform.
             $this->Submissions_Table_Html($edit,$inscription).
-            $buttons.
+            $endform.
             "";
+    }
+    
+    //*
+    //* function Collaborators_Friend_Submissions_Handle, Parameter list: ()
+    //*
+    //* Shows currently allocated Submissions for inscription in .
+    //*
+
+    function Collaborators_Friend_Submissions_Handle()
+    {
+        $userid=$this->CGI_GETint("Friend");
+        $inscription=$this->Sql_Select_Hash(array("Friend" => $userid));
+
+        echo
+            $this->Submissions_Table_Show(1,$inscription);
     }
 }
 

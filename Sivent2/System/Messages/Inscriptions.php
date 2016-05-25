@@ -1,5 +1,10 @@
 array
 (
+   "Inscription_Period" => array
+   (
+      "Name" => "Período de Inscrições",
+      "Name_UK" => "Inscriptions Period",
+   ),
    "Inscription_Inscribed" => array
    (
       "Name" => "Inscrito",
@@ -27,8 +32,8 @@ array
    ),
    "Friend_Data_Diag_OK" => array
    (
-      "Name" => "Dados Completos",
-      "Name_UK" => "Data Complete",
+      "Name" => "Dados da Inscrição Completos",
+      "Name_UK" => "Inscription Data Complete",
    ),
    "Friend_Data_Diag_Message" => array
    (
@@ -39,6 +44,11 @@ array
    (
       "Name" => "Dados Incompletos",
       "Name_UK" => "Data Incomplete",
+   ),
+   "Friend_Data_Status_Title" => array
+   (
+      "Name" => "Status da Inscrição",
+      "Name_UK" => "Inscription Status",
    ),
    "Contents__Title_Main" => array
    (
@@ -72,8 +82,8 @@ array
    ),
    "Events_Submissions_Show_Has_Name" => array
    (
-      "Name" => "Minhas Submissões",
-      "Name_UK" => "My Proposals",
+      "Name" => "Propor ou Editar Submissões",
+      "Name_UK" => "Submit or Edit Proposals ",
    ),
    "Events_Submissions_Show_Inscriptions_Name" => array
    (
@@ -96,8 +106,8 @@ array
    
    "Events_Collaborations_Show_Has_Name" => array
    (
-      "Name" => "Minhas Colaborações",
-      "Name_UK" => "My Collaborations",
+      "Name" => "Propor ou Editar Colaborações",
+      "Name_UK" => "Submit or Edit Collaborations",
    ),
    "Events_Collaborations_Show_Inscriptions_Name" => array
    (
@@ -114,6 +124,30 @@ array
       "Name" => "Colaborar com o Evento",
       "Name_UK" => "Collaborate with the Event",
    ),
+
+   "Events_Caravans_Show_Has_Name" => array
+   (
+      "Name" => "Propor ou Editar Caravana",
+      "Name_UK" => "Submit or Edit Caravan",
+   ),
+   "Events_Caravans_Show_Inscriptions_Name" => array
+   (
+      "Name" => "Inscricões para Colaborações",
+      "Name_UK" => "Collaboration Inscriptions",
+   ),
+   "Events_Caravans_Show_Has_Title" => array
+   (
+      "Name" => "Gerenciar Minhas Colaborações",
+      "Name_UK" => "Manage My Collaborations",
+   ),
+   "Events_Caravans_Show_Inscriptions_Title" => array
+   (
+      "Name" => "Colaborar com o Evento",
+      "Name_UK" => "Collaborate with the Event",
+   ),
+
+
+   
    "Inscriptions_Certificate_Generated_Title" => array
    (
       "Name" => "Gerado",

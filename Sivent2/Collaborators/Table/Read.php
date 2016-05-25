@@ -17,6 +17,27 @@ class CollaboratorsTableRead extends CollaboratorsTableRow
 
         return $collaborations;
     }
+    
+    //*
+    //* function Collaborators_User_Table_Read, Parameter list: $user
+    //*
+    //* Reads users collaborations fro db.
+    //*
+
+    function Collaborators_User_Table_Read($userid)
+    {
+        if (empty($this->Items))
+        {
+            $where=array
+            (
+               "Friend" => $userid,
+            );
+
+            $this->Items=$this->Sql_Select_Hashes($where);
+        }
+
+        return $this->Items;
+    }
 }
 
 ?>

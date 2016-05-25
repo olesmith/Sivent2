@@ -33,6 +33,7 @@
           "Collaborators",
           
           "Inscriptions",
+          "Caravans",
           "Caravaneers",
           
           "Areas",
@@ -53,7 +54,8 @@
           "Collaborations" => array("Units","Events"),
           "Collaborators" => array("Collaborations","Inscriptions"),
           "Inscriptions" => array("Datas","GroupDatas"),
-          "Caravaneers" => array("Inscriptions"),
+          "Caravans" => array("Inscriptions"),
+          "Caravaneers" => array("Caravans"),
           "Areas" => array("Events"),
           "Submissions" => array("Inscriptions","Areas"),
           "Certificates" => array("Inscriptions","Caravaneers","Collaborations","Submissions"),
@@ -285,6 +287,25 @@
 
              "ItemName_UK"   => "Caravaneer",
              "ItemsName_UK"  => "Caravaneers",
+             "ItemsNamer_UK" => "ID",
+         ),
+         "Caravans" => array
+          (
+             "SqlAccessor" => "CaravansObj",
+             "SqlObject" => "CaravansObject",
+             "SqlClass" => "Caravans",
+             "SqlFile" => "Caravans.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Inscriptions",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Caravana",
+             "ItemsName"     => "Caravanas",
+             "ItemsNamer"    => "ID",
+
+             "ItemName_UK"   => "Caravan",
+             "ItemsName_UK"  => "Caravans",
              "ItemsNamer_UK" => "ID",
          ),
          "Submissions" => array

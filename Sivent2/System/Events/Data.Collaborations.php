@@ -5,6 +5,7 @@ array
       "Name" => "Colaborações",
       "ShortName" => "Colaborações",
       "Title" => "Colaborações",
+      "SelectCheckBoxes"  => 2,
       
       "Name_UK" => "Collaborations",
       "ShortName_UK" => "Collaborations",
@@ -13,7 +14,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -34,7 +35,7 @@ array
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -56,7 +57,7 @@ array
       "Title_UK" => "Inscriptions Begins, Date",
       "Sql" => "INT",
       
-      "Public"   => 0,
+      "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,

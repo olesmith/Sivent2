@@ -70,7 +70,7 @@ array
 
       "Sql" => "VARCHAR(256)",
 
-      "Size" => 50,
+      "Size" => 35,
       "Search" => TRUE,
 
       "Public"   => 1,
@@ -103,7 +103,7 @@ array
       "Sql" => "VARCHAR(256)",
       "Search" => TRUE,
 
-      "Size" => 50,
+      "Size" => 35,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -148,13 +148,13 @@ array
    "Title" => array
    (
       "Name" => "Título",
-      "Name_UK" => "Title",
+      "Name_UK" => "Title (PT)",
 
       "Sql" => "VARCHAR(256)",
 
       "Compulsory" => TRUE,
       "Search" => TRUE,
-      "Size" => "50",
+      "Size" => "35",
 
       "Public"   => 1,
       "Person"   => 0,
@@ -166,7 +166,7 @@ array
    "Title_UK" => array
    (
       "Name" => "Título (UK)",
-      "Name_UK" => "Title (UK)",
+      "Name_UK" => "Title",
 
       "Sql" => "VARCHAR(256)",
 

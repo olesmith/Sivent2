@@ -154,30 +154,10 @@ class InscriptionsSubmissions extends InscriptionsCaravans
 
     function Inscription_Submissions_Table_DateSpan()
     {
-        return
-            $this->H
-            (
-               4,
-               $this->MyTime_Sort2Date($this->Event("Submissions_StartDate")).
-               " - ".
-               $this->MyTime_Sort2Date($this->Event("Submissions_EndDate"))
-            ).
-            "";
+        return $this->Date_Span_Interval($event,"Submissions_StartDate","Submissions_EndDate");
     }
     
     //*
-    //* function Inscription_Group_Update, Parameter list: &$item
-    //*
-    //* Updates data from Submissions form.
-    //*
-
-    function Inscription_Group_Update($group,&$item)
-    {
-        $item=$this->MyMod_Item_Update_CGI($item,$this->GetGroupDatas($group,TRUE),$prepost="");
-        
-        return $item;
-    }
-   //*
     //* function Inscription_Submissions_Table, Parameter list: 
     //*
     //* Creates inscrition collaboration html table.
@@ -195,8 +175,8 @@ class InscriptionsSubmissions extends InscriptionsCaravans
         
         if (empty($this->ItemDataSGroups[ $group ]))
         {
-            $this->ItemDataSGroups[ $group ]=
-                $this->ReadPHPArray("System/Inscriptions/SGroups.".$group.".php");
+            $this->ItemDataSGroups=
+                $this->ReadPHPArray("System/Inscriptions/SGroups.".$group.".php",$this->ItemDataSGroups);
         }
         
         if ($edit==1 && $this->CGI_POSTint("Update")==1)
@@ -205,30 +185,48 @@ class InscriptionsSubmissions extends InscriptionsCaravans
         }
         
         return
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->Inscription_Submissions_Table_DateSpan().
-            $this->MyMod_Item_Table_Html
-            (
-               $this->Inscription_Submissions_Table_Edit($edit),
-               $item,
-               $this->GetGroupDatas($group,TRUE)
-            ).
+            /* $this->H */
+            /* ( */
+            /*    5, */
+            /*    $this->MyLanguage_GetMessage("Inscription_Period"). */
+            /*    ", ". */
+            /*    $this->GetRealNameKey($this->ItemDataSGroups[ $group ]). */
+            /*    ": ". */
+            /*    $this->EventsObj()->Event_Submissions_Inscriptions_DateSpan(). */
+            /*    ". ". */
+            /*    $this->EventsObj()->Event_Submissions_Inscriptions_Status() */
+            /* ). */
             $this->Inscription_Submissions_Table_Show($edit,$item).
             "";
     }
     
     
     //*
-    //* function Inscription_Submissions_Show, Parameter list: $edit,$item
+    //* function Inscription_Submissions_Table_Show, Parameter list: $edit,$item
     //*
     //* Shows currently allocated collaborations for inscription in $item.
     //*
 
     function Inscription_Submissions_Table_Show($edit,$item)
     {
+        $this->Submissionsobj()->ItemData("ID");
+        $this->Submissionsobj()->ItemDataGroups("Basic");
         
         return 
             $this->Submissionsobj()->Submissions_Table_Show($edit,$item);
+    }
+    
+    //*
+    //* function Inscription_Event_Submissions_Table, Parameter list: $edit
+    //*
+    //* Creates a table listing inscription colaborations.
+    //*
+
+    function Inscription_Event_Submissions_Table($edit,$inscription)
+    {
+        return
+            $this->Inscription_Submissions_Table_Show($edit,$inscription).
+            "";
     }
 }
 

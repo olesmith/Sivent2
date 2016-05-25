@@ -36,6 +36,7 @@ array
             'Copy' => 1,
             'Delete' => 1,
             "GenCert" => 1,
+            "MailCert" => 1,
          ),
          'Admin' => array
          (
@@ -43,6 +44,7 @@ array
             'Copy' => 1,
             'Delete' => 1,
             "GenCert" => 1,
+            "MailCert" => 1,
          ),
       ),
       'Plural' => array
@@ -55,21 +57,9 @@ array
          ),
          'Coordinator' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
-            "Emails" => 1,
-            "GenCerts" => 1,
-            //"Collaborations" => 1,
          ),
          'Admin' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
-            "Emails" => 1,
-            "GenCerts" => 1,
-            //"Collaborations" => 1,
          ),
       ),
       'SingularPlural' => array
@@ -88,9 +78,15 @@ array
          ),
          'Coordinator' => array
          (
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
          ),
          'Admin' => array
          (
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
          ),
       ),
       'ActionsPlural' => array
@@ -109,9 +105,13 @@ array
          ),
          'Coordinator' => array
          (
+            "Emails" => 1,
+            "GenCerts" => 1,
          ),
          'Admin' => array
          (
+            "Emails" => 1,
+            "GenCerts" => 1,
          ),
       ),
       'ActionsSingular' => array
@@ -130,17 +130,15 @@ array
          ),
         'Coordinator' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
-            "Emails" => 1,
+            "FriendCollaborations" => 1,
+            "FriendSubmissions" => 1,
+            "FriendCaravan" => 1,
          ),
          'Admin' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
-            "Emails" => 1,
+            "FriendCollaborations" => 1,
+            "FriendSubmissions" => 1,
+            "FriendCaravan" => 1,
          ),
       ),
    ),

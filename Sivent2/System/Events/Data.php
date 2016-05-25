@@ -113,4 +113,40 @@ array
       "Assessor"  => 0,
       "Compulsory"  => TRUE,
    ),
+   "Place_Address" => array
+   (
+      "Name" => "Endereço do Local",
+      "Name_UK" => "Place Address",
+
+      "Sql" => "VARCHAR(256)",
+      "Size" => 50,
+
+      "Search" => FALSE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+      "Compulsory"  => TRUE,
+   ),
+   "Place_Site" => array
+   (
+      "Name" => "Site do Local",
+      "Name_UK" => "Place Site",
+
+      "Sql" => "VARCHAR(256)",
+      "Size" => 50,
+
+      "Search" => FALSE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+      "Compulsory"  => TRUE,
+   ),
 );

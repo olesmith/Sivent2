@@ -2,17 +2,22 @@ array
 (
    "Submissions_Inscriptions_Closed" => array
    (
-      "Name" => "Fechadas",
-      "Name_UK" => "Closed",
+      "Name" => "Inscrições Fechadas",
+      "Name_UK" => "Inscriptions Closed",
    ),
    "Submissions_Inscriptions_Open" => array
    (
-      "Name" => "Abertas",
-      "Name_UK" => "Open",
+      "Name" => "Inscrições Abertas",
+      "Name_UK" => "Inscriptions Open",
    ),
    "Submissions_Inscriptions_Table_Title" => array
    (
-      "Name" => "Submissões:",
-      "Name_UK" => "Submissions:",
+      "Name" => "Submissões",
+      "Name_UK" => "Submissions",
+   ),
+   "Submissions_User_Table_Title" => array
+   (
+      "Name" => "Submissões",
+      "Name_UK" => "Submissions",
    ),
 );
