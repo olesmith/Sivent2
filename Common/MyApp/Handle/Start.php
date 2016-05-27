@@ -72,7 +72,7 @@ trait MyApp_Handle_Start
         }
         elseif (method_exists($this,"HandleStart"))
         {
-            $this->HandleStart();
+            //$this->HandleStart();
             return;
         }
         

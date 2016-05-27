@@ -78,10 +78,10 @@ class HtmlForm extends HtmlInput
         //CGI vars to explicitly suppres
         foreach ($suppresscgis as $cgivar) { unset($args[ $cgivar ]); }
         
-       if (method_exists($this,"GetSearchVars"))
+       if (method_exists($this,"MyMod_Items_Search_Vars"))
         {
             //Supress search var value as forms GET args
-            foreach ($this->GetSearchVars() as $data)
+            foreach ($this->MyMod_Items_Search_Vars() as $data)
             {
                 $rdata=$this->GetSearchVarCGIName($data);
                 unset($args[ $rdata  ]);

@@ -44,38 +44,6 @@ class Items extends ItemsEmails
     }
 
 
-    //*
-    //* function FindActualWhere, Parameter list: $datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=1
-    //*
-    //* Detects which data to actually read.
-    //*
-
-    function FindActualWhere($where=array(),$datas=array(),$nosearches=FALSE,$includeall=1)
-    {
-        if ($this->NoSearches) { $nosearches=$this->NoSearches; }
-
-        $searchvars=$this->GetDefinedSearchVars($datas);
-        if ($includeall==2) { $searchvars=array(); }
-
-        $searchwhere="";
-        if (!$nosearches && $includeall!=2)
-        {
-            $searchwhere=$this->GetSearchVarsWhere();
-        }
-        
-        if ($includeall!=2)
-        {
-            foreach ($where as $key => $value)
-            {
-                $searchwhere[ $key ]=$value;
-            }
-            //if ($where!="") { $where.=" AND "; }
-            //$where.=$searchwhere;
-            //$where=preg_replace('/\s*(AND|OR)\s*$/',"",$where);
-        }
-
-        return $searchwhere;
-    }
 
     //*
     //* function GetRealWhereClause, Parameter list: $where="",$data=""

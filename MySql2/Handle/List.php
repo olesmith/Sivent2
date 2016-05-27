@@ -138,7 +138,7 @@ class HandleList extends HandleZip
           $table=$this->ItemsCSVTable();
       }
 
-      $searchvars=$this->GetDefinedSearchVars($datas);
+      $searchvars=$this->MyMod_Items_Search_Vars_Get($datas);
       if ($this->AddSearchVarsToDataList)
       {
           $datas=$this->AddSearchVarsToDataList($datas);

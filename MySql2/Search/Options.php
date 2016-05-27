@@ -26,13 +26,7 @@ class SearchOptions extends Paging
                (
                   $this->GetMessage($this->SearchDataMessages,"ShowAll").":"
                ),
-               $this->MakeRadioSet //($name,$values,$titles,$selected=-1)
-               (
-                  $this->ModuleName."_IncludeAll",
-                  array(1,2),
-                  $this->MyLanguage_GetMessage("NoYes"),
-                  $this->CGI2IncludeAll()
-               ).
+               $this->MyMod_Items_Search_IncludeAll_Field().
                ""
              );
         }

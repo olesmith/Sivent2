@@ -31,53 +31,6 @@ class ItemPostProcess extends ItemReads
 
 
     //*
-    //* function PostProcessSqlObjects, Parameter list: $item,$datadefs
-    //*
-    //* Updates data IDs from nested data.
-    //*
-
-    function PostProcessSqlObjects($item,$datadefs)
-    {
-        $updatedatas=array();
-        foreach ($datadefs as $n => $datadef)
-        {
-            $startdata1=$datadef[ "From1" ];
-            $startdata2=$datadef[ "From2" ];
-            if ($startdata2=="") { $startdata2=$startdata1; }
-
-            $destdata=$datadef[ "Dest" ];
-
-            if (isset($item[ $startdata1 ]))
-            {
-                if (
-                    isset($item[ $startdata2 ])
-                    &&
-                    $item[ $startdata2 ]>0
-                    &&
-                    $item[ $destdata ]!=$item[ $startdata2 ]
-                   )
-                {
-                    $item[ $destdata ]=$item[ $startdata2 ];
-                    array_push($updatedatas,$destdata);
-                }
-            }
-        }
-
-        if (count($updatedatas)>0)
-        {
-            $this->MySqlSetItemValues
-            (
-               "",
-               $updatedatas,
-               $item
-            );
-        }
-
-        return $item;
-    }
-
- 
-    //*
     //* function PostProcessItem, Parameter list: $item
     //*
     //* Post process item. That is: calls TrimCaseItem,
@@ -98,32 +51,43 @@ class ItemPostProcess extends ItemReads
         {
             return $item;
         }
+
         $ritem=$this->ApplyAllEnums($item);
-        foreach ($this->DatasRead as $data => $hash)
+        $updatedatas=array();
+
+        foreach ($this->DatasRead as $id => $data)
         {
-            if (!isset($this->ItemData[ $data ])) { continue; }
+            $hash=$this->ItemData($data);
+            if (empty($hash)) { continue; }
+            
+            $value=preg_replace('/^\s*/',"",$item[ $data ]);
+            $value=preg_replace('/\s*$/',"",$value);
+            $value=preg_replace('/&#39;/',"'",$value);
 
-            if ($hash[ "DerivedMethod" ]!="")
+            if (!empty($hash[ "Format" ]))
             {
-                $method=$hash[ "DerivedMethod" ];
-                $item=$this->$method($item);
+                $value=sprintf($hash[ "Format" ],$value);
             }
-            elseif ($hash[ "Derived" ]!="")
+
+            if ($item[ $data ]!=$value)
             {
-                $item[ $data ]=$this->Filter($hash[ "Derived" ],$ritem);
+                $item[ $data ]!=$value;
+                array_push($updatedatas,$data);
             }
-
-            $item[ $data ]=preg_replace('/^\s*/',"",$item[ $data ]);
-            $item[ $data ]=preg_replace('/\s*$/',"",$item[ $data ]);
-            $item[ $data ]=preg_replace('/&#39;/',"'",$item[ $data ]);
-
-            if ($hash[ "Format" ]!="")
+            
+            $postdata=$this->ItemData($data,"Post_Data");
+            if (!empty($postdata))
             {
-                $item[ $data ]=sprintf($hash[ "Format" ],$item[ $data ]);
+                $this->MyMod_Item_PostProcess_Data($item,$data,$updatedatas);
             }
         }
 
-        $item=$this->TrimCaseItem($item);
+        if (count($updatedatas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+        }
+        
+        $item=$this->MyMod_Item_PostProcess_Trim($item);
 
         $post=$this->ItemPostProcessor;
         if ($post=="")

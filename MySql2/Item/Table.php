@@ -113,6 +113,7 @@ class ItemTable extends ItemRow
             }
             elseif (method_exists($this,$data))
             {
+                var_dump($data);
                 array_push
                 (
                    $tbl,

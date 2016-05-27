@@ -60,11 +60,11 @@ trait Sql_Table_Structure_Column
         $query="";
         if ($type=="mysql")
         {
-            $hash[ 'table_schema' ]=$this->DBHash[ "DB" ];
+            $hash[ 'table_schema' ]=$this->DBHash("DB");
         }
         elseif ($type=="pgsql")
         {
-            $hash[ 'table_catalog' ]=$this->DBHash[ "DB" ];
+            $hash[ 'table_catalog' ]=$this->DBHash("DB");
         }
 
         

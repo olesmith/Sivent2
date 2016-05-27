@@ -41,23 +41,25 @@ class ItemsRead extends ItemsLatex
 
         $this->NoPaging=$nopaging;
 
+        $rsearchvars=$this->MyMod_Items_Search_Vars_Get();
+        
         if ($this->IncludeAll) { $includeall=2; }
+
         if ($includeall==0)
         {
-            $includeall=$this->CGI2IncludeAll();
+            if (!$this->MyMod_Items_Search_Vars_Defined())
+            {
+                $includeall=$this->CGI2IncludeAll();
+            }
         }
 
         //Figure out which data we should read
         $rdatas=$this->FindDatasToRead($datas,$nosearches);
 
         //Figure out where clause
-        $rwhere=$this->FindActualWhere($where,$datas,$nosearches,$includeall);
+        $rwhere=$this->MyMod_Items_Search_Where($where,$datas,$nosearches,$includeall);
 
-        $searchvars=array();
-        $rsearchvars=$this->GetDefinedSearchVars($datas);
-        if (empty($rsearchvars)) { $rsearchvars=array(); }
-
-       //Read
+        //Read
         $this->ItemHashes=array();
         if (!empty($rwhere) || count($rsearchvars)>0 || $includeall==2 || !empty($this->OnlyReadIDs))
         {

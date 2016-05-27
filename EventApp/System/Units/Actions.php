@@ -12,6 +12,7 @@ array
          "Public"   => 1,
          "Person"   => 1,
          "Friend"     => 1,
+         "Distributor" => 1,
          "Coordinator" => 1,
          "Admin"    => 1,
       ),
@@ -22,6 +23,7 @@ array
          "Admin" => 0,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'Add' => array
@@ -31,6 +33,7 @@ array
          "Admin" => 0,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'Copy' => array
@@ -40,6 +43,7 @@ array
          "Admin" => 0,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'Show' => array
@@ -49,6 +53,7 @@ array
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
+         "Distributor" => 1,
          "Assessor"  => 1,
          "AccessMethod" => "CheckShowAccess",
       ),
@@ -59,6 +64,7 @@ array
          "Admin" => 0,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'Edit' => array
@@ -69,6 +75,7 @@ array
          "Friend"     => 0,
          "Coordinator" => 1,
          "Assessor"  => 0,
+         "Distributor" => 1,
          "AccessMethod" => "CheckEditAccess",
       ),
       'EditList' => array
@@ -78,6 +85,7 @@ array
          "Admin" => 0,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'Delete' => array
@@ -98,6 +106,7 @@ array
          "Friend"     => 1,
          "Coordinator" => 1,
          "Assessor"  => 1,
+         "Distributor" => 1,
          "AccessMethod" => "CheckShowAccess",
       ),
       'Zip' => array
@@ -107,6 +116,7 @@ array
          "Admin" => 1,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
       'MyUnit' => array
@@ -116,6 +126,7 @@ array
          "Admin" => 1,
          "Friend"     => 0,
          "Coordinator" => 0,
+         "Distributor" => 0,
          "Assessor"  => 0,
       ),
 );

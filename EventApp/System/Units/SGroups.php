@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Status","Name","Title",
+         "Status","Initials","Name","Title",
          "Address","City","Area","ZIP","State",
          "Phone","Fax","Url","Email","EmailCC",
       ),
@@ -16,6 +16,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "Distributor" => 1,
       "Assessor"  => 1,
       "Single"  => 1,
     ),
@@ -34,6 +35,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "Distributor" => 1,
       "Assessor"  => 1,
     ),
 );

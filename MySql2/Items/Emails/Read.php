@@ -23,7 +23,7 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
         $where=array();
         if ($this->CGI2IncludeAll()!=2)
         {
-            $where=$this->GetSearchVarsWhere();
+            $where=$this->MyMod_Items_Search_VarsWhere();
         }
 
         foreach ($rwhere as $key => $value) { $where[ $key ]=$value; }
@@ -32,7 +32,7 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
         (
            "",
            $where,
-           array_merge($friendkeys,array_keys($this->GetDefinedSearchVars()))
+           array_merge($friendkeys,array_keys($this->MyMod_Items_Search_Vars_Get()))
         );
 
         if ($this->CGI2IncludeAll()!=2)

@@ -167,13 +167,16 @@ trait MyMod_Data_Fields_Show
             elseif ($this->ItemData[ $data ][ "Iconify" ])
             {
                 $file=$item[ "ID" ]."_".$data.".png";
-                $value=$this->IconText
-                (
-                   $file,
-                   $item[ $data ],
-                   $this->ItemData[ $data ][ "IconColors" ],
-                   $this->ItemData[ $data ][ "BkIconColors" ]
-                );
+                 if (!empty($item[ $data ]))
+                {
+                    $value=$this->IconText
+                    (
+                       $file,
+                       $item[ $data ],
+                       $this->ItemData[ $data ][ "IconColors" ],
+                       $this->ItemData[ $data ][ "BkIconColors" ]
+                    );
+                }
             }
             else
             {

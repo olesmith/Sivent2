@@ -37,7 +37,7 @@ class Application extends ApplicationCGIVars
 
     var $CommonData=array();
     var $SplitVars=array();
-    var $SearchVars=array();
+    //var $SearchVars=array();
     var $HtmlError=FALSE;
     var $LoginType="";
     var $Handle=TRUE;

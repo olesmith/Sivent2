@@ -24,7 +24,7 @@ trait DB_PDO
         {
             $this->DoDie('PDO: Could not connect to server: '.$dbhash[ "Host" ]);
         }
-        
+
         $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $dbhash[ "Link" ]=$link;

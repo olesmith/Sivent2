@@ -19,7 +19,7 @@ trait Sql_Table_Exists
         {
             $query=
                 'SELECT 1 FROM '.
-                $this->Sql_Table_Name_Qualify($this->DBHash[ "DB" ]).
+                $this->Sql_Table_Name_Qualify($this->DBHash("DB")).
                 ".".
                 $this->Sql_Table_Name_Qualify($table);
         }

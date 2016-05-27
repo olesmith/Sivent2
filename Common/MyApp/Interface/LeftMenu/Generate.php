@@ -105,7 +105,7 @@ trait MyApp_Interface_LeftMenu_Generate
                 
                 if (preg_match('/#/',$url))
                 {
-                    $url=$this->Filter($url,$_GET);
+                    //$url=$this->Filter($url,$_GET);
                 }
 
                 if (!empty($url))

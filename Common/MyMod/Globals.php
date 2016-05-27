@@ -24,7 +24,11 @@ trait MyMod_Globals
     {
         if (empty($this->ApplicationObj()->DBHash))
         {
+            //Read DB definitions
             $this->ApplicationObj()->DBHash=$this->ReadPHPArray(".DB.php");
+
+            //Then connect - or die
+            $this->ApplicationObj()->DB_Connect();
         }
 
         if (!empty($key)) { return $this->ApplicationObj()->DBHash[ $key ]; }

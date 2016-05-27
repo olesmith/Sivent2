@@ -107,6 +107,17 @@ trait CallStack
 
         array_push($row,join(", ",$rows));
 
+        $msg="";
+        if (!empty($trace[ $level ][ 'file' ]))
+        {
+           if (preg_match('/(Base|MySql2)/',$trace[ $level ][ 'file' ]))
+            {
+                $msg="Move to Common!";
+            }
+        }
+        array_push($row,$msg);
+
+
         return $row;
     }
     //*
@@ -157,7 +168,7 @@ trait CallStack
 
         }
 
-        $inforows=array();;
+        $inforows=array();
         if (count($classes)>0)
         {
             array_push
@@ -183,7 +194,6 @@ trait CallStack
                )
             );
         }
-
 
         return $inforows;
     }

@@ -49,12 +49,12 @@ class MyEventAppMenues extends MyEventAppAccess
     }
 
     //*
-    //* function  MyEvent_App_Menues_Unit_Menu, Parameter list: 
+    //* function  MyEvent_App_Menues_Unit_Menues, Parameter list: 
     //*
     //* Generates Unit menu.
     //*
 
-    function MyEvent_App_Menues_Unit_Menu($unit)
+    function MyEvent_App_Menues_Unit_Menues($unit)
     {
         $title=$unit[ "Name" ];
 
@@ -74,11 +74,22 @@ class MyEventAppMenues extends MyEventAppAccess
                 
         }
 
+        return $menu;
+    }
+    
+    //*
+    //* function  MyEvent_App_Menues_Unit_Menu, Parameter list: 
+    //*
+    //* Generates Unit menu.
+    //*
+
+    function MyEvent_App_Menues_Unit_Menu($unit)
+    {
         return
-            $menu.
+            $this->MyEvent_App_Menues_Unit_Menues($unit).
             join("",$this->HtmlEventsMenu()).
             "";
-     }
+    }
     
     //*
     //* function  HtmlUnitMenu, Parameter list: 

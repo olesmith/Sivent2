@@ -55,6 +55,11 @@ trait MyLanguage_Messages
     {
         $langkey=$this->ApplicationObj()->MyLanguage_GetLanguageKey();
 
+        if (empty($this->ApplicationObj()->Messages))
+        {
+            $this->MyApp_Messages_ReadFiles();
+        }
+
         if (!empty($this->ApplicationObj()->Messages[ $key ]))
         {
             if (

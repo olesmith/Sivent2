@@ -13,7 +13,7 @@ class SearchCookies extends SearchCGI
         $cookies=preg_grep('/^ModuleName$/',$this->ApplicationObj->CookieVars,PREG_GREP_INVERT);
         $cookievals=$this->ApplicationObj->CookieValues;
 
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if (
                   $this->ItemData[ $data ][ "Sql" ]=="ENUM"

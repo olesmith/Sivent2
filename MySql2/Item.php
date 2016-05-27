@@ -55,26 +55,6 @@ class Item extends ItemUpdate
 
 
 
-    //*
-    //* function TrimCaseItem, Parameter list: $item
-    //*
-    //* Trims casing for each ItemData definition,
-    //* which has TrimCase set.
-    //* Returns modified item.
-    //*
-
-    function TrimCaseItem($item)
-    {
-        foreach ($this->DatasRead as $data)
-        {
-            if (isset($this->ItemData[ $data ]) && !empty($this->ItemData[ $data ][ "TrimCase" ]) && $this->ItemData[ $data ][ "TrimCase" ])
-            {
-                $item[ $data ]=$this->TrimCase($item[ $data ]);
-            }
-         }
-
-        return $item;
-    }
 
 
     //*

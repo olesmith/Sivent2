@@ -25,10 +25,11 @@ trait DB
 
     function DB_Init()
     {
-        if ($this->DB)
+        if ($this->DB && empty($this->DBHash[ "Link" ]))
         {
             $this->DBHash();
-            $this->DB_Connect();
+            //Moved to DBHash()
+            //$this->DB_Connect();
         }
     }
 
@@ -111,7 +112,7 @@ trait DB
 
     function  DB_Link()
     {
-        return $this->DBHash[ "Link" ];
+        return $this->DBHash("Link");
     }
     
     //*
@@ -123,7 +124,7 @@ trait DB
 
     function DB_Dialect()
     {
-        return strtolower($this->DBHash[ "ServType" ]);
+        return strtolower($this->DBHash("ServType"));
     }
     
     //*
@@ -136,7 +137,7 @@ trait DB
     function DB_MySql()
     {
         $res=FALSE;
-        if (preg_match('/^mysql$/',$this->DBHash[ "ServType" ])) { $res=TRUE; }
+        if (preg_match('/^mysql$/',$this->DBHash("ServType"))) { $res=TRUE; }
 
         return $res;
     }
@@ -151,7 +152,7 @@ trait DB
     function DB_PostGres()
     {
         $res=FALSE;
-        if (preg_match('/^pgsql$/',$this->DBHash[ "ServType" ])) { $res=TRUE; }
+        if (preg_match('/^pgsql$/',$this->DBHash("ServType"))) { $res=TRUE; }
 
         return $res;
     }

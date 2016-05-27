@@ -3,7 +3,6 @@
 
 class SearchVars extends SearchInit
 {
-    protected $SearchVars=array();
 
    //*
     //* function AddSearchVar, Parameter list: $data
@@ -29,29 +28,6 @@ class SearchVars extends SearchInit
         $this->SearchVars=preg_grep('/^'.$data.'$/',$this->SearchVars,PREG_GREP_INVERT);
     }
 
-    //*
-    //* function GetSearchVars, Parameter list: 
-    //*
-    //* Returns list of vars indicated with Search TRUE.
-    //*
-
-    function GetSearchVars()
-    {
-        if (empty($this->SearchVars))
-        {
-            $this->SearchVars=array();
-            foreach (array_keys($this->ItemData) as $data)
-            {
-                if ($this->MyMod_Data_Field_Is_Search($data))
-                {
-                    array_push($this->SearchVars,$data);
-                }
-            }
-        }
-
-        return $this->SearchVars;
-    }
-
 
     //*
     //* function GetPreSearchVars, Parameter list: 
@@ -65,7 +41,7 @@ class SearchVars extends SearchInit
     function GetPreSearchVars()
     {
         $searchvars=array();
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -95,7 +71,7 @@ class SearchVars extends SearchInit
     function GetPostSearchVars()
     {
         $searchvars=array();
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -124,48 +100,6 @@ class SearchVars extends SearchInit
         
         return $searchvars;
     }
-
-
-    //*
-    //* function GetDefinedSearchVars, Parameter list: 
-    //*
-    //* Returns list of allowed and defined search vars.
-    //* If one or more search vars are defined, sets $this->IncludeAll
-    //* to 0, in order NOT to read all items.
-    //*
-
-    function GetDefinedSearchVars()
-    {
-        $searchvars=array();
-        foreach ($this->GetSearchVars() as $data)
-        {
-            if ($this->MyMod_Data_Access($data)>=1)
-            {
-                $rdata=$this->GetSearchVarCGIName($data);
-                $value=$this->GetSearchVarCGIValue($data);
-
-                if (is_array($value))
-                {
-                    if (count($value)>0)
-                    {
-                        $searchvars[ $data ]=$value;
-                    }
-                }
-                elseif (!empty($value) && $value!=" 0")
-                {
-                    $searchvars[ $data ]=$value;
-                }
-            }
-        }
-
-        if (count($searchvars)>0)
-        {
-            $this->IncludeAll=0;
-        }
-
-        return $searchvars;
-    }
-
     //*
     //* function AddSearchVarsToDataList, Parameter list: $datas
     //*
@@ -181,7 +115,7 @@ class SearchVars extends SearchInit
             return array_merge($datas,$this->ResSearchVars);
         }
 
-        $searchvars=$this->GetDefinedSearchVars();
+        $searchvars=$this->MyMod_Items_Search_Vars_Get();
 
         $ressearchvars=array();
         foreach ($searchvars as $data => $value)

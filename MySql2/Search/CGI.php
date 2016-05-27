@@ -195,7 +195,7 @@ class SearchCGI extends SearchOptions
     function SearchVarsAsHiddens()
     {
         $hiddens=array();
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -230,7 +230,7 @@ class SearchCGI extends SearchOptions
 
     function SearchVarsAsHash($hash=array())
     {
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -266,7 +266,7 @@ class SearchCGI extends SearchOptions
     function SearchVarsAsURL()
     {
         $hiddens=array();
-        foreach ($this->GetSearchVars() as $data)
+        foreach ($this->MyMod_Items_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {

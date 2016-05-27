@@ -13,7 +13,16 @@ trait MyTime
         $lkey=$this->MyLanguage_GetLanguageKey();
 
         if (empty($this->ApplicationObj()->Messages[ "WeekDays" ])) { return ""; }
-        return $this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ][ intval($weekday) ];
+
+        $msg="";
+        if (!empty($this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ]))
+        {
+            $msg=$this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ][ intval($weekday) ];
+        }
+        else
+        {
+            $msg=$this->ApplicationObj()->Messages[ "WeekDays" ][ intval($weekday) ];
+        }
     }
 
     //*
@@ -27,7 +36,18 @@ trait MyTime
         $lkey=$this->MyLanguage_GetLanguageKey();
 
         if (empty($this->ApplicationObj()->Messages[ "WeekDays" ])) { return array(); }
-       return $this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ];
+
+        $msg="";
+        if (!empty($this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ]))
+        {
+            $msg=$this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ];
+        }
+        if (!empty($this->ApplicationObj()->Messages[ "WeekDays" ]))
+        {
+            $msg= $this->ApplicationObj()->Messages[ "WeekDays" ];
+        }
+
+        return $msg;
     }
 
     //* function MyTime_Month, Parameter list: $month,$long=FALSE

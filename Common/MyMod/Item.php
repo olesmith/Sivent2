@@ -11,6 +11,7 @@ include_once("Item/Read.php");
 include_once("Item/Data.php");
 include_once("Item/Children.php");
 include_once("Item/Language.php");
+include_once("Item/PostProcess.php");
 
 trait MyMod_Item
 {
@@ -24,7 +25,8 @@ trait MyMod_Item
         MyMod_Item_Read,
         MyMod_Item_Data,
         MyMod_Item_Children,
-        MyMod_Item_Language;
+        MyMod_Item_Language,
+        MyMod_Item_PostProcess;
         
     //*
     //* Creates row with item titles.

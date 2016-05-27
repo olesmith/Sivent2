@@ -19,7 +19,7 @@ class ItemsTableTable extends ItemsTableRow
         if (count($items)==0)     { $items=$this->ItemHashes; }
         if (count($datas)==0)     { $datas=$this->GetDefaultDataGroup(); }
 
-        $searchvars=$this->GetDefinedSearchVars($datas);
+        $searchvars=$this->MyMod_Items_Search_Vars_Get($datas);
         if ($this->AddSearchVarsToDataList)
         {
             $datas=$this->AddSearchVarsToDataList($datas);

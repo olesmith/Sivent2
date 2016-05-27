@@ -15,7 +15,7 @@ trait DB_Method
     {
         return
             "DB_".
-            $this->DBHash[ "Type" ].
+            $this->DBHash("Type").
             "_".
             $method;
     }
