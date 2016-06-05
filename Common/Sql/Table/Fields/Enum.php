@@ -53,6 +53,8 @@ trait Sql_Table_Fields_Enum
         
         if (empty($columninfo)) { $columninfo=$this->Sql_Table_Column_Info($data,$table); }
 
+        if (preg_match('/^pgsql$/',$this->DBHash("ServType"))) { return; }
+        
         if (
               !empty($datadef)
               &&
@@ -92,7 +94,7 @@ trait Sql_Table_Fields_Enum
                      $this->Sql_Table_Column_Name_Qualify($data).
                      " ENUM(".$def.")";
                  
-                 $this->QueryDB($query);
+                 $this->DB_Query($query);
                  $this->ApplicationObj()->AddPostMessage("Mod Column ".$data.": $query");
                  $this->ApplicationObj->LogMessage(5,"Mod Column: ".$query);
 

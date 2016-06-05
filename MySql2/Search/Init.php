@@ -1,6 +1,6 @@
 <?php
 
-class SearchInit extends SearchWheres
+class SearchInit extends SearchTable
 {
     //*
     //* function InitSearch, Parameter list: $hash=array()

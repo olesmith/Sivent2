@@ -50,7 +50,7 @@ class SearchVars extends SearchInit
 
                 if (!empty($value))
                 {
-                    $searchvars[ $data ]=$this->GetSearchVarWhere($data,$value);
+                    $searchvars[ $data ]=$this->MyMod_Items_Search_Var_Where($data,$value);
                     if (empty($searchvars[ $data ])) { unset($searchvars[ $data ]); }
                     
                 }

@@ -43,10 +43,9 @@ trait MyMod_Data_Fields_Sql
             }
         }
 
-
         //Where clause in module sql table
         $where=$this->Module2Object($data)->MyMod_Data_Fields_Sql_Where($data);
-        
+
         if (!is_array($where)) { $where=$this->Hash2SqlWhere($where); }
 
         //Get values present in table.
@@ -119,8 +118,7 @@ trait MyMod_Data_Fields_Sql
                    $datas
                 );
         }
-        
-        
+
         $rvalue=$this->Html_Select_Hashes2Field
         (
            $this->GetSearchVarCGIName($data),
@@ -138,14 +136,14 @@ trait MyMod_Data_Fields_Sql
         }
         else
         {
-            $rvalue==preg_replace
+            $rvalue=preg_replace
             (
                '/NAME=\''.$data.'\'/',
                "NAME='".$rdata."'",
                $rvalue
             );
         }
-
+        
         return $rvalue;
     }    
 }

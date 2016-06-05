@@ -18,7 +18,13 @@ class LoginShiftUser extends LoginLogin
               &&
               !empty($this->UsersObj()->ItemData[ "Unit" ]))
         {
+            $profiles=$this->ApplicationObj()->ShiftUserUnallowedProfiles();
+
             $peoplewhere[ "Unit" ]=$this->Unit[ "ID" ];
+            foreach ($profiles as $profile)
+            {
+                $peoplewhere[ "Profile_".$profile ]=1;
+            }
         }
 
         return $this->UsersObj()->GetRealWhereClause($peoplewhere);

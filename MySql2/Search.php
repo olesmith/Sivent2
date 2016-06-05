@@ -8,7 +8,7 @@ include_once("Search/CGI.php");
 include_once("Search/Cookies.php");
 include_once("Search/Fields.php");
 include_once("Search/Table.php");
-include_once("Search/Wheres.php");
+#include_once("Search/Wheres.php");
 include_once("Search/Init.php");
 include_once("Search/Vars.php");
 

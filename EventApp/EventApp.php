@@ -132,19 +132,6 @@ class EventApp extends MyEventAppMail
     {
     }
 
-    /* //\* */
-    /* //\* function PreInterfaceMenu, Parameter list:  */
-    /* //\* */
-    /* //\* Called by modules TInterface menu (via ApplicationObj), before printing anything. */
-    /* //\* Displays App and Unit info. */
-    /* //\* */
-
-    /* function PreInterfaceMenu_disabled() */
-    /* { */
-    /*     echo */
-    /*         $this->AppInfo(); */
-    /* } */
-    
     //*
     //* sub MyApp_Titles, Parameter list:
     //*
@@ -350,7 +337,11 @@ class EventApp extends MyEventAppMail
                 $this->Html_Table
                 (
                    "",
-                   $table
+                   $table,
+                   array(),
+                   array(),
+                   array(),
+                   $evenodd=FALSE
                 ).
                 ""
             ).
@@ -480,6 +471,20 @@ class EventApp extends MyEventAppMail
             
     }
 
+    //*
+    //* function HandleShowUnits, Parameter list: 
+    //*
+    //* Displays Units in DB.
+    //*
+
+    function HandleShowUnits()
+    {
+        $this->MyApp_Interface_Head();
+
+        echo
+            $this->UnitsObj()->ShowUnits(0);
+    }
+    
 }
 
 ?>

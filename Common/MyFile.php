@@ -36,7 +36,7 @@ trait MyFile
             $this->DoDie("No such file: $file");
         }
 
-        $text=$this->MyReadFile($file);
+        $text=$this->MyFile_Read($file);
         $text=preg_grep('/(<<<<<|>>>>>|======)/',$text,PREG_GREP_INVERT);
 
         $text=preg_replace('/<\?php/',"",$text);

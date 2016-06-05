@@ -86,7 +86,7 @@ trait MyMod_Data_Fields_Module
 
         if (is_array($where))
         {
-            $where=$this->Hash2MySql($where);
+            $where=$this->Hash2SqlWhere($where);
         }
 
         $where=$this->FilterHash($where,$this->LoginData);
@@ -218,9 +218,8 @@ trait MyMod_Data_Fields_Module
 
         if (empty($this->ItemData[ $data ][ "Options" ]))
         {
-            $ids=$subobject->MySqlUniqueColValues
+            $ids=$subobject->Sql_Select_Unique_Col_Values
             (
-               "",
                "ID",
                $this->MyMod_Data_Fields_Module_SqlWhere($data,$item),
                $this->ItemData($data,"SqlGroupBy"),

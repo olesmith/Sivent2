@@ -80,17 +80,19 @@ class SearchTable extends SearchFields
                     {
                         $fixedvalue=$fixedvalues[ $var ];
                     }
-                    if (!empty($this->SqlWhere[ $var ]))
-                    {
-                        $fixedvalue=$this->SqlWhere[ $var ];
-                    }
 
-                    $input=$this->$method($var,$fixedvalue);
+                    //20160528: Sids2::Buildings
+                    /* if (!empty($this->SqlWhere[ $var ])) */
+                    /* { */
+                    /*     $fixedvalue=$this->SqlWhere[ $var ]; */
+                    /* } */
+
+                   $input=$this->$method($var,$fixedvalue);
                     //if ($showall==2 || !empty($fixedvalue))
-                    if (!empty($fixedvalue))
-                    {
-                        $input=preg_replace('/NAME=/i',"DISABLED='disabled' NAME=",$input);
-                    }
+                   /* if (!empty($fixedvalue) && !is_array()) */
+                   /*  { */
+                   /*      $input=preg_replace('/NAME=/i',"DISABLED='disabled' NAME=",$input); */
+                   /*  } */
 
                     $row=array
                     (

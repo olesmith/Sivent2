@@ -322,11 +322,11 @@ function HTMLTable($titles,$rows,$tableoptions=array(),$background=TRUE,$tdclass
 
         $evenclass="even";
         $oddclass="odd";
-        /* if (!$hover) */
-        /* { */
-        /*     $evenclass="ceven"; */
-        /*     $oddclass="codd";             */
-        /* } */
+        if (!$evenodd)
+        {
+            $evenclass="ceven";
+            $oddclass="codd";
+        }
 
         $html="";
         if (!empty($titles))

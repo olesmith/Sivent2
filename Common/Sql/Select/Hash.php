@@ -15,7 +15,7 @@ trait Sql_Select_Hash
     function Sql_Select_Hash_Query($where,$sqldata=array(),$noecho=FALSE,$table="")
     {
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
-        if (count($sqldata)==0) { $sqldata=array_keys($this->ItemData); }
+        if (empty($sqldata)) { $sqldata=array_keys($this->ItemData); }
 
         return $this->Sql_Select_Hashes_Query($where,$sqldata,"",$table);
     }
@@ -130,14 +130,14 @@ trait Sql_Select_Hash
         if (count($rdatas)>0 && !empty($item[ "ID" ]))
         {
             $ritem=
-                $this->Sql_Select_Hash_Values
+                $this->Sql_Select_Hash
                 (
-                   $item[ "ID" ],
+                   array("ID" => $item[ "ID" ]),
                    $rdatas,
-                   "ID",
                    FALSE,
                    $table
                 );
+            
             foreach ($rdatas as $id => $data)
             {
                 $item[ $data ]=$ritem[ $data ];

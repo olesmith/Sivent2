@@ -7,7 +7,7 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => TRUE,
+      "Search" => FALSE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
@@ -54,7 +54,7 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => TRUE,
+      "Search" => FALSE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,

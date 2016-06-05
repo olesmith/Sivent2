@@ -51,7 +51,7 @@ class ItemsEmailsCells extends ItemsEmailsRead
            array
            (
               "ID" => 0,
-              "Email" => $this->MailInfo[ "AdmEmail" ],
+              "Email" => $this->MailInfo[ "BCCEmail" ],
               "Name" => "Sistema",
            ),
            $this->LoginData

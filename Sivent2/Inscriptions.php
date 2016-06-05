@@ -97,7 +97,6 @@ class Inscriptions extends InscriptionsHandle
         {
             array_push($this->ItemDataSGroupFiles,"SGroups.Caravans.php");
         }
-        
     }
     
     //*
@@ -147,29 +146,24 @@ class Inscriptions extends InscriptionsHandle
     {
         parent::PreProcessItemData();
 
+        array_push
+        (
+           $this->ItemDataFiles,
+           "Data.Certificate.php","Data.Collaborations.php",
+           "Data.Submissions.php","Data.Caravans.php"
+        );
+        
+
         $event=$this->Event();
         if ($this->EventsObj()->EventCertificates($event))
         {
-            array_push($this->ItemDataFiles,"Data.Certificate.php");
-
             $this->CertificatesObj()->ItemData("ID");
         }
         
         if (!$this->Load_Other_Data) { return; }
     
-        if ($this->EventsObj()->Event_Collaborations_Has($event))
-        {
-            array_push($this->ItemDataFiles,"Data.Collaborations.php");
-        }
-        
-        if ($this->EventsObj()->Event_Submissions_Has($event))
-        {
-            array_push($this->ItemDataFiles,"Data.Submissions.php");
-        }
-        
         if ($this->EventsObj()->Event_Caravans_Has($event))
         {
-            array_push($this->ItemDataFiles,"Data.Caravans.php");
             $this->CaravaneersObj()->ItemData("ID");
         }
     }

@@ -71,16 +71,6 @@ class Table extends TableLanguage
         $this->InitBase($hash);
     }
 
-    //*
-    //* function ApplicationObj, Parameter list: 
-    //*
-    //* ApplicationObj accessor.
-    //*
-
-    function ApplicationObj()
-    {
-        return $this->ApplicationObj;
-    }
 
     //*
     //* function AddOrUpdate, Parameter list: $table,$where,&$item,$namekey="ID",$readdatas=array()

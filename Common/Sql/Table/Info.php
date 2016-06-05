@@ -133,7 +133,6 @@ trait Sql_Table_Info
 
         if (!empty($hash[ "Name" ]))
         {
-            $this->Sql_Insert_Unique($where,$hash,$this->Sql_Tables_Info_Name(),TRUE);
             $this->Sql_Update_Item($hash,$where,array("Time"),$this->Sql_Tables_Info_Name());
         }
 

@@ -191,30 +191,28 @@ class MyEventAppMenues extends MyEventAppAccess
         foreach (array_reverse($events) as $event)
         {
             $eventid=$event[ "ID" ];
+
+            $link="";
             if ($eventid!=$currenteventid)
             {
-                array_push
-                (
-                   $links,
-                   $this->HtmlEventMenu($event,$args).
-                   $this->BR()
-                );
+               $link=
+                   $this->HtmlEventMenu($event,$args);
             }
             else
             {
-                array_push
-                (
-                   $links,
-                   "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-                   $event[ "Name" ].
-                   $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
-                   (
-                      $this->HtmlEventsMenuDef(),
-                      $event
-                   ).
-                   $this->BR()
-                );
+                $link=
+                    "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
+                    $event[ "Name" ].
+                    $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
+                    (
+                       $this->HtmlEventsMenuDef(),
+                       $event
+                     );
             }
+
+            $link=preg_replace('/#Event/',$event[ "ID" ],$link);
+            
+            array_push($links,$link.$this->BR());
         }      
 
         return $links;

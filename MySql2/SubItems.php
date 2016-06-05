@@ -222,7 +222,7 @@ class SubItems extends Enums
 
             if (is_array($subobject->SqlWhere))
             {
-                $subobject->SqlWhere=$subobject->Hash2MySql($subobject->SqlWhere);
+                $subobject->SqlWhere=$subobject->MyMod_Data_Fields_Module_SqlWhere($subobject->SqlWhere);
             }
 
             $subobject->SqlWhere=$this->FilterHash($subobject->SqlWhere,$this->LoginData);

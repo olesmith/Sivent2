@@ -25,7 +25,7 @@ array
        "Name_UK" => "Components",
        "Data" => array
        (
-          "Certificates","Collaborations","Caravans","Submissions"
+          "Selection","Certificates","Collaborations","Caravans","Submissions"
        ),
 
        "Person" => 0,

@@ -35,7 +35,7 @@ array
       "Name_UK" => "Event",
       
       "SqlClass" => "Events",
-      "Search" => TRUE,
+      "Search" => FALSE,
       "Compulsory"  => TRUE,
 
       "SqlDerivedData" => array("Name"),

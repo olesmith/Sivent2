@@ -20,13 +20,13 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
             $emails[ $friendkey ]=array();
         }
 
-        $where=array();
-        if ($this->CGI2IncludeAll()!=2)
-        {
-            $where=$this->MyMod_Items_Search_VarsWhere();
-        }
-
-        foreach ($rwhere as $key => $value) { $where[ $key ]=$value; }
+        /* $where=array(); */
+        /* if ($this->CGI2IncludeAll()!=2) */
+        /* { */
+        /*     $where=$this->MyMod_Items_Search_Where(); */
+        /* } */
+        
+        $where=array_merge($this->MyMod_Items_Search_Where(),$rwhere);
 
         $this->ItemHashes=$this->SelectHashesFromTable
         (

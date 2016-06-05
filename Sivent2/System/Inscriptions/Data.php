@@ -91,9 +91,9 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => FALSE,
-      "Values" => array("Não","Sim"),
-      "Values_UK" => array("No","Yes"),
+      "Search" => TRUE,
+      "Values" => array("Aguardando","Indeferido","Lista de Espera","Deferido"),
+      "Values_UK" => array("Waiting","Undeferred","Waiting List","Selected"),
       "Default"  => 1,
 
       "Public"   => 1,

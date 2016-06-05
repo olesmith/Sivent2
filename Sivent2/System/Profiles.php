@@ -6,6 +6,7 @@ array
    (
       "Name" => "Anônimo",
       "Name_UK" => "Anonymous",
+      "Trust" => 0,
    ),
    "Coordinator" => array
    (
@@ -13,6 +14,7 @@ array
       "Name_UK" => "Coordinator",
       "PName" => "Coordenadores",
       "PName_UK" => "Coordinators",
+      "Trust" => 5,
    ),
    "Friend" => array
    (
@@ -20,6 +22,7 @@ array
       "Name_UK" => "Registration",
       "PName" => "Cadastros",
       "PName_UK" => "Registrations",
+      "Trust" => 1,
    ),
    "Admin" => array
    (
@@ -27,6 +30,7 @@ array
       "Name_UK" => "Administrator",
       "PName" => "Administradores",
       "PName_UK" => "Administrators",
+      "Trust" => 100,
    ),
 );
 

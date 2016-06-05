@@ -30,6 +30,7 @@ array
       "Name_UK" => "Caravan Name",
 
       "Sql" => "VARCHAR(256)",
+      "Size" => 25,
 
       "Search" => TRUE,
 

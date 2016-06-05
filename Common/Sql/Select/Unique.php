@@ -4,13 +4,13 @@
 trait Sql_Select_Unique
 {
     //*
-    //* function Sql_Select_Unique_Col_Values_Query, Parameter list: $col,$where,$orderby,$table=""
+    //* function Sql_Select_Unique_Col_Values_Query, Parameter list: $col,$where=array(),$orderby="",$table=""
     //*
     //* Returns list of unique col values resulting from $where.
     //*
     //* 
 
-    function Sql_Select_Unique_Col_Values_Query($col,$where,$orderby,$table="")
+    function Sql_Select_Unique_Col_Values_Query($col,$where=array(),$orderby="",$table="")
     {
         if (!$this->Sql_Table_Exists($table)) { return ""; }
 
@@ -48,6 +48,7 @@ trait Sql_Select_Unique
         $values=array();
         if (!empty($query))
         {
+            $res=$this->DB_Query($query);
             foreach ($this->DB_Query_2Assoc_List($query) as $item)
             {
                 $values[ $item[ $col ] ]=1;

@@ -14,7 +14,7 @@ trait Sql_Table_Fields_Exists
         if (empty($table)) { $table=$this->SqlTableName($table); }
 
         $this->Sql_Table_Columns_Read($table);
-        
+
         $exists=FALSE;
         if (!empty($this->ApplicationObj()->TablesColumns[ $table ][ $data ]))
         {

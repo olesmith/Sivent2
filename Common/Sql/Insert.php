@@ -40,6 +40,23 @@ trait Sql_Insert
     }
     
     //*
+    //* function Sql_Insert_NextID, Parameter list: 
+    //*
+    //* Returns next ID: max+1.
+    //* 
+    //* 
+
+    function Sql_Insert_NextID($table)
+    {
+        $ids=$this->Sql_Select_Unique_Col_Values("ID",array(),"",$table);
+
+        $max=0;
+        foreach ($ids as $id) { if ($id>$max) { $max=$id; } }
+
+        return $max+1;
+    }
+    
+    //*
     //* function Sql_Insert_LastID, Parameter list: $result,$table
     //*
     //* Adds $item (assoc array) to DB table $table
@@ -76,10 +93,11 @@ trait Sql_Insert
     function Sql_Insert_Item(&$item,$table="",$nocheckcols=FALSE)
     {
         $this->LastSqlInsert=$this->Sql_Insert_Item_Query($item,$table,$nocheckcols);
+        $item[ "ID" ]=$this->Sql_Insert_NextID($table);
 
         $result=$this->DB_Query($this->LastSqlInsert);
-        //var_dump($this->LastSqlInsert);
-        $item[ "ID" ]=$this->Sql_Insert_LastID($result,$table);
+
+         //$item[ "ID" ]=$this->Sql_Insert_LastID($result,$table);
 
         return $result;
     }

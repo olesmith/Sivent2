@@ -77,6 +77,7 @@ class Events extends EventsCertificate
         array_push
         (
            $this->ItemDataFiles,
+           "Data.Selection.php",
            "Data.Certificates.php",
            "Data.Collaborations.php",
            "Data.Caravans.php",
@@ -140,29 +141,6 @@ class Events extends EventsCertificate
         return parent::PostProcess($item);
     }
 
-    /* //\* */
-    /* //\* function  EventHorisontalMenues, Parameter list: $event */
-    /* //\* */
-    /* //\* Prints horistonal menu for $event. */
-    /* //\* */
-
-    /* function EventHorisontalMenu($event) */
-    /* { */
-    /*     if (empty($event)) { return ""; } */
-        
-    /*     return  */
-    /*         $this->MyMod_HorMenu_Action */
-    /*         ( */
-    /*            array */
-    /*            ( */
-    /*                "Datas","GroupDatas","Inscriptions" */
-    /*            ), */
-    /*            "atablemenu", */
-    /*            $event[ "ID" ], */
-    /*            $event */
-    /*         ). */
-    /*         ""; */
-    /* } */
 
     //*
     //* function PostInterfaceMenu, Parameter list: $plural=FALSE,$id=""

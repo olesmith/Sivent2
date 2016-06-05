@@ -57,16 +57,17 @@ class ItemPostProcess extends ItemReads
 
         foreach ($this->DatasRead as $id => $data)
         {
-            $hash=$this->ItemData($data);
-            if (empty($hash)) { continue; }
+            $hashdef=$this->ItemData($data);
+            if (empty($hashdef)) { continue; }
+            if (empty($item[ $data ])) { continue; }
             
             $value=preg_replace('/^\s*/',"",$item[ $data ]);
             $value=preg_replace('/\s*$/',"",$value);
             $value=preg_replace('/&#39;/',"'",$value);
 
-            if (!empty($hash[ "Format" ]))
+            if (!empty($hashdef[ "Format" ]))
             {
-                $value=sprintf($hash[ "Format" ],$value);
+                $value=sprintf($hashdef[ "Format" ],$value);
             }
 
             if ($item[ $data ]!=$value)

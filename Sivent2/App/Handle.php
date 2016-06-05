@@ -3,20 +3,6 @@
 class App_Handle extends App_Has
 {
     //*
-    //* function HandleShowUnits, Parameter list: 
-    //*
-    //* Displays Units in DB.
-    //*
-
-    function HandleShowUnits()
-    {
-        $this->MyApp_Interface_Head();
-
-        echo
-            $this->UnitsObj()->ShowUnits(0);
-    }
-    
-    //*
     //* function HandleStart, Parameter list: 
     //*
     //* Overrides Application::HandleStart.
