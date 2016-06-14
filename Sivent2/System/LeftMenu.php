@@ -248,33 +248,6 @@ array
          "Coordinator" => 1,
          "Assessor"  => 1,
       ),
-      "03_Units" => array
-      (
-         'Title' => 'Entidades:',
-         'Title_UK' => 'Entities:',
-
-         'Public'   => 0,
-         'Person'   => 0,
-         "Admin"    => 0,
-         "Friend"     => 0,
-         "Coordinator" => 0,
-
-         '10_Units' => array
-         (
-            'Name' => 'Gerenciar Entidades',
-            'Title' => 'Manage Entities',
-            'Name_UK' => 'Entidades',
-            'Title_UK' => 'Entities',
-
-            'Href' => '?ModuleName=Units&Action=Search',
-            'Public'   => 0,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-         ),
-      ),
       "04_App" => array
       (
          'Title' => 'SiVent2:',
@@ -301,4 +274,31 @@ array
          "Assessor"  => 1,
          "Method" => "MyApp_Interface_LeftMenu_Language",
      ),
+      "06_Units" => array
+      (
+         'Title' => 'Entidades:',
+         'Title_UK' => 'Entities:',
+
+         'Public'   => 1,
+         'Person'   => 1,
+         "Admin"    => 1,
+         "Friend"     => 0,
+         "Coordinator" => 0,
+
+         '10_Units' => array
+         (
+            'Name' => 'Entidades usando SiVent2',
+            'Name_UK' => 'Entities using Sivent2',
+            'Title' => 'Entidades usando SiVent2 neste Servidor',
+            'Title_UK' => 'Entities using Sivent2 on this Server',
+
+            'Href' => '?Action=Start',
+            'Public'   => 1,
+            'Person'   => 1,
+            'Admin'    => 1,
+            "Friend"     => 0,
+            "Coordinator" => 0,
+            "Assessor"  => 0,
+         ),
+      ),
 );

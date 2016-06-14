@@ -17,7 +17,7 @@ array
       "Public"   => 0,
       "Person"   => 1,
       "Admin"    => 2,
-      "Coordinator" => 2,
+      "Coordinator" => 1,
    ),
    "MailTail" => array
    (
@@ -37,6 +37,6 @@ array
       "Public"   => 0,
       "Person"   => 1,
       "Admin"    => 2,
-      "Coordinator" => 2,
+      "Coordinator" => 1,
    ),
 );

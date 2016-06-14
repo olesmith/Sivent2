@@ -283,10 +283,9 @@ class DataGroups extends HashesData
 
         if (!isset($groups[ $group ]) || !is_array($groups[ $group ]))
         {
-            $this->CallStack_Show();
-            echo $this->ModuleName." Warning: Group $group undefined";exit();
+            echo $this->ModuleName." Warning: Group $group undefined";
             $this->AddMsg("Warning: Group $group undefined");
-            return;
+            return array();
         }
 
         $datas=$this->GetRealNameKey($groups[ $group ],"Data");
@@ -294,9 +293,9 @@ class DataGroups extends HashesData
         //if (!isset($groups[ $group ][ "Data" ]) || !is_array($groups[ $group ][ "Data" ]))
         if (empty($datas) || !is_array($datas))
         {
-            echo $this->ModuleName." Warning: Group $group has no data defined";exit();
+            //echo $this->ModuleName." Warning: Group ".$groups[ $group ][ "Name" ]." has no data defined";
             $this->AddMsg("Warning: Group $group has no data defined");
-            return;
+            return array();
         }
 
         $rgroups=array();

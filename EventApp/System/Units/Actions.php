@@ -73,7 +73,7 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 0,
-         "Coordinator" => 1,
+         "Coordinator" => 0,
          "Assessor"  => 0,
          "Distributor" => 1,
          "AccessMethod" => "CheckEditAccess",

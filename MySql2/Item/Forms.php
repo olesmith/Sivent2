@@ -36,6 +36,8 @@ class ItemForms extends Fields
             $rdatas=array_keys($this->AllDatas);
         }
 
+        if (empty($rdatas)) { return array(); }
+
         foreach ($rdatas as $id => $data)
         {
             if (
@@ -153,7 +155,7 @@ class ItemForms extends Fields
         }
         elseif (count($this->ItemDataSGroups)>0)
         {
-            //we will generate a list of tables
+           //we will generate a list of tables
             $tables=array();
             $row=array();
             foreach ($this->ItemDataSGroups as $group => $groupdef)

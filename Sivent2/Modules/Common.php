@@ -13,7 +13,7 @@ class ModulesCommon extends EventMod
 
     function Unit($key="")
     {
-        return $this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit");
+        return $this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE);
     }
 
     //*

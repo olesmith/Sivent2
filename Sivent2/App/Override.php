@@ -84,4 +84,26 @@ class App_Override extends App_Handle
             $this->AppInfo();        
     }
 
+    //*
+    //* function MyApp_Interface_Phrase, Parameter list: 
+    //*
+    //* Initializes loggin, if no.
+    //*
+
+    function MyApp_Interface_Tail_Phrase()
+    {
+        return
+            $this->BR().
+            $this->DIV
+            (
+               "This system is Free Software, download: ".
+               $this->A("https://github.com/olesmith/SiVent2").
+               "",
+               array("ALIGN" => 'center')
+            ).
+            $this->BR().
+            $this->Html_HR('75%').
+            parent::MyApp_Interface_Tail_Phrase().
+            "";
+     }
 }

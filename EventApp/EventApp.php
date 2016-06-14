@@ -308,17 +308,22 @@ class EventApp extends MyEventAppMail
 
     function AppInfo()
     {
-        $table=
-            array_merge
-            (
-               $this->UnitInfoRow(),
-               $this->UnitsObj()->MyMod_Item_Table
-               (
-                  0,
-                  $this->Unit(),
-                  array(array("Title","Url","Email"))
-               )
-            );
+        $unit=$this->Unit();
+        $table=array();
+        if (!empty($unit))
+        {
+            $table=
+                array_merge
+                (
+                   $this->UnitInfoRow(),
+                   $this->UnitsObj()->MyMod_Item_Table
+                   (
+                      0,
+                      $this->Unit(),
+                      array(array("Title","Url","Email"))
+                   )
+                );
+        }
        
         $event=$this->Event();
         if (!empty($event))

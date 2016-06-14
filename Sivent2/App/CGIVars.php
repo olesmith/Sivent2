@@ -14,12 +14,14 @@ class App_CGIVars extends EventApp
         $unit=$this->CGI_GETint("Unit");
         if (empty($unit))
         {
-            $args=$this->CGI_URI2Hash();
-            $args[ "Unit" ]=1;
-
-            $uri="?".$this->CGI_Hash2URI($args);
+            $this->HandleShowUnits();
             
-            $this->CGI_Redirect("?".$this->CGI_Hash2URI($args));
+            /* $args=$this->CGI_URI2Hash(); */
+            /* $args[ "Unit" ]=1; */
+
+            /* $uri="?".$this->CGI_Hash2URI($args); */
+            
+            /* $this->CGI_Redirect("?".$this->CGI_Hash2URI($args)); */
 
             exit();
         }
