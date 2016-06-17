@@ -93,11 +93,11 @@ trait Sql_Insert
     function Sql_Insert_Item(&$item,$table="",$nocheckcols=FALSE)
     {
         $this->LastSqlInsert=$this->Sql_Insert_Item_Query($item,$table,$nocheckcols);
-        $item[ "ID" ]=$this->Sql_Insert_NextID($table);
+        //$item[ "ID" ]=$this->Sql_Insert_NextID($table);
 
         $result=$this->DB_Query($this->LastSqlInsert);
 
-         //$item[ "ID" ]=$this->Sql_Insert_LastID($result,$table);
+        $item[ "ID" ]=$this->Sql_Insert_LastID($result,$table);
 
         return $result;
     }

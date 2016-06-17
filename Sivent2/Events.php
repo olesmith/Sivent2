@@ -22,7 +22,7 @@ class Events extends EventsCertificate
     function Events($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Unit","Name","Certificates");
+        $this->AlwaysReadData=array("Unit","Name","Certificates","Collaborations","Collaborations");
         $this->Sort=array("Name");
         $this->IDGETVar="Event";
         $this->IncludeAllDefault=TRUE;

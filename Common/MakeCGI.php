@@ -4,6 +4,10 @@ include_once("MakeCGI/Cookies.php");
 
 trait MakeCGI
 {
+    var $CGI_Args_Separator="&";
+    var $CGI_SplitVars=array();
+    var $CGI_SearchVars=array();
+
     use MakeCGI_Cookies;
 
     //*
@@ -152,6 +156,29 @@ trait MakeCGI
         return $this->CGI_TreatValue($value);
     }
 
+    //*
+    //* sub CGI_POSTOrGET, Parameter list: $name
+    //*
+    //*Returns $_POST or $_GET $name key.
+    //*
+
+    function CGI_POSTOrGET($name)
+    {
+        $value="";
+        if (isset($_POST[ $name ]))
+        {
+            $value=$_POST[ $name ];
+        }
+        else
+        {
+            if (isset($_GET[ $name ]))
+            {
+                $value=$_GET[ $name ];
+            }
+        }
+
+        return $this->CGI_TreatValue($value);
+    }
     //*
     //* sub CGI_GETOrPOST, Parameter list: $name
     //*
@@ -403,5 +430,110 @@ trait MakeCGI
             return $hash[ $key ];
         }
     }
+    
+    function CGI_Query2Hash($qs="",$argshash=array())
+    {
+        if ($qs=="") { $qs=$_SERVER[ "QUERY_STRING" ]; }
+        $qs=preg_replace('/\?/',"",$qs);
+
+        if (preg_match('/\S/',$qs))
+        {
+            $qargs=preg_split('/\s*&(amp;)?\s*/',$qs);
+            foreach ($qargs as $arg)
+            {
+                $argss=preg_split('/\s*=\s*/',$arg);
+                if (isset($argss[1]))
+	            {
+                    $argshash[ $argss[0] ]=$argss[1];
+                }
+            }
+        }
+
+        return $argshash;
+    }
+    
+    function CGI_Hash2Query($argshash=array())
+    {
+        $queries=array();
+        foreach ($argshash as $arg => $value)
+        {
+            $string=$arg."=".$value;
+            array_push($queries,$string);
+        }
+
+        return join($this->CGI_Args_Separator,$queries);
+    }
+    
+    function CGI_Hidden2Hash($hash=array())
+    {
+        if (is_array($this->HiddenVars))
+        {
+            foreach ($this->HiddenVars as $var)
+            {
+                if (isset($_POST[ $var ]) && $_POST[ $var ]!="")
+                {
+                    $hash[ $var ]=$value;
+                }
+            }
+        }
+
+        return $hash;
+    }
+  function CGI_MakeHiddenFields($tabmovesdown=FALSE)
+  {
+      $fields=array();
+      if ($tabmovesdown)
+      {
+          array_push
+          (
+             $fields,
+             $this->MakeHidden
+             (
+                $this->ModuleName."_TabMovesDown",
+                $this->GetPOST($this->ModuleName."_TabMovesDown")
+             )
+          );
+      }
+
+      if (is_array($this->HiddenVars))
+      {
+          foreach ($this->HiddenVars as $var)
+          {
+              $value=$this->GetGETOrPOST($var);
+              if ($value!="") { array_push($fields,$this->MakeHidden($var,$value)); }
+          }
+      }
+
+      if (is_array($this->CGI_SplitVars))
+      {
+          foreach ($this->CGI_SplitVars as $var => $def)
+          {
+              $vvar=$this->ItemName."_".$var;
+              $val=$this->GetCGIVarValue($vvar."_Only");
+           
+              if ($val!="")
+              {
+                  array_push($fields,$this->MakeHidden($vvar."_Only",$val));
+              }
+          }
+      }
+      
+      if (is_array($this->CGI_SearchVars))
+      {
+          foreach ($this->CGI_SearchVars as $var => $def)
+          {
+              $vvar=$this->ItemName."_".$var;
+              $val=$this->GetCGIVarValue($vvar."_Search");
+           
+              if ($val!="")
+              {
+                  array_push($fields,$this->MakeHidden($vvar."_Search",$val));
+              }
+          }
+      }
+
+
+      return join("",$fields);
+  }
 }
 ?>

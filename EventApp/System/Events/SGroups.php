@@ -7,7 +7,7 @@ array
 
       "Data" => array
       (
-         "Name","Title","Name_UK","Title_UK",
+         "Initials","Name","Title","Name_UK","Title_UK",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -24,7 +24,7 @@ array
 
       "Data" => array
       (
-         "Status","Date","StartDate","EndDate","EditDate",
+         "Status","Date","Inscriptions_Public","StartDate","EndDate","EditDate",
       ),
       "Admin" => 1,
       "Person" => 0,

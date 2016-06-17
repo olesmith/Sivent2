@@ -41,6 +41,13 @@ class EventsCells extends MyEvents
         }
 
         $cell="";
+        if (!empty($event[ "Info" ]))
+        {
+            $cell.=
+                $this->MyMod_Data_Fields_Show("Info",$event).
+                $this->BR();
+        }
+        
         if (count($msgs)>0)
         {
             $cell=$this->HtmlList($msgs);

@@ -66,7 +66,7 @@ trait Sql_Select_Unique
     //*
     //* 
 
-    function Sql_Select_Unique_Col_NValues($col,$where,$table="")
+    function Sql_Select_Unique_Col_NValues($col,$where=array(),$table="")
     {
         return count
         (

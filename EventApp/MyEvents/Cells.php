@@ -194,9 +194,9 @@ class MyEventsCells extends MyEventsFriend
             $this->Sql_Select_Unique_Col_Values
             (
                "ID",
-               "StartDate<'".$today."'".
+               "StartDate<='".$today."'".
                " AND ".
-               "EndDate>'".$today."'",
+               "EndDate>='".$today."'",
                "ID"
             );
     }

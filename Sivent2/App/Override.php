@@ -69,7 +69,42 @@ class App_Override extends App_Handle
         parent::MyApp_Login_SetData($logindata);
         $this->CheckEventAccess();
     }
+    
+    //*
+    //* function MyApp_Login_PostMessage , Parameter list: 
+    //*
+    //* Returns post message to Login form.
+    //*
 
+    function MyApp_Login_PostMessage()
+    {
+        return
+            preg_replace
+            (
+               '/#Unit/',
+               $this->Unit("ID"),
+               $this->FrameIt
+               (
+                 $this->Div
+                 (
+                    $this->MyLanguage_GetMessage("Sivent_Old_Message"),
+                    array
+                    (
+                       "CLASS" => 'postloginmsg',
+                    )
+                 ),
+                 array
+                 (
+                    "BORDER" => 1,
+                    "WIDTH" => '80%',
+                    "ALIGN" => 'center',
+                 )
+                )
+            ).
+            "<BR>".
+            parent::MyApp_Login_PostMessage();
+    }
+    
     //*
     //* function MyApp_Interface_Head, Parameter list: 
     //*

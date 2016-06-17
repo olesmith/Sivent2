@@ -99,15 +99,8 @@ trait MyMod_Data_Fields_Show
                )
         {
             $value=$this->MyMod_Data_Fields_Text_Show($data,$item,$value);
+            $value=html_entity_decode($value);
         }
-        /* elseif ( */
-        /*           !empty($this->ItemData[ $data ][ "Type" ]) */
-        /*           && */
-        /*           $this->ItemData[ $data ][ "Type" ]=="TEXT" */
-        /*        ) */
-        /* { */
-        /*     return "text"; */
-        /* } */
         elseif (
                   $this->ItemData[ $data ][ "Sql" ]=="TEXT"
                   ||

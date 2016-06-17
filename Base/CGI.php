@@ -347,58 +347,7 @@ class CGI extends Lists
 
   function MakeHiddenFields($tabmovesdown=FALSE)
   {
-      $fields=array();
-      if ($tabmovesdown)
-      {
-          array_push
-          (
-             $fields,
-             $this->MakeHidden
-             (
-                $this->ModuleName."_TabMovesDown",
-                $this->GetPOST($this->ModuleName."_TabMovesDown")
-             )
-          );
-      }
-
-      if (is_array($this->HiddenVars))
-      {
-          foreach ($this->HiddenVars as $var)
-          {
-              $value=$this->GetGETOrPOST($var);
-              if ($value!="") { array_push($fields,$this->MakeHidden($var,$value)); }
-          }
-      }
-
-      if (is_array($this->SplitVars))
-      {
-          foreach ($this->SplitVars as $var => $def)
-          {
-              $vvar=$this->ItemName."_".$var;
-              $val=$this->GetCGIVarValue($vvar."_Only");
-           
-              if ($val!="")
-              {
-                  array_push($fields,$this->MakeHidden($vvar."_Only",$val));
-              }
-          }
-      }
-      if (is_array($this->SearchVars))
-      {
-          foreach ($this->SearchVars as $var => $def)
-          {
-              $vvar=$this->ItemName."_".$var;
-              $val=$this->GetCGIVarValue($vvar."_Search");
-           
-              if ($val!="")
-              {
-                  array_push($fields,$this->MakeHidden($vvar."_Search",$val));
-              }
-          }
-      }
-
-
-      return join("",$fields);
+      return $this->CGI_MakeHiddenFields($tabmovesdown);
   }
 
   function MakeHiddenQuery()
@@ -419,6 +368,7 @@ class CGI extends Lists
 
   function Hidden2Hash($hash=array())
   {
+      return $this->CGI_Hidden2Hash($hash);
       if (is_array($this->HiddenVars))
       {
           foreach ($this->HiddenVars as $var)
@@ -436,36 +386,15 @@ class CGI extends Lists
 
   function Query2Hash($qs="",$argshash=array())
   {
-      if ($qs=="") { $qs=$_SERVER[ "QUERY_STRING" ]; }
-      $qs=preg_replace('/\?/',"",$qs);
-
-      if (preg_match('/\S/',$qs))
-      {
-          $qargs=preg_split('/\s*&(amp;)?\s*/',$qs);
-          foreach ($qargs as $arg)
-          {
-              $argss=preg_split('/\s*=\s*/',$arg);
-              if (isset($argss[1]))
-	          {
-                  $argshash[ $argss[0] ]=$argss[1];
-              }
-          }
-      }
-
-      return $argshash;
+      return $this->CGI_Query2Hash($qs,$argshash);
   }
 
   function Hash2Query($argshash)
   {
-      $queries=array();
-      foreach ($argshash as $arg => $value)
-      {
-          $string=$arg."=".$value;
-          array_push($queries,$string);
-      }
-
-      return join($this->URL_Args_Separator,$queries);
+      return $this->CGI_Hash2Query($argshash);
   }
+
+  
 
   function QueryString($args=array())
   {

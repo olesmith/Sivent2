@@ -52,11 +52,11 @@ class HtmlForm extends HtmlInput
         $anchor=preg_replace('/#/',"",$anchor);
 
 
-        $args=$this->Query2Hash();
-        $args=$this->Query2Hash($action,$args);
-        $args=$this->Hidden2Hash($args);
+        $args=$this->CGI_Query2Hash();
+        $args=$this->CGI_Query2Hash($action,$args);
+        $args=$this->CGI_Hidden2Hash($args);
 
-        $query=$this->Hash2Query($args);
+        $query=$this->CGI_Hash2Query($args);
 
         $this->AddCommonArgs2Hash($args);
 
@@ -64,7 +64,7 @@ class HtmlForm extends HtmlInput
         {
             $aargs=$matches[2];
             $action=$matches[1];
-            $args=$this->Query2Hash($aargs,$args);
+            $args=$this->CGI_Query2Hash($aargs,$args);
         }
 
         if (method_exists($this,"GroupDataCGIVar"))
@@ -88,7 +88,7 @@ class HtmlForm extends HtmlInput
             }
         }
 
-        $options[ "ACTION" ]="?".$this->Hash2Query($args)."#".$anchor;
+        $options[ "ACTION" ]="?".$this->CGI_Hash2Query($args)."#".$anchor;
         $options[ "ENCTYPE" ]="multipart/form-data";
         if ($enctype!=0)
         {
@@ -114,7 +114,7 @@ class HtmlForm extends HtmlInput
         $hiddens="";
         if ($nohiddens)
         {
-            $hiddens=$this->MakeHiddenFields();
+            $hiddens=$this->CGI_MakeHiddenFields();
         }
 
         return 

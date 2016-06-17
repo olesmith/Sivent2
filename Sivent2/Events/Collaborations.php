@@ -37,7 +37,7 @@ class EventsCollaborations extends EventsCreate
         if ($res)
         {
             $res=FALSE;
-            if ($item[ "Collaborations_Inscriptions" ]==2)
+            if (!empty($item[ "Collaborations_Inscriptions" ]) && $item[ "Collaborations_Inscriptions" ]==2)
             {
                 $res=TRUE;
             }

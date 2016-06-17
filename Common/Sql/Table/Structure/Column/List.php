@@ -23,20 +23,21 @@ trait Sql_Table_Structure_Column_List
     
 
     //*
-    //* function Sql_Table_Columns_Names_Query, Parameter list: $table
+    //* function Sql_Table_Columns_Names_Where, Parameter list:
     //*
-    //* Returns query for column names in $table.
+    //* Returns where for column names in $table.
     //* 
 
-    function Sql_Table_Columns_Names_Query($table)
+    function Sql_Table_Columns_Names_Where($table="")
     {
         //We need it here!
         if (empty($table)) { $table=$this->SqlTableName($table); }
-
+        
         $hash=array
         (
            'table_name' => $table,
         );
+        
         $type=$this->DB_Dialect();
 
         $query="";
@@ -46,17 +47,32 @@ trait Sql_Table_Structure_Column_List
         }
         elseif ($type=="pgsql")
         {
-            $hash[ 'table_catalog' ]=$this->DBHash("DB");
+            //$hash[ 'table_catalog' ]=$this->DBHash("DB");
         }
-        
-        $query=
+
+        return $hash;
+    }
+
+    
+    //*
+    //* function Sql_Table_Columns_Names_Query, Parameter list: $table
+    //*
+    //* Returns query for column names in $table.
+    //* 
+
+    function Sql_Table_Columns_Names_Query($table)
+    {
+         return
             "SELECT ".
             " column_name ".
             " FROM ".
-            "INFORMATION_SCHEMA.COLUMNS WHERE ".
-            $this->Sql_Table_Column_Hash_Qualify($hash).
+            "INFORMATION_SCHEMA.COLUMNS".
+            " WHERE ".
+            $this->Sql_Table_Column_Hash_Qualify
+            (
+               $this->Sql_Table_Columns_Names_Where($table)
+            ).
             "";
-
         
         return $query;
     }
@@ -71,7 +87,7 @@ trait Sql_Table_Structure_Column_List
     {
         $query=$this->Sql_Table_Columns_Names_Query($table);
         $result=$this->DB_Query($query);
-        
+
         $fieldnames=array();
         while ($row=$this->DB_Fetch_Assoc($result))
         {

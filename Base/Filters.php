@@ -106,34 +106,7 @@ class Filters extends Time
 
     function FilterHash($lines,$hash,$prekey="")
     {
-        $datas=array();
-        if ($hash) { $datas=array_keys($hash); }
-
-        //this way shortest filtered first (#Line before #Lines)
-        sort($datas);
-
-        $datas=array_reverse($datas);
-        foreach ($datas as $data)
-        {
-            $value=$hash[ $data ];
-            $rdata=$prekey.$data;
-
-            if (!is_array($value))
-            {
-                $lines=preg_replace('/#'.$rdata.'\b/',$value,$lines);
-                $lines=preg_replace('/#'.$rdata.'_/',$value."_",$lines);
-                while (preg_match("/#{([^}]+)}$rdata/",$lines,$matches))
-                {
-                    $format=$matches[1];
-                    $value=sprintf($format,$value);
-
-                    $format=preg_replace('/%/',"\\%",$format);
-                    $lines=preg_replace('/'.$matches[0].'/',$value,$lines);
-                }
-            }
-        }
-
-        return $lines;
+        return $this->MyHash_Filter($lines,$hash,$prekey);
     }
 
     //*

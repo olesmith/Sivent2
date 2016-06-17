@@ -36,7 +36,7 @@ trait DB_Fetch
 
     function DB_Fetch_Assoc_List($result,$byid=FALSE)
     {
-        return $this->DB_Method_Call("Fetch_Assoc_List",$result);
+         return $this->DB_Method_Call("Fetch_Assoc_List",$result);
     }
 
     //*

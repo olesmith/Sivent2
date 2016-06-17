@@ -7,9 +7,9 @@ array
 
       "Data" => array
       (
-         "Name","Title","Place","Place_Address","Place_Site",
+         "Initials","Name","Title","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
-         "Date","AnnouncementLink","Announcement"
+         "Date","AnnouncementLink","Announcement",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -25,7 +25,7 @@ array
        "Name_UK" => "Components",
        "Data" => array
        (
-          "Selection","Certificates","Collaborations","Caravans","Submissions"
+          "Payments","Selection","Certificates","Collaborations","Caravans","Submissions","Info",
        ),
 
        "Person" => 0,

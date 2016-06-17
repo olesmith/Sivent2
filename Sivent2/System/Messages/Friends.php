@@ -1,5 +1,10 @@
 array
 (
+   "Friend_Events_Table_Title" => array
+   (
+      "Name" => "Eventos:",
+      "Name_UK" => "Events:",
+   ),
    "Friends_Collaborators_SelectField" => array
    (
       "Name" => "Selecione Cadastro:",

@@ -12,10 +12,9 @@ array
          //"Datas","GroupDatas",
          "Date","Title","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
-         "Status","Inscriptions_Public",
+         "Status","Inscriptions_Public","Payments",
          "Inscribe","Inscription",
-         "NoOfInscriptionsCell",
-         "Event_Inscriptions_InfoCell"
+         "NoOfInscriptionsCell"
       ),
       "Admin" => 1,
       "Person" => 0,

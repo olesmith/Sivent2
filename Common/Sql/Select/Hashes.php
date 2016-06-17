@@ -9,7 +9,7 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes_Query($where="",$fields,$orderby="",$table="",$limit="")
+    function Sql_Select_Hashes_Query($where="",$fields=array(),$orderby="",$table="",$limit="")
     {
         if (empty($table)) { $table=$this->SqlTableName(); }
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }

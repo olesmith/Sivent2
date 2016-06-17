@@ -21,6 +21,8 @@ trait Sql_Table_Structure_Column_Read
                 $this->ApplicationObj()->TablesColumns[ $table ][ $field ]=TRUE;
             }
         }
+
+        return $this->ApplicationObj()->TablesColumns[ $table ];
     }
 }
 ?>

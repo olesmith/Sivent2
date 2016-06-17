@@ -1,5 +1,15 @@
 array
 (
+   "Sivent_Old_Message" => array
+   (
+      "Name" =>
+      "Sivent2 é uma versão nova do antigo SiVent. Certificados emitidos ".
+      "pelo sistema antigo, continuam disponíveis acessando: ".
+      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>".
+      "Cadastros do sistema antigo não foram transferidos. Todos precisam recadastrar-se aqui no Sivent2.",
+      "Name_UK" =>
+      "Inscriptions Open",
+   ),
    "Events_Open_Title" => array
    (
       "Name" => "Inscrições Abertas",

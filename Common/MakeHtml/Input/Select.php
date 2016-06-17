@@ -37,7 +37,7 @@ trait Html_Input_Select
                 {
                     $selectoptions[ "TITLE" ]=
                         "Selecionado: ".
-                        $this->FilterHash($titlefilter,$item);
+                        $this->MyHash_Filter($titlefilter,$item);
                 }
             }
         }
@@ -68,10 +68,10 @@ trait Html_Input_Select
 
         if (!empty($titlefilter))
         {
-            $options[ "TITLE" ]=$this->FilterHash($titlefilter,$item);
+            $options[ "TITLE" ]=$this->MyHash_Filter($titlefilter,$item);
         }
 
-        return $this->Html_Tags("OPTION",$this->FilterHash($namefilter,$item),$options);
+        return $this->Html_Tags("OPTION",$this->MyHash_Filter($namefilter,$item),$options);
 
     }
 

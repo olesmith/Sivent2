@@ -38,7 +38,7 @@ trait Sql_Table
         {
             $res="`".$table."`";
         }
-        elseif ($type=="pgsql")
+        elseif ($type=="pgsql" && preg_match('/[A-Z]/',$table))
         {
             $res='"'.$table.'"';
         }

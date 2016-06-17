@@ -117,7 +117,10 @@ class Table extends TableLanguage
             foreach (array("ItemName","ItemsName") as $key)
             {
                 $acc=$key.$lang;
-                $value=preg_replace('/#'.$acc.'/',$this->$acc,$value);
+                if (!is_array($value))
+                {
+                    $value=preg_replace('/#'.$acc.'/',$this->$acc,$value);
+                }
             }
         }
         

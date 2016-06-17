@@ -91,6 +91,18 @@ trait MakeHtml
     }
 
     //*
+    //* sub Html_H, Parameter list: $h,$contents,$options=array()
+    //*
+    //* Returns H tag.
+    //*
+    //*
+
+    function Html_H($h,$contents,$options=array())
+    {
+        return $this->Html_Tags("H".$h,$contents,$options);
+    }
+
+    //*
     //* sub Html_IMG, Parameter list: $src,$alttext="",$options=array()
     //*
     //* Returns IMG tag.
