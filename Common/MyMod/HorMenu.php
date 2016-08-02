@@ -2,6 +2,7 @@
 
 include_once("HorMenu/Action.php");
 include_once("HorMenu/Help.php");
+include_once("HorMenu/Info.php");
 
 trait MyMod_HorMenu
 {
@@ -9,24 +10,7 @@ trait MyMod_HorMenu
 
     use 
         MyMod_HorMenu_Action,
-        MyMod_HorMenu_Help;
-
-    //*
-    //* function MyMod_HorMenu_Gern, Parameter list: $plural=FALSE,$id=""
-    //*
-    //* Prints horisontal menu of Singular and Plural actions.
-    //*
-
-    function MyMod_HorMenu_Gen($plural=FALSE,$id="")
-    {
-        return
-            join
-            (
-               "",
-               $this->MyMod_HorMenu_Menues(!$plural,$id)
-            );
-    }
-
+        MyMod_HorMenu_Info;
 
     //*
     //* function MyMod_HorMenu_Echo, Parameter list: $plural=FALSE,$id=""
@@ -63,6 +47,24 @@ trait MyMod_HorMenu
         $this->MyMod_HorMenu_Send=1;
     }
 
+    //*
+    //* function MyMod_HorMenu_Gern, Parameter list: $plural=FALSE,$id=""
+    //*
+    //* Prints horisontal menu of Singular and Plural actions.
+    //*
+
+    function MyMod_HorMenu_Gen($plural=FALSE,$id="")
+    {
+        return
+            $this->Anchor("HorMenu").
+            join
+            (
+               "",
+               $this->MyMod_HorMenu_Menues(!$plural,$id)
+            );
+    }
+
+
 
     //*
     //* function MyMod_HorMenu_Menues, Parameter list: $singular,$id=""
@@ -73,14 +75,14 @@ trait MyMod_HorMenu
     function MyMod_HorMenu_Menues($singular,$id="")
     {
         $menues=array();
-        foreach ($this->MyMod_HorMenu_Get($singular) as $mid => $menu)
+        foreach ($this->MyMod_HorMenu_Get($singular) as $cssclass => $menu)
         {
             if (count($menu)>0)
             {
                 array_push
                 (
                    $menues,
-                   $this->MyMod_HorMenu_Action($menu,"ptablemenu",$id)
+                   $this->MyMod_HorMenu_Actions($menu,$cssclass,$id)
                 );
             }
         }
@@ -126,9 +128,9 @@ trait MyMod_HorMenu
     {
         return array
         (
-           $this->MyMod_HorMenu_Menu_Actions("SingularPlural"),
-           $this->MyMod_HorMenu_Menu_Actions("ActionsSingular"),
-           $this->MyMod_HorMenu_Menu_Actions("Singular"),
+           "sptablemenu" => $this->MyMod_HorMenu_Menu_Actions("SingularPlural"),
+           "atablemenu"  => $this->MyMod_HorMenu_Menu_Actions("ActionsSingular"),
+           "stablemenu"  => $this->MyMod_HorMenu_Menu_Actions("Singular"),
         );
     }
 
@@ -140,11 +142,17 @@ trait MyMod_HorMenu
 
     function MyMod_HorMenu_Plurals()
     {
+        $plurals=$this->MyMod_HorMenu_Menu_Actions("Plural");
+        if (preg_match('/^Admin$/',$this->Profile()))
+        {
+            array_push($plurals,"Info");
+        }
+        
         return array
         (
-           $this->MyMod_HorMenu_Menu_Actions("SingularPlural"),
-           $this->MyMod_HorMenu_Menu_Actions("Plural"),
-           $this->MyMod_HorMenu_Menu_Actions("ActionsPlural"),
+           "sptablemenu" => $this->MyMod_HorMenu_Menu_Actions("SingularPlural"),
+           "ptablemenu"  => $plurals,
+           "atablemenu"  => $this->MyMod_HorMenu_Menu_Actions("ActionsPlural"),
         );
     }
 }

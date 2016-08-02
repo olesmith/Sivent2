@@ -38,6 +38,10 @@ trait MyMod_Data_Fields_Edit
         {
             return "";
         }
+        elseif ($this->ItemData[ $data ][ "IsColor" ])
+        {
+           $value=$this->MyMod_Data_Fields_Color_Field($data,$item,1,$rdata);
+        }
         elseif (!empty($this->ItemData[ $data ][ "Derived" ]))
         {
             $value=$item[ $data ];

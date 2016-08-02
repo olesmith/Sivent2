@@ -205,17 +205,15 @@ function MakeTextArea($name,$rows,$cols,$value,$wrap="physical",$options=array()
 
 function HtmlDateInputField($name,$date="",$options=array())
 {
-    //if (empty($date) && $this->ItemData[ $date ][ "Default" ]=="today") { $date=$this->TimeStamp2DateSort(); }
-
     if (empty($options[ "TITLE" ]))
     {
-        $options[ "TITLE" ]="dd/mm/yyyy - /mm/yyyy para todos os dias do mês...";
+        $options[ "TITLE" ]="dd/mm/yyyy";
     }
 
-    if (!preg_match('/\//',$date))
-    {
-        $date=$this->SortTime2Date($date);
-    }
+    /* if (!preg_match('/\//',$date)) */
+    /* { */
+    /*     $date=$this->SortTime2Date($date); */
+    /* } */
 
     return $this->MakeInput
     (
@@ -254,72 +252,42 @@ function HtmlDateInputValue($name,$search=FALSE,$default=TRUE)
            $this->CurrentMonth(),
            $this->CurrentYear()
         );
+        
+        $year=$this->CurrentYear();
+        $mon=$this->CurrentMonth();
+        $day=$this->CurrentDate();
     }
 
     $date=preg_replace('/[^\d]/',"/",$date);
-    $dates=preg_split('/\//',$date);
-
-    $year=$this->CurrentYear();
-    if ($search)
+    
+    $year=$mon=$day="";
+    if (!empty($date))
     {
-        $year="____";
-    }
-
-    if (count($dates)>0)
-    {
+        $dates=preg_split('/\//',$date);
         $year=array_pop($dates);
-    }
-
-    if ($year!="____" && $year<100)
-    {
-        if ($year<20) {  $year+=2000; }
-        else          {  $year+=1900; }
-    } 
-
-    $mon=$this->CurrentMonth();
-    if ($search)
-    {
-        $mon="__";
-    }
-
-    if (count($dates)>0)
-    {
-        $mon=array_pop($dates);
-    }
-
-    if ($mon!="__")
-    {
-        if ($mon>0)
+        if ($year<100)
         {
-            $mon=sprintf("%02d",$mon);
+            if ($year<20) {  $year+=2000; }
+            else          {  $year+=1900; }
         }
-        else
+
+        if (count($dates)>0)
         {
-            $mon="__";
-        }
-    }
+            $mon=array_pop($dates);
+            if ($mon>0)
+            {
+                $mon=sprintf("%02d",$mon);
+            }
 
-
-    $day=$this->CurrentDate();
-    if ($search)
-    {
-        $day="__";
-    }
-
-    if (count($dates)>0)
-    {
-        $day=array_pop($dates);
-    }
-
-    if ($day!="__")
-    {
-        if ($day>0)
-        {
-            $day=sprintf("%02d",$day);
-        }
-        else
-        {
-            $day="__";
+            $day=$this->CurrentDate();
+            if (count($dates)>0)
+            {
+                $day=array_pop($dates);
+                if ($day>0)
+                {
+                    $day=sprintf("%02d",$day);
+                }
+            }
         }
     }
 

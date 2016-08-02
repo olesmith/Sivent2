@@ -30,24 +30,35 @@ class HtmlTable extends HtmlList
 
     
     //*
-    //* function FrameIt, Parameter list: $content,$options=array()
+    //* function FrameIt, Parameter list: $content,$options=array(),$troptions=array(),$tdoptions=array()
     //*
     //* Frames content.
     //*
 
-    function FrameIt($content,$options=array())
+    function FrameIt($content,$options=array(),$troptions=array(),$tdoptions=array())
     {
         if (!$this->LatexMode())
         {
             $options[ "ALIGN" ]='center';
             $options[ "FRAME" ]='border';
+            if (is_array($content))
+            {
+                return $this->Html_Table("",$content,$options,$troptions,$tdoptions);
+            }
+            
             $content=$this->HtmlTags
             (
                "TABLE",
                $this->HtmlTags
                (
                   "TR",
-                  $this->HtmlTags("TD",$content)
+                  $this->HtmlTags
+                  (
+                     "TD",
+                     $content,
+                     $tdoptions
+                  ),
+                  $troptions
                ),
                $options
             );

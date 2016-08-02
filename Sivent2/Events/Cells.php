@@ -3,9 +3,30 @@
 class EventsCells extends MyEvents
 {
     //*
-    //* function Event_Caravans_Has, Parameter list: $edit,$item=array()
+    //* function Event_Caravans_Info, Parameter list: $event=array()
     //*
-    //* Returns TRUE if event has collaborations.
+    //* Generates event info text.
+    //*
+
+    function Event_Inscriptions_Info($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        $text="";
+        if (!empty($event[ "Info" ]))
+        {
+            $text=
+                $this->MyMod_Data_Fields_Show("Info",$event).
+                $this->BR();
+        }
+
+        return $text;
+    }
+    
+     //*
+    //* function Event_Caravans_InfoCell, Parameter list: $edit,$item=array()
+    //*
+    //* Generates event info cell;
     //*
 
     function Event_Inscriptions_InfoCell($event=array())
@@ -40,13 +61,7 @@ class EventsCells extends MyEvents
             );
         }
 
-        $cell="";
-        if (!empty($event[ "Info" ]))
-        {
-            $cell.=
-                $this->MyMod_Data_Fields_Show("Info",$event).
-                $this->BR();
-        }
+        $cell=$this->Event_Inscriptions_Info($event);
         
         if (count($msgs)>0)
         {

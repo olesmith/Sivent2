@@ -32,8 +32,10 @@ trait Sql_Select_Hash
 
     function Sql_Select_Hash($where,$sqldata=array(),$noecho=FALSE,$table="")
     {
-        if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
         if (empty($table)) { $table=$this->SqlTableName(); }
+        if (!is_array($where) && preg_match('/^\d+$/',$where)) { $where=array("ID" => $where); }
+        
+        if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
 
         if (count($sqldata)==0) { $sqldata=array(); }
 

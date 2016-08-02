@@ -32,6 +32,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "SubAction" => "Inscriptions",
     ),
    "Icons" => array
    (
@@ -50,5 +51,6 @@ array
       "Admin" => 1,
       "Friend"     => 0,
       "Coordinator" => 1,
+      "SubAction" => "Icons",
     ),
 );

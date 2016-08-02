@@ -23,7 +23,7 @@ trait MyActions_Defaults
             "Person"        => FALSE,
             "Admin"         => FALSE,
             "AccessMethod"  => "",
-            "NameMethod"   => "",
+            "NameMethod"    => "",
             "TitleMethod"   => "",
             "Edits"         => FALSE,
             "Handler"       => "",
@@ -33,7 +33,8 @@ trait MyActions_Defaults
             "Target"        => FALSE,
             "GenMethod"     => FALSE,
             "NonPostVars"   => array(),
-            "NonGetVars"   => array(),
+            "NonGetVars"    => array(),
+            "Anchor"        => "HorMenu",
             "AltAction"     => FALSE, //alternator to inlcude in menues, when action is current
         );
 

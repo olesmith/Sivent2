@@ -2,7 +2,7 @@ array
 (
     "Certificates" => array
     (
-       "Name" => "Certificadooo",
+       "Name" => "Certificado",
        "Name_UK" => "Certificate",
        "Data" => array
        (
@@ -13,7 +13,7 @@ array
        "Person" => 1,
        "Public" => 1,
        "Admin" => 2,
-       "Friend"     => 1,
+       "Friend"     => 0,
        "Coordinator" => 2,
        //"GenTableMethod" => "InscriptionCertificateTable",
        "Single" => TRUE,

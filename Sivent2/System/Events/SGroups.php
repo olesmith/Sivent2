@@ -17,7 +17,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
-      "Single" => TRUE,
+      "Single" => FALSE,
     ),
     "Components" => array
     (
@@ -25,7 +25,9 @@ array
        "Name_UK" => "Components",
        "Data" => array
        (
-          "Payments","Selection","Certificates","Collaborations","Caravans","Submissions","Info",
+          "Payments","Selection",
+          "Certificates","Collaborations","Caravans",
+          "Submissions","Schedule_Public","Info",
        ),
 
        "Person" => 0,
@@ -34,25 +36,6 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
        //"GenTableMethod" => "Event_Collaborations_Table",
-    ),
-    "Certificates" => array
-    (
-       "Name" => "Certificados",
-       "Name_UK" => "Certificates",
-       "Data" => array
-       (
-          "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
-          "GenCert",
-          "Certificates_Latex_Sep_Vertical",
-          "Certificates_Latex_Sep_Horisontal",
-        ),
-
-       "Person" => 0,
-       "Public" => 1,
-       "Admin" => 1,
-       "Friend"     => 0,
-       "Coordinator" => 1,
-       "GenTableMethod" => "Event_Certificate_Table",
     ),
     "Collaborations" => array
     (
@@ -69,6 +52,7 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
        "AccessMethod" => "Event_Collaborations_Has",
+       "SubAction" => "Collaborations",
     ),
     "Caravans" => array
     (
@@ -88,15 +72,17 @@ array
        "Coordinator" => 1,
        "GenTableMethod" => "Event_Caravans_Table_Html",
        "AccessMethod" => "Event_Caravans_Has",
+       "SubAction" => "Caravans",
     ),
     "Submissions" => array
     (
-       "Name" => "Submissões de Trabalhos",
-       "Name_UK" => "Submissions",
+       "Name" => "Submissão de Atividades",
+       "Name_UK" => "Submission of Activities",
        "Data" => array
        (
-        "Submissions","Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate","Submissions_Public",
-        "Certificates_Submissions_TimeLoad",
+          "Submissions","Submissions_Inscriptions",
+          "Submissions_StartDate","Submissions_EndDate","Submissions_Public",
+          "Certificates_Submissions_TimeLoad",
        ),
 
        "Person" => 1,
@@ -106,6 +92,45 @@ array
        "Coordinator" => 1,
        "GenTableMethod" => "Event_Submissions_Table",
        "AccessMethod" => "Event_Submissions_Has",
+       "SubAction" => "Submissions",
+    ),
+    "PreInscriptions" => array
+    (
+       "Name" => "Preinscrições",
+       "Name_UK" => "PreInscriptions",
+       "Data" => array
+       (
+          "PreInscriptions_StartDate","PreInscriptions_EndDate","PreInscriptions_MustHavePaid"
+       ),
+
+       "Person" => 1,
+       "Public" => 1,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       //"GenTableMethod" => "Event_Submissions_Table",
+       "AccessMethod" => "Event_PreInscriptions_Has",
+       "SubAction" => "PreInscriptions",
+    ),
+    "Certificates" => array
+    (
+       "Name" => "Certificados",
+       "Name_UK" => "Certificates",
+       "Data" => array
+       (
+          "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
+          "GenCert",
+          "Certificates_Latex_Sep_Vertical",
+          "Certificates_Latex_Sep_Horisontal",
+        ),
+
+       "Person" => 0,
+       "Public" => 1,
+       "Admin" => 1,
+       "Friend"     => 0,
+       "Coordinator" => 1,
+       "GenTableMethod" => "Event_Certificate_Table",
+       "SubAction" => "Certificates",
     ),
     "Certificate_Signatures" => array
     (
@@ -124,6 +149,7 @@ array
        "Friend"     => 0,
        "Coordinator" => 1,
        "AccessMethod" => "Event_Certificates_Has",
+       "SubAction" => "Certificates",
     ),
     "Certificate_Latex" => array
     (
@@ -141,6 +167,7 @@ array
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => "Event_Certificates_Has",
+       "SubAction" => "Certificates",
     ),
     "Submissions_Latex" => array
     (
@@ -160,6 +187,7 @@ array
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => array("Event_Submissions_Has","Event_Certificates_Has"),
+       "SubAction" => "Submissions",
     ),
     "Collaborators_Latex" => array
     (
@@ -178,6 +206,7 @@ array
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => array("Event_Collaborations_Has","Event_Certificates_Has"),
+       "SubAction" => "Collaborators",
     ),
     "Caravaneers_Latex" => array
     (
@@ -196,5 +225,6 @@ array
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => array("Event_Caravans_Has","Event_Certificates_Has"),
+       "SubAction" => "Caravans",
     ),
 );

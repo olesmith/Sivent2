@@ -110,6 +110,18 @@ trait MyApp_Interface_LeftMenu_Generate
 
                 if (!empty($url))
                 {
+                    $anchor="HorMenu";
+                    if (isset($submenu[ $menuid ][ "Anchor" ]))
+                    {
+                        $anchor=$submenu[ $menuid ][ "Anchor" ];
+                    }
+                    
+                    $noqueryargs=FALSE;
+                    if (isset($submenu[ $menuid ][ "OmitArgs" ]))
+                    {
+                        $noqueryargs=$submenu[ $menuid ][ "OmitArgs" ];
+                    }
+                    
                     $url=
                         $this->MyApp_Interface_LeftMenu_Bullet("+").
                         $this->Href
@@ -118,9 +130,20 @@ trait MyApp_Interface_LeftMenu_Generate
                            $this->GetRealNameKey($submenu[ $menuid ],"Name"),
                            $this->GetRealNameKey($submenu[ $menuid ],"Title"),
                            $this->GetRealNameKey($submenu[ $menuid ],"Target"),
-                           "leftmenulinks"
+                           "leftmenulinks",
+                           FALSE,
+                           array(),
+                           "HorMenu"
                         );
-                }
+                    
+                    if (isset($submenu[ $menuid ][ "OmitArgs" ]))
+                    {
+                        foreach ($submenu[ $menuid ][ "OmitArgs" ] as $arg)
+                        {
+                            $url=preg_replace('/'.$arg.'=\d+&?/',"",$url);
+                        }
+                    }
+                 }
                 else
                 {
                     $url=

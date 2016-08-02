@@ -41,7 +41,7 @@ class App_Has extends App_Head_Table
     //*
     //* function SubmissionsPublic, Parameter list:
     //*
-    //* Checks whether current event has Submissions.
+    //* Checks whether current event has public Submissions.
     //* 
     //*
 
@@ -61,4 +61,17 @@ class App_Has extends App_Head_Table
     {
         return $this->EventsObj()->Event_Certificates_Has();
     }
+    
+    //*
+    //* function SchedulePublic, Parameter list:
+    //*
+    //* Checks whether current event has a published Schedule.
+    //* 
+    //*
+
+    function SchedulePublic()
+    {
+        return $this->EventsObj()->Event_Schedule_Public();
+    }
+    
 }

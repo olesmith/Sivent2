@@ -11,7 +11,7 @@ class ModPerms extends SubModules
 
     function HandleModPerms()
     {
-        $this->FriendsObj()->SavePrintDocHeads();
+        $this->FriendsObj()->MyMod_Handle_DocHeads();
 
         $this->ModulesTable();
 

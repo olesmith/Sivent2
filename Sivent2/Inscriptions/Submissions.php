@@ -158,50 +158,6 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     }
     
     //*
-    //* function Inscription_Submissions_Table, Parameter list: 
-    //*
-    //* Creates inscrition collaboration html table.
-    //*
-
-    function Inscription_Submissions_Table($edit,$item,$group="")
-    {
-        $this->SubmissionsObj()->Sql_Table_Structure_Update();
-        
-        $this->SubmissionsObj()->Actions("Edit");
-        $this->SubmissionsObj()->ItemData("ID");
-        $this->SubmissionsObj()->ItemDataGroups("Basic");
-        
-        if (empty($group)) { $group="Submissions"; }
-        
-        if (empty($this->ItemDataSGroups[ $group ]))
-        {
-            $this->ItemDataSGroups=
-                $this->ReadPHPArray("System/Inscriptions/SGroups.".$group.".php",$this->ItemDataSGroups);
-        }
-        
-        if ($edit==1 && $this->CGI_POSTint("Update")==1)
-        {
-            $this->Inscription_Group_Update($group,$item);
-        }
-        
-        return
-            /* $this->H */
-            /* ( */
-            /*    5, */
-            /*    $this->MyLanguage_GetMessage("Inscription_Period"). */
-            /*    ", ". */
-            /*    $this->GetRealNameKey($this->ItemDataSGroups[ $group ]). */
-            /*    ": ". */
-            /*    $this->EventsObj()->Event_Submissions_Inscriptions_DateSpan(). */
-            /*    ". ". */
-            /*    $this->EventsObj()->Event_Submissions_Inscriptions_Status() */
-            /* ). */
-            $this->Inscription_Submissions_Table_Show($edit,$item).
-            "";
-    }
-    
-    
-    //*
     //* function Inscription_Submissions_Table_Show, Parameter list: $edit,$item
     //*
     //* Shows currently allocated collaborations for inscription in $item.

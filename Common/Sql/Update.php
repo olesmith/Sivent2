@@ -100,9 +100,7 @@ trait Sql_Update
 
     function Sql_Update_Item_Value_Set($id,$var,$value,$idvar="ID",$table="")
     {
-        if (empty($table)) { $table=$this->SqlTableName($table); }
-        
-        $query=$this->Sql_Update_Item_Value_Set_Query($id,$var,$value,$idvar,$table);
+       $query=$this->Sql_Update_Item_Value_Set_Query($id,$var,$value,$idvar,$table);
 
         return $this->DB_Query($query);
     }
@@ -180,6 +178,8 @@ trait Sql_Update
         $query=$this->Sql_Update_Item_Values_Set_Query($vars,$item,$table);
         
         $this->DB_Query($query);
+
+        return $query;
     }
     
     //*

@@ -107,6 +107,17 @@ class App_Head_Table extends App_Events
             );
         }
        
+        if ($this->EventsObj()->Event_PreInscriptions_Has($event))
+        {
+            $this->AppEventTableGroup
+            (
+               $table,
+               $event,
+               "Event_Inscriptions_PreInscriptions_Open",
+               array("PreInscriptions_StartDate","PreInscriptions_EndDate","PreInscriptions_MustHavePaid")
+            );
+        }
+       
         return $table;
     }
     
@@ -138,6 +149,21 @@ class App_Head_Table extends App_Events
                    ),
                 );
         }
+        elseif (count($logos)==1)
+        {
+            return
+                array
+                (
+                   array
+                   (
+                      $this->MultiCell($logos[0],6),
+                   ),
+                   array
+                   (
+                      $this->MultiCell($titlecell,6),
+                   ),
+                );
+        }
         else
         {
             return
@@ -145,7 +171,7 @@ class App_Head_Table extends App_Events
                 (
                    array
                    (
-                      $this->MultiCell($titlecell,6)
+                      $this->MultiCell($titlecell,6),
                    ),
                 );
         }
@@ -174,7 +200,7 @@ class App_Head_Table extends App_Events
 
         //Double if no second
         if (count($imgs)==0) { $imgs=array(); }
-        if (count($imgs)==1) { array_push($imgs,$imsgs[0]); }
+        //if (count($imgs)==1) { array_push($imgs,$imsgs[0]); }
 
         return $imgs;
     }

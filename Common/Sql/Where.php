@@ -132,5 +132,30 @@ trait Sql_Where
 
         return $where;
     }
+    
+    //*
+    //* function Sql_Where_Data_Ors, Parameter list: $datas,$value
+    //*
+    //* Returns Sql ORs, looping over $datas valued $value. 
+    //*
+    //* 
+
+    function Sql_Where_Data_Ors($datas,$value)
+    {
+        $ors=array();
+        foreach ($datas as $data)
+        {
+            array_push
+            (
+               $ors,
+               $data.
+               "=".
+               $this->Sql_Table_Column_Value_Qualify($value)
+            );        
+        }
+
+        return "(".join(" OR ",$ors).")";
+    }
+    
 }
 ?>

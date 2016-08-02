@@ -142,6 +142,9 @@ class MyEvents extends MyEventsHandle
 
         $this->Unit2ItemData();
         $this->Today2ItemData();
+        $this->ItemData[ "HtmlIcon1" ][ "Coordinator" ]=2;
+        $this->ItemData[ "HtmlIcon2" ][ "Coordinator" ]=2;
+        $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
     }
 
     //*
@@ -285,7 +288,7 @@ class MyEvents extends MyEventsHandle
         if (empty($event)) { return ""; }
         
         return 
-            $this->MyMod_HorMenu_Action
+            $this->MyMod_HorMenu_Actions
             (
              array("Datas","GroupDatas"),
                "atablemenu",

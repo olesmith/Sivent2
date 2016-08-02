@@ -72,7 +72,7 @@ class Html extends HtmlForm
     function MakeHiddenArgs($hash=array())
     {
         $hash=$this->MakeHiddenHash($hash);
-        return $this->Hash2Query($hash);
+        return $this->CGI_Hash2Query($hash);
     }
 
     function FindIconsPath()

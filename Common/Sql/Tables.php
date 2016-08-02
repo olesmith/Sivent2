@@ -2,11 +2,46 @@
 
 trait Sql_Tables
 {
+    var $SQL_Tables=array();
+    
     //*
-    //* function Sql_Tables_Select_Hashes, Parameter list: $regexp="",$where=array(),$datas=array()
+    //* function Sql_Tables, Parameter list: 
     //*
     //* Returns listwith the names of the Tables in current database.
     //* If $regexp given, applies it to list returned.
+    //* 
+    //* 
+
+    function Sql_Tables()
+    {
+        if (empty($this->SQL_Tables))
+        {
+            $tables=$this->Sql_Table_Names();
+
+            $this->SQL_Tables=array();
+            foreach ($tables as $table)
+            {
+                $comps=preg_split('/_+/',$table);
+                $module=array_pop($comps);
+
+                if (empty($this->SQL_Tables[ $module ]))
+                {
+                    $this->SQL_Tables[ $module ]=array();
+                }
+
+                $this->SQL_Tables[ $module ][ $table ]=$table;
+            }
+        }
+
+        return $this->SQL_Tables;        
+    }
+
+    
+    //*
+    //* function Sql_Tables_Select_Hashes, Parameter list: $regexp="",$where=array(),$datas=array()
+    //*
+    //* Returns list of items, conforming to $where, in lists of tables,
+    //* conforming to $regexp.
     //* 
     //* 
 

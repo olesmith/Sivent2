@@ -15,15 +15,15 @@ array
       "Name" => "Inscrições Abertas",
       "Name_UK" => "Inscriptions Open",
    ),
-   "Events_Closed_Title" => array
+   "Events_Status" => array
    (
-      "Name" => "Inscrições Encerradas",
-      "Name_UK" => "Inscriptions Closed",
+      "Name" => "Status",
+      "Name_UK" => "Status",
    ),
    "Events_ToOpen_Title" => array
    (
-      "Name" => "Inscrições à Iniciar",
-      "Name_UK" => "Inscriptions to Open",
+      "Name" => "À Iniciar",
+      "Name_UK" => "To Open",
    ),
    "Event_DateSpan_Title" => array
    (
@@ -32,8 +32,8 @@ array
    ),
    "Events_Closed_Title" => array
    (
-      "Name" => "Inscrições Fechadas",
-      "Name_UK" => "Inscriptions Closed",
+      "Name" => "Fechadas",
+      "Name_UK" => "Closed",
    ),
    "Events_Handle_Candidate_Title" => array
    (
@@ -50,11 +50,11 @@ array
       "Name" => "Inscrições, Histórico",
       "Name_UK" => "Inscription History",
    ),
-   "Events_Inscriptions_Cell_Noof_Title" => array
-   (
-      "Name" => "No. de Inscrições",
-      "Name_UK" => "No. of Inscriptions",
-   ),
+   /* "Events_Inscriptions_Cell_Noof_Title" => array */
+   /* ( */
+   /*    "Name" => "No. de Inscrições", */
+   /*    "Name_UK" => "No. of Inscriptions", */
+   /* ), */
    "Events_Inscriptions_Cell_Status_Title" => array
    (
       "Name" => "Status",
@@ -119,6 +119,11 @@ array
    (
       "Name" => "Chamada de Caravanas Abertas",
       "Name_UK" => "Call for Caravanas Open",
+   ),
+   "Event_Inscriptions_PreInscriptions_Open" => array
+   (
+      "Name" => "PreInscrições Abertas",
+      "Name_UK" => "PreInscriptions Open",
    ),
    "Event_Inscriptions_Title" => array
    (

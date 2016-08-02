@@ -65,6 +65,20 @@ trait MyApp_Interface_Messages
     }
 
     //*
+    //* sub PrintStatusMessage, Parameter list: $msg
+    //*
+    //* Prints message - and adds to HtmlStatusMessages.
+    //*
+    //*
+
+    function PrintStatusMessage($msg)
+    {
+        $this->AddHtmlStatusMessage($msg);
+        echo
+            $this->Div($msg,array("CLASS" => "diagnostics"));
+    }
+
+    //*
     //* sub AddEmailMessage, Parameter list: $msg
     //*
     //* Adds a message to .

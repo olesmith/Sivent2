@@ -6,7 +6,6 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Event",
          "Status",
          "Title","Title_UK",
          "Type","Area","Level","Certificate","Certificate_TimeLoad",
@@ -33,13 +32,13 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "Neccessities" => array
+    "Info" => array
     (
-       "Name" => "Necessidades",
-       "Name_UK" => "Neccessities",
+       "Name" => "Resumo",
+       "Name_UK" => "Summary",
        "Data" => array
        (
-        "Need_Projector","Need_Computer","Need_Other",
+          "Keywords","Summary","File",
         ),
 
        "Person" => 0,
@@ -48,13 +47,28 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "Info" => array
+    "PreInscriptions" => array
     (
-       "Name" => "Resumo",
-       "Name_UK" => "Summary",
+       "Name" => "Preinscrições",
+       "Name_UK" => "PreInscriptions",
        "Data" => array
        (
-          "Summary","File",
+           "PreInscriptions","Vacancies",
+        ),
+
+       "Person" => 0,
+       "Public" => 1,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+    ),
+    "Neccessities" => array
+    (
+       "Name" => "Necessidades",
+       "Name_UK" => "Neccessities",
+       "Data" => array
+       (
+        "Need_Projector","Need_Computer","Need_Other",
         ),
 
        "Person" => 0,

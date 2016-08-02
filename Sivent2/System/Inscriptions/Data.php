@@ -128,6 +128,7 @@ array
       "Sql" => "VARCHAR(64)",
 
       "Search" => FALSE,
+      "IsBarcode" => TRUE,
       "Size" => "50x3",
 
       "Public"   => 1,

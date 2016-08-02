@@ -31,13 +31,13 @@ class HtmlForm extends HtmlInput
 
 
     //*
-    //* function StartForm, Parameter list: $action,$method="post",$enctype=0,$options=array(),$suppresscgis=array(),$anchor=""
+    //* function StartForm, Parameter list: $action,$method="post",$fileupload=FALSE,$options=array(),$suppresscgis=array(),$anchor=""
     //*
     //* Creates leading part of a FORM.
     //* 
     //*
 
-    function StartForm($action="",$method="post",$enctype=0,$options=array(),$suppresscgis=array())
+    function StartForm($action="",$method="post",$fileupload=FALSE,$options=array(),$suppresscgis=array())
     {
         global $NForms;
         $NForms++;
@@ -90,7 +90,7 @@ class HtmlForm extends HtmlInput
 
         $options[ "ACTION" ]="?".$this->CGI_Hash2Query($args)."#".$anchor;
         $options[ "ENCTYPE" ]="multipart/form-data";
-        if ($enctype!=0)
+        if ($fileupload)
         {
             $options[ "ENCTYPE" ]="application/x-www-form-urlencoded";
         }

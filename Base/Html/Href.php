@@ -4,13 +4,13 @@ class HtmlHref extends HtmlTable
 {
     var $URL_CommonArgs=NULL;
 //*
-//* function HRef, Parameter list: $href,$name,$title,$target,$class="",$noqueryargs=FALSE,$options=array(),$anchor=""
+//* function HRef, Parameter list: $href,$name,$title,$target,$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu"
 //*
 //* Creates a href.
 //* 
 //*
 
-    function HRef($href,$name="",$title="",$target="",$class="",$noqueryargs=FALSE,$options=array(),$anchor="")
+    function HRef($href,$name="",$title="",$target="",$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu")
 {
     if ($this->LatexMode()) { return $name; }
     $comps=preg_split('/\?/',$href);
@@ -27,7 +27,7 @@ class HtmlHref extends HtmlTable
     }
 
     $hash=array();
-    if (!$noqueryargs) { $hash=$this->Query2Hash($args); }
+    if (!$noqueryargs) { $hash=$this->CGI_Query2Hash($args); }
 
     if (count($hash)>0)
     {
@@ -53,10 +53,10 @@ class HtmlHref extends HtmlTable
         $name=$href;
     }
 
-    if ($this->URL_Args_Separator!="&")
+    if ($this->CGI_Args_Sep!="&")
     {
-        $href=preg_replace('/'.$this->URL_Args_Separator.'/',"&",$href);
-        $href=preg_replace('/&/',$this->URL_Args_Separator,$href);
+        $href=preg_replace('/'.$this->CGI_Args_Sep.'/',"&",$href);
+        $href=preg_replace('/&/',$this->CGI_Args_Sep,$href);
     }
 
     $args=$this->CGI_URI2Hash($href);

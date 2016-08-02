@@ -14,7 +14,7 @@ class ItemTable extends ItemRow
     //* Creates a full blown HtmlItemTable.
     //*
 
-    function HtmlItemTable($edit,$datas,$item=array(),$table=array(),$plural=FALSE)
+    function HtmlItemTable($edit,$datas,$item=array(),$table=array(),$plural=FALSE,$precgikey="")
     {
         if (empty($item)) { $item=$this->ItemHash; }
 
@@ -29,7 +29,9 @@ class ItemTable extends ItemRow
               $datas,
               $table,
               $plural,
-              FALSE //don't include title
+              FALSE, //don't include title,
+              TRUE,
+              $precgikey
            ),
            array("ALIGN" => 'center')
         );
@@ -41,7 +43,7 @@ class ItemTable extends ItemRow
     //*
 
     function ItemTable($edit=0,$item=array(),$noid=FALSE,$rdatalist=array(),$tbl=array(),
-                       $plural=FALSE,$includename=TRUE,$includecompulsorymsg=TRUE)
+                       $plural=FALSE,$includename=TRUE,$includecompulsorymsg=TRUE,$precgikey="")
     {
         if (count($item)>0) {} else { $item=$this->ItemHash; }
         $item=$this->TestItem($item);
@@ -96,7 +98,7 @@ class ItemTable extends ItemRow
                )
             {
                 $row=array();
-                $this->ItemTableRow($edit,$item,$data,$compulsories,$row,$plural);
+                $this->ItemTableRow($edit,$item,$data,$compulsories,$row,$plural,$precgikey);
                 if (count($row)>0) { array_push($tbl,$row); }
             }
             elseif (isset($this->Actions[ $data ]))

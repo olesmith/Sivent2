@@ -76,8 +76,10 @@ trait Sql_Table_Structure_Update
         $tableinfo=$this->Sql_Tables_Info_Get($table);
 
         $res=TRUE;
+        $mtime=$this->MyMod_Data_Files_MTime();
+        
         if (
-            $this->MyMod_Data_Files_MTime()>$tableinfo[ "Time" ]
+            $mtime>$tableinfo[ "Time" ]
             ||
             $this->Sql_Table_Structure_Update_Force
            )
@@ -92,7 +94,10 @@ trait Sql_Table_Structure_Update
             $res=$this->Sql_Table_Fields_Update($datas,$datadefs,$table);
 
             //Update table info with .
-            $this->Sql_Tables_Info_Set($table,array("Time" => $this->MyMod_Data_Files_MTime()));
+            if ($mtime>$tableinfo[ "Time" ])
+            {
+                $this->Sql_Tables_Info_Set($table,array("Time" => $mtime));
+            }
         }
 
         return $res;

@@ -112,7 +112,7 @@ class SearchCGI extends SearchOptions
             if (empty($value) && !empty($this->ItemData[ $data ][ "SearchDefault" ]))
             {
                 //take default
-                $value=$this->ItemData[ $data ][ "SearchDefault" ];
+                //$value=$this->ItemData[ $data ][ "SearchDefault" ];
             }
             else
             {

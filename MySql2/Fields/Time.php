@@ -118,13 +118,17 @@ class TimeFields extends SubItems
         $mon=0;
         $year=0;
 
-        //fix
-        $tmpdata=preg_replace('/^'.$item[ "ID" ].'_/',"",$data);
+        /* //fix */
+        /* $tmpdata=$data; */
+        /* if (!empty($item[ "ID" ])) */
+        /* { */
+        /*     $tmpdata=preg_replace('/^'.$item[ "ID" ].'_/',"",$data); */
+        /* } */
         
-        if (empty($value) && $this->ItemData[ $tmpdata ][ "Default" ]=="today")
-        {
-            $value=$this->TimeStamp2DateSort();
-        }
+        /* if (empty($value) && $this->ItemData[ $data ][ "Default" ]=="today") */
+        /* { */
+        /*     $value=$this->TimeStamp2DateSort(); */
+        /* } */
 
         if (preg_match('/^(\d\d\d\d)(\d\d)(\d\d)$/',$value,$matches))
         {

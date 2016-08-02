@@ -87,6 +87,7 @@ array
       
       "Compulsory" => FALSE,
       "Search" => FALSE,
+      "Default" => 20,
    ),
    "Caravans_Max" => array
    (
@@ -107,6 +108,7 @@ array
       
       "Compulsory" => FALSE,
       "Search" => FALSE,
+      "Default" => 40,
    ),
    "Caravans_Timeload" => array
    (

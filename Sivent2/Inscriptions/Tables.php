@@ -1,7 +1,56 @@
 <?php
 
-class InscriptionsTables extends InscriptionsRead
+
+include_once("Tables/Speaker.php");
+include_once("Tables/Schedules.php");
+include_once("Tables/Submissions.php");
+include_once("Tables/Collaborations.php");
+include_once("Tables/Caravans.php");
+include_once("Tables/Certificates.php");
+include_once("Tables/PreInscriptions.php");
+
+
+class InscriptionsTables extends InscriptionsTablesPreInscriptions
 {
+    //*
+    //* function InscriptionSGroupsTable, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
+    //*
+    //* Creates Inscription edit table as matrix.
+    //*
+
+    function InscriptionSGroupsTable($edit,$inscription)
+    {
+        $buttons="";
+        if ($edit==1) { $buttons=$this->Buttons(); }
+        
+        $this->SGroups_NumberItems=FALSE;
+
+        return
+            $this->MyMod_Item_Group_Tables_Form
+            (
+               $edit,
+               "Update",
+               $this->MyMod_Item_SGroups($edit),
+               $inscription,
+               FALSE,  //mayupdate, done elsewhere
+               FALSE, //plural
+               "",
+               $buttons
+            );
+    }
+    
+    //*
+    //* function Inscription_Event_Info, Parameter list: 
+    //*
+    //* Returns event info.
+    //*
+
+    function Inscription_Event_Info()
+    {
+        $eventmessage=$this->EventsObj()->Event_Inscriptions_Info();
+        return $this->FrameIt($eventmessage);
+    }
+    
     //*
     //* function InscriptionTable, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
     //*
@@ -13,20 +62,12 @@ class InscriptionsTables extends InscriptionsRead
         if (empty($inscription)) { $inscription=$this->Inscription; }
 
         $buttons="";
-        if ($edit==1) { $buttons=$this->Buttons(); }
+        if ($edit==1 && !empty($inscription[ "ID" ])) { $buttons=$this->Buttons(); }
         
         $this->SGroups_NumberItems=FALSE;
 
-        $table=$this->MyMod_Item_Group_Tables
-        (
-           $this->InscriptionSGroups($edit),
-           $inscription,
-           $buttons
-        );
-
-        //array_unshift($table,$this->InscriptionMessageRow($inscription));
-
-        array_unshift($table,$this->InscriptionDiagList($inscription));
+        $table=array($this->InscriptionSGroupsTable($edit,$inscription));
+        
 
         if (empty($inscription[ "ID" ]) && $edit==1 && $buttons)
         {
@@ -43,16 +84,21 @@ class InscriptionsTables extends InscriptionsRead
             array_push($table,$this->Button("submit",$title));
         }
 
+        array_unshift($table,$this->InscriptionDiagList($inscription));
+
+        array_push
+        (
+           $table,
+           $this->Anchor("TABLE").
+           $this->Inscription_Event_Info()
+        );
+        
         if (!empty($inscription[ "ID" ]))
         {
             array_push
             (
                $table,
-               $this->HR().
-               $this->InscriptionEventMenu($inscription),
-               array($this->Inscription_Event_Type_Table(1,$inscription)),
-               $this->HR(),
-               array($this->Inscription_Event_Types_Table(0,$inscription))
+               $this->Inscription_Event_Typed_Tables($edit,$inscription)
             );
         }
 
@@ -60,114 +106,132 @@ class InscriptionsTables extends InscriptionsRead
     }
     
     //*
-    //* function Inscription_Event_Type_Table, Parameter list: $edit
+    //* function InscriptionTablesType, Parameter list: $inscription
     //*
-    //* Creates Inscription event Type table: Certificates, Collaborations, Caravans and Submissions.
-    //* Dispatcher.
+    //* Detects tables type from CGI.
     //*
 
-    function Inscription_Event_Type_Table($edit,$inscription)
+    function InscriptionTablesType($inscription=array())
     {
-        $type=$this->CGI_GETOrPOST("Type");
-
-        $html="";
-        if ($type=="Collaboration" && $this->Inscriptions_Collaborations_Has())
+        $type=$this->CGI_GET("Type");
+        if (empty($type))
         {
-            if (!$this->Inscriptions_Collaborations_Inscriptions_Open()) { $edit=0; }
-
-            $html=$this->Inscription_Collaborations_Table($edit,$inscription);
-        }
-        elseif ($type=="Caravan" && $this->Inscriptions_Caravans_Has())
-        {
-            if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
+            $speaker=
+                $this->SpeakersObj()->Sql_Select_Hash
+                (
+                   $this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ])),
+                   array("ID")
+                );
             
-            $html=$this->Inscription_Caravans_Table($edit,$inscription);
-        }
-        elseif ($type=="Submission" && $this->Inscriptions_Submissions_Has())
-        {
-            if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
-            
-            $html=$this->Inscription_Submissions_Table($edit,$inscription);
-        }
-        elseif ($type=="Certificate" && $this->Inscriptions_Certificates_Published())
-        {
-            $html=$this->Inscription_Certificate_Table($edit,$inscription);
+            if (!empty($speaker))
+            {
+                $type="Speaker";
+            }
+            else
+            {
+                if ($this->Inscriptions_PreInscriptions_Has())
+                {
+                    $type="PreInscriptions";
+                }
+            }
         }
 
-        return $html;
+        return $type;
     }
     
     //*
-    //* function Inscription_Event_Types_Table, Parameter list: $edit
+    //* function Inscription_Event_Typed_Tables, Parameter list: $edit
     //*
-    //* Creates table listing fo inscriptions for submissions, collaborations and caravans.
+    //* Creates Event typed tables:
+    //*
+    //* Caravanas
+    //* Collaborations
+    //* Submissions
+    //* Speakers Data
+    //* Schedule info
+    //* PreInscriptions info
+    //*
+    //* Todo:
+    //* Presences info
+    //* Assessments info
     //*
 
-    function Inscription_Event_Types_Table($edit,$inscription)
+    function Inscription_Event_Typed_Tables($edit,$inscription)
     {
-        $type=$this->CGI_Get("Type");
-        $html="";
+        $tables=
+            array_merge
+            (
+               $this->Inscription_Certificate_Table(0,$inscription),
+               $this->Inscription_Speaker_Tables(1,$inscription),
+               $this->Inscription_Submissions_Table(1,$inscription),
+               $this->Inscription_PreInscriptions_Table(1,$inscription),
+               $this->Inscription_Collaborations_Table(1,$inscription),               
+               $this->Inscription_Caravans_Table(1,$inscription)
+           );
 
-        if ($type!="Collaboration")
+        if (!empty($tables))
         {
-            $html.=$this->Inscription_Event_Collaborations_Table($edit,$inscription);
-        }
-        
-        if ($type!="Submission")
-        {
-            $html.=$this->Inscription_Event_Submissions_Table($edit,$inscription);
-        }
-        
-        if ($type!="Caravan")
-        {
-            $html.=$this->Inscription_Event_Caravans_Table($edit,$inscription);
+            return $this->Html_Table("",$tables);
         }
 
-        return $html;
-    }
-    
-    
-    
-    //*
-    //* function InscriptionEventTable, Parameter list: $edit
-    //*
-    //* Creates Inscription event data table
-    //*
-
-    function InscriptionEventTable($edit)
-    {
         return "";
-        $table=parent::InscriptionEventTable($edit);
-        
-        return $this->InscriptionEventLogosAdd($table);
     }
 
     
     //*
-    //* function InscriptionEventMenu, Parameter list: 
+    //* function Inscription_Type_Link, Parameter list: $type,$message,$achor="TABLE"
     //*
-    //* Creates Inscription event data menu, offering links
-    //* to Collaborations, Caravans, Submissions, etc.
+    //* Returns typed link: Speaker, Collaborators, etc.
     //*
 
-    function InscriptionEventMenu($inscription)
+    function Inscription_Type_Link($type,$message,$achor="TABLE")
     {
-        $actions=$this->MyActions_AddFile("System/Inscriptions/Actions.Inscription.php");
-
-        if (empty($inscription[ "ID" ])) { return ""; }
+        $args=$this->CGI_URI2Hash();
+        $args[ "Type" ]=$type;
         
         return
-            $this->Anchor("Menu").
-            $this->MyMod_HorMenu_Action
+            $this->Href
             (
-               $actions,
-               "ptablemenu",
-               $inscription[ "ID" ],
-               $inscription
-            ).
-            "";
+               "?".$this->CGI_Hash2URI($args),
+               $this->MyLanguage_GetMessage($message),
+               $title="",$target="",$class="",$noqueryargs=FALSE,$options=array(),$anchor="TABLE"
+            );
     }
+
+
+    //*
+    //* function Inscription_Type_Rows, Parameter list: $type,$eventdatas=array(),$inscrdatas=array()
+    //*
+    //* Returns typed link: Speaker, Collaborators, etc.
+    //*
+
+    function Inscription_Type_Rows($item,$type,$link,$eventdatas=array(),$inscrdatas=array())
+    {
+        $titles=
+            array_merge
+            (
+               $this->EventsObj()->GetDataTitles($eventdatas),
+               $this->GetDataTitles($inscrdatas),
+               array("")
+            );
+
+        $link=$this->DIV($link,array("CLASS" => 'right'));
         
+        $row=
+            array_merge
+            (
+               $this->EventsObj()->MyMod_Item_Row(0,$this->Event(),$eventdatas),
+               $this->MyMod_Item_Row(0,$item,$inscrdatas),
+               array($link)
+            );
+                
+        return
+            array
+            (
+               $this->B($titles),
+               $row
+            );
+    }
 }
 
 ?>

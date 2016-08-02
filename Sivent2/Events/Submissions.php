@@ -1,6 +1,6 @@
 <?php
 
-class EventsSubmissions extends EventsCaravans
+class EventsSubmissions extends EventsPayments
 {
     //*
     //* function Event_Submissions_Has, Parameter list: $item=array()

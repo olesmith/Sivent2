@@ -53,7 +53,10 @@ class HandleDownload extends Menues
           $this->SendDocHeader
           (
              $ext,
-             preg_replace('/^\./',"",basename(join(".",$comps)))
+             preg_replace('/^\./',"",basename(join(".",$comps))),
+             "",
+             24*60*60, //expires in one hour, should be reasonable
+             filemtime($file)
           );
 
           echo $content;

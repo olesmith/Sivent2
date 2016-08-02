@@ -17,7 +17,7 @@ trait MyApp_Interface_Tail
     //*
     //* function MyApp_Interface_Tail, Parameter list: 
     //*
-    //* Initializes loggin, if no.
+    //* Echoes the aplication tail.
     //*
 
     function MyApp_Interface_Tail()
@@ -66,7 +66,7 @@ trait MyApp_Interface_Tail
                 "<TR><TD COLSPAN='3'>\n".
                 $this->MyApp_Interface_Tail_Queries_Show().
                 $this->MyApp_Interface_Tail_PostMessages_Show().
-                "</TRD</TR>\n".
+                "</TD></TR>\n".
                 "</TABLE></DIV></BODY>\n".
                 "</HTML>".
                 "";
@@ -80,19 +80,7 @@ trait MyApp_Interface_Tail
 
     function MyApp_Interface_Tail_Queries_Show()
     {
-        return "";
-        if (is_array($this->DB_Queries) && !empty($this->DB_Queries) && $this->DBHash[ "Debug" ])
-        {
-            return
-                $this->H(3,"DB Queries").
-                $this->HtmlTable
-                (
-                   array("No","Module","Function","Query"),
-                   $this->MyHash_List_Number($this->DB_Queries)
-                );
-        }
-
-        return "";
+        return $this->DB_Queries_Show();
     }
     
     //*

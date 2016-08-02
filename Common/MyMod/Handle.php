@@ -3,12 +3,20 @@
 include_once("Handle/Help.php");
 include_once("Handle/Show.php");
 include_once("Handle/Edit.php");
+include_once("Handle/Delete.php");
+include_once("Handle/Search.php");
+include_once("Handle/Prints.php");
+include_once("Handle/Info.php");
 
 trait MyMod_Handle
 {
     use MyMod_Handle_Help,
         MyMod_Handle_Show,
-        MyMod_Handle_Edit;
+        MyMod_Handle_Edit,
+        MyMod_Handle_Delete,
+        MyMod_Handle_Search,
+        MyMod_Handle_Prints,
+        MyMod_Handle_Info;
     
     //*
     //* function MyMod_Handle, Parameter list:$args=array()
@@ -139,7 +147,7 @@ trait MyMod_Handle
             $this->DoExit();
         }
 
-        $this->SavePrintDocHeads();
+        $this->MyMod_Handle_DocHeads();
 
         $this->ItemHash=$item;
         if (method_exists($this,"PreHandle"))
@@ -156,6 +164,59 @@ trait MyMod_Handle
             $this->PostHandle();
         }
     }
+
+    
+  function MyMod_Handle_DocHeads($force=FALSE)
+  {
+      $latex=0;
+      $latex=$this->CGI_GETOrPOSTint("Latex");
+      if ($latex>=1) { return; }
+
+      $zip=0;
+      $zip=$this->CGI_GETOrPOSTint("ZIP");
+
+      if ($zip==1) { return; }
+
+      $latexdoc=$this->CGI_GETOrPOSTint("LatexDoc");
+      if (empty($latexdoc)) { $latexdoc=0; }
+      if (empty($latexdoc)) { $latexdoc=0; }
+
+      
+
+      if ($latexdoc==0 || $force)
+      {
+          $action=$this->MyActions_Detect();
+          if (
+                empty($this->Actions[ $action ][ "NoHeads" ])
+                ||
+                $this->Actions[ $action ][ "NoHeads" ]!=1
+                ||
+                $force
+             )
+          {
+              $this->ApplicationObj()->MyApp_Interface_Head();
+          }
+
+          if (
+                !isset($this->Actions[ $action ][ "NoInterfaceMenu" ])
+                ||
+                $this->Actions[ $action ][ "NoInterfaceMenu" ]!=1
+                ||
+                $force
+             )
+          {
+              if (empty($this->Actions[ $action ][ "NoInterfaceMenu" ]))
+              {
+                  $singular=FALSE;
+                  if (isset($this->Actions[ $action ][ "Singular" ])) { $singular=!$this->Actions[ $action ][ "Singular" ]; }
+                  $this->MyMod_HorMenu_Echo($singular);
+                 
+                  echo "<A NAME=\"TOP\"></A>\n";
+              }
+          }
+
+      }
+  }
 }
 
 ?>

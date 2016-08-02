@@ -246,13 +246,17 @@ class ItemForms extends Fields
             array_unshift($tbl,$buttons);
         }
         
-        $tbl=
+        $tbl=$this->FrameIt
+        (
             $this->HTML_Table
             (
                "",
                $tbl,
-               array("ALIGN" => 'center',"BORDER" => 1)
-            );
+               array("ALIGN" => 'center'),
+               array(),
+               array("WIDTH" => '50%')
+            )
+        );
 
 
         $name=$this->GetItemName($item);
@@ -595,7 +599,7 @@ class ItemForms extends Fields
         $item=$this->ItemHash;
         foreach ($this->AddDefaults as $data => $value)
         {
-            if ($item[ $data ]!="")
+            if (!empty($item[ $data ]))
             {
                 $item[ $data ]=$value;
                 $item[ $data."_Value" ]=$value;
@@ -634,63 +638,7 @@ class ItemForms extends Fields
 
     function DeleteForm($title,$deletedtitle,$item=array(),$echo=TRUE,$formurl="?Action=Delete",$idvar="ID")
     {
-        if (! is_array($item) || count($item)==0) { $item=$this->ItemHash; }
-
-        $this->ApplicationObj->LogMessage("DeleteForm",$item[ "ID" ].": ".$this->GetItemName($item));
-
-        $html="";
-        if ($this->GetPOST("Delete")==1)
-        {
-            $html=$this->Delete($item,$echo);
-            $html=$this->H(2,$deletedtitle);            
-        }
-        else
-        {
-            $tbl=$this->ItemTable(0,$item);
-
-            $name=$this->GetItemName($item);
-
-            if (count($this->BackRefDBs)>0)
-            {
-                $res=$this->HandleBackRefDBs($item,$name);
-                if ($res!=0) { return; }
-                else
-                {
-                    $html.=
-                        $this->H
-                        (
-                           3,
-                           "Nenhuma ".$obj->ItemName." referencia esta ".$this->ItemName."<BR>".
-                           $this->ItemName." pode ser deletada com seguran&ccedil;a"
-                        );
-                }
-            }
-
-            $html.=
-                $this->H(2,$title).
-                $this->H
-                (
-                   3,
-                   "Tem certeza que quer deletar '".$this->ItemName.": ".$name."'?"
-                ).
-                $this->StartForm($formurl).
-                $this->Center($this->Button("submit",">>DELETAR<<")).
-                $this->HTMLTable("",$tbl).
-                $this->MakeHidden($idvar,$item[ "ID" ]).
-                $this->MakeHidden("Delete",1).
-                $this->Center($this->Button("submit",">>DELETAR<<")).
-                $this->EndForm();
-        }
-
-        if ($echo)
-        {
-            echo $html;
-            return $item;
-        }
-        else
-        {
-            return $html;
-        }
+        return MyMod_Handle_Delete_Form($title,$deletedtitle,$item,$echo,$formurl,$idvar);
     }
 
 }

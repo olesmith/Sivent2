@@ -200,4 +200,53 @@ array
       'Friend'     => 1,
       'Coordinator' => 0,
    ),
+   "071_Schedule" => array
+   (
+      "Name" => "Grade",
+      "Title" => "Mostrar Grade do Evento",
+      "Name_UK" => "Schedule",
+      "Title_UK" => "Show Event Schedule",
+
+      'Href' => '?Unit=#Unit&ModuleName=Schedules&Action=Schedule&Event=#Event',
+
+      'Public'    => 1,
+      'Person'    => 0,
+      'Admin'     => 0,
+
+      'Friend'     => 1,
+      'Coordinator' => 0,
+      'AccessMethod' => 'SchedulePublic',
+   ),
+   "072_Schedule" => array
+   (
+      "Name" => "Grade",
+      "Title" => "Grade do Evento",
+      "Name_UK" => "Schedule",
+      "Title_UK" => "Event Schedule",
+
+      'Href' => '?Unit=#Unit&ModuleName=Schedules&Action=Schedule&Event=#Event',
+
+      'Public'    => 0,
+      'Person'    => 0,
+      'Admin'     => 1,
+
+      'Friend'     => 0,
+      'Coordinator' => 1,
+      'AccessMethod' => 'HasSubmissions',
+   ),
+   "08_Speakers" => array
+   (
+      "Name" => "Palestrantes",
+      "Name_UK" => "Speakers",
+
+      'Href' => '?Unit=#Unit&ModuleName=Speakers&Action=Search&Event=#Event',
+
+      'Public'    => 0,
+      'Person'    => 0,
+      'Admin'     => 1,
+
+      'Friend'     => 0,
+      'Coordinator' => 1,
+      'AccessMethod' => 'HasSubmissions',
+   ),
 );

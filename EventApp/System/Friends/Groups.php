@@ -22,7 +22,7 @@ array
        "Name_UK" => "Curriculumns",
        "Data" => array
        (
-           "Edit","Name","NickName","Email","Lattes","Curriculum"
+           "Edit","Name","NickName","Titulation","Email","Lattes","Curriculum"
        ), 
 
        "Admin" => 1,
@@ -64,4 +64,20 @@ array
        "Friend" => 1,
        "Coordinator" => 1,
    ),
+   "Common" => array
+   (
+       "Name" => "Comum",
+       "Data" => array
+       (
+          "No","Show","Edit","Delete","Groups",
+          "Volatile","Name","Email","Phone","Cell",
+          "CTime","MTime"
+       ), 
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 0,
+
+       "Friend" => 1,
+       "Coordinator" => 1,
+    ),
 );

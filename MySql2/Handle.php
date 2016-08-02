@@ -79,28 +79,21 @@ class Handle extends HandleLatex
 
   function HandleDelete($echo=TRUE,$actionname="Delete",$formurl="?Action=Delete",$idvar="ID")
   {
-      if ($this->MyAction_Allowed($actionname))
-      {
-          $title=$this->GetRealNameKey($this->Actions[ $actionname ]);
-          $ptitle=$this->GetRealNameKey($this->Actions[ $actionname ],"PName");
-          
-          return $this->DeleteForm($title,$ptitle,array(),$echo,$formurl,$idvar);
-      }
-      else { $this->DoDie("Deletar não permitido"); }
+      $this->MyMod_Handle_Delete($echo,$actionname,$formurl,$idvar);
   }
 
   
-  //*
-  //* function , Parameter list: 
-  //*
-  //* 
-  //*
+  /* //\* */
+  /* //\* function , Parameter list:  */
+  /* //\* */
+  /* //\*  */
+  /* //\* */
 
-  function HandleComposedAdd()
-  {
-      $this->HandleAdd();
-      $this->HandleList("",TRUE,1);
-  }
+  /* function HandleComposedAdd() */
+  /* { */
+  /*     $this->HandleAdd(); */
+  /*     $this->HandleList("",TRUE,1); */
+  /* } */
 
   //*
   //* function , Parameter list: 

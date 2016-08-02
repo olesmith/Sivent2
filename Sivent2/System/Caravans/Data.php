@@ -56,8 +56,8 @@ array
    ),
    "Caravans_Status" => array
    (
-      "Name" => "Min. no de Participantes",
-      "Name_UK" => "Min. no. of Participants",
+      "Name" => "Min. de Participantes Atingido",
+      "Name_UK" => "Min. of Participants Achieved",
 
       "Sql" => "ENUM",
 

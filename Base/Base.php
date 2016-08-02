@@ -1188,40 +1188,18 @@ class Base extends Filters
         return $cols;
     }
 
-    //*
-    //* function PageItems, Parameter list: $list,$maxnitems,$ditem=1
-    //*
-    //* Splits a list in sublists, with max of $nlines per item.
-    //* Elements in $leadingrows is prepended in each sublists.
-    //*
+    /* //\* */
+    /* //\* function PageItems, Parameter list: $list,$maxnitems,$ditem=1 */
+    /* //\* */
+    /* //\* Splits a list in sublists, with max of $nlines per item. */
+    /* //\* Elements in $leadingrows is prepended in each sublists. */
+    /* //\* */
 
-    function PageItems($list,$maxnitems,$ditem=1)
-    {
-        $items=array();
-        $plist=array();
-        $nitems=0;
-        foreach ($list as $id => $item)
-        {
-            $nitems+=$ditem;
-            if ($nitems<$maxnitems)
-            {
-                array_push($items,$item);
-            }
-            else
-            {
-                array_push($plist,$items);
-                $items=array($item);
-                $nitems=$ditem;
-            }
-        }
-
-        if (count($items)>0)
-        {
-            array_push($plist,$items);
-        }
-
-        return $plist;
-    }
+    /* function PageItems($list,$maxnitems,$ditem=1) */
+    /* { */
+    /*     return $this->MyHashes_Page($list,$maxnitems,$ditem); */
+    /* } */
+    
     //*
     //* function TrimPRN, Parameter list: $prn
     //*

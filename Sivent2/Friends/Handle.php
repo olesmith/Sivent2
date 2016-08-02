@@ -12,9 +12,9 @@ class FriendsHandle extends FriendsInscriptions
 
     function MyMod_Handle_Show($title="")
     {
-        $this->Friend_Inscriptions_Table($this->ItemHash);
-    
-        parent::MyMod_Handle_Show($title);
+        echo parent::MyMod_Handle_Show($title);
+        
+        $this->Friend_Inscriptions_Table($this->ItemHash);    
     }
     
     //*
@@ -24,11 +24,11 @@ class FriendsHandle extends FriendsInscriptions
     //* Prints list of $friend inscriptions and call parent.
     //*
 
-    function MyMod_Handle_Edit($title="")
+    function MyMod_Handle_Edit($title="",$formurl=NULL,$title="",$noupdate=FALSE)
     {
+        echo parent::MyMod_Handle_Edit($title,$formurl,$title,$noupdate);
+        
         $this->Friend_Inscriptions_Table($this->ItemHash);
-    
-        parent::MyMod_Handle_Edit($title);
     }
 }
 

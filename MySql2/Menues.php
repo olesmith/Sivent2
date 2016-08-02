@@ -39,7 +39,7 @@ class Menues extends Export
 
     function SystemMenu()
     {
-        echo $this->MyMod_HorMenu_Action(array("Backup","SysInfo","Process","Profiles","Zip"),"atablemenu","");
+        echo $this->MyMod_HorMenu_Actions(array("Backup","SysInfo","Process","Profiles","Zip"),"atablemenu","");
     }
 }
 ?>

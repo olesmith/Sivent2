@@ -218,6 +218,39 @@ class Friends extends FriendsHandle
         return $action;
         
     }
+
+    
+    //*
+    //* Overrides FriendInfo.
+    //*
+    //* Returns info text for $friend.
+    //*
+
+    function FriendInfo($friend,$class="")
+    {
+        $info="";
+        if (!empty($friend[ "Title" ]))
+        {
+            $info.=$friend[ "Title" ]." ";
+        }
+
+        $info.=$friend[ "Name" ];
+
+        if (!empty($friend[ "Institution" ]))
+        {
+            $info.=", ".$friend[ "Institution" ];
+        }
+        
+        if (!empty($friend[ "Lattes" ]))
+        {
+            $options=array("TARGET" => '_blank');
+            if (!empty($class)) { $options[ "CLASS" ]=$class; }
+            
+            $info.=" ".$this->A($friend[ "Lattes" ],"Curriculum",$options);
+        }
+        
+        return $info;
+    }
 }
 
 ?>

@@ -80,6 +80,10 @@ trait MyMod_Item_PostProcess
             {
                 $item[ $data ]=strtoupper($item[ $data ]);
             }
+            if (!empty($this->ItemData[ $data ][ "ToLower" ]))
+            {
+                $item[ $data ]=strtolower($item[ $data ]);
+            }
          }
 
         return $item;

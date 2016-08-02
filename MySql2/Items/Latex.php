@@ -91,93 +91,7 @@ class ItemsLatex extends Item
 
     function LatexItems($items=array())
     {
-        //Test access methods and deny if not satified!!! Used individually for each item, should be used overall too.
-        $accessmethod=$this->Actions[ "Print" ][ "AccessMethod" ];
-
-
-        if (count($items)==0) { $items=$this->ItemHashes; }
-
-        $items=$this->SplitLatexItems($items);
-        $latexdocno=$this->CGI2LatexDocNo();
-        $latexinfo=$this->LatexData[ "PluralLatexDocs" ][ "Docs" ][ $latexdocno ];
-
-        $glue=$this->GetLatexSkel($latexinfo[ "Glue" ],TRUE);
-
-        $head="";
-        if (!empty($latexinfo[ "PageHead" ]))
-        {
-            $head=$this->GetLatexSkel($latexinfo[ "PageHead" ],TRUE);
-        }
-
-        $tail="";
-        if (!empty($latexinfo[ "PageTail" ]))
-        {
-            $tail=$this->GetLatexSkel($latexinfo[ "PageTail" ],TRUE);
-        }
-
-        $latex=$head;
-        $nitems=0;
-        $count=0;
-        foreach ($items as $id => $item)
-        {
-            //See if we need to check access on individual objects
-            if ($accessmethod!="")
-            {
-                if (method_exists($this,$accessmethod))
-                {
-                    if (!$this->$accessmethod($item))
-                    {
-                        continue;
-                    }
-                }
-            }
-
-            $item=$this->ApplyAllEnums($item,TRUE);
-            $item=$this->TrimLatexItem($item);
-
-            $nitems++;
-            $item[ "No" ]=sprintf("%03d",$nitems);
-            
-            $rlatex="";
-            if (isset($item[ "LatexPre" ]))
-            {
-                $rlatex.=$item[ "LatexPre" ];
-            }
-            $rlatex.=$glue;
-
-            $rlatex=$this->FilterHash($rlatex,$item);
-
-            $rlatex=$this->FilterObject($rlatex);
-
-            $latex.=$rlatex;
-
-            
-            $count++;
-            if (
-                  !empty($latexinfo[ "ItemsPerPage" ])
-                  &&
-                  $latexinfo[ "ItemsPerPage" ]>0
-                  &&
-                  $count==$latexinfo[ "ItemsPerPage" ]
-                  &&
-                  $nitems<count($items)
-               )
-            {
-                $latex.=
-                    $tail.
-                    "\n\n\\clearpage\n\n".
-                    $head;
-
-                $count=0;
-
-            }
-        }
-
-        if ($nitems==0) { $latex="Empty Document..."; }
-
-        $latex.=$tail;
-
-        return $latex;
+        return $this->MyMod_Items_Latex($items);
     }
 
     //*
@@ -238,52 +152,7 @@ class ItemsLatex extends Item
 
     function PrintItems($items=array())
     {
-        if  (count($items)==0) { $items=$this->ItemHashes; }
-        $this->ApplicationObj->LogMessage("PrintItems",count($items)." items");
-
-        $latexdocno=$this->CGI2LatexDocNo();
-
-        $latex=$this->GetLatexHead("Plural",$latexdocno);
-
-        $newpage=FALSE;
-        if (isset($this->LatexData[ "PluralLatexDocs" ][ $latexdocno ][ "TableOfContents" ]))
-        {
-            $latex.="\n\\tableofcontents\n\n";
-            $newpage=TRUE;
-        }
-        if (isset($this->LatexData[ "PluralLatexDocs" ][ $latexdocno ][ "ListOfTables" ]))
-        {
-            $latex.="\n\\listoftables\n\n";
-            $newpage=TRUE;
-        }
-        if (isset($this->LatexData[ "PluralLatexDocs" ][ $latexdocno ][ "ListOfFigures" ]))
-        {
-            $latex.="\n\\listoffigures\n\n";
-            $newpage=TRUE;
-        }
-
-        if ($newpage) { $latex.="\\newpage\n\n"; }
-        $latex.=
-               $this->LatexItems($items).
-               $this->LatexTail();
-
-        $latex=$this->TrimLatex($latex);
-        $item=$this->ItemHash;
-        if (is_array($this->ItemHash))
-        {
-            $latex=$this->FilterHash($latex,$this->ItemHash);
-        }
-
-        $texfilename=
-            $this->ApplicationObj->HtmlSetupHash[ "WindowTitle" ].
-            $this->ModuleName.".".
-            $this->MTime2FName().
-            ".tex";
-
- 
-
-
-        return $this->RunLatexPrint($texfilename,$latex);
+        return $this->MyMod_Items_Print($items);
     }
 
     //*

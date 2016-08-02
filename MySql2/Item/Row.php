@@ -90,18 +90,19 @@ class ItemRow extends ItemEdits
 
 
     //*
-    //* function ItemTableRow, Parameter list: $edit,$item,$data,&$compulsories=0,&$row=array(),$plural=FALSE
+    //* function ItemTableRow, Parameter list: $edit,$item,$data,&$compulsories=0,&$row=array(),$plural=FALSE,$precgikey=""
     //*
     //* Creates ItemTableRow.
     //*
 
-    function ItemTableRow($edit,$item,$data,&$compulsories=0,&$row=array(),$plural=FALSE)
+    function ItemTableRow($edit,$item,$data,&$compulsories=0,&$row=array(),$plural=FALSE,$precgikey="")
     {
         $dagger=$this->SPAN("*",array("CLASS" => "errors"));
         $access=$this->MyMod_Data_Access($data,$item);
 
         $rdata="";
         if ($plural) { $rdata=$item[ "ID" ]."_".$data; }
+        if ($precgikey) { $rdata=$precgikey.$rdata; }
             
         if ($access>=1)
         {

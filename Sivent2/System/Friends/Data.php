@@ -1,5 +1,22 @@
 array
 (
+   "Title"     => array
+   (
+      "Sql" => "VARCHAR(256)",
+      "Name"  => "Titulação",
+      "Name_UK"  => "Titulation",
+      "Title"  => "Titulação nas Citações",
+      "Title_UK"  => "Titulation in Citations",
+      "Size"  => 30,
+
+      "Compulsory" => FALSE,
+
+      "Admin" => 2,
+      "Person" => 0,
+      "Public" => 0,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+    ),
    "NickName"     => array
    (
       "Sql" => "VARCHAR(256)",

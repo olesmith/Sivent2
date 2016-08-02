@@ -1,6 +1,5 @@
 <?php
 
-//include_once("Actions/Defaults.php");
 
 trait MyActions_Files
 {

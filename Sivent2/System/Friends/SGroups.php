@@ -6,7 +6,7 @@ array
        "Name_UK" => "Registration Data",
        "Data" => array
        (
-          "Name","NickName","Email","Cell","Phone",
+          "Name","NickName","Title","Email","Cell","Phone",
        ), 
        "Admin" => 1,
        "Person" => 0,

@@ -9,6 +9,8 @@ include_once("Handle/Log.php");
 include_once("Handle/Module.Setup.php");
 include_once("Handle/Setup.php");
 include_once("Handle/SU.php");
+include_once("Handle/Export.php");
+include_once("Handle/Import.php");
 
 trait MyApp_Handle
 {
@@ -17,7 +19,8 @@ trait MyApp_Handle
         MyApp_Handle_Admin,MyApp_Handle_Backup,
         MyApp_Handle_Log,MyApp_Handle_ModuleSetup,
         MyApp_Handle_Help,
-        MyApp_Handle_Setup,MyApp_Handle_SU;
+        MyApp_Handle_Setup,MyApp_Handle_SU,
+        MyApp_Handle_Export,MyApp_Handle_Import;
 
     //*
     //* function MyApp_Handle, Parameter list:$args=array()

@@ -6,6 +6,16 @@ class EventMod extends DBDataObj
     var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
     
     //*
+    //* function PreActions, Parameter list:
+    //*
+    //* 
+    //*
+
+    function PreActions()
+    {
+    }
+    
+    //*
     //* function InitActions, Parameter list:
     //*
     //* Overrides MySql2::InitActions.

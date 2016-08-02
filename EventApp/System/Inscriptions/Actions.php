@@ -74,9 +74,9 @@ array
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
-         "Friend"     => 0,
+         "Friend"     => 1,
          "Coordinator" => 1,
-         "AccessMethod" => "CheckShowAccess",
+         "AccessMethod" => "CheckEditAccess",
       ),
    "Inscribe" => array
    (

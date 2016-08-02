@@ -31,13 +31,6 @@ trait MyMod_SubModules_Structure
            TRUE,
            $this->SqlTableName()
         );
-        
-        /* $this->UpdateDBFields */
-        /* ( */
-        /*    $this->SqlTableName(), */
-        /*    $this->DataKeys(), */
-        /*    $this->ItemData */
-        /* ); */
     }
 
     //*

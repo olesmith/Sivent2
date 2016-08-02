@@ -2,17 +2,17 @@
 
 trait Barcode
 {
-    //*     Based on BarCode by David S. Tufts
-/*
+    //*     Based on BarCode by David S. Tufts code.
+ /*
  *  Author:  David S. Tufts
  *  Company: Rocketwood.LLC
  *	  www.rocketwood.com
  *  Date:	05/25/2003
  *  Usage:
- *	  <img src="/barcode.php?text=testing" alt="testing" />
+ *	  <img src="/Barcode.php?text=testing" alt="testing" />
  */
-    var $Zint="/usr/bin/zint";
-    var $ZintDir="/var/www/zint";
+    //var $Zint="/usr/bin/zint";
+    var $BarcodeDir="../Barcodes";
     var $CodeLink="";
     var $CodeCGIVar="Code";
 
@@ -332,6 +332,18 @@ trait Barcode
     }
     
     //*
+    //* function BarCode_Code2File, Parameter list: $code
+    //*
+    //* Generate bar code file for $item.
+    //*
+
+    function BarCode_Code2File($code)
+    {
+        $code=preg_replace('/\./',"-",$code);
+        return $this->BarcodeDir."/".$code.".png";
+    }
+    
+    //*
     //* function BarCode_File, Parameter list: $item
     //*
     //* Generate bar code file for $item.
@@ -339,8 +351,7 @@ trait Barcode
 
     function BarCode_File($item)
     {
-        $code=$item[ "Code" ];
-        return $this->ZintDir."/".$code.".png";
+        return $this->BarCode_Code2File($item[ "Code" ]);
     }
     
     //*
@@ -351,6 +362,11 @@ trait Barcode
 
     function BarCode_Generate($item)
     {
+        if (!is_dir($this->BarcodeDir))
+        {
+            mkdir($this->BarcodeDir);
+        }
+        
         $this->Barcode_Image_Write($item[ "Code" ],$this->BarCode_File($item));
         
         return $this->BarCode_File($item);
@@ -411,16 +427,17 @@ trait Barcode
 class BarImage
 {
     use Barcode;
+    //    var $BarcodeDir="Uploads/Barcodes";
 
 
     //Generates cache control http headers, and sends image (png).
     
     function Barcode_Image_Generate()
     {
+        //expires in one year
         $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + (365*24*60 *60)); 
-        $img=$_SERVER[ "DOCUMENT_ROOT" ]."/zint/".$_GET[ "Code" ].".png";
-
-        $imgdate=filemtime( $img);
+        $img=$this->BarCode_Code2File($_GET[ "Code" ]);
+        $imgdate=filemtime($img);
 
 
         header

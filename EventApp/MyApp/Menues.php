@@ -211,9 +211,10 @@ class MyEventAppMenues extends MyEventAppAccess
             }
 
             $link=preg_replace('/#Event/',$event[ "ID" ],$link);
+            $link=preg_replace('/#Unit/',$args[ "Unit" ],$link);
             
             array_push($links,$link.$this->BR());
-        }      
+        }
 
         return $links;
     }
@@ -238,6 +239,7 @@ class MyEventAppMenues extends MyEventAppAccess
         
         $args[ "ID" ]=$event[ "ID" ];
 
+        
         return 
             $this->MyApp_Interface_LeftMenu_Bullet("+").
             $this->HtmlTags

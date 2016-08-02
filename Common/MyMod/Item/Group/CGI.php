@@ -7,7 +7,7 @@ trait MyMod_Item_Group_CGI
     //* Updates $item for data in $group. Returns datas altered.
     //*
 
-    function MyMod_Item_Group_CGI2Item($group,&$item,$plural=FALSE)
+    function MyMod_Item_Group_CGI2Item($group,&$item,$plural=FALSE,$precgikey="")
     {
         $updatedata=array();
         foreach ($this->MyMod_Item_Group_Data($group,TRUE) as $data)
@@ -18,6 +18,10 @@ trait MyMod_Item_Group_CGI
                  if ($plural)
                  {
                      $rdata=$item[ "ID" ]."_".$data;
+                 }
+                 if ($precgikey)
+                 {
+                     $rdata=$precgikey.$rdata;
                  }
                     
                  if (preg_match('/^FILE$/',$this->ItemData[ $data ][ "Sql" ]))

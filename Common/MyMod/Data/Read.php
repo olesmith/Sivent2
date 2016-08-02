@@ -49,14 +49,10 @@ trait MyMod_Data_Read
         $itemdatas=$this->ReadPHPArray($file);
         foreach (array_keys($itemdatas) as $data)
         {
-            /* if (!is_array($itemdatas[ $data ])) */
-            /*     { */
-            /*         var_dump($data); */
-            /*         var_dump($itemdatas[ $data ]); */
-            /*     } */
-            $itemdatas[ $data ][ "File" ]=$file;
             $this->MyMod_Data_Add_Data($data,$itemdatas[ $data ]);
-        }
+            //if (empty($this->ItemData[ $data ][ "File" ])) var_dump($data);
+            $this->ItemData[ $data ][ "File" ]=$file;
+         }
     }
 
     
@@ -74,6 +70,8 @@ trait MyMod_Data_Read
         }
         else
         {
+            if (!is_array($hash)) { var_dump($hash); }
+        
             foreach ($hash as $key => $value)
             {
                 $this->ItemData[ $data ][ $key ]=$value;

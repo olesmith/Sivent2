@@ -193,10 +193,19 @@
 	  	option.disabled
 	  	{
   	  		color: $DarkGrey;
-  	  		background-color: $LightBlue;
-	  		font-size: 10px;
+  	  		background-color: $Grey;
+	  		font-size: 12px;
+	  		font-style: Italic;
 	  		text-decoration: None;
-	  		text-align: center;
+	  	}
+	  	option.selected
+	  	{
+  	  		color: $Black;
+  	  		background-color: $LightGrey;
+	  		font-size: 12px;
+	  		text-decoration: None;
+	  		text-align: left;
+	  		font-weight: Bold;
 	  	}
 	  	textarea
 	  	{
@@ -544,7 +553,8 @@
         {
 	  		color: $Red;
 	  		text-decoration: none;
-	  		font-size: 10px;
+	  		text-align: center;
+	  		font-size: 14px;
             font-style: italic;
 	  		font-weight: Bold;
 	  	}
@@ -559,8 +569,10 @@
 	  	}
 	  	*.warning
         {
-	  		color: #$Dark;
-	  		font-size: 10px;
+	  		color: $DarkGrey;
+	  		font-size: 14px;
+	  		text-align: center;
+            font-style: italic;
 	  		font-weight: Bold;
         }
 	  	*.success

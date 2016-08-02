@@ -4,12 +4,12 @@
 trait Sql_Table_Info
 {
     //*
-    //* function Sql_Tables_Info_Name, Parameter list:
+    //* function Sql_Tables_Info_Table_Name, Parameter list:
     //*
     //* Name of tables info table.
     //*
 
-    function Sql_Tables_Info_Name()
+    function Sql_Tables_Info_Table_Name()
     {
         return "__Table__";
     }
@@ -61,7 +61,7 @@ trait Sql_Table_Info
 
     function Sql_Tables_Info_Create()
     {
-        $stable=$this->Sql_Tables_Info_Name();
+        $stable=$this->Sql_Tables_Info_Table_Name();
         if (!$this->Sql_Table_Exists($stable))
         {
             $this->Sql_Table_Create($stable);
@@ -74,7 +74,7 @@ trait Sql_Table_Info
 
             $datas=$this->Sql_Tables_Info_Data();
             unset($datas[ "ID" ]);
-            
+
             $this->Sql_Table_Fields_Add_List(array_keys($datas),$datas,$stable);
         }
 
@@ -101,7 +101,7 @@ trait Sql_Table_Info
            array("Name" => $table),
            array(),
            TRUE,
-           $this->Sql_Tables_Info_Name()
+           $this->Sql_Tables_Info_Table_Name()
         );
 
         if (empty($hash))
@@ -126,6 +126,7 @@ trait Sql_Table_Info
         if (empty($table)) { $table=$this->SqlTableName($table); }
         if (empty($table)) { return; }
         
+        
         $stable=$this->Sql_Tables_Info_Create();
 
         $where[ "Name" ]=$table;
@@ -133,7 +134,8 @@ trait Sql_Table_Info
 
         if (!empty($hash[ "Name" ]))
         {
-            $this->Sql_Update_Item($hash,$where,array("Time"),$this->Sql_Tables_Info_Name());
+            $infotable=$this->Sql_Tables_Info_Table_Name();
+            $hash=$this->Sql_Unique_Item_Update($where,$hash,$infotable);
         }
 
         return $hash;

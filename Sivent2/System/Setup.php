@@ -40,6 +40,15 @@
           "Submissions",
           
           "Certificates",
+          
+          "Dates",
+          "Times",
+          "Places",
+          "Rooms",
+          "Schedules",
+          
+          "Speakers",
+          "PreInscriptions",
        ),
        "ModuleDependencies" => array
        (
@@ -59,6 +68,15 @@
           "Areas" => array("Events"),
           "Submissions" => array("Inscriptions","Areas"),
           "Certificates" => array("Inscriptions","Caravaneers","Collaborations","Submissions"),
+          
+          "Dates" => array("Events"),
+          "Times" => array("Dates"),
+          "Places" => array("Events"),
+          "Rooms" => array("Places"),
+          "Schedules" => array("Dates","Times","Rooms"),
+          
+          "Speakers" => array("Friends","Submissions"),
+          "PreInscriptions" => array("Friends","Inscriptions","Submissions"),
        ),
        "SubModulesVars" => array
        (
@@ -316,8 +334,8 @@
              "SqlFile" => "Submissions.php",
              "SqlHref" => TRUE,
              "SqlTable" => "#Unit__#Event_Submissions",
-             "SqlFilter" => "#Friend: #Name",
-             "SqlDerivedData" => array("Friend","Title"),
+             "SqlFilter" => "#Name: #Title",
+             "SqlDerivedData" => array("Name","Title"),
 
              "ItemName"      => "Submissão",
              "ItemsName"     => "Submissões",
@@ -364,6 +382,139 @@
              "ItemName_UK"   => "Certificate",
              "ItemsName_UK"  => "Certificates",
              "ItemsNamer_UK" => "Code",
+         ),
+         "Dates" => array
+          (
+             "SqlAccessor" => "DatesObj",
+             "SqlObject" => "DatesObject",
+             "SqlClass" => "Dates",
+             "SqlFile" => "Dates.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Dates",
+             "SqlFilter" => "#Title",
+             "SqlDerivedData" => array("Name","Title"),
+
+             "ItemName"      => "Data",
+             "ItemsName"     => "Datas",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Date",
+             "ItemsName_UK"  => "Dates",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Times" => array
+          (
+             "SqlAccessor" => "TimesObj",
+             "SqlObject" => "TimesObject",
+             "SqlClass" => "Times",
+             "SqlFile" => "Times.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Times",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Horário",
+             "ItemsName"     => "Horários",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Time Slot",
+             "ItemsName_UK"  => "Time Slots",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Places" => array
+          (
+             "SqlAccessor" => "PlacesObj",
+             "SqlObject" => "PlacesObject",
+             "SqlClass" => "Places",
+             "SqlFile" => "Places.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Places",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Local",
+             "ItemsName"     => "Locais",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Place",
+             "ItemsName_UK"  => "Places",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Rooms" => array
+          (
+             "SqlAccessor" => "RoomsObj",
+             "SqlObject" => "RoomsObject",
+             "SqlClass" => "Rooms",
+             "SqlFile" => "Rooms.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Rooms",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Sala",
+             "ItemsName"     => "Salas",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Room",
+             "ItemsName_UK"  => "Rooms",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Schedules" => array
+          (
+             "SqlAccessor" => "SchedulesObj",
+             "SqlObject" => "SchedulesObject",
+             "SqlClass" => "Schedules",
+             "SqlFile" => "Schedules.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__Schedules",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Slot",
+             "ItemsName"     => "Slots",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Slot",
+             "ItemsName_UK"  => "Slots",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Speakers" => array
+          (
+             "SqlAccessor" => "SpeakersObj",
+             "SqlObject" => "SpeakersObject",
+             "SqlClass" => "Speakers",
+             "SqlFile" => "Speakers.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Speakers",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Palestrante",
+             "ItemsName"     => "Palestrantes",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Speaker",
+             "ItemsName_UK"  => "Speakers",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "PreInscriptions" => array
+          (
+             "SqlAccessor" => "PreInscriptionsObj",
+             "SqlObject" => "PreInscriptionsObject",
+             "SqlClass" => "PreInscriptions",
+             "SqlFile" => "PreInscriptions.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_PreInscriptions",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Preinscrição",
+             "ItemsName"     => "Preinscrições",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Preinscription",
+             "ItemsName_UK"  => "Preinscriptions",
+             "ItemsNamer_UK" => "Name",
          ),
        ),
        "PermissionVars" => array

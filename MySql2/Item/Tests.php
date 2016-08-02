@@ -126,7 +126,7 @@ class ItemTests extends ItemTestsItem
                     $this->HtmlStatus=array($this->HtmlStatus);
                 }
 
-                $msg=$this->ItemName." não é único";
+                $msg=$this->ItemName." ".$this->MyLanguage_GetMessage("IsNotUnique");
 
                 array_push($this->HtmlStatus,$msg);
                 return FALSE; 

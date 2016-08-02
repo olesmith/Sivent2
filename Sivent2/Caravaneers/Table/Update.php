@@ -161,7 +161,7 @@ class CaravaneersTableUpdate extends CaravaneersAccess
     {
         $remails=array();
         $rcaravaneers=array();
-        for ($n=1;$n<=$this->Event("Caravans_Max");$n++)
+        for ($n=1;$n<=$this->EventsObj()->Event_Caravans_Max();$n++)
         {
             $rcaravaneer=$this->Caravaneer_Table_Update($n,$caravaneers,$empty,$remails);
             
@@ -204,7 +204,7 @@ class CaravaneersTableUpdate extends CaravaneersAccess
         
 
         $status=1;
-        if ($ncaravaneers>=$this->Event("Caravans_Min")) { $status=2; }
+        if ($ncaravaneers>=$this->EventsObj()->Event_Caravans_Min()) { $status=2; }
         
         if (
               empty($inscription[ "Caravans_Status" ])

@@ -205,7 +205,7 @@ trait DB_MySqli
     //* 
     //* 
 
-    function DB_MySqli_Fetch_Assoc_list($result,$byid=FALSE)
+    function DB_MySqli_Fetch_Assoc_list($result,$byid=FALSE,$lowercasekeys=FALSE)
     {
         $items=array();
 
@@ -220,7 +220,10 @@ trait DB_MySqli
 
             foreach ($row as $key => $value)
             {
-                $item[ $key ]=$value;
+                $rkey=$key;
+                if ($lowercasekeys) { $rkey=strtolower($key); }
+                
+                $item[ $rkey ]=$value;
                 if ($key=="ID") { $id=$row[$key]; }
                 $n++;
             }

@@ -3,20 +3,6 @@
 class Lists extends SqlQuery
 {
     //*
-    //* function MakeSureIsArray, Parameter list: &$list,$key
-    //*
-    //* If empty $list[ $key ], sets it to array().
-    //*
-
-    function MakeSureIsArray(&$list,$key)
-    {
-        if (empty($list[ $key ]))
-        {
-            $list[ $key ]=array();
-        }
-    }
-
-    //*
     //* function MakeSureIsValue, Parameter list: &$list,$key,$value
     //*
     //* If not isset $list[ $key ], sets it to $value.

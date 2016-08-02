@@ -9,6 +9,7 @@ include_once("MyActions/Add.php");
 include_once("MyActions/Access.php");
 include_once("MyActions/Entry.php");
 include_once("MyActions/Permissions.php");
+include_once("MyActions/Info.php");
 
 trait MyActions
 {
@@ -20,7 +21,8 @@ trait MyActions
         MyActions_Add,
         MyActions_Entry,
         MyActions_Permissions,
-        MyActions_Access;
+        MyActions_Access,
+        MyActions_Info;
 
 
     //*

@@ -194,7 +194,7 @@ class SearchFields extends SearchCookies
         }
         elseif ($this->MyMod_Data_Field_Is_Date($data))
         {
-            $value=$this->DateSearchField($data,$rdata,$rval);
+            $value=$this->DateSearchField($data,$rdata,"");
         }
         elseif ($this->MyMod_Data_Field_Is_Time($data))
         {

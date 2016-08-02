@@ -299,7 +299,7 @@ class CGI extends Lists
       );
   }
 
-  function SendDocHeader($contenttype,$filename="",$charset="")
+  function SendDocHeader($contenttype,$filename="",$charset="",$expiresin=0,$filemtime=0)
   {
       $contenttypes=array
       (
@@ -333,12 +333,22 @@ class CGI extends Lists
 
       header('Content-type: '.$contenttype.'; charset='.$charset);
 
-      if ($filename!="")
+      if (!empty($filename))
       {
           header
           (
              'Content-Disposition: attachment;'.
              'filename="'.$filename.'"; charset='.$charset
+          );             
+      }
+      
+      if (!empty($expiresin))
+      {
+          $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + $expiresin); 
+          header
+          (
+             'Cache-Control: public, max-age='.$expires.';'.
+             'Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime).';'
           );             
       }
   }

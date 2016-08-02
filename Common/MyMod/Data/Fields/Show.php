@@ -84,6 +84,10 @@ trait MyMod_Data_Fields_Show
 
             return $this->$fieldmethod($data,$item,0);
         }
+        elseif (!empty($this->ItemData[ $data ][ "IsBarcode" ]))
+        {
+            return $this->MyMod_Data_Fields_Barcode_Field($data,$item,0);
+        }
         elseif (!empty($this->ItemData[ $data ][ "Info" ]))
         {
             return $this->MyMod_Data_Field_Info($data);
@@ -121,6 +125,10 @@ trait MyMod_Data_Fields_Show
 
             $rvalue=$this->FileFieldDecorator($data,$item,$plural,0);
             $value=$rvalue;
+        }
+        elseif ($this->ItemData[ $data ][ "IsColor" ])
+        {
+           $value=$this->MyMod_Data_Fields_Color_Field($data,$item,0);
         }
         elseif ($this->ItemData[ $data ][ "Password" ])
         {

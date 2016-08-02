@@ -49,7 +49,7 @@ trait MakeHtml_Input
 
     function Html_Input_Field($name,$value,$options=array())
     {
-        $options[ "TYPE" ]='text';
+        if (empty($options[ "TYPE" ])) { $options[ "TYPE" ]='text'; }
         $options[ "NAME" ]=$name;
         $options[ "VALUE" ]=$value;
         return $this->Html_Tag

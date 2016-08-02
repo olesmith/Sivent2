@@ -51,7 +51,7 @@ trait MyMessage
 
     function MyMessage_Die($msg,$info1=array(),$info2=array(),$info3=array(),$info4=array(),$info5=array())
     {
-        if (!$this->HeadersSend)
+        if (method_exists($this,"MyApp_Interface_Head") && !$this->HeadersSend)
         {
             echo
                 $this->MyApp_Interface_Head();

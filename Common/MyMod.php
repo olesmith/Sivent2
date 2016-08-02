@@ -1,5 +1,6 @@
 <?php
 
+include_once("CSS.php");
 include_once("MyFile.php");
 include_once("MyDir.php");
 include_once("MyHash.php");
@@ -30,7 +31,7 @@ trait MyMod
 {    
     use 
         _accessor_, //see SAdE/index.php
-        MyFile,MyDir,MyHash,Accessor,MyActions,Sql,DB,CallStack;
+        CSS,MyFile,MyDir,MyHash,Accessor,MyActions,Sql,DB,CallStack;
 
     use
         MyMod_Handle,MyMod_HorMenu,
@@ -82,7 +83,7 @@ trait MyMod
     );
 
     //*
-    //* function MyApp_Init, Parameter list: $args=array()
+    //* function MyMod_Init, Parameter list: $args=array()
     //*
     //* Module initializer.
     //*
@@ -93,6 +94,18 @@ trait MyMod
 
         $this->MyHash_Args2Object($this->MyMod_Defaults,TRUE);
         $this->MyHash_Args2Object($args);
+    }
+
+    //*
+    //* function MyMod_ItemName, Parameter list: $key="ItemName"
+    //*
+    //* Returns item name, according to active language.
+    //*
+
+    function MyMod_ItemName($key="ItemName")
+    {
+        $key.=$this->ApplicationObj()->MyLanguage_GetLanguageKey();
+        return $this->$key;
     }
 
 }

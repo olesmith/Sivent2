@@ -9,14 +9,16 @@ array
          "No","Edit","Delete","GenCert",
          "Status",
          "Event","Type","Area","Level",
-         "Friend","Title","File"
+         "SubmissionAuthorsCell","Name","Title",
+         "File","PreInscriptions","Vacancies",
       ),
       "Data_UK" => array
       (
          "No","Edit","Delete","GenCert",
          "Status",
          "Event","Type","Area","Level",
-         "Friend","Title_UK","File"
+         "SubmissionAuthorsCell","Name","Title_UK",
+         "File","PreInscriptions","Vacancies",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -34,7 +36,7 @@ array
           //"Delete",
           "GenCert","MailCert",
           "Status",
-          "Event","Title","Selected",
+          "Event","Name","Title","Title_UK","Selected",
           "Certificate","Certificate_TimeLoad",
           "Author1","Author2","Author3",
         ),
@@ -44,7 +46,7 @@ array
        "Public" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
-    ),
+   ),
    "Submission" => array
    (
       "Name" => "Detalhes",
@@ -54,14 +56,39 @@ array
          "No","Edit","Delete","GenCert",
          "Author1","Status",
          "Type","Area","Level",
-         "Title",
+         "Name","Title","Keywords",
       ),
       "Data_UK" => array
       (
          "No","Edit","Delete","GenCert",
          "Author1","Status",
          "Type","Area","Level",
-         "Title_UK",
+         "Name","Title_UK","Keywords",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "PreInscriptions" => array
+   (
+      "Name" => "PreInscrições",
+      "Name_UK" => "PreInscriptions",
+      "Data" => array
+      (
+         "No",
+         "Name",
+         "Type","Area","Level",
+         "Title","Vacancies",
+         "SubmissionNPreInscriptionsCell","SubmissionVacanciesCell",
+      ),
+      "Data_UK" => array
+      (
+         "No",
+         "Name","Status",
+         "Type","Area","Level",
+         "Title_UK","Vacancies","SubmissionNPreInscriptionsCell","SubmissionVacanciesCell",
       ),
       "Admin" => 1,
       "Person" => 0,

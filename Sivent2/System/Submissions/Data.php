@@ -47,6 +47,23 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
     ),
+   "Author1" => array
+   (
+    //Author names MUST come before Friend data
+      "Name" => "Autor Proponente",
+      "Name_UK" => "Proponent Author",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Size" => 35,
+      "Search" => TRUE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+   ),
    "Friend" => array
    (
       "Name" => "Cadastro, Autor",
@@ -62,38 +79,7 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
-   ),
-   "Author1" => array
-   (
-      "Name" => "Autor Proponente",
-      "Name_UK" => "Proponent Author",
-
-      "Sql" => "VARCHAR(256)",
-
-      "Size" => 35,
-      "Search" => TRUE,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-   ),
-   "Friend2" => array
-   (
-      "Name" => "Cadastro, Coautor #1",
-      "Name_UK" => "Registration, Coautor #1",
-
-      "Sql" => "INT",
-
-      "SqlClass" => "Friends",
-      "Search" => FALSE,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
+      "TriggerFunction" => "UpdateSpeaker",
    ),
    "Author2" => array
    (
@@ -111,6 +97,23 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+   ),
+   "Friend2" => array
+   (
+      "Name" => "Cadastro, Coautor #1",
+      "Name_UK" => "Registration, Coautor #1",
+
+      "Sql" => "INT",
+
+      "SqlClass" => "Friends",
+      "Search" => FALSE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "TriggerFunction" => "UpdateSpeaker",
    ),
    "Author3" => array
    (
@@ -144,6 +147,25 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
+      "TriggerFunction" => "UpdateSpeaker",
+   ),
+   "Name" => array
+   (
+      "Name" => "Identificador",
+      "Name_UK" => "Identifier",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Compulsory" => FALSE,
+      "Search" => TRUE,
+      "Size" => 3,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
    ),
    "Title" => array
    (
@@ -154,7 +176,7 @@ array
 
       "Compulsory" => TRUE,
       "Search" => TRUE,
-      "Size" => "35",
+      "Size" => 35,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -171,7 +193,7 @@ array
       "Sql" => "VARCHAR(256)",
 
       "Search" => TRUE,
-      "Size" => "50",
+      "Size" => 35,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -193,6 +215,46 @@ array
       "Values" => array("Palestra","Minicurso","Oficina"),
       "Values_UK" => array("Talk","Minicourse","Workshop"),
       "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+   ),
+   "PreInscriptions" => array
+   (
+      "Name" => "Preinscrições",
+      "Name_UK" => "Preinscriptions",
+      "Title" => "Preinscrições para este Atividade",
+      "Title_UK" => "Preinscriptions for this Activity",
+      
+      "Sql" => "ENUM",
+
+      "Search" => TRUE,
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+   ),
+   "Vacancies" => array
+   (
+      "Name" => "Vagas",
+      "Name_UK" => "Vacancies",
+      "Title" => "No. Vargas",
+      "Title_UK" => "No. Vacancies",
+
+
+      "Sql" => "INT",
+      "Regexp" => "^\d+$",
+      "Default" => 40,
+
+      "Search" => TRUE,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -294,8 +356,8 @@ array
    ),
    "Status" => array
    (
-      "Name" => "Selecionado",
-      "Name_UK" => "Selected",
+      "Name" => "Status",
+      "Name_UK" => "Status",
 
       "Sql" => "ENUM",
 
@@ -348,6 +410,23 @@ array
       "Assessor"  => 0,
    ),
    
+   "Keywords" => array
+   (
+      "Name" => "Palavras Chaves",
+      "Name_UK" => "Keywords",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Search" => TRUE,
+      "Size" => "50",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
    "Summary" => array
    (
       "Name" => "Resumo",

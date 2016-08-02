@@ -4,8 +4,8 @@ include_once("MakeCGI/Cookies.php");
 
 trait MakeCGI
 {
-    var $CGI_Args_Separator="&";
-    var $CGI_SplitVars=array();
+    var $CGI_Args_Sep="&";
+    var $CGI_Split_Vars=array();
     var $CGI_SearchVars=array();
 
     use MakeCGI_Cookies;
@@ -42,6 +42,17 @@ trait MakeCGI
 
     function CGI_TreatValue($value)
     {
+        //Multiple selects
+        if (is_array($value))
+        {
+            foreach (array_keys($value) as $id)
+            {
+                $value[ $id ]=$this->CGI_TreatValue($value[ $id ]);
+            }
+
+            return $value;
+        }
+
         $value=htmlentities($value,ENT_QUOTES,'UTF-8' );
 
         //remove leading and trailing white space.
@@ -58,6 +69,16 @@ trait MakeCGI
 
     function CGI_Treatint($value)
     {
+        //Multiple selects
+        if (is_array($value))
+        {
+            foreach (array_keys($value) as $id)
+            {
+                $value[ $id ]=$this->CGI_Treatint($value[ $id ]);
+            }
+
+            return $value;
+        }
         $value=$this->CGI_TreatValue($value);
         $value=preg_replace('/[^-\d]+/',"",$value);
 
@@ -334,7 +355,7 @@ trait MakeCGI
     function CGI_URI2Hash($uri="",$hash=array())
     {
         if (empty($uri)) { $uri=$_SERVER[ "QUERY_STRING" ]; }
-        $uri=preg_replace('/\?/',"",$uri);
+        $uri=preg_replace('/^\S*\?/',"",$uri);
 
         if (preg_match('/\S/',$uri))
         {
@@ -461,7 +482,7 @@ trait MakeCGI
             array_push($queries,$string);
         }
 
-        return join($this->CGI_Args_Separator,$queries);
+        return join($this->CGI_Args_Sep,$queries);
     }
     
     function CGI_Hidden2Hash($hash=array())
@@ -504,9 +525,9 @@ trait MakeCGI
           }
       }
 
-      if (is_array($this->CGI_SplitVars))
+      if (is_array($this->CGI_Split_Vars))
       {
-          foreach ($this->CGI_SplitVars as $var => $def)
+          foreach ($this->CGI_Split_Vars as $var => $def)
           {
               $vvar=$this->ItemName."_".$var;
               $val=$this->GetCGIVarValue($vvar."_Only");

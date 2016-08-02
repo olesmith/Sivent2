@@ -173,7 +173,7 @@ trait DB_MySql
     //* 
     //* 
 
-    function DB_MySql_Fetch_Assoc_list($result,$byid=FALSE)
+    function DB_MySql_Fetch_Assoc_list($result,$byid=FALSE,$lowercasekeys=FALSE)
     {
         $items=array();
 
@@ -188,7 +188,10 @@ trait DB_MySql
 
             foreach ($row as $key => $value)
             {
-                $item[ $key ]=$value;
+                $rkey=$key;
+                if ($lowercasekeys) { $rkey=strtolower($key); }
+                
+                $item[ $rkey ]=$value;
                 if ($key=="ID") { $id=$row[$key]; }
                 $n++;
             }

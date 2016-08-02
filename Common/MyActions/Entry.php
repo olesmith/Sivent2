@@ -18,7 +18,8 @@ trait MyActions_Entry
             $this->IconsPath=$this->FindIconsPath();
         }
 
-        if (!empty($this->Actions[ $data ]) && is_array($this->Actions[ $data ]))
+        $action=$this->Actions($data);
+        if (!empty($action) && is_array($action))
         {
             if ($this->MyAction_Allowed($data,$item))
             {
@@ -90,13 +91,17 @@ trait MyActions_Entry
     {
         if (!isset($this->Actions[ $data ][ "Name" ])) { return ""; }
 
+        $anchor=$this->Actions($data,"Anchor");
+
         $action=$this->Href
         (
            $this->MyActions_Entry_URL($data,$item,$rargs,$noargs),
            $this->MyActions_Entry_Name($data,$noicons,$item),
            $this->MyActions_Entry_Title($data,$item),
            $this->Actions[ $data ][ "Target" ],
-           $class
+           $class,
+           FALSE,array(),
+           $anchor
         );
 
         $action=$this->Filter($action,$item);
@@ -226,8 +231,6 @@ trait MyActions_Entry
         }
 
         $href=$this->Actions[ $data ][ "Href" ];
-        //if (empty($href)) { $href="index.php"; }
-
 
         $action=
             $href."?".
@@ -244,12 +247,6 @@ trait MyActions_Entry
         if (!empty($this->IDGETVar))
         {
             $action=preg_replace('/\&?ID=/',"&".$this->IDGETVar."=",$action);
-        }
-
-        $anchor=$this->Actions($data,"Anchor");
-        if (!empty($anchor))
-        {
-            $action.="#".$anchor;
         }
 
         return $action;

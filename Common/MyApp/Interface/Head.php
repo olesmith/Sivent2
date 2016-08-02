@@ -29,20 +29,45 @@ trait MyApp_Interface_Head
 
 
     //*
-    //* sub MyApp_Interface_Header, Parameter list:
+    //* sub MyApp_Interface_Header_Send, Parameter list:
     //*
-    //* Sends the HTML header part.
+    //* Sends the HTML header .
     //*
     //*
 
-    function MyApp_Interface_Header()
+    function MyApp_Interface_Header_HTTP()
     {
-        if ($this->HeadersSend!=0)
-        {
-            //$this->AddMsg("Warning! Double header (not) send",2);
-            return;
-        }
+        if ($this->HeadersSend!=0) { return; }
+        
+        header('Content-type: text/html;charset='.$this->HtmlSetupHash[ "CharSet"  ]);
+        $this->HTML=TRUE;
 
+        $this->HeadersSend=1;  
+    }
+    
+    //*
+    //* sub MyApp_Interface_Comment, Parameter list:
+    //*
+    //* Sends 'before HTML tag' comment.
+    //*
+    //*
+
+    function MyApp_Interface_Comment()
+    {
+        return
+            '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'.
+            "\n";
+    }
+    
+    //*
+    //* sub MyApp_Interface_Cookies, Parameter list:
+    //*
+    //* Returns before HTM tage comment.
+    //*
+    //*
+
+    function MyApp_Interface_Cookies()
+    {
         if ($this->Module)
         {
             $this->Module->AddSearchVars2Cookies();
@@ -51,72 +76,155 @@ trait MyApp_Interface_Head
                 array_push($this->CookieVars,$cookievar);
             }
         }
+        
+    }
+    
+    
+    //*
+    //* sub MyApp_Interface_, Parameter list:
+    //*
+    //* Returns interface header <TITLE>...</TITLE> section.
+    //*
+    //*
 
-
-        $vars=array
-        (
-           "Profile" => $this->Profile,
-        );
-
-        if ($this->LoginType=="Admin") { $vars[ "Admin" ]=1; }
-
-        header('Content-type: text/html;charset='.$this->HtmlSetupHash[ "CharSet"  ]);
-        $this->HTML=TRUE;
-
-        $this->HeadersSend=1;  
-
+    function MyApp_Interface_Application_Title()
+    {
         return
-            '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'.
+            $this->HtmlTags("TITLE",$this->ApplicationWindowTitle())."\n";
+    }
+    
+    //*
+    //* sub MyApp_Interface_, Parameter list:
+    //*
+    //* Returns interface header short cut icon entry.
+    //*
+    //*
+
+    function MyApp_Interface_Application_ShortCut_Icon()
+    {
+        return "";
+            $this->HtmlTag
+            (
+               "LINK",
+               "",
+               array
+               (
+                  "REL"  => 'shortcut icon',
+                  "HREF" => $this->FindIconsPath()."/SAdE.owl.jpg",
+               )
+            ).
+            "\n";
+    }
+    
+    //*
+    //* sub MyApp_Interface_Application_METAs, Parameter list:
+    //*
+    //* Returns interface header META section
+    //*
+    //*
+
+    function MyApp_Interface_Application_METAs()
+    {
+        return
+            $this->HtmlTag
+            (
+               "META",
+               "",
+               array
+               (
+                  "HTTP-EQUIV" => 'Content-type',
+                  "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
+               )
+             ).
+             "\n".
+             $this->HtmlTag
+             (
+                "META",
+                "",
+                array
+                (
+                   "NAME"    => 'Autor',
+                   "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
+                )
+             ).
+             "\n";
+    }
+    //*
+    //* sub MyApp_Interface_Application_LINKs, Parameter list:
+    //*
+    //* Returns interface header LINKs.
+    //*
+    //*
+
+    function MyApp_Interface_Application_LINKs()
+    {
+        return
+            $this->HtmlTag
+            (
+               "META",
+               "",
+               array
+               (
+                  "HTTP-EQUIV" => 'Content-type',
+                  "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
+               )
+             ).
+             "\n".
+             $this->HtmlTag
+             (
+                "META",
+                "",
+                array
+                (
+                   "NAME"    => 'Autor',
+                   "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
+                )
+             ).
+             "\n";
+    }
+    
+    //*
+    //* sub MyApp_Interface_Application_Styles, Parameter list:
+    //*
+    //* Returns interface header style section
+    //*
+    //*
+
+    function MyApp_Interface_Application_Styles()
+    {
+        return
+            $this->MyApp_Interface_Application_CSS_Generate().
+            "";
+    }
+    
+    
+    //*
+    //* sub MyApp_Interface_Header, Parameter list:
+    //*
+    //* Sends the HTML header part.
+    //*
+    //*
+
+    function MyApp_Interface_Header()
+    {
+        //Printed right away.
+        $this->MyApp_Interface_Header_HTTP();
+        
+        $this->MyApp_Interface_Cookies();
+        
+        return
+            $this->MyApp_Interface_Comment().
             "<HTML>\n".
             $this->HtmlTags
             (
                "HEAD",
-               $this->HtmlTags
-               (
-                  "TITLE",
-                  $this->ApplicationWindowTitle()
-               )."\n".
-               "    ".
-               $this->HtmlTag
-               (
-                  "LINK",
-                  "",
-                  array
-                  (
-                     "REL"  => 'shortcut icon',
-                     "HREF" => $this->FindIconsPath()."/SAdE.owl.jpg",
-                  )
-               )."\n".
-               "    ".
-               $this->HtmlTag
-               (
-                  "META",
-                  "",
-                  array
-                  (
-                     "HTTP-EQUIV" => 'Content-type',
-                     "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
-                  )
-               )."\n".
-               "    ".
-               $this->HtmlTag
-               (
-                  "META",
-                  "",
-                  array
-                  (
-                     "NAME"    => 'Autor',
-                     "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
-                  )
-               )."\n".
-               "    ".
-               $this->HtmlTags
-               (
-                 "STYLE",
-                 $this->ReadCSS(),
-                 array("TYPE" => 'text/css')
-               ).
-               "\n"
+               "\n".
+               $this->MyApp_Interface_Application_CSS_LINKs().
+               $this->MyApp_Interface_Application_Title().
+               $this->MyApp_Interface_Application_ShortCut_Icon().
+               $this->MyApp_Interface_Application_METAs().
+               $this->MyApp_Interface_Application_Styles().
+              "\n"
             ).
             $this->HtmlTag
             (
@@ -125,7 +233,6 @@ trait MyApp_Interface_Head
                array
                (
                   " " => $this->HtmlSetupHash[ "BodyArgs"  ],
-                  /* "ONLOAD" => "setFocus()", */
                )
             )."\n".
             "    ".

@@ -34,19 +34,20 @@ trait MyMod_Items_Table
     //* Creates table with $items
     //*
 
-    function MyMod_Items_Table_Html($edit,$items,$datas,$options=array())
+    function MyMod_Items_Table_Html($edit,$items,$datas,$options=array(),$troptions=array(),$tdoptions=array())
     {
         if (!is_array($datas)) { $datas=$this->ItemDataGroups($datas,"Data"); }
         
         $tableoptions=array();
-        if (empty($options[ "TABLE_Options" ])) { $options[ "TABLE_Options" ]=array(); }
+        //if (empty($options[ "TABLE_Options" ])) { $options[ "TABLE_Options" ]=array(); }
         
         return
             $this->Html_Table
             (
                $this->MyMod_Item_Titles($datas),
                $this->MyMod_Items_Table($edit,$items,$datas),
-               $options[ "TABLE_Options"  ]
+               //$options[ "TABLE_Options"  ]
+               $options,$troptions,$tdoptions
             ).
             "";
     }

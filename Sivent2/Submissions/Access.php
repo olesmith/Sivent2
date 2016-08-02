@@ -73,13 +73,13 @@ class SubmissionsAccess extends ModulesCommon
         }
         
 
-        if (preg_match('/^(Friend)$/',$this->Profile()))
-        {
-            if (!$this->EventsObj()->Event_Submissions_Inscriptions_Open())
-            {
-                $res=FALSE;
-            }
-        }
+        /* if (preg_match('/^(Friend)$/',$this->Profile())) */
+        /* { */
+        /*     if (!$this->EventsObj()->Event_Submissions_Inscriptions_Open()) */
+        /*     { */
+        /*         $res=FALSE; */
+        /*     } */
+        /* } */
 
         
         return $res;
@@ -125,6 +125,15 @@ class SubmissionsAccess extends ModulesCommon
             $res=$this->CheckEditAccess($item);
         }
 
+
+        if (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            if (!$this->EventsObj()->Event_Submissions_Inscriptions_Open())
+            {
+                $res=FALSE;
+            }
+        }
+        
         return $res;
     }
     

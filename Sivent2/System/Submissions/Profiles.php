@@ -26,12 +26,15 @@ array
          ),
          "Friend" => array
          (
+            "Show" => 1,
+            "Submission" => 1,
          ),
          'Assessor' => array
          (
          ),
          'Coordinator' => array
          (
+            "Submission" => 1,
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
@@ -39,6 +42,7 @@ array
          ),
          'Admin' => array
          (
+            "Submission" => 1,
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
@@ -88,9 +92,15 @@ array
          ),
          'Coordinator' => array
          (
+            "Event" => 1,
+            "Areas" => 1,
+            "Schedule" => 1,
          ),
          'Admin' => array
          (
+            "Event" => 1,
+            "Areas" => 1,
+            "Schedule" => 1,
          ),
       ),
       'ActionsPlural' => array
@@ -109,8 +119,6 @@ array
          ),
          'Coordinator' => array
          (
-            "Event" => 1,
-            "Areas" => 1,
          ),
          'Admin' => array
          (

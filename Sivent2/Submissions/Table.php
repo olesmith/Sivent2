@@ -45,8 +45,6 @@ class SubmissionsTable extends SubmissionsAccess
 
     function Submissions_Table_Data()
     {
-        //return $this->GetRealNameKey($this->ItemDataGroups[ "Submission" ],"Data");
-        
         return $this->GetGroupDatas("Submission",FALSE);
     }
     
@@ -144,6 +142,7 @@ class SubmissionsTable extends SubmissionsAccess
 
     function Submissions_Table_Show($edit,&$inscription)
     {
+        $this->Actions("Show");
         $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $inscription[ "Friend" ],array("Name","Email")));
 
         $startform="";
@@ -168,22 +167,22 @@ class SubmissionsTable extends SubmissionsAccess
         }
         
         return
-                $this->H
-                (
-                   3,
-                   $this->MyLanguage_GetMessage("Submissions_User_Table_Title").
-                   ": ".
-                   $this->FriendsObj()->FriendID2Name($inscription[ "Friend" ])
-                ).
-                $this->H
-                (
-                   5,
-                   $this->MyLanguage_GetMessage("Inscription_Period").
-                   ": ".
-                   $this->EventsObj()->Event_Collaborations_Inscriptions_DateSpan().
-                   ". ".
-                   $this->EventsObj()->Event_Collaborations_Inscriptions_Status()
-                ).
+            $this->H
+            (
+               3,
+               $this->MyLanguage_GetMessage("Submissions_User_Table_Title").
+               ": ".
+               $this->FriendsObj()->FriendID2Name($inscription[ "Friend" ])
+            ).
+            $this->H
+            (
+               5,
+               $this->MyLanguage_GetMessage("Inscription_Period").
+               ": ".
+               $this->EventsObj()->Event_Collaborations_Inscriptions_DateSpan().
+               ". ".
+               $this->EventsObj()->Event_Collaborations_Inscriptions_Status()
+            ).
             $startform.
             $this->Submissions_Table_Html($edit,$inscription).
             $endform.

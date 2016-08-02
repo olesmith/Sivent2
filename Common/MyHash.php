@@ -3,6 +3,19 @@
 trait MyHash
 {
     //*
+    //* function MyHash_Value_Save_Set, Parameter list: &$list,$key,$value=array()
+    //*
+    //* If empty $list[ $key ], sets it to array().
+    //*
+
+    function MyHash_Value_Save_Set(&$list,$key,$value=array())
+    {
+        if (empty($list[ $key ]))
+        {
+            $list[ $key ]=$value;
+        }
+    }
+    //*
     //* function MyHash_Key, Parameter list: $hash,$key
     //*
     //* Savely return $hash key $key.
@@ -14,6 +27,7 @@ trait MyHash
 
         return NULL;
     }
+
 
     //*
     //* function MyHash_Args2Object, Parameter list: $hash
@@ -87,7 +101,7 @@ trait MyHash
         foreach (array_keys($list) as $id)
         {
             $val=$list[ $id ][ $key ];
-            $this->MakeSureIsArray($rlist,$val);
+            $this->MyHash_Value_Save_Set($rlist,$val);
             $rlist[ $val ]=$list[ $id ];
         }
 
@@ -106,7 +120,7 @@ trait MyHash
         foreach (array_keys($list) as $id)
         {
             $val=$list[ $id ][ $key ];
-            $this->MakeSureIsArray($rlist,$val);
+            $this->MyHash_Value_Save_Set($rlist,$val);
             $rlist[ $val ][ $id ]=$list[ $id ];
         }
 
@@ -125,7 +139,7 @@ trait MyHash
         foreach (array_keys($list) as $id)
         {
             $val=$list[ $id ][ $key ];
-            $this->MakeSureIsArray($rlist,$val);
+            $this->MyHash_Value_Save_Set($rlist,$val);
             array_push($rlist[ $val ],$list[ $id ]);
         }
 
@@ -145,11 +159,11 @@ trait MyHash
         foreach (array_keys($list) as $id)
         {
             $val1=$list[ $id ][ $key1 ];
-            $this->MakeSureIsArray($rlist,$val1);
+            $this->MyHash_Value_Save_Set($rlist,$val1);
 
             
             $val2=$list[ $id ][ $key2 ];
-            $this->MakeSureIsArray($rlist[ $val1 ],$val2);
+            $this->MyHash_Value_Save_Set($rlist[ $val1 ],$val2);
 
             array_push($rlist[ $val1 ][ $val2 ],$list[ $id ]);
         }
@@ -169,14 +183,14 @@ trait MyHash
         foreach (array_keys($list) as $id)
         {
             $val1=$list[ $id ][ $key1 ];
-            $this->MakeSureIsArray($rlist,$val1);
+            $this->MyHash_Value_Save_Set($rlist,$val1);
 
             
             $val2=$list[ $id ][ $key2 ];
-            $this->MakeSureIsArray($rlist[ $val1 ],$val2);
+            $this->MyHash_Value_Save_Set($rlist[ $val1 ],$val2);
 
             $val3=$list[ $id ][ $key3 ];
-            $this->MakeSureIsArray($rlist[ $val1 ][ $val2 ],$val3);
+            $this->MyHash_Value_Save_Set($rlist[ $val1 ][ $val2 ],$val3);
 
 
             
@@ -474,6 +488,41 @@ trait MyHash
 
         return $lines;
     }
-}
+    
+    //*
+    //* function MyHashes_Page, Parameter list: $list,$maxnitems,$ditem=1
+    //*
+    //* Splits a list in sublists, with max of $nlines per item.
+    //* Elements in $leadingrows is prepended in each sublists.
+    //*
+
+    function MyHashes_Page($list,$maxnitems,$ditem=1)
+    {
+        $items=array();
+        $plist=array();
+        $nitems=0;
+        foreach ($list as $id => $item)
+        {
+            $nitems+=$ditem;
+            if ($nitems<=$maxnitems)
+            {
+                array_push($items,$item);
+            }
+            else
+            {
+                array_push($plist,$items);
+                $items=array($item);
+                $nitems=$ditem;
+            }
+        }
+
+        if (count($items)>0)
+        {
+            array_push($plist,$items);
+        }
+
+        return $plist;
+    }
+ }
 
 ?>

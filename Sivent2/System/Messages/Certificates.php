@@ -40,4 +40,14 @@ array
       "Name" => "Para Verificar, acesse",
       "Name_UK" => "Verify accessing",
    ),
+   "Certificate_Link" => array
+   (
+      "Name" => "Gerar Certificados",
+      "Name_UK" => "Generate Certificates",
+   ),
+   "Certificate_Not_Available_Yet" => array
+   (
+      "Name" => "Certificados Aguardando Liberação",
+      "Name_UK" => "Certificates Awaiting Liberation",
+   ),
 );

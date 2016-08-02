@@ -85,4 +85,24 @@ array
         "Name"    => "#ItemsName",
         "Name_UK" => "#ItemsName_UK",
        ),
+       "DeleteButtonTitle" => array
+       (
+        "Name"    => "Deletar",
+        "Name_UK" => "Delete",
+       ),
+       "DeleteReturnTitle" => array
+       (
+        "Name"    => "Retornar",
+        "Name_UK" => "Return",
+       ),
+       "IsNotUnique" => array
+       (
+        "Name"    => "Não único",
+        "Name_UK" => "Not unique",
+       ),
+       "Items_None_Found" => array
+       (
+        "Name"    => "Nenhum(a) Item Encontrado(a).",
+        "Name_UK" => "No Items Found.",
+       ),
     );

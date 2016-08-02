@@ -13,5 +13,6 @@ array
       "Public" => 0,
       "Admin" => 1,
       "Coordinator" => 1,
+      "SubAction" => "Mail",
     ),
 );

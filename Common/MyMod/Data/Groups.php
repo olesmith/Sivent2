@@ -5,6 +5,7 @@ include_once("Groups/Defaults.php");
 include_once("Groups/Time.php");
 include_once("Groups/Files.php");
 include_once("Groups/Add.php");
+include_once("Groups/Info.php");
 
 trait MyMod_Data_Groups
 {
@@ -12,7 +13,8 @@ trait MyMod_Data_Groups
         MyMod_Data_Groups_Defaults, 
         MyMod_Data_Groups_Time, 
         MyMod_Data_Groups_Files, 
-        MyMod_Data_Groups_Add
+        MyMod_Data_Groups_Add, 
+        MyMod_Data_Groups_Info
         ;
 
 

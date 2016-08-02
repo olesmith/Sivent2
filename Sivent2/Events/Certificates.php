@@ -1,6 +1,6 @@
 <?php
 
-class EventsCertificates extends EventsSubmissions
+class EventsCertificates extends EventsSchedules
 {
     //*
     //* function Event_Certificates_Has, Parameter list: $item

@@ -102,6 +102,8 @@ trait MyMod_Data_Defaults
             "IsHour"            => FALSE,
             "ToDayIsDefault"    => FALSE,
             "Info"              => FALSE,
+            "IsColor"          => FALSE,
+            "IsBarcode"          => FALSE,
         );
 
     }

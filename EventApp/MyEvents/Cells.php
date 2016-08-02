@@ -120,20 +120,21 @@ class MyEventsCells extends MyEventsFriend
     }
 
     //*
-    //* function NoOfInscriptionsCell, Parameter list:
+    //* function NoOfInscriptionsCell, Parameter list:$edit=0,$event=array(),$data=""
     //*
     //* Returns number of inscriptions in sql table.
     //*
 
-    function NoOfInscriptionsCell($event=array())
+    function NoOfInscriptionsCell($edit=0,$event=array(),$data="")
     {
         if (empty($event)) { return $this->MyLanguage_GetMessage("Events_Inscriptions_Cell_Noof_Title"); }
+       
+        $sqltable=$this->SqlEventTableName("Inscriptions",$event);
         
         $ninscribed="-";
-        if ($this->InscriptionsObj()->Sql_Table_Exists())
+        if ($this->InscriptionsObj()->Sql_Table_Exists($sqltable))
         {
-            $table=$this->SqlEventTableName("Inscriptions",$event);
-            $ninscribed=$this->InscriptionsObj()->MySqlNEntries($table,array());
+            $ninscribed=$this->InscriptionsObj()->Sql_Select_NHashes(array(),$sqltable);
         }
 
         return $ninscribed;

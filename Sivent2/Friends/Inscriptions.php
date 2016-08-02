@@ -1,10 +1,9 @@
 <?php
 
-
 class FriendsInscriptions extends FriendsEvents
 {
-    var $Inscriptions_Friend_Table_Event_Data=array("Name","StartDate");
-    var $Inscriptions_Friend_Table_Inscription_Data=array("Edit","GenCert","CTime","Status","Name","Email",);
+    var $Inscriptions_Friend_Table_Event_Data=array("Name","EventStart","EventEnd");
+    var $Inscriptions_Friend_Table_Inscription_Data=array("Inscription","GenCert","CTime","Status","Name","Email",);
     
     //*
     //* function Friend__Read, Parameter list: $friend=array()
@@ -28,7 +27,12 @@ class FriendsInscriptions extends FriendsEvents
             $inscriptions[ $eventid ]=
                 $this->InscriptionsObj()->Sql_Select_Hashes
                 (
-                   array("Friend" =>$friend[ "ID" ]),
+                   array
+                   (
+                      "Unit" => $this->Unit("ID"),
+                      "Event" => $eventid,
+                      "Friend" => $friend[ "ID" ],
+                   ),
                    array(),
                    "",
                    FALSE,
@@ -128,7 +132,6 @@ class FriendsInscriptions extends FriendsEvents
         foreach ($inscriptions as $eventid => $einscriptions)
         {
             $table=array_merge($table,$this->Friend_Inscriptions_Event_Row($friend,$eventid,$einscriptions));
-            
         }
 
         echo

@@ -8,6 +8,7 @@ include_once("Sql/Select.php");
 include_once("Sql/Insert.php");
 include_once("Sql/Update.php");
 include_once("Sql/Delete.php");
+include_once("Sql/Unique.php");
 
 trait Sql
 {
@@ -19,6 +20,7 @@ trait Sql
         Sql_Select,
         Sql_Insert,
         Sql_Update,
+        Sql_Unique,
         Sql_Delete;
 
     //*

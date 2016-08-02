@@ -390,7 +390,10 @@ class Paging extends Items
                       $page,
                       "Página ".$page.", ".$start."-".$end.$name,
                       $target="",
-                      "ptablemenu"
+                      "ptablemenu",
+                      "FALSE",
+                      array(),
+                      "PagingMenu"
                    )
                 );
             }
@@ -400,7 +403,8 @@ class Paging extends Items
             $last=$page;
         }
 
-        return 
+        return
+            $this->Anchor("PagingMenu").
             $this->HRefMenu
             (
                $this->NPages." Páginas: ",

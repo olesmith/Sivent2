@@ -50,14 +50,23 @@ class FriendsEvents extends FriendsCollaborations
 
     function Friend_Event_Rows($event)
     {
-        $row=
-            $this->EventsObj()->MyMod_Item_Row(0,$event,$this->EventsObj()->GetGroupDatas("Basic"));
+        $row=$this->EventsObj()->MyMod_Item_Row(0,$event,$this->EventsObj()->GetGroupDatas("Basic"));
 
-        $info=$this->EventsObj()->Event_Inscriptions_InfoCell($event);
-
-        $info=array("",$this->MultiCell($info,count($row)-1,"left"));
-        
-        return array($row,$info);
+        return
+            array
+            (
+               $row,
+               array
+               (
+                  "","","","",
+                  $this->MultiCell
+                  (
+                     $this->EventsObj()->Event_Inscriptions_InfoCell($event),
+                     count($row)-4,
+                     "left"
+                  )
+               )
+            );
     }
 
     

@@ -83,4 +83,46 @@ array
       "Search"  => TRUE,
       "Compulsory"  => TRUE,
    ),
+   "Color" => array
+   (
+      "Name" => "Cor do Texto",
+      "Title" => "Cor  do Texto da Trilha",
+      "Name_UK" => "Text Color",
+      "Title_UK" => "Area Text Color",
+
+      "Size" => "10",
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => TRUE,
+      "IsColor"  => TRUE,
+      "Default"  => "#000000",
+      
+   ),
+   "Background" => array
+   (
+      "Name" => "Cor de Fundo",
+      "Title" => "Cor de Fundo da Trilha",
+      "Name_UK" => "Background Color",
+      "Title_UK" => "Area Background Color",
+
+      "Size" => "10",
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => TRUE,
+      "IsColor"  => TRUE,
+      "Default"  => "#FFFFFF",
+   ),
+   
 );

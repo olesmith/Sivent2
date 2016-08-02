@@ -136,39 +136,22 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
-     "Areas" => array
-     (
-        "Href"     => "",
-        "HrefArgs" => "?ModuleName=Areas&Action=Search&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Trilhas",
-        "Title_UK" => "Manage Areas of Interest",
-        "Name"     => "Trilhas",
-        "Name_UK"     => "Areas of Interest",
+     /* "Event" => array */
+     /* ( */
+     /*    "Href"     => "", */
+     /*    "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"), */
+     /*    "Title"    => "Gerenciar Evento", */
+     /*    "Title_UK" => "Manage Event", */
+     /*    "Name"     => "Evento", */
+     /*    "Name_UK"     => "Event", */
 
-        "Public"   => 0,
-        "Person"   => 0,
-        "Admin"    => 1,
-        "Friend"   => 0,
-        "Coordinator"   => 1,
-        "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
-      ),
-     "Event" => array
-     (
-        "Href"     => "",
-        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Evento",
-        "Title_UK" => "Manage Event",
-        "Name"     => "Evento",
-        "Name_UK"     => "Event",
-
-        "Public"   => 0,
-        "Person"   => 0,
-        "Admin"    => 1,
-        "Friend"   => 0,
-        "Coordinator"   => 1,
-        "Advisor"    => 0,
-      ),
+     /*    "Public"   => 0, */
+     /*    "Person"   => 0, */
+     /*    "Admin"    => 1, */
+     /*    "Friend"   => 0, */
+     /*    "Coordinator"   => 1, */
+     /*    "Advisor"    => 0, */
+     /*  ), */
    "FriendTable" => array
    (
       "Href"     => "",
@@ -186,4 +169,21 @@ array
       "AccessMethod"    => "Event_Submissions_Has",
       "Handler"    => "Collaborators_Friend_Submissions_Handle",
    ),
+     "Submission" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Submission&Event=#Event&ID=#ID",
+        "Title"    => "Detalhes da Submissão",
+        "Title_UK" => "Submission Details",
+        "Name"     => "Detalhes",
+        "Name_UK"     => "Details",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 1,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "Handler"    => "MyMod_Handle_Submission",
+      ),
 );

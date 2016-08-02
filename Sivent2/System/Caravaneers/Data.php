@@ -127,7 +127,7 @@ array
       "Title_UK" => "Status",
 
       "Values" => array("OK","Email Vazio","Email mal Formatado","Email Existente"),
-      "Values_UK" => array("OK","Empty Email","Malformed Email","Existente Email"),
+      "Values_UK" => array("OK","Empty Email","Malformed Email","Existent Email"),
       "Default"  => "0",
       "NoSelectSort"  => TRUE,
       

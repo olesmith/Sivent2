@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsCertificate extends SubmissionsTable
+class SubmissionsCertificate extends SubmissionsSchedule
 {
     //*
     //* function Certificate_Code, Parameter list: $item

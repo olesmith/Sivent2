@@ -92,6 +92,15 @@ trait Sql_Insert
 
     function Sql_Insert_Item(&$item,$table="",$nocheckcols=FALSE)
     {
+        if ($table!="__Table__")
+        {
+            $time=time();
+            foreach (array("ATime","CTime","MTime") as $key)
+            {
+                $item[ $key ]=$time;
+            }
+        }
+
         $this->LastSqlInsert=$this->Sql_Insert_Item_Query($item,$table,$nocheckcols);
         //$item[ "ID" ]=$this->Sql_Insert_NextID($table);
 
@@ -122,14 +131,6 @@ trait Sql_Insert
        
         if (empty($ritem))
         {
-            if ($table!="__Table__")
-            {
-                foreach (array("ATime","CTime","MTime") as $key)
-                {
-                    $item[ $key ]=time();
-                }
-            }
-
             $this->Sql_Insert_Item($item,$table,$nocheckcols);
 
             return TRUE;

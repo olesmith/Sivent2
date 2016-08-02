@@ -152,7 +152,7 @@ array
    "Payments" => array
    (
       "Name" => "Taxa de Inscrição",
-      "Name_UK" => "Piad Event",
+      "Name_UK" => "Event Fee",
       "Title" => "Evento Pago?",
       "Title_UK" => "Paid Event?",
       "Sql" => "ENUM",
@@ -184,4 +184,46 @@ array
       "Assessor"  => 1,
       "Search"  => FALSE,
    ),
+   "Payments" => array
+   (
+      "Name" => "Taxa de Inscrição",
+      "Name_UK" => "Paid Event",
+      "Title" => "Evento Pago?",
+      "Title_UK" => "Paid Event?",
+      "Sql" => "ENUM",
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default"  => "1",
+      "SelectCheckBoxes"  => 2,
+
+      "Public"   => 1,
+      "Person"   => 1,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 1,
+      "Search"  => FALSE,
+   ),
+    "Schedule_Public" => array
+   (
+      "Name" => "Grade Publicado",
+      "Name_UK" => "Schedule Public",
+
+      "Sql" => "ENUM",
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default" => 1,
+      
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Default" => 1,
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+      "Compulsory"  => FALSE,
+   ),
+   
 );

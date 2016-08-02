@@ -544,12 +544,13 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
         $rcount=count($rows[$n]);
         if ($rcount>$count) { $count=$rcount; }
 
-        if ($rspeclen>0 && $rcount>$speclen)
-        {
-            print "Invalid row width, ".$rcount.", row ".($n+1).", max. ".$speclen.":\n";
-            var_dump($rows[$n]);
-            exit();
-        }
+        //Jorcelino, 7o ano, 20/06/2016
+        /* if ($rspeclen>0 && $rcount>$speclen) */
+        /* { */
+        /*     print "Invalid row width, ".$rcount.", row ".($n+1).", max. ".$speclen.":\n"; */
+        /*     var_dump($rows[$n]); */
+        /*     exit(); */
+        /* } */
     }
 
     $hline="";

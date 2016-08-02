@@ -108,7 +108,7 @@ trait MyMod_Items_Search
     {
         if ($this->NoSearches) { $nosearches=$this->NoSearches; }
 
-        if ($this->MyMod_Items_Search_Vars_Defined()) { $includeall=1; }
+        if ($this->MyMod_Items_Search_Vars_Defined()) { $nosearches=FALSE; }
         
         $searchwhere="";
         if (!$nosearches && $includeall!=2)
@@ -149,11 +149,54 @@ trait MyMod_Items_Search
             {
                 $where=preg_replace('/^'.$data.'=?\s+/',"",$where);
             }
-            $wheres[ $data ]=$where;
+            
+            $rdata=$this->MyMod_Items_Search_Var_Data($data);
+
+            $wheres[ $rdata ]=$where;
         }
 
         return $wheres;
     }
+
+    //*
+    //* function MyMod_Items_Search_Var_Data, Parameter list: $data,$datavalues=array()
+    //*
+    //* Generates pre sql search vars where, for var $data.
+    //*
+
+    function MyMod_Items_Search_Var_Data($data,$datavalues=array())
+    {
+        $rdata=$data;
+        if (!empty($this->ItemData[ $data ][ "SqlMethod" ]))
+        {
+        }
+        elseif ($this->MyMod_Data_Field_Is_Enum($data))
+        {
+        }
+        elseif ($this->MyMod_Data_Field_Is_Time($data))
+        {
+        }
+        elseif (preg_match('/^(ENUM|INT)$/i',$this->ItemData[ $data ][ "Sql" ]))
+        {
+        }
+        elseif ($this->ItemData[ $data ][ "SearchCompound" ])
+        {
+        }
+        else
+        {
+            $rdata="__".$data;
+            if (is_array($datavalues))
+            {
+            }
+            elseif (!preg_match('/LIKE/',$datavalues))
+            {
+            }
+        }
+
+        return $rdata;
+    }
+    
+    
     //*
     //* function MyMod_Items_Search_Var_Where, Parameter list: $data,$datavalues=array()
     //*
@@ -274,11 +317,19 @@ trait MyMod_Items_Search
             {
                 if (preg_match('/[_%]/',$datavalues))
                 {
-                    $where=" LIKE '".$datavalues."'";         
+                    $where=
+                        "lower(".
+                        $this->Sql_Table_Column_Name_Qualify($data).
+                        ") ".
+                        "LIKE lower('".$datavalues."')";         
                 }
                 elseif (!preg_match('/LIKE/',$datavalues))
                 {
-                    $where=" LIKE '%".$datavalues."%'";         
+                    $where=
+                        "lower(".
+                        $this->Sql_Table_Column_Name_Qualify($data).
+                        ") ".
+                        "LIKE lower('%".$datavalues."%')";         
                 }
             }
             else

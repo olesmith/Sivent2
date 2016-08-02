@@ -59,7 +59,8 @@ class Caravans extends CaravansCaravaneers
 
     function PreActions()
     {
-        parent::PreProcessItemDataGroups();
+        //parent::PreProcessItemDataGroups();
+        parent::PreActions();
         array_push($this->ActionPaths,"System/Inscriptions","../EventApp/System/Inscriptions");
     }
 

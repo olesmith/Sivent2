@@ -7,7 +7,10 @@ include_once("Events/Cells.php");
 include_once("Events/Create.php");
 include_once("Events/Collaborations.php");
 include_once("Events/Caravans.php");
+include_once("Events/Payments.php");
 include_once("Events/Submissions.php");
+include_once("Events/PreInscriptions.php");
+include_once("Events/Schedules.php");
 include_once("Events/Certificates.php");
 include_once("Events/Certificate.php");
 
@@ -81,7 +84,8 @@ class Events extends EventsCertificate
            "Data.Certificates.php",
            "Data.Collaborations.php",
            "Data.Caravans.php",
-           "Data.Submissions.php"
+           "Data.Submissions.php",
+           "Data.PreInscriptions.php"
         );
         
         parent::PreProcessItemData();
@@ -174,6 +178,87 @@ class Events extends EventsCertificate
 
         return $res;
     }
+    
+    //*
+    //* function MyMod_Handle_Event_Menu, Parameter list: 
+    //*
+    //* Creates horisontal menu with access to different SGroups.
+    //*
+
+    function MyMod_Handle_Event_Menu()
+    {
+        $args=$this->CGI_URI2Hash();
+
+        $subactions=$this->ReadPHPArray("System/Events/SubActions.php");
+        
+        $currsubaction=$this->CGI_GET("SubAction");
+
+        $hrefs=array();
+        foreach ($subactions as $subaction => $def)
+        {
+            $args[ "SubAction" ]=$subaction;
+
+            $href=$this->GetRealNameKey($def);
+            if ($subaction!=$currsubaction)
+            {
+                $href=$this->Href
+                (
+                   "?".$this->CGI_Hash2URI($args),
+                   $href,
+                   "",
+                   "",
+                   "",
+                   FALSE,
+                   array(),
+                   "HorMenu"
+                );
+            }
+            
+            array_push($hrefs,$href);
+        }
+        
+        return
+            $this->Center
+            (
+               "[ ".
+               join(" | ",$hrefs).
+               " ]"
+            );
+    }
+    
+    //*
+    //* function MyMod_Handle_Edit, Parameter list: $echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE
+    //*
+    //* Overrides module object Edit handler.
+    //*
+
+    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
+    {
+        echo $this->MyMod_Handle_Event_Menu();
+
+        $subaction=$this->CGI_GET("SubAction");
+
+        $agroups=array();
+        foreach (array_keys($this->ItemDataSGroups) as $group)
+        {
+            if (!empty($this->ItemDataSGroups[ $group ][ "SubAction" ]))
+            {
+                if ($this->ItemDataSGroups[ $group ][ "SubAction" ]==$subaction)
+                {
+                    $agroups[ $group ]=$this->ItemDataSGroups[ $group ];
+                }
+                unset($this->ItemDataSGroups[ $group ]);
+            }
+        }
+        
+        foreach (array_keys($agroups) as $group)
+        {
+            $this->ItemDataSGroups[ $group ]=$agroups[ $group ];
+        }
+        
+        return parent::MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
+    }
+
     
 }
 

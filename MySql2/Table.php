@@ -386,50 +386,6 @@ class Table extends TableLanguage
       $this->ApplicationObj()->MyApp_Interface_Head();
       $this->MyMod_HorMenu_Echo($plural);
   }
-
-  function SavePrintDocHeads($output=-1)
-  {
-      if ($output<0) { $output=$this->GetGETOrPOST("Output"); }
-
-      $latex=0;
-      $latex=$this->GetGETOrPOST("Latex");
-      if ($latex>=1) { return; }
-
-      $zip=0;
-      $zip=$this->GetGETOrPOST("ZIP");
-
-      if ($zip==1) { return; }
-
-      $latexdoc=$this->GetGETOrPOST("LatexDoc");
-      if (empty($latexdoc)) { $latexdoc=0; }
-      if (empty($latexdoc)) { $latexdoc=0; }
-
-
-      if ($output==0 && $latexdoc==0)
-      {
-          $action=$this->MyActions_Detect();
-          if (empty($this->Actions[ $action ][ "NoHeads" ]) || $this->Actions[ $action ][ "NoHeads" ]!=1)
-          {
-              $this->ApplicationObj()->MyApp_Interface_Head();
-          }
-
-          if (
-                !isset($this->Actions[ $action ][ "NoInterfaceMenu" ])
-                ||
-                $this->Actions[ $action ][ "NoInterfaceMenu" ]!=1
-             )
-          {
-              if (empty($this->Actions[ $action ][ "NoInterfaceMenu" ]))
-              {
-                  $singular=FALSE;
-                  if (isset($this->Actions[ $action ][ "Singular" ])) { $singular=!$this->Actions[ $action ][ "Singular" ]; }
-                 $this->MyMod_HorMenu_Echo($singular);
-                 echo "<A NAME=\"TOP\"></A>\n";
-              }
-          }
-
-      }
-  }
 }
 
 ?>

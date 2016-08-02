@@ -16,8 +16,18 @@ trait Sql_Select_Unique
 
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
 
-        $query=
-            "SELECT ".
+        $type=$this->DB_Dialect();
+        $query="SELECT DISTINCT ";
+        if (!empty($orderby) && $type=="pgsql")
+        {
+            $query.=
+                " ON (".
+                $this->Sql_Table_Column_Names_Qualify($orderby).
+                //$this->Sql_Table_Column_Name_Qualify($col).
+                ") ";
+        }
+
+        $query.=
             $this->Sql_Table_Column_Name_Qualify($col).
             " FROM ".
             $this->Sql_Table_Name_Qualify($table);
@@ -48,7 +58,7 @@ trait Sql_Select_Unique
         $values=array();
         if (!empty($query))
         {
-            $res=$this->DB_Query($query);
+            //25/06/2016!!! Ufffff! $res=$this->DB_Query($query);
             foreach ($this->DB_Query_2Assoc_List($query) as $item)
             {
                 $values[ $item[ $col ] ]=1;

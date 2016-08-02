@@ -88,6 +88,7 @@ class InscriptionsCaravans extends InscriptionsCollaborations
 
         return $title;
     }
+    
     //*
     //* function Inscription_Caravans_Table_Edit, Parameter list: $edit
     //*
@@ -119,115 +120,6 @@ class InscriptionsCaravans extends InscriptionsCollaborations
             $this->MyTime_Sort2Date($this->Event("Caravans_EndDate")).
             "";
     }
-    
-   //*
-    //* function Inscription_Caravans_Table, Parameter list: $edit,$item,$group=""
-    //*
-    //* Creates inscrition collaboration html table.
-    //*
-
-    function Inscription_Caravans_Table($edit,$item,$group="")
-    {
-        if (empty($group)) { $group="Caravans"; }
-
-        if (empty($this->ItemDataSGroups[ $group ]))
-        {
-            $this->ItemDataSGroups[ $group ]=
-                $this->ReadPHPArray("System/Inscriptions/SGroups.".$group.".php");
-        }
-        
-        
-        if ($edit==1 && $this->CGI_POSTint("Update")==1)
-        {
-            $this->Inscription_Group_Update($group,$item);
-        }
-        
-        $buttons="";
-        $html="";
-        if ($edit==1)
-        {
-            $buttons=$this->Buttons();
-            $html.=$this->StartForm();
-        }
-
-        $caravanstable=$this->Inscription_Caravans_Table_Show($edit,$item);
-
-        $table=
-            array_merge
-            (
-               $this->EventsObj()->Event_Caravans_Table(0,$this->Event(),"Caravans"),
-               array
-               (
-                  $this->H
-                  (
-                     5,
-                     $this->MyLanguage_GetMessage("Inscription_Period").
-                     ", ".
-                     $this->GetRealNameKey($this->ItemDataSGroups[ $group ]).
-                     ": ".
-                     $this->Inscription_Caravans_Table_DateSpan()
-                  )
-               ),
-               $this->MyMod_Item_Table
-               (
-                  $this->Inscription_Caravans_Table_Edit($edit),
-                 $item,
-                 $this->GetGroupDatas($group)
-               ),
-               array($buttons),
-               array($caravanstable)
-            );
-
-        
-        $html.=
-            $this->Html_Table("",$table).
-            "";
-
-        if ($edit==1)
-        {
-            $html.=
-                $this->MakeHidden("Update",1).
-                $this->EndForm();
-        }
-        
-        return $this->FrameIt($html);
-    }
-    
-    //*
-    //* function Inscription_Caravans_Show, Parameter list: $edit,&$item
-    //*
-    //* Shows currently allocated collaborations for inscription in $item.
-    //*
-
-    function Inscription_Caravans_Table_Show($edit,&$item)
-    {
-        if ($edit==1)
-        {
-            $this->MyMod_Item_Update_SGroup($item,"Caravans");
-        }
-                                            
-        //if ($item[ "Caravans" ]==1) { return "No"; }
-
-        return $this->Inscription_Event_Caravans_Table($edit,$item);
-    }
-    
-    //*
-    //* function Inscription_Event_Caravaneers_Table, Parameter list: $edit,&$item
-    //*
-    //* Creates a table listing inscription colaborations.
-    //*
-
-    function Inscription_Event_Caravans_Table($edit,&$item)
-    {
-        $this->CaravaneersObj()->ItemData("ID");
-        $this->CaravaneersObj()->Sql_Table_Structure_Update();
-        $this->CaravaneersObj()->Actions("Show");
-        
-        return 
-            $this->CaravaneersObj()->CaravaneersObj()->Caravaneers_Table_Show($edit,$item).
-            "";
-    }
-
 }
 
 ?>

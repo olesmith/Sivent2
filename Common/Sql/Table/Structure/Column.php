@@ -115,7 +115,7 @@ trait Sql_Table_Structure_Column
     //*
     //* function Sql_Table_Column_Info, Parameter list: $column,$table=""
     //*
-    //* Return column info. Unified 'ANSI'.
+    //* Return column info.
     //* 
 
     function Sql_Table_Column_Info($column,$table="")

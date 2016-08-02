@@ -59,7 +59,11 @@ trait MyActions_Add
             
             $this->MyAction_Add($action,$actions[ $action ]);
             $this->Actions[ $action ][ "Action" ]=$action;
-            $this->Actions[ $action ][ "File" ]=$file;
+            if (empty($this->Actions[ $action ][ "File" ]))
+            {
+                $this->Actions[ $action ][ "File" ]=array();
+            }
+            array_push($this->Actions[ $action ][ "File" ],$file);
             $this->Actions[ $action ][ "N" ]=$n;
         }
         

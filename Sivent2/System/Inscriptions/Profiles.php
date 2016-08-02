@@ -37,6 +37,7 @@ array
             'Delete' => 1,
             "GenCert" => 1,
             "MailCert" => 1,
+            "Friend" => 1,
          ),
          'Admin' => array
          (
@@ -45,7 +46,8 @@ array
             'Delete' => 1,
             "GenCert" => 1,
             "MailCert" => 1,
-         ),
+            "Friend" => 1,
+          ),
       ),
       'Plural' => array
       (

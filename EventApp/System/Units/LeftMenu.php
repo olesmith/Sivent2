@@ -8,6 +8,7 @@ array
       "Title_UK" => "Department",
 
       'Href' => '?Unit=#Unit&ModuleName=Units&Action=Show&ID=#Unit',
+      'OmitArgs' => array("Event"),
 
       'Public'    => 1,
       'Person'    => 0,
@@ -25,6 +26,7 @@ array
       "Title_UK" => "Registrations",
 
       'Href' => '?Unit=#Unit&ModuleName=Friends&Action=Search',
+      'OmitArgs' => array("Event"),
 
       'Public'    => 0,
       'Person'    => 0,
@@ -42,6 +44,7 @@ array
       "Title_UK" => "Events",
 
       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Search',
+      'OmitArgs' => array("Event"),
 
       'Public'    => 1,
       'Person'    => 0,
@@ -59,6 +62,7 @@ array
       "Title_UK" => "Manage Permissions",
 
       'Href' => '?Unit=#Unit&ModuleName=Permissions&Action=Search',
+      'OmitArgs' => array("Event"),
 
       'Public'    => 0,
       'Person'    => 0,
@@ -72,6 +76,7 @@ array
       'Name' => 'Uploads',
       'Title' => 'Gerenciar Uploads',
       'Href' => '?Unit=#Unit&Action=Uploads',
+      'OmitArgs' => array("Event"),
 
       'Public'   => 0,
       'Person'   => 0,

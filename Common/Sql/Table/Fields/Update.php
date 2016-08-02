@@ -16,6 +16,9 @@ trait Sql_Table_Fields_Update
 
     function Sql_Table_Fields_Update($datas,$datadefs,$table="")
     {
+        $columninfo=$this-> Sql_Table_Columns_Info($table);
+
+        
         $addlist=array();
         $enums=array();
         $addeds=array();
@@ -26,7 +29,7 @@ trait Sql_Table_Fields_Update
             {
                 if ($this->Sql_Table_Field_Exists($data,$table))
                 {
-                    $this->Sql_Table_Field_Update($data,array(),$table);
+                    $this->Sql_Table_Field_Update($data,$columninfo[ $data ],array(),$table);
                     array_push($updateds,$data);
                 }
                 else
@@ -51,23 +54,22 @@ trait Sql_Table_Fields_Update
     //* Update filed $data.
     //* 
 
-    function Sql_Table_Field_Update($data,$datadef=array(),$table="")
+    function Sql_Table_Field_Update($data,$columninfo,$datadef=array(),$table="")
     {
         if (empty($datadef) && !empty($this->ItemData[ $data ])) { $datadef=$this->ItemData[ $data ]; }
         if (empty($datadef)) { return; }
-        
 
-        $info=$this->Sql_Table_Column_Info($data,$table);
-        if (!empty($info))
+        //28/06/2016: Read column info in one bite. $info=$this->Sql_Table_Column_Info($data,$table);
+        if (!empty($columninfo))
         {
             if ($datadef[ "Sql" ]=="ENUM")
             {
-                $this->Sql_Table_Field_Enum_Update($data,$datadef,$info,$table);
+                $this->Sql_Table_Field_Enum_Update($data,$datadef,$columninfo,$table);
             }
 
             $datadef[ "Default" ]=preg_replace('/\s+/'," ",$datadef[ "Default" ]);
 
-            $default=$this->Sql_Table_Column_Info_2_Default($info);
+            $default=$this->Sql_Table_Column_Info_2_Default($columninfo);
             if (
                   !empty($datadef[ "Default" ])
                   &&
@@ -90,7 +92,7 @@ trait Sql_Table_Fields_Update
             $oldlen=$matches[1];
             if (preg_match('/^\d+$/',$oldlen,$matches))
             {
-                $newlen=$this->Sql_Table_Column_Info_2_Length($info);
+                $newlen=$this->Sql_Table_Column_Info_2_Length($columninfo);
                 if ($oldlen!=$newlen)
                 {
                     $len=$this->Sql_Table_Field_Length_Alter($data,$datadef,$table);

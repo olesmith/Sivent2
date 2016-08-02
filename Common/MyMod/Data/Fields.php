@@ -6,6 +6,8 @@ include_once("Fields/Show.php");
 include_once("Fields/Edit.php");
 include_once("Fields/File.php");
 include_once("Fields/Text.php");
+include_once("Fields/Color.php");
+include_once("Fields/Barcode.php");
 include_once("Fields/Module.php");
 include_once("Fields/Enums.php");
 include_once("Fields/Derived.php");
@@ -20,6 +22,8 @@ trait MyMod_Data_Fields
         MyMod_Data_Fields_Edit,
         MyMod_Data_Fields_File,
         MyMod_Data_Fields_Text,
+        MyMod_Data_Fields_Color,
+        MyMod_Data_Fields_Barcode,
         MyMod_Data_Fields_Module,
         MyMod_Data_Fields_Enums,
         MyMod_Data_Fields_Derived,

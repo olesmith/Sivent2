@@ -36,7 +36,7 @@ array
         "Public"   => 1,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "HandleList",
+        "Handler"   => "MyMod_Handle_Search",
         //"AltAction"   => "EditList",
         "Edits"   => 0,
         "Singular"   => FALSE,
@@ -155,7 +155,7 @@ array
         "Public"   => 0,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "HandleList",
+        "Handler"   => "MyMod_Handle_Search",
         "Edits"   => 0,
         "Singular"   => FALSE,
        ),
@@ -173,7 +173,7 @@ array
         "Public"   => 0,
         "Person"   => 0,
         "Admin"   => 1,
-        "Handler"   => "HandleList",
+        "Handler"   => "MyMod_Handle_Search",
         //"AltAction"   => "Search",
         "Edits"   => 1,
         "Singular"   => FALSE,
@@ -192,7 +192,7 @@ array
         "Public"   => 0,
         "Person"   => 0,
         "Admin"   => 0,
-        "Target"   => "_delete",
+        //"Target"   => "_delete",
         "Handler"   => "HandleDelete",
         "Edits"   => 1,
         "Singular"   => TRUE,
@@ -263,7 +263,7 @@ array
         "Public"   => 1,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "HandlePrints",
+        "Handler"   => "MyMod_Handle_Prints",
         "NoHeads"   => 1,
         "NoInterfaceMenu"   => 1,
         "Edits"   => 0,
@@ -366,7 +366,7 @@ array
         "Handler"   => "HandleProcess",
         "Singular"   => FALSE,
        ),
-       "SysInfo" => array
+       "Info" => array
        (
         "Href"     => "",
         "HrefArgs" => "",
@@ -379,6 +379,7 @@ array
         "Person"   => 0,
         "Admin"   => 1,
         "Singular"   => FALSE,
+        "Handler"  => "MyMod_Handle_Info",
        ),
        "Profiles" => array
        (

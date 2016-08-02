@@ -19,6 +19,48 @@ trait MyMod_Item_Group
 
     
     //*
+    //* Returns loaded ItemDataSGroups. 
+    //*
+
+    function MyMod_Item_SGroups($edit,$groupsperrow=3)
+    {
+        $profile=$this->Profile();
+        
+        
+        $sgroups=array();
+        foreach (array_keys($this->ItemDataSGroups) as $group)
+        {
+            if (
+                  !empty($this->ItemDataSGroups[ $group ][ $profile ])
+                  &&
+                  count($this->ItemDataSGroups[ $group ][ "Data" ])>0
+               )
+            {
+                array_push($sgroups,$group);
+            }
+        }
+        
+        $groups=array();
+        foreach ($this->PageArray($sgroups,$groupsperrow) as $row => $rgroups)
+        {
+            $groups[ $row ]=array();
+
+            foreach ($rgroups as $group)
+            {
+                $redit=$edit;
+                if ($this->MyMod_Item_Group_Allowed($this->ItemDataSGroups[ $group ]))
+                {
+                    if ($edit==1) { $redit=$this->ItemDataSGroups[ $group ][ $profile ]-1; }
+            
+                    $groups[ $row ][ $group ]=$redit;
+                }
+            }
+        }
+
+        return $groups;
+    }
+    
+    //*
     //* Chekcs access to data group.
     //*
 

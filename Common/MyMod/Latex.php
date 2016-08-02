@@ -20,41 +20,6 @@ trait MyMod_Latex
                 $this->MyMod_Latex_Add_File($file);
             }
         }
-
-        return;
-        
-       /*  //First global Latex defs */
-       /*  $file= */
-       /*      $this->ApplicationObj()->MyApp_Setup_Path(). */
-       /*     "/". */
-       /*      "Latex.Data.php"; */
-
-       /*  if (file_exists($file)) */
-       /*  { */
-       /*      $this->LatexData=$this->ReadPHPArray */
-       /*      ( */
-       /*         $this->ApplicationObj->SetupPath. */
-       /*         "/Defs/Latex.Data.php", */
-       /*         $this->LatexData */
-       /*      ); */
-       /*  } */
-        
-       /* //Add module specific Latex defs */
-       /*  $file= */
-       /*      $this->MyMod_Setup_Path(). */
-       /*     "/". */
-       /*      "Latex.Data.php"; */
-        
-       /*  if (file_exists($file)) */
-       /*  { */
-       /*      $this->LatexData=$this->ReadPHPArray */
-       /*      ( */
-       /*         $this->MyMod_Setup_Path(). */
-       /*         "/". */
-       /*         "Latex.Data.php", */
-       /*         $this->LatexData */
-       /*      ); */
-       /*  } */
     }
     
 }

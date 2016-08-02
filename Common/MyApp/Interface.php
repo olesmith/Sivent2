@@ -8,6 +8,7 @@ include_once("Interface/Tail.php");
 include_once("Interface/Titles.php");
 include_once("Interface/Icons.php");
 include_once("Interface/LeftMenu.php");
+include_once("Interface/CSS.php");
 
 
 trait MyApp_Interface
@@ -19,7 +20,8 @@ trait MyApp_Interface
         MyApp_Interface_Tail,
         MyApp_Interface_Titles,
         MyApp_Interface_Icons,
-        MyApp_Interface_LeftMenu;
+        MyApp_Interface_LeftMenu,
+        MyApp_Interface_CSS;
 
     //*
     //* function MyApp_Interface_Init, Parameter list: 

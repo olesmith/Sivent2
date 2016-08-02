@@ -117,12 +117,14 @@ class CaravaneersTable extends CaravaneersTableUpdate
         }
         
         $caravaneers=$this->Caravaneers_Table_Sort($caravaneers);
-        $min=$this->Event("Caravans_Min");
-
         $this->Caravaneers_Table_Inscription_Update($inscription);
+
         
+        $min=$this->EventsObj()->Event_Caravans_Min();
+        $max=$this->EventsObj()->Event_Caravans_Max();
+
         $table=array();
-        for ($n=1;$n<=$this->Event("Caravans_Max");$n++)
+        for ($n=1;$n<=$max;$n++)
         {
             $caravaneer=array();
             if (count($caravaneers)>0) { $caravaneer=array_shift($caravaneers); }

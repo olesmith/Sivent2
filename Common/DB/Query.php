@@ -16,22 +16,30 @@ trait DB_Query
 
     function DB_Exec($query,$ignoreerror=FALSE)
     {
-        if ($this->ApplicationObj()->DBHash[ "Debug" ] && preg_match('/'.$this->DB_Regex.'/',$query))
+        $mtime=time();
+        
+        $res=$this->DB_Method_Call("Exec",$query,$ignoreerror);
+        if ($this->ApplicationObj()->DBHash[ "Debug" ]>2 && preg_match('/'.$this->DB_Regex.'/',$query))
         {
-            $caller=$this->CallStack_Caller(4);
+            $caller4=$this->CallStack_Caller(4);
+            $caller3=$this->CallStack_Caller(3);
             array_push
             (
                 $this->ApplicationObj()->DB_Queries,
                 array
                 (
-                   $this->ModuleName,
-                   $caller[ 'function' ],
-                   $query
+                   "ex".$this->ModuleName,
+                   $query,
+                   time()-$mtime,
+                   $caller3[ 'function' ],
+                   $caller4[ 'file' ],
+                   $caller4[ 'line' ],
                 )
             );
         }
+
         
-        return $this->DB_Method_Call("Exec",$query,$ignoreerror);
+        return $res;
     }
     
     //*
@@ -43,22 +51,29 @@ trait DB_Query
 
     function DB_Query($query,$ignoreerror=FALSE)
     {
-        if ($this->ApplicationObj()->DBHash[ "Debug" ] && preg_match('/'.$this->DB_Regex.'/',$query))
+        $mtime=time();
+        $res=$this->DB_Method_Call("Query",$query,$ignoreerror);
+        
+        if ($this->ApplicationObj()->DBHash[ "Debug" ]>2 && preg_match('/'.$this->DB_Regex.'/',$query))
         {
-            $caller=$this->CallStack_Caller(4);
+            $caller4=$this->CallStack_Caller(4);
+            $caller3=$this->CallStack_Caller(3);
             array_push
             (
                 $this->ApplicationObj()->DB_Queries,
                 array
                 (
                    $this->ModuleName,
-                   $caller[ 'function' ],
-                   $query
+                   $query,
+                   time()-$mtime,
+                   $caller4[ 'function' ],
+                   $caller3[ 'file' ],
+                   $caller3[ 'line' ],
                 )
             );
         }
         
-        return $this->DB_Method_Call("Query",$query,$ignoreerror);
+        return $res;
     }
 
     //*
@@ -137,10 +152,10 @@ trait DB_Query
     //* 
     //* 
 
-    function DB_Query_2Assoc_List($query,$ignoreerror=FALSE)
+    function DB_Query_2Assoc_List($query,$ignoreerror=FALSE,$lowercasekeys=FALSE)
     {
         $result = $this->DB_Query($query);
-        $res=$this->DB_Fetch_Assoc_List($result);
+        $res=$this->DB_Fetch_Assoc_List($result,FALSE,$lowercasekeys);
 
         $this->DB_Method_Call("FreeResult",$result);
 
@@ -163,6 +178,28 @@ trait DB_Query
         $this->DB_Method_Call("FreeResult",$result);
 
         return $res;
+    }
+    
+    //*
+    //* function MyApp_Interface_Tail_Queries_Show, Parameter list: 
+    //*
+    //* Initializes loggin, if no.
+    //*
+
+    function DB_Queries_Show()
+    { 
+        if (is_array($this->DB_Queries) && !empty($this->DB_Queries))
+        {
+            return
+                $this->H(3,"DB Queries").
+                $this->HtmlTable
+                (
+                   array("No","Module","Query","Seconds","Function","File","Line"),
+                   $this->MyHash_List_Number($this->DB_Queries)
+                );
+        }
+
+        return "";
     }
 }
 ?>

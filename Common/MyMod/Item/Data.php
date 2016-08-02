@@ -11,9 +11,16 @@ trait MyMod_Item_Data
     function MyMod_Item_Data_Cell($edit,$item,$data,$plural=FALSE,$rdata="")
     {
         $dagger=$this->SPAN("*",array("CLASS" => "errors"));
+        if ($edit==0)
+        {
+            $ldata=$this->MyLanguage_GetLanguagedKey($data);
+            if ($ldata!=$data && !empty($item[ $ldata ]))
+            {
+                $data=$ldata;
+            }
+        }
         
         $value=$this->MyMod_Data_Fields($edit,$item,$data,$plural,$tabindex="",$rdata);
-
         if ($edit==1 && $this->MyMod_Data_Field_Is_Date($data))
         {
             $value.=" DD/MM/YYYY";

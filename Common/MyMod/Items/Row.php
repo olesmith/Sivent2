@@ -21,13 +21,12 @@ trait MyMod_Items_Row
             foreach ($rdata as $data)
             {
                 $cell="";
-                if ($data=="No") { $cell=$this->B($n); }
 
-                
+                if ($data=="No") { $cell=$this->B($n); }
                 elseif (!empty($this->ItemData[ $data ]))
                 {
                     $access=$this->MyMod_Data_Access($data,$item);
-
+ 
                     $redit=$edit;
 
                     if ($access<=1) { $redit=0; }
@@ -36,7 +35,7 @@ trait MyMod_Items_Row
                         $rdata=$pre.$data;
                         $cell=$this->MyMod_Item_Data_Cell($redit,$item,$data,$plural,$rdata);
                     }
-                }
+                 }
                 elseif (!empty($this->Actions[ $data ]))
                 {
                     if ($this->MyAction_Access_Has($data))
@@ -46,7 +45,7 @@ trait MyMod_Items_Row
                 }
                 elseif (!empty($this->CellMethods[ $data ]))
                 {
-                    $cell=$this->$data($item,$n);
+                    $cell=$this->$data($edit,$item,$data);
                 }
 
                 array_push($row,$cell);

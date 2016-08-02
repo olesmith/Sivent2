@@ -265,6 +265,122 @@ class ModulesCommon extends EventMod
         return $this->MyLanguage_GetMessage($key);
     }
 
+    
+    //*
+    //* function PreActions, Parameter list:
+    //*
+    //* Add actions common for all modules.
+    //*
+
+    function PreActions()
+    {
+        parent::PreActions();
+
+        array_unshift($this->ActionPaths,"System/App");
+    }
+
+    //*
+    //* function UnitWhere, Parameter list: $event=array(),$unit=array()
+    //*
+    //* Returns Unit => sql where clause.
+    //*
+
+    function UnitWhere($where=array(),$unit=array())
+    {
+        if (empty($unit))  $unit=$this->Unit();
+        
+        $where[ "Unit" ]=$unit[ "ID" ];
+
+        return $where;
+    }
+
+    //*
+    //* function UnitEventWhere, Parameter list: $event=array(),$unit=array()
+    //*
+    //* Returns Unit => and Event => sql where clause.
+    //*
+
+    function UnitEventWhere($where=array(),$event=array(),$unit=array())
+    {
+        if (empty($event)) $event=$this->Event();
+        if (empty($unit))  $unit=$this->Unit();
+
+        if (!is_array($event))
+        {
+            $event=array("ID" => $event);
+        }
+        
+        $where[ "Unit" ]=$unit[ "ID" ];
+        $where[ "Event" ]=$event[ "ID" ];
+
+        return $where;
+    }
+
+    //*
+    //* function ItemExistenceMessage, Parameter list: $message,$where=array()
+    //*
+    //* Prints informing $message, if no item exists in sql table.
+    //* Default $where=$this->UnitEventWhere().
+    //*
+
+    function ItemExistenceMessage($othermodule="",$where=array())
+    {
+        if (!preg_match('/^(Coordinator|Admin)$/',$this->Profile())) return;
+            
+        if (empty($where)) $where=$this->UnitEventWhere();
+
+        $obj=$this;
+        if (empty($othermodule))
+        {
+            $module=$this->ModuleName;
+            $obj=$this;
+        }
+
+        $message="No_Items_Defined_Message";
+        $message=$this->MyLanguage_GetMessage("No_Items_Defined_Message");
+
+        $message=preg_replace('/#ItemName/',$obj->MyMod_ItemName(),$message);
+        $message=preg_replace('/#ItemsName/',$obj->MyMod_ItemName("ItemsName"),$message);
+                
+        if (
+              !$this->Sql_Table_Exists()
+              ||
+              $this->Sql_Select_NHashes($this->UnitEventWhere())==0
+           )
+        {
+            echo
+                $this->Div
+                (
+                   $message.
+                   ": ".
+                   $this->Href
+                   (
+                      $this->CGI_Hash2URI
+                      (
+                         array
+                         (
+                            "Unit" => $this->Unit("ID"),
+                            "Event" => $this->Event("ID"),
+                            "ModuleName" => $othermodule,
+                            "Action" => "Add",
+                         )                         
+                      ),
+                      $this->MyLanguage_GetMessage("Add_Action_Name").
+                      " ".
+                      $obj->MyMod_ItemName(),
+                      "","","",$noqueryargs=FALSE,$options=array(),"HorMenu"
+                   ),
+                   array("CLASS" => 'warning')
+                ).
+                $this->BR();
+
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+
 }
 
 ?>

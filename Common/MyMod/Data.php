@@ -7,12 +7,13 @@ include_once("Data/Files.php");
 include_once("Data/Read.php");
 include_once("Data/Fields.php");
 include_once("Data/TimeData.php");
+include_once("Data/Info.php");
 
 trait MyMod_Data
 {
     use 
         MyMod_Data_Defaults,MyMod_Data_Groups,MyMod_Data_Fields,
-        MyMod_Data_Files,MyMod_Data_Read,MyMod_Data_TimeData;
+        MyMod_Data_Files,MyMod_Data_Read,MyMod_Data_TimeData,MyMod_Data_Info;
 
 
     //*
@@ -26,7 +27,7 @@ trait MyMod_Data
     {
         $this->ItemData();
 
-        $this->MyMod_Data_Read();
+        //29/06/2016 $this->MyMod_Data_Read();
 
         if ($readitemgroupsdata)//??
         {

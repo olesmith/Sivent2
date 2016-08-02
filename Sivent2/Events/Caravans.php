@@ -3,6 +3,40 @@
 class EventsCaravans extends EventsCollaborations
 {
     //*
+    //* function Event_Caravans_Min, Parameter list: $item=array()
+    //*
+    //* Returns Caravans_Min or default.
+    //*
+
+    function Event_Caravans_Min($item=array())
+    {
+        if (empty($item)) { $item=$this->Event(); }
+        
+        $min=$item[ "Caravans_Min" ];
+        if (empty($min)) { $min=$this->ItemData[ "Caravans_Min" ][ "Default" ]; }
+
+        return $min;        
+    }
+
+    
+    //*
+    //* function Event_Caravans_Max, Parameter list: $item=array()
+    //*
+    //* Returns Caravans_Max or default.
+    //*
+
+    function Event_Caravans_Max($item=array())
+    {
+        if (empty($item)) { $item=$this->Event(); }
+        
+        $max=$item[ "Caravans_Max" ];
+        if (empty($max)) { $max=$this->ItemData[ "Caravans_Max" ][ "Default" ]; }
+
+        return $max;        
+    }
+
+    
+    //*
     //* function Event_Caravans_Has, Parameter list: $item=array()
     //*
     //* Returns TRUE if event has collaborations.

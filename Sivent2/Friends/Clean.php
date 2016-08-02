@@ -20,7 +20,7 @@ class FriendsClean extends MyFriends
         $group=$this->GetActualDataGroup();
 
         array_push($this->ItemDataGroups[ $group ][ "Data" ],"CleanCell");
-        $this->HandleList("",TRUE,1,$group,array(),"","","Remover","Resetar");
+        $this->MyMod_Handle_Search("",TRUE,1,$group,array(),"","","Remover","Resetar");
     }
 
     //*

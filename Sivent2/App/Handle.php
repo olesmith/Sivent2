@@ -50,16 +50,10 @@ class App_Handle extends App_Has
     {
         echo
             $this->H(1,$this->MyLanguage_GetMessage("Events_Table_Title")).
-            $this->Html_Table
+            $this->EventsObj()->MyMod_Items_Group_Table_Html
             (
-               "",
-               $this->EventsObj()->ItemsTableDataGroup
-               (
-                  "",
-                  0,
-                  "",
-                  $this->GetCoordinatorEvents()
-               )
+               0,
+               $this->GetCoordinatorEvents()
             ).
             "";
 

@@ -306,6 +306,20 @@ class Data extends DataPrint
       return $list;
   }
 
+  function Datas2Datas($datas)
+  {
+      $rdatas=array();
+      foreach ($datas as $data)
+      {
+          if (!empty($this->ItemData[ $data ]))
+          {
+              array_push($rdatas,$data);
+          }
+      }
+
+      return $rdatas;
+  }
+
   function GetDataTitle($data,$nohtml=0)
   {
       if (is_array($data)) { $data=array_shift($data); }

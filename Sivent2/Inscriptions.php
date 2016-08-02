@@ -15,10 +15,18 @@ include_once("Inscriptions/Caravans.php");
 include_once("Inscriptions/Submissions.php");
 include_once("Inscriptions/Certificate.php");
 include_once("Inscriptions/Certificates.php");
+include_once("Inscriptions/PreInscriptions.php");
 include_once("Inscriptions/Handle.php");
+
+
+include_once("../Common/Barcode.php");
+
+
 
 class Inscriptions extends InscriptionsHandle
 {
+    use Barcode;
+    
     var $Certificate_Type=1;
 
     var $Load_Other_Data=TRUE;
@@ -97,6 +105,12 @@ class Inscriptions extends InscriptionsHandle
         {
             array_push($this->ItemDataSGroupFiles,"SGroups.Caravans.php");
         }
+        
+        if ($this->EventsObj()->Event_Payments_Has($event))
+        {
+            array_push($this->ItemDataSGroupFiles,"SGroups.Payments.php");
+            array_push($this->ItemDataGroupFiles,"Groups.Payments.php");
+        }
     }
     
     //*
@@ -153,7 +167,6 @@ class Inscriptions extends InscriptionsHandle
            "Data.Submissions.php","Data.Caravans.php"
         );
         
-
         $event=$this->Event();
         if ($this->EventsObj()->EventCertificates($event))
         {
@@ -165,6 +178,11 @@ class Inscriptions extends InscriptionsHandle
         if ($this->EventsObj()->Event_Caravans_Has($event))
         {
             $this->CaravaneersObj()->ItemData("ID");
+        }
+        
+        if ($this->EventsObj()->Event_Payments_Has($event))
+        {
+            array_push($this->ItemDataFiles,"Data.Payments.php");
         }
     }
     
@@ -201,6 +219,7 @@ class Inscriptions extends InscriptionsHandle
     function PostInit()
     {
         parent::PostInit();
+        $this->SubmissionsObj()->Sql_Table_Structure_Update();
     }
 
     //*
@@ -423,6 +442,19 @@ class Inscriptions extends InscriptionsHandle
         
         return $ninscribed;
         
+    }
+    
+    //*
+    //* function InitPrint, Parameter list: $item
+    //*
+    //* Does some casing before printing.
+    //*
+
+    function InitPrint($item)
+    {
+        $item[ "Name" ]=$this->TrimCase($item[ "Name" ]);
+
+        return $item;
     }
     
     

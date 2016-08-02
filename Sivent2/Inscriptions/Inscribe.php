@@ -25,6 +25,16 @@ class InscriptionsInscribe extends InscriptionsTables
         unset($this->Inscription[ "Assessments" ]);
         parent::Inscribe($friend);
     }
+    //*
+    //* function InscriptionEventTable, Parameter list: 
+    //*
+    //* Overrides MyInscriptions::InscriptionEventTable.
+    //*
+
+    function InscriptionEventTable()
+    {
+        return "";
+    }
 }
 
 ?>

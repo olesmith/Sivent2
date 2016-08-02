@@ -19,6 +19,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "SubAction" => "Certificates",
    ),
    "Certificate_CH" => array
    (

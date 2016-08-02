@@ -184,7 +184,7 @@ trait MyApp_Interface_Doc_Head
             }
         }
 
-        return $this->HtmlTags("TD",$html);
+        return $this->HtmlTags("TD",$html,array("CLASS" => 'headtable'));
     }
 }
 

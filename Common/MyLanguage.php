@@ -143,9 +143,9 @@ trait MyLanguage
     }
 
     //*
-    //* function Language, Parameter list: 
+    //* function MyLanguage_GetLanguageKey, Parameter list: 
     //*
-    //* Returns language from CGI (GET or COOKIE) and sets language cookie.
+    //* Returns language key, ie empty or _.$language.
     //*
 
     function MyLanguage_GetLanguageKey($language="")
@@ -159,6 +159,17 @@ trait MyLanguage
         if (!empty($key)) { $key="_".$key; }
 
         return $key;
+    }
+
+    //*
+    //* function , Parameter list: 
+    //*
+    //* Returns languaged $key name.
+    //*
+
+    function MyLanguage_GetLanguagedKey($key,$language="")
+    {
+        return $key.$this->MyLanguage_GetLanguageKey($language);
     }
 
     //*

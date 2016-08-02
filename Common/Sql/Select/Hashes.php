@@ -2,6 +2,8 @@
 
 trait Sql_Select_Hashes
 {
+    var $Sql_Select_Hashes_Unique_Col="ID";
+    
     //*
     //* function Sql_Select_Hashes_Query, Parameter list: $where,$fields,$orderby="",$table=""
     //*
@@ -9,7 +11,7 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes_Query($where="",$fields=array(),$orderby="",$table="",$limit="")
+    function Sql_Select_Hashes_Query($where="",$fields=array(),$orderby="",$table="",$limit="",$offset="")
     {
         if (empty($table)) { $table=$this->SqlTableName(); }
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
@@ -48,10 +50,14 @@ trait Sql_Select_Hashes
                 ' ORDER BY '.
                 $this->Sql_Table_Column_Names_Qualify($orderby);
         }
+        
         if (!empty($limit))
         {
-            $query.=
-                ' LIMIT '.$limit;
+            $query.=' LIMIT '.$limit;
+        }
+        if (!empty($offset))
+        {
+            $query.=' OFFSET '.$offset;
         }
 
         return $query;
@@ -89,11 +95,11 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes($where="",$fieldnames=array(),$orderby="",$postprocess=FALSE,$table="",$limit="")
+    function Sql_Select_Hashes($where="",$fieldnames=array(),$orderby="",$postprocess=FALSE,$table="",$limit="",$offset="")
     {
         if (!$this->Sql_Table_Exists($table)) { return array(); }
         
-        $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table,$limit);
+        $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table,$limit,$offset);
         $result = $this->DB_Query_2Assoc_List($this->LastSqlWhere);
 
         if ($result && $postprocess)
@@ -104,22 +110,69 @@ trait Sql_Select_Hashes
         return $result;
     }
     //*
-    //* function Sql_Select_Hashes, Parameter list: $where,$fields,$orderby="",$postprocess=FALSE,$table=""
+    //* function Sql_Select_Hashes_Query, Parameter list: $where,$fields,$orderby="",$table=""
+    //*
+    //* Generates the SQL slect hashes query.
+    //*
+    //* 
+
+    function Sql_Select_NHashes_Query($where="",$table="")
+    {
+        if (empty($table)) { $table=$this->SqlTableName(); }
+        if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
+
+        $type=$this->DB_Dialect();
+        $dbstring="";
+        if ($type=="mysql")
+        {
+            $dbstring=
+                $this->Sql_Table_Name_Qualify($this->ApplicationObj()->DBHash[ "DB" ]).
+                ".";
+        }
+        
+        //$fieldnames=array($fieldname);
+        $query=
+            'SELECT '.
+            " COUNT(".$this->Sql_Table_Column_Names_Qualify($this->Sql_Select_Hashes_Unique_Col).")".
+            ' FROM '.
+            $dbstring.
+            $this->Sql_Table_Name_Qualify($table).
+            '';
+        
+        if (preg_match('/\S/',$where)) { $query.=' WHERE '.$where; }
+
+        return $query;
+    }
+
+
+    //*
+    //* function Sql_Select_NHashes, Parameter list: $where,$fields,$orderby="",$postprocess=FALSE,$table=""
     //*
     //* Perform a select query on Table $table in the current DB.
-    //* Returns each match as a hash of the field names in
-    //* in $fields or all data if $fields is not an array.
+    //* Returns number of matches aconforming to $where.
     //*
     //* 
 
     function Sql_Select_NHashes($where="",$table="")
     {
-        $query=$this->Sql_Select_Hashes_Query($where,array("ID"),"",$table);
+        if (!$this->Sql_Table_Exists($table)) { return 0; }
         
+        $query=$this->Sql_Select_NHashes_Query($where,$table);
+
         $result = $this->DB_Query_2Assoc_List($query);
+
+        //var_dump($result);
         $this->LastSqlWhere=$query;
 
-        return count($result);
+        $type=$this->DB_Dialect();
+        if ($type=="mysql")
+        {
+            return $result[0][ 'COUNT('.$this->Sql_Select_Hashes_Unique_Col.')' ];
+        }
+        elseif ($type=="pgsql")
+        {
+            return $result[0][ 'count' ];
+        }
     }
     
     
@@ -132,11 +185,11 @@ trait Sql_Select_Hashes
     //*
     //* 
 
-    function Sql_Select_Hashes_ByID($where="",$fields=array(),$bykey="ID",$orderby="",$postprocess=FALSE,$table="")
+    function Sql_Select_Hashes_ByID($where="",$fields=array(),$bykey="ID",$orderby="",$postprocess=FALSE,$table="",$limit="",$offset="")
     {
         return $this->MyHash_HashesList_2ID
         (
-           $this->Sql_Select_Hashes($where,$fields,$orderby,$postprocess,$table),
+           $this->Sql_Select_Hashes($where,$fields,$orderby,$postprocess,$table,$limit,$offset),
            $bykey
         );
     }

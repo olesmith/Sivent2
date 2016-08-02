@@ -13,17 +13,16 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
 
     function Inscription_Certificate_Where($inscription)
     {
-        $where=
+        return $this->UnitEventWhere
+        (    
             array
             (
-               "Unit"        => $this->Unit("ID"),
-               "Event"       => $inscription[ "Event" ],
                "Friend"      => $inscription[ "Friend" ],
                "Inscription" => $inscription[ "ID" ],
                "Type"        => $this->Certificate_Type,
-            );
-
-        return $where;
+            ),
+            $inscription[ "Event" ]
+         );
     }
  
     //*
@@ -39,8 +38,6 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
         $where=
             array
             (
-               "Unit"        => $inscription[ "Unit" ],
-               "Event"       => $inscription[ "Event" ],
                "Friend"      => $inscription[ "Friend" ],
             );
 
@@ -50,7 +47,8 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
             $where[ "Type" ]=$this->Certificate_Type;
         }
 
-        return $where;
+        return $this->UnitEventWhere($where,$inscription[ "Event" ]);
+        
     }
  
     //*
@@ -62,14 +60,13 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
     function Inscription_Certificates_All_Where()
     {
         $type=$this->CGI_GET("Type");
-        
-        $where=
+        $where=$this->UnitEventWhere
+        (
             array
             (
-               "Unit"        => $this->Unit("ID"),
-               "Event"       => $this->Event("ID"),
-               "Type"        => $this->Certificate_Type,
-            );
+                "Type"        => $this->Certificate_Type,
+            )
+        );
 
         return $where;
     }

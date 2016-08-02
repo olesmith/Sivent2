@@ -13,27 +13,24 @@ class Certificates_Latex extends Certificates_Validate
         $latex=$this->GetLatexSkel("Head.Cert.tex");
 
         $watermark=$this->Event("Certificates_Watermark");
-        if (empty($watermark) || !file_exists($watermark))
+        if (!empty($watermark) && file_exists($watermark))
         {
-            echo "Fatal Error: No watermark file: '".$watermark."'";
-            exit();
+            $latex=preg_replace
+            (
+               '/\\\\begin{document}/',
+               "%%%!\n".
+               "%%%! Watermark contribution to preamble\n".
+               "\\usepackage{draftwatermark}\n".
+               "\\SetWatermarkText{\\includegraphics[width=26cm]{".$watermark."}}\n". 
+               "\\SetWatermarkAngle{0}\n".
+               "\\SetWatermarkScale{1}\n".
+               "%%%!\n".
+               "%%%!\n".
+               "\\begin{document}".
+               "",
+               $latex
+            );
         }
-        
-        $latex=preg_replace
-        (
-           '/\\\\begin{document}/',
-           "%%%!\n".
-           "%%%! Watermark contribution to preamble\n".
-           "\\usepackage{draftwatermark}\n".
-           "\\SetWatermarkText{\\includegraphics[width=26cm]{".$watermark."}}\n". 
-           "\\SetWatermarkAngle{0}\n".
-           "\\SetWatermarkScale{1}\n".
-           "%%%!\n".
-           "%%%!\n".
-           "\\begin{document}".
-           "",
-           $latex
-        );
 
         return $latex;
     }

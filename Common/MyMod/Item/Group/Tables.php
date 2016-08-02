@@ -7,7 +7,7 @@ trait MyMod_Item_Group_Tables
     //* Create item Group table. Returns row list.
     //*
 
-    function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE)
+    function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="")
     {
         if (!empty($this->ItemDataSGroups[ $group ][ "GenTableMethod" ]))
         {
@@ -41,7 +41,8 @@ trait MyMod_Item_Group_Tables
                      array(),
                      $plural,
                      FALSE,
-                     FALSE
+                     FALSE,
+                     $precgikey
                    );
 
             if ($this->SGroups_NumberItems)
@@ -84,7 +85,7 @@ trait MyMod_Item_Group_Tables
     //* Create item Group tables. Returns row list.
     //*
 
-    function MyMod_Item_Group_Tables($groupdefs,$item,$buttons="",$plural=FALSE)
+    function MyMod_Item_Group_Tables($groupdefs,$item,$buttons="",$plural=FALSE,$prekey="")
     {
         $tables=array();
         $redit=0;
@@ -106,7 +107,7 @@ trait MyMod_Item_Group_Tables
                     array_push
                     (
                        $row,
-                       $this->MyMod_Item_Group_Table($edit,$group,$item,$plural)
+                       $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$prekey)
                     );
                 }
                 else { array_push($row,$group); }
@@ -140,7 +141,6 @@ trait MyMod_Item_Group_Tables
             $options=
                 array
                 (
-                   "BORDER" => 1,
                    "ALIGN" => 'center'
                 );
         }

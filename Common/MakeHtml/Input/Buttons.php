@@ -42,7 +42,13 @@ trait Html_Input_Buttons
         $html="";
         foreach ($buttons as $button)
         {
-            $html.=$this->Html_Input_Button_Make($button[ "Type" ],$button[ "Title" ],$options);
+            $html.=
+                $this->Html_Input_Button_Make
+                (
+                   $button[ "Type" ],
+                   $button[ "Title" ],
+                   $options
+                );
         }
 
         return $this->Center($html);
