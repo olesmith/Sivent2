@@ -1,0 +1,59 @@
+	  	tr.ceven
+	    {
+	  		color: #333333;
+	  		background-color: #FFFFFF;
+	  	}
+	  	tr.codd
+	    {
+	  		color: #000000;
+	  		background-color: #33ccff;
+	  	}
+	  	td.ceven
+	    {
+	  		color: #000000;
+	  		background-color: #FFFFFF;
+	  	}
+	  	td.codd
+	    {
+	  		color: #FFFFFF;
+	  		/* background-color: #3333ff; */
+	  	}
+
+	  	tr.even
+	    {
+	  		color: #333333;
+	  		background-color: #FFFFFF;
+	  	}
+
+
+	  	tr.odd
+	    {
+	  		color: #000000;
+	  		background-color: #F2F2F2;
+	  	}
+
+	  	td.even
+	    {
+	  		color: #000000;
+	  		/* background-color: #3399ff; */
+	  	}
+	  	td.odd
+	    {
+	  		color: #FFFFFF;
+	  		/* background-color: #3333ff; */
+	  	}
+
+        
+	  	tr.even:hover
+        {
+	  		background-color: #FAEBD7;
+	  	}
+	  	td.odd:hover
+        {
+	  		color: #000000;
+	  		/* background-color: #33ccff; */
+	  	}
+	  	td.even:hover
+        {
+	  		color: #FFFFFF;
+	  	}

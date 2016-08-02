@@ -1,0 +1,40 @@
+*.submissiontext
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 14px;
+	text-decoration: Underline;
+    text-align: left;
+}
+*.submissionkey
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 18px;
+	text-decoration: None;
+    text-align: center;
+}
+*.submissiontitle
+{
+	font-style: None;
+	font-weight: Bold;
+	font-size: 18px;
+	text-decoration: None;
+    text-align: center;
+}
+*.submissionauthors
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 16px;
+	text-decoration: None;
+    text-align: center;
+}
+*.submissioninfotable
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 16px;
+	text-decoration: None;
+    text-align: center;
+}

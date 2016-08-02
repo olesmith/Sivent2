@@ -1,0 +1,38 @@
+        /* App/Unit info table, top center */
+        *.headtable
+        {
+	  		font-size: 16px;
+	  		text-align: center;
+	  		font-style: Italic;
+            font-weight: Bold;
+	  	}
+	  	*.headinst
+        {
+	  		font-size: 26px;
+            color: #333333;
+	  	}
+	  	*.headdept
+        {
+	  		font-size: 24px;
+            color: #333333;
+	  	}
+	  	*.headtitle
+        {
+	  		font-size: 22px;
+            color: #333333;
+	  	}
+	  	*.headaddress
+        {
+	  		font-size: 20px;
+            color: #333333;
+	  	}
+	  	*.headcity
+        {
+	  		font-size: 18px;
+            color: #333333;
+	  	}
+	  	*.headcontacts
+        {
+	  		font-size: 16px;
+            color: #333333;
+	  	}

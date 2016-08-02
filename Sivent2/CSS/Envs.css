@@ -1,0 +1,61 @@
+        *.Bold
+        {
+	  		font-weight: Bold;
+	  	}
+	  	*.Italic
+        {
+	  		font-style: Italic;
+	  	}
+	  	*.Underline
+        {
+	  		text-decoration: underline;
+	  	}
+
+	  	*.center
+	  	{
+	  		text-align: center;
+	  	}
+	  	*.left
+	  	{
+	  		text-align: left;
+	  	}
+	  	*.right
+	  	{
+	  		text-align: right;
+	  	}
+	  	*.top
+	  	{
+	  		vertical-align: top;
+	  	}
+	  	*.errors
+        {
+	  		color: #FF3333;
+	  		text-decoration: none;
+	  		text-align: center;
+	  		font-size: 14px;
+            font-style: italic;
+	  		font-weight: Bold;
+	  	}
+	  	*.error
+        {
+	  		color: #FF3333;
+	  		text-decoration: none;
+	  		text-align: center;
+	  		font-size: 14px;
+            font-style: italic;
+	  		font-weight: Bold;
+	  	}
+	  	*.warning
+        {
+	  		color: #333333;
+	  		font-size: 14px;
+	  		text-align: center;
+            font-style: italic;
+	  		font-weight: Bold;
+        }
+	  	*.success
+        {
+	  		color: #0077FF;
+	  		font-size: 14px;
+	  		font-weight: Bold;
+	  	}
