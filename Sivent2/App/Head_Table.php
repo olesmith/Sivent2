@@ -37,6 +37,103 @@ class App_Head_Table extends App_Events
 
     function AppEventInfoTable($event)
     {
+        return $this->EventInfoRow($event);
+        
+        /* $tabledata= */
+        /*     array */
+        /*     ( */
+        /*        array */
+        /*        ( */
+        /*           "Name","Date","Status" */
+        /*        ), */
+        /*        array */
+        /*        ( */
+        /*           "Place","Place_Address","Place_Site", */
+        /*        ), */
+        /*        array */
+        /*        ( */
+        /*           "EventStart","EventEnd","Inscriptions_Public", */
+        /*        ), */
+        /*     ); */
+
+        /* $table= */
+        /*     array_merge */
+        /*     ( */
+        /*        $this->EventInfoRow($event), */
+        /*        $this->EventsObj()->MyMod_Item_Table */
+        /*        ( */
+        /*           0, */
+        /*           $event, */
+        /*           $tabledata */
+        /*        ) */
+        /*     ); */
+
+        /* return $table; */
+
+        /* $this->AppEventTableGroup */
+        /* ( */
+        /*    $table, */
+        /*    $event, */
+        /*    "Event_Inscriptions_Title", */
+        /*    array("StartDate","EndDate","EditDate",) */
+        /* ); */
+        
+        /* if ($this->EventsObj()->Event_Collaborations_Inscriptions_Has($event)) */
+        /* { */
+        /*     $this->AppEventTableGroup */
+        /*     ( */
+        /*        $table, */
+        /*        $event, */
+        /*        "Event_Inscriptions_Collaborations_Open", */
+        /*        array("Collaborations","Collaborations_StartDate","Collaborations_EndDate") */
+        /*     ); */
+        /* } */
+        
+        /* if ($this->EventsObj()->Event_Caravans_Inscriptions_Open($event)) */
+        /* { */
+        /*     $this->AppEventTableGroup */
+        /*     ( */
+        /*        $table, */
+        /*        $event, */
+        /*        "Event_Inscriptions_Caravans_Open", */
+        /*        array("Caravans","Caravans_StartDate","Caravans_EndDate") */
+        /*     ); */
+        /* } */
+        
+        /* if ($this->EventsObj()->Event_Submissions_Inscriptions_Has($event)) */
+        /* { */
+        /*     $this->AppEventTableGroup */
+        /*     ( */
+        /*        $table, */
+        /*        $event, */
+        /*        "Event_Inscriptions_Submissions_Open", */
+        /*        array("Submissions","Submissions_StartDate","Submissions_EndDate") */
+        /*     ); */
+        /* } */
+       
+        /* if ($this->EventsObj()->Event_PreInscriptions_Has($event)) */
+        /* { */
+        /*     $this->AppEventTableGroup */
+        /*     ( */
+        /*        $table, */
+        /*        $event, */
+        /*        "Event_Inscriptions_PreInscriptions_Open", */
+        /*        array("PreInscriptions_StartDate","PreInscriptions_EndDate","PreInscriptions_MustHavePaid") */
+        /*     ); */
+        /* } */
+       
+        /* return $table; */
+    }
+    
+    //*
+    //* function AppEventInfoPostTable, Parameter list: 
+    //*
+    //* Overrides EventApp::AppEventInfoTable.
+    //*
+
+    function AppEventInfoPostTable()
+    {
+        $event=$this->Event();
         $tabledata=
             array
             (

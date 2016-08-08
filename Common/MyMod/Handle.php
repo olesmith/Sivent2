@@ -158,7 +158,6 @@ trait MyMod_Handle
         //this->ApplicationObj->PrintHelpLink();
         $this->$handler();
 
-        
         if (method_exists($this,"PostHandle"))
         {
             $this->PostHandle();
