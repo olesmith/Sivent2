@@ -9,6 +9,7 @@ include_once("Events/Collaborations.php");
 include_once("Events/Caravans.php");
 include_once("Events/Payments.php");
 include_once("Events/Submissions.php");
+include_once("Events/Assessments.php");
 include_once("Events/PreInscriptions.php");
 include_once("Events/Schedules.php");
 include_once("Events/Certificates.php");
@@ -85,6 +86,7 @@ class Events extends EventsCertificate
            "Data.Collaborations.php",
            "Data.Caravans.php",
            "Data.Submissions.php",
+           "Data.Assessments.php",
            "Data.PreInscriptions.php"
         );
         

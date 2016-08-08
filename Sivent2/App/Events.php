@@ -5,7 +5,7 @@ class App_Events extends App_CGIVars
     //*
     //* function EventSelect, Parameter list: $data,$item,$edit,$rdata=""
     //*
-    //* Creates event select field. If Unit is set, restricts to unit city.
+    //* Creates event select field.
     //*
 
     function EventSelect($data,$item,$edit,$rdata="")
@@ -69,7 +69,6 @@ class App_Events extends App_CGIVars
         }
 
         return
-            
             $this->EventsObj()->Sql_Select_Hashes
             (
                array

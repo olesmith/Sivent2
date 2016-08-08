@@ -29,6 +29,9 @@ array
           "Status","Selected",
           "Code",
         ),
+       
+       "Edit_Coordinator" => 1, //edit default for this group
+       "Edit_Admin" => 1, //edit default for this group
 
        "Person" => 0,
        "Public" => 1,
@@ -51,6 +54,9 @@ array
           "Code",
         ),
 
+       "Edit_Coordinator" => 1, //edit default for this group
+       "Edit_Admin" => 1, //edit default for this group
+       
        "Person" => 0,
        "Public" => 1,
        "Admin" => 1,

@@ -77,13 +77,13 @@ array
    ),
    "Inscriptions_Submissions_Cell_Noof_Title" => array
    (
-      "Name" => "Submissões",
-      "Name_UK" => "Proposals",
+      "Name" => "Submissão de Atividades",
+      "Name_UK" => "Activity Proposals",
    ),
    "Events_Submissions_Show_Has_Name" => array
    (
-      "Name" => "Propor ou Editar Submissões",
-      "Name_UK" => "Submit or Edit Proposals ",
+      "Name" => "Propor ou Editar Atividades",
+      "Name_UK" => "Submit or Edit  Activities",
    ),
    "Events_Submissions_Show_Inscriptions_Name" => array
    (
@@ -92,8 +92,8 @@ array
    ),
    "Events_Submissions_Show_Has_Title" => array
    (
-      "Name" => "Gerenciar Minhas Submissões",
-      "Name_UK" => "Manage My Proposals",
+      "Name" => "Gerenciar Minhas Atividades",
+      "Name_UK" => "Manage My Activities",
    ),
    "Events_Submissions_Show_Inscriptions_Title" => array
    (

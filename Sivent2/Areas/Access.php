@@ -57,7 +57,8 @@ class AreasAccess extends ModulesCommon
          
         $res=$this->Current_User_Event_Coordinator_Is();
 
-        //add no submissions check
+        $nsubmissions=$this->SubmissionsObj()->Sql_Select_NHashes($this->UnitEventWhere(array("Area" => $item[ "ID" ])));
+        if ($nsubmissions>0) { $res=FALSE; }
         
         return $res;
     }

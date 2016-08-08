@@ -35,62 +35,7 @@ class Collaborators extends CollaboratorsCertificate
     {
         return $this->ApplicationObj()->SqlEventTableName("Collaborators",$table);
     }
-
-
-    //*
-    //* function PreActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreActions()
-    {
-    }
-
-
-    //*
-    //* function PostActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostActions()
-    {
-    }
-
     
-    //*
-    //* function PreProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreProcessItemDataGroups()
-    {
-    }
-
-    //*
-    //* function PostProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostProcessItemDataGroups()
-    {
-    }
-
-    //*
-    //* function PreProcessItemData, Parameter list:
-    //*
-    //* Pre process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
-
-    function PreProcessItemData()
-    {
-    }
-    
-   
     //*
     //* function PostProcessItemData, Parameter list:
     //*

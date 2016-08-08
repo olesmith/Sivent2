@@ -99,10 +99,10 @@ array
    (
       "Href"     => "",
       "HrefArgs" => "?ModuleName=Submissions&Action=FriendTable&Friend=#Friend",
-      "Title"    => "Gerenciar Submissões do Participante",
-      "Title_UK" => "Administer Participants Submissions",
-      "Name"     => "Submissões do Participante",
-      "Name_UK"   => "Participant's Submissions",
+      "Title"    => "Gerenciar Atividades do Participante",
+      "Title_UK" => "Administer Participant Activities",
+      "Name"     => "Atividades do Participante",
+      "Name_UK"   => "Participant Activities",
       
       //"Handler"   => "Inscription_Handle_Certificates_Generate",
       //"Icon"   => "print_dark.png",

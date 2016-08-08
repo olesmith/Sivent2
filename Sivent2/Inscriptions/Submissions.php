@@ -165,8 +165,8 @@ class InscriptionsSubmissions extends InscriptionsCaravans
 
     function Inscription_Submissions_Table_Show($edit,$item)
     {
-        $this->Submissionsobj()->ItemData("ID");
-        $this->Submissionsobj()->ItemDataGroups("Basic");
+        $this->SubmissionsObj()->ItemData("ID");
+        $this->SubmissionsObj()->ItemDataGroups("Basic");
         
         return 
             $this->Submissionsobj()->Submissions_Table_Show($edit,$item);

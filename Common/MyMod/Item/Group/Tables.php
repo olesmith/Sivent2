@@ -4,10 +4,48 @@
 trait MyMod_Item_Group_Tables
 {
     //*
-    //* Create item Group table. Returns row list.
+    //* Create item Group table (matrix).
     //*
 
     function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="")
+    {
+        $table=
+            $this->ItemTable
+            (
+               $edit,
+               $item,
+               TRUE,
+               $this->ItemDataSGroups[ $group ][ "Data" ],
+               array(),
+               $plural,
+               FALSE,
+               FALSE,
+               $precgikey
+             );
+
+        if ($this->SGroups_NumberItems)
+        {
+            $n=1;
+            foreach (array_keys($table) as $id)
+            {
+                array_unshift($table[ $id ],$this->B($n.":"));
+                $n++;
+            }
+        }
+           
+        $title=$this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name");
+        if ($edit==1) { $title.=$this->SUP("","&dagger;"); }
+           
+        array_unshift($table,$this->H(3,$title));
+
+        return $table;
+    }
+    
+    //*
+    //* Create item Group html table.
+    //*
+
+    function MyMod_Item_Group_Table_HTML($edit,$group,$item,$plural=FALSE,$precgikey="",$options=array())
     {
         if (!empty($this->ItemDataSGroups[ $group ][ "GenTableMethod" ]))
         {
@@ -32,40 +70,11 @@ trait MyMod_Item_Group_Tables
         if (!empty($this->ItemDataSGroups[ $group ][ "Data" ]))
         {
             $table=
-                  $this->ItemTable
-                  (
-                     $edit,
-                     $item,
-                     TRUE,
-                     $this->ItemDataSGroups[ $group ][ "Data" ],
-                     array(),
-                     $plural,
-                     FALSE,
-                     FALSE,
-                     $precgikey
-                   );
-
-            if ($this->SGroups_NumberItems)
-            {
-                $n=1;
-                foreach (array_keys($table) as $id)
-                {
-                    array_unshift($table[ $id ],$this->B($n.":"));
-                    $n++;
-                }
-            }
-           
-            $title=$this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name");
-            if ($edit==1) { $title.=$this->SUP("","&dagger;"); }
-           
-            array_unshift($table,$this->H(3,$title));
-
-            $table=
                $this->Html_Table
                (
                   "",
-                  $table,
-                  array("WIDTH" => '100%'),
+                  $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$precgikey),
+                  $options,
                   array(),
                   array(),
                   TRUE,
@@ -107,7 +116,7 @@ trait MyMod_Item_Group_Tables
                     array_push
                     (
                        $row,
-                       $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$prekey)
+                       $this->MyMod_Item_Group_Table_HTML($edit,$group,$item,$plural,$prekey,array("WIDTH" => '100%'))
                     );
                 }
                 else { array_push($row,$group); }

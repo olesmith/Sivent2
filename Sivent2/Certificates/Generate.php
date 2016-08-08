@@ -92,7 +92,7 @@ class Certificates_Generate extends Certificates_Latex
         }
         
         return
-            "%%! Omit footnote texting\n".
+            "%%! Verification entry\n".
             "\\let\\thefootnote\\relax\n\\footnote{\n".
             $this->MyLanguage_GetMessage("Certificates_Validation_Message1").
             ": ".
@@ -131,10 +131,21 @@ class Certificates_Generate extends Certificates_Latex
         $hspace=$this->Event($key);
 
         $width=28-2*$hspace;
-        return
-            "\n\n\\hspace{1cm}\\vspace{".$vspace."cm}\n\n".
-            $this->Latex_Minipage($width,$text,"c","l").
-            "";
+
+        $texts=preg_split('/\s*\\\\(new|clear)page\s*/',$text);
+
+        $latex="";
+        foreach (array_keys($texts) as $id)
+        {
+            $texts[ $id ]=
+                "\n\n\\hspace{1cm}\\vspace{".$vspace."cm}\n\n".
+                $this->Latex_Minipage($width,$texts[ $id ],"c","l").
+                "\n\n".
+                $this->Certificate_Verification_Info($cert).
+                "";
+        }
+
+        return join("\n\n\\clearpage\n\n",$texts);
     }
     
     

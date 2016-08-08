@@ -21,9 +21,12 @@ class EventsCertificate extends EventsCertificates
                    "Type" => $type,
                 );
             
-            $latex.=
-                $this->CertificatesObj()->Certificate_Generate($cert).
-                "";
+            if ($this->CertificatesObj()->Sql_Select_NHashes($cert)>0)
+            {
+                $latex.=
+                    $this->CertificatesObj()->Certificate_Generate($cert).
+                    "";
+            }
         }
         
         $latex=preg_replace('/#/',"\\#",$latex);

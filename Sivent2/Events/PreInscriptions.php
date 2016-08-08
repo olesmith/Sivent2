@@ -1,6 +1,6 @@
 <?php
 
-class EventsPreInscriptions extends EventsSubmissions
+class EventsPreInscriptions extends EventsAssessments
 {
     //*
     //* function Event_PreInscriptions_Has, Parameter list: $event=array()

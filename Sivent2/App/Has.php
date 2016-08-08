@@ -39,6 +39,18 @@ class App_Has extends App_Head_Table
     }
     
     //*
+    //* function HasCriterias, Parameter list:
+    //*
+    //* Checks whether current event has Submissions.
+    //* 
+    //*
+
+    function HasCriterias()
+    {
+        return $this->HasSubmissions();
+    }
+    
+    //*
     //* function SubmissionsPublic, Parameter list:
     //*
     //* Checks whether current event has public Submissions.

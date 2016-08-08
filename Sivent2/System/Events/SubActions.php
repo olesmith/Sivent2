@@ -27,8 +27,13 @@ array
    ),
    "Submissions" => array
    (
-      "Name" => "Submissões",
-      "Name_UK" => "Submissions",
+      "Name" => "Atividades",
+      "Name_UK" => "Activities",
+   ),
+   "Assessments" => array
+   (
+      "Name" => "Avaliações",
+      "Name_UK" => "Assessments",
    ),
    "Caravans" => array
    (

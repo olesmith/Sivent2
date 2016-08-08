@@ -13,6 +13,7 @@ include_once("Inscriptions/Form.php");
 include_once("Inscriptions/Collaborations.php");
 include_once("Inscriptions/Caravans.php");
 include_once("Inscriptions/Submissions.php");
+include_once("Inscriptions/Assessments.php");
 include_once("Inscriptions/Certificate.php");
 include_once("Inscriptions/Certificates.php");
 include_once("Inscriptions/PreInscriptions.php");

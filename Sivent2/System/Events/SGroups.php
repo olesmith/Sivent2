@@ -7,7 +7,7 @@ array
 
       "Data" => array
       (
-         "Initials","Name","Title","Place","Place_Address","Place_Site",
+         "Status","Visible","Initials","Name","Title","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
          "Date","AnnouncementLink","Announcement",
       ),
@@ -27,7 +27,7 @@ array
        (
           "Payments","Selection",
           "Certificates","Collaborations","Caravans",
-          "Submissions","Schedule_Public","Info",
+          "Submissions","Assessments","Schedule_Public","Info",
        ),
 
        "Person" => 0,
@@ -171,8 +171,8 @@ array
     ),
     "Submissions_Latex" => array
     (
-       "Name" => "Submissões, Certificados",
-       "Name_UK" => "Submissions, Certificates",
+       "Name" => "Atividades, Certificados",
+       "Name_UK" => "Activities, Certificates",
        "Data" => array
        (
           "Certificates_Submissions_Latex",
@@ -226,5 +226,22 @@ array
        "Single" => 1,
        "AccessMethod" => array("Event_Caravans_Has","Event_Certificates_Has"),
        "SubAction" => "Caravans",
+    ),
+    "Assessments" => array
+    (
+       "Name" => "Avaliação das Atividades",
+       "Name_UK" => "Activities Assessment",
+       "Data" => array
+       (
+          "Assessments","Assessments_StartDate","Assessments_EndDate",
+        ),
+
+       "Person" => 1,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       "SubAction" => "Assessments",
+       "AccessMethod" => "Event_Assessments_Has",
     ),
 );

@@ -46,7 +46,14 @@ class MyEventsTables extends MyEventsTablesEvents
 
     function ReadEvents()
     {
-        $this->ApplicationObj()->Events=$this->Sql_Select_Hashes(array(),array(),array("StartDate","ID"));
+        $this->ApplicationObj()->Events=
+            $this->Sql_Select_Hashes
+            (
+               $this->ApplicationObj()->HtmlEventsWhere(),
+               array(),
+               array("StartDate","ID")
+            );
+        
         $this->ApplicationObj()->Events=array_reverse($this->ApplicationObj()->Events);
     }
     

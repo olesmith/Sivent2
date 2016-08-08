@@ -11,6 +11,10 @@ class DBDataUpdate extends DBDataQuest
     function UpdateSqlKeyField($item,$data,$newvalue)
     {
         $value=$item[ $data ];
+        
+        $newvalue=$this->Html2Sort($newvalue);
+        $newvalue=$this->Text2Sort($newvalue);
+        
         if ($value!=$newvalue)
         {
             if ($this->DBDataObj()->Sql_Table_Field_Exists($value))

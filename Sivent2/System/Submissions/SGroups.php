@@ -47,13 +47,13 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "PreInscriptions" => array
+    "Neccessities" => array
     (
-       "Name" => "Preinscrições",
-       "Name_UK" => "PreInscriptions",
+       "Name" => "Necessidades",
+       "Name_UK" => "Neccessities",
        "Data" => array
        (
-           "PreInscriptions","Vacancies",
+        "Need_Projector","Need_Computer","Need_Other",
         ),
 
        "Person" => 0,
@@ -62,13 +62,13 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "Neccessities" => array
+    "PreInscriptions" => array
     (
-       "Name" => "Necessidades",
-       "Name_UK" => "Neccessities",
+       "Name" => "Preinscrições",
+       "Name_UK" => "PreInscriptions",
        "Data" => array
        (
-        "Need_Projector","Need_Computer","Need_Other",
+           "PreInscriptions","Vacancies",
         ),
 
        "Person" => 0,

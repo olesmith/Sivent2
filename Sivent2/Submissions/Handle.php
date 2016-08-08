@@ -1,16 +1,17 @@
 <?php
 
+include_once("Handle/Assessments.php");
 
-class SubmissionsHandle extends SubmissionsCertificate
+class SubmissionsHandle extends SubmissionsHandleAssessments
 {
     
     //*
-    //* function MyMod_Handle_Submission, Parameter list: $submission=array()
+    //* function Submissions_Handle_Submission, Parameter list: $submission=array()
     //*
     //* Elaborated display of Submission.
     //*
 
-    function MyMod_Handle_Submission($submission=array())
+    function Submissions_Handle_Submission($submission=array())
     {
         if (empty($submission)) { $submission=$this->ItemHash; }
 

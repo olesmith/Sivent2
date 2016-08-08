@@ -24,6 +24,7 @@ class Certificates_Latex extends Certificates_Validate
                "\\SetWatermarkText{\\includegraphics[width=26cm]{".$watermark."}}\n". 
                "\\SetWatermarkAngle{0}\n".
                "\\SetWatermarkScale{1}\n".
+               "\\SetWatermarkColor[rgb]{0,0,0}\n".
                "%%%!\n".
                "%%%!\n".
                "\\begin{document}".
@@ -79,15 +80,11 @@ class Certificates_Latex extends Certificates_Validate
         $cert=$this->Certificate_Read($cert);
 
         $latex=
-            //"\\begin{center}\n".
             $this->Certificate_Text($cert).
             "\n\n".
             $this->Certificate_Signatures(18).
             "\n\n".
-            //"\\end{center}\n".
-            $this->Certificate_Verification_Info($cert).
-            "\n\n".
-            "\n\n\\clearpage\n\n".
+            "\\clearpage\n\n".
             "";
 
         $latex=$this->Certificate_Latex_Filter($cert,$latex);

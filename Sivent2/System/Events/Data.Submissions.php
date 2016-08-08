@@ -2,8 +2,8 @@ array
 (     
    "Submissions" => array
    (
-      "Name" => "Submissões",
-      "Name_UK" => "Submissions",
+      "Name" => "Atividades",
+      "Name_UK" => "Activities",
       "SelectCheckBoxes"  => 2,
 
       "Sql" => "ENUM",
@@ -24,10 +24,10 @@ array
    "Submissions_StartDate" => array
    (
       "Name" => "Inscrições Início",
-      "Title" => "Submissões, Inscrições Início, Data",
+      "Title" => "Atividades, Inscrições Início, Data",
       
       "Name_UK" => "Inscriptions Begins",
-      "Title_UK" => "Submission Inscriptions Begins, Date",
+      "Title_UK" => "Ativity Inscriptions Begins, Date",
       "Sql" => "INT",
       
       "Public"   => 1,
@@ -43,7 +43,6 @@ array
    "Submissions_Inscriptions" => array
    (
       "Name" => "Com Inscrições",
-      
       "Name_UK" => "Has Inscriptions",
 
       "Sql" => "ENUM",
@@ -64,10 +63,10 @@ array
    "Submissions_EndDate" => array
    (
       "Name" => "Inscrições Até",
-      "Title" => "Submissões, Inscrições Até, Data",
+      "Title" => "Atividades, Inscrições Até, Data",
       
       "Name_UK" => "Inscriptions Untill",
-      "Title_UK" => "Submission Inscriptions Untill, Date",
+      "Title_UK" => "Activity Inscriptions Untill, Date",
       "Sql" => "INT",
       
       "Public"   => 1,
@@ -82,8 +81,8 @@ array
    ),
    "Submissions_Public" => array
    (
-      "Name" => "Submissões Públicos",
-      "Name_UK" => "Submissions Public",
+      "Name" => "Atividades Públicos",
+      "Name_UK" => "Activities Public",
       
       "Sql" => "ENUM",
       "Values" => array("Não","Sim"),
@@ -102,8 +101,8 @@ array
    ),
    "Certificates_Submissions_Latex" => array
    (
-      "Name" => "Submissões, Certificado (LaTeX)",
-      "Name_UK" => "Submissions, Certificate (LaTeX)",
+      "Name" => "Atividades, Certificado (LaTeX)",
+      "Name_UK" => "Activities, Certificate (LaTeX)",
 
       "Sql" => "TEXT",
       "Size" => "100x10",
@@ -143,8 +142,8 @@ array
    ),
    "Certificates_Submissions_Latex_UK" => array
    (
-      "Name" => "Submissões, Certificado (UK)",
-      "Name_UK" => "Submissions, Certificate (UK)",
+      "Name" => "Atividades, Certificado (UK)",
+      "Name_UK" => "Activities, Certificate (UK)",
 
       "Sql" => "TEXT",
       "Size" => "100x10",
@@ -182,8 +181,8 @@ array
    ),
    "Certificates_Submissions_TimeLoad" => array
    (
-      "Name" => "Submissões, CH Padrão",
-      "Name_UK" => "Submissions, Default TimeLoad",
+      "Name" => "Atividades, CH Padrão",
+      "Name_UK" => "Activities, Default TimeLoad",
 
       "Sql" => "VARCHAR(8)",
       "Default" => "2",

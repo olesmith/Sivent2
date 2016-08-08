@@ -4,6 +4,7 @@
 include_once("Tables/Speaker.php");
 include_once("Tables/Schedules.php");
 include_once("Tables/Submissions.php");
+include_once("Tables/Assessments.php");
 include_once("Tables/Collaborations.php");
 include_once("Tables/Caravans.php");
 include_once("Tables/Certificates.php");
@@ -164,6 +165,7 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
                $this->Inscription_Certificate_Table(0,$inscription),
                $this->Inscription_Speaker_Tables(1,$inscription),
                $this->Inscription_Submissions_Table(1,$inscription),
+               $this->Inscription_Assessors_Table(1,$inscription),
                $this->Inscription_PreInscriptions_Table(1,$inscription),
                $this->Inscription_Collaborations_Table(1,$inscription),               
                $this->Inscription_Caravans_Table(1,$inscription)

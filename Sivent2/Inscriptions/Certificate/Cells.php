@@ -1,7 +1,7 @@
 <?php
 
 
-class InscriptionsCertificateCells extends InscriptionsSubmissions
+class InscriptionsCertificateCells extends InscriptionsAssessments
 {
     //*
     //* function Certificate_Where, Parameter list: $inscription

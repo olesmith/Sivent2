@@ -1,6 +1,6 @@
 <?php
 
-class InscriptionsTablesCollaborations extends InscriptionsTablesSubmissions
+class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
 {
     //*
     //* function Inscription_Collaborations_Link, Parameter list: 

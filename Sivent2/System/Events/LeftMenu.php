@@ -81,7 +81,7 @@ array
       'Friend'     => 0,
       'Coordinator' => 1,
    ),
-   "030_Collaborations" => array
+   "03_Collaborations" => array
    (
       "Name" => "Colaborações",
       "Title" => "Colaborações",
@@ -89,23 +89,6 @@ array
       "Title_UK" => "Collaborations",
 
       'Href' => '?Unit=#Unit&ModuleName=Collaborations&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasCollaborations',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-   ),
-   "031_Collaborators" => array
-   (
-      "Name" => "Colaboradores",
-      "Title" => "Colaboradores",
-      "Name_UK" => "Collaborators",
-      "Title_UK" => "Collaborators",
-
-      'Href' => '?Unit=#Unit&ModuleName=Collaborators&Action=Search&Event=#Event',
       'AccessMethod' => 'HasCollaborations',
 
       'Public'    => 0,
@@ -149,29 +132,12 @@ array
       'Friend'     => 0,
       'Coordinator' => 1,
    ),
-   "05_Areas" => array
-   (
-      "Name" => "Trilhas",
-      "Title" => "Gerenciar Trilhas",
-      "Name_UK" => "Areas of Interest",
-      "Title_UK" => "Manage Areas of Interest",
-
-      'Href' => '?Unit=#Unit&ModuleName=Areas&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasSubmissions',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-   ),
    "061_Submissions" => array
    (
-      "Name" => "Submissões",
-      "Title" => "Gerenciar Submissões",
-      "Name_UK" => "Submissions",
-      "Title_UK" => "Manage Submissions",
+      "Name" => "Atividades",
+      "Title" => "Gerenciar Atividades",
+      "Name_UK" => "Activities",
+      "Title_UK" => "Manage Activities",
 
       'Href' => '?Unit=#Unit&ModuleName=Submissions&Action=Search&Event=#Event',
       'AccessMethod' => 'HasSubmissions',

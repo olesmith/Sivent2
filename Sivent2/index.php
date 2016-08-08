@@ -18,6 +18,10 @@ include_once("App/Override.php");
 
 class Sivent2 extends App_Override
 {
+    var $Sigma="&Sigma;";
+    var $Mu="&mu;";
+    var $Pi="&pi;";
+    
     var $IDGETVar="";
     var $Pertains=1; //Questionary: 1, 
     var $PertainsSetup=array

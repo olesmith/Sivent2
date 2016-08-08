@@ -12,7 +12,7 @@ array
          //"Datas","GroupDatas",
          "Date","Title","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
-         "Status","Inscriptions_Public","Payments",
+         "Visible","Status","Inscriptions_Public","Payments",
          "Inscribe","Inscription",
          "NoOfInscriptionsCell"
       ),
@@ -98,8 +98,8 @@ array
     ),
     "Submissions" => array
     (
-       "Name" => "Submissões",
-       "Name_UK" => "Submissions",
+       "Name" => "Atividades",
+       "Name_UK" => "Activities",
        "Data" => array
        (
           "No","Edit","Delete",
@@ -107,6 +107,23 @@ array
           "Submissions","Submission_Public",
           "Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate",
           "Certificate_Submission_TimeLoad"
+        ),
+
+       "Person" => 1,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+    ),
+    "Assessments" => array
+    (
+       "Name" => "Avaliação das Atividades",
+       "Name_UK" => "Activities Assessment",
+       "Data" => array
+       (
+          "No","Edit","Delete",
+          "Event","Friend",
+          "Assessments","Assessments_StartDate","Assessments_EndDate",
         ),
 
        "Person" => 1,

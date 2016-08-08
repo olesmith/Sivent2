@@ -21,8 +21,21 @@ class Submissions extends SubmissionsHandle
     function Submissions($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Unit","Title","Title_UK","Status","TimeLoad","Friend","Friend2","Friend3");
+        $this->AlwaysReadData=
+            array
+            (
+               "Unit","Event",
+               "Title","Title_UK",
+               "Status","TimeLoad",
+               "Friend","Friend2","Friend3"
+            );
+        
         $this->Sort=array("Title");
+        if ($this->CGI_VarValue("Submissions_GroupName")=="Assessments")
+        {
+            $this->Sort=array("Result");
+            $this->Reverse=TRUE;
+        }
         $this->IncludeAllDefault=TRUE;
     }
 
@@ -151,6 +164,12 @@ class Submissions extends SubmissionsHandle
                 $item[ $akey ]=$this->FriendsObj()->Sql_Select_Hash_Value($item[ $fkey ],"Name");
                 array_push($updatedatas,$akey);
             }
+
+            if (!empty($item[ $fkey ]) && $item[ "Status" ]==2)
+            {            
+                //Make sure author is speaker
+                $this->UpdateSpeaker($item,$fkey,$item[ $fkey ]);
+            }
         }
 
         return $updatedatas;
@@ -214,7 +233,7 @@ class Submissions extends SubmissionsHandle
 
         return $friends;
     }
-    
+        
     //*
     //* Overrides UpdateSpeaker.
     //*

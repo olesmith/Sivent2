@@ -18,7 +18,7 @@ array
       "Sql" => "INT",
       "SqlClass" => "Units",
       "Search" => FALSE,
-      "SqlDerivedData" => array("Name"),
+      
       "GETSearchVarName"  => "Unit",
 
       "Public"   => 1,
@@ -38,7 +38,6 @@ array
       "Search" => FALSE,
       "Compulsory"  => TRUE,
 
-      "SqlDerivedData" => array("Name"),
       "GETSearchVarName"  => "Event",
       "Sql" => "INT",
       "Public"   => 1,

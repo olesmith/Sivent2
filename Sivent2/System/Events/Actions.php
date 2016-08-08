@@ -57,10 +57,10 @@ array
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Submissions&Action=Search&Event=#ID",
-        "Title"    => "Gerenciar Submissões",
-        "Title_UK" => "Manage Submissions",
-        "Name"     => "Submissões",
-        "Name_UK"     => "Submissions",
+        "Title"    => "Gerenciar Atividades",
+        "Title_UK" => "Manage Activities",
+        "Name"     => "Atividades",
+        "Name_UK"     => "Activities",
 
         "Public"   => 0,
         "Person"   => 0,

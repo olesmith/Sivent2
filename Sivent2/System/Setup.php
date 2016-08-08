@@ -39,6 +39,10 @@
           "Areas",
           "Submissions",
           
+          "Criterias",
+          "Assessors",
+          "Assessments",
+          
           "Certificates",
           
           "Dates",
@@ -60,13 +64,22 @@
           "GroupDatas" => array("Events"),
           "Sponsors" => array("Units","Events"),
           "Permissions" => array("Units","Events"),
+          "Inscriptions" => array("Datas","GroupDatas"),
+          
           "Collaborations" => array("Units","Events"),
           "Collaborators" => array("Collaborations","Inscriptions"),
-          "Inscriptions" => array("Datas","GroupDatas"),
+
           "Caravans" => array("Inscriptions"),
           "Caravaneers" => array("Caravans"),
+          
           "Areas" => array("Events"),
+          
           "Submissions" => array("Inscriptions","Areas"),
+          
+          "Criterias" => array("Submissions"),
+          "Assessors" => array("Submissions"),
+          "Assessments" => array("Assessors","Criterias"),
+          
           "Certificates" => array("Inscriptions","Caravaneers","Collaborations","Submissions"),
           
           "Dates" => array("Events"),
@@ -337,12 +350,12 @@
              "SqlFilter" => "#Name: #Title",
              "SqlDerivedData" => array("Name","Title"),
 
-             "ItemName"      => "Submissão",
-             "ItemsName"     => "Submissões",
+             "ItemName"      => "Atividade",
+             "ItemsName"     => "Atividades",
              "ItemsNamer"    => "Title",
 
-             "ItemName_UK"   => "Submission",
-             "ItemsName_UK"  => "Submissions",
+             "ItemName_UK"   => "Activity",
+             "ItemsName_UK"  => "Activities",
              "ItemsNamer_UK" => "Title_UK",
          ),
          "Areas" => array
@@ -497,6 +510,7 @@
              "ItemsName_UK"  => "Speakers",
              "ItemsNamer_UK" => "Name",
          ),
+         
          "PreInscriptions" => array
           (
              "SqlAccessor" => "PreInscriptionsObj",
@@ -514,6 +528,65 @@
 
              "ItemName_UK"   => "Preinscription",
              "ItemsName_UK"  => "Preinscriptions",
+             "ItemsNamer_UK" => "Name",
+         ),
+
+         
+         "Criterias" => array
+          (
+             "SqlAccessor" => "CriteriasObj",
+             "SqlObject" => "CriteriasObject",
+             "SqlClass" => "Criterias",
+             "SqlFile" => "Criterias.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Criterias",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Critério",
+             "ItemsName"     => "Critérios",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Criteria",
+             "ItemsName_UK"  => "Criterias",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Assessors" => array
+          (
+             "SqlAccessor" => "AssessorsObj",
+             "SqlObject" => "AssessorsObject",
+             "SqlClass" => "Assessors",
+             "SqlFile" => "Assessors.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Assessors",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Avaliador",
+             "ItemsName"     => "Avaliadores",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Assessor",
+             "ItemsName_UK"  => "Assessors",
+             "ItemsNamer_UK" => "Name",
+         ),
+         "Assessments" => array
+          (
+             "SqlAccessor" => "AssessmentsObj",
+             "SqlObject" => "AssessmentsObject",
+             "SqlClass" => "Assessments",
+             "SqlFile" => "Assessments.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Assessments",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Avaliador",
+             "ItemsName"     => "Avaliadores",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Assessor",
+             "ItemsName_UK"  => "Assessments",
              "ItemsNamer_UK" => "Name",
          ),
        ),

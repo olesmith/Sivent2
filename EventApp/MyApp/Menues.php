@@ -163,6 +163,21 @@ class MyEventAppMenues extends MyEventAppAccess
         return $this->ReadPHPArray("../EventApp/System/Events/LeftMenu.php");
     }
     
+     //*
+    //* function  HtmlEventsWhere, Parameter list: 
+    //*
+    //* Returns menu def as read from system file. May be overridden.
+    //*
+
+    function HtmlEventsWhere()
+    {
+        return
+            array
+            (
+               "Unit" => $this->Unit("ID"),
+            );
+    }
+    
     //*
     //* function  HtmlEventsMenu, Parameter list: 
     //*
@@ -181,11 +196,13 @@ class MyEventAppMenues extends MyEventAppAccess
         $events=$this->EventsObj()->SelectHashesFromTable
         (
            "",
-           array("Unit" => $args[ "Unit" ]),
+           $this->HtmlEventsWhere(),
            array("ID","Name","Date"),
            FALSE,
-           "Date,ID"
+           "CTime,ID"
         );
+
+        array_reverse($events);
 
         $links=array();
         foreach (array_reverse($events) as $event)

@@ -65,10 +65,10 @@ array
    (
       "Href"     => "",
       "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Submission&Friend=#Friend#1",
-      "Title"    => "Inscrição",
-      "Title_UK" => "Inscription",
-      "Name"     => "Inscrição",
-      "Name_UK"   => "Inscrição",
+      "Title"    => "Atividades",
+      "Title_UK" => "Activities",
+      "Name"     => "Atividade",
+      "Name_UK"   => "Activity",
       
       //"Handler"   => "Inscription_Collaborations_Inscription_Handle",
 
@@ -136,30 +136,14 @@ array
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
-     /* "Event" => array */
-     /* ( */
-     /*    "Href"     => "", */
-     /*    "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"), */
-     /*    "Title"    => "Gerenciar Evento", */
-     /*    "Title_UK" => "Manage Event", */
-     /*    "Name"     => "Evento", */
-     /*    "Name_UK"     => "Event", */
-
-     /*    "Public"   => 0, */
-     /*    "Person"   => 0, */
-     /*    "Admin"    => 1, */
-     /*    "Friend"   => 0, */
-     /*    "Coordinator"   => 1, */
-     /*    "Advisor"    => 0, */
-     /*  ), */
    "FriendTable" => array
    (
       "Href"     => "",
       "HrefArgs" => "?ModuleName=Submissions&Action=FriendTable&Friend=#Friend",
-      "Title"    => "Gerenciar Submissões do Participante",
-      "Title_UK" => "Administer Participant's Submissions",
-      "Name"     => "Submissões do Participante",
-      "Name_UK"   => "Participant's Submissions",
+      "Title"    => "Gerenciar Atividades do Participante",
+      "Title_UK" => "Administer Participant Activities",
+      "Name"     => "Atividades do Participante",
+      "Name_UK"   => "Participant Activities",
       
       "Public"   => 0,
       "Person"   => 0,
@@ -185,5 +169,24 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "Handler"    => "MyMod_Handle_Submission",
+      ),
+     "Assessments" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Assessments&Event=#Event&ID=#ID",
+
+        "Name"     => "Avaliadores e Avaliações",
+        "Name_UK"     => "Assessors and Assessments",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 1,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "Handler"    => "Submissions_Handle_Assessments",
+        "AccessMethod"    => "Event_Assessments_Has",
+        "Singular"      => TRUE,
+        "Icon"      => "absences_light.png",
       ),
 );

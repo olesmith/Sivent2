@@ -21,11 +21,10 @@ class InscriptionsCertificateHandle extends InscriptionsCertificateCells
         foreach ($certs as $cert)
         {
             $latex.=$this->CertificatesObj()->Certificate_Generate($cert);
+            $this->CertificatesObj()->Certificate_Set_Generated($cert);
         }
         
         $latex=$this->CertificatesObj()->Certificates_Latex_Ambles_Put($latex);
-
-        $this->CertificatesObj()->Certificate_Set_Generated($cert);
         
         if ($this->CGI_GET("Latex")!=1)
         {

@@ -17,6 +17,28 @@ array
       "Search"  => TRUE,
       "SearchCheckBox"  => TRUE,
    ),
+    "Visible" => array
+   (
+      "Name" => "Visível",
+      "Name_UK" => "Visible",
+
+      "Sql" => "ENUM",
+      "Values" => array("Sim","Não"),
+      "Values_UK" => array("Yes","No"),
+      "Default" => 1,
+      
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Default" => 1,
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+      "Compulsory"  => FALSE,
+   ),
+   
    "EventStart" => array
    (
       "Name" => "Início do Evento",

@@ -3,8 +3,8 @@ array
      "Submissions" =>
      array
      (
-       "Name" => "Submissões",
-       "Name_UK" => "Submissions",
+       "Name" => "Atividades",
+       "Name_UK" => "Activities",
        "Data" => array
        (
         "Name",

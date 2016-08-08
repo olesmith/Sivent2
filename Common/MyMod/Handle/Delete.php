@@ -39,7 +39,7 @@ trait MyMod_Handle_Delete
         }
         
         $hash=$this->CGI_URI2Hash($uri);
-        unset($hash[ "ID" ]);
+        //unset($hash[ "ID" ]);
         
         $returnuri="?".$this->CGI_Hash2URI($hash)."#HorMenu";
         

@@ -184,6 +184,23 @@ class ModulesCommon extends EventMod
     }
 
     //*
+    //* function Event_Assessments_Has, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has activity assessments.
+    //*
+
+    function Event_Assessments_Has($item=array())
+    {
+        $res=FALSE;
+        if ($this->Event("Assessments")==2)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+
+    //*
     //* function Event_Caravans_Has, Parameter list: $item=array()
     //*
     //* Returns TRUE if event has collaborations.
@@ -332,7 +349,7 @@ class ModulesCommon extends EventMod
         $obj=$this;
         if (empty($othermodule))
         {
-            $module=$this->ModuleName;
+            $othermodule=$this->ModuleName;
             $obj=$this;
         }
 
@@ -341,7 +358,8 @@ class ModulesCommon extends EventMod
 
         $message=preg_replace('/#ItemName/',$obj->MyMod_ItemName(),$message);
         $message=preg_replace('/#ItemsName/',$obj->MyMod_ItemName("ItemsName"),$message);
-                
+
+
         if (
               !$this->Sql_Table_Exists()
               ||
@@ -355,7 +373,7 @@ class ModulesCommon extends EventMod
                    ": ".
                    $this->Href
                    (
-                      $this->CGI_Hash2URI
+                      "?".$this->CGI_Hash2URI
                       (
                          array
                          (

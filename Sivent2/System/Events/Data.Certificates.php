@@ -67,7 +67,7 @@ array
       "Name_UK" => "Graphics, Watermark",
 
       "Sql" => "FILE",
-      "Extensions" => array("png","jpg"),
+      "Extensions" => array("png","jpg","pdf"),
       "Default" => "10",
       "Iconify" => TRUE,
 

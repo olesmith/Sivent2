@@ -479,4 +479,22 @@ array
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
    ),
+   "Result" => array
+   (
+      "Name" => "Resultado",
+      "Title" => "Resultado da Avaliação",
+      "Name_UK" => "Result",
+      "Title_UK" => "Assessment Result",
+
+      "Sql" => "REAL",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => FALSE,
+      "Compulsory"  => FALSE,
+      "Format"  => "%.1f",
+   ),
 );

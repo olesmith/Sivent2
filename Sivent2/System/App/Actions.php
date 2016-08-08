@@ -16,6 +16,57 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
       ),
+     "Criterias" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Criterias&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Critérios",
+        "Title_UK" => "Manage Criterias",
+        "Name"     => "Critérios",
+        "Name_UK"     => "Criterias",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Submissions_Has",
+      ),
+     "Assessors" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Assessors&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Avaliadores",
+        "Title_UK" => "Manage Assessors",
+        "Name"     => "Avaliadores",
+        "Name_UK"     => "Assessors",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Submissions_Has",
+     ),
+     "Assessments" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Assessments&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Avaliações",
+        "Title_UK" => "Manage Assessments",
+        "Name"     => "Avaliações",
+        "Name_UK"     => "Assessments",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "AccessMethod"    => "Event_Submissions_Has",
+     ),
      "Areas" => array
      (
         "Href"     => "",
@@ -37,7 +88,7 @@ array
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Submissions&Action=Submission&Event=#Event&ID=#ID",
-        "Title"    => "Detalhes da Submissão",
+        "Title"    => "Detalhes da Atividade",
         "Title_UK" => "Submission Details",
         "Name"     => "Detalhes",
         "Name_UK"     => "Details",
@@ -53,10 +104,10 @@ array
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Submissions&Action=Search&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Submissões",
-        "Title_UK" => "Manage Submissions",
-        "Name"     => "Submissões",
-        "Name_UK"     => "Submissions",
+        "Title"    => "Gerenciar Atividades",
+        "Title_UK" => "Manage Activities",
+        "Name"     => "Atividades",
+        "Name_UK"     => "Activities",
 
         "Public"   => 0,
         "Person"   => 0,

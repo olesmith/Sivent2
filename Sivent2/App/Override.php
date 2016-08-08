@@ -142,4 +142,20 @@ class App_Override extends App_Handle
             parent::MyApp_Interface_Tail_Phrase().
             "";
      }
+    
+     //*
+    //* function  HtmlEventsWhere, Parameter list: 
+    //*
+    //* Overrides EventApp::HtmlEventsWhere. Leaves out non-visible events.
+    //*
+
+    function HtmlEventsWhere()
+    {
+        return
+            array
+            (
+               "Unit" => $this->Unit("ID"),
+               "Visible" => 1,
+            );
+    }
 }
