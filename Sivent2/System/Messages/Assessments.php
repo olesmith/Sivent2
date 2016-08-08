@@ -1,0 +1,48 @@
+array
+(
+   "Assessments_Edit_Link" => array
+   (
+      "Name" => "Acessar Atividade(s) Proposta(s)",
+      "Name_UK" => "Access Proposed Activity(ies)",
+   ),
+   "Assessments_Inscriptions_Closed" => array
+   (
+      "Name" => "Submissão de Atividades Fechadas",
+      "Name_UK" => "Proposal of Activities Closed",
+   ),
+   "Assessments_Inscriptions_Open" => array
+   (
+      "Name" => "Inscrições Abertas",
+      "Name_UK" => "Inscriptions Open",
+   ),
+   "Assessments_Inscriptions_Table_Title" => array
+   (
+      "Name" => "Atividades Designadas para Avaliar",
+      "Name_UK" => "Assigned Assessments",
+   ),
+   "Assessments_Inscriptions_Assessment_Link_Title" => array
+   (
+      "Name" => "Avaliar",
+      "Name_UK" => "Assessment",
+   ),
+   "Assessments_Inscriptions_Assessment_UnLink_Title" => array
+   (
+      "Name" => "Esconder",
+      "Name_UK" => "Hide",
+   ),
+   "Assessments_Inscriptions_Assessment_Title" => array
+   (
+      "Name" => "Avaliar Atividade",
+      "Name_UK" => "Assess Activity",
+   ),
+   "Assessments_Inscriptions_Assessment_Friend_Title" => array
+   (
+      "Name" => "Autor da Proposta",
+      "Name_UK" => "Proposal Author",
+   ),
+   "Assessments_Inscriptions_Assessment_Submission_Title" => array
+   (
+      "Name" => "Proposta de Atividade",
+      "Name_UK" => "Activity Proposed",
+   ),
+);
