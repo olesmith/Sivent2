@@ -83,5 +83,46 @@ trait Sql_Select_Unique
             $this->Sql_Select_Unique_Col_Values($col,$where,"ID",$table)
         );
     }
+
+    
+    //*
+    //* function Sql_Select_Unique_Item, Parameter list: $col,$where,
+    //*
+    //* Reads unique item from SQL table: croaks, if NOT unique!
+    //*
+    //* 
+
+    function Sql_Select_Unique_Item($where,$datas=array(),$delete=FALSE,$table="")
+    {
+        $items=$this->Sql_Select_Hashes($where,array("ID"),array("ID"));
+        
+        var_dump("oi");
+        var_dump($items);
+        $item=array();
+        if (count($items)>0)
+        {
+            $item=array_pop($items);
+            $item=$this->Sql_Select_Hash(array("ID" => $item[ "ID" ]));
+        }
+        
+        if (count($items)>0)
+        {
+            $item=array();
+           var_dump("non-unique items");
+           $this->AddHtmlStatusMessage("Sql_Select_Unique_Item: non-unique items");
+           
+            foreach ($items as $item)
+            {
+                var_dump("should delete ".$item[ "ID" ]);
+                if ($delete)
+                {
+                   $this->Sql_Delete_Item($item[ "ID" ]);
+                }
+            }
+        }
+
+        return $item;
+        
+    }
 }
 ?>

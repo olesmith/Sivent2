@@ -25,12 +25,6 @@ class Certificates_Validate extends Certificates_Access
         $comps=preg_split('/\./',$code);
 
         return $this-> Certificate_Decode($code);
-        
-        return
-             array
-             (
-                "Code" => $code,
-             );
     }
     
     //*
@@ -41,6 +35,8 @@ class Certificates_Validate extends Certificates_Access
 
     function Certificates_Validate_Read($code,$datas=array())
     {
+        if (empty($code)) { return array(); }
+        
         return
              $this->Sql_Select_Hashes
              (

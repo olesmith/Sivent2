@@ -162,7 +162,6 @@ class SchedulesRooms extends SchedulesDates
         $cell="";
         if (!empty($schedule[ "Submission" ]))
         {
-            //$submission=$this->Submissions($schedule[ "Submission" ]);
             $submission=$this->SubmissionsObj()->Sql_Select_Hash(array("ID" => $schedule[ "Submission" ]));
 
             $friendinfo="-";
@@ -186,26 +185,25 @@ class SchedulesRooms extends SchedulesDates
             $cell=
                 array
                 (
-                   "Text" =>
-                   $this->Span
+                   "Text" => $this->FrameIt
                    (
-                      $this->SubmissionsObj()->SubmissionAuthors($submission),
-                      array("CLASS" => 'Bold')
-                   ).
-                   $this->BR().
-                   $this->BR().
-                   $this->Span
-                   (
-                      $this->SubmissionsObj()->SubmissionInfo($submission),
-                      array("CLASS" => 'Italic')
-                   ).
-                   $this->BR().
-                   $this->BR().
-                   $this->MyActions_Entry("Submission",$submission,TRUE,$options[ "CLASS" ]).
-                   $this->BR().
-                   $this->BR().
-                   $this->ScheduleRoomSubmissionAdminMenu($schedule,$class).
-                   "",
+                      $this->Span
+                      (
+                         $this->SubmissionsObj()->SubmissionAuthors($submission),
+                         array("CLASS" => 'Bold')
+                      ).
+                      $this->BR().
+                      $this->BR().
+                      $this->Span
+                      (
+                         $this->SubmissionsObj()->SubmissionInfo($submission),
+                         array("CLASS" => 'Italic')
+                      ).
+                      $this->BR().
+                      $this->BR().
+                      $this->ScheduleRoomMenu($schedule).
+                      ""
+                   ),
                    "Options" => $options
                 );
         }
@@ -240,25 +238,29 @@ class SchedulesRooms extends SchedulesDates
    }
     
     //*
-    //* function ScheduleRoomSubmissionAdminMenu, Parameter list: $schedule,$class
+    //* function ScheduleRoomMenu, Parameter list: $schedule
     //*
     //* Generates administrative menu for schedule cell. Returns empty for non admin users.
     //*
 
-    function ScheduleRoomSubmissionAdminMenu($schedule,$class)
+    function ScheduleRoomMenu($schedule)
     {
-        if (!preg_match('/(Admin|Coordinator)/',$this->Profile())) { return; }
+        //if (!preg_match('/(Admin|Coordinator)/',$this->Profile())) { return; }
 
         return
             $this->MyMod_HorMenu_Actions
             (
-               array("PreInscriptions"),
-               $class,
+               array
+               (
+                  "Submission",
+                  "PreInscriptions",
+                  "Presences",
+               ),
+               "",
                "",
                $schedule
             ).
             "";
-        
     }
     
 }

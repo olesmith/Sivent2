@@ -50,4 +50,9 @@ array
       "Name" => "Certificados Aguardando Liberação",
       "Name_UK" => "Certificates Awaiting Liberation",
    ),
+   "Certificate_Friend_Table_Title" => array
+   (
+      "Name" => "Meus Certificados",
+      "Name_UK" => "My Certificates",
+   ),
 );

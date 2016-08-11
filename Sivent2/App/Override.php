@@ -158,4 +158,64 @@ class App_Override extends App_Handle
                "Visible" => 1,
             );
     }
+    //*
+    //* sub PostHandle, Parameter list: 
+    //*
+    //* Runs after modules has finished: prints event post ifno.
+    //*
+    //*
+
+    function MyApp_Interface_Post_Row()
+    {
+        $event=$this->CGI_GETint("Event");
+        if (empty($event)) { return ""; }
+        
+        chdir(dirname($_SERVER[ "SCRIPT_FILENAME" ]));
+       
+        $table=$this->ApplicationObj()->AppEventInfoPostTable();
+
+        $iconrow=array_shift($table);
+
+        $html="";
+        if (count($iconrow)==1)
+        {
+            $html=
+                $this->HtmlTags
+                (
+                   "TR",
+                   $this->HtmlTags("TD").
+                   $this->HtmlTags("TD",$iconrow[0][ "Text" ]).
+                   $this->HtmlTags("TD")
+                ).
+                "";
+        }
+        else
+        {
+            $html=
+                $this->HtmlTags
+                (
+                   "TR",
+                   $this->HtmlTags("TD",$iconrow[0][ "Text" ]).
+                   $this->HtmlTags("TD",$iconrow[1][ "Text" ]).
+                   $this->HtmlTags("TD",$iconrow[2][ "Text" ])
+                ).
+                "";
+        }
+
+        return 
+            $html.
+            $this->HtmlTags
+            (
+               "TR",
+               $this->HtmlTags("TD").
+               $this->HtmlTags
+               (
+                  "TD",
+                  $this->FrameIt($this->Html_Table("",$table))
+               ).
+               $this->HtmlTags("TD")
+             ).
+            "";
+    }
+
 }

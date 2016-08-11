@@ -37,6 +37,8 @@ class App_Handle extends App_Has
         {
             $this->EventsObj()->ShowEvents();
         }
+        
+        exit();
     }
 
    
@@ -56,8 +58,6 @@ class App_Handle extends App_Has
                $this->GetCoordinatorEvents()
             ).
             "";
-
-        exit();
     }
 
     //*
@@ -69,6 +69,9 @@ class App_Handle extends App_Has
     function HandleFriend()
     {
         $this->FriendsObj()->Friend_Events_Table();
+
+        echo
+            $this->CertificatesObj()->Certificates_Friend_Table_Html($this->LoginData());
     }
 
     //*

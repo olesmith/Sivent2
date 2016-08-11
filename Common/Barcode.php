@@ -435,8 +435,16 @@ class BarImage
     function Barcode_Image_Generate()
     {
         //expires in one year
-        $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + (365*24*60 *60)); 
-        $img=$this->BarCode_Code2File($_GET[ "Code" ]);
+        $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + (365*24*60 *60));
+
+        $code=preg_replace('/^[\d\.]*/',"",$_GET[ "Code" ]);
+
+        $img=$this->BarCode_Code2File($code);
+
+        if (!file_exists($img))
+        {
+            $this->Barcode_Image_Write($code,$this->BarCode_File(array("Code" => $code)));
+        }
         $imgdate=filemtime($img);
 
 

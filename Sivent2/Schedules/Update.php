@@ -10,12 +10,16 @@ class SchedulesUpdate extends SchedulesSpeaker
 
     function UpdateScheduleDate($date)
     {
-        foreach ($this->SchedulePlaces() as $place)
+         var_dump("here");
+       foreach ($this->SchedulePlaces() as $place)
         {
+         var_dump("here1");
             foreach ($this->DateTimes($date) as $id => $time)
             {
-                foreach ($this->ScheduleRooms($place) as $room)
+          var_dump("here2");
+               foreach ($this->ScheduleRooms($place) as $room)
                 {
+         var_dump("here3");
                     $this->UpdateScheduleEntry($date,$time,$place,$room);
                 }
             }
@@ -31,71 +35,89 @@ class SchedulesUpdate extends SchedulesSpeaker
     function UpdateScheduleEntry($date,$time,$place,$room)
     {
         $submissionid=$this->ScheduleCGIValue($date,$time,$room);
-        $where=array
-        (
-           "Time" => $room[ "ID" ],
-           "Room" => $time[ "ID" ],
-        );
-        $where=$this->UnitEventWhere($where);
-        $schedule=$this->Sql_Select_Hash($where);
 
-         if ($submissionid>0)
-        {
-            $where=
-                array
-                (
-                   "Unit" => $this->Unit("ID"),
-                   "Event" => $this->Event("ID"),
-                   "Submission" => $submissionid,
-                   "Time" => $time[ "ID" ],
-                );
-
-            $nsubmissions=$this->Sql_Select_NHashes($where);
-            if ($nsubmissions==0)
-            {
-                $where=
-                    array
-                    (
-                       "Unit" => $this->Unit("ID"),
-                       "Submission" => $submissionid,
-                       "Date" => $date[ "ID" ],
-                       "Time" => $time[ "ID" ],
-                       "Room" => $room[ "ID" ],
-                    );
-
-                 $schedule=$where;
-                 $schedule[ "Date" ]=$date[ "ID" ];
-                 $schedule[ "Place" ]=$place[ "ID" ];
-                 $schedule[ "Room" ]=$room[ "ID" ];
-                 $schedule[ "Submission" ]=$submissionid;
-             
-                 $this->Sql_Unique_Item_AddOrUpdate
-                 (
-                    $where,
-                    $schedule
-                 );
-            
-                 //$this->SetSchedule($schedule);
-            }
-            else { print "already $nsubmissions<BR>"; }
-            
-        }
-        elseif (!empty($schedule))
-        {
-            print "delete<BR>";
-            $this->Sql_Delete_Items
+        $where=
+            $this->UnitEventWhere
             (
                array
                (
-                  "Unit" => $this->Unit("ID"),
-                  "Event" => $this->Event("ID"),
                   "Time" => $time[ "ID" ],
                   "Room" => $room[ "ID" ],
                )
             );
 
-            //unset($this->Schedules[ $time[ "ID" ] ][ $room[ "ID" ] ]);
+        $schedule=$this->Sql_Select_Unique_Item($where,array(),TRUE);
+        
+        
+        $schedules=$this->Sql_Select_Hashes($where);
+
+        var_dump("here id ".$submissionid);
+        var_dump(count($schedules));
+
+       
+        if (count($schedules)>0)
+        {
+            $schedule=array_pop($schedules);
+            if (count($schedules)>1)
+            {
+                var_dump("non-unique items");
+                foreach ($schedules as $schedule)
+                {
+                    //$this->Sql_Delete_Item($schedule[ "ID" ]);
+                }
+            }
+
+            if ($schedule[ "Submission" ]==$submissionid)
+            {
+                var_dump("no change");
+            }
+            elseif ($submissionid==0)
+            {
+                $schedule[ "Submission" ]=$submissionid;
+                $this->Sql_Delete_Item($schedule[ "ID" ]);
+            }
+            elseif ($submissionid>0)
+            {
+                $schedule[ "Submission" ]=$submissionid;
+                $this->Sql_Update_Item_Values_Set(array("Submission"),$schedule);
+            }
+            
+                
+
+            //$nsubmissions=$this->Sql_Select_NHashes($where);
         }
+        elseif ($submissionid>0)
+        {
+            $schedule=
+                $this->UnitEventWhere
+                (
+                   array
+                   (
+                      "Time" => $time[ "ID" ],
+                      "Room" => $room[ "ID" ],
+                   )
+                );
+
+            $schedule[ "Submission" ]=$submissionid;
+            $this->Sql_Insert_Item($schedule);
+        }
+        
+        /* elseif (!empty($schedule)) */
+        /* { */
+        /*     print "delete<BR>"; */
+        /*     $this->Sql_Delete_Items */
+        /*     ( */
+        /*        array */
+        /*        ( */
+        /*           "Unit" => $this->Unit("ID"), */
+        /*           "Event" => $this->Event("ID"), */
+        /*           "Time" => $time[ "ID" ], */
+        /*           "Room" => $room[ "ID" ], */
+        /*        ) */
+        /*     ); */
+
+        /*     //unset($this->Schedules[ $time[ "ID" ] ][ $room[ "ID" ] ]); */
+        /* } */
     }
 }
 

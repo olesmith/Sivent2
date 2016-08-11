@@ -134,6 +134,7 @@ class App_Head_Table extends App_Events
     function AppEventInfoPostTable()
     {
         $event=$this->Event();
+
         $tabledata=
             array
             (

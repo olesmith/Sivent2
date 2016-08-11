@@ -103,7 +103,6 @@ class FriendsEvents extends FriendsCollaborations
                $table
             ).
             "";
-        exit();
     }
 }
 

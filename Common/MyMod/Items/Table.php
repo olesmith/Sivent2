@@ -11,7 +11,7 @@ trait MyMod_Items_Table
     {
         $table=array();
         $n=1;
-        foreach ($items as $item)
+        foreach ($items as $id => $item)
         {
             if (empty($item[ "No" ])){ $item[ "No" ]=$n; }
 
@@ -20,9 +20,7 @@ trait MyMod_Items_Table
                 $item[ "No" ]=sprintf($options[ "Format" ],$item[ "No" ]);
             }
 
-            $row=$this->MyMod_Items_Table_Row($edit,$n,$item,$datas);
-            
-            array_push($table,$row);
+            $table[ $id ]=$this->MyMod_Items_Table_Row($edit,$n,$item,$datas);;
 
             $n++;
         }

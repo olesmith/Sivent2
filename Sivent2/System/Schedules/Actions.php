@@ -114,4 +114,21 @@ array
         "NonGetVars" => array("Date","Time","Place","Room"),
         "AccessMethod"    => "Submission_PreInscriptions_Has",
       ),
+     "Presences" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Presences&Action=Register&Event=".$this->Event("ID")."&Schedule=#ID",
+        "Name"     => "Presenças",
+        "Name_UK"     => "Presences",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+
+        "NonGetVars" => array("Date","Time","Place","Room"),
+        //"AccessMethod"    => "Submission_PreInscriptions_Has",
+      ),
 );

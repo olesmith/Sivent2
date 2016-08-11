@@ -3,6 +3,20 @@
 trait MyHash
 {
     //*
+    //* function MyHash_2_Hash_Transfer, Parameter list: $src,&$dest,$datas
+    //*
+    //* If empty $list[ $key ], sets it to array().
+    //*
+
+    function MyHash_2_Hash_Transfer($src,&$dest,$datas)
+    {
+        foreach (array("Date","Time","Place","Room","Submission") as $data)
+        {
+            $dest[ $data ]=$src[ $data ];
+        }
+    }
+
+    //*
     //* function MyHash_Value_Save_Set, Parameter list: &$list,$key,$value=array()
     //*
     //* If empty $list[ $key ], sets it to array().

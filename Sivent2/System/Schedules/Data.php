@@ -18,7 +18,7 @@ array
       "Sql" => "INT",
       "SqlClass" => "Units",
       "Search" => FALSE,
-      "SqlDerivedData" => array("Name"),
+
       "GETSearchVarName"  => "Unit",
 
       "Public"   => 1,
@@ -39,7 +39,6 @@ array
       "Search" => FALSE,
       "Compulsory"  => TRUE,
 
-      "SqlDerivedData" => array("Name"),
       "GETSearchVarName"  => "Event",
       "Sql" => "INT",
       "Public"   => 1,
@@ -52,9 +51,7 @@ array
    "Name" => array
    (
       "Name" => "Horário",
-      "Title" => "Horário",
       "Name_UK" => "Time",
-      "Title_UK" => "Time",
 
       "Size" => "8",
       "Sql" => "VARCHAR(256)",
@@ -87,9 +84,7 @@ array
    "Time" => array
    (
       "Name" => "Horário",
-      "Title" => "Horário",
       "Name_UK" => "Time Slot",
-      "Title_UK" => "Time Slot",
 
       "GETSearchVarName"  => "Time",
       "Size" => "8",
@@ -107,9 +102,7 @@ array
    "Place" => array
    (
       "Name" => "Local",
-      "Title" => "Local",
       "Name_UK" => "Place",
-      "Title_UK" => "Place",
       
       "GETSearchVarName"  => "Place",
       "Size" => "8",
@@ -119,18 +112,16 @@ array
       "SqlClass" => "Places",
       "Public"   => 1,
       "Person"   => 0,
-      "Admin"    => 2,
+      "Admin"    => 1,
       "Friend" => 1,
-      "Coordinator" => 2,
+      "Coordinator" => 1,
       
       "Search"  => TRUE,
    ),
    "Room" => array
    (
       "Name" => "Sala",
-      "Title" => "Sala",
       "Name_UK" => "Room",
-      "Title_UK" => "Room",
       
       "GETSearchVarName"  => "Room",
       "Size" => "8",
@@ -148,10 +139,8 @@ array
    ),
    "Submission" => array
    (
-      "Name" => "Submissão",
-      "Title" => "Submission",
-      "Name_UK" => "Submissão",
-      "Title_UK" => "Submission",
+      "Name" => "Atividade",
+      "Name_UK" => "Atividade",
       
       "GETSearchVarName"  => "Submission",
       "Size" => "8",

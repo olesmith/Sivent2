@@ -82,7 +82,7 @@ array
       
       "Public"   => 1,
       "Person"   => 0,
-      "Friend"     => 0,
+      "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
       "Icon"    => "print_dark.png",

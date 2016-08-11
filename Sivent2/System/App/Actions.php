@@ -87,7 +87,7 @@ array
      "Submission" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Submissions&Action=Submission&Event=#Event&ID=#ID",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Details&Event=#Event&ID=#ID",
         "Title"    => "Detalhes da Atividade",
         "Title_UK" => "Submission Details",
         "Name"     => "Detalhes",

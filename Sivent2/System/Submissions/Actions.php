@@ -153,10 +153,10 @@ array
       "AccessMethod"    => "Event_Submissions_Has",
       "Handler"    => "Collaborators_Friend_Submissions_Handle",
    ),
-     "Submission" => array
+     "Details" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Submissions&Action=Submission&Event=#Event&ID=#ID",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Details&Event=#Event&ID=#ID",
         "Title"    => "Detalhes da Submissão",
         "Title_UK" => "Submission Details",
         "Name"     => "Detalhes",
@@ -168,7 +168,8 @@ array
         "Friend"   => 1,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "Handler"    => "MyMod_Handle_Submission",
+        "Singular"      => TRUE,
+        "Handler"    => "Submissions_Handle_Submission",
       ),
      "Assessments" => array
      (

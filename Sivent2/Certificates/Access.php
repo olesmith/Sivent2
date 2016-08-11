@@ -68,13 +68,20 @@ class Certificates_Access extends ModulesCommon
 
     function CheckGenerateAccess($item=array())
     {
-        if (empty($item)) { return TRUE; }
+       if (empty($item)) { return TRUE; }
 
         $res=FALSE;
         if (preg_match('/^(Public)$/',$this->Profile()))
         {
             $code=$this->Certificates_Validate_CGI2Code();
             if ($this->Certificates_Validate_NMatch()>0)
+            {
+                $res=TRUE;
+            }
+        }
+        elseif (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            if ($item[ "Friend" ]==$this->LoginData("ID"))
             {
                 $res=TRUE;
             }

@@ -118,7 +118,7 @@ class Friends extends FriendsHandle
     function PostProcessItemData()
     {
         parent::PostProcessItemData();
-    }
+   }
 
     //*
     //* function PostInit, Parameter list:
@@ -129,7 +129,7 @@ class Friends extends FriendsHandle
     function PostInit()
     {
         parent::PostInit();
-    }
+     }
 
     //*
     //* function PostProcess, Parameter list: $item

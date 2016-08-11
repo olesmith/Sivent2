@@ -53,6 +53,7 @@
           
           "Speakers",
           "PreInscriptions",
+          "Presences",
        ),
        "ModuleDependencies" => array
        (
@@ -86,10 +87,11 @@
           "Times" => array("Dates"),
           "Places" => array("Events"),
           "Rooms" => array("Places"),
-          "Schedules" => array("Dates","Times","Rooms"),
+          "Schedules" => array("Dates","Times","Rooms","Submissions"),
           
           "Speakers" => array("Friends","Submissions"),
           "PreInscriptions" => array("Friends","Inscriptions","Submissions"),
+          "Presences" => array("Friends","Schedules"),
        ),
        "SubModulesVars" => array
        (
@@ -532,6 +534,47 @@
          ),
 
          
+         "PreInscriptions" => array
+          (
+             "SqlAccessor" => "PreInscriptionsObj",
+             "SqlObject" => "PreInscriptionsObject",
+             "SqlClass" => "PreInscriptions",
+             "SqlFile" => "PreInscriptions.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_PreInscriptions",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Preinscrição",
+             "ItemsName"     => "Preinscrições",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Preinscription",
+             "ItemsName_UK"  => "Preinscriptions",
+             "ItemsNamer_UK" => "Name",
+         ),
+
+         
+         "Presences" => array
+          (
+             "SqlAccessor" => "PresencesObj",
+             "SqlObject" => "PresencesObject",
+             "SqlClass" => "Presences",
+             "SqlFile" => "Presences.php",
+             "SqlHref" => TRUE,
+             "SqlTable" => "#Unit__#Event_Presences",
+             "SqlFilter" => "#Name",
+             "SqlDerivedData" => array("Name"),
+
+             "ItemName"      => "Presença",
+             "ItemsName"     => "Presenças",
+             "ItemsNamer"    => "Name",
+
+             "ItemName_UK"   => "Presence",
+             "ItemsName_UK"  => "Presences",
+             "ItemsNamer_UK" => "Name",
+         ),
+         
          "Criterias" => array
           (
              "SqlAccessor" => "CriteriasObj",
@@ -543,12 +586,12 @@
              "SqlFilter" => "#Name",
              "SqlDerivedData" => array("Name"),
 
-             "ItemName"      => "Critério",
-             "ItemsName"     => "Critérios",
+             "ItemName"      => "Avaliador",
+             "ItemsName"     => "Avaliadores",
              "ItemsNamer"    => "Name",
 
-             "ItemName_UK"   => "Criteria",
-             "ItemsName_UK"  => "Criterias",
+             "ItemName_UK"   => "Assessor",
+             "ItemsName_UK"  => "Assessors",
              "ItemsNamer_UK" => "Name",
          ),
          "Assessors" => array

@@ -62,8 +62,11 @@ class Certificates_Code extends Certificates_Mail
         
         $item[ "Type" ]=intval(array_shift($comps));
         $typekey=$this->Type2Key($item);
-        $item[ $typekey ]=$item[ "ID" ];
-        unset($item[ "ID" ]);
+        if (!empty($typekey))
+        {
+            $item[ $typekey ]=$item[ "ID" ];
+            unset($item[ "ID" ]);
+        }
                 
         return $item;
     }
@@ -78,6 +81,7 @@ class Certificates_Code extends Certificates_Mail
     {
         if (empty($code)) { $code=$this->CGI_GET("Code"); }
 
+        $code=preg_replace('/[^\d\.]/',"",$code);
         $codes=preg_split('/\./',$code);
 
         $where=array();

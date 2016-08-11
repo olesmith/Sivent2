@@ -74,7 +74,7 @@ class MyEventAppMenues extends MyEventAppAccess
                 
         }
 
-        return $menu;
+        return preg_replace('/#Unit/',$unit[ "ID" ],$menu);
     }
     
     //*

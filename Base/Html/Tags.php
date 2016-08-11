@@ -39,13 +39,13 @@ class HtmlTags extends HtmlCSS
     }
 
     //*
-    //* sub HtmlTags, Parameter list: $tag,$contents,$options=array()
+    //* sub HtmlTags, Parameter list: $tag,$contents="",$options=array()
     //*
     //* Returns matching html tags <$tag>$contents</$tag>
     //*
     //*
 
-    function HtmlTags($tag,$contents,$options=array())
+    function HtmlTags($tag,$contents="",$options=array())
     {
         $tag=strtoupper($tag);
         if (is_array($contents)) { $contents="\n".join("\n",$contents); }

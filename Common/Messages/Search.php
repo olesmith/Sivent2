@@ -1,5 +1,10 @@
 array
 (
+   "Printable_Version" => array
+   (
+      "Name" => "Versão Imprimível",
+      "Name_UK" => "Printable Version",
+    ),
    "IncludeAll_Inactive_Message" => array
    (
       "Name" => "Pesquisa Ativa",

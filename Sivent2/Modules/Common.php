@@ -399,25 +399,6 @@ class ModulesCommon extends EventMod
     }
 
 
-    //*
-    //* sub PostHandle, Parameter list: 
-    //*
-    //* Runs after modules has finished: prints event post ifno.
-    //*
-    //*
-
-    function PostHandle()
-    {
-        echo
-            $this->BR().$this->BR().
-            $this->Html_Table
-            (
-               "",
-               $this->ApplicationObj()->AppEventInfoPostTable()
-            ).
-            "";
-    }
-
 }
 
 ?>

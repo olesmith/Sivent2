@@ -463,12 +463,26 @@ function LatexMakeRow($row,$count=0)
 
 function LatexHeadRow($row,$count=0)
 {
-  if ($count==0) { $count=count($row); }
-  for ($n=0;$n<count($row);$n++)
-  {
-    $row[$n]="\\textbf{".$row[$n]."}";
-  }
-  $tex=$this->LatexMakeRow($row,$count);
+    if (is_array($row[0]))
+    {
+        //Multiple header rows.
+        $tex="";
+        foreach ($row as $rrow)
+        {
+            $tex.=$this->LatexHeadRow($rrow,$count);
+        }
+
+        return $tex;
+    }
+    
+    if ($count==0) { $count=count($row); }
+    
+    for ($n=0;$n<count($row);$n++)
+    {
+        $row[$n]="\\textbf{".$row[$n]."}";
+    }
+    
+    $tex=$this->LatexMakeRow($row,$count);
 
   return $tex;
 }
@@ -512,7 +526,14 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
     $count=0;
     if (is_array($titles) && count($titles)>0)
     {  
-        $count=count($titles);
+        if (is_array($titles[0]))
+        {
+            $count=count($titles[0]);
+        }
+        else
+        {
+            $count=count($titles);
+        }
     }
     else
     {
