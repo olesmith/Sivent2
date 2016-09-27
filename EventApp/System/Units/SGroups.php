@@ -6,8 +6,9 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Status","Initials","Name","Title",
-         "DefaultSemester",
+         "Status","Online",
+         "Initials","Name","Title",
+         "Sivent2URL",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -45,7 +46,6 @@ array
       "Data" => array
       (
          "HtmlIcon1","HtmlIcon2","LatexIcon1","LatexIcon2"
-         
       ),
       "Admin" => 1,
       "Person" => 0,

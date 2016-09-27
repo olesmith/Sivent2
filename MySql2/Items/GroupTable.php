@@ -28,7 +28,6 @@ class ItemsGroupTable extends ItemsTable
 
         $datas=$this->GetGroupDatas($group);
 
-
         if (!empty($this->ItemDataGroups[ $group ][ "GenTableMethod" ]))
         {
             $method=$this->ItemDataGroups[ $group ][ "GenTableMethod" ];
@@ -77,6 +76,11 @@ class ItemsGroupTable extends ItemsTable
            )
         {
             $titles=array();
+        }
+        
+        if (!empty($this->ItemDataGroups[ $group ][ "SumVars" ]))
+        {
+            $this->SumVars=array("");
         }
 
         return $this->ItemsTable($title,$edit,$datas,$items,$countdef,$titles,TRUE,$cgiupdatevar);
@@ -132,7 +136,7 @@ class ItemsGroupTable extends ItemsTable
     //* Generates html table for $where conforming items.
     //*
 
-    function ItemGroupHtmlTable($title,$where,$sort="Name")
+    function ItemGroupHtmlTable_20160908($title,$where,$sort="Name")
     {
         $items=$this->SelectHashesFromTable
         (

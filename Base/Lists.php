@@ -312,39 +312,5 @@ class Lists extends SqlQuery
 
         return $table;
     }
-
-
-    //*
-    //* function SortListByKey, Parameter list: $list,$key
-    //*
-    //* Returns list sorted by $key.
-    //*
-
-    function SortListByKey($list,$key)
-    {
-        $rlist=array();
-        foreach (array_keys($list) as $id)
-        {
-            $value=$list[ $id ][ $key ];
-
-            $value=$this->Html2Sort($value);
-            $value=strtolower($value);
-            while (isset($rlist[ $value ])) { $value.="0"; }
-
-            $rlist[ $value ]=$list[ $id ];
-        }
-
-        $values=array_keys($rlist);
-        sort($values);
-
-        $list=array();
-        foreach ($values as $value)
-        {
-            array_push($list,$rlist[ $value ]);
-        }
-         
-        return $list;
-    }
-
 }
 ?>

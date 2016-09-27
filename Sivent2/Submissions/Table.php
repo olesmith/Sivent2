@@ -1,6 +1,5 @@
 <?php
 
-//include_once("Table/Update.php");
 
 
 class SubmissionsTable extends SubmissionsAccess
@@ -57,7 +56,7 @@ class SubmissionsTable extends SubmissionsAccess
 
     function Submissions_Table_Sort($submissions)
     {
-        return $this->SortList($submissions,array("Title"));
+        return $this->MyMod_Sort_List($submissions,array("Title"));
     }
     
     //*
@@ -109,7 +108,17 @@ class SubmissionsTable extends SubmissionsAccess
         $table=array();
         foreach ($submissions as $id => $submission)
         {
-            array_push($table,$this->Submissions_Table_Row($edit,$inscription,$n++,$submission,$datas));
+            array_push
+            (
+               $table,
+               $this->Submissions_Table_Row($edit,$inscription,$n++,$submission,$datas)
+            );
+        }
+
+        if ($edit==1 && count($table)>0)
+        {
+            //array_unshift($table,$this->Buttons());
+            array_push($table,$this->Buttons());
         }
         
         return $table;
@@ -141,7 +150,12 @@ class SubmissionsTable extends SubmissionsAccess
     function Submissions_Table_Show($edit,&$inscription)
     {
         $this->Actions("Show");
-        $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $inscription[ "Friend" ],array("Name","Email")));
+        $friend=
+            $this->FriendsObj()->Sql_Select_Hash
+            (
+               array("ID" => $inscription[ "Friend" ]),
+               array("Name","Email")
+            );
 
         $startform="";
         $endform="";
@@ -149,21 +163,23 @@ class SubmissionsTable extends SubmissionsAccess
         {
             $startform=
                 $this->StartForm().
-                $this->Buttons().
                 "";
             $endform =
                 $this->MakeHidden("Update",1).
-                $this->Buttons().
                 $this->EndForm().
                 "";
         }
 
-        $action=$this->MyActions_Entry("Add",array(),TRUE);
-        if (!empty($action))
+        $action="";
+        if ($this->EventsObj()->Event_Submissions_Inscriptions_Open())
         {
-            $action=$this->Html_BR().$this->Html_BR().$action;
+            $action=$this->MyActions_Entry("Add",array(),TRUE);
+            if (!empty($action))
+            {
+                $action=$this->Center($action);
+            }
         }
-        
+
         return
             $this->H
             (
@@ -177,10 +193,11 @@ class SubmissionsTable extends SubmissionsAccess
                5,
                $this->MyLanguage_GetMessage("Inscription_Period").
                ": ".
-               $this->EventsObj()->Event_Collaborations_Inscriptions_DateSpan().
+               $this->EventsObj()->Event_Submissions_Inscriptions_DateSpan().
                ". ".
-               $this->EventsObj()->Event_Collaborations_Inscriptions_Status()
+               $this->EventsObj()->Event_Submissions_Inscriptions_Status()
             ).
+            $action.
             $startform.
             $this->Submissions_Table_Html($edit,$inscription).
             $endform.

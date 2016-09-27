@@ -10,6 +10,19 @@ class CollaboratorsAccess extends ModulesCommon
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $item=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess()
+    {
+        $res=$this->CollaborationsObj()->HasModuleAccess();
+
+        return $res;
+    }
+
+    //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be viewed. Admin may -
@@ -20,8 +33,24 @@ class CollaboratorsAccess extends ModulesCommon
     function CheckShowAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
-        $res=$this->Current_User_Event_Coordinator_Is();
+        
+        $res=$this->HasModuleAccess();
        
+        return $res;
+    }
+
+    //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //* Activated in System::Friends::Profiles.
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
+
         return $res;
     }
 
@@ -37,12 +66,27 @@ class CollaboratorsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=$this->HasModuleAccess();
        
         return $res;
     }
     
+     //*
+    //* function CheckEditAccess, Parameter list: $item=array()
     //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //* Activated in  System::Friends::Profiles.
+    //*
+
+    function CheckEditListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
+
+        return $res;
+    }
+    
+   //*
     //* function CheckDeleteAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be deleted.

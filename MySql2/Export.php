@@ -363,7 +363,7 @@ class Export extends Import
         }
 
         $sortreverse=$fields[ "Reverse"];
-        $this->SortItems($sort,$sortreverse);
+        $this->MyMod_Sort_Items($sort,$sortreverse);
 
 
         $format="%d";

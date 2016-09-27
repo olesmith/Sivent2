@@ -46,17 +46,17 @@ class Sivent2 extends App_Override
     );
 
     
-    var $AppProfiles=array
-    (
-       //Order in Profiles menu
-       "Sivent2" => array
-       (
-          "Public",
-          "Coordinator",
-          "Friend",
-          "Admin",
-       ),
-    );
+    /* var $AppProfiles=array */
+    /* ( */
+    /*    //Order in Profiles menu */
+    /*    "Sivent2" => array */
+    /*    ( */
+    /*       "Public", */
+    /*       "Coordinator", */
+    /*       "Friend", */
+    /*       "Admin", */
+    /*    ), */
+    /* ); */
     
     var $UserProfiles=array
     (
@@ -87,16 +87,13 @@ class Sivent2 extends App_Override
         $event=$this->CGI_GETint("Event");
         if (!empty($event))
         {
-            //var_dump("1".$this->URL_CommonArgs);
             $args=$this->Query2Hash($this->URL_CommonArgs);           
-            //var_dump($args);
-           $args[ "Event" ]=$event;
+            $args[ "Event" ]=$event;
 
            $add="Event=".$event;
            if (!empty($this->URL_CommonArgs)) { $add="&".$add; }
            
            $this->URL_CommonArgs.=$add;
-           //var_dump("1".$this->URL_CommonArgs);
         }
    }
     
@@ -152,8 +149,8 @@ $application=new Sivent2
       "ValidProfiles" => array
       (
           "Public",
-          "Coordinator",
           "Friend",
+          "Coordinator",
           "Admin",
       ),
       "CGIVars" => "Sivent2_CGIVars_Get",

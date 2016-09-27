@@ -8,6 +8,7 @@ array
          "Title_UK" => "Start",
          "Name"     => "Início",
          "Name_UK"   => "Start",
+         "URLMethod"  => "GenStartURL",
  
          "Public"   => 1,
          "Person"   => 1,
@@ -107,10 +108,12 @@ array
          "Coordinator" => 1,
          "Assessor"  => 1,
          "Distributor" => 1,
-         "AccessMethod" => "CheckShowAccess",
+         "NoLogging" => TRUE,
+         //"AccessMethod" => "CheckShowAccess",
       ),
       'Zip' => array
       (
+         "HrefArgs" => "?Unit=#ID&ModuleName=Units&Action=Zip",
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
@@ -118,6 +121,7 @@ array
          "Coordinator" => 0,
          "Distributor" => 0,
          "Assessor"  => 0,
+         "AccessMethod" => "CheckEditAccess",
       ),
       'MyUnit' => array
       (

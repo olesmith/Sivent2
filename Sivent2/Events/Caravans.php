@@ -3,6 +3,32 @@
 class EventsCaravans extends EventsCollaborations
 {
     //*
+    //* function Event_Caravans_Dates_Take, Parameter list: &$item
+    //*
+    //* Returns Caravans_Min or default.
+    //*
+
+    function Event_Caravans_Dates_Take(&$item)
+    {
+        $this->Sql_Select_Hash_Datas_Read($item,array("Caravans","Caravans_StartDate","Caravans_EndDate"));
+        
+        $updatedatas=array();
+        if ($item[ "Caravans" ]==2)
+        {
+            $today=$this->MyTime_2Sort();
+            foreach (array("StartDate","EndDate") as $key)
+            {
+                if (empty($item[ "Caravans_".$key ]))
+                {
+                    $item[ "Caravans_".$key ]=$today;
+                }
+            }
+        }
+
+        return $updatedatas;
+    }
+
+    //*
     //* function Event_Caravans_Min, Parameter list: $item=array()
     //*
     //* Returns Caravans_Min or default.

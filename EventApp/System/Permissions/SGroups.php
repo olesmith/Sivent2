@@ -7,7 +7,7 @@ array
 
       "Data" => array
       (
-         "Unit","Event","User",
+         "Event","Type","User",
          "Comment","CTime","MTime",
       ),
       "Admin" => 1,

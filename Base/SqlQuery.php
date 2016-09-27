@@ -46,8 +46,7 @@ class SqlQuery extends SqlMessages
         {
             if (preg_match('/^_/',$arg))
             {
-                var_dump($arg);
-                array_push($ands,$value);
+                 array_push($ands,$value);
             }
             elseif (is_array($value))
             {

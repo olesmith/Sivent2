@@ -208,40 +208,46 @@ class SchedulesTimes extends SchedulesAccess
             array_merge
             (
                array($this->GetRealNameKey($this->ItemData[ "Time" ])),
-               $this->RoomsObj()->RoomTitleCells($rooms,$date),
-               array("")
+               $this->RoomsObj()->RoomTitleCells($rooms,$date)//,
+               //array("")
             );
                 
     }
 
 
-    //*
-    //* function TimesRoomsTopology, Parameter list: $edit,$times,$rooms
-    //*
-    //* Initializes topology. If we are NOT editing, performs 'shrinking on rows.
-    //*
+    /* //\* */
+    /* //\* function TimesRoomsTopology, Parameter list: $edit,$times,$rooms */
+    /* //\* */
+    /* //\* Initializes topology. If we are NOT editing, performs 'shrinking on rows. */
+    /* //\* */
 
-    function TimesRoomsTopology($edit,$times,$rooms)
-    {
-        $this->TimesRoomsInitTopology($times,$rooms);
-        if ($edit==0)
-        {
-            $this->TimesRoomsEditTopology($times,$rooms);
-        }
-    }    
+    /* function TimesRoomsTopology($edit,$times,$rooms) */
+    /* { */
+    /*     $this->TimesRoomsInitTopology($times,$rooms); */
+    /*     if ($edit==0) */
+    /*     { */
+    /*         $this->TimesRoomsEditTopology($times,$rooms); */
+    /*     } */
+    /* }     */
     
     //*
-    //* function TimesRoomsInitTopology, Parameter list: $times,$rooms
+    //* function TimesRoomsInitTopology, Parameter list: $date,$times,$rooms
     //*
     //* Returns initial times/rooms topology.
     //*
 
-    function TimesRoomsInitTopology($times,$rooms)
+    function TimesRoomsInitTopology($date,$times,$rooms)
     {
         $this->Topology=array();
         foreach ($times as $id => $time)
         {
             $timeid=$time[ "ID" ];
+
+            if ($time[ "Type" ]==2)
+            {
+                $this->Topology[ $timeid ]=array();
+                continue;
+            }
             
             $row=array();
             foreach ($rooms as $room)
@@ -273,20 +279,27 @@ class SchedulesTimes extends SchedulesAccess
     //* .
     //*
 
-    function TimesRoomsEditTopology($times,$rooms)
+    function TimesRoomsEditTopology($times,&$rooms)
     {
+        $rrooms=array();
         foreach ($rooms as $room)
         {
             $roomid=$room[ "ID" ];
             
             $lasttimeid=0;
             $submission=0;
+            $nroomentries=0;
             foreach (array_keys($this->Topology) as $timeid)
             {
+                if (empty($this->Topology[ $timeid ][ $roomid ])) { $lasttimeid=0; $submission=0; continue; }
+                
                 if ($submission>0 && $this->Topology[ $timeid ][ $roomid ][ "ID" ]==$submission)
                 {
-                    unset($this->Topology[ $timeid ][ $roomid ]);
+                    if (!$this->ApplicationObj()->LatexMode) { unset($this->Topology[ $timeid ][ $roomid ]); }
+                    else                                     { $this->Topology[ $timeid ][ $roomid ]=""; }
+                    
                     $this->Topology[ $lasttimeid ][ $roomid ][ "Count" ]++;
+                    $nroomentries++;
                 }
                 else
                 {
@@ -294,7 +307,14 @@ class SchedulesTimes extends SchedulesAccess
                     $lasttimeid=$timeid;
                 }
             }
+
+            if ($nroomentries>0)
+            {
+                array_push($rrooms,$room);
+            }
         }
+        
+        $rooms=$rrooms;
     }
     
     //*
@@ -306,19 +326,37 @@ class SchedulesTimes extends SchedulesAccess
     function TimesRoomsTopologyCells($edit,$date,$time,$place,$rooms)
     {
         $timeid=$time[ "ID" ];
+        $title=$this->B($this->TimesObj()->TimeTitleCell($time,$date));
         
-        $row=array($this->B($this->TimesObj()->TimeTitleCell($time,$date)));
+        if ($time[ "Type" ]==2)
+        {
+            //No array? Latex
+            return
+                array
+                (
+                   $title,
+                   $this->MultiCell($this->TimesScheduleRooomsCommonField($date,$time),count($rooms))
+                );
+        }
+        
+        $row=array($title);
         
         foreach ($rooms as $room)
         {
             $roomid=$room[ "ID" ];
-            if (!empty($this->Topology[ $timeid ][ $roomid ]))
+            if (isset($this->Topology[ $timeid ][ $roomid ]))
             {
-                array_push($row,$this->TimesRoomsTopologyCell($edit,$date,$time,$place,$room));
+                $cell="";
+                if (!empty($this->Topology[ $timeid ][ $roomid ]))
+                {
+                    $cell=$this->TimesRoomsTopologyCell($edit,$date,$time,$place,$room);
+                }
+                
+                array_push($row,$cell);
             }
         }
         
-        array_push($row,"");
+        //latex array_push($row,"");
 
         return $row;
      }
@@ -339,7 +377,12 @@ class SchedulesTimes extends SchedulesAccess
         if ($this->Topology[ $timeid ][ $roomid ][ "Count" ]>1)
         {
             $nrows=$this->Topology[ $timeid ][ $roomid ][ "Count" ];
-            $options=array("ROWSPAN" => $nrows);
+            $options=
+                array
+                (
+                   "ROWSPAN" => $nrows
+                );
+            
             if (is_array($cell))
             {
                 foreach ($cell[ "Options" ] as $option => $value)

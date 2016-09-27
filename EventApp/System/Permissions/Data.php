@@ -49,6 +49,49 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
     ),
+   "Type" => array
+   (
+      "Name" => "Tipo",
+      "Name_UK" => "Type",
+      "Title" => "Tipo de Coordenador",
+      "Title_UK" => "Coordinator Type",
+      "EmptyName" => "Todos",
+      "EmptyName_UK" => "All",
+      
+      "Values" => array
+      (
+         "Evento",
+         "Inscrições",
+         "Colaborações",
+         "Caravanas",
+         "Submissõess",
+         "PreInscrições",
+         "Presenças",         
+      ),
+      "Values_UK" => array
+      (
+         "Event",
+         "Inscriptions",
+         "Collaborations",
+         "Caravans",
+         "Submissions",
+         "PreInscriptions",
+         "Presences",         
+      ),
+      
+      "Default" => "0 ",
+      
+      "NoSelectSort" => TRUE,
+      "Search" => TRUE,
+      "Compulsory"  => FALSE,
+
+      "Sql" => "ENUM",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+    ),
    "User" => array
    (
       "Name" => "Usuário",

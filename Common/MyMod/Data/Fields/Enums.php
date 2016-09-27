@@ -30,9 +30,10 @@ trait MyMod_Data_Fields_Enums
         $value="";        
         if (!isset($item[ $data ]))
         {
-            if (!empty($this->ItemData[ $data ][ "EmptyName" ]))
+            $empty=$this->GetEnumEmptyName($data);;
+            if (!empty($empty))
             {
-                $value=$this->ItemData[ $data ][ "EmptyName" ];
+                $value=$empty;
             }
 
             return $value;
@@ -76,11 +77,12 @@ trait MyMod_Data_Fields_Enums
                 $value=$item[ $data ];
             }
 
-            if (!empty($this->ItemData[ $data ][ "EmptyName" ]))
+            $empty=$this->GetEnumEmptyName($data);
+            if (!empty($empty))
             {
                 if (empty($value))
                 {
-                    $value=$this->ItemData[ $data ][ "EmptyName" ];
+                    $value=$empty;
                 }
             } 
         }

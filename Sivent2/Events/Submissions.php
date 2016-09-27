@@ -71,6 +71,7 @@ class EventsSubmissions extends EventsPayments
         if (empty($item)) { return FALSE; }
 
         $res=$this->Event_Submissions_Inscriptions_Has($item);
+
         if ($res)
         {
             $today=$this->MyTime_2Sort();

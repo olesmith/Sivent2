@@ -23,7 +23,7 @@ array
 
       "Public"   => 1,
       "Person"   => 0,
-      "Admin"    => 2,
+      "Admin"    => 1,
       "Friend" => 1,
       "Coordinator" => 1,
       
@@ -154,7 +154,6 @@ array
       "Compulsory" => 1,
       "Search" => FALSE,
       "Compulsory"  => TRUE,
-      "IsDate"  => TRUE,
    ),
    "StartDate" => array
    (

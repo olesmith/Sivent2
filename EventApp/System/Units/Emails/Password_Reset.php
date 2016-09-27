@@ -1,8 +1,10 @@
 array
 (
    "Name" => "Email de Alteração de Senha",
+   "Name_ES" => "Email de Alteración de Contraseña",
    "Name_UK" => "Change Password Mail",
    "Title" => "Email de Confirmação",
+   "Title_ES" => "Email de Alteración de Contraseña",
    "Title_UK" => "Confirmation Email",
    
    "Data" => array("Subject","Body"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Recuperação de Senha, #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Recuperación de Contraseña, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Recover Password, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
        "Recebemos uma solicitação de recuperar a senha do login (email) #Email. ".

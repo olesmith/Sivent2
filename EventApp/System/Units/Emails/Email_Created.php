@@ -1,8 +1,10 @@
 array
 (
    "Name" => "Cadastro de Usuário Efetuado",
+   "Name_ES" => "Registro del Usuário Efetuado",
    "Name_UK" => "Informing User Registration",
    "Title" => "Cadastro de Usuário Efetuado",
+   "Title_ES" => "Registro del Usuário Efetuado",
    "Title_UK" => "Informing User Registration",
    
    "Data" => array("Subject","Body"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Cadastro de Usário Efetuada, #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Registro del Usário Efetuada, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Informing User Registration, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
       "Enviamos este email, para confirmar seu cadastro do #ApplicationName, #Unit_Name, #Unit_Title.\n\n".

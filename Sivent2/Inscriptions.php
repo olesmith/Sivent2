@@ -6,6 +6,7 @@ include_once("../EventApp/MyInscriptions.php");
 
 include_once("Inscriptions/Access.php");
 include_once("Inscriptions/Read.php");
+include_once("Inscriptions/Cells.php");
 include_once("Inscriptions/Tables.php");
 include_once("Inscriptions/Inscribe.php");
 include_once("Inscriptions/Update.php");
@@ -58,6 +59,10 @@ class Inscriptions extends InscriptionsHandle
                "Curriculum","Friend_Data_Edit_Link"
             );
         $this->IncludeAllDefault=TRUE;
+
+        $this->CellMethods[ "Inscription_Collaborators_Noof_Cell" ]=TRUE;
+        $this->CellMethods[ "Inscription_Caravaneers_Noof_Cell" ]=TRUE;
+        $this->CellMethods[ "Inscription_Submissions_Noof_Cell" ]=TRUE;
     }
 
 
@@ -209,6 +214,8 @@ class Inscriptions extends InscriptionsHandle
     function PostProcessItemData()
     {
         parent::PostProcessItemData();
+
+        $this->Coordinator_Type=2;
     }
 
     //*
@@ -392,60 +399,6 @@ class Inscriptions extends InscriptionsHandle
 
     
     //*
-    //* function Inscription_Collaborators_Noof_Cell, Parameter list: $inscription=array()
-    //*
-    //* Returns number of collaborators registered for $inscription.
-    //*
-
-    function Inscription_Collaborators_Noof_Cell($inscription=array())
-    {
-        if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Collaborators_Cell_Noof_Title"); }
-        
-        $ninscribed=$this->CollaboratorsObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ]));
-
-        if (empty($ninscribed)) { $ninscribed="-"; }
-        
-        return $ninscribed;
-        
-    }
-    
-    //*
-    //* function Inscription_Caravaneers_Noof_Cell, Parameter list: $inscription=array()
-    //*
-    //* Returns number of Caravaneers registered for $inscription.
-    //*
-
-    function Inscription_Caravaneers_Noof_Cell($inscription=array())
-    {
-        if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Caravaneers_Cell_Noof_Title"); }
-        
-        $ninscribed=$this->CaravaneersObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ],"Status" => 1));
-
-        if (empty($ninscribed)) { $ninscribed="-"; }
-        
-        return $ninscribed;
-        
-    }
-    
-    //*
-    //* function Inscription_Submissions_Noof_Cell, Parameter list: $inscription=array()
-    //*
-    //* Returns number of Submissions registered for $inscription.
-    //*
-
-    function Inscription_Submissions_Noof_Cell($inscription=array())
-    {
-        if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Submissions_Cell_Noof_Title"); }
-        
-        $ninscribed=$this->SubmissionsObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ]));
-
-        if (empty($ninscribed)) { $ninscribed="-"; }
-        
-        return $ninscribed;
-        
-    }
-    
-    //*
     //* function InitPrint, Parameter list: $item
     //*
     //* Does some casing before printing.
@@ -457,8 +410,6 @@ class Inscriptions extends InscriptionsHandle
 
         return $item;
     }
-    
-    
-  }
+}
 
 ?>

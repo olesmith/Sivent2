@@ -29,7 +29,7 @@ class EventMod extends DBDataObj
         {
             $this->Actions[ $action ][ "AccessMethod" ]=$method;
         }
-   }
+    }
 
     //*
     //* function Current_User_Admin_Is, Parameter list: 
@@ -39,14 +39,8 @@ class EventMod extends DBDataObj
 
     function Current_User_Admin_Is()
     {
-        $res=FALSE;
-        if (preg_match('/^(Admin)$/',$this->Profile()))
-        {
-            $res=TRUE;
-        }
-
-        return $res;
-     }
+        return $this->ApplicationObj()->Current_User_Admin_Is();
+    }
 
     //*
     //* function Current_User_Coordinator_Is, Parameter list: 
@@ -56,16 +50,7 @@ class EventMod extends DBDataObj
 
     function Current_User_Coordinator_Is()
     {
-        $res=FALSE;
-        if (preg_match('/^(Coordinator)$/',$this->Profile()))
-        {
-            if ($this->LoginData("Unit")==$this->Unit("ID"))
-            {
-                $res=TRUE;
-            }
-        }
-
-        return $res;
+        return $this->ApplicationObj()->Current_User_Coordinator_Is();
     }
 
     //*
@@ -96,29 +81,18 @@ class EventMod extends DBDataObj
 
     function Current_User_Event_Coordinator_Is($event=array(),$unit=array())
     {
-        if (empty($unit)) { $unit=$this->Unit("ID"); }
-        if (is_array($unit)) { $unit=$unit[ "ID" ]; }
-        
-        if (empty($event)) { $event=$this->Event("ID"); }
-        if (is_array($event)) { $event=$event[ "ID" ]; }
-        
-        $res=$this->Current_User_Admin_Is();
-        if ($this->Current_User_Coordinator_Is() && !$res)
-        {
-            $events=
-                $this->PermissionsObj()->Sql_Select_Unique_Col_Values
-                (
-                   "Event",
-                   array
-                   (
-                      "User" => $this->LoginData("ID"),
-                   )
-                );
+        return $this->ApplicationObj()->Current_User_Event_Coordinator_Is($event,$unit);
+    }
+    
+    //*
+    //* function Event_Inscriptions_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
 
-            if (preg_grep('/^(0|'.$event.')$/',$events)) { $res=TRUE; }
-        }
-
-        return $res;
+    function Event_Inscriptions_DateSpan($event=array())
+    {
+        return $this->EventsObj()->Event_Inscriptions_DateSpan($event);
     }
 }
 

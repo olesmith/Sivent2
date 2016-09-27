@@ -1,304 +1,131 @@
 array
 (
-      "00_Register" => array
-      (
-         'Title' => 'Registrar-se:',
-         'Title_UK' => 'Register:',
-
-         'Public'   => 1,
-         'Person'   => 0,
-         "Admin"    => 0,
-         "Friend"     => 0,
-         "Coordinator" => 0,
-         "Assessor"  => 0,
-         '00_Register' => array
-         (
-            'Name' => 'Cadastrar-se',
-            'Name_UK' => 'Register',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Register',
-            'Public'   => 1,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-         '10_ResendConfirm' => array
-         (
-            'Name' => 'Reenviar Código de Confirmação',
-            'Name_UK' => 'Resend Confirm Code',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=ResendConfirm',
-            'Public  ' => 1,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-         '20_Confirm' => array
-         (
-            'Name' => 'Confirmar Cadastro',
-            'Name_UK' => 'Confirm Registration',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Confirm',
-            'Public'   => 1,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-         '25_ResendConfirm' => array
-         (
-            'Name' => 'Reenviar Cod. de Cadastro',
-            'Name_UK' => 'Resend Confirm Code',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=ResendConfirm',
-            'Public'   => 1,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-         '30_Recover' => array
-         (
-            'Name' => 'Recuperar Senha',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Recover',
-            'Public'   => 1,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-       ),
-
-
-
-       "00_Personal" => array
-       (
-         'Title' => 'Pessoal:',
-         'Title_UK' => 'Personal:',
-
-         'Public'   => 1,
-         'Person'   => 1,
-         "Admin"    => 1,
-         "Friend"     => 1,
-         "Coordinator" => 1,
-         "Assessor"  => 1,
-         '00_Top' => array
-         (
-            'Name' => 'Início',
-            'Name_UK' => 'Start',
-            'Title' => 'Voltar ao Início',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Start',
-
-            'Public'   => 1,
-            'Person'   => 0,
-            'Admin'    => 1,
-            "Friend"     => 1,
-            "Coordinator" => 1,
-            "Assessor"  => 0,
-         ),
-         '40_Logon' => array
-         (
-            'Name' => 'Efetuar Login',
-            'Name_UK' => 'Logon',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Logon',
-            'Public' => 1,
-            'Person' => 0,
-            'Admin' => 0,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-          ),
-         '50_Logoff' => array
-         (
-            'Name' => 'Sair',
-            'Title' => 'Efetuar Logoff (Sair) do Sistema',
-            'Name_UK' => 'Logoff',
-            'Title_UK' => 'Logoff from the Sistema',
-
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=Logoff',
-            "SiPE" => 1,
-            "SiDS" => 0,
-            'Public'      => 0,
-            'Person'      => 1,
-            'Admin'       => 1,
-            "Friend"     => 1,
-            "Coordinator" => 1,
-            "Assessor"  => 1,
-         ),
-         '60_NewPassword' => array
-         (
-            'Name' => 'Alterar Senha',
-            'Title' => 'Alterar minha Senha',
-            'Name_UK' => 'Change Password',
-            'Title_UK' => 'Change my Password',
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=NewPassword',
-            'Public'   => 0,
-            'Person'   => 0,
-            'Admin'    => 1,
-            "Friend"     => 1,
-            "Coordinator" => 1,
-            "Assessor"  => 1,
-         ),
-         /* '65_NewLogin' => array */
-         /* ( */
-         /*    'Name' => 'Alterar Email (Login)', */
-         /*    'Title' => 'Alterar meu Email', */
-         /*    'Name_UK' => 'Change Email (Login)', */
-         /*    'Title_UK' => 'Change my Email Email', */
-
-         /*    'Href' => '?Unit='.$this->Unit("ID").'&Action=NewLogin', */
-         /*    'Public'   => 0, */
-         /*    'Person'   => 0, */
-         /*    'Admin'    => 1, */
-         /*    "Friend"     => 1, */
-         /*    "Coordinator" => 1, */
-         /*    "Assessor"  => 1, */
-         /* ), */
-         '70_SU' => array
-         (
-            'Name' => 'Trocar Usuário',
-            'Title' => 'Virar para outro Usuário',
-            'Name_UK' => 'Shift User',
-            'Title_UK' => 'Switch to Another User',
-
-            'Href' => '?Unit='.$this->Unit("ID").'&Action=SU',
-            'Public'   => 0,
-            'Person'   => 0,
-            'Admin'    => 1,
-            "Friend"     => 0,
-            "Coordinator" => 1,
-            "Assessor"  => 0,
-         ),
-         '80_MyData' => array
-         (
-            'Name' => 'Meus Dados',
-            'Title' => 'Editar Dados do meu Cadastro',
-            'Name_UK' => 'My Personal Info',
-            'Title_UK' => 'Edit Registration Data',
-
-            'Href' => '?Unit='.$this->Unit("ID").'&ModuleName=Friends&Action=Edit&ID=#LoginID',
-            'Public'   => 0,
-            'Person'   => 0,
-            'Admin'       => 1,
-            "Friend"     => 1,
-            "Coordinator" => 1,
-            "Assessor"     => 1,
-         ),
-         '90_MyUnit' => array
-         (
-            'Name' => 'Minha Unidade',
-            'Title' => 'Editar Dados da Minha Unidade',
-            'Name_UK' => 'My Unit',
-            'Title_UK' => 'Edit Unit Data',
-
-            'Href' => '?Unit='.$this->Unit("ID").'&ModuleName=Units&Action=Edit',
-            'Public'   => 0,
-            'Person'   => 0,
-            'Admin'    => 0,
-            "Friend"     => 0,
-            "Coordinator" => 1,
-            "Assessor"  => 0,
-         ),
-      ),
-
-      "01_Sponsors" => array
-      (
-         'Title' => 'Patrocinadores:',
-         'Title_UK' => 'Sponsors:',
-
-         'Public'   => 1,
-         'Person'   => 0,
-         "Admin"    => 1,
-         "Friend"     => 1,
-         "Coordinator" => 1,
-         "Assessor"  => 1,
-         
-         "1_Sponsors" => array
-         (
-            "Name" => "Patrocinadores",
-            "Title" => "Visualizar Patrocinadores",
-            "Name_UK" => "Sponsors",
-            "Title_UK" => "See Sponsors",
-
-            'Href' => '?Unit='.$this->Unit("ID").'&ModuleName=Sponsors&Action=Search',
-            'AccessMethod' => "AppHasSponsors",
-
-            'Public'    => 1,
-            'Person'    => 0,
-            'Admin'     => 1,
-
-            'Friend'     => 0,
-            'Coordinator' => 1,
-         ),
-      ),
-
-      "01_Profile" => array
-      (
-         'Title' => 'Perfís:',
-         'Title_UK' => 'Profiles:',
-         "Method" => "MyApp_Interface_LeftMenu_Profile",
-
-         'Public'   => 0,
-         'Person'   => 0,
-         'Admin'    => 1,
-         "Friend"     => 1,
-         "Coordinator" => 1,
-         "Assessor"  => 1,
-      ),
-      "04_App" => array
-      (
-         'Title' => 'SiVent2:',
-         'Title_UK' => 'SiVent2:',
-
-         'Public'   => 1,
-         'Person'   => 0,
-         "Admin"    => 1,
-         "Friend"     => 1,
-         "Coordinator" => 1,
-         "Assessor"  => 1,
-         "Method" => "HtmlUnitMenu",
-     ),
-      "05_Language" => array
-      (
-         'Title' => 'Línguas:',
-         'Title_UK' => 'Language:',
-
-         'Public'   => 1,
-         'Person'   => 1,
-         "Admin"    => 1,
-         "Friend"     => 1,
-         "Coordinator" => 1,
-         "Assessor"  => 1,
-         "Method" => "MyApp_Interface_LeftMenu_Language",
-     ),
-      "06_Units" => array
-      (
-         'Title' => 'Entidades:',
-         'Title_UK' => 'Entities:',
-
-         'Public'   => 1,
-         'Person'   => 1,
-         "Admin"    => 1,
-         "Friend"     => 0,
-         "Coordinator" => 0,
-
-         '10_Units' => array
-         (
-            'Name' => 'Entidades usando SiVent2',
-            'Name_UK' => 'Entities using Sivent2',
-            'Title' => 'Entidades usando SiVent2 neste Servidor',
-            'Title_UK' => 'Entities using Sivent2 on this Server',
-
-            'Href' => '?Action=Start',
-            'Public'   => 1,
-            'Person'   => 1,
-            'Admin'    => 1,
-            "Friend"     => 0,
-            "Coordinator" => 0,
-            "Assessor"  => 0,
-         ),
-      ),
+   "00_Register" => array
+   (
+      "Admin" => "0",
+      "Assessor" => "0",
+      "Coordinator" => "0",
+      "Friend" => "0",
+      "Name" => "Registrar-se:",
+      "Name_ES" => "Registrar-se:",
+      "Name_UK" => "Register:",
+      "Person" => "0",
+      "Public" => "1",
+      "Title" => "Registrar-se:",
+      "Title_ES" => "Registrar-se:",
+      "Title_UK" => "Register:",
+      "include_file" => "System/LeftMenu/Register.php",
+   ),
+   "00_Personal" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Name" => "Pessoal:",
+      "Name_ES" => "Personal:",
+      "Name_UK" => "Personal:",
+      "Person" => "1",
+      "Public" => "1",
+      "Title" => "Pessoal:",
+      "Title_ES" => "Personal:",
+      "Title_UK" => "Personal:",
+      "include_file" => "System/LeftMenu/Personal.php",
+   ),
+   "01_Sponsors" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Name" => "Patrocinadores:",
+      "Name_ES" => "Patrocinadores:",
+      "Name_UK" => "Sponsors:",
+      "Person" => "0",
+      "Public" => "1",
+      "Title" => "Patrocinadores:",
+      "Title_ES" => "Patrocinadores:",
+      "Title_UK" => "Sponsors:",
+      "include_file" => "System/LeftMenu/Sponsors.php",
+   ),
+   "01_Profile" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Method" => "MyApp_Interface_LeftMenu_Profile",
+      "Name" => "Perfís:",
+      "Name_ES" => "Perfiles:",
+      "Name_UK" => "Profiles:",
+      "Person" => "0",
+      "Public" => "0",
+      "Title" => "Perfís:",
+      "Title_ES" => "Perfiles:",
+      "Title_UK" => "Profiles:",
+   ),
+   "03_Unit" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Method" => "HtmlUnitMenu",
+      "Name" => "Entidade:",
+      "Name_ES" => "Entidad:",
+      "Name_UK" => "Entity:",
+      "Person" => "0",
+      "Public" => "1",
+      "Title" => "Entidade:",
+      "Title_ES" => "Entidad:",
+      "Title_UK" => "Entity:",
+   ),
+   "04_Event" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Method" => "HtmlEventsMenu",
+      "Name" => "Eventos:",
+      "Name_ES" => "Eventos:",
+      "Name_UK" => "Events:",
+      "Person" => "0",
+      "Public" => "1",
+      "Title" => "Eventos:",
+      "Title_ES" => "Eventos:",
+      "Title_UK" => "Events:",
+   ),
+   "05_Language" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Method" => "MyApp_Interface_LeftMenu_Language",
+      "Name" => "Línguas:",
+      "Name_ES" => "Idiomas:",
+      "Name_UK" => "Language:",
+      "Person" => "1",
+      "Public" => "1",
+      "Title" => "Línguas:",
+      "Title_ES" => "Idiomas:",
+      "Title_UK" => "Language:",
+   ),
+   "06_Units" => array
+   (
+      "Admin" => "1",
+      "Coordinator" => "0",
+      "Friend" => "0",
+      "Name" => "Entidades:",
+      "Name_ES" => "Entidades:",
+      "Name_UK" => "Entities:",
+      "Person" => "1",
+      "Public" => "1",
+      "Title" => "Entidades:",
+      "Title_ES" => "Entidades:",
+      "Title_UK" => "Entities:",
+      "include_file" => "System/LeftMenu/System.php",
+   ),
 );
+

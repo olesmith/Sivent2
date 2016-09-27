@@ -3,7 +3,7 @@ array
      "Event" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
+        "HrefArgs" => "?ModuleName=Events&Action=Show&Event=".$this->Event("ID"),
         "Title"    => "Gerenciar Evento",
         "Title_UK" => "Manage Event",
         "Name"     => "Evento",
@@ -15,6 +15,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
+        'AccessMethod'    => "Current_User_Event_May_Edit",
       ),
      "Criterias" => array
      (
@@ -31,7 +32,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Assessors" => array
      (
@@ -48,7 +49,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
      ),
      "Assessments" => array
      (
@@ -65,7 +66,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
      ),
      "Areas" => array
      (
@@ -82,7 +83,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Submission" => array
      (
@@ -115,7 +116,8 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        //"AccessMethod"    => "Event_Submissions_Has",
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Dates" => array
      (
@@ -133,6 +135,7 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array("Date","Time","Place","Room"),
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Times" => array
      (
@@ -150,6 +153,7 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array("Time","Place","Room"),
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Places" => array
      (
@@ -167,6 +171,7 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array("Date","Time","Place","Room"),
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Rooms" => array
      (
@@ -184,6 +189,7 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array("Date","Time","Room"),
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
      "Schedule" => array
      (
@@ -216,5 +222,6 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Edit",
       ),
 );

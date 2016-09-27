@@ -44,6 +44,10 @@ class AssessorsInscriptionAssessorsTable extends AssessorsInscriptionAssessorsRo
 
         //Must do first for imediate update to work.
         $details=$this->Assessors_Inscription_Assessors_Form($edit,$inscription,$assessors);
+
+        $table=$this->Assessors_Inscription_Assessors_Table($edit,$inscription,$assessors,$datas,$frienddatas,$submissiondatas);
+
+        if (empty($table)) { return array(); }
         
         return
             array
@@ -54,7 +58,7 @@ class AssessorsInscriptionAssessorsTable extends AssessorsInscriptionAssessorsRo
                   $this->Html_Table
                   (
                      $this->Assessors_Inscription_Assessors_Table_Titles($datas,$frienddatas,$submissiondatas),
-                     $this->Assessors_Inscription_Assessors_Table($edit,$inscription,$assessors,$datas,$frienddatas,$submissiondatas)
+                     $table
                   ).
                   $details.
                   ""

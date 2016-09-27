@@ -68,6 +68,17 @@ class App_Handle extends App_Has
 
     function HandleFriend()
     {
+        $event=$this->Event();
+        if (!empty($event))
+        {
+            if ($this->FriendIsInscribed($event,$this->LoginData()))
+            {
+                $this->InscriptionsObj()->HandleInscribe();
+                exit();
+            }
+        }
+        
+        
         $this->FriendsObj()->Friend_Events_Table();
 
         echo
@@ -83,7 +94,7 @@ class App_Handle extends App_Has
     function HandlePublic()
     {
         $this->MyApp_Login_Form();
-        
+
         $this->EventsObj()->ShowEvents();
     }
 

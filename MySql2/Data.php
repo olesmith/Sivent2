@@ -370,7 +370,7 @@ class Data extends DataPrint
               $title=$this->GetRealNameKey($this->Actions[ $data ],$this->TitleKeyName);
           }
       }
-      elseif (method_exists($this,$data))
+      elseif (method_exists($this,$data) && !empty( $this->CellMethods[ $data ]))
       {
           $title=$this->$data();
 
@@ -623,7 +623,7 @@ class Data extends DataPrint
             $datas=$this->AddSearchVarsToDataList($datas);
         }
 
-        $this->SortVars2DataList($datas);
+        $datas=$this->MyMod_Sort_Vars2Data($datas);
 
         //Always read IDs
         if (!preg_grep('/^ID$/',$datas))

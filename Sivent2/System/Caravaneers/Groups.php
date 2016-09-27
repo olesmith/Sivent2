@@ -7,7 +7,7 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
-         "Unit","Event","Friend","Name","Email","PRN",
+         "Event","Friend","Name","Email","PRN","Comment",
          "Status","Registration",
       ),
       "Admin" => 1,
@@ -24,10 +24,27 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
-         "Name","Email","PRN",
          "Status",
+         "Name","Email",
+         "PRN","Comment","Registration",
          "Certificate","TimeLoad","Code","GenCert",
-         "Registration",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Latex" => array
+   (
+      "Name" => "Inscrição",
+      "Name_UK" => "Inscription",
+      "Data" => array
+      (
+         "No",
+         "Name","Email","PRN","Comment",
+         "Status",
       ),
       "Admin" => 1,
       "Person" => 0,

@@ -87,7 +87,6 @@ class MyEventAppMenues extends MyEventAppAccess
     {
         return
             $this->MyEvent_App_Menues_Unit_Menues($unit).
-            join("",$this->HtmlEventsMenu()).
             "";
     }
     
@@ -178,6 +177,17 @@ class MyEventAppMenues extends MyEventAppAccess
             );
     }
     
+     //*
+    //* function  HtmlEventsWhere, Parameter list: 
+    //*
+    //* Returns menu def as read from system file. May be overridden.
+    //*
+
+    function HtmlEventsData()
+    {
+        return array("ID","Name","Date");
+    }
+    
     //*
     //* function  HtmlEventsMenu, Parameter list: 
     //*
@@ -197,7 +207,7 @@ class MyEventAppMenues extends MyEventAppAccess
         (
            "",
            $this->HtmlEventsWhere(),
-           array("ID","Name","Date"),
+           $this->HtmlEventsData(),
            FALSE,
            "CTime,ID"
         );
@@ -217,9 +227,12 @@ class MyEventAppMenues extends MyEventAppAccess
             }
             else
             {
+                $name=$event[ "Name" ];
+                if (!empty($event[ "Initials" ])) { $name=$event[ "Initials" ]; }
+                
                 $link=
                     "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-                    $event[ "Name" ].
+                    $event[ "Initials" ].
                     $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
                     (
                        $this->HtmlEventsMenuDef(),
@@ -256,13 +269,15 @@ class MyEventAppMenues extends MyEventAppAccess
         
         $args[ "ID" ]=$event[ "ID" ];
 
+        $name=$event[ "Name" ];
+        if (!empty($event[ "Initials" ])) { $name=$event[ "Initials" ]; }
         
         return 
             $this->MyApp_Interface_LeftMenu_Bullet("+").
             $this->HtmlTags
             (
                "A",
-               $event[ "Name" ],
+               $name,
                array
                (
                   "HREF" => "?".$this->Hash2Query($args),

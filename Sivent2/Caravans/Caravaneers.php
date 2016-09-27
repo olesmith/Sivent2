@@ -1,9 +1,93 @@
 <?php
 
-class CaravansCaravaneers extends CaravansAccess
+class Caravans_Caravaneers extends Caravans_Access
 {
     //*
-    //* function Caravan_Info_Table, Parameter list: $edit,$caravan
+    //* function Caravan_Info_Data, Parameter list: $edit,$caravan
+    //*
+    //* Caravan info show data.
+    //*
+
+    function Caravan_Info_Data()
+    {
+        return $this->GetGroupDatas("Basic");
+    }
+
+    //*
+    //* function Caravan_Update_Data, Parameter list: $edit,$caravan
+    //*
+    //* Caravan info show data.
+    //*
+
+    function Caravan_Update_Data()
+    {
+         return $this->GetGroupDatas("Basic");
+
+         return
+            array
+            (
+               "Name","City","Status",
+            );
+    }
+
+    //*
+    //* function Caravan_Info_Friend_Data, Parameter list: $edit,$caravan
+    //*
+    //* Caravan info friend show data.
+    //*
+
+    function Caravan_Info_Friend_Data()
+    {
+        return
+            array
+            (
+               "Name","Email","Phone","Cell",
+            );
+    }
+    //*
+    //* function Caravan_Info_Update, Parameter list: $edit,&$caravan
+    //*
+    //* Updates caravans info.
+    //*
+
+    function Caravan_Info_Update($edit,&$caravan)
+    {
+        $datas=
+            $this->MyMod_Item_Datas_CGI2Item
+            (
+               $this->Caravan_Update_Data(),
+               $caravan
+            );
+
+        if (count($datas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set($datas,$caravan);
+        }
+    }
+
+    
+    //*
+    //* function Caravan_Info_Print_Row, Parameter list: $caravan
+    //*
+    //* Generates caravan print row, with link.
+    //*
+
+    function Caravan_Info_Print_Row($caravan)
+    {
+
+        $action=$this->MyActions_Entry("Caravaneers",$caravan,$noicons=0,$class="",$rargs=array("Latex" => 1));
+
+        return
+            array
+            (
+               $this->B($this->Language_Message("Printable_Version").":"),
+               $action
+            );
+    }
+
+    
+    //*
+    //* function Caravan_Info_Table, Parameter list: $edit,$caravan,$friend
     //*
     //* Prints caravans info.
     //*
@@ -12,37 +96,87 @@ class CaravansCaravaneers extends CaravansAccess
     {
         $this->FriendsObj()->ItemData();
 
+        if ($edit==1 && $this->CGI_POSTint("Update")==1)
+        {
+            $this->Caravan_Info_Update($edit,$caravan);
+        }
+
         $table=
             array_merge
             (
                $this->Friendsobj()->MyMod_Item_Table
                (
-                  $edit,
+                  0,
                   $friend,
-                  array
-                  (
-                     "Friend","Email","Phone","Cell",
-                  )
+                  $this->Caravan_Info_Friend_Data()
                ),
+               array($this->HR()),
                $this->MyMod_Item_Table
                (
                   $edit,
                   $caravan,
-                  array
-                  (
-                     "Caravans_Name","Caravans_NParticipants","Caravans_Status",
-                  )
+                  $this->Caravan_Info_Data()
                )
             );
-               
-        return $this->FrameIt
-        (
+
+
+        if (!$this->LatexMode())
+        {
+            array_push($table,$this->Caravan_Info_Print_Row($caravan));
+        }
+        
+        if ($edit==1)
+        {
+            array_push($table,array($this->Buttons()));
+        }
+        
+        $method="Html_Table";
+        if ($this->LatexMode()) { $method="Latex_Table"; }
+        
+        return 
             $this->H(1,$this->MyLanguage_GetMessage("Caravans_Table_Title")).
-            $this->Html_Table("",$table).
-            ""
-        );
+            $this->$method("",$table).
+            "";
     }
 
+    //*
+    //* function Caravan_Friend_Read, Parameter list: $caravan
+    //*
+    //* Prints caravaneers info for current item.
+    //*
+
+    function Caravan_Friend_Read($caravan)
+    {
+        if (empty($caravan[ "Friend" ])) { $this->DoDie("No such caravan with owner: ",$friend); }
+
+        $friend=
+            $this->FriendsObj()->Sql_Select_Hash
+            (
+               array("ID" => $caravan[ "Friend" ])
+            );
+
+        if (empty($friend[ "ID" ])) { $this->DoDie("No such friend: ",$friendid); }
+
+        return $friend;
+    }
+
+    
+    //*
+    //* function Caravan_Caravaneers_Latex_File, Parameter list: $caravan
+    //*
+    //* Prints caravaneers info for current item.
+    //*
+
+    function Caravan_Caravaneers_Latex_File($caravan)
+    {
+        return
+            "Caravan.".
+            preg_replace('/\s+/',".",$caravan[ "Name" ]).
+            ".".
+            $this->MyTime_FileName().
+            ".tex";
+    }
+    
     //*
     //* function Caravan_Caravaneers_Handle, Parameter list:
     //*
@@ -53,21 +187,19 @@ class CaravansCaravaneers extends CaravansAccess
     {
         $this->CaravaneersObj()->Sql_Table_Structure_Update();
         $this->CaravaneersObj()->Actions();
+
+        $caravanid=$this->CGI_GETint("ID");
+        $where=$this->UnitEventWhere(array("ID" => $caravanid));
+        $caravan=$this->Sql_Select_Hash($where);
+
         $edit=1;
-
-        $inscriptionid=$this->CGI_GETint("ID");
-        $caravan=$this->InscriptionsObj()->Sql_Select_Hash(array("ID" => $inscriptionid));
+        if (!$this->CheckEditAccess($caravan)) { $edit=0; }
+        if ($this->LatexMode()) { $edit=0; }
         
-        if (empty($caravan[ "Friend" ])) { $this->DoDie("No such inscription: ",$inscriptionid); }
-
-        
-        $friendid=$caravan[ "Friend" ];
-        $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $friendid));
-
-        if (empty($friend[ "ID" ])) { $this->DoDie("No such friend: ",$friendid); }
-        
+        $friend=$this->Caravan_Friend_Read($caravan);
+       
         $formstart="";
-        $formsend="";
+        $formend="";
 
         if ($edit==1)
         {
@@ -78,11 +210,29 @@ class CaravansCaravaneers extends CaravansAccess
         }
 
         $table=$this->CaravaneersObj()->Caravaneers_Table_Show($edit,$caravan);
+        if ($this->LatexMode())
+        {
+            $latex=
+                $this->GetLatexSkel("Head.tex").
+                $this->Caravan_Info_Table($edit,$caravan,$friend).
+                $table.
+                $this->GetLatexSkel("Tail.tex").
+                "";
+
+            //$this->ShowLatexCode($latex);exit();
+            $this->Latex_PDF
+            (
+               $this->Caravan_Caravaneers_Latex_File($caravan),
+               $latex
+             );
+            exit();
+        }
+
         
         echo $this->FrameIt
         (    
             $formstart.
-            $this->Caravan_Info_Table(0,$caravan,$friend).
+            $this->Caravan_Info_Table($edit,$caravan,$friend).
             $table.
             $formend.
             ""

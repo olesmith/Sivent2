@@ -28,6 +28,8 @@ class Schedules extends SchedulesHandle
         $this->AlwaysReadData=array("Unit","Event","Name","Date","Time","Room","Submission");
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

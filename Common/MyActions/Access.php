@@ -4,6 +4,17 @@
 trait MyActions_Access
 {
     //*
+    //* function MyAction_AccessMethod, Parameter list: $action
+    //*
+    //*
+
+    function MyAction_AccessMethod($action)
+    {
+        return $this->Actions($action,"AccessMethod");
+    }
+
+    
+    //*
     //* function MyAction_Allowed, Parameter list: $action,$item=array()
     //*
     //*
@@ -11,9 +22,6 @@ trait MyActions_Access
     function MyAction_Allowed($action,$item=array())
     {
         if (!$this->Actions) { $this->MyActions_Init(); }
-
-        //When checking for title access, shouldn't take $this->ItemHash as default
-        //08/05/2016 if (empty($item) && isset($this->ItemHash)) { $item=$this->ItemHash; }
 
         $logintype=$this->LoginType;
         if ($logintype=="") { $logintype="Public"; }
@@ -39,10 +47,24 @@ trait MyActions_Access
                         $res=$this->$accessmethod($item);
                     }
                 }
+                //20160911
+                elseif (method_exists($this->ApplicationObj(),$accessmethod))
+                {
+                    if (!empty($actiondef[ "AccessDebug" ]))
+                    {
+                        var_dump($action.": ".$accessmethod);
+                        var_dump($this->Profile().": ".$actiondef[ $this->Profile() ]);
+                        var_dump($this->ApplicationObj()->$accessmethod($item));
+                    }
+                    
+                    if (!empty($actiondef[ $this->Profile() ]))
+                    {
+                        $res=$this->ApplicationObj()->$accessmethod($item);
+                    }
+                }
                 else
                 {
-                    $this->Debug=1;
-                    $this->ApplicationObj()->AddHtmlStatusMessage
+                    $this->MyAction_Error
                     (
                        $this->ModuleName.": Warning: Invalid access method (action: $action): ".
                        $accessmethod.", ignored"
@@ -57,7 +79,7 @@ trait MyActions_Access
                     var_dump($this->Profile.": ".$actiondef[ $this->Profile ]);
                     var_dump($this->MyMod_Access_HashAccess($actiondef,array(1,2)));
                 }
-                
+
                 $res=$this->MyMod_Access_HashAccess($actiondef,array(1,2));
             }
         }
@@ -95,8 +117,8 @@ trait MyActions_Access
 
         $this->MyAction_Error
         (
-           "No ".$this->Profile()." access to Action $action",
-           ""
+           "No ".$this->Profile()." access to Action ".$this->ModuleName."@".$action,
+           $action
         );
     }
 }

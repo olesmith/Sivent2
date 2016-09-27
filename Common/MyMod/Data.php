@@ -188,6 +188,24 @@ trait MyMod_Data
     }
 
     
+    //*
+    //* Removes action entreis from $datas
+    //*
+
+    function MyMod_Datas_Actions_Remove($datas)
+    {
+        $rdatas=array();
+        foreach ($datas as $data)
+        {
+            $action=$this->Actions($data,"Name");
+            if (empty($action))
+            {
+                array_push($rdatas,$data); 
+            }
+        }
+
+        return $rdatas;
+    }
 }
 
 ?>

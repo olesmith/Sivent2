@@ -59,7 +59,7 @@ trait MyMod_Handle_Search
           }
       }
 
-      $this->DetectSort($group);
+      $this->MyMod_Sort_Detect($group);
       if ($output=="html")
       {
           if ($searchvarstable)

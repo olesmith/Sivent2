@@ -4,11 +4,12 @@ array
    (
       "Name" => "Emails (PT)",
       "Name_UK" => "Emails (UK)",
+      "Name_ES" => "Emails (ES)",
       "Title" => "Conteúdo dos Emails",
       "Title_UK" => "Email Contents",
+      "Title_ES" => "Conteúdo dos Emails",
       
       "Data" => array(),
-      "Data_UK" => array(),
       
       "Admin" => 1,
       "Person" => 0,

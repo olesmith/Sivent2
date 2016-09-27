@@ -3,6 +3,7 @@
 include_once("../EventApp/MyEvents.php"); 
 
 
+include_once("Events/Access.php");
 include_once("Events/Cells.php");
 include_once("Events/Create.php");
 include_once("Events/Collaborations.php");
@@ -115,6 +116,8 @@ class Events extends EventsCertificate
     function PostProcessItemData()
     {
         parent::PostProcessItemData();
+
+        $this->Coordinator_Type=1;
     }
 
     //*
@@ -143,7 +146,13 @@ class Events extends EventsCertificate
         }
 
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
-            
+
+        $updatedatas=$this->Event_Caravans_Dates_Take($item);
+        if (!empty($updatedatas))
+        {
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+        }
+        
         return parent::PostProcess($item);
     }
 
@@ -261,7 +270,25 @@ class Events extends EventsCertificate
         return parent::MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
     }
 
-    
+       //*
+    //* function MyMod_Messages_Files, Parameter list: 
+    //*
+    //* Returns list of module messaged files.
+    //*
+
+    function MyMod_Messages_Files()
+    {
+        return 
+            array_merge
+            (
+               array
+               (
+                  "System/Events/LeftMenu.php",
+               ),
+               parent::MyMod_Messages_Files()
+            );
+    }
+ 
 }
 
 ?>

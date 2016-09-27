@@ -20,25 +20,25 @@ class DBDataAccess extends ModulesCommon
     function CheckShowAccess($item)
     {
         $res=FALSE;
-        if (preg_match('/^Candidate$/',$this->ApplicationObj->Profile))
+        if (preg_match('/^Candidate$/',$this->Profile()))
         {
             if (!empty($item[ "ID" ]) && $item[ "ID" ]==$this->ApplicationObj->LoginData[ "ID" ])
             {
                 $res=TRUE;
             }
         }
-        elseif (preg_match('/^Assessor$/',$this->ApplicationObj->Profile))
+        elseif (preg_match('/^Assessor$/',$this->Profile()))
         {
             if (!empty($item[ "ID" ]) && $item[ "ID" ]==$this->ApplicationObj->LoginData[ "ID" ])
             {
                 $res=TRUE;
             }
         }
-        elseif (preg_match('/^Coordinator$/',$this->ApplicationObj->Profile))
+        elseif (preg_match('/^Coordinator$/',$this->Profile()))
         {
             $res=TRUE;
         }
-        elseif (preg_match('/^Admin$/',$this->ApplicationObj->Profile))
+        elseif (preg_match('/^Admin$/',$this->Profile()))
         {
             $res=TRUE;
         }
@@ -57,11 +57,11 @@ class DBDataAccess extends ModulesCommon
     function CheckEditAccess($item)
     {
         $res=FALSE;
-        if (preg_match('/^Coordinator$/',$this->ApplicationObj->Profile))
+        if (preg_match('/^Coordinator$/',$this->Profile()))
         {
             $res=TRUE;
         }
-        elseif (preg_match('/^Admin$/',$this->ApplicationObj->Profile))
+        elseif (preg_match('/^Admin$/',$this->Profile()))
         {
             $res=TRUE;
         }
@@ -83,7 +83,7 @@ class DBDataAccess extends ModulesCommon
         if (
               $this->CheckEditAccess($item)
               &&
-              preg_match('/^(Coordinator|Admin)$/',$this->ApplicationObj->Profile)
+              preg_match('/^(Coordinator|Admin)$/',$this->Profile())
            )
         {
             $res=TRUE;

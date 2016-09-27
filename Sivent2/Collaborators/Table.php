@@ -25,7 +25,7 @@ class CollaboratorsTable extends CollaboratorsTableUpdate
         $this->ItemDataGroups($group);
         $this->Collaborators_User_Table_Read($userid);
 
-        if (count($this->Items)>0)
+        if (count($this->Items)>=0)
         {
             return
                 $this->H

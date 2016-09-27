@@ -1,47 +1,7 @@
 <?php
 
-class CaravaneersTableUpdate extends CaravaneersAccess
+class Caravaneers_Table_Update extends Caravaneers_Table_Table
 {
-    //*
-    //* function Caravaneer_Table_CGI2Name, Parameter list: $n
-    //*
-    //* Returns cgi value.
-    //*
-
-    function Caravaneer_Table_CGI2Name($n)
-    {
-        $value="No_".$n."_Name";
-        $value=$this->CGI_POST($value);
-        
-        return
-            preg_replace
-            (
-               '/\s+/',
-               " ",
-               preg_replace
-               (
-                  '/^\s+/',
-                  "",
-                  preg_replace('/s+$/',"",$value)
-               )
-            );
-    }
-
-    //*
-    //* function Caravaneer_Table_CGI2Email, Parameter list: $n
-    //*
-    //* Returns cgi value.
-    //*
-
-    function Caravaneer_Table_CGI2Email($n)
-    {
-        $value="No_".$n."_Email";
-        $value=$this->CGI_POST($value);
-        
-        return preg_replace('/\s+/',"",$value);
-    }
-
-    
     //*
     //* function Caravaneer_Table_Update, Parameter list: $n,&$caravaneers,$empty,&$remails
     //*
@@ -168,13 +128,18 @@ class CaravaneersTableUpdate extends CaravaneersAccess
             if (!empty($rcaravaneer))
             {
                 array_push($rcaravaneers,$rcaravaneer);
+
+                $rcaravaneer=$this->CaravaneersObj()->PostProcess($rcaravaneer);
             }
         }
 
-        while (count($caravaneers)>0)
+        
+        $rcaravaneers=$this->Caravaneers_Table_Read($inscription);
+        while (count($rcaravaneers)>$this->EventsObj()->Event_Caravans_Max())
         {
-            $caravaneer=array_shift($caravaneers);
+            $rcaravaneer=array_shift($rcaravaneers);
             $this->Sql_Delete_Item($caravaneer[ "ID" ],"ID");
+            //var_dump("delete caravaneer");var_dump($caravaneer);
         }
         
 
@@ -189,36 +154,26 @@ class CaravaneersTableUpdate extends CaravaneersAccess
 
     function Caravaneers_Table_Inscription_Update(&$inscription)
     {
+        $where=$this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ]));
+        
+        $caravan=$this->CaravansObj()->Sql_Select_Hash($where);
+        
         $ncaravaneers=$this->CaravaneersObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ],"Status" => 1));
         
         $updatedatas=array();
         if (
-              empty($inscription[ "Caravans_NParticipants" ])
+              empty($caravan[ "NParticipants" ])
               ||
-              $inscription[ "Caravans_NParticipants" ]!=$ncaravaneers
+              $caravan[ "NParticipants" ]!=$ncaravaneers
             )
         {
-            $inscription[ "Caravans_NParticipants" ]=$ncaravaneers;
-            array_push($updatedatas,"Caravans_NParticipants");
+            $caravan[ "NParticipants" ]=$ncaravaneers;
+            array_push($updatedatas,"NParticipants");
         }
-        
-
-        $status=1;
-        if ($ncaravaneers>=$this->EventsObj()->Event_Caravans_Min()) { $status=2; }
-        
-        if (
-              empty($inscription[ "Caravans_Status" ])
-              ||
-              $inscription[ "Caravans_Status" ]!=$status
-            )
-        {
-            $inscription[ "Caravans_Status" ]=$status;
-            array_push($updatedatas,"Caravans_Status");
-        }
-        
+                
         if (count($updatedatas)>0)
         {
-            $this->InscriptionsObj()->Sql_Update_Item_Values_Set($updatedatas,$inscription);
+            $this->CaravansObj()->Sql_Update_Item_Values_Set($updatedatas,$caravan);
         }
     }
 
@@ -231,12 +186,23 @@ class CaravaneersTableUpdate extends CaravaneersAccess
 
     function Caravaneer_Table_Update_Certificate(&$caravaneer,$n,&$updatedatas)
     {
+        $data="Certificate";
         foreach (array("Certificate","Timeload") as $data)
         {
             $cgikey="No_".$n."_".$data;
             if (isset($_POST[ $cgikey ]))
             {
-                $cgivalue=$this->CGI_POSTint($cgikey);
+                $cgivalue=2;
+
+                if ($caravaneer[ $data ]!=$cgivalue)
+                {
+                    $caravaneer[ $data ]=$cgivalue;
+                    array_push($updatedatas,$data);
+                }
+            }
+            elseif ($data=="Certificate")
+            {
+                $cgivalue=1;
                 if ($caravaneer[ $data ]!=$cgivalue)
                 {
                     $caravaneer[ $data ]=$cgivalue;

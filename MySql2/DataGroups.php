@@ -331,9 +331,7 @@ class DataGroups extends HashesData
                     }
                     else
                     {
-                        if (
-                            isset($this->Actions[ $rdata ][ "AltAction" ])
-                           )
+                        if (!empty($this->Actions[ $rdata ][ "AltAction" ]))
                         {
                             $altaction=$this->Actions[ $rdata ][ "AltAction" ];
                             if ($this->MyAction_Allowed($altaction))

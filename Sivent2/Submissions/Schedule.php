@@ -26,7 +26,7 @@ class SubmissionsSchedule extends SubmissionsTable
                 );
         }
 
-        return $this->SortList($schedules,array("Sort","ID"));
+        return $this->MyMod_Sort_List($schedules,array("Sort","ID"));
     }
     
     //*

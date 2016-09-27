@@ -26,7 +26,7 @@ array
        "Data" => array
        (
           "Payments","Selection",
-          "Certificates","Collaborations","Caravans",
+          "Certificates","Certificates_Published","Collaborations","Caravans",
           "Submissions","Assessments","Schedule_Public","Info",
        ),
 

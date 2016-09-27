@@ -1,7 +1,7 @@
 <?php
 
 
-class CaravaneersCertificate extends CaravaneersTable
+class Caravaneers_Certificate extends Caravaneers_Table
 {
     //*
     //* function Certificate_Code, Parameter list: $item
@@ -105,7 +105,7 @@ class CaravaneersCertificate extends CaravaneersTable
                                "Event"        => $item[ "Event" ],
                                "Friend"       => $item[ $fdata ],
                                "Type"         => $this->Certificate_Type,
-                               "Name"         => $item[ "Title" ],
+                               "Name"         => $item[ "Name" ],
                                "Code"         => $item[ "Code" ],
                             );
 

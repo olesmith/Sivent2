@@ -1,8 +1,10 @@
 array
 (
    "Name" => "Email de Alteração de Senha, Confirmação",
+   "Name_ES" => "Email de Alteración de Contraseña, Confirmaçión",
    "Name_UK" => "Change Password Mail, Confirmation",
    "Title" => "Email de Confirmação, Confirmação",
+   "Title_ES" => "Email de Alteración de Contraseña, Confirmaçión",
    "Title_UK" => "Confirmation Email, Confirmation",
    
    "Data" => array("Subject","Body"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Senha alterada, #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Contraseña alterada, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Password changed, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
         "Informamos que sua senha foi alterada:\n\n".

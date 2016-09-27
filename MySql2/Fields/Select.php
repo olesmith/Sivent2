@@ -12,7 +12,7 @@ class SelectFields extends FileFields
     //* Should ONLY be called by MakeDataField, who checks access
     //*
 
-    function CreateDataSelectField($data,$item,$value="",$ignoredefault=0,$checkbox=FALSE,$fieldtitle="",$tabindex=0,$rdata="")
+    function CreateDataSelectField($data,$item,$value="",$ignoredefault=0,$checkbox=FALSE,$fieldtitle="",$tabindex=0,$rdata="",$options=array())
     {
         if (empty($rdata)) { $rdata=$data; }
         
@@ -88,10 +88,10 @@ class SelectFields extends FileFields
         $names=array();
         if ($checkbox==FALSE)
         {
-            if (!$this->ItemData[ $data ][ "NoSearchEmpty" ])
+            if (empty($this->ItemData[ $data ][ "NoSearchEmpty" ]))
             {
                 $values=array(0);
-                $names=array($this->ItemData[ $data ][ "EmptyName" ]);
+                $names=array($this->GetEnumEmptyName($data));
             }
         }
         elseif ($checkbox==2)
@@ -120,11 +120,21 @@ class SelectFields extends FileFields
 
         if ($checkbox==1)
         {
-            $value=$this->MakeCheckBoxSetTable($rdata,$values,$names,$value,3,array("ALIGN" => 'left'));
+            $options[ "ALIGN" ]='left';
+            $value=
+                $this->MakeCheckBoxSetTable($rdata,$values,$names,$value,3,$options);
         }
         elseif ($checkbox==2)
         {
-            $value=$this->MakeRadioSet($rdata,$values,$names,$value);
+             $options[ "ALIGN" ]='left';
+             $value=$this->MakeRadioSet($rdata,$values,$names,$value,$tabindex);
+        }
+        elseif ($checkbox==3)
+        {
+            $options[ "ALIGN" ]='left';
+            $options[ "TABINDEX" ]=$tabindex;
+            
+            $value=$this->MakeCheckBox($rdata,1,$value-1,FALSE,$options);
         }
         else
         {

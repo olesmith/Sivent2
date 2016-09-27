@@ -26,12 +26,12 @@ class ApplicationLogs extends AppUsers
         return $this->SubModuleLoad("Logs",$updatestructure);
     }
     //*
-    //* function LogMessage, Parameter list: $action,$msgs,$level=5
+    //* function LogMessage, Parameter list: $action,$msgs="",$level=5
     //*
     //* Loghs $msgs using $this->LogsObj().
     //*
 
-    function LogMessage($action,$msgs,$level=5)
+    function LogMessage($action,$msgs="",$level=5)
     {
         $logobj=$this->LogsObject(TRUE);
         if (!empty($logobj))

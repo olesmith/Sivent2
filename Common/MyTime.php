@@ -77,13 +77,12 @@ trait MyTime
         return $this->ApplicationObj()->Messages[ "Months" ][ "Name".$lkey ];
     }
 
+    //* function MyTime_Info, Parameter list:
     //*
-    //* function TimeStamp2Text, Parameter list: $mtime="",$sep=" "
-    //*
-    //* Format $mtime.
+    //* Reads file info.
     //*
 
-    function TimeStamp2Text($mtime="",$sep=" ")
+    function MyTime_Info($mtime="")
     {
         if ($mtime=="") { $mtime=time(); }
         if ($mtime==0) { return ""; }
@@ -106,6 +105,18 @@ trait MyTime
         $timeinfo[ "Min" ]=sprintf("%02d",$timeinfo[ "tm_min" ]);
         $timeinfo[ "Sec" ]=sprintf("%02d",$timeinfo[ "tm_sec" ]);
 
+        return $timeinfo;
+    }
+
+    //*
+    //* function TimeStamp2Text, Parameter list: $mtime="",$sep=" "
+    //*
+    //* Format $mtime.
+    //*
+
+    function TimeStamp2Text($mtime="",$sep=" ")
+    {
+        $timeinfo=$this->MyTime_Info();
 
         return
             $timeinfo[ "WeekDay" ].
@@ -123,7 +134,41 @@ trait MyTime
             $sep.
             join
             (
-               ":",
+               ".",
+               array
+               (
+                  $timeinfo[ "Hour" ],
+                  $timeinfo[ "Min" ]//,
+                  //$timeinfo[ "Sec" ]
+               )
+            );
+    }
+
+    //*
+    //* function MyTime_FileName, Parameter list: $mtime="",$sep=" "
+    //*
+    //* Format $mtime for a file name..
+    //*
+
+    function MyTime_FileName($mtime="",$sep="-",$datesep=".",$timesep=".")
+    {
+        $timeinfo=$this->MyTime_Info($mtime);
+
+        return
+            join
+            (
+               $datesep,
+               array
+               (
+                  $timeinfo[ "MDay" ],
+                  $timeinfo[ "Month" ],
+                  $timeinfo[ "Year" ]
+               )
+            ).
+            $sep.
+            join
+            (
+               $timesep,
                array
                (
                   $timeinfo[ "Hour" ],

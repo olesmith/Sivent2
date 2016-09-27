@@ -1,8 +1,10 @@
 array
 (
-   "Name" => "Email de Alteração de Endereço Eletrònico, Solicitação",
+   "Name" => "Email de Alteração de Endereço Eletrônico, Solicitação",
+   "Name_ES" => "Email de Alteración de  Dirección Eletrònico, Solicitación",
    "Name_UK" => "Change Email Address Mail, Solicitation",
-   "Title" => "Email de Alteração de Endereço Eletrònico, Solicitação",
+   "Title" => "Email de Alteração de Endereço Eletrônico, Solicitação",
+   "Title_ES" => "Email de Alteración de Dirección Eletrònico, Solicitación",
    "Title_UK" => "Change Email Address Mail, Solicitation",
    
    "Data" => array("Subject","Body"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
-      "Default"      => "#ApplicationName: Alterar de Endereço Eletrônico, #Unit_Name, #Unit_Title",
+      "Default"      => "#ApplicationName: Alteração de Endereço Eletrônico, #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Alteración de Dirección Eletronico, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Email Address Change, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
           "Prezado(a) #Name\n\n".

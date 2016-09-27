@@ -46,6 +46,9 @@ trait MakeForm
            "UpdateCGIVar" => "",
            "UpdateCGIValue" => 1,
            "UpdateItems"   => array(),
+           
+           "PreTableRows"  => array(),
+           "PostTableRows" => array(),
         );
 
         foreach ($rargs as $key => $value)

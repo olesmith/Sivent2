@@ -59,6 +59,23 @@ class App_Has extends App_Head_Table
 
     function SubmissionsPublic()
     {
+        if (preg_match('/^(Admin|Coordinator)$/',$this->Profile())) { return TRUE; }
+        if (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            $where=
+               array
+               (
+                  "Unit"  => $this->Unit("ID"),
+                  "Event" => $this->Event("ID"),
+                  "Friend" => $this->LoginData("ID"),
+               );
+            
+            if ($this->SubmissionsObj()->Sql_Select_NHashes($where)>0)
+            {
+                return TRUE;
+            }
+        }
+        
         return $this->EventsObj()->Event_Submissions_Public();
     }
     

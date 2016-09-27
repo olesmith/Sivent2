@@ -41,14 +41,14 @@ class HtmlCheckButton extends HtmlHref
 
             $boxes[$n]=
                 "<B>".$titles[$n].":</B> ".
-                $this->MakeCheckBox($boxname,$values[$n],$checked);
+                $this->MakeCheckBox($boxname,$values[$n],$checked,FALSE,$options);
         }
 
         return join("",$boxes);
     }
 
     //*
-    //* sub MakeCheckBoxSetTable, Parameter list: name,$values,$selecteds=array(),$ncols=3,$toptions=array(),$troptions=array(),$tdoptions=array
+    //* sub MakeCheckBoxSetTable, Parameter list: name,$values,$selecteds=array(),$ncols=3,$options=array(),$toptions=array(),$troptions=array(),$tdoptions=array
     //*
     //* Create set of Check boxes of name $name and values $values[0],...
     //* If $selected is defined, button $n is checked, if
@@ -57,7 +57,7 @@ class HtmlCheckButton extends HtmlHref
     //*
     //*
 
-    function MakeCheckBoxSetTable($name,$values,$titles,$selecteds=array(),$ncols=3,$toptions=array(),$troptions=array(),$tdoptions=array())
+    function MakeCheckBoxSetTable($name,$values,$titles,$selecteds=array(),$ncols=3,$options=array(),$toptions=array(),$troptions=array(),$tdoptions=array())
     {
         if (!is_array($selecteds)) { $selecteds=array($selecteds); }
 
@@ -72,10 +72,10 @@ class HtmlCheckButton extends HtmlHref
             {
                 $checked=1;
             }
-
+            
             if (!isset($table[ $row ])) { $table[ $row ]=array(); }
             $table[ $row ][ 2*$col ]="<B>".$titles[$n].":</B>";
-            $table[ $row ][ 2*$col+1 ]=$this->MakeCheckBox($boxname,$values[$n],$checked);
+            $table[ $row ][ 2*$col+1 ]=$this->MakeCheckBox($boxname,$values[$n],$checked,FALSE,$options);
 
             $col++;
             if ($col>=$ncols)

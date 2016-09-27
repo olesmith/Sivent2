@@ -2,66 +2,63 @@ array
 (
    "Basic" => array
    (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Data" => array("No","Edit","Delete","GenCert","MailCert","Event","Friend","Status","Inscription","Code"),
+      "Friend" => "1",
       "Name" => "Básicos",
+      "Name_ES" => "Básicos",
       "Name_UK" => "Basic",
-      "Data" => array
-      (
-         "No","Edit","Delete","GenCert","MailCert",
-         "Event","Friend","Status",
-         "Inscription",
-         "Code",
-      ),
-      "Admin" => 1,
-      "Person" => 0,
-      "Public" => 0,
-      "Admin" => 1,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-    ),
-    "Selection" => array
-    (
-       "Name" => "Seleção",
-       "Name_UK" => "Selection",
-       "Data" => array
-       (
-          "No","Edit","Delete",
-          "Event","Friend",
-          "Status","Selected",
-          "Code",
-        ),
-       
-       "Edit_Coordinator" => 1, //edit default for this group
-       "Edit_Admin" => 1, //edit default for this group
-
-       "Person" => 0,
-       "Public" => 1,
-       "Admin" => 1,
-       "Friend"     => 1,
-       "Coordinator" => 1,
-       "Assessor"  => 0,
-    ),
-    "Certificates" => array
-    (
-       "Name" => "Certificados",
-       "Name_UK" => "Certificates",
-       "Data" => array
-       (
-          "No","Edit","Delete",
-          "Event","Friend",
-          "Status","Selected","Certificate","Certificate_CH",
-          "Inscription_Certificate_Generated_Cell","GenCert",
-          "Inscription_Certificate_Mailed_Cell","MailCert",
-          "Code",
-        ),
-
-       "Edit_Coordinator" => 1, //edit default for this group
-       "Edit_Admin" => 1, //edit default for this group
-       
-       "Person" => 0,
-       "Public" => 1,
-       "Admin" => 1,
-       "Friend"     => 1,
-       "Coordinator" => 1,
-       "Assessor"  => 0,
-    ),
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Básicos",
+      "ShortName_ES" => "Básicos",
+      "ShortName_UK" => "Basic",
+      "Title" => "Básicos",
+      "Title_ES" => "Básicos",
+      "Title_UK" => "Basic",
+   ),
+   "Selection" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "0",
+      "Coordinator" => "1",
+      "Data" => array("No","Edit","Delete","Event","Friend","Status","Selected","Code"),
+      "Edit_Admin" => "1",
+      "Edit_Coordinator" => "1",
+      "Friend" => "1",
+      "Name" => "Seleção",
+      "Name_ES" => "Seleción",
+      "Name_UK" => "Selection",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Seleção",
+      "ShortName_ES" => "Seleción",
+      "ShortName_UK" => "Selection",
+      "Title" => "Seleção",
+      "Title_ES" => "Seleción",
+      "Title_UK" => "Selection",
+   ),
+   "Certificates" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "0",
+      "Coordinator" => "1",
+      "Data" => array("No","Edit","Delete","Event","Friend","Status","Selected","Certificate","Certificate_CH","Inscription_Certificate_Generated_Cell","GenCert","Inscription_Certificate_Mailed_Cell","MailCert","Code"),
+      "Edit_Admin" => "1",
+      "Edit_Coordinator" => "1",
+      "Friend" => "1",
+      "Name" => "Certificados",
+      "Name_ES" => "Certificados",
+      "Name_UK" => "Certificates",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Certificados",
+      "ShortName_ES" => "Certificados",
+      "ShortName_UK" => "Certificates",
+      "Title" => "Certificados",
+      "Title_ES" => "Certificados",
+      "Title_UK" => "Certificates",
+   ),
 );
+

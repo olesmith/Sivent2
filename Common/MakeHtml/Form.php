@@ -4,18 +4,18 @@
 trait MakeHtml_Form
 {
     //*
-    //* function Html_Form_Start, Parameter list: $edit
+    //* function Html_Form_Start, Parameter list: $edit,$action=""
     //*
     //* Starts html form.
     //* 
     //*
 
-    function Html_Form_Start($edit)
+    function Html_Form_Start($edit,$action="")
     {
         $html="";
         if ($edit==1)
         {
-            $html=$this->StartForm();
+            $html=$this->StartForm($action);
         }
 
         return $html;
@@ -49,10 +49,12 @@ trait MakeHtml_Form
     //* 
     //*
 
-    function Html_Form($contents,$edit,$buttons="",$hiddens=array())
+    function Html_Form($contents,$edit,$buttons="",$hiddens=array(),$action="")
     {
+        if (empty($hiddens)) { $hiddens=array("Update" => 1); }
+        
         $html=
-            $this->Html_Form_Start($edit).
+            $this->Html_Form_Start($edit,$action).
             $contents.
             "";
         

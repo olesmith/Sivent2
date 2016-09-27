@@ -6,7 +6,7 @@ array
       "Sql" => "ENUM",
       "Values" => array("Aguardando Início das Inscrições","Inscrições Abertas","Inscrições Encerradas"),
       "Values_UK" => array("Awaiting Inscriptions to Open","Inscriptions Open","Inscriptions Closed"),
-      "SearchDefault"   => 2,
+      "SearchDefault"   => 0,
       "Default"   => 2,
       "Public"   => 1,
       "Person"   => 1,
@@ -15,7 +15,7 @@ array
       "Coordinator" => 1,
       "Assessor"  => 1,
       "Search"  => TRUE,
-      "SearchCheckBox"  => TRUE,
+      "SearchCheckBox"  => FALSE,
    ),
     "Visible" => array
    (
@@ -230,6 +230,7 @@ array
    (
       "Name" => "Grade Publicado",
       "Name_UK" => "Schedule Public",
+      "SelectCheckBoxes"  => 2,
 
       "Sql" => "ENUM",
       "Values" => array("Não","Sim"),

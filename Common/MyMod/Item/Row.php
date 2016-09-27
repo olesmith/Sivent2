@@ -69,7 +69,13 @@ trait MyMod_Item_Row
                           array("CLASS" => 'title'),
                           FALSE
                        ),
-                       $this->MyMod_Item_Data_Cell($redit,$item,$data,$plural)
+                       $this->MyMod_Item_Data_Cell
+                       (
+                          $redit,
+                          $item,
+                          $data,
+                          $plural
+                       )
                     );
                 }
                 elseif (!empty($this->Actions[ $data ]))
@@ -81,15 +87,15 @@ trait MyMod_Item_Row
                        $this->MyActions_Entry($data,$item)
                     );
                 }
-                /* elseif (!empty($this->CellMethods[ $data ])) */
-                /* { */
-                /*     array_push */
-                /*     ( */
-                /*        $row, */
-                /*        $this->B($this->$data().":"), */
-                /*        $this->$data($item) */
-                /*     ); */
-                /* } */
+                elseif (!empty($this->CellMethods[ $data ]))
+                {
+                    array_push
+                    (
+                       $row,
+                       $this->B($this->$data().":"),
+                       $this->$data($item)
+                    );
+                }
                 //else { var_dump("No access: $data"); var_dump($this->ItemData($data)); }
             }
         }

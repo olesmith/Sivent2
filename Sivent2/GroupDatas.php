@@ -13,8 +13,8 @@ class GroupDatas extends DBGroups
     function GroupDatas($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name");
-        $this->Sort=array("Name");
+        $this->AlwaysReadData=array("Text");
+        $this->Sort=array("Text");
     }
 
 

@@ -96,8 +96,6 @@ trait Sql_Select_Unique
     {
         $items=$this->Sql_Select_Hashes($where,array("ID"),array("ID"));
         
-        var_dump("oi");
-        var_dump($items);
         $item=array();
         if (count($items)>0)
         {

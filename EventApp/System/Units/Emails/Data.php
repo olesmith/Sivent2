@@ -13,7 +13,7 @@ array
       "Default_UK"   => "",
       
       "Size" => "50",
-      "Sql" => "TEXT",
+      "Sql" => "BLOB",
       
       "Public"   => 0,
       "Person"   => 1,
@@ -34,7 +34,7 @@ array
       "Default_UK"   => "",
       
       "Size" => "50x10",
-      "Sql" => "TEXT",
+      "Sql" => "BLOB",
       
       "Public"   => 0,
       "Friend"    => 1,

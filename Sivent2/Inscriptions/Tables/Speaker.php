@@ -1,6 +1,6 @@
 <?php
 
-class InscriptionsTablesSpeaker extends InscriptionsRead
+class InscriptionsTablesSpeaker extends InscriptionsCells
 {
     //*
     //* function Inscription_Speaker_Link, Parameter list: 
@@ -73,11 +73,12 @@ class InscriptionsTablesSpeaker extends InscriptionsRead
             }
             
             $form=
+                $this->H(3,$this->MyLanguage_GetMessage("Speaker_Data_Table_Title")).
                 $this->SpeakersObj()->MyMod_Item_Group_Tables_Form
                 (
                    $edit,
                    "SaveSpeaker",
-                   $this->SpeakersObj()->MyMod_Item_SGroups($edit,3),
+                   $this->SpeakersObj()->MyMod_Item_SGroups($edit,2),
                    $speaker,
                    TRUE,
                    TRUE, //plural
@@ -87,7 +88,7 @@ class InscriptionsTablesSpeaker extends InscriptionsRead
                 $this->Inscription_Speaker_Schedule_Table($speaker).
                 "";
 
-            $form=array(array($form));
+            $form=array(array($this->FrameIt($form)));
         }
         
         return $form;

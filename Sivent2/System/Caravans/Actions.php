@@ -1,25 +1,73 @@
 array
 (
-   "SeeInscription" => array
-   (
-      "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Edit&ID=#ID#1",
-      "Title"    => "Inscrição",
-      "Title_UK" => "Inscription",
-      "Name"     => "Inscrição",
-      "Name_UK"   => "Inscrição",
-      
-      "Public"   => 0,
-      "Person"   => 0,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-      "Admin"    => 1,
-      "AccessMethod"    => "CheckEditAccess",
-  ),
+      'Search' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
+      'Add' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
+      'Copy' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
+      'Show' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowAccess",
+      ),
+      'Edit' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditAccess",
+      ),
+      'EditList' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
+      'Delete' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod"  => "CheckDeleteAccess",
+      ),
    "Caravaneers" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Caravans&Action=Caravaneers&ID=#ID#1",
+      "HrefArgs" => "?ModuleName=Caravans&Action=Caravaneers&ID=#ID",
       "Title"    => "Participantes da Caravana",
       "Title_UK" => "Caravan Participantes",
       "Name"     => "Caravaneiros",

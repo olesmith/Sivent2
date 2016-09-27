@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -84,6 +83,7 @@ array
             "Event" => 1,
             "Submissions" => 1,
             "Criterias" => 1,
+            "Assessments" => 1,
             "Times" => 1,
             "Rooms" => 1,
             "Schedule" => 1,
@@ -93,6 +93,7 @@ array
             "Event" => 1,
             "Submissions" => 1,
             "Criterias" => 1,
+            "Assessments" => 1,
             "Times" => 1,
             "Rooms" => 1,
             "Schedule" => 1,
@@ -148,4 +149,3 @@ array
       ),
    ),
 );
-?>

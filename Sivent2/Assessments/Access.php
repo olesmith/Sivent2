@@ -10,6 +10,19 @@ class AssessmentsAccess extends ModulesCommon
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $event=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess($event=array())
+    {
+        $res=$this->SubmissionsObj()->HasModuleAccess($event);
+
+        return $res;
+    }
+
+    //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be viewed. Admin may -
@@ -21,11 +34,25 @@ class AssessmentsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        $res=TRUE;
+         $res=$this->HasModuleAccess();
+
+         return $res;
+    }
+    
+    //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
 
         return $res;
     }
-
+ 
     //*
     //* function CheckEditAccess, Parameter list: $item=array()
     //*
@@ -38,8 +65,28 @@ class AssessmentsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
          
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=
+            $this->Current_User_Coordinator_Is()
+            &&
+            $this->HasModuleAccess();
         
+        return $res;
+    }
+    
+    //*
+    //* function CheckEditListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //*
+
+    function CheckEditListAccess($item=array())
+    {
+        $res=
+            $this->Current_User_Coordinator_Is()
+            &&
+            $this->HasModuleAccess();
+       
         return $res;
     }
     
@@ -55,11 +102,10 @@ class AssessmentsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
          
-        $res=$this->Current_User_Event_Coordinator_Is();
-
-        //add delete check
-        //$nsubmissions=$this->SubmissionsObj()->Sql_Select_NHashes($this->UnitEventWhere(array("Area" => $item[ "ID" ])));
-        //if ($nsubmissions>0) { $res=FALSE; }
+        $res=
+            $this->Current_User_Coordinator_Is()
+            &&
+            $this->HasModuleAccess();
         
         return $res;
     }

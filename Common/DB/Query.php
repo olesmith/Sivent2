@@ -72,7 +72,7 @@ trait DB_Query
                 )
             );
         }
-        
+
         return $res;
     }
 

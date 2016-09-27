@@ -21,9 +21,17 @@ trait MyMod_Item_Data
         }
         
         $value=$this->MyMod_Data_Fields($edit,$item,$data,$plural,$tabindex="",$rdata);
-        if ($edit==1 && $this->MyMod_Data_Field_Is_Date($data))
+        if  ($edit==1 && $this->MyMod_Data_Field_Is_Date($data))
         {
-            $value.=" DD/MM/YYYY";
+            $title="DD/MM/YYYY";
+            if ($plural)
+            {
+                $value=$this->Span($value,array("TITLE" => $title));
+            }
+            else
+            {
+                $value.=" ".$title;
+            }
         }
         
         if (
@@ -95,7 +103,7 @@ trait MyMod_Item_Data
         }
         
         $options[ "TITLE" ]=$title;
-        return $this->Span($name,$options).$add;
+        return $this->Span($this->B($name),$options).$add;
     }
 
     

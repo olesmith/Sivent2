@@ -125,7 +125,7 @@ trait MyMod_Data_Fields_Sql
            $this->MyMod_Data_Fields_Module_SubItems_2Options
            (
               $data,
-              $this->SortList($hashes,$datas)
+              $this->MyMod_Sort_List($hashes,$datas)
            ),
            $value
         );

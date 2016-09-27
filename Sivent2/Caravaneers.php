@@ -6,7 +6,7 @@ include_once("Caravaneers/Certificate.php");
 
 
 
-class Caravaneers extends CaravaneersCertificate
+class Caravaneers extends Caravaneers_Certificate
 {
     var $Certificate_Type=2;
     
@@ -19,7 +19,7 @@ class Caravaneers extends CaravaneersCertificate
     function Caravaneers($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration");
+        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration","Certificate","Certificate_CH");
         $this->Sort=array("Name");
     }
 
@@ -146,11 +146,11 @@ class Caravaneers extends CaravaneersCertificate
         }
         
         $this->Sql_Select_Hash_Datas_Read($item,array("TimeLoad","Code","Certificate"));
+        
         $this->PostProcess_Certificate_TimeLoad($item,$updatedatas);
         $this->PostProcess_Code($item,$updatedatas);
-        
         $this->PostProcess_Certificate($item);
-        
+
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);

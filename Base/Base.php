@@ -853,36 +853,36 @@ class Base extends Filters
         return $ns;
     }
 
-    //*
-    //* function SortListWithIDs, Parameter list: &$names,&$values
-    //*
-    //* Sort $names, but alos rearranges order of $values.
-    //*
+    /* //\* */
+    /* //\* function MyMod_Sort_ListWithIDs, Parameter list: &$names,&$values */
+    /* //\* */
+    /* //\* Sort $names, but alos rearranges order of $values. */
+    /* //\* */
 
-    function SortListWithIDs(&$names,&$values)
-    {
-        if (count($names)==count($values))
-        {
-            $hash=array();
-            for ($n=0;$n<count($names);$n++)
-            {
-                $val=$names[ $n ];
-                while (isset($hash[ $val ])) { $val.="a"; }
-                $hash[ $val ]=$values[$n ];
-            }
+    /* function SortListWithIDs_20160910(&$names,&$values) */
+    /* { */
+    /*     if (count($names)==count($values)) */
+    /*     { */
+    /*         $hash=array(); */
+    /*         for ($n=0;$n<count($names);$n++) */
+    /*         { */
+    /*             $val=$names[ $n ]; */
+    /*             while (isset($hash[ $val ])) { $val.="a"; } */
+    /*             $hash[ $val ]=$values[$n ]; */
+    /*         } */
 
-            $keys=array_keys($hash);
-            sort($keys);
+    /*         $keys=array_keys($hash); */
+    /*         sort($keys); */
 
-            $names=array();
-            $values=array();
-            foreach ($keys as $key)
-            {
-                array_push($names,$key);
-                array_push($values,$hash[ $key ]);
-            }
-        }
-    }
+    /*         $names=array(); */
+    /*         $values=array(); */
+    /*         foreach ($keys as $key) */
+    /*         { */
+    /*             array_push($names,$key); */
+    /*             array_push($values,$hash[ $key ]); */
+    /*         } */
+    /*     } */
+    /* } */
 
     //*
     //* function HashKeySetAndTRUE, Parameter list: $hash,$key

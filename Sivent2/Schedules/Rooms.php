@@ -167,12 +167,13 @@ class SchedulesRooms extends SchedulesDates
             $friendinfo="-";
             
             $options=array();
+            $area=array();
             $class="";
             if (!empty($submission[ "Area" ]))
             {
                 $area=$this->AreasObj()->Sql_Select_Hash($submission[ "Area" ],array("Color","Background"));
                 $class='Area'.$submission[ "Area" ];
-                $options[ "CLASS" ]=$class;
+                $options[ "CLASS" ]=$class;                
             }
             
             if (!empty($submission[ "Friend" ]))
@@ -180,30 +181,59 @@ class SchedulesRooms extends SchedulesDates
                 $friend=$this->Speakers[ $submission[ "Friend" ] ];
                 $friendinfo=$this->FriendsObj()->FriendInfo($friend,$class);
             }
-
+            
+            $cell=
+                $this->B
+                (
+                 join("; ",$this->SubmissionsObj()->SubmissionAuthors($submission)).":\\newline\n"
+                ).
+                //$this->BR().
+                //$this->BR().
+                $this->I
+                (
+                   $this->SubmissionsObj()->SubmissionInfo($submission)
+                ).
+                "";
+            
+            if ($this->ApplicationObj()->LatexMode)
+            {
+                if (!empty($area[ "Color" ]))
+                {
+                    $cell_uuu=
+                        "\\sethlcolor{red}\n".
+                        "\\hl{\n".
+                        "   \\textcolor{white}{".
+                         $cell.
+                        "   }\n".
+                        "}";
+                }
+                
+                $cell=
+                    $this->Latex_Minipage
+                    (
+                       "5cm",
+                       $this->Latex_Env
+                       (
+                          "center",
+                          $this->Latex_Env("small",$cell)
+                       ),
+                       $align='c'
+                    );
+            }
+            else
+            {
+                
+                $cell.=
+                      $this->BR().
+                      $this->BR().
+                      $this->ScheduleRoomMenu($schedule).
+                    "";
+            }
             
             $cell=
                 array
                 (
-                   "Text" => $this->FrameIt
-                   (
-                      $this->Span
-                      (
-                         $this->SubmissionsObj()->SubmissionAuthors($submission),
-                         array("CLASS" => 'Bold')
-                      ).
-                      $this->BR().
-                      $this->BR().
-                      $this->Span
-                      (
-                         $this->SubmissionsObj()->SubmissionInfo($submission),
-                         array("CLASS" => 'Italic')
-                      ).
-                      $this->BR().
-                      $this->BR().
-                      $this->ScheduleRoomMenu($schedule).
-                      ""
-                   ),
+                   "Text" => $this->FrameIt($cell),
                    "Options" => $options
                 );
         }

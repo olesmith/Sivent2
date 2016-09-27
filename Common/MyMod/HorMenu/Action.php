@@ -28,16 +28,19 @@ trait MyMod_HorMenu_Action
                 if (!$res || $caction==$action)
                 {
                     $raction=$this->Actions[ $action ][ "AltAction" ];
-               }
+                }
             }
+            elseif (!$res) { continue; }
 
             if (!empty($included[ $raction ])) { continue; }
 
-            //Exlude both - or just one
+            //Exclude both - or just one
             $included[ $raction ]=1;
             $included[ $action ]=1;
 
-            $href=$this->MyMod_HorMenu_Action($action,$cssclass,$id,$item,$title,$caction);
+            //20160911 $href=$this->MyMod_HorMenu_Action($action,$cssclass,$id,$item,$title,$caction);
+            $href=$this->MyMod_HorMenu_Action($raction,$cssclass,$id,$item,$title,$caction);
+            
             if (!empty($href))
             {
                 array_push($hrefs,$href);
@@ -98,12 +101,12 @@ trait MyMod_HorMenu_Action
             {
                 $itemname=$this->GetItemName();
 
-                $name=$this->Actions[ $action ][ "Name" ];
+                $name=$this->GetRealNameKey($this->Actions[ $action ],"Name");
                 $name=preg_replace('/#ID/',$id,$name);
-                $name=preg_replace('/#ItemName/',$this->ItemName,$name);
-                $name=preg_replace('/#ItemsName/',$this->ItemsName,$name);
+                $name=preg_replace('/#ItemName(_\S\S)?/',$this->MyMod_ItemName(),$name);
+                $name=preg_replace('/#ItemsName(_\S\S)/',$this->MyMod_ItemName("ItemsName"),$name);
 
-               $href=$this->SPAN($name,array("CLASS" => 'inactivemenuitem'));
+                $href=$this->SPAN($name,array("CLASS" => 'inactivemenuitem'));
             }
         }
 

@@ -1,5 +1,41 @@
 array
 (
+      'Emails' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
+      'Add' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
+      'Search' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
+      'EditList' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+      ),
    "Friend" => array
    (
       "Href"     => "",
@@ -73,7 +109,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
-      "AccessMethod"    => "CheckCertificateAccess",
+      "AccessMethod"    => "CheckCertificatesAccess",
   ),
    "FriendCollaborations" => array
    (

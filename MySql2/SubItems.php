@@ -546,7 +546,7 @@ class SubItems extends Enums
         if ($addempty)
         {
              array_unshift($this->ItemData[ $data ][ "IDs" ],0);
-             array_unshift($this->ItemData[ $data ][ "Names" ],$this->ItemData[ $data ][ "EmptyName" ]);
+             array_unshift($this->ItemData[ $data ][ "Names" ],$this->GetEnumEmptyName($data));
         }
 
         return array

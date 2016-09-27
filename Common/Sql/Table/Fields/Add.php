@@ -48,11 +48,10 @@ trait Sql_Table_Fields_Add
         if ($data=="Default") { die("Item data (SQL column) named 'Default' unappropriate!"); }
 
         if (
-              !empty($datadef[ "Default" ])
+              
+              $this->Sql_Table_Field_Default_Should($data,$datadef)
               &&
               !preg_match('/\s+DEFAULT\s+/',$sqltype)
-              &&
-              !preg_match('/^(TEXT)$/i',$datadef[ "Sql" ])
            )
         {
             $sqltype.=" DEFAULT '".$datadef[ "Default" ]."'";

@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Status",
          "Event","Type","Area","Level",
          "SubmissionAuthorsCell","Name","Title",
@@ -14,7 +14,7 @@ array
       ),
       "Data_UK" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Status",
          "Event","Type","Area","Level",
          "SubmissionAuthorsCell","Name","Title_UK",
@@ -32,7 +32,7 @@ array
        "Name_UK" => "Authors & Certificates",
        "Data" => array
        (
-          "No","Edit",
+          "No","Edit","Copy",
           //"Delete",
           "GenCert","MailCert","Assessments",
           "Status",
@@ -53,17 +53,17 @@ array
       "Name_UK" => "Details",
       "Data" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Author1","Status",
          "Type","Area","Level",
-         "Name","Title","Keywords",
+         "Name","Title","File",
       ),
       "Data_UK" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Author1","Status",
          "Type","Area","Level",
-         "Name","Title_UK","Keywords",
+         "Name","Title_UK","File",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -77,7 +77,7 @@ array
       "Name_UK" => "PreInscriptions",
       "Data" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Name",
          "Type","Area","Level","Friend",
          "Title","Vacancies",
@@ -85,7 +85,7 @@ array
       ),
       "Data_UK" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Name","Status",
          "Type","Area","Level","Friend",
          "Title_UK","Vacancies",
@@ -94,7 +94,7 @@ array
       "Admin" => 1,
       "Person" => 0,
       "Public" => 1,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
       "AccessMethod" => "Event_PreInscriptions_Has",
    ),
@@ -104,14 +104,14 @@ array
       "Name_UK" => "Assessments",
       "Data" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Name","Title","Friend",
          "Type","Area","Level","Result","Status",
          
       ),
       "Data_UK" => array
       (
-         "No","Edit","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","GenCert","Assessments",
          "Name",
          "Title_UK","Friend",
          "Type","Area","Level","Result","Status",
@@ -120,7 +120,7 @@ array
       "Admin" => 1,
       "Person" => 0,
       "Public" => 1,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
       "GenTableMethod" => "Submission_Assessments_Table",
       "AccessMethod" => "Event_Assessments_Has",

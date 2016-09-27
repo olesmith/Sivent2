@@ -160,7 +160,7 @@ class SendMail extends LeftMenu
         $mailhash[ "Body" ].=
             "\n-----\n".
             "####################################################################################\n".
-            $this->MyLanguage_GetMessage("MailTrailer").
+            $this->MyLanguage_GetMessage("MailTrailer")."\n".
             "####################################################################################";
 
         $filters=array_merge

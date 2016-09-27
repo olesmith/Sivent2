@@ -1,218 +1,269 @@
 array
 (
-   "011_ShowEvent" => array
+   "01_Inscription" => array
    (
-      "Name" => "Sobre o Evento",
-      "Title" => "Informações do Evento",
-      "Name_UK" => "About the Event",
-      "Title_UK" => "Event Info",
-
-      'Href' => '?Unit=#Unit&ModuleName=Events&Action=Show&Event=#Event',
-
-      'Public'    => 1,
-      'Person'    => 0,
-      'Admin'     => 0,
-
-      'Friend'     => 1,
-      'Coordinator' => 0,
-   ),
-   "012_ShowEvent" => array
-   (
-
-      "Name" => "Dados do Evento",
-      "Title" => "Dados do Evento",
-      "Name_UK" => "Event Data",
-      "Title_UK" => "Event Data",
-
-       'Href' => '?Unit=#Unit&ModuleName=Events&Action=Edit&Event=#Event',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-   ),
-   "021_Inscription" => array
-   (
+      "AccessMethod" => "FriendIsInscribed",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event",
       "Name" => "Inscrição",
-      "Title" => "Minha Inscrição",
+      "Name_ES" => "Inscrición",
       "Name_UK" => "Inscription",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Inscrição",
+      "ShortName_ES" => "Inscrición",
+      "ShortName_UK" => "Inscription",
+      "Title" => "Minha Inscrição",
+      "Title_ES" => "Mi Inscrición",
       "Title_UK" => "My Inscription",
-
-      'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=Inscription&Event=#Event',
-
-      'AccessMethod'    => "FriendIsInscribed",
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 0,
-
-      'Friend'     => 1,
-      'Coordinator' => 0,
    ),
-   "022_Inscriptions" => array
+   "02_ShowEvent" => array
    (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Show&Event=#Event",
+      "Name" => "Sobre",
+      "Name_ES" => "Sobre",
+      "Name_UK" => "About",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Sobre",
+      "ShortName_ES" => "Sobre",
+      "ShortName_UK" => "About",
+      "Title" => "Sobre o Evento",
+      "Title_ES" => "Sobre el Evento",
+      "Title_UK" => "About the Event",
+   ),
+   "03_EditEvent" => array
+   (
+      "AccessMethod" => "Current_User_Event_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Edit&Event=#Event",
+      "Name" => "Setup",
+      "Name_ES" => "Setup",
+      "Name_UK" => "Setup",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Setup",
+      "ShortName_ES" => "Setup",
+      "ShortName_UK" => "Setup",
+      "Title" => "Setup do Evento",
+      "Title_ES" => "Setup",
+      "Title_UK" => "Event Setup",
+   ),
+   "04_Inscriptions" => array
+   (
+      "AccessMethod" => "Current_User_Event_Inscriptions_May_Access",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Search&Event=#Event",
       "Name" => "Inscrições",
-      "Title" => "Inscrições do Evento",
+      "Name_ES" => "Inscriciónes",
       "Name_UK" => "Inscriptions",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Inscrições",
+      "ShortName_ES" => "Inscriciónes",
+      "ShortName_UK" => "Inscriptions",
+      "Title" => "Inscrições do Evento",
+      "Title_ES" => "Inscriciónes do Evento",
       "Title_UK" => "Event Inscriptions",
-
-      'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=Search&Event=#Event',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
-   "021_Certificates" => array
+   "05_Certificates" => array
    (
-      "Name" => "Presenças e Certificados",
-      "Name_UK" => "Presences and Certificates",
-
-      'Href' => '?Unit=#Unit&ModuleName=Inscriptions&Action=EditList&Event=#Event&Inscriptions_GroupName=Certificates',
-      'AccessMethod' => 'HasCertificates',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
+      "AccessMethod" => "Current_User_Event_Certificates_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=EditList&Event=#Event&Inscriptions_GroupName=Certificates",
+      "Name" => "Certificados",
+      "Name_ES" => "Certificados",
+      "Name_UK" => "Certificates",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Certificados",
+      "ShortName_ES" => "Certificados",
+      "ShortName_UK" => "Certificates",
+      "Title" => "Presenças e Certificados",
+      "Title_ES" => "Certificados",
+      "Title_UK" => "Presences and Certificates",
    ),
-   "03_Collaborations" => array
+   "06_Collaborations" => array
    (
+      "AccessMethod" => "Current_User_Event_Collaborations_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Collaborations&Action=Search&Event=#Event",
       "Name" => "Colaborações",
-      "Title" => "Colaborações",
+      "Name_ES" => "Colaboraciones",
       "Name_UK" => "Collaborations",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Colaborações",
+      "ShortName_ES" => "Colaboraciones",
+      "ShortName_UK" => "Collaborations",
+      "Title" => "Colaborações",
+      "Title_ES" => "Colaboraciones",
       "Title_UK" => "Collaborations",
-
-      'Href' => '?Unit=#Unit&ModuleName=Collaborations&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasCollaborations',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
-   "040_Caravans" => array
+   "07_Caravans" => array
    (
+      "AccessMethod" => "Current_User_Event_Caravans_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Caravans&Action=Search&Event=#Event",
       "Name" => "Caravanas",
-      "Title" => "Gerenciar Caravanas",
+      "Name_ES" => "Caravanas",
       "Name_UK" => "Caravans",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Caravanas",
+      "ShortName_ES" => "Caravanas",
+      "ShortName_UK" => "Caravans",
+      "Title" => "Gerenciar Caravanas",
+      "Title_ES" => "Caravanas",
       "Title_UK" => "Manage Caravans",
-
-      'Href' => '?Unit=#Unit&ModuleName=Caravans&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasCaravans',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
-   "041_Caravaneers" => array
+   "09_Submissions" => array
    (
-      "Name" => "Caravaneiro(a)s",
-      "Title" => "Gerenciar Caravaneiro(a)s",
-      "Name_UK" => "Caravaneers",
-      "Title_UK" => "Manage Caravaneers",
-
-      'Href' => '?Unit=#Unit&ModuleName=Caravaneers&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasCaravans',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-   ),
-   "061_Submissions" => array
-   (
+      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=Search&Event=#Event",
       "Name" => "Atividades",
-      "Title" => "Gerenciar Atividades",
+      "Name_ES" => "Actividades",
       "Name_UK" => "Activities",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Atividades",
+      "ShortName_ES" => "Actividades",
+      "ShortName_UK" => "Activities",
+      "Title" => "Gerenciar Atividades",
+      "Title_ES" => "Actividades",
       "Title_UK" => "Manage Activities",
-
-      'Href' => '?Unit=#Unit&ModuleName=Submissions&Action=Search&Event=#Event',
-      'AccessMethod' => 'HasSubmissions',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
-   "062_Submissions_Pub" => array
+   "10_Submissions_Pub" => array
    (
+      "AccessMethod" => "SubmissionsPublic",
+      "Admin" => "0",
+      "Coordinator" => "0",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=Search&Event=#Event",
       "Name" => "Palestres",
-      "Title" => "Palestres do Event",
+      "Name_ES" => "Palestres",
       "Name_UK" => "Talks",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Palestres",
+      "ShortName_ES" => "Palestres",
+      "ShortName_UK" => "Talks",
+      "Title" => "Palestres do Event",
+      "Title_ES" => "Palestres",
       "Title_UK" => "Talks at the Event",
-
-      'Href' => '?Unit=#Unit&ModuleName=Submissions&Action=Search&Event=#Event',
-      'AccessMethod' => 'SubmissionsPublic',
-
-      'Public'    => 1,
-      'Person'    => 0,
-      'Admin'     => 0,
-
-      'Friend'     => 1,
-      'Coordinator' => 0,
    ),
-   "071_Schedule" => array
+   "11_Schedule" => array
    (
+      "AccessMethod" => "SchedulePublic",
+      "Admin" => "0",
+      "Coordinator" => "0",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Schedules&Action=Schedule&Event=#Event",
       "Name" => "Grade",
+      "Name_ES" => "Grade",
+      "Name_UK" => "Schedule",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Grade",
+      "ShortName_ES" => "Grade",
+      "ShortName_UK" => "Schedule",
       "Title" => "Mostrar Grade do Evento",
-      "Name_UK" => "Schedule",
+      "Title_ES" => "Mostrar Grade del Evento",
       "Title_UK" => "Show Event Schedule",
-
-      'Href' => '?Unit=#Unit&ModuleName=Schedules&Action=Schedule&Event=#Event',
-
-      'Public'    => 1,
-      'Person'    => 0,
-      'Admin'     => 0,
-
-      'Friend'     => 1,
-      'Coordinator' => 0,
-      'AccessMethod' => 'SchedulePublic',
    ),
-   "072_Schedule" => array
+   "12_Schedule" => array
    (
+      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Schedules&Action=Schedule&Event=#Event",
       "Name" => "Grade",
-      "Title" => "Grade do Evento",
+      "Name_ES" => "Grade",
       "Name_UK" => "Schedule",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Grade",
+      "ShortName_ES" => "Grade",
+      "ShortName_UK" => "Schedule",
+      "Title" => "Grade do Evento",
+      "Title_ES" => "Grade",
       "Title_UK" => "Event Schedule",
-
-      'Href' => '?Unit=#Unit&ModuleName=Schedules&Action=Schedule&Event=#Event',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-      'AccessMethod' => 'HasSubmissions',
    ),
-   "08_Speakers" => array
+   "13_Speakers" => array
    (
+      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Speakers&Action=Search&Event=#Event",
       "Name" => "Palestrantes",
+      "Name_ES" => "Palestrantes",
       "Name_UK" => "Speakers",
-
-      'Href' => '?Unit=#Unit&ModuleName=Speakers&Action=Search&Event=#Event',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-      'AccessMethod' => 'HasSubmissions',
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Palestrantes",
+      "ShortName_ES" => "Palestrantes",
+      "ShortName_UK" => "Speakers",
+      "Title" => "Palestrantes",
+      "Title_ES" => "Palestrantes",
+      "Title_UK" => "Speakers",
+   ),
+   "14_PreInscriptions" => array
+   (
+      "AccessMethod" => "Current_User_Event_PreInscriptions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=PreInscriptions&Action=Search&Event=#Event",
+      "Name" => "Preinscrições",
+      "Name_ES" => "Preinscriciones",
+      "Name_UK" => "Preinscriptions",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Preinscrições",
+      "ShortName_ES" => "Preinscriciones",
+      "ShortName_UK" => "Preinscriptions",
+      "Title" => "Preinscrições",
+      "Title_ES" => "Preinscriciones",
+      "Title_UK" => "Preinscriptions",
+   ),
+   "15_Presences" => array
+   (
+      "AccessMethod" => "Current_User_Event_Presences_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Presences&Action=Search&Event=#Event",
+      "Name" => "Presenças",
+      "Name_ES" => "Presencias",
+      "Name_UK" => "Presences",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Presenças",
+      "ShortName_ES" => "Presencias",
+      "ShortName_UK" => "Presences",
+      "Title" => "Presenças",
+      "Title_ES" => "Presencias",
+      "Title_UK" => "Presences",
    ),
 );
+

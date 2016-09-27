@@ -178,7 +178,7 @@ class ModuleLogs extends ModulesCommon
 
     function LogEntry($msgs,$level=5)
     {
-        $msgs="INSERT INTO 'Table'";
+        //$msgs="INSERT INTO 'Table'";
 
         if (is_array($msgs)) { $msgs=join("\n",$msgs); }
 

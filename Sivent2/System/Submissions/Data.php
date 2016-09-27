@@ -27,7 +27,7 @@ array
       "Friend" => 1,
       "Coordinator" => 1,
       
-      "Compulsory" => 1,
+      "Compulsory" => TRUE,
    ),
    "Event" => array
    (
@@ -87,7 +87,7 @@ array
       "Name_UK" => "Coauthor #1",
 
       "Sql" => "VARCHAR(256)",
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Size" => 35,
 
@@ -121,7 +121,7 @@ array
       "Name_UK" => "Coauthor #2",
 
       "Sql" => "VARCHAR(256)",
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Size" => 50,
 
@@ -163,9 +163,27 @@ array
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 2,
+      "Friend"     => 0,
       "Coordinator" => 2,
       "Assessor"  => 0,
+   ),
+   "Status" => array
+   (
+      "Name" => "Status",
+      "Name_UK" => "Status",
+
+      "Sql" => "ENUM",
+
+      "Search" => TRUE,
+      "Values" => array("Aguardando Avaliação","Deferido","Indeferido"),
+      "Values_UK" => array("Awaiting Assessment","Selected","Refused"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
    ),
    "Title" => array
    (
@@ -192,7 +210,7 @@ array
 
       "Sql" => "VARCHAR(256)",
 
-      "Search" => TRUE,
+      "Search" => FALSE,
       "Size" => 35,
 
       "Public"   => 1,
@@ -236,10 +254,10 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 2,
+      "Friend"     => 1,
       "Coordinator" => 2,
    ),
    "Vacancies" => array
@@ -254,12 +272,12 @@ array
       "Regexp" => "^\d+$",
       "Default" => 40,
 
-      "Search" => TRUE,
+      "Search" => FALSE,
 
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 2,
+      "Friend"     => 1,
       "Coordinator" => 2,
    ),
    "Area" => array
@@ -278,6 +296,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "Compulsory" => TRUE,
    ),
    "Level" => array
    (
@@ -312,7 +331,7 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"  => 2,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 2,
@@ -329,9 +348,9 @@ array
       "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
-      "Default"  => 1,
+      "Default"  => 0,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 2,
@@ -346,30 +365,12 @@ array
       "Sql" => "VARCHAR(256)",
       "Size" => 35,
 
-      "Search" => FALSE,
+      "Search" => TRUE,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 2,
-      "Coordinator" => 2,
-   ),
-   "Status" => array
-   (
-      "Name" => "Status",
-      "Name_UK" => "Status",
-
-      "Sql" => "ENUM",
-
-      "Search" => FALSE,
-      "Values" => array("Aguardando Avaliação","Deferido","Indeferido"),
-      "Values_UK" => array("Awaiting Assessment","Selected","Refused"),
-      "Default"  => 1,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 1,
       "Coordinator" => 2,
    ),
    "Certificate" => array
@@ -379,12 +380,12 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => FALSE,
+      "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -402,7 +403,7 @@ array
       "Regexp" => '^\d+$',
       "Default" => 2,
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -426,6 +427,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "Compulsory" => TRUE,
    ),
    "Summary" => array
    (
@@ -434,7 +436,7 @@ array
 
       "Sql" => "VARCHAR(1048)",
 
-      "Search" => TRUE,
+      "Search" => FALSE,
       "Size" => "50x5",
 
       "Public"   => 1,
@@ -443,6 +445,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "Compulsory" => TRUE,
    ),
    "File" => array
    (
@@ -470,7 +473,7 @@ array
 
       "Size" => "50",
       "Sql" => "VARCHAR(64)",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 1,
       "Friend" => 1,

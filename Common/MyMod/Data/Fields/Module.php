@@ -128,8 +128,9 @@ trait MyMod_Data_Fields_Module
     {
         if (empty($value) && !empty($item[ $data ])) { $value=$item[ $data ]; }
 
+        $empty=$this->GetEnumEmptyName($data);
         $emptytext="";
-        if (!empty($this->ItemData[ $data ][ "EmptyName" ])) { $emptytext=$this->ItemData[ $data ][ "EmptyName" ]; }
+        if (!empty($empty)) { $emptytext=$empty; }
 
         if (!empty($value))
         {
@@ -186,8 +187,9 @@ trait MyMod_Data_Fields_Module
 
         $subobject=$this->MyMod_Data_Fields_Module_2Object($data);
 
+        $empty=$this->GetEnumEmptyName($data);
         $emptytext="";
-        if (!empty($this->ItemData[ $data ][ "EmptyName" ])) { $emptytext=$this->ItemData[ $data ][ "EmptyName" ]; }
+        if (!empty($empty)) { $emptytext=$empty; }
 
         return $this->Html_Select_Hashes2Field
         (
@@ -315,7 +317,6 @@ trait MyMod_Data_Fields_Module
             (
                $where,
                $this->MyMod_Data_Fields_Module_Datas($data),
-               FALSE,
                join(",",$subobject->Sort)
             );
         }

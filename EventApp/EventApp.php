@@ -201,21 +201,27 @@ class EventApp extends MyEventAppMail
             return $this->MyApp_Titles();
         }
 
+        $contacts=array($unit[ "Url" ],$unit[ "Phone" ],$unit[ "Email" ]);
+        $contacts=preg_grep('/\S/',$contacts);
+
+        $address=
+            array
+            (
+               $unit[ "Area" ],
+               $unit[ "City" ],
+               $this->UnitsObj()->MyMod_Data_Fields_Show("State",$unit),
+               $unit[ "ZIP" ]
+            );
+        $address=preg_grep('/\S/',$address);
+
         return array
         (
            $unit[ "Name" ],
            $unit[ "Title" ],
            $unit[ "Address" ],
-           
-           $unit[ "Area" ].", ".
-           $unit[ "City" ]."-".
-           $this->UnitsObj()->MyMod_Data_Fields_Show("State",$unit).
-           ", CEP: ".
-           $unit[ "ZIP" ],
-           
-           $unit[ "Url" ]." - ".
-           $unit[ "Phone" ]." - ".
-           $unit[ "Email" ],
+                      
+           join(" - ",$address),
+           join(" - ",$contacts)
         );
     }
    
@@ -309,22 +315,8 @@ class EventApp extends MyEventAppMail
     function AppInfo()
     {
         $unit=$this->Unit();
-        $table=array();
-        if (!empty($unit))
-        {
-            $table=
-                array_merge
-                (
-                   $this->UnitInfoRow(),
-                   $this->UnitsObj()->MyMod_Item_Table
-                   (
-                      0,
-                      $this->Unit(),
-                      array(array("Title","Url","Email"))
-                   )
-                );
-        }
-       
+        $table=$this->AppUnitInfoTable();
+               
         $event=$this->Event();
         if (!empty($event))
         {
@@ -377,6 +369,33 @@ class EventApp extends MyEventAppMail
             );
     }
 
+    //*
+    //* function AppUnitInfoTable, Parameter list: 
+    //*
+    //* Creates application info table: Unit and Event, if defined.
+    //*
+
+    function AppUnitInfoTable()
+    {
+        $unit=$this->Unit();
+        $table=array();
+        if (!empty($unit))
+        {
+            $table=
+                array_merge
+                (
+                   $this->UnitInfoRow(),
+                   $this->UnitsObj()->MyMod_Item_Table
+                   (
+                      0,
+                      $this->Unit(),
+                      array(array("Title","Url","Email"))
+                   )
+                );
+        }
+
+        return  $table;
+    }
     
     //*
     //* function UnitLogos, Parameter list: $unit=array()
@@ -490,6 +509,16 @@ class EventApp extends MyEventAppMail
             $this->UnitsObj()->ShowUnits(0);
     }
     
+    //*
+    //* function Event_Inscriptions_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Inscriptions_DateSpan($event=array())
+    {
+        return $this->EventsObj()->Event_Inscriptions_DateSpan($event);
+    }
 }
 
 ?>

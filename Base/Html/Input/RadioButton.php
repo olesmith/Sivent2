@@ -39,23 +39,28 @@ function MakeRadio($name,$value,$checked=0,$disabled=0,$options=array())
 //*
 //*
 
-function MakeRadioSet($name,$values,$titles,$selected=-1)
+function MakeRadioSet($name,$values,$titles,$selected=-1,$tabindex=0,$options=array())
 {
-  $radios=array();
-  for ($n=0;$n<count($values);$n++)
-  {
-    $checked=0;
-    if (intval($selected)>0 && preg_match("/^$selected$/",$values[$n]) || count($values)==1)
+    $radios=array();
+    for ($n=0;$n<count($values);$n++)
     {
-      $checked=1;
+        $checked=0;
+        if (intval($selected)>0 && preg_match("/^$selected$/",$values[$n]) || count($values)==1)
+        {
+            $checked=1;
+        }
+
+        if (!empty($tabindex))
+        {
+            $options[ "TABINDEX" ]=$tabindex+$n;
+        }
+        
+        $radios[$n]=
+            $this->B($titles[$n].": ").
+            $this->MakeRadio($name,$values[$n],$checked,$disabled=0,$options);
     }
 
-    $radios[$n]=
-        $this->B($titles[$n].": ").
-        $this->MakeRadio($name,$values[$n],$checked);
-  }
-
-  return join("",$radios);
+    return join("",$radios);
 }
 
 

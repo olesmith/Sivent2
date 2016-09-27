@@ -147,20 +147,27 @@ class ItemLatex extends ItemPostProcess
     }
 
     //*
-    //* function GenerateLatexHorMenu , Parameter list:
+    //* function GenerateLatexHorMenu , Parameter list: $singular=TRUE
     //*
     //* Generates Latex menu of pritables.
     //* 
     //*
 
-    function GenerateLatexHorMenu()
+    function GenerateLatexHorMenu($item=array())
     {
-        $latexdocs=$this->LatexData[ "SingularLatexDocs" ][ "Docs" ];
-
         $hash=$this->Query2Hash();
-        $hash[ "Action" ]="Print";
-        $hash[ "ID" ]=$this->ItemHash[ "ID" ];
 
+        $hash[ "Action" ]="Search";
+        $key="PluralLatexDocs";
+        if (!empty($item))
+        {
+            $key="SingularLatexDocs";
+            $paction="Search";
+            $hash[ "ID" ]=$item[ "ID" ];
+            $hash[ "Action" ]="Latex";
+        }
+        
+        $latexdocs=$this->LatexData[ $key ][ "Docs" ];
 
         $hrefs=array();
         $n=1;
@@ -275,8 +282,8 @@ class ItemLatex extends ItemPostProcess
     function ItemLatexTablePrint($title,$item=array(),$noid=0,$rdatalist=array())
     {
         $this->ApplicationObj->LogMessage("ItemLatexTablePrint",$item[ "ID" ].": ".$this->GetItemName($item));
-        $item=$this->ApplyAllEnums($item);
-        $title=$this->ItemName.": ".$this->GetItemName($item);
+        $item=$this->ApplyAllEnums($item); 
+       $title=$this->ItemName.": ".$this->GetItemName($item);
 
         $this->LatexData[ "PageTitle" ]="\\begin{Large}\n".$title."\n\\end{Large}\n\n\\vspace{0.25cm}";
         $this->LatexData[ "NItemsPerPage" ]=50;

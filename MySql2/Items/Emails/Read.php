@@ -19,12 +19,6 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
         {
             $emails[ $friendkey ]=array();
         }
-
-        /* $where=array(); */
-        /* if ($this->CGI2IncludeAll()!=2) */
-        /* { */
-        /*     $where=$this->MyMod_Items_Search_Where(); */
-        /* } */
         
         $where=array_merge($this->MyMod_Items_Search_Where(),$rwhere);
 
@@ -68,7 +62,7 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
                 $ids[ $friend[ $friendkey ] ]=1;
             }
  
-            $emails[ $friendkey ]=$this->SortListByKey($remails,"Name");
+            $emails[ $friendkey ]=$this->Sort_List_ByKey($remails,"Name");
          }
 
         return $emails;

@@ -40,7 +40,7 @@ class HandleLatex extends HandlePrints
 
       $this->TrimLatexItems();
 
-      $items=$this->SortItems();
+      $items=$this->MyMod_Sort_Items();
       for ($n=0;$n<count($items);$n++)
       {
           if (method_exists($this,"InitPrint")) { $items[$n]=$this->InitPrint($items[$n]); }

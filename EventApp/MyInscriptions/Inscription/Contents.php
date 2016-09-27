@@ -9,48 +9,24 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
     //*
 
     function InscriptionContents($edit,$buttons=TRUE)
-    {
-        $open=TRUE;
-        if ($this->ApplicationObj->Event("EditDate")<$this->TimeStamp2DateSort())
-        {
-            $open=FALSE;
-            $edit=0;
-        }
-        
-        $date=$this->EventsObj()->MyMod_Data_Fields(0,$this->Event(),"EditDate");
+    {         
+        $method=$this->TableMethod();
 
-        $title1=$this->Messages("Contents__Title_Main");
-        $title2=
-            $this->Messages("Contents__Title_Editable_Until").
-            ": ".
-            $date;
-        
-        if ($edit==0)
-        {
-            $title2=
-                $this->Messages("Contents__Title_UnEditable_Since").
-                " ".$date; 
-        }
-
-        $table=
-            array_merge
-            (
-               $this->InscriptionFriendTable(0,$this->Friend),
-               $this->InscriptionTable
-               (
-                  $edit,
-                  $buttons,
-                  $this->Inscription,
-                  TRUE
-               )
-             );
-        
-        
         return
             $this->Anchor("TOP").
             $this->FrameIt
             (
-               $this->Html_Table("",$table)
+               $this->$method
+               (
+                  "",
+                  $this->InscriptionTable
+                  (
+                     $edit,
+                     $buttons,
+                     $this->Inscription,
+                     TRUE
+                  )
+               )
             ).
             "";
     }
@@ -65,6 +41,8 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
     {
         //Prevent edit, if Event EditDate surpassed.
         if ($this->Event("EditDate")<$this->MyTime_2Sort()) { $edit=0; }
+
+        if ($this->LatexMode()) { $edit=0; }
 
         return $edit;
     }
@@ -81,8 +59,8 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
         $args=$this->CGI_URI2Hash();
 
         $edit=$this->InscriptionFormEdit($edit);
-       
-        return
+        
+        $html=
             $this->Form_Run
             (
                array
@@ -116,6 +94,14 @@ class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
                )
             ).
             "";
+
+        return $this->FrameIt
+        (
+            $this->InscriptionFriendForm(1,$this->Friend).
+            $html.
+            $this->Inscription_Event_Typed_Tables($edit,$this->Inscription).
+            ""
+        );
     }
 }
 

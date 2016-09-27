@@ -78,7 +78,7 @@ class Presences_Register_Registers_Read extends Presences_Register_Registers_Whe
 
     function Presences_Schedule_Friends_Read($schedule,$schedules,$presences)
     {
-        return $this->SortList
+        return $this->MyMod_Sort_List
         (
            $this->FriendsObj()->Sql_Select_Hashes_ByID
            (

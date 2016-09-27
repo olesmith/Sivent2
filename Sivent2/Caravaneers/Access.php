@@ -1,6 +1,6 @@
 <?php
 
-class CaravaneersAccess extends ModulesCommon
+class Caravaneers_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (
@@ -10,19 +10,31 @@ class CaravaneersAccess extends ModulesCommon
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $item=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess()
+    {
+        $res=$this->CaravansObj()->HasModuleAccess();
+
+        return $res;
+    }
+
+    //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be viewed. Admin may -
     //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
-    //* Activated in System::Friends::Profiles.
     //*
 
     function CheckShowAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->Current_User_Event_Coordinator_Is();
-
+        $res=$this->HasModuleAccess();
+       
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
             if ($item[ "Friend" ]=$this->LoginData("ID"))
@@ -31,6 +43,22 @@ class CaravaneersAccess extends ModulesCommon
             }
         }
 
+        return $res;
+    }
+    
+    //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        if (empty($item)) { return TRUE; }
+
+        $res=$this->HasModuleAccess();
+       
         return $res;
     }
 
@@ -45,7 +73,19 @@ class CaravaneersAccess extends ModulesCommon
     function CheckEditAccess($item=array())
     {
         return $this->CheckShowAccess($item);
-   }
+    }
+    
+    //*
+    //* function CheckEditListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //*
+
+    function CheckEditListAccess($item=array())
+    {
+        return $this->CheckShowListAccess();
+    }
     
     //*
     //* function CheckDeleteAccess, Parameter list: $item=array()
@@ -56,7 +96,7 @@ class CaravaneersAccess extends ModulesCommon
 
     function CheckDeleteAccess($item=array())
     {
-        return $this->CheckShowAccess($item);
+        return $this->CheckEditAccess($item);
     }
     
     //*

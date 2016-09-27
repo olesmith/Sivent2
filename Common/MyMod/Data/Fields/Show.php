@@ -168,7 +168,7 @@ trait MyMod_Data_Fields_Show
             elseif ($this->ItemData[ $data ][ "Iconify" ])
             {
                 $file=$item[ "ID" ]."_".$data.".png";
-                 if (!empty($item[ $data ]))
+                if (!empty($item[ $data ]))
                 {
                     $value=$this->IconText
                     (
@@ -262,9 +262,9 @@ trait MyMod_Data_Fields_Show
             else
             {
                 if (
-                  preg_match('/^(\S+)_(.+)/',$data,$matches) &&
-                  !empty($this->ItemData[ $matches[1] ][ "SqlObject" ])
-                )
+                      preg_match('/^(\S+)_(.+)/',$data,$matches) &&
+                      !empty($this->ItemData[ $matches[1] ][ "SqlObject" ])
+                   )
                 {
                     $basedata=$matches[1];
 
@@ -297,7 +297,7 @@ trait MyMod_Data_Fields_Show
         {
             $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
         }
-
+        
         if (!$plural)
         {
             $value.=$this->FieldComment($data);
@@ -334,34 +334,33 @@ trait MyMod_Data_Fields_Show
 
     function MyMod_Data_Field_Show_Text_HTML($data,$value)
     {
-            $size=$this->ItemData[ $data ][ "Size" ];
-            $size=preg_split('/\s*x\s*/',$size);
+        $size=$this->ItemData[ $data ][ "Size" ];
+        $size=preg_split('/\s*x\s*/',$size);
 
-            $width=50;
-            if ($size[0]) { $width=$size[0]; }
-            $value=preg_replace("/(\s*\n\s*)+/","<BR>\n",$value);
+        $width=50;
+        if ($size[0]) { $width=$size[0]; }
+        $value=preg_replace("/(\s*\n\s*)+/","<BR>\n",$value);
 
-            $values=preg_split('/\s+/',$value);
-            $rvalues=array();
+        $values=preg_split('/\s+/',$value);
+        $rvalues=array();
 
-            $rvalue="";
-            foreach ($values as $svalue)
+        $rvalue="";
+        foreach ($values as $svalue)
+        {
+            if (strlen($rvalue.$svalue)<$width)
             {
-                if (strlen($rvalue.$svalue)<$width)
-                {
-                    $rvalue.=" ".$svalue;
-                }
-                else
-                {
-                    array_push($rvalues,$rvalue);
-                    $rvalue=$svalue;
-                }
+                $rvalue.=" ".$svalue;
             }
+            else
+            {
+                array_push($rvalues,$rvalue);
+                $rvalue=$svalue;
+            }
+        }
 
-            if (preg_match('/\S/',$rvalue)) { array_push($rvalues,$rvalue); }
+        if (preg_match('/\S/',$rvalue)) { array_push($rvalues,$rvalue); }
 
-            $value=join($this->BR(),$rvalues);
-        return $value;
+        return join($this->BR(),$rvalues);
     }
 
     //*

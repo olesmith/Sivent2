@@ -17,7 +17,27 @@ class Units extends MyUnits
         $this->Sort=array("Name");
         $this->IDGETVar="Unit";
         $this->UploadFilesHidden=FALSE;
+        $this->SqlWhere=array("ID" => $this->ApplicationObj()->Unit("ID"));
    }
+    
+    //*
+    //* function MyMod_Messages_Files, Parameter list: 
+    //*
+    //* Returns list of module messaged files.
+    //*
+
+    function MyMod_Messages_Files()
+    {
+        return 
+            array_merge
+            (
+               array
+               (
+                  "System/Units/LeftMenu.php",
+               ),
+               parent::MyMod_Messages_Files()
+            );
+    }
 }
 
 ?>

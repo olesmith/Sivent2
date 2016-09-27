@@ -1,8 +1,9 @@
 <?php
 
 include_once("../EventApp/MyPermissions.php");
+include_once("Permissions/Access.php");
 
-class Permissions extends MyPermissions
+class Permissions extends Permissions_Access
 {
     //*
     //* function Permissions, Parameter list: $args=array()
@@ -18,90 +19,6 @@ class Permissions extends MyPermissions
         $this->NonGetVars=array("Event","CreateTable");
     }
 
-
-    //*
-    //* function PreActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreActions()
-    {
-        parent::PreActions();
-    }
-
-
-    //*
-    //* function PostActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostActions()
-    {
-        parent::PostActions();
-    }
-
-    
-    //*
-    //* function PreProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreProcessItemDataGroups()
-    {
-        parent::PreProcessItemDataGroups();
-    }
-
-    //*
-    //* function PostProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostProcessItemDataGroups()
-    {
-         parent::PostProcessItemDataGroups();
-   }
-
-    //*
-    //* function PreProcessItemData, Parameter list:
-    //*
-    //* Pre process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
-
-    function PreProcessItemData()
-    {
-        parent::PreProcessItemData();
-    }
-    
-   
-    //*
-    //* function PostProcessItemData, Parameter list:
-    //*
-    //* Post process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
-
-    function PostProcessItemData()
-    {
-        parent::PostProcessItemData();
-    }
-
-    
-    
-    //*
-    //* function PostInit, Parameter list:
-    //*
-    //* Runs right after module has finished initializing.
-    //*
-
-    function PostInit()
-    {
-        parent::PostInit();
-    }
 
     //*
     //* function PostProcess, Parameter list: $item

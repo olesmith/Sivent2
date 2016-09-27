@@ -13,7 +13,12 @@ trait MyApp_Logging
         if ($this->Logging)
         {
            $this->MyMod_SubModule_Load("Logs",TRUE,TRUE);
-           $this->LogsObject()->LogEntry($this->AppName);
+
+           $module=$this->CGI_GET("ModuleName");
+           if (empty($module))
+           {
+               $this->LogsObject()->LogEntry($this->AppName);
+           }
         }
 
     }

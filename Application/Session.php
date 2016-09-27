@@ -146,26 +146,50 @@ class Session extends Login
 
     function HandleShowSessions()
     {
-        if ($this->Profile!="Admin") { die("Only admin may list users"); }
+        if ($this->Profile!="Admin") { die("Only admin may list sessions"); }
 
-        $sessions=$this->MySqlRightJoin
+        $sqltable=$this->GetSessionsTable();
+        
+        $sessions=$this->Sql_Select_Hashes
         (
-           $this->GetSessionsTable(),
-           "",
            array(),
-           FALSE,
-           ""
+           array(),
+           "",
+           "",
+           $sqltable
          );
 
         $session=array_pop($sessions);
         array_push($sessions,$session);
         $keys=array_keys($session);
-        sort($keys);
+        //sort($keys);
 
+        $delete=$this->CGI_GET("Session");
+
+        $args=$this->CGI_URI2Hash();
+        
         $table=array();
         foreach ($sessions as $session)
         {
-            $row=array();
+            $href="";
+            if (!empty($delete) && $session[ "ID" ]==$delete)
+            {
+                $res=$this->Sql_Delete_Item($delete,"ID",$sqltable);
+                $href="Removed";
+            }
+            else
+            {
+                $args[ "Session" ]=$session[ "ID" ];
+                $href=
+                    $this->Href
+                    (
+                       "?".$this->CGI_Hash2URI($args),
+                       "Remove",
+                       "Remove Session/Login"
+                    );
+            }
+            
+            $row=array($href);
             foreach ($keys as $key)
             {
                 array_push($row,$session[ $key ]);
@@ -175,7 +199,7 @@ class Session extends Login
         }
 
         $this->MyApp_Interface_Head();
-
+        array_unshift($keys,"");
         echo
             $this->H(1,"Sessões Ativas").
             $this->Html_Table

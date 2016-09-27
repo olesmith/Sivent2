@@ -18,6 +18,8 @@ class Times extends TimesAccess
         $this->AlwaysReadData=array("Unit","Event","Sort","Name","Duration","StartHour","StartMin","EndHour","EndMin",);
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Sort","Name");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

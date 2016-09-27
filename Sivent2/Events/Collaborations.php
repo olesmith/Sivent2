@@ -23,6 +23,23 @@ class EventsCollaborations extends EventsCreate
     }
 
     //*
+    //* function Event_Collaborations_May, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has collaborations.
+    //*
+
+    function Event_Collaborations_May($item=array())
+    {
+        $res=
+            $this->Event_Collaborations_Has($item)
+            &&
+            $this->CollaborationsObj()->HasModuleAccess()
+            ;
+
+        return $res;
+    }
+
+    //*
     //* function Event_Collaborations_Inscriptions_Has, Parameter list: $item=array()
     //*
     //* Returns TRUE if event has collaborations.

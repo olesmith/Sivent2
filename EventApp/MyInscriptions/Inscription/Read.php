@@ -33,7 +33,27 @@ class MyInscriptionsInscriptionRead extends MyInscriptionsQuest
 
     function ReadInscription()
     {
-        $this->Inscription=$this->InscriptionsObj()->Sql_Select_Hash
+        $where=$this->Friend2SqlWhere($this->Friend);
+
+        if (preg_match('/^(Admin|Coordinator)$/',$this->Profile()))
+        {
+            $iid=$this->CGI_GETint("ID");
+            if (!empty($iid))
+            {
+                $fid=$this->InscriptionsObj()->Sql_Select_Hash_Value($iid,"Friend");
+                if (!empty($iid))
+                {
+                    $this->Friend=$this->FriendsObj()->Sql_Select_Hash
+                    (
+                       array("ID" => $fid),
+                       TRUE,
+                       array()
+                    );
+                }
+            }
+        }
+ 
+        $this->Inscription=$this->Sql_Select_Hash
         (
            $this->Friend2SqlWhere($this->Friend),
            TRUE,

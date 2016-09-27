@@ -187,6 +187,25 @@ trait MyMod_Globals
         return $this->ApplicationObj()->Profiles;
     }
 
+    //*
+    //* function Profiles_Is, Parameter list: $profiles,$profile=""
+    //*
+    //* Returns TRUE if current user's profile is in $profiles
+    //*
+
+    function Profiles_Is($profiles,$profile="")
+    {
+        if (empty($profile)) { $profile=$this->Profile(); }
+        
+        $res=FALSE;
+        if (preg_match('/^(Admin|Coordinator)$/',$profile))
+        {
+            $res=TRUE;
+        }
+        
+        return $res;
+    }
+
    //*
     //* Returns Logintyppe
     //*

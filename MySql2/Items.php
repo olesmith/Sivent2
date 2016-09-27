@@ -321,7 +321,7 @@ class Items extends ItemsEmails
     {
         if (count($items)==0) { $items=$this->ItemHashes; }
 
-        $this->SortItems();
+        $this->MyMod_Sort_Items();
 
         $ids=array(0);
         $names=array("");

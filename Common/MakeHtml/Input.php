@@ -79,6 +79,43 @@ trait MakeHtml_Input
         );
     }
 
+    //*
+    //* function Html_Input_Area, Parameter list: $name,$rows,$cols,$value
+    //*
+    //* Creates a	TEXTAREA field.
+    //* 
+    //*
+
+    function Html_Input_Area($name,$rows,$cols,$value,$wrap="physical",$options=array())
+    {
+        $options[ "NAME" ]=$name;
+        $options[ "COLS" ]=$cols;
+        $options[ "ROWS" ]=$rows;
+        $options[ "WRAP" ]=$wrap;
+
+        $html="";
+        if (is_array($value))
+        {
+            for ($n=0;$n<count($value);$n++)
+            {
+                chop($value[$n]);
+                $html.=$value[$n]."\n";
+            }
+        }
+        else
+        {
+            $html.=$value."\n";
+        }
+
+        return $this->Html_Tags
+        (
+           "TEXTAREA",
+           $html,
+           $options
+        );
+        return $html;
+    }
+
 
 }
 ?>

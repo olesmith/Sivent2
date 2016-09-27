@@ -18,6 +18,8 @@ class Places extends PlacesAccess
         $this->AlwaysReadData=array("Name");
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

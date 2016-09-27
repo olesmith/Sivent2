@@ -50,7 +50,7 @@ class SchedulesHandle extends SchedulesUpdate
         return
             $this->StartForm().
             $this->H(1,$this->GetRealNameKey($this->Event(),"Title")).
-            $this->FrameIt($this->HandleScheduleSelectsTable()).
+            //$this->FrameIt($this->HandleScheduleSelectsTable()).
             $this->EndForm().
             "";
     }
@@ -64,6 +64,12 @@ class SchedulesHandle extends SchedulesUpdate
     function HandleSchedule()
     {
         $this->ReadSubmissions();
+        if ($this->CGI_GETOrPOSTint("Latex")==1)
+        {
+            $this->ApplicationObj()->LatexMode=TRUE;
+            $edit=0;
+        }
+
         
         $edit=0;
         if (preg_match('/^EditSchedule$/',$this->CGI_GET("Action"))) { $edit=1; }
@@ -76,6 +82,42 @@ class SchedulesHandle extends SchedulesUpdate
                 $this->MakeHidden("Save",1).
                 $this->EndForm().
                 "";
+        }
+
+        if ($this->ApplicationObj()->LatexMode)
+        {
+            $tables=$this->DatesSchedulesTables(0);
+
+            $latex="";
+            foreach ($tables as $rtables)
+            {
+                foreach ($rtables as $rlatex)
+                {
+                    $latex.=
+                        $rlatex.
+                        "\n\n\\clearpage\n\n".
+                        "";
+                }
+            }
+
+            $latex=
+                $this->GetLatexSkel("Head.Land.tex").
+                $latex.
+                $this->GetLatexSkel("Tail.tex").
+                "";
+               
+
+            //$this->ShowLatexCode($latex);
+            $this->RunLatexPrint
+            (
+               "Presences.".
+               //$this->Text2Sort($texfile).".".
+               $this->MTime2FName().
+               ".tex",
+               $latex
+             );
+
+            exit();
         }
         
         echo

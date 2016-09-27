@@ -119,7 +119,10 @@ class Table extends TableLanguage
                 $acc=$key.$lang;
                 if (!is_array($value))
                 {
-                    $value=preg_replace('/#'.$acc.'/',$this->$acc,$value);
+                    if (property_exists ($this,$acc))
+                    {
+                        $value=preg_replace('/#'.$acc.'/',$this->$acc,$value);
+                    }
                 }
             }
         }
@@ -224,6 +227,11 @@ class Table extends TableLanguage
 
         $args=$this->Query2Hash($argstring,$rargs);
 
+        if (!empty($href) && !preg_match('/\?/',$href))
+        {            
+            $args[ "Action" ]=$href;
+        }
+        
         return parent::StartForm("?".$this->Hash2Query($args),$method,$enctype,$options,$suppresscgis);
     }
 

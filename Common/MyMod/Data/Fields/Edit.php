@@ -25,8 +25,12 @@ trait MyMod_Data_Fields_Edit
         
         //Save and then disable tabindex
         $rtabindex=$tabindex;
-        $tabindex="";
-        
+        //$tabindex="";
+        if (empty($tabindex) && !empty($this->ItemData[ $data ][ "TabIndex" ]))
+        {
+            $tabindex=$this->ItemData[ $data ][ "TabIndex" ];
+        }
+
         $options=array();
         if (!empty($tabindex)) { $options[ "TABINDEX" ]=$tabindex; }
 
@@ -56,8 +60,9 @@ trait MyMod_Data_Fields_Edit
                0,
                $this->ItemData[ $data ][ "SelectCheckBoxes" ],
                "",
-               $rtabindex,
-               $rdata
+               $tabindex,
+               $rdata,
+               $options
             );
         }
         elseif (
@@ -72,15 +77,7 @@ trait MyMod_Data_Fields_Edit
         {
             $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
         }
-        /* elseif ( */
-        /*           !empty($this->ItemData[ $data ][ "Size" ]) */
-        /*           && */
-        /*           preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ]) */
-        /*        ) */
-        /* { */
-        /*     $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata); */
-        /* } */
-        elseif ($this->MyMod_Data_Fields_Module_Class($data))
+       elseif ($this->MyMod_Data_Fields_Module_Class($data))
         {
             $value=$this->MyMod_Data_Fields_Module_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
         }
@@ -124,7 +121,6 @@ trait MyMod_Data_Fields_Edit
                 $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
             }
 
-            $options=array();
             if (!empty($this->ItemData[ $data ][ "AutoComplete" ]))
             {
                 $options=array("AUTOCOMPLETE" => $this->ItemData[ $data ][ "AutoComplete" ]);

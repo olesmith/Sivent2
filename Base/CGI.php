@@ -301,6 +301,7 @@ class CGI extends Lists
 
   function SendDocHeader($contenttype,$filename="",$charset="",$expiresin=0,$filemtime=0)
   {
+      /* $contenttype="txt"; */
       $contenttypes=array
       (
          "txt"  => "text/plain",
@@ -344,13 +345,19 @@ class CGI extends Lists
       
       if (!empty($expiresin))
       {
-          $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + $expiresin); 
-          header
-          (
-             'Cache-Control: public, max-age='.$expires.';'.
-             'Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime).';'
-          );             
+          $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + $expiresin);
+          
+          header('Cache-Control: public, max-age='.$expires);
+          header('Expires: '.$expires);
+          header('Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime));
+
+          /* echo              'Cache-Control: public, max-age='.$expires.';\n'. */
+          /*    'Expires: '.$expires.';\n'. */
+          /*     'Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime).';\n'; */
+
       }
+
+      /* exit(); */
   }
 
 

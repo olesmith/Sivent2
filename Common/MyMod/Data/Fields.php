@@ -54,6 +54,11 @@ trait MyMod_Data_Fields
 
         if ($edit==1 && $access==2 && isset($this->ItemData[ $data ]))
         {
+            if (empty($tabindex) && !empty($this->ItemData[ $data ][ "TabIndex" ]))
+            {
+                $tabindex-$this->ItemData[ $data ][ "TabIndex" ];
+            }
+            
             return $this->MyMod_Data_Fields_Edit
             (
                $data,
@@ -97,7 +102,6 @@ trait MyMod_Data_Fields
             $rdata=array_shift($rdatas);
             $cell=$this->MyMod_Data_Field($edit,$item,$data,$plural,$tabindex,$rdata);
 
-            
             array_push
             (
                $cells,

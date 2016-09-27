@@ -22,6 +22,8 @@ class Collaborators extends CollaboratorsCertificate
         $this->AlwaysReadData=array("Name","TimeLoad");
         $this->Sort=array("Name");
         $this->IncludeAllDefault=TRUE;
+
+        $this->Coordinator_Type=3;
     }
 
     //*

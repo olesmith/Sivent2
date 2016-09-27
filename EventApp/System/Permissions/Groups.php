@@ -6,8 +6,8 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
-         "Unit","Event","User",
+         "No","Edit","Delete","Copy",
+         "Event","Type","User",
          "Comment","CTime","MTime",
       ),
       "Admin" => 1,

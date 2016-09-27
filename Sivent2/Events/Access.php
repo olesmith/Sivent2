@@ -1,79 +1,44 @@
 <?php
 
-class MyInscriptionsAccess extends ModulesCommon
+class EventsAccess extends MyEvents
 {
-    /* var $Access_Methods=array */
-    /* ( */
-    /*    "Show"   => "CheckShowAccess", */
-    /*    "Edit"   => "CheckEditAccess", */
-    /*    "Delete"   => "CheckDeleteAccess", */
-    /* ); */
+    //*
+    //* function CheckShowAccess, Parameter list: $item
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //* Activated in System::Friends::Profiles.
+    //*
 
-    /* //\* */
-    /* //\* function CheckShowAccess, Parameter list: $item */
-    /* //\* */
-    /* //\* Checks if $item may be viewed. Admin may - */
-    /* //\* and Person, if LoginData[ "ID" ]==$item[ "ID" ] */
-    /* //\* Activated in System::Friends::Profiles. */
-    /* //\* */
-
-    /* function CheckShowAccess($item) */
-    /* { */
-    /*     if (empty($item)) { return TRUE; } */
+    function CheckShowAccess($item)
+    {
+        if (empty($item)) { return TRUE; }
         
-    /*     $res=FALSE; */
-    /*     if (preg_match('/^(Friend)$/',$this->Profile())) */
-    /*     { */
-    /*         if ( */
-    /*               !empty($item[ "Friend" ]) */
-    /*               && */
-    /*               $item[ "Friend" ]==$this->LoginData("ID") */
-    /*            ) */
-    /*         { */
-    /*             $res=TRUE; */
-    /*         } */
-    /*     } */
-    /*     elseif (preg_match('/^Coordinator$/',$this->Profile())) */
-    /*     { */
-    /*         $res=TRUE; */
-    /*     } */
-    /*     elseif (preg_match('/^(Admin|Public)$/',$this->Profile())) */
-    /*     { */
-    /*         $res=TRUE; */
-    /*     } */
+        $res=parent::CheckShowAccess($item);
 
-    /*     return $res; */
-    /* } */
+        if ($res) { $res=$this->Current_User_Event_May_Access($item); }
 
-    /* //\* */
-    /* //\* function CheckEditAccess, Parameter list: $item */
-    /* //\* */
-    /* //\* Checks if $item may be edited. Admin may - */
-    /* //\* and Person, if LoginData[ "ID" ]==$item[ "ID" ]. */
-    /* //\* Activated in  System::Friends::Profiles. */
-    /* //\* */
+        return $res;
+    }
 
-    /* function CheckEditAccess($item) */
-    /* { */
-    /*     $res=FALSE; */
-    /*     if (preg_match('/^(Friend)$/',$this->Profile())) */
-    /*     { */
-    /*         if ( */
-    /*               !empty($item[ "Friend" ]) */
-    /*               && */
-    /*               $item[ "Friend" ]==$this->LoginData("ID") */
-    /*            ) */
-    /*         { */
-    /*             $res=TRUE; */
-    /*         } */
-    /*     } */
-    /*     elseif (preg_match('/^(Coordinator|Admin)$/',$this->ApplicationObj->Profile)) */
-    /*     { */
-    /*         $res=TRUE; */
-    /*     } */
- 
-    /*     return $res; */
-    /* } */
+    //*
+    //* function CheckEditAccess, Parameter list: $item
+    //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //* Activated in  System::Friends::Profiles.
+    //*
+
+    function CheckEditAccess($item)
+    {
+        if (empty($item)) { return TRUE; }
+        
+        $res=parent::CheckEditAccess($item);
+
+        if ($res) { $res=$this->Current_User_Event_May_Edit($item); }
+
+        return $res;
+    }
 
     /* //\* */
     /* //\* function CheckDeleteAccess, Parameter list: $item */

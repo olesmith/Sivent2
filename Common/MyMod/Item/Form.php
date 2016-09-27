@@ -9,16 +9,36 @@ trait MyMod_Item_Form
 
     function MyMod_Item_Table_Contents($edit,$args)
     {
-        return
-            $this->H(5,"Editar ".$this->ItemName).
-            $this->MyMod_Item_Table_Html
+        $table=
+            $this->MyMod_Item_Table
             (
                $edit,
                $args[ "Item" ],
                $args[ "Datas" ],
                TRUE //plural
-            ).
-             "";
+             );
+
+        if (!empty($args[ "TablePreRows" ]))
+        {
+            $table=array_merge($args[ "TablePreRows" ],$table);
+        }
+        
+        if (!empty($args[ "TablePostRows" ]))
+        {
+            $table=array_merge($table,$args[ "TablePostRows" ]);
+        }
+
+        $method="Html_Table";
+        if ($this->LatexMode())
+        {
+            $method="LatexTable";
+        }
+        
+        $method=$this->TableMethod();
+        return
+            $this->H(5,"Editar ".$this->ItemName).
+            $this->$method("",$table).
+            "";
     }
 
     //*
@@ -52,6 +72,11 @@ trait MyMod_Item_Form
 
     function MyMod_Item_Table_Form($args=array())
     {
+        $submit=
+            $this->GetMessage($this->HtmlMessages,"SendButton").
+            " ".
+            $this->MyMod_ItemName();
+        
         $args=array_merge
         (
            array
@@ -66,7 +91,7 @@ trait MyMod_Item_Form
               "Contents"   => "MyMod_Item_Table_Contents",
               "Options"    => array(),
 
-              "EndButtons"   => $this->Buttons(),
+              "EndButtons"   => $this->Buttons($submit),
               "Hiddens"   => array(),
 
               "Edit"   => 1,
@@ -77,11 +102,14 @@ trait MyMod_Item_Form
 
               "UpdateCGIVar" => "Update",
               "UpdateCGIValue" => 1,
+              
+              "TablePreRows" => array(),
+              "TablePostRows" => array(),
            ),
            $args
         );
 
-        return $this->Form_Run($args);       
+        return $this->FrameIt($this->Form_Run($args));       
      }    
 }
 

@@ -94,34 +94,6 @@ class Language extends Dir
     function GetMessage($file,$key,$subkey="Name")
     {
         return $this->MyLanguage_GetMessage($key,$subkey);
-        /* if (!is_array($file)) */
-        /* { */
-        /*     $file=$this->SearchMessageFile($file); */
-        /*     if ($file!=FALSE) */
-        /*     { */
-        /*         if (!isset($this->Messages[ $file ]) || !is_array($this->Messages[ $file ])) */
-        /*         { */
-        /*             $this->ReadMessageFile($file); */
-        /*         } */
-        /*     } */
-        /* } */
-
-        /* $language=$this->GetLanguage(); */
-        /* if (is_array($this->Messages[ $file ])) */
-        /* { */
-        /*     $val=$this->Messages[ $file ][ $key ][ $subkey ]; */
-        /*     if ($language!="") */
-        /*     { */
-        /*         $rsubkey=$this->MyLanguage_GetLanguageKey(); */
-        /*         if (!empty($this->Messages[ $file ][ $key ][ $rsubkey ])) */
-        /*         { */
-        /*             $val=$this->Messages[ $file ][ $key ][ $rsubkey ]; */
-        /*         } */
-        /*     } */
-
-        /*     return $val; */
-        /* } */
-        
     }
 
 

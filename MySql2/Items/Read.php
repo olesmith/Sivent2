@@ -65,21 +65,7 @@ class ItemsRead extends ItemsLatex
         {
             $rwhere=$this->GetRealWhereClause($rwhere);
             if (empty($rwhere)) { $rwhere=array(); }
-            /* if (!is_array($rwhere)) */
-            /* { */
-            /*     $rwhere=$this->SqlClause2Hash($rwhere); */
-            /* } */
-           /* if ($includeall!=2) */
-            /* { */
-            /*     $rwhere=array_merge */
-            /*     ( */
-            /*        $rwhere, */
-            /*        $this->GetPreSearchVars() */
-            /*     ); */
-            /* } */
-            
 
-           
             if ($this->OnlyReadIDs)
             {
                 $rrwhere="ID IN ('".join("', '",$this->OnlyReadIDs)."')";
@@ -134,7 +120,7 @@ class ItemsRead extends ItemsLatex
 
         if (!$this->SortsAsOrderBy)
         {
-            $this->SortItems();
+            $this->MyMod_Sort_Items();
         }
 
         if (!$nopaging)

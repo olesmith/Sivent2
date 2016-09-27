@@ -2,7 +2,9 @@
 
 include_once("CSS.php");
 include_once("MyFile.php");
+include_once("MakeLatex.php");
 include_once("MyDir.php");
+include_once("MySort.php");
 include_once("MyHash.php");
 include_once("../Common/Accessor.php");
 include_once("MyActions.php");
@@ -22,16 +24,28 @@ include_once("MyMod/Items.php");
 include_once("MyMod/Access.php");
 include_once("MyMod/Profiles.php");
 include_once("MyMod/Setup.php");
+include_once("MyMod/Sort.php");
 include_once("MyMod/Globals.php");
 include_once("MyMod/Latex.php");
 include_once("MyMod/Language.php");
 include_once("MyMod/Mail.php");
+include_once("MyMod/Messages.php");
 
 trait MyMod
 {    
     use 
-        _accessor_, //see SAdE/index.php
-        CSS,MyFile,MyDir,MyHash,Accessor,MyActions,Sql,DB,CallStack;
+        _accessor_, //see #SystemRoot#/index.php
+        CSS,
+        MyFile,
+        MySort,
+        MakeLatex,
+        MyDir,
+        MyHash,
+        Accessor,
+        MyActions,
+        Sql,
+        DB,
+        CallStack;
 
     use
         MyMod_Handle,MyMod_HorMenu,
@@ -39,7 +53,7 @@ trait MyMod
         MyMod_Actions,MyMod_Data,MyMod_Item,
         MyMod_Access,MyMod_Mail,
         MyMod_Items,MyMod_Latex,MyMod_Language,
-        MyMod_Profiles,MyMod_Setup,MyMod_Globals;
+        MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,MyMod_Messages;
 
 
     var $MyMod_Defaults=array
@@ -94,6 +108,15 @@ trait MyMod
 
         $this->MyHash_Args2Object($this->MyMod_Defaults,TRUE);
         $this->MyHash_Args2Object($args);
+
+        foreach (array("ItemName","ItemsName","ItemNamer") as $attr)
+        {
+            foreach ($this->ApplicationObj()->LanguageKeys as $lkey)
+            {
+                $rattr=$attr.$lkey;
+                //$this->$rattr="";
+            }
+        }
     }
 
     //*
@@ -104,8 +127,13 @@ trait MyMod
 
     function MyMod_ItemName($key="ItemName")
     {
-        $key.=$this->ApplicationObj()->MyLanguage_GetLanguageKey();
-        return $this->$key;
+        $lkey=$key.$this->ApplicationObj()->MyLanguage_GetLanguageKey();
+        if (!property_exists($this,$lkey))
+        {
+            $lkey=$key;
+        }
+
+        return $this->$lkey;
     }
 
 }

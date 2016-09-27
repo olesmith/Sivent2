@@ -77,12 +77,6 @@ class HtmlTable extends HtmlList
         if (!$this->LatexMode())
         {
             $options[ "COLSPAN" ]=$colspan;
-            /* if (empty($roptions[ "TITLE" ])) */
-            /* { */
-            /*     $caller=$this->CallStack_Caller(1); */
-        
-            /*     $options[ "Title" ]=$caller[ 'file'].": ".$caller[ 'line']; */
-            /* } */
 
             return array
             (
@@ -316,6 +310,23 @@ function HTMLTable($titles,$rows,$tableoptions=array(),$background=TRUE,$tdclass
 }
 
 
+    //*
+    //* function Html_Table_Head_Row, Parameter list: $row
+    //*
+    //* Returns a table head row, hashing row; 
+    //*
+
+    function Html_Table_Head_Row($row)
+    {
+        return
+            array
+            (
+               "Row" => $row,
+               "Class" => 'head',
+               "TitleRow" => TRUE,
+            );
+    }
+    
     //*
     //* function Html_Table, Parameter list: $titles,$rows,$options=array()
     //*

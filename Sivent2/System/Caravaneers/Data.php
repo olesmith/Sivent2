@@ -82,6 +82,7 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
+      "TabIndex"  => 1,
    ),
    "Email" => array
    (
@@ -100,6 +101,7 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
+      "TabIndex"  => 2,
    ),
    "PRN" => array
    (
@@ -118,6 +120,26 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
+      "TabIndex"  => 6,
+   ),
+   "Comment" => array
+   (
+      "Name" => "Info",
+      "Title" => "Info",
+      "Name_UK" => "Info",
+      "Title_UK" => "Info",
+
+      "Size" => "25",
+      "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 2,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+      "TabIndex"  => 7,
    ),
    "Status" => array
    (
@@ -155,7 +177,7 @@ array
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 1,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
     ),
    "Certificate" => array
@@ -164,8 +186,9 @@ array
       "Name_UK" => "Certificate Avaliable",
 
       "Sql" => "ENUM",
-
-      "Search" => FALSE,
+      "SelectCheckBoxes" => 3, //boolean on/off select
+      
+      "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
@@ -175,6 +198,8 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
+      "AccessMethod" => "Inscriptions_Certificates_May",
+      "TabIndex"  => 3,
    ),
    "TimeLoad" => array
    (
@@ -193,6 +218,8 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
+      "AccessMethod" => "Inscriptions_Certificates_May",
+      "TabIndex"  => 5,
    ),
    "Code" => array
    (
@@ -211,5 +238,6 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
+      "AccessMethod" => "Inscriptions_Certificates_May",
    ),
 );

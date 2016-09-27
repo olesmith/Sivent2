@@ -10,18 +10,30 @@ class SubmissionsAccess extends ModulesCommon
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $event=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess($event=array())
+    {
+        $res=$this->ApplicationObj()->Current_User_Event_Submissions_May_Edit($event);
+        
+        return $res;
+    }
+
+     //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be viewed. Admin may -
     //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
-    //* Activated in System::Friends::Profiles.
     //*
 
     function CheckShowAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=$this->HasModuleAccess();
 
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
@@ -30,6 +42,36 @@ class SubmissionsAccess extends ModulesCommon
                   &&
                   $item[ "Friend" ]==$this->LoginData("ID")
                )
+            {            
+                $res=TRUE;
+            }
+        }
+        
+        if (preg_match('/^(Public|Friend)$/',$this->Profile()))
+        {
+            if ($this->EventsObj()->Event_Submissions_Public())
+            {            
+                $res=TRUE;
+            }
+        }
+
+        return $res;
+    }
+    
+     //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
+
+        if (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            if ($this->EventsObj()->Event_Submissions_Open())
             {            
                 $res=TRUE;
             }
@@ -58,7 +100,7 @@ class SubmissionsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=$this->HasModuleAccess();
 
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
@@ -71,17 +113,25 @@ class SubmissionsAccess extends ModulesCommon
                 $res=TRUE;
             }
         }
-        
+                
+        return $res;
+    }
+    
+    //*
+    //* function CheckEditListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //* Activated in  System::Friends::Profiles.
+    //*
 
-        /* if (preg_match('/^(Friend)$/',$this->Profile())) */
-        /* { */
-        /*     if (!$this->EventsObj()->Event_Submissions_Inscriptions_Open()) */
-        /*     { */
-        /*         $res=FALSE; */
-        /*     } */
-        /* } */
-
-        
+    function CheckEditListAccess($item=array())
+    {
+        $res=
+            $this->Current_User_Coordinator_Is()
+            &&
+            $this->HasModuleAccess();
+       
         return $res;
     }
     
@@ -90,7 +140,6 @@ class SubmissionsAccess extends ModulesCommon
     //*
     //* Checks if $item may be edited. Admin may -
     //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
-    //* Activated in  System::Friends::Profiles.
     //*
 
     function CheckDeleteAccess($item=array())
@@ -113,8 +162,6 @@ class SubmissionsAccess extends ModulesCommon
 
     function CheckAddAccess($item=array())
     {
-         //if (empty($item)) { return TRUE; }
-
         $res=FALSE;
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
@@ -124,7 +171,6 @@ class SubmissionsAccess extends ModulesCommon
         {
             $res=$this->CheckEditAccess($item);
         }
-
 
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {

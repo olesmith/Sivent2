@@ -1,6 +1,6 @@
 <?php
 
-class EventsCells extends MyEvents
+class EventsCells extends EventsAccess
 {
     //*
     //* function Event_Caravans_Info, Parameter list: $event=array()

@@ -198,7 +198,7 @@ class SchedulesDates extends SchedulesTimes
             $table=array_merge
             (
                $table,
-               $this->PlaceSchedulesTable($edit,$date,$place)
+               $this->PlaceSchedulesTableHtml($edit,$date,$place)
             );
         }
 

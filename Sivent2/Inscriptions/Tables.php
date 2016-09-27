@@ -25,7 +25,8 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         if ($edit==1) { $buttons=$this->Buttons(); }
         
         $this->SGroups_NumberItems=FALSE;
-
+        unset($this->ItemDataSGroups[ "Submissions" ]);
+        
         return
             $this->MyMod_Item_Group_Tables_Form
             (
@@ -37,7 +38,8 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
                FALSE, //plural
                "",
                $buttons
-            );
+            ).
+            "";
     }
     
     //*
@@ -49,7 +51,12 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     function Inscription_Event_Info()
     {
         $eventmessage=$this->EventsObj()->Event_Inscriptions_Info();
-        return $this->FrameIt($eventmessage);
+        if (!empty($eventmessage))
+        {
+            $eventmessage=$this->FrameIt($eventmessage);
+        }
+        
+        return $eventmessage;
     }
     
     //*
@@ -94,14 +101,14 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
            $this->Inscription_Event_Info()
         );
         
-        if (!empty($inscription[ "ID" ]))
-        {
-            array_push
-            (
-               $table,
-               $this->Inscription_Event_Typed_Tables($edit,$inscription)
-            );
-        }
+        /* if (!empty($inscription[ "ID" ])) */
+        /* { */
+        /*     array_push */
+        /*     ( */
+        /*        $table, */
+        /*        $this->Inscription_Event_Typed_Tables($edit,$inscription) */
+        /*     ); */
+        /* } */
 
         return $table;
     }
@@ -168,8 +175,9 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
                $this->Inscription_Assessors_Table(1,$inscription),
                $this->Inscription_PreInscriptions_Table(1,$inscription),
                $this->Inscription_Collaborations_Table(1,$inscription),               
-               $this->Inscription_Caravans_Table(1,$inscription)
+               $this->Inscription_Caravans_Table_Form(1,$inscription)
            );
+
 
         if (!empty($tables))
         {

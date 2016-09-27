@@ -12,6 +12,9 @@ class HtmlHref extends HtmlTable
 
     function HRef($href,$name="",$title="",$target="",$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu")
 {
+    $orighref=$href;
+    $path="";
+    
     if ($this->LatexMode()) { return $name; }
     $comps=preg_split('/\?/',$href);
 
@@ -20,6 +23,7 @@ class HtmlHref extends HtmlTable
     if (count($comps)>0)
     {
         $href=$comps[0];
+        $path=$comps[0];
         if (count($comps)>1)
         {
             $args=$comps[1];
@@ -68,8 +72,13 @@ class HtmlHref extends HtmlTable
     {
         $href.="#".$anchor;
     }
+    if (preg_match('/javascript/i',$orighref))
+    {
+        $href=$orighref."?')";
+    }
 
-    $options[ "HREF" ]=$href;
+
+    $options[ "HREF" ]=$path.$href;
     if ($title!="")  { $options[ "TITLE" ] =$title; }
     if ($target!="") { $options[ "TARGET" ]=$target; }
     if ($class!="")  { $options[ "CLASS" ]=$class; }
@@ -216,7 +225,13 @@ function HRefVerticalMenu($title,$links,$titles=array(),$btitles=array(),$class=
 
 function Anchor($name,$text="")
 {
-    return "<A NAME=".$name."></A>".$this->B($text);
+    $anchor="";
+    if (!$this->LatexMode())
+    {
+        $anchor="<A NAME=".$name."></A>".$this->B($text);
+    }
+    
+    return $anchor;
 }
 }
 

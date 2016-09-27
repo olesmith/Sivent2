@@ -30,7 +30,7 @@ trait MyMod_Handle_Delete
     {
         if (! is_array($item) || count($item)==0) { $item=$this->ItemHash; }
 
-        $this->ApplicationObj->LogMessage("MyMod_Handle_Delete_Form",$item[ "ID" ].": ".$this->GetItemName($item));
+        //$this->ApplicationObj->LogMessage("MyMod_Handle_Delete_Form",$item[ "ID" ].": ".$this->GetItemName($item));
 
         $uri=$_SERVER[ "HTTP_REFERER" ];
         if ($this->CGI_POSTint("Delete")==1)

@@ -73,6 +73,7 @@ class ItemEdits extends ItemForms
             $item=$this->PostProcessItem($item);
 
             $this->ItemHash=$item;
+            $this->ApplicationObj->LogMessage("Item Added");
 
             return TRUE;
         }
@@ -128,6 +129,7 @@ class ItemEdits extends ItemForms
             unset($item[ "MTime" ]);
             $item=$this->ReadItemDerivedData($item);
             $item=$this->PostProcessItem($item);
+            $this->ApplicationObj->LogMessage("Item Copied");
 
             $this->ItemHash=$item;
 
@@ -148,7 +150,7 @@ class ItemEdits extends ItemForms
     {
         if (count($item)>0) {} else { $item=$this->ItemHash; }
 
-        $this->ApplicationObj->LogMessage("Delete",$item[ "ID" ].": ".$this->GetItemName($item));
+        $this->ApplicationObj->LogMessage("Item Deleted",$item[ "ID" ].": ".$this->GetItemName($item));
         
         $this->Sql_Delete_Item($item[ "ID" ],"ID",$this->SqlTableName());
 

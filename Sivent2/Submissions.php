@@ -37,6 +37,8 @@ class Submissions extends SubmissionsHandle
             $this->Reverse=TRUE;
         }
         $this->IncludeAllDefault=TRUE;
+
+        $this->Coordinator_Type=5;
     }
 
     //*
@@ -53,7 +55,7 @@ class Submissions extends SubmissionsHandle
 
 
     //*
-    //* Returns full (relative) upload path: UploadPath/Module.
+    //* Returns full (relative) upload path: UploadPath/#Unit/#Event/Submissions.
     //*
 
     function GetUploadPath()
@@ -88,6 +90,8 @@ class Submissions extends SubmissionsHandle
     {
         $this->PostProcessUnitData();
         $this->PostProcessEventData();
+
+        $this->Actions();
     }
 
 
@@ -186,7 +190,7 @@ class Submissions extends SubmissionsHandle
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
             $this->AddDefaults[ "Friend" ]=$this->LoginData("ID");
-            $this->AddFixedValues[ "Friend" ]=$this->CGI_GETint("Friend");
+            $this->AddFixedValues[ "Friend" ]=$this->LoginData("ID");
             if (!empty($this->AddDefaults[ "Friend" ]))
             {
                 $this->AddDefaults[ "Author1" ]=$this->LoginData("Name");

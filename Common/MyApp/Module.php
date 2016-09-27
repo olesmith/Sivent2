@@ -54,6 +54,17 @@ trait MyApp_Module
         $accessor=$this->SubModulesVars[ $module ][ "SqlClass" ]."Obj";
         return $this->$accessor();
     }
+    
+    //*
+    //* function MyApp_Modules_Get, Parameter list:
+    //*
+    //* Returns list of application modules.
+    //*
+
+    function MyApp_Modules_Get()
+    {
+        return array_keys($this->SubModulesVars);
+    }
 }
 
 ?>

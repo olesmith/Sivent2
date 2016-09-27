@@ -71,11 +71,9 @@ trait Sql_Table_Fields_Update
 
             $default=$this->Sql_Table_Column_Info_2_Default($columninfo);
             if (
-                  !empty($datadef[ "Default" ])
+                  $this->Sql_Table_Field_Default_Should($data,$datadef)
                   &&
                   $default!=$datadef[ "Default" ]
-                  &&
-                  !preg_match('/^(TEXT)$/i',$datadef[ "Sql" ])
                )
             {
                 $this->Sql_Table_Field_Default_Set($data,$datadef[ "Default" ],$table);

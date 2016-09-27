@@ -74,7 +74,12 @@ trait MyApp_Handle
     {
         //Test action access
         $res=$this->MyAction_Access_Require($action);
-
+        if (!$res)
+        {
+            $action=$this->DefaultAction;
+            $res=$this->MyAction_Access_Require($action);
+        }
+        
         $this->MyApp_Handle_Action($action);
 
         return $res;
@@ -119,6 +124,15 @@ trait MyApp_Handle
             $this->Module->SetCookieVars();
             
             $res=$this->Module->MyAction_Allowed($action);
+
+            if (!$res)
+            {
+                if (!empty($this->Module->Actions[ $action ][ "AltAction" ]))
+                {
+                    $action=$this->Module->Actions[ $action ][ "AltAction" ];
+                    $res=$this->Module->MyAction_Allowed($action);
+                }
+            }
 
             //var_dump($res);
             if (!$res) { return FALSE; }

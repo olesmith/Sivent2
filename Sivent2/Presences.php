@@ -19,6 +19,8 @@ class Presences extends Presences_Register
         $this->AlwaysReadData=array("Unit","Event","Name");
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
+
+        $this->Coordinator_Type=7;
     }
 
     //*

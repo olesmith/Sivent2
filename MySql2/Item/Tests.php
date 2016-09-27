@@ -237,6 +237,20 @@ class ItemTests extends ItemTestsItem
             $newvalue=$this->GetPOST($rdata);
             $newvalue=preg_replace('/,/',".",$newvalue);
         }
+        elseif (
+              preg_match('/^ENUM$/',$this->ItemData[ $data ][ "Sql" ])
+              &&
+              $this->ItemData[ $data ][ "SelectCheckBoxes" ]==3)
+        {
+            if (!isset($_POST[ $rdata ]))
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
         else
         {
             if (!isset($_POST[ $rdata ]))

@@ -38,6 +38,16 @@ array
          "Assessor"  => 0,
          "AccessMethod" => "CheckEditAccess",
       ),
+      'Copy' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod" => "CheckEditAccess",
+      ),
       'EditList' => array
       (
          'Public' => 0,

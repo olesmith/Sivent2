@@ -51,9 +51,9 @@ trait MyMod_Data_Defaults
             "SqlMethod"         => NULL,
             "SqlSortReverse"    => FALSE,
 
-            "Admin"             => TRUE,
-            "Public"            => FALSE,
-            "Person"            => FALSE,
+            "Admin"             => 1,
+            "Public"            => 0,
+            "Person"            => 0,
 
             "Search"            => FALSE,
             "SearchFieldMethod" => "",
@@ -104,6 +104,7 @@ trait MyMod_Data_Defaults
             "Info"              => FALSE,
             "IsColor"          => FALSE,
             "IsBarcode"          => FALSE,
+            "TabIndex"          => "",
         );
 
     }

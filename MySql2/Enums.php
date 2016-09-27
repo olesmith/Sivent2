@@ -42,6 +42,17 @@ class Enums extends DataGroups
     }
 
     //*
+    //* function GetEnumEmptyName, Parameter list: $data
+    //*
+    //* Returns enum empty name.
+    //*
+
+    function GetEnumEmptyName($data)
+    {
+        return $this->GetRealNameKey($this->ItemData[ $data ],"EmptyName");
+    }
+    
+    //*
     //* function GetEnumValue, Parameter list: $data,$item,$latex=FALSE
     //*
     //* Used $this->ItemData[ $data ][ "Values" ] to obtain
@@ -69,9 +80,10 @@ class Enums extends DataGroups
         $value="";        
         if (!isset($item[ $data ]))
         {
-            if (!empty($this->ItemData[ $data ][ "EmptyName" ]))
+            $empty=$this->GetEnumEmptyName($data);
+            if (!empty($empty))
             {
-                $value=$this->ItemData[ $data ][ "EmptyName" ];
+                $value=$empty;
                 if (method_exists($this,$value))
                 {
                     $value=$this->$value($item);
@@ -119,11 +131,12 @@ class Enums extends DataGroups
                 $value=$item[ $data ];
             }
 
-            if (!empty($this->ItemData[ $data ][ "EmptyName" ]))
+            $empty=$this->GetEnumEmptyName($data);
+            if (!empty($empty))
             {
                 if (empty($value))
                 {
-                    $value=$this->ItemData[ $data ][ "EmptyName" ];
+                    $value=$empty;
                     if (method_exists($this,$value))
                     {
                         $value=$this->$value($item);

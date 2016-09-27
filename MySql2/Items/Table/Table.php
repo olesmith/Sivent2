@@ -27,7 +27,7 @@ class ItemsTableTable extends ItemsTableRow
 
         $datas=$this->ListUniqueValues($datas);
 
-       if (!empty($cgiupdatevar) && $this->GetPOST($cgiupdatevar))
+        if (!empty($cgiupdatevar) && $this->GetPOST($cgiupdatevar))
         {
             $items=$this->UpdateItems($items);
         }
@@ -80,7 +80,7 @@ class ItemsTableTable extends ItemsTableRow
                array
                (
                   "Class" => 'head',
-                  "Row" => $this->GetSortTitles($titles)
+                  "Row" => $this->MyMod_Sort_Title_Cells($titles)
                )
             );
         }
@@ -113,7 +113,14 @@ class ItemsTableTable extends ItemsTableRow
 
         if ($sumvars && count($items)>0 && count($this->SumVars)>0)
         {
-            array_push($tbl,$this->SumVarsRow($datas,$sums,$items));
+            if (method_exists($this,"SumVarsRows"))
+            {
+                $tbl=array_merge($tbl,$this->SumVarsRows($datas,$sums,$items));
+            }
+            else
+            {
+                array_push($tbl,$this->SumVarsRow($datas,$sums,$items));
+            }
         }
 
         return $tbl;

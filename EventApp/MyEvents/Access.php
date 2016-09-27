@@ -78,7 +78,26 @@ class MyEventsAccess extends ModulesCommon
     }
     
     //*
-    //* function MayInscribe, Parameter list: $friend=array()
+    //* function Event_Inscriptions_Public_Is, Parameter list: $event=array()
+    //*
+    //* Checks if $event inscriptions are public.
+    //*
+
+    function Event_Inscriptions_Public_Is($event=array())
+    {
+        if (empty($event)) { return TRUE; }
+
+        $res=TRUE;
+        if ($event[ "Inscriptions_Public" ]==2)
+        {
+            $res=FALSE;
+        }
+
+        return $res;
+    }
+
+    //*
+    //* function MayInscribe, Parameter list: $event=array()
     //*
     //* Checks if $friend may be inscribed, that is:
     //*
@@ -89,12 +108,9 @@ class MyEventsAccess extends ModulesCommon
     function MayInscribe($event=array())
     {
         if (empty($event)) { return TRUE; }
-
-        if ($event[ "Inscriptions_Public" ]==2)
-        {
-            $res=FALSE;
-        }
-        else
+        
+        $res=$this->Event_Inscriptions_Public_Is($event);
+        if ($res)
         {
             $res=!$this->IsInscribed($event);
         }

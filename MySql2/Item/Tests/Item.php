@@ -31,7 +31,7 @@ class ItemTestsItem extends ItemBackRefs
             }
 
             unset($item[ $data."_Message" ]);
-            if ($item[ $data ]!="" && isset($this->ItemData[ $data ][ "Regexp" ]))
+            if (!empty($item[ $data ]) && isset($this->ItemData[ $data ][ "Regexp" ]))
             {
                 if (!preg_match('/'.$this->ItemData[ $data ][ "Regexp" ].'/',$item[ $data ]))
                 {

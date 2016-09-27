@@ -34,7 +34,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Collaborations_Has",
+        "AccessMethod"    => "Event_Collaborations_May",
       ),
      "Collaborators" => array
      (

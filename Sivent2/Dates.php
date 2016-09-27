@@ -18,6 +18,8 @@ class Dates extends DatesAccess
         $this->AlwaysReadData=array("Name","Title");
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

@@ -72,30 +72,35 @@ trait MyMod_Item_Update
                           && 
                           empty($this->ItemData[ $data ][ "TimeType" ])
                        )
-                {
+                {                    
                     $newvalue=$this->TestUpdateItem($data,$item,FALSE,$prepost);
-
                     $default=$this->ItemData($data,"Default");
+                   
                     if (empty($newvalue) && !empty($default))
                     {
                         $newvalue=htmlentities($default);
                         $newvalue=preg_replace('/\\\\/',"&#92;",$newvalue);
                     }
-                    
-                    if (!isset($item[ $data ]) || $newvalue!=$item[ $data ])
-                    {
-                        if ($this->TriggerFunction($data))
-                        {
-                            $item=$this->ApplyTriggerFunction($data,$item,$prepost);
-                        }
-                        else
-                        {
-                            $item[ $data ]=$newvalue;
-                        }
 
+                    $oldvalue="";
+                    if (!empty($item[ $data ])) { $oldvalue=$item[ $data ]; }
+
+                    if ($this->TriggerFunction($data))
+                    {
+                        $item=$this->ApplyTriggerFunction($data,$item,$prepost);
+                    }
+                    else
+                    {
+                        $item[ $data ]=$newvalue;
+                    }
+
+                    if ($item[ $data ]!=$oldvalue)
+                    {
+                        //var_dump("$data: $oldvalue => $newvalue") ;
                         $update++;
                         array_push($rdatas,$data);
                     }
+                    
                 }
             }
         }
@@ -129,7 +134,7 @@ trait MyMod_Item_Update
 
             $this->ApplicationObj()->AddHtmlStatusMessage
             (
-               $this->B("Alterado: ").
+               $this->B($this->MyLanguage_GetMessage("Altered").": ").
                $this->HtmlList($rdatanames)
             );
 

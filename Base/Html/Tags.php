@@ -240,6 +240,8 @@ class HtmlTags extends HtmlCSS
     {
         if ($this->LatexMode())
         {
+            if (is_array($contents)) { $contents=join("\n",$contents); }
+
             return $contents;
         }
         else
@@ -362,7 +364,7 @@ class HtmlTags extends HtmlCSS
     {
         if ($this->LatexMode())
         {
-            return "\n\n";
+            return "\\\\\n";
         }
         else
         {
@@ -394,7 +396,7 @@ class HtmlTags extends HtmlCSS
 
             return $rcontents;
         }
-
+        
         if ($this->LatexMode())
         {
             return "\\textbf{".$contents."}";

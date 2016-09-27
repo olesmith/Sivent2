@@ -26,6 +26,7 @@ array
       "Name_UK" => "Certificates Published",
 
       "Sql" => "ENUM",
+      "SelectCheckBoxes"  => 2,
 
       "Search" => FALSE,
       "Values" => array("Não","Sim"),

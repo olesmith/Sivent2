@@ -73,7 +73,7 @@ trait MyMod_Handle_Prints
 
        if ($sort=="")
        {
-           $this->DetectSort();
+           $this->MyMod_Sort_Detect();
        }
        else
        {
@@ -93,7 +93,7 @@ trait MyMod_Handle_Prints
            exit();
        }
 
-       $this->SortItems();
+       $this->MyMod_Sort_Items();
        $this->MyMod_Handle_Prints_Init();
 
        if (!empty($this->LatexData[ "PluralLatexDocs" ][ "Docs" ][ $latexdocno ][ "AltHandler" ]))

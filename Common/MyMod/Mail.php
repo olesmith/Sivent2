@@ -28,19 +28,33 @@ trait MyMod_Mail
     //* key entries in $item.
     //*
 
-    function  MyMod_Mail_Typed_Send($type,$user,$item,$hrefs=array())
+    function MyMod_Mail_Typed_Send($type,$user,$item,$hrefs=array())
     {
         foreach ($hrefs as $key => $url)
         {
             $user[ $key ]=preg_replace('/index\.php/',"",$url);
         }
-        //var_dump($item);
+
+        $language=$this->ApplicationObj()->GetLanguage();
+
+        $where=
+            $this->UnitsObj()->UnitWhere
+            (
+               array
+               (
+                  "Name" => $type,
+                  "Language" => $language,
+               )
+            );
+
+        $mail=$this->MailTypesObj()->Sql_Select_Hash($where);
+                
 
         $subject=
             $this->MyMod_Mail_Text_Filter
             (
                $user,
-               $this->GetRealNameKey($item,$type."_Subject")
+               $mail[ "Subject" ]
             );
         
         $body=
@@ -48,9 +62,9 @@ trait MyMod_Mail
             (
                $user,
                $this->GetRealNameKey($item,"MailHead")."\n\n".
-               $this->GetRealNameKey($item,$type."_Body")."\n\n".
+               $mail[ "Body" ]."\n\n".
                $this->GetRealNameKey($item,"MailTail").
-               ""
+               "\n\n"
             );
 
         $this->ApplicationObj()->ApplicationSendEmail

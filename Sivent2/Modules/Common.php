@@ -4,6 +4,89 @@ include_once("../EventApp/EventMod.php");
 
 class ModulesCommon extends EventMod
 {
+    var $Coordinator_Type=0;
+
+    
+    //*
+    //* sub Coordinator_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to module.
+    //*
+    //*
+
+    function Coordinator_Access_Has($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->ApplicationObj()->Coordinator_Access_Has($this->Coordinator_Type,$event);
+    }
+
+    //*
+    //* sub Current_User_Event_May_Edit, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to module.
+    //*
+    //*
+
+    function Current_User_Event_May_Edit($event=array())
+    {
+        return $this->Coordinator_Access_Has($event);
+    }
+
+    //*
+    //* sub Current_User_Event_May_Access, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to module.
+    //*
+    //*
+
+    function Current_User_Event_May_Access($event=array())
+    {
+        return $this->ApplicationObj()->Current_User_Event_May_Access($event);
+    }
+
+    //*
+    //* function Inscriptions_Certificates_Published, Parameter list: 
+    //*
+    //* Returns true or false, whether event should provide certificates.
+    //*
+
+    function Inscriptions_Certificates_Published()
+    {
+        $event=$this->Event();
+
+        return
+            $this->EventsObj()->Event_Certificates_Has($event)
+            &&
+            $this->EventsObj()->Event_Certificates_Published($event);
+    }
+    
+    //*
+    //* function Inscriptions_Certificates_May, Parameter list: 
+    //*
+    //* Returns true or false, whether we may access certificates:
+    //*
+    //* Friend and Public: Inscriptions_Certificates_Published()
+    //* Coordinator and Admin: Yes
+    //*
+
+    function Inscriptions_Certificates_May()
+    {
+        $event=$this->Event();
+
+        $res=FALSE;
+        if ($this->Profiles_Is(array("Admin","Coordinator")))
+        {
+            $res=TRUE;
+        }
+        elseif ($this->Profiles_Is(array("Public","Friend")))
+        {
+            $res=$this->Inscriptions_Certificates_Published();
+        }
+            
+        return $res;
+    }
+    
     //*
     //* sub Unit, Parameter list: $key=""
     //*
@@ -157,13 +240,10 @@ class ModulesCommon extends EventMod
 
     function Event_Collaborations_Has($item=array())
     {
-        $res=FALSE;
-        if ($this->Event("Collaborations")==2)
-        {
-            $res=TRUE;
-        }
-
-        return $res;
+        return
+            $this->EventsObj()->Event_Collaborations_Has($item)
+            &&
+            $this->EventsObj()->Event_Collaborations_May($item);
     }
     
     //*
@@ -226,11 +306,18 @@ class ModulesCommon extends EventMod
 
     function Date_Span_Interval($item,$key1,$key2)
     {
-        return
-            $this->MyTime_Sort2Date($item[ $key1 ]).
-            " - ".
-            $this->MyTime_Sort2Date($item[ $key2 ]).
-            "";
+        $cell=
+            $this->MyTime_Sort2Date($item[ $key1 ]);
+
+        if (!empty($key2) && !empty($item[ $key2 ]))
+        {
+            $cell.=
+                " - ".
+                $this->MyTime_Sort2Date($item[ $key2 ]).
+                "";
+        }
+
+        return $cell;
     }
 
     //*

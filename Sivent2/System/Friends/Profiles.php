@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -147,4 +146,3 @@ array
       ),
    ),
 );
-?>

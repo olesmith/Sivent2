@@ -18,6 +18,8 @@ class Assessors extends AssessorsInscription
         $this->AlwaysReadData=array();
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name","Friend","Submission","Result");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

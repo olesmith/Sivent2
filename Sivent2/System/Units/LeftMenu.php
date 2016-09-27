@@ -2,50 +2,39 @@ array
 (
    "41_Certificates" => array
    (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Certificates&Action=Search",
       "Name" => "Certificados",
-      "Title" => "Certificates",
+      "Name_ES" => "Certificados",
       "Name_UK" => "Certificados",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Certificados",
+      "ShortName_ES" => "Certificados",
+      "ShortName_UK" => "Certificados",
+      "Title" => "Certificates",
+      "Title_ES" => "Certificados",
       "Title_UK" => "Certificates",
-
-      'Href' => '?Unit=#Unit&ModuleName=Certificates&Action=Search',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
    "42_Certificates" => array
    (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Certificates&Action=Validate",
       "Name" => "Validar Certificados",
-      "Title" => "Validate Certificates",
+      "Name_ES" => "Validar Certificados",
       "Name_UK" => "Validar",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Validar Certificados",
+      "ShortName_ES" => "Validar Certificados",
+      "ShortName_UK" => "Validar",
+      "Title" => "Validate Certificates",
+      "Title_ES" => "Validar Certificados",
       "Title_UK" => "Validate",
-
-      'Href' => '?Unit=#Unit&ModuleName=Certificates&Action=Validate',
-
-      'Public'    => 1,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
-   ),
-   "5_Permissions" => array
-   (
-      "Name" => "Permissões",
-      "Title" => "Gerenciar Permissões",
-      "Name_UK" => "Permissions",
-      "Title_UK" => "Manage Permissions",
-
-      'Href' => '?Unit=#Unit&ModuleName=Permissions&Action=Search',
-
-      'Public'    => 0,
-      'Person'    => 0,
-      'Admin'     => 1,
-
-      'Friend'     => 0,
-      'Coordinator' => 1,
    ),
 );
+

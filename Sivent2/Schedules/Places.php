@@ -151,18 +151,27 @@ class SchedulesPlaces extends SchedulesRooms
 
     
     //*
-    //* function PlaceSchedulesTable, Parameter list: $edit,$date,$place
+    //* function PlaceSchedulesTableHtml, Parameter list: $edit,$date,$place
     //*
-    //* Generates $date and $place scedule.
+    //* Generates $date and $place schedule html table.
     //*
 
-    function PlaceSchedulesTable($edit,$date,$place)
+    function PlaceSchedulesTableHtml($edit,$date,$place)
     {
         $rooms=$this->ScheduleRooms($place);
         
         if (count($rooms)==0) { return array(); }
 
-        $table=
+         $times=$this->DateTimes($date);
+        
+        $this->TimesRoomsInitTopology($date,$times,$rooms);
+        if ($edit==0)
+        {
+            //Shrink consecutive activities.
+            $this->TimesRoomsEditTopology($times,$rooms);
+        }
+
+       $table=
             array
             (
                $this->H
@@ -183,31 +192,110 @@ class SchedulesPlaces extends SchedulesRooms
                ),
             );
 
-        $times=$this->DateTimes($date);
-        
-        $this->TimesRoomsInitTopology($times,$rooms);
-        if ($edit==0)
-        {
-            //Shrink consecutive activities.
-            $this->TimesRoomsEditTopology($times,$rooms);
-        }
-
         foreach ($times as $id => $time)
         {
-            array_push($table,$this->TimesRoomsTopologyCells($edit,$date,$time,$place,$rooms));
-            $table=
-                array_merge
-                (
-                   $table,
-                   $this->TimesScheduleRoomsDiagnosticsRows($edit,$date,$time,$place,$rooms)
-                );
+            array_push
+            (
+               $table,
+               $this->TimesRoomsTopologyCells($edit,$date,$time,$place,$rooms)
+            );
+            
+            if ($edit==1)
+            {
+                $table=
+                    array_merge
+                    (
+                       $table,
+                       $this->TimesScheduleRoomsDiagnosticsRows($edit,$date,$time,$place,$rooms)
+                    );
+            }
         }
         
         if ($edit==1)
         {
             array_push($table,array($this->Buttons()));
         }
+        
+        $method="Html_Table";
+        if ($this->ApplicationObj()->LatexMode) { $method="Latex_Table_Multi"; }
+        
+        return
+            array
+            (
+               $this->H
+               (
+                  2,
+                  $this->DateScheduleTitle($date)
+               ).
+               $this->H
+               (
+                  3,
+                  $this->PlacesObj()->PlaceTitle($place)
+               ).
+               $this->$method
+               (
+                  "",
+                  $this->PlaceSchedulesTable($edit,$date,$place)
+               )
+            );
+    }
 
+    
+    //*
+    //* function PlaceSchedulesTable, Parameter list: $edit,$date,$place
+    //*
+    //* Generates $date and $place scedule.
+    //*
+
+    function PlaceSchedulesTable($edit,$date,$place)
+    {
+        $rooms=$this->ScheduleRooms($place);
+        
+        if (count($rooms)==0) { return array(); }
+
+        $times=$this->DateTimes($date);
+        
+        $this->TimesRoomsInitTopology($date,$times,$rooms);
+        if ($edit==0)
+        {
+            //Shrink consecutive activities.
+            $this->TimesRoomsEditTopology($times,$rooms);
+        }
+
+       $table=
+            array
+            (
+               array
+               (
+                  "Class" => 'head',
+                  "TitleRow" => TRUE,
+                  "Row" => $this->TimesScheduleRoomsTitleRow($edit,$date,$place,$rooms),
+               ),
+            );
+        foreach ($times as $id => $time)
+        {
+            array_push
+            (
+               $table,
+               $this->TimesRoomsTopologyCells($edit,$date,$time,$place,$rooms)
+            );
+            
+            if ($edit==1)
+            {
+                $table=
+                    array_merge
+                    (
+                       $table,
+                       $this->TimesScheduleRoomsDiagnosticsRows($edit,$date,$time,$place,$rooms)
+                    );
+            }
+        }
+        
+        if ($edit==1)
+        {
+            array_push($table,array($this->Buttons()));
+        }
+        
         return $table;
     }
 }

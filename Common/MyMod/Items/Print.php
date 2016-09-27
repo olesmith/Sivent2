@@ -54,7 +54,7 @@ trait MyMod_Items_Print
     function MyMod_Items_Print($items=array())
     {
         if  (count($items)==0) { $items=$this->ItemHashes; }
-        $this->ApplicationObj->LogMessage("PrintItems",count($items)." items");
+        //$this->ApplicationObj->LogMessage("PrintItems",count($items)." items");
 
         $latexdocno=$this->CGI2LatexDocNo();
 

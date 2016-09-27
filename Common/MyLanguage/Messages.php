@@ -51,13 +51,13 @@ trait MyLanguage_Messages
     //* $subkey is subject to language iteration.
     //*
 
-    function MyLanguage_GetMessage($key,$subkey="Name",$rkey="")
+    function MyLanguage_GetMessage($key,$subkey="Name",$rkey="",$croak=TRUE)
     {
         $langkey=$this->ApplicationObj()->MyLanguage_GetLanguageKey();
 
         if (empty($this->ApplicationObj()->Messages))
         {
-            $this->MyApp_Messages_ReadFiles();
+            $this->MyApp_Messages_Files_Read();
         }
 
         if (!empty($this->ApplicationObj()->Messages[ $key ]))
@@ -85,7 +85,32 @@ trait MyLanguage_Messages
         }
 
         //Still here, warn!
-        $this->Warn("Unable to retrieve system message",$key,$subkey,$langkey,$rkey);
+        if ($croak) { $this->Warn("Unable to retrieve system message",$key,$subkey,$langkey,$rkey); }
     }
+    
+    //*
+    //* function Language_Message, Parameter list: $key,$subkey="Name"
+    //*
+    //* Retrieves message $key => $subkey. 
+    //* If $subkey is Name, returns spanned Name => Title field.
+    //* 
+    //*
+
+    function Language_Message($key,$subkey="Name")
+    {
+        $message=$this->MyLanguage_GetMessage($key,$subkey);
+        
+        if ($subkey=="Name")
+        {
+            $title=$this->MyLanguage_GetMessage($key,"Title","",FALSE);
+            if (!empty($title))
+            {
+                $message=$this->Span($message,array("TITLE" => $title));
+            }
+        }
+
+        return $message;
+    }
+
 }
 ?>

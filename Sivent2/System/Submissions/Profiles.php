@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -26,7 +25,7 @@ array
          ),
          "Friend" => array
          (
-            "Show" => 1,
+            "Edit" => 1,
             "Submission" => 1,
          ),
          'Assessor' => array
@@ -86,7 +85,8 @@ array
          "Friend" => array
          (
             "Add" => 1,
-            "Submissions" => 1,
+            "Search" => 1,
+            "Inscription" => 1,
          ),
          'Assessor' => array
          (
@@ -164,4 +164,3 @@ array
       ),
    ),
 );
-?>

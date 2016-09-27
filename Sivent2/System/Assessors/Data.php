@@ -53,7 +53,7 @@ array
       "Name_UK" => "Assessor",
       
       "SqlClass" => "Friends",
-      "Search" => FALSE,
+      "Search" => TRUE,
       "Compulsory"  => TRUE,
 
       "GETSearchVarName"  => "Friend",
@@ -71,7 +71,7 @@ array
       "Name_UK" => "Activity",
       
       "SqlClass" => "Submissions",
-      "Search" => FALSE,
+      "Search" => TRUE,
       "Compulsory"  => TRUE,
 
       "GETSearchVarName"  => "Submission",

@@ -1,70 +1,70 @@
 array
 (
-   "Caravans" => array
-   (
-      "Name" => "Você Quer Coordenar uma Caravana?",
-      "Name_UK" => "Do You Want to Coordinate a Caravan?",
+   /* "Caravans" => array */
+   /* ( */
+   /*    "Name" => "Você Quer Coordenar uma Caravana?", */
+   /*    "Name_UK" => "Do You Want to Coordinate a Caravan?", */
 
-      "Sql" => "ENUM",
+   /*    "Sql" => "ENUM", */
 
-      "Search" => FALSE,
-      "Values" => array("Não","Sim"),
-      "Values_UK" => array("No","Yes"),
-      "Default"  => 1,
+   /*    "Search" => FALSE, */
+   /*    "Values" => array("Não","Sim"), */
+   /*    "Values_UK" => array("No","Yes"), */
+   /*    "Default"  => 1, */
 
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-   ),
-   "Caravans_Name" => array
-   (
-      "Name" => "Nome da Caravana",
-      "Name_UK" => "Caravan Name",
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 2, */
+   /*    "Friend"     => 2, */
+   /*    "Coordinator" => 2, */
+   /* ), */
+   /* "Caravans_Name" => array */
+   /* ( */
+   /*    "Name" => "Nome da Caravana", */
+   /*    "Name_UK" => "Caravan Name", */
 
-      "Sql" => "VARCHAR(256)",
+   /*    "Sql" => "VARCHAR(256)", */
 
-      "Search" => TRUE,
+   /*    "Search" => TRUE, */
 
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-   ),
-   "Caravans_NParticipants" => array
-   (
-      "Name" => "No. de Participantes",
-      "Name_UK" => "No. of Participants",
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 2, */
+   /*    "Friend"     => 2, */
+   /*    "Coordinator" => 2, */
+   /* ), */
+   /* "Caravans_NParticipants" => array */
+   /* ( */
+   /*    "Name" => "No. de Participantes", */
+   /*    "Name_UK" => "No. of Participants", */
 
-      "Sql" => "INT",
-
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 1,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-   ),
-   "Caravans_Status" => array
-   (
-      "Name" => "Min. no de Participantes",
-      "Name_UK" => "Min. no. of Participants",
-
-      "Sql" => "ENUM",
-
-      "Search" => FALSE,
-      "Values" => array("Não","Sim"),
-      "Values_UK" => array("No","Yes"),
-      "Default"  => 1,
+   /*    "Sql" => "INT", */
 
 
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 1,
-      "Friend"     => 1,
-      "Coordinator" => 1,
-   ),
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 1, */
+   /*    "Friend"     => 1, */
+   /*    "Coordinator" => 1, */
+   /* ), */
+   /* "Caravans_Status" => array */
+   /* ( */
+   /*    "Name" => "Min. no de Participantes", */
+   /*    "Name_UK" => "Min. no. of Participants", */
+
+   /*    "Sql" => "ENUM", */
+
+   /*    "Search" => FALSE, */
+   /*    "Values" => array("Não","Sim"), */
+   /*    "Values_UK" => array("No","Yes"), */
+   /*    "Default"  => 1, */
+
+
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 1, */
+   /*    "Friend"     => 1, */
+   /*    "Coordinator" => 1, */
+   /* ), */
  
 );

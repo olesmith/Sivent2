@@ -13,7 +13,7 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 0,
-         "Coordinator" => 1,
+         "Coordinator" => 0,
       ),
       'Show' => array
       (
@@ -52,6 +52,15 @@ array
          "AccessMethod"  => "CheckDeleteAccess",
       ),
       'Download' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowAccess",
+      ),
+      'Zip' => array
       (
          'Public' => 1,
          'Person' => 0,

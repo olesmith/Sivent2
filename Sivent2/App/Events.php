@@ -41,7 +41,13 @@ class App_Events extends App_CGIVars
     {
         $menudef=parent::HtmlEventsMenuDef();
         
-        $this->MyMod_Profiles_Hash_Transfer($menudef,"Friend",$this->ApplicationObj()->UserProfiles,TRUE);
+        $this->MyMod_Profiles_Hash_Transfer
+        (
+           $menudef,
+           "Friend",
+           $this->ApplicationObj()->UserProfiles,
+           TRUE
+        );
         
         $menudef=$this->ReadPHPArray("System/Events/LeftMenu.php",$menudef);
 

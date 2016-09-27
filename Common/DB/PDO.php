@@ -96,6 +96,22 @@ trait DB_PDO
      }
     
     //*
+    //* function DB_PDO_Query_Html, Parameter list: $query
+    //*
+    //* Shows query, HTML.
+    //* 
+    //* 
+
+    function DB_PDO_Query_Html($query)
+    {
+        $query=preg_replace('/(UPDATE|SELECT|INSERT|DELETE|WHERE|SET)/',"$1<BR>",$query);
+        $query=preg_replace('/,/',"$1<BR>",$query);
+        $query=preg_replace('/(\S+)=/',"&nbsp;&nbsp;&nbsp;$1=",$query);
+
+        return $query."<BR>";
+    }
+    
+    //*
     //* function DB_PDO_Query, Parameter list: $query,$ignoreerror=FALSE
     //*
     //* Calls mysqli_select_db
@@ -115,7 +131,16 @@ trait DB_PDO
         
         catch (Exception $e)
         {
-            $this->DoDie($this->ModuleName.', Invalid query:',$query,$this->DB_Link()->errorinfo());
+            echo
+               $this->ModuleName.', Invalid query:<BR>'.
+               $this->DB_PDO_Query_Html($query).
+                "";
+                
+            $this->DoDie
+            (
+               $this->ModuleName.', Invalid query',
+               $this->DB_Link()->errorinfo()
+            );
         }
 
         return $result; 

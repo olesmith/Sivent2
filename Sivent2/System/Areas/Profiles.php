@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -33,13 +32,14 @@ array
          ),
          'Coordinator' => array
          (
-            'Show' => 1,
             'Edit' => 1,
+            'Copy' => 1,
             'Delete' => 1,
          ),
          'Admin' => array
          (
             'Edit' => 1,
+            'Copy' => 1,
             'Delete' => 1,
          ),
       ),
@@ -80,10 +80,24 @@ array
          ),
          'Coordinator' => array
          (
-         ),
+            "Event" => 1,
+            "Submissions" => 1,
+            "Criterias" => 1,
+            "Assessors" => 1,
+            "Times" => 1,
+            "Rooms" => 1,
+            "Schedule" => 1,
+          ),
          'Admin' => array
          (
-         ),
+            "Event" => 1,
+            "Submissions" => 1,
+            "Criterias" => 1,
+            "Assessors" => 1,
+            "Times" => 1,
+            "Rooms" => 1,
+            "Schedule" => 1,
+          ),
       ),
       'ActionsPlural' => array
       (
@@ -103,11 +117,21 @@ array
          (
             "Event" => 1,
             "Submissions" => 1,
+            "Criterias" => 1,
+            "Assessors" => 1,
+            "Times" => 1,
+            "Rooms" => 1,
+            "Schedule" => 1,
          ),
          'Admin' => array
          (
             "Event" => 1,
             "Submissions" => 1,
+            "Criterias" => 1,
+            "Assessors" => 1,
+            "Times" => 1,
+            "Rooms" => 1,
+            "Schedule" => 1,
          ),
       ),
       'ActionsSingular' => array
@@ -139,4 +163,3 @@ array
       ),
    ),
 );
-?>

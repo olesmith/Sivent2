@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
+         "No","Edit","Delete",
          "Unit","Event","Name","Name_UK","TimeLoad","Inscriptions","CertText","CertText_UK",
          "Collaborations_Collaborators_Noof_Cell",
          "Collaborations_Collaborators_NHomologated_Cell"

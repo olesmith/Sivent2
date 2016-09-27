@@ -3,6 +3,47 @@
 
 class ItemsTableRow extends ItemsRead
 {
+    function ItemsTableCellAligned($value,$align)
+    {
+        if (!empty($align))
+        {
+            $value=
+                array
+                (
+                   "Text" => $value,
+                   "Options" => array("CLASS" => $align),
+                );
+        }
+
+        return $value; 
+    }
+
+    
+    function ItemsTableCellAlign($data,$value)
+    {
+        if (!empty($this->ItemData[ $data ]))
+        {
+            $align="";
+            if (
+                  preg_match('/(INT|REAL)/i',$this->ItemData[ $data ][ "Sql" ])
+                  &&
+                  empty($this->ItemData[ $data ][ "SqlClass" ])
+               )
+            {
+                 $align='right';
+            }
+            elseif (!empty($this->ItemData[ $data ][ "Align" ]))
+            {
+                $align=$this->ItemData[ $data ][ "Align" ];
+            }
+            
+            $value=$this->ItemsTableCellAligned($value,$align);
+        }
+
+        return $value;
+    }
+
+    
     function ItemsTableRow($edit,$item,$nn,$datas,$subdatas=array(),&$tbl=array(),$even=TRUE)
     {
         //Test if we have individual access to Edit $item
@@ -96,7 +137,7 @@ class ItemsTableRow extends ItemsRead
             {
                 $value=$this->MyMod_Data_Fields($edit,$item,$data,TRUE,$tabindex);//TRUE for plural
                 
-                if (!preg_match('/\S/',$value)) { $value="&nbsp;"; }
+                if (empty($value)) { $value="&nbsp;"; }
             }
             elseif (method_exists($this,$data))
             {
@@ -122,6 +163,8 @@ class ItemsTableRow extends ItemsRead
                 $value.=$this->Font($item[ $data."_Message" ],array("CLASS" => 'errors'));
             }
 
+            $value=$this->ItemsTableCellAlign($data,$value);
+           
             array_push($row,$value);
 
             $tabindex++;
@@ -172,19 +215,25 @@ class ItemsTableRow extends ItemsRead
     }
 
     //*
-    //* function SumVarsRow, Parameter list: $datas,$sums,$items
+    //* function SumVarsRow, Parameter list: $datas,$sums
     //*
     //* Creates sumvar row. Data summed are listed in $this->SumVars and summed above in $sums.
     //* 
 
-    function SumVarsRow($datas,$sums,$items)
+    function SumVarsRow($datas,$sums)
     {
         $row=array();
         foreach ($datas as $data)
         {
-            if ($data=="No")               { array_push($row,$this->B("&Sigma;")); }
-            elseif (isset($sums[ $data ])) { array_push($row,$sums[ $data ]); }
-            else                           { array_push($row,"&nbsp;"); }
+            $value="&nbsp;";
+            if ($data=="No")               { $value=$this->B("&Sigma;"); }
+            elseif (isset($sums[ $data ])) { $value=$sums[ $data ]; }
+            $value=$this->B($value);
+            
+            $value=$this->ItemsTableCellAlign($data,$value);
+            
+            array_push($row,$value);
+            
         }
 
         return $row;

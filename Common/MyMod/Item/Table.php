@@ -73,7 +73,6 @@ trait MyMod_Item_Table
              );
         }
 
-
         return $table;
     }    
 }

@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -36,7 +35,7 @@ array
             'Copy' => 1,
             'Delete' => 1,
             "Friend" => 1,
-            "SeeInscription" => 1,
+            "Caravaneers" => 1,
             "GenCert" => 1,
          ),
          'Admin' => array
@@ -44,6 +43,7 @@ array
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
+            "Caravaneers" => 1,
             "GenCert" => 1,
          ),
       ),
@@ -60,14 +60,12 @@ array
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
-            "Emails" => 1,
          ),
          'Admin' => array
          (
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
-            "Emails" => 1,
          ),
       ),
       'SingularPlural' => array
@@ -143,4 +141,3 @@ array
       ),
    ),
 );
-?>

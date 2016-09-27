@@ -1,5 +1,6 @@
 array
     (
+     //Access pertaining (strictly) to the application
      "Help" => array
      (
         "Href"     => "",
@@ -338,7 +339,7 @@ array
         "Advisor"    => 0,
         "Handler"    => "ShowDir_Handle",
       ),
-     "Inscriptions" => array
+     "Inscriptions" => array //Move to App/Actions.php?
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscriptions&Event=#Event",
@@ -353,5 +354,22 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
+      ),
+     "Messages" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?Action=Messages&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Mensagens dos Sistema",
+        "Title_UK" => "Manage System Messages",
+        "Name"     => "Mensagens dos Sistema",
+        "Name_UK"     => "System Messages",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 0,
+        "Advisor"    => 0,
+        "Handler"    => "MyApp_Messages_Edit_Handle",
       ),
     );

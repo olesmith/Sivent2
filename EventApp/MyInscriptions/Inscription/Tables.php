@@ -6,7 +6,7 @@ class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
     //*
     //* function InscriptionHtmlTable, Parameter list: $edit,$buttons=FALSE,$inscription,$title="",$includeassessments=FALSE
     //*
-    //* Creates Inscription edit table as matrix.
+    //* Creates Inscription edit html table.
     //*
 
     function InscriptionHtmlTable($edit,$buttons=FALSE,$inscription,$title="",$includeassessments=FALSE)
@@ -47,35 +47,34 @@ class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
     //* Creates Inscription friend data table
     //*
 
-    function InscriptionFriendTable($edit,$friend=array())
+    function InscriptionFriendForm($edit,$friend=array())
     {
         if (empty($friend)) { $friend=$this->Friend; }
-
-        $table=$this->FriendsObj()->ItemTable
+        if ($this->LatexMode()) { $edit=0; }
+        
+        return join
         (
-           $edit,
-           $friend,
-           FALSE,
-           $this->InscriptionFriendTableData
-        );
-
-        array_push
-        (
-           $table,
-           $this->InscriptionMessageRow()
-        );
-
-        array_unshift
-        (
-            $table,
-            $this->H
+           "",
+            array
             (
-               1,
-               $this->Messages("Friend_Table_Title")
+               $this->H
+               (
+                  1,
+                  $this->Messages("Friend_Table_Title")
+               ),
+               $this->FriendsObj()->MyMod_Item_Table_Form
+               (
+                  array
+                  (
+                     "Edit"          => $edit,
+                     "Item"          => $friend,
+                     "Datas"         => $this->InscriptionFriendTableData,
+                     "TablePostRows" => array($this->InscriptionMessageRow()),
+                     "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
+                  )
+               ),
             )
         );
-
-        return $table;
     }
     
 

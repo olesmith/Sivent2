@@ -3,6 +3,31 @@
 class App_Override extends App_Handle
 {
     //*
+    //* function MyApp_Handle, Parameter list:$args=array()
+    //*
+    //* Overrides the main handler.
+    //*
+
+    function MyApp_Handle($args=array())
+    {
+        $this->UnitsObj()->Sql_Table_Structure_Update();
+        
+        $online=$this->Unit("Online");
+        if ($online==2 && $this->Profile()!="Admin")
+        {
+            $this->MyApp_Interface_Head();
+
+            echo
+                $this->H(1,$this->Language_Message("System_Closed")).
+                $this->H(2,$this->Unit("Online_Message")).
+                "";
+            exit();
+        }
+        parent::MyApp_Handle($args);
+    }
+
+    
+    //*
     //* function MyApp_Handle_Logon, Parameter list: 
     //*
     //* Handle Login Form, add events listing.
@@ -158,6 +183,18 @@ class App_Override extends App_Handle
                "Visible" => 1,
             );
     }
+    
+     //*
+    //* function  HtmlEventsWhere, Parameter list: 
+    //*
+    //* Returns menu def as read from system file. May be overridden.
+    //*
+
+    function HtmlEventsData()
+    {
+        return array("ID","Name","Date","Initials");
+    }
+    
     //*
     //* sub PostHandle, Parameter list: 
     //*
@@ -211,11 +248,46 @@ class App_Override extends App_Handle
                $this->HtmlTags
                (
                   "TD",
-                  $this->FrameIt($this->Html_Table("",$table))
+                  $this->Html_Table("",$table)
                ).
                $this->HtmlTags("TD")
              ).
             "";
     }
 
+    //*
+    //* function MyApp_Interface_LeftMenu_Read, Parameter list: 
+    //*
+    //* Reads the menus pertaining to profile $this->Profile.
+    //* If $this->Profile is empty, return Public menus.
+    //*
+
+    function MyApp_Interface_LeftMenu_Read()
+    {
+        $menues=$this->MyApp_Setup_Files2Hash("System","LeftMenu.php");
+        $unit=$this->Unit("ID");
+        if (empty($unit))
+        {
+            $keys=array_keys($menues);
+            $keys=preg_grep('/(Language|Units)$/',$keys,PREG_GREP_INVERT);
+
+            foreach ($keys as $key) { unset($menues[ $key ]); }
+        }
+
+        return $menues;
+    }
+    
+    //*
+    //* function AppUnitInfoTable, Parameter list: 
+    //*
+    //* Creates application info table: Unit and Event, if defined.
+    //*
+
+    function AppUnitInfoTable()
+    {
+        $unit=$this->Unit();
+        $table=array();
+
+        return $table;
+    }
 }

@@ -68,8 +68,8 @@ class SearchOptions extends Paging
         if (!preg_grep('/^Printing/',$omitvars))
         {
             array_push
-                (
-           $table,
+            (
+               $table,
                $this->GetLatexSelectFieldRow("Plural")
             );
         }

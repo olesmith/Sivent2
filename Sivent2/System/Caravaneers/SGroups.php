@@ -6,8 +6,10 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Unit","Event","Friend","Name","Email","Registration",
-         "CTime","MTime",
+         "Event","Name","Email","PRN","Comment",
+         "Status",
+         "Certificate","TimeLoad","Code","GenCert",
+         "Registration",
       ),
       "Admin" => 1,
       "Person" => 0,

@@ -46,7 +46,31 @@ trait Sql_Table_Fields_Update_Default
         return $query;
     }
     
+     //*
+    //* function Sql_Table_Field_Default_Should, Parameter list: $data,$datadef=array()
     //*
+    //* Sets column default to $value.
+    //* 
+
+    function Sql_Table_Field_Default_Should($data,$datadef=array())
+    {        
+        if (empty($datadef) && !empty($this->ItemData[ $data ])) { $datadef=$this->ItemData[ $data ]; }
+
+        $res=FALSE;
+        if (
+              !empty($datadef[ "Default" ])
+              &&
+              !preg_match('/^(TEXT|BLOB)$/i',$datadef[ "Sql" ])
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+
+    
+   //*
     //* function Sql_Table_Field_Default_Set, Parameter list: $data,$value,$table=""
     //*
     //* Sets column default to $value.

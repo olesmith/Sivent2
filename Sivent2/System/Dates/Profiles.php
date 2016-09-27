@@ -1,4 +1,3 @@
-<?php
 array
 (
    'Access' => array
@@ -33,17 +32,15 @@ array
          ),
          'Coordinator' => array
          (
-            'Show' => 1,
             'Edit' => 1,
-            'Delete' => 1,
             'Copy' => 1,
+            'Delete' => 1,
          ),
          'Admin' => array
          (
-            'Show' => 1,
             'Edit' => 1,
-            'Delete' => 1,
             'Copy' => 1,
+            'Delete' => 1,
          ),
       ),
       'Plural' => array
@@ -150,4 +147,3 @@ array
       ),
    ),
 );
-?>

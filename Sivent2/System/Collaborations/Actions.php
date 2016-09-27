@@ -6,6 +6,8 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
       ),
       'Add' => array
       (
@@ -41,6 +43,7 @@ array
          "Friend"     => 0,
          "Coordinator" => 1,
          "Assessor"  => 0,
+         "AccessMethod" => "CheckEditListAccess",
       ),
       'Delete' => array
       (
@@ -67,21 +70,5 @@ array
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "AccessMethod"    => "Event_Collaborations_Has",
-      ),
-     "Event" => array
-     (
-        "Href"     => "",
-        "HrefArgs" => "?ModuleName=Events&Action=Edit&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Evento",
-        "Title_UK" => "Manage Event",
-        "Name"     => "Evento",
-        "Name_UK"     => "Event",
-
-        "Public"   => 0,
-        "Person"   => 0,
-        "Admin"    => 1,
-        "Friend"   => 0,
-        "Coordinator"   => 1,
-        "Advisor"    => 0,
       ),
 );

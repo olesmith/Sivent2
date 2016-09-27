@@ -647,7 +647,7 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
             $pageno++;
             if ( ($n+1)<count($rows))
             {
-                $tex.="\\nclearpage\n\n";
+                $tex.="\n\\clearpage\n\n";
 
                 if ($footnumbers)
                 {

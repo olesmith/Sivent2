@@ -1,6 +1,6 @@
 <?php
 
-class CollaborationsAccess extends ModulesCommon
+class Collaborations_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (
@@ -10,19 +10,46 @@ class CollaborationsAccess extends ModulesCommon
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $event=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess($event=array())
+    {
+        $res=$this->ApplicationObj()->Current_User_Event_Collaborations_May_Edit($event);
+
+        return $res;
+    }
+
+    //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*
     //* Checks if $item may be viewed. Admin may -
     //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
-    //* Activated in System::Friends::Profiles.
     //*
 
     function CheckShowAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=$this->HasModuleAccess();
         
+        return $res;
+    }
+
+    //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //* Activated in System::Friends::Profiles.
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
+
         return $res;
     }
 
@@ -38,9 +65,23 @@ class CollaborationsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        
-        $res=$this->Current_User_Event_Coordinator_Is();
- 
+        $res=$this->HasModuleAccess();
+
+        return $res;
+    }
+    
+    //*
+    //* function CheckEditAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be edited. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //* Activated in  System::Friends::Profiles.
+    //*
+
+    function CheckEditListAccess($item=array())
+    {
+        $res=$this->HasModuleAccess();
+
         return $res;
     }
     
@@ -55,7 +96,9 @@ class CollaborationsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
         
-        $res=$this->Current_User_Event_Coordinator_Is();
+        $res=$this->HasModuleAccess();
+        $res=$this->ApplicationObj()->Current_User_Event_Collaborations_May_Edit($this->Event());
+
         if (
               $res
               &&

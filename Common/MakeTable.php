@@ -266,7 +266,7 @@ trait MakeTable
         $cell="";
         if (!empty($this->ItemData[ $data ]))
         {
-            $cell=$this->MakeSortTitle($data,TRUE);
+            $cell=$this->MyMod_Sort_Title_Cell($data,TRUE);
         }
         elseif (!empty($this->Actions[ $data ]))
         {

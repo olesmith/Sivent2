@@ -7,6 +7,7 @@ trait MyLanguage
 {
     use MyLanguage_Messages;
 
+    var $Language_Default="PT";
     var $Language="PT";
     var $LanguageKey="";
 
@@ -29,8 +30,10 @@ trait MyLanguage
            (
               "Key" => "",
               "Name" => "PT",
+              
               "Title" => "Português",
               "Title_UK" => "Portuguese",
+              "Title_ES" => "Portuguese",
               "Icon" => "br.png",
            ),
            "UK" => array
@@ -39,7 +42,17 @@ trait MyLanguage
               "Name" => "UK",
               "Title" => "Inglês",
               "Title_UK" => "English",
+              "Title_PT" => "Ingles",
               "Icon" => "uk.png",
+           ),
+           "ES" => array
+           (
+              "Key" => "ES",
+              "Name" => "ES",
+              "Title" => "Espanhol",
+              "Title_UK" => "Spanish",
+              "Title_UK" => "Castilhano",
+              "Icon" => "es.png",
            ),
         );
 
@@ -292,8 +305,12 @@ trait MyLanguage
                 $itemdata[ $lang ][ $data.$langkey ]=$def;
                 foreach (array("Name","Title","ShortName","Default") as $key)
                 {
-                    $itemdata[ $lang ][ $data.$langkey ][ $key ]=$def[ $key.$langkey ];
-                }
+                    $itemdata[ $lang ][ $data.$langkey ][ $key ]=$def[ $key ];
+                    if (!empty($def[ $key.$langkey ]))
+                    {
+                        $itemdata[ $lang ][ $data.$langkey ][ $key ]=$def[ $key.$langkey ];
+                    }
+               }
             }
         }
 
@@ -318,6 +335,11 @@ trait MyLanguage
                 $datas=array_keys($itemdata[ $lang ]);
                 
                 $itemgroups[ $group.$langkey ]=$def;
+                if (empty($def[ "Data".$langkey ]))
+                {
+                    $def[ "Data".$langkey ]=$def[ "Data" ];
+                }
+                
                 $itemgroups[ $group.$langkey ][ "Data" ]=array_merge($def[ "Data".$langkey ],$datas);
                 
                 $itemgroups[ $group.$langkey ][ "Language" ]=$lang;
@@ -325,7 +347,10 @@ trait MyLanguage
                 
                 foreach (array("Name","Title") as $key)
                 {
-                    $itemgroups[ $group.$langkey ][ $key ]=$def[ $key.$langkey ];
+                    $value=$def[ $key ];
+                    if (!empty($def[ $key.$langkey ])) { $value=$def[ $key.$langkey ]; }
+                    
+                    $itemgroups[ $group.$langkey ][ $key ]=$value; //$def[ $key.$langkey ];
                 }
             }
         }

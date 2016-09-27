@@ -43,7 +43,7 @@ trait Sql_Delete
         if (!empty($id) && $id>0 && $this->Sql_Table_Exists($table))
         {
             $query=$this->Sql_Delete_Item_Query($id,$var,$table);
-            
+
             $res=$this->QueryDB($query);
             if ($this->Sql_Delete_Log)
             {

@@ -11,7 +11,7 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
     function Inscription_Submissions_Link($item)
     {
         $message="Submissions_Inscribe_Link";
-        if (!$this->Inscriptions_Caravans_Inscriptions_Open())
+        if (!$this->Inscriptions_Submissions_Inscriptions_Open())
         {
             $message="Submissions_Inscriptions_Closed";
         }
@@ -37,7 +37,7 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
     //* Creates inscription collaboration info row (no details).
     //*
 
-    function Inscription_Submissions_Row($item)
+    function Inscription_Submissions_Rows($item)
     {
         return
             $this->Inscription_Type_Rows
@@ -61,11 +61,10 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
         
         if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
 
-
         $type=$this->InscriptionTablesType($item);
         if ($type!="Submissions")
         {
-            return $this->Inscription_Submissions_Row($item);
+            return $this->Inscription_Submissions_Rows($item);
         }
         
         $this->SubmissionsObj()->Sql_Table_Structure_Update();
@@ -86,8 +85,15 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
         {
             $this->Inscription_Group_Update($group,$item);
         }
+
+        $table=$this->Inscription_Submissions_Rows($item);
+        array_push
+        (
+           $table,
+           array($this->Inscription_Submissions_Table_Show(0,$item))
+        );
         
-        return array(array($this->FrameIt($this->Inscription_Submissions_Table_Show($edit,$item))));
+        return $table;
     }
 }
 

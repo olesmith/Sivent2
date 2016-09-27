@@ -155,7 +155,15 @@ trait MakeCGI
 
     function CGI_GETint($name)
     {
-        $value=$this->CGI_GET($name);
+        if (!is_array($name)) { $name=array($name); }
+        
+        $value=0;
+        foreach ($name as $rname)
+        {
+            $value=$this->CGI_GET($rname);
+
+            if (!empty($value)) { break; }
+        }
 
         return $this->CGI_Treatint($value);
     }

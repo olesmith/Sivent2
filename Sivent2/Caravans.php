@@ -2,10 +2,11 @@
 
 include_once("Caravans/Access.php");
 include_once("Caravans/Caravaneers.php");
+include_once("Caravans/Certificate.php");
 
 
 
-class Caravans extends CaravansCaravaneers
+class Caravans extends Caravans_Certificate
 {
     var $Certificate_Type=5;
     
@@ -18,11 +19,12 @@ class Caravans extends CaravansCaravaneers
     function Caravans($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration");
+        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration","NParticipants");
         $this->Sort=array("Name");
 
-        $this->SqlWhere=array("Caravans" => 2);
         $this->IncludeAllDefault=TRUE;
+
+        $this->Coordinator_Type=4;
     }
 
     
@@ -47,96 +49,11 @@ class Caravans extends CaravansCaravaneers
 
     function SqlTableName($table="")
     {
-        return $this->ApplicationObj()->SqlEventTableName("Inscriptions",$table);
+        return $this->ApplicationObj()->SqlEventTableName("Caravans",$table);
     }
 
-
-    //*
-    //* function PreActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreActions()
-    {
-        //parent::PreProcessItemDataGroups();
-        parent::PreActions();
-        array_push($this->ActionPaths,"System/Inscriptions","../EventApp/System/Inscriptions");
-    }
-
-
-    //*
-    //* function PostActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostActions()
-    {
-    }
 
     
-    //*
-    //* function PreProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreProcessItemDataGroups()
-    {
-        parent::PreProcessItemDataGroups();
-        //array_push($this->ItemDataGroupPaths,"System/Inscriptions","../EventApp/System/Inscriptions");
-    }
-
-    //*
-    //* function PostProcessItemDataGroups, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PostProcessItemDataGroups()
-    {
-    }
-
-    //*
-    //* function PreProcessItemData, Parameter list:
-    //*
-    //* Pre process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
-
-    function PreProcessItemData()
-    {
-        $this->Load_Other_Data=FALSE;
-        
-        parent::PreProcessItemData();
-        array_push($this->ItemDataPaths,"System/Inscriptions","../EventApp/System/Inscriptions");
-    }
-    
-   
-    //*
-    //* function PostProcessItemData, Parameter list:
-    //*
-    //* Post process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
-
-    function PostProcessItemData()
-    {
-        parent::PostProcessItemData();
-    }
-
-    
-    
-    //*
-    //* function PostInit, Parameter list:
-    //*
-    //* Runs right after module has finished initializing.
-    //*
-
-    function PostInit_disabled()
-    {
-    }
 
     //*
     //* function PostProcess, Parameter list: $item
@@ -155,9 +72,17 @@ class Caravans extends CaravansCaravaneers
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
         $updatedatas=array();
-        
-        //$this->Sql_Select_Hash_Datas_Read($item,array("TimeLoad","Collaboration","Homologated"));
 
+        $this->Sql_Select_Hash_Datas_Read($item,array("NParticipants"));
+        
+        $where=$this->UnitEventWhere(array("Friend" => $item[ "Friend" ]));
+        $ncaravaneers=$this->CaravaneersObj()->Sql_Select_NHashes($where);
+        if ($item[ "NParticipants" ]!=$ncaravaneers)
+        {
+            $item[ "NParticipants" ]=$ncaravaneers;
+            array_push($updatedatas,"NParticipants");
+        }
+                
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);

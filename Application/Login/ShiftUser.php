@@ -153,7 +153,7 @@ class LoginShiftUser extends LoginLogin
            "Name"
         );
 
-        $people=$this->UsersObj()->SortList($people,array("Name","ID"));
+        $people=$this->UsersObj()->MyMod_Sort_List($people,array("Name","ID"));
 
         $selectids=array();
         $selectnames=array();

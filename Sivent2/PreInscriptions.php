@@ -20,6 +20,8 @@ class PreInscriptions extends PreInscriptionsHandle
         $this->AlwaysReadData=array();
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
+
+        $this->Coordinator_Type=6;
     }
 
     //*

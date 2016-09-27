@@ -17,7 +17,9 @@ class Criterias extends CriteriasAccess
         $this->AlwaysReadData=array();
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name","Name_UK","Weight");
-    }
+
+        $this->Coordinator_Type=5;
+     }
 
     //*
     //* function SqlTableName, Parameter list: $table=""

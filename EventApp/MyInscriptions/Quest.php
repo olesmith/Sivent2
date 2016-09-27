@@ -13,6 +13,7 @@ class MyInscriptionsQuest extends MyInscriptionsAccess
         $event=$this->Event();
         
         if (empty($event[ "ID" ])) { return; }
+        if (!method_exists($this,"GroupDatasObj")) { return; }
 
         $this->GroupDatasObj()->Sql_Table_Structure_Update();
         $this->ReadDBGroups
@@ -43,6 +44,7 @@ class MyInscriptionsQuest extends MyInscriptionsAccess
         $event=$this->Event();
         
         if (empty($event[ "ID" ])) { return; }
+        if (!method_exists($this,"DatasObj")) { return; }
 
         $this->DatasObj()->Sql_Table_Structure_Update();
         $this->ReadDBData

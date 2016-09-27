@@ -2,8 +2,10 @@ array
 (
    "Name" => "Email de Confirmação, Reenvio",
    "Name_UK" => "Confirmation Mail, Resend",
+   "Name_ES" => "Email de Confirmación, Reenvio",
    "Title" => "Email de Confirmação, Reenvio",
    "Title_UK" => "Confirmation Mail, Resend",
+   "Title_ES" => "Email de Confirmación, Reenvio",
    
    "Data" => array("Subject","Body"),
    "Data_UK" => array("Subject_UK","Body_UK"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Reenvio de Código de Confirmação, #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Reenvio de Código de Confirmación, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Resending Confirmation Code, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
         "Recebemos uma solicitação de reenvio de do código de confirmação. Para completar o cadastro, por favor acesse o link:\n\n".

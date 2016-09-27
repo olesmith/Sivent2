@@ -1,9 +1,11 @@
 array
 (
-   "Name" => "Email de Confirmação do Cadastro",
-   "Name_UK" => "Mail Confirming Registration",
-   "Title" => "Email de Confirmação",
-   "Title_UK" => "Mail Confirming Registration",
+   "Name" => "Emails de Confirmação do Cadastro",
+   "Name_UK" => "Mails Confirming Registration",
+   "Name_ES" => "Emails de Confirmación de Registro",
+   "Title" => "Emails de Confirmação",
+   "Title_UK" => "Mails Confirming Registration",
+   "Title_ES" => "Emails de Confirmación",
    
    "Data" => array("Subject","Body"),
    "Data_UK" => array("Subject_UK","Body_UK"),
@@ -11,10 +13,11 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Cadastro confirmado, #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Registration confirmed, #Unit_Name, #Unit_Title",
+      "Default_ES"   => "#ApplicationName: Registro confirmado, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
       "Person"   => 1,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
       "Enviamos este email para confirmar seu cadastro no #ApplicationName, #Unit_Name, #Unit_Title.\n\n".

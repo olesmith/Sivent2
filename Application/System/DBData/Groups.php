@@ -6,7 +6,7 @@ array
       "Name_UK" => "Basic",
       "Actions" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","Copy",
       ),
       "Data" => array
       (
@@ -28,7 +28,7 @@ array
       "Name_UK" => "Titles",
       "Actions" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","Copy",
       ),
       "Data" => array
       (
@@ -53,7 +53,7 @@ array
       "Name_UK" => "Permissions",
       "Actions" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","Copy",
       ),
       "ShowData" => array
       (
@@ -78,7 +78,7 @@ array
       "Name_UK" => "Values",
       "Actions" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","Copy",
       ),
       "ShowData" => array
       (
@@ -103,7 +103,7 @@ array
       "Name_UK" => "Sizes",
       "Actions" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","Copy",
       ),
       "ShowData" => array
       (

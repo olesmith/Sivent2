@@ -142,8 +142,10 @@ class MyEvents extends MyEventsHandle
 
         $this->Unit2ItemData();
         $this->Today2ItemData();
+        
         $this->ItemData[ "HtmlIcon1" ][ "Coordinator" ]=2;
         $this->ItemData[ "HtmlIcon2" ][ "Coordinator" ]=2;
+        $this->ItemData[ "Initials" ][ "Coordinator" ]=2;
         $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
     }
 
@@ -157,6 +159,8 @@ class MyEvents extends MyEventsHandle
     function Unit2ItemData()
     {
         $unit=$this->ApplicationObj->Unit();
+        if (empty($unit)) { return; }
+        
 
         $this->AddDefaults[ "Unit" ]=$unit[ "ID" ];
         $this->AddFixedValues[ "Unit" ]=$unit[ "ID" ];
@@ -341,6 +345,39 @@ class MyEvents extends MyEventsHandle
         return $res;
     }
 
+    
+    //*
+    //* function Event_Inscriptions_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_Inscriptions_DateSpan($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Interval($event,"EventStart","EventEnd");
+    }
+    
+    
+    //*
+    //* function MyMod_Messages_Files, Parameter list: 
+    //*
+    //* Returns list of module messaged files.
+    //*
+
+    function MyMod_Messages_Files()
+    {
+        return 
+            array_merge
+            (
+               array
+               (
+                  "../EventApp/System/Events/LeftMenu.php",
+               ),
+               parent::MyMod_Messages_Files()
+            );
+    }
 }
 
 ?>

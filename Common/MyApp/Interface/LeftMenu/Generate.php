@@ -48,10 +48,14 @@ trait MyApp_Interface_LeftMenu_Generate
            if (empty($menu)) { return ""; }
 
            if (is_array($menu)) { $menu=join("",$menu); }
+
+           $name=$this->GetRealNameKey($submenu,"Name");
+           if (empty($name)) { $name=$this->GetRealNameKey($submenu,"Title"); }
+           
            $html.=
                $this->DIV
                (
-                  $this->GetRealNameKey($submenu,"Title"),
+                  $name,
                   array("CLASS" => 'leftmenutitle')
                ).
                $menu;

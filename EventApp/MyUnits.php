@@ -12,11 +12,13 @@ class MyUnits extends MyUnitsEvents
     var $MailTypes=array
     (
        "Register",
-       "Confirm","Confirm_Resend",
+       "Confirm",
+       "Confirm_Resend",
        "Password_Reset",
        "Password_Changed",
        "Email_Created",
-       "Email_Change","Email_Changed",
+       "Email_Change",
+       "Email_Changed",
     );
     
     //*
@@ -30,6 +32,7 @@ class MyUnits extends MyUnitsEvents
         $this->Hash2Object($args);
         $this->AlwaysReadData=array("Name");
         $this->Sort=array("Name");
+        $this->SqlWhere=array("ID" => $this->Unit("ID"));
         $this->IDGETVar="Unit";
         $this->UploadFilesHidden=FALSE;
    }
@@ -129,6 +132,8 @@ class MyUnits extends MyUnitsEvents
 
         $this->AddMails2ItemData("../EventApp/System/Units/Data.Mails.php");
         $this->AddMailTypes2ItemData("../EventApp/System/Units/Emails/Data.php");
+
+        $this->MailTypesObj()->Sql_Table_Structure_Update();
     }
 
 
@@ -162,6 +167,13 @@ class MyUnits extends MyUnitsEvents
            $item
         );
         
+        $updatedatas=
+            array_merge
+            (
+               $updatedatas,
+               $this->PostProcessMailTypes($item)
+            );
+        
         if (count($updatedatas)>0)
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
@@ -187,6 +199,8 @@ class MyUnits extends MyUnitsEvents
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
         $this->MailInfo2Unit($item);
+
+        
 
         return $item;
     }
@@ -616,6 +630,47 @@ class MyUnits extends MyUnitsEvents
         return $cell;
     }
 
+    //*
+    //* function MyMod_Messages_Files, Parameter list: 
+    //*
+    //* Returns list of module messaged files.
+    //*
+
+    function MyMod_Messages_Files()
+    {
+        return 
+            array_merge
+            (
+               array
+               (
+                  "../EventApp/System/Units/LeftMenu.php",
+               ),
+               parent::MyMod_Messages_Files()
+            );
+    }
+    
+    //*
+    //* function GenStartURL, Parameter list: $data,$item
+    //*
+    //* Generates link to Unit start, possibly on another server.
+    //*
+
+    function GenStartURL($data,$item)
+    {
+        $args=$this->CGI_URI2Hash();
+        
+        unset($args[ "ModuleName" ]);        
+        $args[ "Action" ]=$data;
+        $args[ "Unit" ]=$item[ "ID" ];
+         
+        $server=$item[ "Sivent2URL" ];
+        
+        return
+            $server.
+            "?".
+            $this->CGI_Hash2URI($args).
+            "";
+    }
 }
 
 ?>

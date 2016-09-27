@@ -17,6 +17,8 @@ class Assessments extends AssessmentsAccess
         $this->AlwaysReadData=array();
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name","Name_UK","Weight");
+
+        $this->Coordinator_Type=5;
     }
 
     //*

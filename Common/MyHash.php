@@ -537,6 +537,104 @@ trait MyHash
 
         return $plist;
     }
- }
+    
+    //*
+    //* function MyHashes_Search, Parameter list: $list,$where
+    //*
+    //* Returns list of items in $list, conforming to $where.
+    //*
+
+    function MyHashes_Search($list,$where)
+    {
+        $rlist=array();
+        foreach ($list as $id => $item)
+        {
+            $add=TRUE;
+            foreach ($where as $key => $value)
+            {
+                if ($item[ $key ]!=$where[ $key ])
+                {
+                    $add=FALSE;
+                    break;
+                }
+            }
+
+            if ($add)
+            {
+                array_push($rlist,$item);
+            }
+        }
+
+        return $rlist;
+    }
+
+    
+    //*
+    //* function MyHashes_Files_Show, Parameter list: $hashes
+    //*
+    //* Displays $hashes key and File entry, for each hash.
+    //*
+
+    function MyHashes_Files_Show($hashes)
+    {
+        $rfiles=array();
+        foreach ($hashes as $data => $hash)
+        {
+            if (!empty($hash[ "File" ]))
+            {
+                $files=$hash[ "File" ];
+                if (!is_array($files)) { $files=array($files); }
+
+                foreach ($files as $rfile)
+                {
+                    $rfiles[ $rfile ]=TRUE;
+                }
+            }
+            //else { var_dump(); }
+            
+        }
+
+        $files=array_keys($rfiles);
+
+        $table=array();
+        foreach ($hashes as $key => $hash)
+        {
+            $row=array($this->B($key.":"));
+
+            $rfiles=array();
+            if (!empty($hash[ "File" ]))
+            {
+                $rrfiles=$hash[ "File" ];
+                if (!is_array($rrfiles)) { $rrfiles=array($rrfiles); }
+
+                foreach ($rrfiles as $file) { $rfiles[ $file ]=TRUE; }
+            }
+            
+            foreach ($files as $file)
+            {
+                $cell="-";
+                if (!empty($rfiles[ $file ]))
+                {
+                    $cell="x";
+                }
+
+                array_push($row,$cell);
+            }
+            
+            array_push($table,$row);
+        }
+
+        $titles=$files;
+        array_unshift($titles,"Data");
+        
+        echo
+            $this->Html_Table
+            (
+               $titles,
+               $table
+            ).
+            "";
+    }
+}
 
 ?>

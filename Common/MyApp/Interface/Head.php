@@ -102,7 +102,7 @@ trait MyApp_Interface_Head
 
     function MyApp_Interface_Application_ShortCut_Icon()
     {
-        return "";
+        return 
             $this->HtmlTag
             (
                "LINK",
@@ -110,7 +110,20 @@ trait MyApp_Interface_Head
                array
                (
                   "REL"  => 'shortcut icon',
-                  "HREF" => $this->FindIconsPath()."/SAdE.owl.jpg",
+                  "HREF" => "icons/favicon.ico",
+                  "TYPE" => "image/x-icon",
+               )
+            ).
+            "\n".
+            $this->HtmlTag
+            (
+               "LINK",
+               "",
+               array
+               (
+                  "REL"  => 'icon',
+                  "HREF" => "icons/favicon.ico",
+                  "TYPE" => "image/x-icon",
                )
             ).
             "\n";
@@ -197,6 +210,29 @@ trait MyApp_Interface_Head
             "";
     }
     
+    //*
+    //* sub MyApp_Interface_Application_Script, Parameter list:
+    //*
+    //* Returns interface header script section
+    //*
+    //*
+
+    function MyApp_Interface_Application_Script()
+    {
+        return
+            $this->HtmlTags
+            (
+               "SCRIPT",
+               "function goto(site,title)\n".
+               "{\n".
+               "   var msg = confirm(title)\n".
+               "   if (msg) {window.location.href = site}\n".
+               "   else (null)\n".
+               "}"
+            ).
+            "\n";
+    }
+    
     
     //*
     //* sub MyApp_Interface_Header, Parameter list:
@@ -224,6 +260,7 @@ trait MyApp_Interface_Head
                $this->MyApp_Interface_Application_ShortCut_Icon().
                $this->MyApp_Interface_Application_METAs().
                $this->MyApp_Interface_Application_Styles().
+               $this->MyApp_Interface_Application_Script().
               "\n"
             ).
             $this->HtmlTag

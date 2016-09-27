@@ -70,7 +70,15 @@ class ItemForms extends Fields
         }
         else
         {
-            array_push($rtbl,$this->H(3,$this->ItemDataSGroups[ $group ][ "Name" ]));
+            array_push
+            (
+               $rtbl,
+               $this->H
+               (
+                  3,
+                  $this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name")
+               )
+            );
             $rtbl=$this->ItemTable($edit,$item,0,$rdatas,$rtbl,FALSE,FALSE,FALSE);
         }
 
@@ -135,7 +143,7 @@ class ItemForms extends Fields
             $item=$this->UpdateItem($item);
         }
 
-        $this->ApplicationObj->LogMessage("EditForm",$item[ "ID" ].": ".$this->GetItemName($item));
+        //$this->ApplicationObj->LogMessage("EditForm",$item[ "ID" ].": ".$this->GetItemName($item));
 
         $tbl=array();
         $hiddens=array();
@@ -160,7 +168,9 @@ class ItemForms extends Fields
             $row=array();
             foreach ($this->ItemDataSGroups as $group => $groupdef)
             {
-                 if (
+                if (isset($groupdef[ "Visible" ]) && !empty($groupdef[ "Visible" ])) { continue; }
+
+                if (
                     !empty($groupdef[ $this->ApplicationObj->Profile ])
                     &&
                     $groupdef[ $this->ApplicationObj->Profile ]<1
@@ -520,7 +530,7 @@ class ItemForms extends Fields
         }
 
         $this->ApplicationObj->MyApp_Interface_Head();
-        $this->ApplicationObj->LogMessage("AddForm","Load form");
+        //$this->ApplicationObj->LogMessage("AddForm","Load form");
         $html=
             $this->H(2,$title).
             $msg.
@@ -594,7 +604,7 @@ class ItemForms extends Fields
 
         
         $this->ApplicationObj->MyApp_Interface_Head();
-        $this->ApplicationObj->LogMessage("CopyForm","Form Loaded");
+        //$this->ApplicationObj->LogMessage("CopyForm","Form Loaded");
 
         $item=$this->ItemHash;
         foreach ($this->AddDefaults as $data => $value)

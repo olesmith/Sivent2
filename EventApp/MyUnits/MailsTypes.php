@@ -46,53 +46,30 @@ class MyUnitsMailsTypes extends MyUnitsMails
             $rmaildatas[ $lang ]=array();
         }
 
-        foreach (array("Subject","Body") as $mailpart)
-        {
-            foreach ($this->MyLanguage_Keys() as $lang)
-            {
-                $langkey=$this->MyLanguage_GetLanguageKey($lang);
+        $maildef=array
+        (
+           "Sql"           => "INT",
+           "SqlClass"      => "MailTypes",
+           "Name"          => "Email",
+           "HRef"          => "?ModuleName=MailTypes&Action=Edit&ID=#",
+      
+           "Public"   => 0,
+           "Person"   => 1,
+           "Friend"    => 1,
+           "Admin"    => 1,
+           "Coordinator" => 1,
+           "Default" => "0 ",
+        );
 
-                $destkey=$mailtype."_".$mailpart.$langkey;
-                    
-                $rmaildatas[ $lang ][ $destkey ]=
-                    $this->Mails[ $mailtype ][ $mailpart ];
-                    
-                $rmaildatas[ $lang ][ $destkey ][ "Default" ]=
-                    $rmaildatas[ $lang ][ $destkey ][ "Default".$langkey ];
-                    
-                foreach (array("Name","Title","ShortName") as $key)
-                {
-                    $rmaildatas[ $lang ][ $destkey ][ $key ]=
-                        $maildatas[ $lang ][ $mailpart.$langkey ][ $key.$langkey ];
-                    //unset other languages?
-                }
-                    
-                foreach ($this->ApplicationObj()->GetProfiles() as $profile => $def)
-                {
-                    if (empty($rmaildatas[ $lang ][ $destkey ][ $profile ]))
-                    {
-                        $rmaildatas[ $lang ][ $destkey ][ $profile ]=1;
-                    }
-                    
-                    if (empty($maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]))
-                    {
-                        $maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]=1;
-                    }
-                    
-                    $rmaildatas[ $lang ][ $destkey ][ $profile ]=
-                        $this->Max
-                        (
-                           $rmaildatas[ $lang ][ $destkey ][ $profile ],
-                           $maildatas[ $lang ][ $mailpart.$langkey ][ $profile ]
-                         );
-                }
-            }
-        }
-            
-        foreach ($rmaildatas as $lang => $defs)
+        foreach ($this->MyLanguage_Keys() as $lang)
         {
-            $this->ItemData=array_merge($this->ItemData,$defs);
+            $data=$mailtype."_".$lang;
+            $this->ItemData[ $data ]=$maildef;
+            $this->ItemData[ $data ][ "Name" ]=$lang;
+            $this->ItemData[ $data ][ "HRef" ]="?ModuleName=MailTypes&Action=Edit&ID=#".$data;
         }
+        
+        return;
     }
 
     //*
@@ -107,54 +84,143 @@ class MyUnitsMailsTypes extends MyUnitsMails
         foreach ($this->MyLanguage_Keys() as $lang)
         {
             $langkey=$this->MyLanguage_GetLanguageKey($lang);
-            $hash[ $lang ]=array
-            (
-               "Subject".$langkey => 1,
-               "Body".$langkey => 1,
-            );
+            $hash[ $lang ]=array();
+            /* ( */
+            /*    "Subject".$langkey => 1, */
+            /*    "Body".$langkey => 1, */
+            /* ); */
         }
         
-        $mailgroups=$this->MyLanguage_ItemData_Groups_Get($hash,$gfile);
-        $mailsgroups=$this->MyLanguage_ItemData_Groups_Get($hash,$sgfile);
+        /* $mailgroups=$this->MyLanguage_ItemData_Groups_Get($hash,$gfile); */
+        $mailsgroups=$this->ReadPHPArray($sgfile);
+        
 
         foreach ($this->Mails as $mailtype => $maildef)
         {
-            foreach ($mailgroups as $group => $def)
-            {
-                $langkey=$def[ "Language_Key" ];
-                foreach ($maildef[ "Data" ] as $data)
-                {
-                    array_push($def[ "Data" ],$mailtype."_".$data.$langkey);
-                }
-                
-                foreach (array("Name","Title") as $key)
-                {
-                    $def[ $key ]=$maildef[ $key.$langkey ];
-                }
-                
-                $this->ItemDataGroups[ $mailtype."_".$group ]=$def;
-            }
-            
             foreach ($mailsgroups as $sgroup => $def)
             {
-                $langkey=$def[ "Language_Key" ];
-                foreach ($maildef[ "Data" ] as $id => $data)
+                foreach ($this->MyLanguage_Keys() as $lang)
                 {
-                    array_push($def[ "Data" ],$mailtype."_".$data.$langkey);
+                    $langkey=$this->MyLanguage_GetLanguageKey($lang);
+                    array_push($def[ "Data" ],$mailtype."_".$lang);
+
+                    foreach (array("Name","Title") as $data)
+                    {
+                        if (!empty($maildef[ $data.$langkey ]))
+                        {
+                            $def[ $data.$langkey ]=$maildef[ $data.$langkey ];
+                        }
+                        else
+                        {
+                            $def[ $data.$langkey ]=$maildef[ $data ];
+                        }
+                    }
                 }
-               
-                foreach (array("Name","Title") as $key)
-                {
-                    $def[ $key ].=
-                        "<BR>".
-                        $maildef[ $key.$langkey ];
-                }
+                
                 $this->ItemDataSGroups[ $mailtype."_".$sgroup ]=$def;
             }
         }
     }
 
 
+    //*
+    //* function PostProcessMailTypes, Parameter list: &$item
+    //*
+    //* Post processes mail types data.
+    //* Creates MailTypes entries for ach languege.
+    //*
+
+    function PostProcessMailTypes(&$item)
+    {
+        $datas=array();
+        foreach ($this->MailTypes as $mailtype)
+        {
+            $datas=array_merge($datas,$this->PostProcessMailType($item,$mailtype));
+        }
+
+        return $datas;
+    }
+    
+    //*
+    //* function PostProcessMailType, Parameter list: &$item,$mailtype
+    //*
+    //* Post processes mail type data.
+    //* Creates MailTypes entries for ach languege.
+    //*
+
+    function PostProcessMailType(&$item,$mailtype)
+    {
+        $datas=array();
+        foreach ($this->MyLanguage_Keys() as $lang)
+        {
+            $langkey=$this->MyLanguage_GetLanguageKey($lang);
+            foreach (array("Subject","Body") as $comp)
+            {
+               array_push($datas,$mailtype."_".$comp.$langkey);
+            }
+        }
+        
+        $oldval=
+            $this->Sql_Select_Hash
+            (
+               array("ID" => $item[ "ID" ]),
+               $datas
+            );
+
+        $datas=array();
+        foreach ($this->MyLanguage_Keys() as $lang)
+        {
+            $langkey=$this->MyLanguage_GetLanguageKey($lang);
+                
+            $where=
+                $this->UnitWhere
+                (
+                   array
+                   (
+                      "Event" => 0,
+                      "Name" => $mailtype,
+                      "Language" => $lang,
+                    )
+                );
+
+            $mail=$this->MailTypesObj()->Sql_Select_Hash($where);
+
+            if (empty($mail))
+            {
+                $mail=$where;
+                foreach (array("Subject","Body") as $comp)
+                {
+                    if (!empty($oldval[ $mailtype."_".$comp."_".$lang ]))
+                    {
+                        $mail[ $comp ]=$oldval[ $mailtype."_".$comp."_".$lang ];
+                    }
+                    elseif (!empty($this->Mails[ $mailtype ][ $comp ][ "Default".$langkey ] ))
+                    {
+                        $mail[ $comp ]=$this->Mails[ $mailtype ][ $comp ][ "Default".$langkey ];
+                    }
+                    elseif (!empty($oldval[ $mailtype."_".$comp ]))
+                    {
+                        $mail[ $comp ]=$oldval[ $mailtype."_".$comp ];
+                    }
+                    elseif (!empty($this->Mails[ $mailtype ][ $comp ][ "Default" ] ))
+                    {
+                        $mail[ $comp ]=$this->Mails[ $mailtype ][ $comp ][ "Default" ];
+                    }
+
+                    $mail[ $comp ]=preg_replace('/\'/',"",$mail[ $comp ]);
+                }
+
+                $this->MailTypesObj()->Sql_Insert_Item($mail);
+                if (!empty($mail[ "ID" ]))
+                {
+                    $item[ $mailtype."_".$lang ]=$mail[ "ID" ];
+                    array_push($datas,$mailtype."_".$lang);
+                }
+            }
+        }
+ 
+        return $datas;
+    }
 }
 
 ?>

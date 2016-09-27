@@ -79,8 +79,7 @@ trait MyMod_Item_Group_Tables
                   array(),
                   TRUE,
                   TRUE
-                )
-            ;
+               );
         }
 
         return 

@@ -1,9 +1,11 @@
 array
 (
    "Name" => "Email Inicial de Cadastro",
+   "Name_ES" => "Email Inicial del Registro",
    "Name_UK" => "Initial Registration Mail",
    "Title" => "Email Inicial de Cadastro",
    "Title_UK" => "Initial Registration Mail",
+   "Title_ES" => "Email Inicial del Registro",
    
    "Data" => array("Subject","Body"),
    "Data_UK" => array("Subject_UK","Body_UK"),
@@ -11,9 +13,10 @@ array
    "Subject" => array
    (
       "Size" => "50",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      => "#ApplicationName: Código de Confirmação,  #Unit_Name, #Unit_Title",
+      "Default_ES"      => "#ApplicationName: Código de Confirmación,  #Unit_Name, #Unit_Title",
       "Default_UK"   => "#ApplicationName: Confirmation Code, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
@@ -25,7 +28,7 @@ array
    "Body" => array
    (
       "Size" => "50x10",
-      "Sql"          => "TEXT",
+      "Sql"          => "BLOB",
       
       "Default"      =>
       "Recebemos uma solicitação de cadastro em #ApplicationName, #Unit_Name, #Unit_Title. ".

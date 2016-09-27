@@ -127,14 +127,18 @@ class MyEventsCells extends MyEventsFriend
 
     function NoOfInscriptionsCell($edit=0,$event=array(),$data="")
     {
-        if (empty($event)) { return $this->MyLanguage_GetMessage("Events_Inscriptions_Cell_Noof_Title"); }
+        if (empty($event)) { return $this->Language_Message("Events_Inscriptions_Cell_Noof_Title"); }
        
         $sqltable=$this->SqlEventTableName("Inscriptions",$event);
         
         $ninscribed="-";
         if ($this->InscriptionsObj()->Sql_Table_Exists($sqltable))
         {
-            $ninscribed=$this->InscriptionsObj()->Sql_Select_NHashes(array(),$sqltable);
+            $ninscribed=$this->InscriptionsObj()->Sql_Select_NHashes
+            (
+               $this->UnitEventWhere(),
+               $sqltable
+            );
         }
 
         return $ninscribed;

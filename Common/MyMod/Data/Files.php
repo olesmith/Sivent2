@@ -34,7 +34,7 @@ trait MyMod_Data_Files
     //*
     //* function MyMod_Data_Files, Parameter list: 
     //*
-    //* Returns contents of $this->ActionFiles.
+    //* Returns files with item data.
     //*
 
     function MyMod_Data_Files()

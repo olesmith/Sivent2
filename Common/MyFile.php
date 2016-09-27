@@ -2,6 +2,8 @@
 
 trait MyFile
 {
+    var $Files_Incomplete=array();
+    
     //**
     //** function MyFile_Read, Parameter list: $file,$regex=""
     //**
@@ -29,7 +31,7 @@ trait MyFile
     //** 
     //**
 
-    function ReadPHPArray($file,&$rhash=array())
+    function ReadPHPArray($file,&$rhash=array(),$includes=TRUE)
     {
         if (!file_exists($file))
         {
@@ -37,11 +39,46 @@ trait MyFile
         }
 
         $text=$this->MyFile_Read($file);
+        $text=preg_grep('/\S/',$text);
+        $text=preg_grep('/<\?php/',$text,PREG_GREP_INVERT);
+        $text=preg_grep('/\?>/',$text,PREG_GREP_INVERT);
         $text=preg_grep('/(<<<<<|>>>>>|======)/',$text,PREG_GREP_INVERT);
+
+        
+        if ($includes )
+        {
+            $rtext=$text;
+            $text=array();
+            foreach ($rtext as $id => $line)
+            {
+                array_push($text,$line);
+            }
+
+            for ($n=0;$n<count($text);$n++)
+            {
+                if (preg_match('/^\s+\"include_file\" => \"(\S+)\"/',$text[ $n ],$matches))
+                {
+                    $rfile=$matches[1];
+                    $rtext=$this->MyFile_Read($rfile);
+                    array_splice($text,$n,1,$rtext);
+                }
+            }
+        }
 
         $text=preg_replace('/<\?php/',"",$text);
         $text=preg_replace('/\?>/',"",$text);
 
+        if (
+              !preg_match('/^\s*(array|\.php)/',$text[0])
+              &&
+              !preg_grep('/\$hash/',$text)
+           )
+        {
+            array_unshift($text,"array","(");
+            array_push($text,");");
+            $this->Files_Incomplete[ $file ]=TRUE;
+        }
+        
         if (!eval('$hash='.join("",$text).";\nreturn 1;"))
         {
             $text=preg_replace('/\n/',"<BR>",$text);
@@ -58,6 +95,7 @@ trait MyFile
                 if (empty($hash[ $key ])) { $hash[ $key ]=$value; }
             }
         }
+
 
         return $hash;
     }

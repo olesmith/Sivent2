@@ -19,7 +19,7 @@ trait MyActions_Entry
         }
 
         $action=$this->Actions($data);
-        if (!empty($action) && is_array($action))
+        if (!empty($data) && !empty($action) && is_array($action))
         {
             if ($this->MyAction_Allowed($data,$item))
             {
@@ -89,7 +89,7 @@ trait MyActions_Entry
 
     function MyActions_Entry_Gen($data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array())
     {
-        if (!isset($this->Actions[ $data ][ "Name" ])) { return ""; }
+        if (empty($this->Actions[ $data ][ "Name" ])) { return ""; }
 
         $anchor=$this->Actions($data,"Anchor");
 
@@ -123,6 +123,7 @@ trait MyActions_Entry
             $method=$this->Actions[ $data ][ "TitleMethod" ];
             return $this->$method($data,$item);
         }
+        
         return $this->GetRealNameKey($this->Actions[ $data ],$this->ActionTitleKey); 
     }
 
@@ -172,6 +173,12 @@ trait MyActions_Entry
     {
         if (!isset($this->Actions[ $data ][ "Name" ])) { return ""; }
 
+        if (!empty($this->Actions[ $data ][ "URLMethod" ]))
+        {
+            $method=$this->Actions[ $data ][ "URLMethod" ];
+            return $this->$method($data,$item);
+        }
+        
         $args=$this->CGI_URI2Hash("");
         $args=$this->Hidden2Hash($args);
 
@@ -248,6 +255,14 @@ trait MyActions_Entry
         {
             $action=preg_replace('/\&?ID=/',"&".$this->IDGETVar."=",$action);
         }
+        
+        if (!empty($this->Actions[ $data ][ "Confirm" ]))
+        {
+            $title=$this->GetRealNameKey($this->Actions[ $data ],"ConfirmTitle");
+            
+            $action="javascript:goto('".$action."','".$title."')";
+        }
+
 
         return $action;
     }

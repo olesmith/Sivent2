@@ -5,19 +5,19 @@ include_once("MyPermissions/Access.php");
 
 class MyPermissions extends MyPermissionsAccess
 {
-    //*
-    //* function Units, Parameter list: $args=array()
-    //*
-    //* Constructor.
-    //*
+    /* //\* */
+    /* //\* function Units, Parameter list: $args=array() */
+    /* //\* */
+    /* //\* Constructor. */
+    /* //\* */
 
-    function MyPermissions($args=array())
-    {
-        $this->Hash2Object($args);
-        $this->AlwaysReadData=array();
-        $this->Sort=array("Name");
-        $this->NonGetVars=array("Event","CreateTable");
-    }
+    /* function MyPermissions($args=array()) */
+    /* { */
+    /*     $this->Hash2Object($args); */
+    /*     $this->AlwaysReadData=array(); */
+    /*     $this->Sort=array("Name"); */
+    /*     $this->NonGetVars=array("Event","CreateTable"); */
+    /* } */
 
     //*
     //* function SqlTableName, Parameter list: $table=""
@@ -52,7 +52,7 @@ class MyPermissions extends MyPermissionsAccess
 
     function PreActions()
     {
-       array_unshift($this->ActionPaths,"../EventApp/System/Permissions");
+       array_push($this->ActionPaths,"../EventApp/System/Permissions");
      }
 
 
@@ -86,6 +86,7 @@ class MyPermissions extends MyPermissionsAccess
 
     function PostProcessItemDataGroups()
     {
+        $this->IncludeAllDefault=TRUE;
     }
 
     //*
@@ -98,6 +99,7 @@ class MyPermissions extends MyPermissionsAccess
     function PreProcessItemData()
     {
         array_unshift($this->ItemDataPaths,"../EventApp/System/Permissions");
+
     }
     
    
@@ -115,6 +117,9 @@ class MyPermissions extends MyPermissionsAccess
         $this->AddDefaults[ "Unit" ]=$unit;
         $this->AddFixedValues[ "Unit" ]=$unit;
         $this->ItemData[ "Unit" ][ "Default" ]=$unit;
+        
+        $this->ItemData[ "Unit" ][ "Coordinator" ]=1;
+        $this->ItemData[ "Unit" ][ "Admin" ]=1;
     }
 
     

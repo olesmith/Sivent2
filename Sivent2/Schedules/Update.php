@@ -10,16 +10,12 @@ class SchedulesUpdate extends SchedulesSpeaker
 
     function UpdateScheduleDate($date)
     {
-         var_dump("here");
        foreach ($this->SchedulePlaces() as $place)
         {
-         var_dump("here1");
             foreach ($this->DateTimes($date) as $id => $time)
             {
-          var_dump("here2");
                foreach ($this->ScheduleRooms($place) as $room)
                 {
-         var_dump("here3");
                     $this->UpdateScheduleEntry($date,$time,$place,$room);
                 }
             }
@@ -51,9 +47,6 @@ class SchedulesUpdate extends SchedulesSpeaker
         
         $schedules=$this->Sql_Select_Hashes($where);
 
-        var_dump("here id ".$submissionid);
-        var_dump(count($schedules));
-
        
         if (count($schedules)>0)
         {
@@ -69,7 +62,7 @@ class SchedulesUpdate extends SchedulesSpeaker
 
             if ($schedule[ "Submission" ]==$submissionid)
             {
-                var_dump("no change");
+                //var_dump("no change");
             }
             elseif ($submissionid==0)
             {
@@ -95,6 +88,8 @@ class SchedulesUpdate extends SchedulesSpeaker
                    (
                       "Time" => $time[ "ID" ],
                       "Room" => $room[ "ID" ],
+                      "Place" => $place[ "ID" ],
+                      "Date" => $date[ "ID" ],
                    )
                 );
 

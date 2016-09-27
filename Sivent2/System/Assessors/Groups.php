@@ -6,9 +6,10 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
+         "No","Edit","Copy","Delete",
          "Friend","Submission",
          "HasAssessed","HasAccessed",
+         "Result"
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -19,11 +20,11 @@ array
    ),
    "Assessments" => array
    (
-      "Name" => "Avaliações",
-      "Name_UK" => "Assessments",
+      "Name" => "Avaliações**",
+      "Name_UK" => "Assessments**",
       "Data" => array
       (
-         "No","Show","Edit","Delete",
+         "No","Edit","Copy","Delete",
          "Friend","HasAssessed","HasAccessed",
          "Result"
       ),

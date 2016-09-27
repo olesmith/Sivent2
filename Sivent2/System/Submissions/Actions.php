@@ -6,6 +6,8 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
       ),
       'Add' => array
       (
@@ -13,6 +15,15 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckAddAccess",
+      ),
+      'Copy' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
          "Coordinator" => 1,
          "AccessMethod" => "CheckAddAccess",
       ),
@@ -27,7 +38,7 @@ array
       ),
       'Edit' => array
       (
-         'Public' => 1,
+         'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 1,
@@ -42,13 +53,14 @@ array
          "Friend"     => 0,
          "Coordinator" => 1,
          "Assessor"  => 0,
+         "AccessMethod" => "CheckEditListAccess",
       ),
       'Delete' => array
       (
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
-         "Friend"     => 1,
+         "Friend"     => 0,
          "Coordinator" => 1,
          "AccessMethod"  => "CheckDeleteAccess",
       ),
@@ -61,22 +73,20 @@ array
          "Coordinator" => 1,
          "AccessMethod"  => "CheckDownloadAccess",
       ),
-   "Submissions" => array
+   "Inscription" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Submission&Friend=#Friend#1",
-      "Title"    => "Atividades",
-      "Title_UK" => "Activities",
-      "Name"     => "Atividade",
-      "Name_UK"   => "Activity",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Type=Submissions&Friend=#Friend#1",
+      "Name"     => "Minha Inscrição",
+      "Name_UK"   => "My Inscription",
       
-      //"Handler"   => "Inscription_Collaborations_Inscription_Handle",
-
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
+      "Singular"    => TRUE,
+      "AccessMethod"  => "CheckShowListAccess",
   ),
    "GenCert" => array
    (

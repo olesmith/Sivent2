@@ -1,10 +1,11 @@
 <?php
 
 include_once("Collaborations/Access.php");
+include_once("Collaborations/Cells.php");
 
 
 
-class Collaborations extends CollaborationsAccess
+class Collaborations extends Collaborations_Cells
 {
     //*
     //* function Units, Parameter list: $args=array()
@@ -18,7 +19,12 @@ class Collaborations extends CollaborationsAccess
         $this->AlwaysReadData=array();
         $this->Sort=array("Name");
         $this->IncludeAllDefault=TRUE;
-    }
+        
+        $this->CellMethods[ "Collaborations_Collaborators_Noof_Cell" ]=TRUE;
+        $this->CellMethods[ "Collaborations_Collaborators_NHomologated_Cell" ]=TRUE;
+
+        $this->Coordinator_Type=3;
+     }
 
     //*
     //* function SqlTableName, Parameter list: $table=""
@@ -83,62 +89,6 @@ class Collaborations extends CollaborationsAccess
         
         return $item;
     }
-    
-    //*
-    //* function Collaborations_Collaborators_Noof_Cell, Parameter list: $collaboration=array()
-    //*
-    //* Returns number of Submissions registered for $inscription.
-    //*
-
-    function Collaborations_Collaborators_Noof_Cell($collaboration=array())
-    {
-        if (empty($collaboration))
-        {
-            return $this->MyLanguage_GetMessage("Collaborations_Collaborators_Cell_Noof_Title");
-        }
-        
-        $ninscribed=$this->CollaboratorsObj()->Sql_Select_NEntries
-        (
-           array
-           (
-              "Collaboration" => $collaboration[ "ID" ],
-           )
-        );
-
-        if (empty($ninscribed)) { $ninscribed="-"; }
-        
-        return $ninscribed;
-        
-    }
-     //*
-    //* function Collaborations_Collaborators_NHomologated_Cell, Parameter list: $collaboration=array()
-    //*
-    //* Returns number of Submissions registered for $inscription.
-    //*
-
-    function Collaborations_Collaborators_NHomologated_Cell($collaboration=array())
-    {
-        if (empty($collaboration))
-        {
-            return $this->MyLanguage_GetMessage("Collaborations_Collaborators_Cell_NHomologated_Title");
-        }
-        
-        $ninscribed=$this->CollaboratorsObj()->Sql_Select_NEntries
-        (
-           array
-           (
-              "Collaboration" => $collaboration[ "ID" ],
-              "Homologated" => 2,
-           )
-        );
-
-        if (empty($ninscribed)) { $ninscribed="-"; }
-        
-        return $ninscribed;
-        
-    }
-    
-   
 }
 
 ?>

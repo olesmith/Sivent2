@@ -14,7 +14,7 @@ trait MyActions_Error
 
         if (is_array($action))                    { $info=$action; $action=$action[ "Action" ]; }
         elseif (isset($this->Actions[ $action ])) { $info=$this->Actions[ $action ]; }
-        //else                                      { $info=$this->Actions; }
+        elseif (isset($this->ApplicationObj()->Actions[ $action ])) { $info=$this->ApplicationObj()->Actions[ $action ]; }
 
         $this->MyMessage_Die
         (

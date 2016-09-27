@@ -7,6 +7,7 @@ include_once("Handle/Delete.php");
 include_once("Handle/Search.php");
 include_once("Handle/Prints.php");
 include_once("Handle/Info.php");
+include_once("Handle/Zip.php");
 
 trait MyMod_Handle
 {
@@ -16,10 +17,49 @@ trait MyMod_Handle
         MyMod_Handle_Delete,
         MyMod_Handle_Search,
         MyMod_Handle_Prints,
-        MyMod_Handle_Info;
+        MyMod_Handle_Info,
+        MyMod_Handle_Zip;
     
     //*
-    //* function MyMod_Handle, Parameter list:$args=array()
+    //* function MyMod_Handle_Item_Read, Parameter list:
+    //*
+    //* Read Item based on CGI, if CGI parms specified.
+    //*
+
+    function MyMod_Handle_Item_Read()
+    {
+        //Do we need to read an item?
+        $id=0;
+        if ($this->IDGETVar)
+        {
+            $id=$this->CGI_GETOrPOSTint($this->IDGETVar);
+        }
+
+        if (empty($id))
+        {
+            $id=$this->CGI_GETOrPOSTint("ID");
+        }
+
+        if (!empty($id))
+        {
+            if (empty($this->ItemHash))
+            {
+                $this->ReadItem($id);
+            }
+
+            if (empty($this->ItemHash))
+            {
+                $this->DoDie
+                (
+                   "Table::Handle ".$this->ModuleName.
+                   ": Not found or not allowed... (".$id.") - bye-bye.."
+                );
+            }
+        }
+    }
+    
+    //*
+    //* function MyMod_Handle, Parameter list: $args=array()
     //*
     //* The main handler. Everything passes through here!
     //* Dispatches an Application or a Module action. 
@@ -30,22 +70,39 @@ trait MyMod_Handle
 
     function MyMod_Handle($args=array())
     {
-        $this->Actions();
-
         $action=$this->CGI_Get("Action");
         if ($action=="") { $action=$this->DefaultAction; }
         $this->ModuleName=$this->CGI_Get("ModuleName");
 
         //Load actions if necessary
         $this->Actions();
-
+        $this->MyMod_Handle_Item_Read();
+        
         if (!empty($this->Actions[ $action ]))
         {
-            if ($this->MyAction_Allowed($action))
+            $item=array();
+            if (!empty($this->Actions[ $action ][ "Singular" ]))
             {
-                $this->ApplicationObj()->LogMessage($action,"Handle");
+                $item=$this->ItemHash;
+            }
+            
+            $res=$this->MyAction_Allowed($action,$item);
+            if (!$res)
+            {
+                if (!empty($this->Actions[ $action ][ "AltAction" ]))
+                {
+                    $action=$this->Actions[ $action ][ "AltAction" ];
+                    $res=$this->MyAction_Allowed($action,$item);
+                }
+            }
 
-                $this->Handle();
+            if ($res)
+            {
+                if (empty($this->Actions[ $action ][ "NoLogging" ]))
+                {
+                    $this->ApplicationObj()->LogMessage($action,"MyMod_Handle");
+                }
+                $this->Handle($action);
             }
             else
             {
@@ -60,12 +117,12 @@ trait MyMod_Handle
 
 
     //*
-    //* function Handle, Parameter list:$args=array()
+    //* function Handle, Parameter list: $action=""
     //*
     //* ModuleHandler
     //*
 
-    function Handle()
+    function Handle($action="")
     {
         if ($this->NoHandle!=0) { return; }
 
@@ -73,40 +130,16 @@ trait MyMod_Handle
         $this->Actions();
         $this->ItemDataGroups();
 
-        //Do we need to read an item?
-        $id=0;
-        if ($this->IDGETVar)
-        {
-            $id=$this->GetGETOrPOST($this->IDGETVar);
-        }
-
-        if (empty($id))
-        {
-            $id=$this->GetGETOrPOST("ID");
-        }
-
-        if (!empty($id))
-        {
-            if (count($this->ItemHash)==0)
-            {
-                $this->ReadItem($id);
-            }
-
-            if (empty($this->ItemHash))
-            {
-                $this->DoDie
-                (
-                   "Table::Handle ".$this->ModuleName.
-                   ": Not found or not allowed... (".$id.") - bye-bye.."
-                );
-            }
-        }
 
         
         $item=$this->ItemHash;
 
         //Do we have a suitable action?
-        $action=$this->MyActions_Detect();
+        if (empty($action))
+        {
+            $action=$this->MyActions_Detect();
+        }
+        
         if (empty($action))
         {
             $this->DoDie
@@ -169,7 +202,11 @@ trait MyMod_Handle
   {
       $latex=0;
       $latex=$this->CGI_GETOrPOSTint("Latex");
-      if ($latex>=1) { return; }
+      if ($latex>=1)
+      {
+          $this->ApplicationObj()->SetLatexMode();
+          return;
+      }
 
       $zip=0;
       $zip=$this->CGI_GETOrPOSTint("ZIP");
@@ -179,8 +216,6 @@ trait MyMod_Handle
       $latexdoc=$this->CGI_GETOrPOSTint("LatexDoc");
       if (empty($latexdoc)) { $latexdoc=0; }
       if (empty($latexdoc)) { $latexdoc=0; }
-
-      
 
       if ($latexdoc==0 || $force)
       {

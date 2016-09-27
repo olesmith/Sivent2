@@ -36,6 +36,7 @@ class HandleDownload extends Menues
               echo "No such file: '".$file."'";
               exit();
           }
+          
           $content=join("",$this->MyReadFile($file));
  
           $matches=array();
@@ -55,7 +56,7 @@ class HandleDownload extends Menues
              $ext,
              preg_replace('/^\./',"",basename(join(".",$comps))),
              "",
-             24*60*60, //expires in one hour, should be reasonable
+             100*24*60*60, //expires in one day, should be reasonable
              filemtime($file)
           );
 

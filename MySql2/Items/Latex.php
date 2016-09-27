@@ -370,7 +370,7 @@ class ItemsLatex extends Item
         $this->LatexData[ "NItemsPerPage" ]=50;
 
         if (count($items)==0) { $items=$this->ItemHashes; }
-        $this->ApplicationObj->LogMessage("ItemLatexTablesPrint",count($items)." items");
+        //$this->ApplicationObj->LogMessage("ItemLatexTablesPrint",count($items)." items");
         $latex="";
         foreach ($items as $id => $item)
         {

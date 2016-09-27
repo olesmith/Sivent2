@@ -10,14 +10,11 @@ include_once("ModPerms.php");
 include_once("Backup.php");
 include_once("Modules.php");
 include_once("Setup.php");
-//include_once("../Application/Messages.php");
 include_once("Messages.php");
 include_once("Help.php");
 include_once("TInterface.php");
 include_once("Perms.php");
 include_once("Profiles.php");
-//include_once("../Application/Users.php");
-//include_once("../Application/Logs.php");
 include_once("../Application/Users.php");
 include_once("../Application/Logs.php");
 include_once("Handlers.php");
@@ -135,7 +132,7 @@ class Application extends ApplicationCGIVars
     function SetLatexMode()
     {
         $this->Sigma   = '$'."\\Sigma".  '$';
-        $this->Mu      = '$'."\\Mu".     '$';
+        $this->Mu      = '$'."\\mu".     '$';
         $this->Percent = "\\%";
 
         $this->LatexMode=TRUE;
@@ -169,10 +166,12 @@ class Application extends ApplicationCGIVars
            "Public" =>1,
            "Person" =>1,
         );
+        
         foreach ($this->ValidProfiles as $profile)
         {
             $profiles[ $profile ]=1;
         }
+        
         $profiles[ "Admin" ]=1;
 
         return array_keys($profiles);
