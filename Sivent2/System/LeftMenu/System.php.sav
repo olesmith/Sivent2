@@ -1,0 +1,33 @@
+   "00_Messages" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "0",
+      "Coordinator" => "0",
+      "Friend" => "0",
+      "Href" => "?Unit=2&Action=Messages",
+      "Name" => "Mensagens dos Sistema",
+      "Name_ES" => "Mensagens dos Sistema",
+      "Name_UK" => "System Messages",
+      "Person" => 0,
+      "Public" => 0,
+      "Title" => "Gerenciar Mensagens dos Sistema",
+      "Title_ES" => "Mensagens dos Sistema",
+      "Title_UK" => "Manage System Messages",
+   ),
+   "10_Units" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "0",
+      "Coordinator" => "0",
+      "Friend" => "0",
+      "Href" => "?Action=Start",
+      "Name" => "Entidades usando SiVent2",
+      "Name_ES" => "Entidades usando SiVent2",
+      "Name_UK" => "Entities using Sivent2",
+      "Person" => 1,
+      "Public" => 1,
+      "Title" => "Entidades usando SiVent2 neste Servidor",
+      "Title_ES" => "Entidades usando SiVent2",
+      "Title_UK" => "Entities using Sivent2 on this Server",
+   ),
+

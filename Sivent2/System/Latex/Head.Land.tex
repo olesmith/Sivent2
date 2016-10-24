@@ -1,0 +1,52 @@
+\documentclass[a4paper,10pt]{report}
+
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+\usepackage
+[
+   a4paper,
+   landscape,
+   twoside,
+   left=0.5cm,
+   right=0.5cm,
+   top=0.75cm,
+   bottom=1.25cm,
+   includehead,
+   includefoot,
+   headheight=2.5cm,
+   headsep=0.25cm,
+   footskip=0.25cm
+]{geometry}
+
+
+\lhead{\includegraphics*[width=2.5cm]{#LatexIcon1}\\}
+\rhead{\includegraphics*[width=2.5cm]{#LatexIcon2}\\}
+\chead{
+      \textbf{
+           \begin{Large}#Unit_Title\end{Large}\\
+           \begin{large}#Unit_Name\end{large}\\
+           #Event_Title\\
+           \begin{small}#Event_Url - #Event_Email\end{small}
+      }
+}
+
+\lfoot{\small{\textbf{SiVent2, Author: Prof. Ole Peter Smith, IME/UFG}}}
+\cfoot{\thepage}
+\rfoot{\small{\textbf{\today}}}
+
+\pagestyle{fancy}
+
+\begin{document}
+\begin{center}
