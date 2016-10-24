@@ -11,4 +11,6 @@ https://github.com/Synchro/PHPMailer
 
 and place them in your webserver directory. These are used for the mail sending.
 
-3: Locate the Sivent2.sql file in the repository and import it into the sivent2 DB on the MySQL server, and adapt the data in Units to meet your needs. You may have to add credentials to your MySQL servers mysql DB, the setup is specified in Sivent2/.DB.php.
+3: Locate the Sivent2.sql file in the repository and import it into the sivent2 DB on the MySQL server, and adapt the data in Units to meet your needs. You may have to add credentials to your MySQL server mysql DB, the setup is specified in Sivent2/.DB.php.
+
+4: For printing to work, you must have Latex installed - only tested on unix-like systems - however, on other platforms, it might work editing the pdflatex.sh script. Install texlive-full!
