@@ -166,6 +166,17 @@ function MakeFileField($name,$options=array())
 
 function MakeTextArea($name,$rows,$cols,$value,$wrap="physical",$options=array())
 {
+    if (empty($rows))
+    {
+        $rows=1;
+        if (!is_array($value))
+        {
+            $value=preg_split('/\n/',$value);
+        }
+        
+        $rows=count($value);
+    }
+    
     $html=
         "<TEXTAREA NAME='".$name."' ".
         "COLS='".$cols."' ".

@@ -14,25 +14,6 @@ class Items extends ItemsEmails
     //*
     //* Variables of Items class:
 
-    var $ItemHashes=array();
-    var $ActionButtons=FALSE;
-    var $ActionButtonActions=array();
-    var $ItemDataGroupNames=array();
-    var $ItemDataSGroupNames=array();
-    var $ItemActions=array();
-    var $ItemsActions=array();
-    var $SumVars=array();
-    var $ConditionalShow="";
-    var $IncludeAll=0;
-    var $IncludeAllDefault=FALSE;
-    var $NoPaging=FALSE;
-    var $NoSearches=FALSE;
-    var $ShowAll=FALSE;
-    var $AddCheckBox2ItemTable=FALSE;
-    var $UniquenessData=array();
-    var $LastWhereClause=NULL;
-    var $OnlyReadIDs=NULL;
-
     //*
     //* function InitItems, Parameter list: $hash=array()
     //*

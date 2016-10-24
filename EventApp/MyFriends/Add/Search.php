@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsAddSearch extends MyFriendsAddTable
+class MyFriends_Add_Search extends MyFriends_Add_Table
 {
     //*
     //* function FriendSelectSearchTable, Parameter list: $leadingrows=array()

@@ -1,12 +1,13 @@
 <?php
 
 include_once("MyInscriptions/Access.php");
+include_once("MyInscriptions/Zip.php");
 include_once("MyInscriptions/Quest.php");
 include_once("MyInscriptions/Inscription.php");
 include_once("MyInscriptions/Handle.php");
 include_once("MyInscriptions/Add.php");
 
-class MyInscriptions extends MyInscriptionsAdd
+class MyInscriptions extends MyInscriptions_Add
 {
     var $InscriptionEventTableSGroups=
         array
@@ -165,6 +166,23 @@ class MyInscriptions extends MyInscriptionsAdd
 
     function PostProcess($item)
     {
+        $this->Sql_Select_Hash_Datas_Read($item,array("Friend","Name"));
+
+        $name=$this->FriendsObj()->Friend_Name_Text($item[ "Friend" ]);
+        
+        
+        $updatedatas=array();
+        if (empty($item[ "Name" ]) || $item[ "Name" ]!=$name)
+        {
+            $item[ "Name" ]=$name;
+            array_push($updatedatas,"Name");
+        }
+
+        if (count($updatedatas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+        }
+        
         return $item;
     }
 }

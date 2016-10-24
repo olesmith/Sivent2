@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsAccess extends MyFriendsFriend
+class MyFriends_Access extends MyFriends_Friend
 {
     var $Access_Methods=array
     (

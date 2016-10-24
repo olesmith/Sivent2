@@ -32,7 +32,7 @@ trait MakeLatex
     //* Generates Latex multirow entry.
     //*
 
-    function Latex_Minipage($width,$text,$align='t')
+    function Latex_Minipage_Old($width,$text,$align='t')
     {
         return
             "\\begin{minipage}[".$align."]{".$width."}\n".

@@ -3,6 +3,18 @@
 trait MyMod_Access
 {
     //*
+    //* function MyMod_Access_Has, Parameter list:
+    //*
+    //* Returns true if access to module allowed.
+    //* Supposed to be overwritten.
+    //*
+
+    function MyMod_Access_Has()
+    {
+        return TRUE;
+    }
+
+    //*
     //* function MyMod_Access_HashAccess, Parameter list: $hash,$value=array(1)
     //*
     //* Tests if $hash has $this->LoginType and $this->Profile keys with value $value.

@@ -1,5 +1,19 @@
 array
 (
+   "0_Start" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&Action=Start&ID=".$this->Unit("ID"),
+      "Name" => "Início",
+      "Name_ES" => "Início",
+      "Name_UK" => "Start",
+      "OmitArgs" => array("Event"),
+      "Person" => "0",
+      "Public" => "1",
+   ),
    "1_ShowUnit" => array
    (
       "Admin" => "1",

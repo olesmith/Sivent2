@@ -17,7 +17,10 @@ class SchedulesAccess extends ModulesCommon
 
     function HasModuleAccess($event=array())
     {
-        $res=$this->SubmissionsObj()->HasModuleAccess($event);
+        $res=
+            $this->SubmissionsObj()->HasModuleAccess($event)
+            ||
+            $this->ApplicationObj()->SubmissionsPublic($event);
 
         return $res;
     }
@@ -35,8 +38,7 @@ class SchedulesAccess extends ModulesCommon
         if (empty($item)) { return TRUE; }
 
         $res=$this->HasModuleAccess();
-
-
+        
         return $res;
     }
 

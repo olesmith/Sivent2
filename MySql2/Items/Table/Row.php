@@ -60,13 +60,20 @@ class ItemsTableRow extends ItemsRead
         $row=array();
         foreach ($datas as $data)
         {
-            if ($data=="")
+            if (empty($data))
             {
                 $value="&nbsp;";
             }
             elseif ($data=="No")
             {
                 $value=$this->B($nn);
+            }
+            elseif (preg_match('/newline\((\d+)\)/',$data,$matches))
+            {
+                array_push($tbl,$row);
+                
+                $row=array($this->MultiCell("",$matches[1]));
+                continue;
             }
             elseif (preg_match('/^text\_/',$data))
             {
@@ -172,7 +179,10 @@ class ItemsTableRow extends ItemsRead
 
         if (count($row)>0 && isset($item[ "ID" ]) && !$this->LatexMode)
         {
-            $row[0].=$this->HtmlTags("A","",array("NAME" => "#".$this->ModuleName."_".$item[ "ID" ]));
+            if (!is_array($row[0]))
+            {
+                $row[0].=$this->HtmlTags("A","",array("NAME" => "#".$this->ModuleName."_".$item[ "ID" ]));
+            }
         }
 
         array_push($tbl,$row);

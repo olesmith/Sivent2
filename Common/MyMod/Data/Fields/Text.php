@@ -23,13 +23,14 @@ trait MyMod_Data_Fields_Text
 
         $width=50;
         if (count($size)>0) { $width=$size[0]; }
+        
         $height=5;
         if (count($size)>1) { $height=$size[1]; }
 
         $value=preg_replace('/^\s+/',"",$value);
         $value=preg_replace('/\s+$/',"",$value);
 
-        if ($height>1)
+        if (count($size)>1)
         {
             $value=$this->MakeTextArea($rdata,$height,$width,$value,"physical",$options);
         }

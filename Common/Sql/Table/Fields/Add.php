@@ -59,8 +59,12 @@ trait Sql_Table_Fields_Add
 
         if (!empty($sqltype))
         {
-            //correct enum type for postgres
-            if ($this->DB_PostGres() && preg_match('/^ENUM/i',$sqltype)) { $sqltype="int"; }
+            //correct postgres types
+            if ($this->DB_PostGres())
+            {
+                if (preg_match('/^ENUM/i',$sqltype)) { $sqltype="int"; }
+                elseif (preg_match('/^BLOB/i',$sqltype)) { $sqltype="bytea"; }
+            }
 
             if (preg_match('/\bAUTO_INCREMENT\b/i',$sqltype))
             {

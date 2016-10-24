@@ -44,6 +44,7 @@ class Certificates_Generate extends Certificates_Latex
     function Certificate_Signatures($width)
     {
         $table=array(array(),array(),array(),array());
+        $include=FALSE;
         for ($n=1;$n<=3;$n++)
         {
             $key="Certificates_Signature_".$n;
@@ -57,15 +58,18 @@ class Certificates_Generate extends Certificates_Latex
                 array_push($table[0],"\\includegraphics[height=1.5cm]{".$file."}\n");
                 array_push($table[1],"\\scriptsize{".$text1."}\n");
                 array_push($table[2],"\\scriptsize{".$text2."}\n");                
-                array_push($table[3],"\\hspace{6cm}\n");                
+                array_push($table[3],"\\hspace{6cm}\n");
+                $include=TRUE;
             }
         }
+
+        if (!$include) { return ""; }
 
         return
             $this->Latex_Minipage
             (
-               $width,
                $this->LatexTable("",$table,"ccc",FALSE,FALSE),
+               $width,
                "c","c"
             ).
             "";
@@ -80,8 +84,9 @@ class Certificates_Generate extends Certificates_Latex
     function Certificate_Verification_Info($cert)
     {
         $url=
-            preg_replace('/[^htps]/',"",strtolower($_SERVER[ 'SERVER_PROTOCOL' ])).
+            preg_replace('/[^https?]/',"",strtolower($_SERVER[ 'SERVER_PROTOCOL' ])).
             ":/".
+            strtolower($_SERVER[ 'SERVER_NAME' ]).
             preg_replace('/index\.php/',"",$_SERVER[ 'SCRIPT_NAME' ]).
             "?Unit=".$this->Unit("ID")."\&Action=Validate";
 
@@ -139,7 +144,15 @@ class Certificates_Generate extends Certificates_Latex
         {
             $texts[ $id ]=
                 "\n\n\\hspace{1cm}\\vspace{".$vspace."cm}\n\n".
-                $this->Latex_Minipage($width,$texts[ $id ],"c","l").
+                $this->Latex_Minipage
+                (
+                    "\n%% Begin Unit key: ".$eventkey."\n".
+                    $texts[ $id ].
+                    "\n%% End Unit key: ".$eventkey."\n",
+                    $width,
+                    "c",
+                    "l"
+                ).
                 "\n\n".
                 $this->Certificate_Verification_Info($cert).
                 "";
@@ -279,7 +292,7 @@ class Certificates_Generate extends Certificates_Latex
         {
             return $this->ShowLatexCode($latex);
         }
-        
+
         return $this->Latex_PDF($this->CertificatesObj()->Certificate_TexName($name),$latex);
     }
     
@@ -300,6 +313,7 @@ class Certificates_Generate extends Certificates_Latex
         if ($this->CGI_GET("Latex")!=1)
         {
             $this->ShowLatexCode($latex);
+            exit();
         }
 
         return

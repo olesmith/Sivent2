@@ -102,7 +102,7 @@ class SchedulesSchedules extends SchedulesSchedule
         if (empty($submissions)) $submissions=$this->Submissions();
         
         //Disable already schedule submissions
-        foreach ($this->Scheduled2Submissions($time,$cschedule) as $sid)
+        foreach ($this->Scheduled2Submissions($time,$cschedule) as $sid => $dummy)
         {
             $submissions[ $sid ][ "Disabled" ]=TRUE;
         }

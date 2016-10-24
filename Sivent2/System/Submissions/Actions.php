@@ -172,7 +172,7 @@ array
         "Name"     => "Detalhes",
         "Name_UK"     => "Details",
 
-        "Public"   => 0,
+        "Public"   => 1,
         "Person"   => 0,
         "Admin"    => 1,
         "Friend"   => 1,
@@ -180,6 +180,7 @@ array
         "Advisor"    => 0,
         "Singular"      => TRUE,
         "Handler"    => "Submissions_Handle_Submission",
+        'AccessMethod'    => "CheckShowAccess",
       ),
      "Assessments" => array
      (

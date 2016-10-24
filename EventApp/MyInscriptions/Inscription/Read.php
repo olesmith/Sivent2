@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsInscriptionRead extends MyInscriptionsQuest
+class MyInscriptions_Inscription_Read extends MyInscriptions_Quest
 {
      //*
     //* function Friend2SqlWhere, Parameter list: $friend
@@ -60,26 +60,6 @@ class MyInscriptionsInscriptionRead extends MyInscriptionsQuest
            array_keys($this->ItemData)
         );
     }
-
-    //*
-    //* function IsInscribed, Parameter list: $friend
-    //*
-    //* Reads  inscription.
-    //*
-
-    function IsInscribed($friend)
-    {
-        $ninscriptions=$this->Sql_Select_NEntries
-        (
-           $this->Friend2SqlWhere($friend)
-        );
-
-        $res=FALSE;
-        if ($ninscriptions>0) { $res=TRUE; }
-
-        return $res;
-    }
-
 }
 
 ?>

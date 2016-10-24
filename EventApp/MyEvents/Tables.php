@@ -5,12 +5,12 @@ include_once("Tables/Events.php");
 class MyEventsTables extends MyEventsTablesEvents
 {
     //*
-    //* function EventsTable, Parameter list: $candname=FALSE
+    //* function EventsTable, Parameter list: 
     //*
     //* Generates events table matrix.
     //*
 
-    function EventsTable($candname=FALSE)
+    function EventsTable()
     {
         return 
             $this->ItemsTableDataGroup

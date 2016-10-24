@@ -4,6 +4,54 @@
 trait Sql_Table_Structure_Update
 {
     var $Sql_Table_Structure_Update_Force=FALSE;
+    //*
+    //* function Sql_Table_Structure_Update, Parameter list: 
+    //*
+    //* Updates structure of $table, satisfying $regexp. Take care!!
+    //* 
+    //* 
+
+    function Sql_Table_Structure_Update($datas=array(),$datadefs=array(),$maycreate=TRUE,$table="")
+    {
+        if (empty($table)) { $table=$this->SqlTableName($table); }
+        
+        if ($this->IsMain() && preg_match('/(Logs)$/',$table)) { return; }
+
+        if (count($datadefs)==0){ $datadefs=$this->ItemData(); }
+        if (count($datas)==0) {$datas=array_keys($datadefs); }
+
+        $this->Sql_Table_Structure_Update_Prepare($maycreate,$table);
+
+        //Retrieve table info
+        $tableinfo=$this->Sql_Tables_Info_Get($table);
+
+        $res=TRUE;
+        $mtime=$this->MyMod_Data_Files_MTime();
+        
+        if (
+            $mtime>$tableinfo[ "Time" ]
+            ||
+            $this->Sql_Table_Structure_Update_Force
+           )
+        {
+           $msg=
+               "Update Structure ".$this->ModuleName.": ".
+               $this->SqlTableName($table).", ".
+                $this->MyMod_Data_Files_MTime();
+
+            $this->ApplicationObj()->AddPostMessage($msg);
+
+            $res=$this->Sql_Table_Fields_Update($datas,$datadefs,$table);
+
+            //Update table info with .
+            if ($mtime>$tableinfo[ "Time" ])
+            {
+                $this->Sql_Tables_Info_Set($table,array("Time" => $mtime));
+            }
+        }
+
+        return $res;
+    }
     
     //*
     //* function Sql_Tables_Structure_Update, Parameter list: $regexp=""
@@ -54,53 +102,6 @@ trait Sql_Table_Structure_Update
         }
     }
     
-    //*
-    //* function Sql_Table_Structure_Update, Parameter list: 
-    //*
-    //* Updates structure of $table, satisfying $regexp. Take care!!
-    //* 
-    //* 
 
-    function Sql_Table_Structure_Update($datas=array(),$datadefs=array(),$maycreate=TRUE,$table="")
-    {
-        if (empty($table)) { $table=$this->SqlTableName($table); }
-        
-        if ($this->IsMain() && preg_match('/(Logs)$/',$table)) { return; }
-
-        if (count($datadefs)==0){ $datadefs=$this->ItemData(); }
-        if (count($datas)==0) {$datas=array_keys($datadefs); }
-
-        $this->Sql_Table_Structure_Update_Prepare($maycreate,$table);
-
-        //Retrieve table info
-        $tableinfo=$this->Sql_Tables_Info_Get($table);
-
-        $res=TRUE;
-        $mtime=$this->MyMod_Data_Files_MTime();
-        
-        if (
-            $mtime>$tableinfo[ "Time" ]
-            ||
-            $this->Sql_Table_Structure_Update_Force
-           )
-        {
-           $msg=
-               "Update Structure ".$this->ModuleName.": ".
-               $this->SqlTableName($table).", ".
-                $this->MyMod_Data_Files_MTime();
-
-            $this->ApplicationObj()->AddPostMessage($msg);
-
-            $res=$this->Sql_Table_Fields_Update($datas,$datadefs,$table);
-
-            //Update table info with .
-            if ($mtime>$tableinfo[ "Time" ])
-            {
-                $this->Sql_Tables_Info_Set($table,array("Time" => $mtime));
-            }
-        }
-
-        return $res;
-    }
 }
 ?>

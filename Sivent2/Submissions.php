@@ -30,7 +30,7 @@ class Submissions extends SubmissionsHandle
                "Friend","Friend2","Friend3"
             );
         
-        $this->Sort=array("Title");
+        $this->Sort=array("Name","Title");
         if ($this->CGI_VarValue("Submissions_GroupName")=="Assessments")
         {
             $this->Sort=array("Result");
@@ -39,6 +39,14 @@ class Submissions extends SubmissionsHandle
         $this->IncludeAllDefault=TRUE;
 
         $this->Coordinator_Type=5;
+
+        $this->MyMod_Language_Data=array("Title");
+        
+        $this->CellMethods[ "SubmissionAuthorsCell" ]=TRUE;
+        $this->CellMethods[ "SubmissionNPreInscriptionsCell" ]=TRUE;
+        $this->CellMethods[ "SubmissionVacanciesCell" ]=TRUE;
+        $this->CellMethods[ "SubmissionNPreInscriptionsCell" ]=TRUE;
+        $this->CellMethods[ "SubmissionVacanciesCell" ]=TRUE;
     }
 
     //*
@@ -185,7 +193,7 @@ class Submissions extends SubmissionsHandle
     //* then calls parent.
     //*
 
-    function InitAddDefaults()
+    function InitAddDefaults($hash=array())
     {
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
@@ -201,7 +209,7 @@ class Submissions extends SubmissionsHandle
             $this->AddDefaults[ "Friend" ]=$this->CGI_GETint("Friend");
         }
         
-        return parent::InitAddDefaults();
+        return parent::InitAddDefaults($hash);
     }
     
     //*
@@ -247,13 +255,21 @@ class Submissions extends SubmissionsHandle
     function UpdateSpeaker($item,$data,$newvalue)
     {
         if ($item[ "Status" ]!=2) { return $item; }
-        
+        $oldvalue=0;
+        if (!empty($item[ $data ])) { $oldvalue=$item[ $data ]; }
+
+        if ($oldvalue==$newvalue)
+        {
+            return $item;
+        }
+       
         $friend=array();
         if (!empty($newvalue))
         {
             $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $newvalue));
         }
 
+        
         $hash=
             array
             (
@@ -264,6 +280,8 @@ class Submissions extends SubmissionsHandle
 
         if (!empty($friend))
         {
+            $this->SpeakersObj()->Sql_Table_Structure_Update();
+            
             $speaker=$this->SpeakersObj()->Sql_Select_Hash(array("Friend" => $newvalue));
             if (empty($speaker))
             {
@@ -365,12 +383,21 @@ class Submissions extends SubmissionsHandle
         if (!empty($submission[ "Friends" ])) { return; }
         
         $submission[ "Friends" ]=array();
-        foreach (array("Friend","Friend2","Friend3") as $rkey)
+        foreach (array("Friend","Friend2","Friend3") as $key)
         {
-            if (!empty($submission[ $rkey ]))
+            if (!empty($submission[ $key ]))
             {
-                $fid=$submission[ $rkey ];
+                $fid=$submission[ $key ];
                 array_push($submission[ "Friends" ],$fid);
+            }
+        }
+        
+        $submission[ "Authors" ]=array();
+        foreach (array("Author1","Author2","Author3") as $key)
+        {
+            if (!empty($submission[ $key ]))
+            {
+                array_push($submission[ "Authors" ],$submission[ $key ]);
             }
         }
     }
@@ -415,7 +442,9 @@ class Submissions extends SubmissionsHandle
             array_push($authors,$this->FriendsObj()->FriendInfo($friend));
         }
 
-        return $authors;
+        
+
+        return $submission[ "Authors" ];
     }
     
     //*

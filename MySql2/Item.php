@@ -20,7 +20,7 @@ class Item extends ItemUpdate
     //*
 
     var $ID,$ItemHash;
-    var $PersonIDRow,$CoordIDRow;
+    var $AddDefaults=array();
     var $ItemPostProcessor,$TestMethod;
     var $BackRefDBs=array();
     var $TriggerFunctions=array();
@@ -33,6 +33,8 @@ class Item extends ItemUpdate
     var $CreatorField="Creator";
     var $UploadPath="Uploads/#Module";
     var $UploadFilesHidden=FALSE;
+    var $UniqueSqlWhere=array();
+
 
     //*
     //* function InitItem, Parameter list: $hash=array()

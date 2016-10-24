@@ -44,6 +44,19 @@ array
             "Tail"      => "Tail.tex",
             
             "ItemsPerPage"  => 25,
+         ),
+         array
+         (
+            "Name" => "Lista de Pagamentos",
+            "Name_UK" => "Payments List",
+            //"AltHandler"  => "Inscriptions_List",
+            "Head"      => "Head.tex",
+            "PageHead"  => "Inscriptions/Head.Payments.tex",
+            "Glue"      => "Inscriptions/List.Payments.tex",
+            "PageTail"  => "Inscriptions/Tail.Payments.tex",
+            "Tail"      => "Tail.tex",
+            
+            "ItemsPerPage"  => 35,
          )
       ),
    ),

@@ -3,11 +3,12 @@ array
    "Basic" => array
    (
       "Name" => "Básicos",
+      "Name_ES" => "Básicos",
       "Name_UK" => "Basic",
       "Data" => array
       (
          "Status",
-         "Title","Title_UK",
+         "Name","Title","Title_UK","Title_ES",
          "Type","Area","Level","Certificate","Certificate_TimeLoad",
       ),
       "Admin" => 1,
@@ -20,6 +21,7 @@ array
     "Authors" => array
     (
        "Name" => "Autores",
+       "Name_ES" => "Autores",
        "Name_UK" => "Authors",
        "Data" => array
        (
@@ -35,6 +37,7 @@ array
     "Info" => array
     (
        "Name" => "Resumo",
+       "Name_ES" => "Resumo",
        "Name_UK" => "Summary",
        "Data" => array
        (
@@ -50,6 +53,7 @@ array
     "Neccessities" => array
     (
        "Name" => "Necessidades",
+       "Name_ES" => "Necessidades",
        "Name_UK" => "Neccessities",
        "Data" => array
        (
@@ -65,6 +69,7 @@ array
     "PreInscriptions" => array
     (
        "Name" => "Preinscrições",
+       "Name_ES" => "Preinscriciónes",
        "Name_UK" => "PreInscriptions",
        "Data" => array
        (

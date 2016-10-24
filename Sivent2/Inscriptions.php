@@ -42,8 +42,9 @@ class Inscriptions extends InscriptionsHandle
     function Inscriptions($args=array())
     {
         $this->Hash2Object($args);
+        
         $this->AlwaysReadData=array("Friend","Name","SortName","Unit","Event","CH");
-        $this->Sort=array("SortName");
+        $this->Sort=array("Name");
         $this->InscriptionEventTableSGroups= array
         (
            array
@@ -410,6 +411,45 @@ class Inscriptions extends InscriptionsHandle
 
         return $item;
     }
+    
+    //*
+    //* function MyMod_Access_Has, Parameter list: 
+    //*
+    //* Returns true if access to module allowed.
+    //*
+
+    function MyMod_Access_Has()
+    {
+        $res=parent::MyMod_Access_Has();
+        
+        //$res=$this->Coordinator_Inscriptions_Access_Has();
+        
+        //var_dump($this->ModuleName);
+        //var_dump($res);
+        
+        return $res;
+    }
+    
+    //*
+    //* function EventCertificates, Parameter list: $inscription
+    //*
+    //* Returns TRUE if $event (or $this->Event()) has certificates.
+    //*
+
+    function Inscription_Paid_Has($inscription)
+    {
+        $havepaid=$inscription[ "Has_Paid" ];
+        
+        $res=FALSE;
+        if ($havepaid>1)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+    
+
 }
 
 ?>

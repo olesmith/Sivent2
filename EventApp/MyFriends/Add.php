@@ -5,8 +5,24 @@ include_once("Add/New.php");
 include_once("Add/Table.php");
 include_once("Add/Search.php");
 
-class MyFriendsAdd extends MyFriendsAddSearch
+class MyFriends_Add extends MyFriends_Add_Search
 {
+    //*
+    //* function MyFriend_Add_Form, Parameter list: 
+    //*
+    //* Creates (mini) form for adding a friend.
+    //*
+
+    function MyFriend_Add_Form()
+    {
+        $datas=$this->MyMod_Data_Compulsories();
+
+        var_dump($datas);
+
+        return "AffRriendForm";
+    }
+
+    
     //*
     //* function AddReadFriends, Parameter list: 
     //*

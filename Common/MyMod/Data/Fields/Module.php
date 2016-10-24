@@ -196,7 +196,7 @@ trait MyMod_Data_Fields_Module
            $rdata,
            $this->MyMod_Data_Fields_Module_Options($data,$item),
            $id,
-           "Name","Title",array(),array(),
+           "Name","Title","ID",array(),array(),
            $this->MyMod_Data_EmptyText($data)
         );
     }

@@ -30,6 +30,20 @@ class SchedulesPlaces extends SchedulesRooms
     }
     
     //*
+    //* function Places_Menu, Parameter list: 
+    //*
+    //* Creates Places select menu
+    //*
+
+    function Places_Menu()
+    {
+        $args=$this->CGI_URI2Hash();
+        unset($args[ "Date" ]);
+
+        return $this->PlacesObj()->MyMod_Items_Menu($args,$this->Places(),"Place",$idkey="ID",$titlekey="Name");
+    }
+
+    //*
     //* function Place, Parameter list: $pid=""
     //*
     //* Reads event place, if necessary.
@@ -159,7 +173,7 @@ class SchedulesPlaces extends SchedulesRooms
     function PlaceSchedulesTableHtml($edit,$date,$place)
     {
         $rooms=$this->ScheduleRooms($place);
-        
+       
         if (count($rooms)==0) { return array(); }
 
          $times=$this->DateTimes($date);
@@ -171,7 +185,7 @@ class SchedulesPlaces extends SchedulesRooms
             $this->TimesRoomsEditTopology($times,$rooms);
         }
 
-       $table=
+        $table=
             array
             (
                $this->H
@@ -192,7 +206,7 @@ class SchedulesPlaces extends SchedulesRooms
                ),
             );
 
-        foreach ($times as $id => $time)
+       foreach ($times as $id => $time)
         {
             array_push
             (

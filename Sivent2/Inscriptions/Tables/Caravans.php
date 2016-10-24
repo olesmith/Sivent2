@@ -32,15 +32,14 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     function Inscription_Caravans_Rows($item,$caravan)
     {
-        $eventdatas=array("Caravans","Caravans_StartDate","Caravans_EndDate");
-        
+        $event=$this->Event();
         return
             $this->Inscription_Type_Rows
             (
                $item,
-               "Basic",
+               "Caravans",
                $this->Inscription_Caravans_Link($item,$caravan),
-               $eventdatas,
+               array("Caravans","Caravans_StartDate","Caravans_EndDate"),
                array()
             );
     }
@@ -69,6 +68,8 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     function Inscription_Caravans_Caravan_Table($edit,$caravan)
     {
         $edit=$this->Inscription_Caravans_Table_Edit($edit);
+
+        if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
 
         $table=
             $this->CaravansObj()->MyMod_Item_Table
@@ -323,6 +324,11 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     function Inscription_Caravans_Table_Form($edit,&$item)
     {
+        if (!$this->Inscriptions_Caravans_Has()) { return array(); }
+
+        $edit=$this->Inscription_Caravans_Table_Edit($edit);
+        if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
+
         foreach (array("CaravansObj","CaravaneersObj") as $module)
         {
             $this->$module()->Sql_Table_Structure_Update();

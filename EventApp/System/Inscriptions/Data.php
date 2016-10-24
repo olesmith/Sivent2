@@ -88,6 +88,21 @@ array
       "Title_ES" => "Registro",
       "Title_UK" => "Registration",
    ),
+   "Name" => array
+   (
+      "Admin" => "1",
+      "Compulsory" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Name" => "Nome",
+      "Name_ES" => "Nombre",
+      "Name_UK" => "Name",
+      "Person" => "0",
+      "Public" => "1",
+      "Search" => "1",
+      "Size" => "20",
+      "Sql" => "VARCHAR(256)",
+   ),
    "Status" => array
    (
       "Admin" => "1",
@@ -123,7 +138,7 @@ array
       "Name_UK" => "Homologated",
       "Person" => "0",
       "Public" => "1",
-      "Search" => "",
+      "Search" => "1",
       "ShortName" => "Homologado",
       "ShortName_ES" => "Homologado",
       "ShortName_UK" => "Homologated",
@@ -167,7 +182,7 @@ array
       "Name_UK" => "Selected",
       "Person" => "0",
       "Public" => "1",
-      "Search" => "",
+      "Search" => "1",
       "ShortName" => "Selecionado",
       "ShortName_ES" => "Selecionado",
       "ShortName_UK" => "Selected",
@@ -177,6 +192,23 @@ array
       "Title_UK" => "Selected",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
+   ),
+   "Comment" => array
+   (
+      "Name" => "Comentário",
+      "Name_UK" => "Comment",
+
+      "Sql" => "TEXT",
+
+      "Search" => FALSE,
+      "Size" => "50x3",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
    ),
 );
 

@@ -1,5 +1,54 @@
 array
 (
+      'EditList' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 0,
+         "Assessor"  => 0,
+      ),
+      'Datas' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod"    => "Coordinator_Inscriptions_Access_Has",
+      ),
+       'GroupDatas' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod"    => "Coordinator_Inscriptions_Access_Has",
+      ),
+      'Inscriptions' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod"    => "Coordinator_Inscriptions_Access_Has",
+      ),
+       'Inscriptions_Add' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod"    => "Coordinator_Inscriptions_Access_Has",
+      ),
       "GenCert" => array
       (
          "Href"     => "",
@@ -34,7 +83,8 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Collaborations_May",
+        //"AccessMethod"    => "Event_Collaborations_May",
+        "AccessMethod"    => "Coordinator_Collaborations_Access_Has",
       ),
      "Collaborators" => array
      (
@@ -51,7 +101,8 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Collaborations_Has",
+        //"AccessMethod"    => "Event_Collaborations_Has",
+        "AccessMethod"    => "Coordinator_Collaborations_Access_Has",
       ),
      "Submissions" => array
      (
@@ -68,7 +119,8 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Submissions_Has",
+        //"AccessMethod"    => "Event_Submissions_Has",
+        "AccessMethod"    => "Coordinator_Submissions_Access_Has",
       ),
      "Caravans" => array
      (
@@ -85,6 +137,7 @@ array
         "Friend"   => 0,
         "Coordinator"   => 1,
         "Advisor"    => 0,
-        "AccessMethod"    => "Event_Caravans_Has",
+        //"AccessMethod"    => "Event_Caravans_Has",
+        "AccessMethod"    => "Coordinator_Caravans_Access_Has",
       ),
 );

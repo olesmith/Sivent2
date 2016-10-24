@@ -59,7 +59,7 @@
        (
           "Logs" => array(),
           "Units" => array("Friends","MailTypes"),
-          "MailTypes" => array(),
+          "MailTypes" => array("Units"),
           "Friends" => array("Units"),
           "Events" => array("Friends","Datas","GroupDatas"),
           "Datas" => array("Events"),

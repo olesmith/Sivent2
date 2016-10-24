@@ -32,7 +32,7 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
     }
     
     //*
-    //* function Inscription_Submissions_Row, Parameter list: 
+    //* function Inscription_Submissions_Rows, Parameter list: 
     //*
     //* Creates inscription collaboration info row (no details).
     //*
@@ -57,7 +57,12 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
 
     function Inscription_Submissions_Table($edit,$item,$group="")
     {
-        if (!$this->Inscriptions_Submissions_Has()) { return array(); }
+        if (
+              !$this->Inscriptions_Submissions_Has()
+              &&
+              !$this->Inscription_Submissions_Has($item)
+           )
+        { return array(); }
         
         if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
 

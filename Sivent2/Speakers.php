@@ -234,6 +234,18 @@ class Speakers extends SpeakersAccess
             $this->SchedulesObj()->SchedulesHtmlTable($schedules,$datas).
             "";
     }
+    
+    //*
+    //* Overrides MySql2::AddForm.
+    //*
+
+    function AddForm($title,$addedtitle,$echo=TRUE)
+    {
+        echo
+            $this->FriendsObj()->MyFriend_Add_Form();
+        
+        parent::AddForm($title,$addedtitle,$echo);
+    }
 }
 
 ?>

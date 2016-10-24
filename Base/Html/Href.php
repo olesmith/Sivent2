@@ -178,7 +178,7 @@ function HRefMenu($title,$links,$titles=array(),$btitles=array(),$nperline=8,
 
         return $this->CENTER
         (
-           $title."\n[ ".$hrefs." ]\n"
+           $title."\n[".$hrefs."]\n"
         );
     }
 

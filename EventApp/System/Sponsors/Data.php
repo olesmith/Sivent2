@@ -23,7 +23,7 @@ array
 
       "Public"   => 1,
       "Person"   => 0,
-      "Admin"    => 2,
+      "Admin"    => 1,
       "Friend" => 1,
       "Coordinator" => 1,
       
@@ -44,7 +44,7 @@ array
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
-      "Coordinator" => 2,
+      "Coordinator" => 1,
    ),
    "Initials" => array
    (

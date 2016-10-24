@@ -96,6 +96,35 @@ class MyEventsAccess extends ModulesCommon
         return $res;
     }
 
+    
+    //*
+    //* function Event_Inscriptions_Open, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has Caravans.
+    //*
+
+    function Event_Inscriptions_Open($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        if (empty($event)) { return FALSE; }
+
+        $res=$this->Event_Inscriptions_Public_Is($event);
+        if ($res)
+        {
+            $today=$this->MyTime_2Sort();
+            if (
+                  $today<$event[ "StartDate" ]
+                  ||
+                  $today>$event[ "EndDate" ]
+               )
+            {
+                $res=FALSE;
+            }
+        }
+
+        return $res;
+    }
+    
     //*
     //* function MayInscribe, Parameter list: $event=array()
     //*
@@ -109,7 +138,11 @@ class MyEventsAccess extends ModulesCommon
     {
         if (empty($event)) { return TRUE; }
         
-        $res=$this->Event_Inscriptions_Public_Is($event);
+        $res=$this->Event_Inscriptions_Open($event);
+        if ($res)
+        {
+            $res=!$this->IsInscribed($event);
+        }
         if ($res)
         {
             $res=!$this->IsInscribed($event);
@@ -128,14 +161,15 @@ class MyEventsAccess extends ModulesCommon
     //* 2: Not inscribed already.
     //*
 
-    function IsInscribed($event=array())
+    function IsInscribed($event=array(),$friend=array())
     {
         if (empty($event)) { return TRUE; }
+        if (empty($friend)) { $friend=$this->LoginData(); }
         
         $this->ApplicationObj()->Event=$event;
         
         $res=FALSE;
-        if ($this->InscriptionsObj()->IsInscribed($this->LoginData()))
+        if ($this->InscriptionsObj()->IsInscribed($friend))
         {
             $res=TRUE;
         }

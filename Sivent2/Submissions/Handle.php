@@ -41,7 +41,7 @@ class SubmissionsHandle extends SubmissionsHandleAssessments
             $this->BR().
             $this->Div
             (
-               join($this->BR().";",$this->SubmissionAuthors($submission)),
+             join(";".$this->BR(),$this->SubmissionAuthors($submission)),
                array("CLASS" => "submissionauthors")
             ).
             $this->BR().

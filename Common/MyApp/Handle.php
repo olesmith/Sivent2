@@ -73,7 +73,7 @@ trait MyApp_Handle
     function MyApp_Handle_TryAction($action)
     {
         //Test action access
-        $res=$this->MyAction_Access_Require($action);
+        $res=$this->MyAction_Access_Has($action);
         if (!$res)
         {
             $action=$this->DefaultAction;
@@ -106,6 +106,19 @@ trait MyApp_Handle
         $this->ExecMTime=time();
         if ($this->Module)
         {
+            $res=$this->Module->MyAction_Allowed($action);
+
+            if (!$res) { return FALSE; }
+        
+            if (!$res)
+            {
+                if (!empty($this->Module->Actions[ $action ][ "AltAction" ]))
+                {
+                    $action=$this->Module->Actions[ $action ][ "AltAction" ];
+                    $res=$this->Module->MyAction_Allowed($action);
+                }
+            }
+
             $this->Module->InitSearch();
 
             $this->Module->LoginType=$this->LoginType;
@@ -123,20 +136,6 @@ trait MyApp_Handle
             $this->Module->AddSearchVars2Cookies();
             $this->Module->SetCookieVars();
             
-            $res=$this->Module->MyAction_Allowed($action);
-
-            if (!$res)
-            {
-                if (!empty($this->Module->Actions[ $action ][ "AltAction" ]))
-                {
-                    $action=$this->Module->Actions[ $action ][ "AltAction" ];
-                    $res=$this->Module->MyAction_Allowed($action);
-                }
-            }
-
-            //var_dump($res);
-            if (!$res) { return FALSE; }
-        
             $this->Module->MyMod_Handle();
         }
 

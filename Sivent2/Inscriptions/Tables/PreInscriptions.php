@@ -33,9 +33,6 @@ class InscriptionsTablesPreInscriptions extends InscriptionsTablesCertificates
 
     function Inscription_PreInscriptions_Rows($item)
     {
-        $this->EventsObj()->CellMethods[ "Event_PreInscriptions_DateSpan" ]=TRUE;
-        $this->EventsObj()->CellMethods[ "Event_PreInscriptions_Status" ]=TRUE;
-        
         return
             $this->Inscription_Type_Rows
             (

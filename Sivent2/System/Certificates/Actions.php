@@ -70,13 +70,13 @@ array
       /* "NameMethod"    => "Inscriptions_Collaborations_Show_Name", */
       /* "TitleMethod"    => "Inscriptions_Collaborations_Show_Title", */
       /* "AccessMethod"    => "Inscriptions_Collaborations_Show_Should", */
-  ),
+   ),
    "Generate" => array
    (
       "HrefArgs" => "?ModuleName=Certificates&Action=Generate&Event=#Event&Latex=1&Code=#Code",
       
       "Title"    => "Gerar Certificado",
-      "Title_UK" => "Generate Certificate2",
+      "Title_UK" => "Generate Certificate",
       "Name"     => "Gerar",
       "Name_UK"   => "Generate",
       
@@ -89,8 +89,5 @@ array
       
       "AccessMethod"    => "CheckGenerateAccess",
       "Handler"    => "Certificates_Generate_Handle_ByCode",
-      /* "NameMethod"    => "Inscriptions_Collaborations_Show_Name", */
-      /* "TitleMethod"    => "Inscriptions_Collaborations_Show_Title", */
-      /* "AccessMethod"    => "Inscriptions_Collaborations_Show_Should", */
-  ),
+   ),
 );

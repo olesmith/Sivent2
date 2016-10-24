@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsAddMail extends MyFriendsGroups
+class MyFriends_Add_Mail extends MyFriends_Groups
 {
     //*
     //* function SendPasswordMail, Parameter list: $friend

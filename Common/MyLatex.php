@@ -244,24 +244,49 @@ trait MyLatex
         if ($exit) { exit(); }
     }
 
+    /* //\* */
+    /* //\* function Latex_Minipage, Parameter list: $width,$orient="t",$height="" */
+    /* //\* */
+    /* //\* Generate a latex minipage env. */
+    /* //\*  */
+    /* //\* */
+
+    /* function Latex_Minipage($content,$width,$orient="t",$height="") */
+    /* { */
+    /*     if (!empty($height)) { $height="[".$height."cm]"; } */
+
+    /*     return */
+    /*         "\\begin{minipage}[".$orient."]".$height."{".$width."cm}\n". */
+    /*         $content. */
+    /*         "\\end{minipage}\n". */
+    /*         ""; */
+    /* } */
+
+     //* function Latex_Minipage, Parameter list: $latex,$width,$pos="c",$align=""
     //*
-    //* function Latex_Minipage, Parameter list: $width,$orient="t",$height=""
-    //*
-    //* Generate a latex minipage env.
-    //* 
+    //* Generates mini page environment
     //*
 
-    function Latex_Minipage($content,$width,$orient="t",$height="")
+    function Latex_Minipage($latex,$width,$pos="c",$align="",$height="")
     {
-        if (!empty($height)) { $height="[".$height."cm]"; }
+        $align=strtolower($align);
+            if ($align=="c") { $align="center"; }
+        elseif ($align=="l") { $align="flushleft"; }
+        elseif ($align=="r") { $align="flushright"; }
         
-        return
-            "\\begin{minipage}[".$orient."]".$height."{".$width."cm}\n".
-            $content.
-            "\\end{minipage}\n".
+        if (!empty($height)) { $height="[".$height."cm]"; }
+
+        if (!empty($align)) { $latex=$this->LatexEnv($align,$latex,array(),FALSE); }
+        $latex=
+            "\\begin{minipage}[".$pos."]".$height."{".$width."cm}\n".
+            $latex."\n".
+            "\\end{minipage}".
             "";
+        
+
+        return $latex;   
     }
 
-    
+   
 }
 ?>

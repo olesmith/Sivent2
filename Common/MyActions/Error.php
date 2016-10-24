@@ -16,7 +16,7 @@ trait MyActions_Error
         elseif (isset($this->Actions[ $action ])) { $info=$this->Actions[ $action ]; }
         elseif (isset($this->ApplicationObj()->Actions[ $action ])) { $info=$this->ApplicationObj()->Actions[ $action ]; }
 
-        $this->MyMessage_Die
+        $this->DoDie
         (
            $msg.": ".$action." ".$this->LoginType,
            $info

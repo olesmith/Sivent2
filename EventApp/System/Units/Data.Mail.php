@@ -105,9 +105,9 @@ array
       "ShortName_UK" => "Usuário",
       "Size" => "25",
       "Sql" => "VARCHAR(256)",
-      "Title" => "User",
-      "Title_ES" => "User",
-      "Title_UK" => "Usuário",
+      "Title" => "Usuário",
+      "Title_ES" => "Usuário",
+      "Title_UK" => "User",
    ),
    "Password" => array
    (
@@ -122,7 +122,7 @@ array
       "Public" => "0",
       "Search" => "",
       "ShortName" => "Senha",
-      "ShortName_ES" => "Senha",
+      "ShortName_ES" => "Contrasena",
       "ShortName_UK" => "Password",
       "Size" => "15",
       "Sql" => "VARCHAR(256)",

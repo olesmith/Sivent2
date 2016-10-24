@@ -94,7 +94,7 @@ trait MyLanguage
         return $this->ApplicationObj()->LanguageKey;
     }
 
-     //*
+    //*
     //* function LanguageKeys, Parameter list: 
     //*
     //* LanguageKeys accessor.
@@ -155,6 +155,21 @@ trait MyLanguage
         $this->ApplicationObj->Language=$language;
     }
 
+    //*
+    //* function MyLanguage_Key2Lang, Parameter list: 
+    //*
+    //* Returns language key, ie empty or _.$language.
+    //*
+
+    function MyLanguage_Key2Lang($language="")
+    {
+        if (empty($language)) { $language=$this->ApplicationObj()->Language; }
+        
+        $language=preg_replace('/^_/',"",$language);
+
+        return $language;
+    }
+    
     //*
     //* function MyLanguage_GetLanguageKey, Parameter list: 
     //*

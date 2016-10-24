@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
+class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGroups
 {
     
     //*
@@ -18,12 +18,12 @@ class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
     }
     
     //*
-    //* function InscriptionEventTable, Parameter list: $edit
+    //* function InscriptionEventTable, Parameter list: 
     //*
     //* Creates Inscription event data table
     //*
 
-    function InscriptionEventTable($edit)
+    function InscriptionEventTable()
     {        
         return $this->FrameIt
         (
@@ -156,6 +156,17 @@ class MyInscriptionsInscriptionTables extends MyInscriptionsInscriptionSGroups
         }
 
         return $table;
+    }
+    //*
+    //* function Inscription_Event_Typed_Tables, Parameter list: $edit
+    //*
+    //* Creates Event typed tables:
+    //*
+
+    function Inscription_Event_Typed_Tables($edit,$inscription)
+    {
+        
+        return "";
     }
 }
 

@@ -288,7 +288,7 @@ array
       "Name_UK" => "Text, Certificate (LaTeX)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
 
       "Search" => FALSE,
 
@@ -324,7 +324,7 @@ array
       "Name_UK" => "Text, Certificate (UK)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
       "Default" =>
       "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
 

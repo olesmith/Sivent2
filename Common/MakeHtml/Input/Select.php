@@ -14,7 +14,8 @@ trait Html_Input_Select
        $items,$fieldname,$valuekey="ID",
        $namefilter="#Name",$titlefilter="",
        $selected=0,$addempty=TRUE,$disabledkey="",
-       $selectoptions=array(),$optionsoptions=array()
+       $selectoptions=array(),$optionsoptions=array(),
+       $maxlen=30
     )
     {
         $select="\n";
@@ -29,7 +30,8 @@ trait Html_Input_Select
                $titlefilter,
                $disabledkey,
                $selected,
-               $optionsoptions
+               $optionsoptions,
+               $maxlen
             );
 
             if ($selected==$item[ $valuekey ])
@@ -37,7 +39,6 @@ trait Html_Input_Select
                 if (!empty($titlefilter))
                 {
                     $selectoptions[ "TITLE" ]=
-                        "Selecionado: ".
                         $this->MyHash_Filter($titlefilter,$item);
                 }
             }
@@ -53,7 +54,7 @@ trait Html_Input_Select
     //* Creates select option from item.
     //*
 
-    function Html_OptionField($item,$valuekey,$namefilter,$titlefilter,$disabledkey,$selected,$options=array())
+    function Html_OptionField($item,$valuekey,$namefilter,$titlefilter,$disabledkey,$selected,$options=array(),$maxlen=30)
     {
         $options[ "VALUE" ]=$item[ $valuekey ];
         
@@ -75,16 +76,44 @@ trait Html_Input_Select
             $options[ "CLASS" ]="selected";
         }
 
-        $options[ "TITLE" ]="";
-        if (!empty($titlefilter))
+        $name=$this->MyHash_Filter($namefilter,$item);
+        $title=$name;
+        if (strlen($name)>$maxlen)
         {
-            $options[ "TITLE" ]=$this->MyHash_Filter($titlefilter,$item);
+            $name=substr($name,0,30)."...";
         }
         
-        $options[ "TITLE" ].=" (".$item[ $valuekey ].")";
+        if (!empty($titlefilter))
+        {
+            $title.=" ".$this->MyHash_Filter($titlefilter,$item);
+        }
+        
+        $title.=" (".$item[ $valuekey ].")";
 
-       return $this->Html_Tags("OPTION",$this->MyHash_Filter($namefilter,$item),$options)."\n";
+        $options[ "TITLE" ]=$title;
+        return $this->Html_Tags("OPTION",$name,$options)."\n";
 
+    }
+
+    //*
+    //* sub Html_Option_Title, Parameter list: 
+    //*
+    //* Genrates option title.
+    //*
+
+    function Html_Option_Title($titlekey,$item)
+    {
+        $title="";
+        if (preg_match('/#/',$titlekey))
+        {
+            $title=$this->FilterHash($titlekey,$item);
+        }
+        elseif (!empty($item[ $titlekey ]))
+        {
+            $title=$item[ $titlekey ];
+        }
+        
+        return $title;
     }
 
 
@@ -107,11 +136,10 @@ trait Html_Input_Select
     //* HTML select input field from list of items.
     //*
 
-    function Html_Select_Hashes2Field
-    (
+    function Html_Select_Hashes2Field(
        $fieldname,$items,
        $selected=0,
-       $namekey="Name",$titlekey="Title",
+       $namekey="Name",$titlekey="Title",$idkey="ID",
        $selectoptions=array(),$optionsoptions=array(),
        $emptytext=""
     )
@@ -133,24 +161,18 @@ trait Html_Input_Select
             //Copy of options, preventing mixing option options.
             $roptionsoptions=$optionsoptions;
             
-            $id=$item[ "ID" ];
+            $id=$item[ $idkey ];
             if ($id==$selected)
             {
                 $roptionsoptions[ "SELECTED" ]="";
-                if (!empty($item[ $titlekey ]))
-                {
-                    $selectoptions[ "TITLE" ]=$item[ $titlekey ];
-                }
+                $selectoptions[ "TITLE" ]=$this->Html_Option_Title($titlekey,$item);
             }
 
             $roptionsoptions[ "VALUE" ]=$id;
 
-            if (!empty($item[ $titlekey ]))
-            {
-                $roptionsoptions[ "TITLE" ]=$item[ $titlekey ];
-            }
+            $roptionsoptions[ "TITLE" ]=$this->Html_Option_Title($titlekey,$item);
 
-           if (!empty($item[ "Disabled" ]))
+            if (!empty($item[ "Disabled" ]))
             {
                 $roptionsoptions[ "DISABLED" ]=" ";
                 $roptionsoptions[ "CLASS" ]= "disabled";
@@ -163,8 +185,8 @@ trait Html_Input_Select
                    "OPTION",
                    $item[ $namekey ],
                    $roptionsoptions
-                ).
-                "\n";
+                ).$titlekey.
+                "11\n";
         }
         
         $selectoptions[ "NAME" ]=$fieldname;

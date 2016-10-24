@@ -445,7 +445,7 @@ trait MakeCGI
 
             if (!empty($attrname) && method_exists($this,$obj))
             {
-                $this->$attrname=$this->$obj()->SelectUniqueHash("",array("ID" => $id));
+                $this->$attrname=$this->$obj()->Sql_Select_Hash(array("ID" => $id));
             }
         }
 

@@ -1,6 +1,6 @@
 array
 (
-   "Paid" => array
+   "Has_Paid" => array
    (
       "Name" => "Taxa Pago",
       "Name_UK" => "Inscription Fee Paid",

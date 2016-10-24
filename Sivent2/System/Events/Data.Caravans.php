@@ -137,7 +137,7 @@ array
       "Name_UK" => "Caravaneers, Certificate (LaTeX)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
 
       "Search" => FALSE,
       "Default" =>
@@ -169,7 +169,7 @@ array
       "Name_UK" => "Caravaneers, Certificate (UK)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
 
       "Search" => FALSE,
       "Default" =>

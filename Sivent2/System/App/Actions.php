@@ -88,18 +88,19 @@ array
      "Submission" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Submissions&Action=Details&Event=#Event&ID=#ID",
+        "HrefArgs" => "?ModuleName=Submissions&Action=Details&Event=#Event&ID=#Submission",
         "Title"    => "Detalhes da Atividade",
         "Title_UK" => "Submission Details",
         "Name"     => "Detalhes",
         "Name_UK"     => "Details",
 
-        "Public"   => 0,
+        "Public"   => 1,
         "Person"   => 0,
         "Admin"    => 1,
         "Friend"   => 1,
         "Coordinator"   => 1,
         "Advisor"    => 0,
+        'AccessMethod'    => "Current_User_Event_Submissions_May_Show",
       ),
      "Submissions" => array
      (

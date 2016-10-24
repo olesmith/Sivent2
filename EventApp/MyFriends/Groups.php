@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsGroups extends ModulesCommon
+class MyFriends_Groups extends MyFriends_Events
 {
     var $UpdateGroupHidden="Update";
     var $UpdatePermissionsHidden="Save";

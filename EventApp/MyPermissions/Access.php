@@ -35,10 +35,7 @@ class MyPermissionsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        $res=
-            $this->Current_User_Admin_Is()
-            ||
-            $this->Current_User_Event_Coordinator_Is(array("ID" => 0));
+        $res=$this->Current_User_Admin_Is();
 
         return $res;
     }

@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsAddTable extends MyFriendsAddNew
+class MyFriends_Add_Table extends MyFriends_Add_New
 {
     var $SubObject=NULL;
     var $SubObjectData=NULL;

@@ -197,7 +197,8 @@ class MyEventAppMenues extends MyEventAppAccess
     function HtmlEventsMenu()
     {
         $args=$this->ScriptQueryHash();
-        if ($this->Unit) { $args[ "Unit" ]=$this->Unit[ "ID" ]; }
+        $uid=$this->Unit("ID");
+        if (!empty($uid)) { $args[ "Unit" ]=$uid; }
 
         $args[ "ModuleName" ]="";
         $args[ "Action" ]="Search";
@@ -232,7 +233,7 @@ class MyEventAppMenues extends MyEventAppAccess
                 
                 $link=
                     "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-                    $event[ "Initials" ].
+                    $name.
                     $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
                     (
                        $this->HtmlEventsMenuDef(),

@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsQuest extends MyInscriptionsAccess
+class MyInscriptions_Quest extends MyInscriptions_Zip
 {
     //*
     //* function AddEventQuestDataGroups, Parameter list:

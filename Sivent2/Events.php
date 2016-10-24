@@ -15,8 +15,10 @@ include_once("Events/PreInscriptions.php");
 include_once("Events/Schedules.php");
 include_once("Events/Certificates.php");
 include_once("Events/Certificate.php");
+include_once("Events/SubActions.php");
+include_once("Events/Handle.php");
 
-class Events extends EventsCertificate
+class Events extends Events_Handle
 {
     //*
     //* function Units, Parameter list: $args=array()
@@ -32,6 +34,8 @@ class Events extends EventsCertificate
         $this->IDGETVar="Event";
         $this->IncludeAllDefault=TRUE;
         $this->NonGetVars=array("Event","CreateTable");
+        
+        $this->MyEvents_CellMethods_Init();
     }
 
 
@@ -190,87 +194,28 @@ class Events extends EventsCertificate
         return $res;
     }
     
+
+     //*
+    //* function Event_PreInscriptions_Paid_MustHave, Parameter list:$event=array()
     //*
-    //* function MyMod_Handle_Event_Menu, Parameter list: 
-    //*
-    //* Creates horisontal menu with access to different SGroups.
+    //* Returns TRUE if $event (or $this->Event()) conditions payment before PreInscriptions.
     //*
 
-    function MyMod_Handle_Event_Menu()
+    function Event_PreInscriptions_Paid_MustHave($event=array())
     {
-        $args=$this->CGI_URI2Hash();
+        if (empty($event)) { $event=$this->Event(); }
 
-        $subactions=$this->ReadPHPArray("System/Events/SubActions.php");
-        
-        $currsubaction=$this->CGI_GET("SubAction");
-
-        $hrefs=array();
-        foreach ($subactions as $subaction => $def)
+        $res=FALSE;
+        if (!empty($event) && $event[ "PreInscriptions_MustHavePaid" ]==2)
         {
-            $args[ "SubAction" ]=$subaction;
-
-            $href=$this->GetRealNameKey($def);
-            if ($subaction!=$currsubaction)
-            {
-                $href=$this->Href
-                (
-                   "?".$this->CGI_Hash2URI($args),
-                   $href,
-                   "",
-                   "",
-                   "",
-                   FALSE,
-                   array(),
-                   "HorMenu"
-                );
-            }
-            
-            array_push($hrefs,$href);
+            $res=TRUE;
         }
-        
-        return
-            $this->Center
-            (
-               "[ ".
-               join(" | ",$hrefs).
-               " ]"
-            );
+
+        return $res;
     }
     
+
     //*
-    //* function MyMod_Handle_Edit, Parameter list: $echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE
-    //*
-    //* Overrides module object Edit handler.
-    //*
-
-    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
-    {
-        echo $this->MyMod_Handle_Event_Menu();
-
-        $subaction=$this->CGI_GET("SubAction");
-
-        $agroups=array();
-        foreach (array_keys($this->ItemDataSGroups) as $group)
-        {
-            if (!empty($this->ItemDataSGroups[ $group ][ "SubAction" ]))
-            {
-                if ($this->ItemDataSGroups[ $group ][ "SubAction" ]==$subaction)
-                {
-                    $agroups[ $group ]=$this->ItemDataSGroups[ $group ];
-                }
-                unset($this->ItemDataSGroups[ $group ]);
-            }
-        }
-        
-        foreach (array_keys($agroups) as $group)
-        {
-            $this->ItemDataSGroups[ $group ]=$agroups[ $group ];
-        }
-        
-        return parent::MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
-    }
-
-       //*
     //* function MyMod_Messages_Files, Parameter list: 
     //*
     //* Returns list of module messaged files.

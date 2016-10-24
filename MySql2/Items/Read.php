@@ -4,7 +4,6 @@
 class ItemsRead extends ItemsLatex
 {
     var $SortsAsOrderBy=FALSE;
-    var $LastWhereClause="";
 
     //*
     //* function ReadItems, Parameter list: $where="",$datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=0,$nopostprocess=FALSE

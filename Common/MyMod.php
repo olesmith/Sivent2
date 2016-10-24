@@ -55,6 +55,32 @@ trait MyMod
         MyMod_Items,MyMod_Latex,MyMod_Language,
         MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,MyMod_Messages;
 
+    //From Mysql2/Items.php
+    var $ItemHashes=array();
+    var $ActionButtons=FALSE;
+    var $ActionButtonActions=array();
+
+    var $ItemActions=array();
+    var $ItemsActions=array();
+    var $SumVars=array();
+    var $ConditionalShow="";
+    var $IncludeAll=0;
+    var $IncludeAllDefault=TRUE;
+    var $NoPaging=FALSE;
+    var $NoSearches=FALSE;
+    var $ShowAll=FALSE;
+    var $AddCheckBox2ItemTable=FALSE;
+    var $UniquenessData=array();
+    var $LastWhereClause=NULL;
+    var $OnlyReadIDs=NULL;
+
+    var $ExtraData=array();
+    var $ItemDataGroupsCommon=array();
+    var $ItemDataGroupNames=array();
+
+    var $ItemDataSGroupsCommon=array();
+    var $ItemDataSGroupNames=array();
+
 
     var $MyMod_Defaults=array
     (
@@ -134,6 +160,17 @@ trait MyMod
         }
 
         return $this->$lkey;
+    }
+
+    //*
+    //* function MyMod_ItemsName, Parameter list: 
+    //*
+    //* Returns items name, according to active language.
+    //*
+
+    function MyMod_ItemsName()
+    {
+        return $this->MyMod_ItemName("ItemsName");
     }
 
 }

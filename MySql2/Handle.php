@@ -57,19 +57,19 @@ class Handle extends HandleLatex
       $this->MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
   }
 
-  //*
-  //* function HandleCopy, Parameter list: 
-  //*
-  //* 
-  //*
+  /* //\* */
+  /* //\* function HandleCopy, Parameter list:  */
+  /* //\* */
+  /* //\*  */
+  /* //\* */
 
-  function HandleCopy()
-  {
-      $title=$this->GetRealNameKey($this->Actions[ "Copy" ]);
-      $ptitle=$this->GetRealNameKey($this->Actions[ "Copy" ],"PName");
+  /* function HandleCopy() */
+  /* { */
+  /*     $title=$this->GetRealNameKey($this->Actions[ "Copy" ]); */
+  /*     $ptitle=$this->GetRealNameKey($this->Actions[ "Copy" ],"PName"); */
 
-      $this->CopyForm($title,$ptitle);
-  }
+  /*     $this->CopyForm($title,$ptitle); */
+  /* } */
 
   //*
   //* function , Parameter list: 

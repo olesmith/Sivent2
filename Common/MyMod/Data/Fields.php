@@ -164,7 +164,6 @@ trait MyMod_Data_Fields
         );
 
         $href="?".$this->CGI_Hash2URI($args);
-        
         $height=$item[ "HtmlLogoHeight" ];
         $width=$item[ "HtmlLogoWidth" ];
 

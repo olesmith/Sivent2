@@ -68,10 +68,10 @@ class PreInscriptionsInscriptionRead extends PreInscriptionsSubmissions
     function PreInscriptions_Submissions_Read()
     {
         $where=$this->UnitEventWhere(array("PreInscriptions" => 2));
-        $sdatas=$this->PreInscriptions_Submissions_Read_Datas();
-        $sdatas[0]="ID";
+        $datas=$this->PreInscriptions_Submissions_Read_Datas();
+        $datas[0]="ID";
 
-        $this->Submissions=$this->SubmissionsObj()->Sql_Select_Hashes($where,$sdatas,"Name,Title");
+        $this->Submissions=$this->SubmissionsObj()->Sql_Select_Hashes($where,$datas,"Name,Title");
     }
     
     //*

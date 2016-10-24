@@ -131,6 +131,7 @@ class DBDataObj extends Table
 
             array_push($this->DatasGroups,$group[ "ID" ]);
         }
+        
         $this->ItemDataSGroups=array_merge($this->ItemDataSGroups,$sgroups);
     }
 
@@ -237,12 +238,16 @@ class DBDataObj extends Table
 
     function DBDataFileDatas()
     {
-        $fdatas=array("No","Edit","CTime","Friend");
+        $fdatas=array("No","Edit","Zips","CTime","Friend","Homologated","Result","Selected");
+
+        $count=count($fdatas)-1;
+
+        array_push($fdatas,"text_Documentos","text_Arquivos");
         foreach ($this->DatasData as $data)
         {
             if ($this->MyMod_Data_Field_Is_File($data))
             {
-                array_push($fdatas,$data);
+                array_push($fdatas,"newline(".$count.")","text_".$data.":",$data);
             }
         }
 

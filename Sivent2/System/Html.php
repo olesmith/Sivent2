@@ -17,7 +17,7 @@ array
       'https://github.com/olesmith',
    ),
    'CssUrl' => 'sivent2.css',
-   'ApplicationName' => 'SiVent2',
+   'ApplicationName' => 'SiVent2: Sistema de Gestão de Eventos',
    'ApplicationTitle' => 'Gestão de Eventos',
    'ApplicationTitle_UK' => 'Event Administration',
    'ApplicationDescription' => 'Sistema para Gestão de Eventos',

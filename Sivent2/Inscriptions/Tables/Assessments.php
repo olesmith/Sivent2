@@ -55,7 +55,12 @@ class InscriptionsTablesAssessments extends InscriptionsTablesSubmissions
 
     function Inscription_Assessments_Table($edit,$item,$group="")
     {
-        if (!$this->Inscriptions_Assessments_Has()) { return array(); }
+        if (
+              !$this->Inscriptions_Assessments_Has()
+              ||
+              !$this->Inscription_Assessments_Has($item)
+           )
+        { return array(); }
         
         if (!$this->Inscriptions_Assessments_Inscriptions_Open()) { $edit=0; }
 

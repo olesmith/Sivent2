@@ -27,7 +27,15 @@ trait MyActions_Access
         if ($logintype=="") { $logintype="Public"; }
 
         $res=FALSE;
-        $actiondef=$this->Actions($action);
+        if (is_array($action))
+        {
+            $actiondef=$action;
+        }
+        else
+        {
+            $actiondef=$this->Actions($action);
+        }
+        
         if (!empty($actiondef))
         {
             if (!empty($actiondef[ "AccessMethod" ]))
@@ -38,6 +46,7 @@ trait MyActions_Access
                     if (!empty($actiondef[ "AccessDebug" ]))
                     {
                         var_dump($action.": ".$accessmethod);
+                        var_dump($item);
                         var_dump($this->Profile().": ".$actiondef[ $this->Profile() ]);
                         var_dump($this->$accessmethod($item));
                     }
@@ -53,6 +62,7 @@ trait MyActions_Access
                     if (!empty($actiondef[ "AccessDebug" ]))
                     {
                         var_dump($action.": ".$accessmethod);
+                        var_dump($item);
                         var_dump($this->Profile().": ".$actiondef[ $this->Profile() ]);
                         var_dump($this->ApplicationObj()->$accessmethod($item));
                     }
@@ -66,8 +76,9 @@ trait MyActions_Access
                 {
                     $this->MyAction_Error
                     (
-                       $this->ModuleName.": Warning: Invalid access method (action: $action): ".
-                       $accessmethod.", ignored"
+                       $this->ModuleName.": Warning: Invalid access method: ".
+                       $accessmethod.", ignored",
+                       ""//$action
                     );
                 }
             }
@@ -76,6 +87,7 @@ trait MyActions_Access
                 if (!empty($actiondef[ "AccessDebug" ]))
                 {
                     var_dump($action.": MyMod_Access_HashAccess");
+                    var_dump($item);
                     var_dump($this->Profile.": ".$actiondef[ $this->Profile ]);
                     var_dump($this->MyMod_Access_HashAccess($actiondef,array(1,2)));
                 }

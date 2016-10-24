@@ -7,19 +7,20 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Status",
-         "Event","Type","Area","Level",
-         "SubmissionAuthorsCell","Name","Title",
+         "Name","Status",
+         "Type","Area","Level",
+         "SubmissionAuthorsCell",
+         "Title",
          "File","PreInscriptions","Vacancies",
       ),
-      "Data_UK" => array
-      (
-         "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Status",
-         "Event","Type","Area","Level",
-         "SubmissionAuthorsCell","Name","Title_UK",
-         "File","PreInscriptions","Vacancies",
-      ),
+      /* "Data_UK" => array */
+      /* ( */
+      /*    "No","Edit","Copy","Delete","GenCert","Assessments", */
+      /*    "Status", */
+      /*    "Event","Type","Area","Level", */
+      /*    "SubmissionAuthorsCell","Name","Title_UK", */
+      /*    "File","PreInscriptions","Vacancies", */
+      /* ), */
       "Admin" => 1,
       "Person" => 0,
       "Public" => 1,
@@ -35,8 +36,8 @@ array
           "No","Edit","Copy",
           //"Delete",
           "GenCert","MailCert","Assessments",
-          "Status",
-          "Event","Name","Title","Title_UK","Selected",
+          "Name","Status",
+          "Title","Title_UK","Selected",
           "Certificate","Certificate_TimeLoad",
           "Author1","Author2","Author3",
         ),
@@ -54,9 +55,9 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Author1","Status",
+         "Name","Author1","Status",
          "Type","Area","Level",
-         "Name","Title","File",
+         "Title","File",
       ),
       "Data_UK" => array
       (
@@ -78,7 +79,7 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Name",
+         "Name","Status",
          "Type","Area","Level","Friend",
          "Title","Vacancies",
          "SubmissionNPreInscriptionsCell","SubmissionVacanciesCell",

@@ -81,7 +81,7 @@ array
         "Advisor"    => 0,
         "Handler"    => "HandleSchedule",
         "NonGetVars" => array("Date","Time","Place","Room"),
-         "AccessMethod" => "CheckShowListAccess",
+        "AccessMethod" => "CheckShowListAccess",
       ),
      "EditSchedule" => array
      (

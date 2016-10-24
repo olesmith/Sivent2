@@ -8,18 +8,91 @@ class ModulesCommon extends EventMod
 
     
     //*
-    //* sub Coordinator_Access_Has, Parameter list: $event=array()
+    //* sub Coordinator_Access_Has, Parameter list: $event=array(),$type=""
     //*
     //* Checks whether coordinator (current login) has access to module.
     //*
     //*
 
-    function Coordinator_Access_Has($event=array())
+    function Coordinator_Access_Has($type="",$event=array())
     {
-        if (empty($event)) { $event=$this->Event(); }
-        
-        return $this->ApplicationObj()->Coordinator_Access_Has($this->Coordinator_Type,$event);
+        if (empty($type)) { $type=$this->Coordinator_Type; }
+
+        return $this->ApplicationObj()->Coordinator_Access_Has($type,$event);
     }
+
+    //*
+    //* sub Coordinator_Inscriptions_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Inscriptions.
+    //*
+    //*
+
+    function Coordinator_Inscriptions_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Inscriptions_Access_Has($event);
+    }
+
+    //*
+    //* sub Coordinator_Collaborations_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Collaborations.
+    //*
+    //*
+
+    function Coordinator_Collaborations_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Collaborations_Access_Has($event);
+    }
+
+    //*
+    //* sub Coordinator_Submissions_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Submissions.
+    //*
+    //*
+
+    function Coordinator_Submissions_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Submissions_Access_Has($event);
+    }
+    //*
+    //* sub Coordinator_Caravans_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Caravans.
+    //*
+    //*
+
+    function Coordinator_Caravans_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Caravans_Access_Has($event);
+    }
+
+    //*
+    //* sub Coordinator_Preinscriptions_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Preinscriptions.
+    //*
+    //*
+
+    function Coordinator_Preinscriptions_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Preinscriptions_Access_Has($event);
+    }
+
+
+    //*
+    //* sub Coordinator_Presences_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Presences.
+    //*
+    //*
+
+    function Coordinator_Presences_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Presences_Access_Has($event);
+    }
+
 
     //*
     //* sub Current_User_Event_May_Edit, Parameter list: $event=array()
@@ -30,7 +103,7 @@ class ModulesCommon extends EventMod
 
     function Current_User_Event_May_Edit($event=array())
     {
-        return $this->Coordinator_Access_Has($event);
+        return $this->ApplicationObj()->Current_User_Event_May_Edit($event);
     }
 
     //*
@@ -87,85 +160,85 @@ class ModulesCommon extends EventMod
         return $res;
     }
     
-    //*
-    //* sub Unit, Parameter list: $key=""
-    //*
-    //* Reads Unit - dies, if not admin and no unit.
-    //*
-    //*
+    /* //\* */
+    /* //\* sub Unit, Parameter list: $key="" */
+    /* //\* */
+    /* //\* Reads Unit - dies, if not admin and no unit. */
+    /* //\* */
+    /* //\* */
 
-    function Unit($key="")
-    {
-        return $this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE);
-    }
+    /* function Unit($key="") */
+    /* { */
+    /*     return $this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE); */
+    /* } */
 
-    //*
-    //* sub Event, Parameter list: $key=""
-    //*
-    //* Reads Unit - dies, if not admin and no unit.
-    //*
-    //*
+    /* //\* */
+    /* //\* sub Event, Parameter list: $key="" */
+    /* //\* */
+    /* //\* Reads Unit - dies, if not admin and no unit. */
+    /* //\* */
+    /* //\* */
 
-    function Event($key="")
-    {
-        return $this->ApplicationObj()->CGI_GET2Hash("Event","EventsObj",$key,"Event",FALSE);
-    }
+    /* function Event($key="") */
+    /* { */
+    /*     return $this->ApplicationObj()->CGI_GET2Hash("Event","EventsObj",$key,"Event",FALSE); */
+    /* } */
 
-    //*
-    //* function PrintDocHeads, Parameter list: 
-    //*
-    //* Overrides Application::PrintDocHeads.
-    //*
+    /* //\* */
+    /* //\* function PrintDocHeads, Parameter list:  */
+    /* //\* */
+    /* //\* Overrides Application::PrintDocHeads. */
+    /* //\* */
 
-    function PrintDocHeads()
-    {
-        $this->ApplicationObj()->MyApp_Interface_Head();
-    }
-
-
-    //*
-    //* function SetEvent, Parameter list: 
-    //*
-    //* Sets $this->ApplicationObj->Event to $event.
-    //*
-
-    function SetEvent($event)
-    {
-        $this->ApplicationObj->Event=$event;
-    }
+    /* function PrintDocHeads() */
+    /* { */
+    /*     $this->ApplicationObj()->MyApp_Interface_Head(); */
+    /* } */
 
 
-    //*
-    //*
-    //* function SqlEventTableName, Parameter list: $table="",$event=array()
-    //*
-    //* Used by specific module to override SqlTableName, prepending Unit id.
-    //*
+    /* //\* */
+    /* //\* function SetEvent, Parameter list:  */
+    /* //\* */
+    /* //\* Sets $this->ApplicationObj->Event to $event. */
+    /* //\* */
 
-    function SqlEventTableName($module,$event=array())
-    {
-        $table="#Unit__#Event_".$module;
+    /* function SetEvent($event) */
+    /* { */
+    /*     $this->ApplicationObj->Event=$event; */
+    /* } */
 
-        $eventid=0;
-        if ($this->CGI_GET("ModuleName")=="Events")
-        {
-            $eventid=$this->CGI_GET("ID");
-        }
 
-        if (empty($eventid))
-        {
-            $eventid=$this->CGI_GET("Event");
-        }
+    /* //\* */
+    /* //\* */
+    /* //\* function SqlEventTableName, Parameter list: $table="",$event=array() */
+    /* //\* */
+    /* //\* Used by specific module to override SqlTableName, prepending Unit id. */
+    /* //\* */
 
-        if (!empty($event))
-        {
-            $eventid=$event[ "ID" ];
-        }
+    /* function SqlEventTableName($module,$event=array()) */
+    /* { */
+    /*     $table="#Unit__#Event_".$module; */
 
-        $table=preg_replace('/#Event/',$eventid,$table);
+    /*     $eventid=0; */
+    /*     if ($this->CGI_GET("ModuleName")=="Events") */
+    /*     { */
+    /*         $eventid=$this->CGI_GET("ID"); */
+    /*     } */
 
-        return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table);
-    }
+    /*     if (empty($eventid)) */
+    /*     { */
+    /*         $eventid=$this->CGI_GET("Event"); */
+    /*     } */
+
+    /*     if (!empty($event)) */
+    /*     { */
+    /*         $eventid=$event[ "ID" ]; */
+    /*     } */
+
+    /*     $table=preg_replace('/#Event/',$eventid,$table); */
+
+    /*     return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table); */
+    /* } */
     
     //*
     //* sub MyMod_Mail_Texts_Get, Parameter list: $files=array()
@@ -381,43 +454,6 @@ class ModulesCommon extends EventMod
         parent::PreActions();
 
         array_unshift($this->ActionPaths,"System/App");
-    }
-
-    //*
-    //* function UnitWhere, Parameter list: $event=array(),$unit=array()
-    //*
-    //* Returns Unit => sql where clause.
-    //*
-
-    function UnitWhere($where=array(),$unit=array())
-    {
-        if (empty($unit))  $unit=$this->Unit();
-        
-        $where[ "Unit" ]=$unit[ "ID" ];
-
-        return $where;
-    }
-
-    //*
-    //* function UnitEventWhere, Parameter list: $event=array(),$unit=array()
-    //*
-    //* Returns Unit => and Event => sql where clause.
-    //*
-
-    function UnitEventWhere($where=array(),$event=array(),$unit=array())
-    {
-        if (empty($event)) $event=$this->Event();
-        if (empty($unit))  $unit=$this->Unit();
-
-        if (!is_array($event))
-        {
-            $event=array("ID" => $event);
-        }
-        
-        $where[ "Unit" ]=$unit[ "ID" ];
-        $where[ "Event" ]=$event[ "ID" ];
-
-        return $where;
     }
 
     //*

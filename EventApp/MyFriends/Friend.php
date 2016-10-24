@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsFriend extends MyFriendsAdd
+class MyFriends_Friend extends MyFriends_Add
 {
      //*
     //* function FriendID2Name, Parameter list: $friendid

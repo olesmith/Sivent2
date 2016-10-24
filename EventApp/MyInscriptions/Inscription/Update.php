@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsInscriptionUpdate extends MyInscriptionsInscriptionTables
+class MyInscriptions_Inscription_Update extends MyInscriptions_Inscription_Tables
 {
     //*
     //* function UpdateInscription, Parameter list: 
@@ -12,7 +12,7 @@ class MyInscriptionsInscriptionUpdate extends MyInscriptionsInscriptionTables
     {
         if (empty($this->Inscription[ "ID" ]))
         {
-            if ($this->MayDoInscribe())
+           if ($this->MayDoInscribe())
             {
                 $this->DoInscribe();
             }

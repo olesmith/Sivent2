@@ -1,6 +1,9 @@
 <?php
 
-class SchedulesSchedule extends SchedulesSubmissions
+include_once("Schedule/Fields.php");
+
+
+class SchedulesSchedule extends Schedules_Schedule_Fields
 {
     //*
     //* function SetSchedule, Parameter list: $schedule
@@ -72,6 +75,33 @@ class SchedulesSchedule extends SchedulesSubmissions
     {
         return $this->CGI_POSTint($this->ScheduleCGIName($date,$time,$room));
     }
+    
+
+    //*
+    //* function Schedule_Menu, Parameter list: $schedule
+    //*
+    //* Generates menu for schedule cell. Link to details, etc.
+    //*
+
+    function Schedule_Menu($schedule)
+    {
+        //if (!preg_match('/(Admin|Coordinator)/',$this->Profile())) { return; }
+
+        return
+            $this->MyMod_HorMenu_Actions
+            (
+               array
+               (
+                  "Submission",
+                  "PreInscriptions",
+                  "Presences",
+               ),
+               "",
+               "",
+               $schedule
+            ).
+            "";
+    }    
 }
 
 ?>

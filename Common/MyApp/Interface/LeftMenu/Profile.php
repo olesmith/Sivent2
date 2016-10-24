@@ -15,19 +15,6 @@ trait MyApp_Interface_LeftMenu_Profile
 
         $links=array();
 
-        /* $cmodule=$this->CGI_GET("ModuleName"); */
-        /* if (!empty($cmodule)) { $cmodule.="Obj"; } */
-        /* else                  { $module="ApplicationObj"; } */
-        
-        /* $caction=$this->CGI_GET("Action"); */
-        $action=$this->DefaultAction;
-
-        $args=array("Action" => $action);
-        /* if (!empty($cmodule) && $this->$cmodule()->MyAction_Allowed($caction)) */
-        /* { */
-        /*     $args=$this->CGI_URI2Hash(); */
-        /* } */
-        
         foreach ($this->MyApp_CGIVars_Compulsory_Vars() as $var => $value)
         {
             $args[ $var ]=$value;

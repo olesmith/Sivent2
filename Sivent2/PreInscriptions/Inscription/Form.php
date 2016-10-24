@@ -4,6 +4,36 @@
 class PreInscriptionsInscriptionForm extends PreInscriptionsInscriptionUpdate
 {
     //*
+    //* function PreInscriptions_Inscription_Payment_Msg, Parameter list: $edit,$inscription,$datas=array()
+    //*
+    //* Shows $inscription preinscriptions form.
+    //*
+
+    function PreInscriptions_Inscription_Payment_Msg($inscription)
+    {
+        $paymentmsg="";
+        
+        $musthavepaid=$this->Event("PreInscriptions_MustHavePaid");
+        if ($this->EventsObj()->Event_PreInscriptions_Paid_MustHave())
+        {
+            $havepaid=$inscription[ "Has_Paid" ];
+            if (!$this->InscriptionsObj()->Inscription_Paid_Has($inscription))
+            {
+                $edit=0;
+                $paymentmsg=
+                    $this->Div
+                    (
+                        $this->Language_Message("PreInscriptions_NotPaid"),
+                        array("CLASS" => 'errors')
+                    );
+            }
+        }
+
+        return $paymentmsg;
+    }
+
+    
+    //*
     //* function PreInscriptions_Inscription_Form, Parameter list: $edit,$inscription,$datas=array()
     //*
     //* Shows $inscription preinscriptions form.
@@ -13,6 +43,13 @@ class PreInscriptionsInscriptionForm extends PreInscriptionsInscriptionUpdate
     {
         if (empty($datas)) $datas=array("ID","Friend","Submission","Schedule");
 
+        $paymentmsg=$this->PreInscriptions_Inscription_Payment_Msg($inscription);
+
+        if (!empty($paymentmsg))
+        {
+            $edit=0;
+        }
+        
         $where=$this->UnitEventWhere(array("PreInscriptions" => 2));
         $this->SubmissionsObj()->ItemDataGroups("Basic");
         $this->SubmissionsObj()->ItemData("ID");
@@ -42,7 +79,7 @@ class PreInscriptionsInscriptionForm extends PreInscriptionsInscriptionUpdate
         if ($edit==1)
         {
             $sdatas[0]="No";
-            $form=
+            $form.=
                 $this->StartForm().
                 $this->PreInscriptions_Submissions_Table_Html($edit,$inscription,$sdatas).
                 $this->MakeHidden("Save",1).
@@ -52,8 +89,9 @@ class PreInscriptionsInscriptionForm extends PreInscriptionsInscriptionUpdate
         }
         
         return
-            $form.
+            $paymentmsg.
             $this->PreInscriptions_Times_Table($inscription).
+            $form.
             "";
     }
     

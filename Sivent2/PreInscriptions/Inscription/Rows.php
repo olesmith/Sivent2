@@ -24,9 +24,6 @@ class PreInscriptionsInscriptionRows extends PreInscriptionsInscriptionCells
 
     function PreInscriptions_Inscription_Submission_Row($edit,$inscription,$submission)
     {
-        $this->SubmissionsObj()->CellMethods[ "SubmissionNPreInscriptionsCell" ]=TRUE;
-        $this->SubmissionsObj()->CellMethods[ "SubmissionVacanciesCell" ]=TRUE;
-        
         $row=
             $this->SubmissionsObj()->MyMod_Item_Row
             (

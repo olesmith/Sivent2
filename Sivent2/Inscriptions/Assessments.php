@@ -37,6 +37,27 @@ class InscriptionsAssessments extends InscriptionsSubmissions
     }
     
     //*
+    //* function Inscriptions_Assessments_Has, Parameter list: 
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Inscription_Assessments_Has($item=array())
+    {
+        $res=FALSE;
+
+        $nentries=0;
+        if (!empty($item[ "Friend" ]))
+        {
+            $nentries=$this->AssessmentsObj()->Sql_Select_NEntries(array("Friend" => $item[ "Friend" ]));
+        }
+
+        if ($nentries>0) { $res=TRUE; }
+
+        return $res;
+    }
+    
+    //*
     //* function Inscription_Assessors_Table_Show, Parameter list: $edit,$item
     //*
     //* Shows currently allocated collaborations for inscription in $item.
@@ -44,6 +65,13 @@ class InscriptionsAssessments extends InscriptionsSubmissions
 
     function Inscription_Assessors_Table($edit,$item)
     {
+        if (
+              !$this->Inscriptions_Submissions_Has()
+              ||
+              !$this->Inscription_Assessments_Has($item)
+           )
+        { return array(); }
+        
         $this->AssessorsObj()->Actions("Show");
         $this->AssessorsObj()->ItemData("ID");
         $this->AssessorsObj()->ItemDataGroups("Basic");

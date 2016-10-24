@@ -8,7 +8,7 @@ trait MyApp_Interface_CSS
         array
         (
            "HTMLs.css","Envs.css",
-           //"App.css",
+           "App.css",
            "Application.css",
            "Left.Menu.css","Hor.Menu.css",
            "Odd.Even.css","Modules.css",

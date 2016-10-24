@@ -8,7 +8,7 @@ trait MyMod_Item_Language
     //* And overrides all empty languaged keys, with this value.
     //*
 
-    function MyMod_Item_Language_Data_Defaults($item,$data)
+    function MyMod_Item_Language_Data_Defaults(&$item,$data)
     {
         $firstvalue="";
         foreach ($this->LanguageKeys() as $lkey)

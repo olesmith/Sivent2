@@ -152,6 +152,7 @@ array
    "Name" => array
    (
       "Name" => "Identificador",
+      "Name_ES" => "Identificador",
       "Name_UK" => "Identifier",
 
       "Sql" => "VARCHAR(256)",
@@ -163,7 +164,7 @@ array
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 0,
+      "Friend"     => 1,
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
@@ -188,7 +189,8 @@ array
    "Title" => array
    (
       "Name" => "Título",
-      "Name_UK" => "Title (PT)",
+      "Name_ES" => "Titulo",
+      "Name_UK" => "Title",
 
       "Sql" => "VARCHAR(256)",
 
@@ -203,23 +205,23 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
-   "Title_UK" => array
-   (
-      "Name" => "Título (UK)",
-      "Name_UK" => "Title",
+   /* "Title_UK" => array */
+   /* ( */
+   /*    "Name" => "Título (UK)", */
+   /*    "Name_UK" => "Title", */
 
-      "Sql" => "VARCHAR(256)",
+   /*    "Sql" => "VARCHAR(256)", */
 
-      "Search" => FALSE,
-      "Size" => 35,
+   /*    "Search" => FALSE, */
+   /*    "Size" => 35, */
 
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-      "Assessor"  => 0,
-   ),
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 2, */
+   /*    "Friend"     => 2, */
+   /*    "Coordinator" => 2, */
+   /*    "Assessor"  => 0, */
+   /* ), */
    "Type" => array
    (
       "Name" => "Tipo",
@@ -348,7 +350,7 @@ array
       "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
-      "Default"  => 0,
+      "Default"  => 1,
 
       "Public"   => 0,
       "Person"   => 0,

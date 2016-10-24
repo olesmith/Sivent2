@@ -35,7 +35,8 @@ class InscriptionsAccess extends MyInscriptions
 
     function CheckShowListAccess($item=array())
     {
-        $res=$this->Current_User_Event_May_Access($this->Event());
+        //$res=$this->Current_User_Event_May_Access($this->Event());
+        $res=$this->Coordinator_Inscriptions_Access_Has();
 
         return $res;
     }
@@ -53,10 +54,15 @@ class InscriptionsAccess extends MyInscriptions
         
         $res=parent::CheckEditAccess($item);
 
-       if ($res)
-       {
-           $res=$this->ApplicationObj()->Current_User_Event_Inscriptions_May_Edit($this->Event());
-       }
+        if ($res)
+        {
+            $res=
+                $this->ApplicationObj()->Current_User_Event_Inscription_May_Edit
+                (
+                    $item,
+                    $this->Event()
+                );
+        }
 
         return $res;
     }
@@ -140,12 +146,11 @@ class InscriptionsAccess extends MyInscriptions
                 $this->ApplicationObj()->Current_User_Event_Inscriptions_May_Edit($this->Event());
         }
 
-
-        
         if (!empty($item[ "Certificate" ]) && $item[ "Certificate" ]==2)
         {
             $res=TRUE;
         }
+        
         
         
         $res=
@@ -154,7 +159,7 @@ class InscriptionsAccess extends MyInscriptions
             $this->Inscriptions_Certificates_Published()
             &&
             $this->CheckEditAccess($item);
-
+        
         return $res;
     }
     

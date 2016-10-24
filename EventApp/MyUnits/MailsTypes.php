@@ -177,7 +177,6 @@ class MyUnitsMailsTypes extends MyUnitsMails
                 (
                    array
                    (
-                      "Event" => 0,
                       "Name" => $mailtype,
                       "Language" => $lang,
                     )

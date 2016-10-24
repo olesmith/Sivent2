@@ -27,10 +27,14 @@ class App_Head_Table extends App_Events
                 $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1]);
         }
          
-         $table=array_merge
+        array_push
         (
            $table,
-           array($this->H(5,$title))
+           array
+           (
+               $this->B($this->MyLanguage_GetMessage($msgkey).":"),
+               $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1])
+           )
         );
         
         if (count($rtable)>0)
@@ -111,7 +115,7 @@ class App_Head_Table extends App_Events
                   "Title" => "Event_Inscriptions_Edit_Title",
                   "Data" => array(),
                   "AccessMethod" => "",
-                  "Dates" => array("EditDate"),
+                  "Dates" => array("StartDate","EditDate"),
                ),
                "Collaborations" => array
                (
@@ -137,12 +141,9 @@ class App_Head_Table extends App_Events
                "PreInscriptions" => array
                (
                   "Title" => "Event_Inscriptions_PreInscriptions_Open",
-                  "Data" => array
-                  (
-                     "PreInscriptions_MustHavePaid"
-                  ),
+                  "Data" => array(),
                   "AccessMethod" => "Event_PreInscriptions_Has",
-                  "Dates" => array("PreInscriptions_StartDate","PreInscriptions_MustHavePaid"),
+                  "Dates" => array("PreInscriptions_StartDate","PreInscriptions_EndDate"),
                ),
             );
 

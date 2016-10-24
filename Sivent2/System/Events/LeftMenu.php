@@ -58,7 +58,7 @@ array
    ),
    "04_Inscriptions" => array
    (
-      "AccessMethod" => "Current_User_Event_Inscriptions_May_Access",
+      "AccessMethod" => "Coordinator_Inscriptions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -77,7 +77,8 @@ array
    ),
    "05_Certificates" => array
    (
-      "AccessMethod" => "Current_User_Event_Certificates_May_Edit",
+       //"AccessMethod" => "Current_User_Event_Certificates_May_Edit",
+      "AccessMethod" => "Coordinator_Inscriptions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -96,7 +97,7 @@ array
    ),
    "06_Collaborations" => array
    (
-      "AccessMethod" => "Current_User_Event_Collaborations_May_Edit",
+      "AccessMethod" => "Coordinator_Collaborations_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -115,7 +116,7 @@ array
    ),
    "07_Caravans" => array
    (
-      "AccessMethod" => "Current_User_Event_Caravans_May_Edit",
+      "AccessMethod" => "Coordinator_Caravans_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -191,7 +192,7 @@ array
    ),
    "12_Schedule" => array
    (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "AccessMethod" => "Coordinator_Submissions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -210,7 +211,7 @@ array
    ),
    "13_Speakers" => array
    (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "AccessMethod" => "Coordinator_Submissions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -229,7 +230,7 @@ array
    ),
    "14_PreInscriptions" => array
    (
-      "AccessMethod" => "Current_User_Event_PreInscriptions_May_Edit",
+      "AccessMethod" => "Coordinator_PreInscriptions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
@@ -248,7 +249,7 @@ array
    ),
    "15_Presences" => array
    (
-      "AccessMethod" => "Current_User_Event_Presences_May_Edit",
+      "AccessMethod" => "Coordinator_Presences_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",

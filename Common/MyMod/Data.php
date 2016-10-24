@@ -7,13 +7,24 @@ include_once("Data/Files.php");
 include_once("Data/Read.php");
 include_once("Data/Fields.php");
 include_once("Data/TimeData.php");
+include_once("Data/Language.php");
 include_once("Data/Info.php");
+include_once("Data/Title.php");
+include_once("Data/Triggers.php");
 
 trait MyMod_Data
 {
     use 
-        MyMod_Data_Defaults,MyMod_Data_Groups,MyMod_Data_Fields,
-        MyMod_Data_Files,MyMod_Data_Read,MyMod_Data_TimeData,MyMod_Data_Info;
+        MyMod_Data_Defaults,
+        MyMod_Data_Groups,
+        MyMod_Data_Fields,
+        MyMod_Data_Files,
+        MyMod_Data_Read,
+        MyMod_Data_TimeData,
+        MyMod_Data_Language,
+        MyMod_Data_Info,
+        MyMod_Data_Title,
+        MyMod_Data_Triggers;
 
 
     //*
@@ -27,9 +38,7 @@ trait MyMod_Data
     {
         $this->ItemData();
 
-        //29/06/2016 $this->MyMod_Data_Read();
-
-        if ($readitemgroupsdata)//??
+        if ($readitemgroupsdata)
         {
             $this->MyMod_Data_Groups_Initialize();
         }
@@ -149,6 +158,25 @@ trait MyMod_Data
         }
 
         return $res;
+    }
+
+    
+    //*
+    //* Returns true if $data is Compulsory.
+    //*
+
+    function MyMod_Data_Compulsories()
+    {
+        $datas=array();
+        foreach (array_keys($this->ItemData) as $data)
+        {
+            if ($this->MyMod_Data_Field_Compulsory($data))
+            {
+                array_push($datas,$data);
+            }
+        }
+        
+        return $datas;
     }
 
     

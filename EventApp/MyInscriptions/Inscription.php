@@ -8,7 +8,7 @@ include_once("Inscription/Update.php");
 include_once("Inscription/Contents.php");
 include_once("Inscription/Inscribe.php");
 
-class MyInscriptionsInscription extends MyInscriptionsInscriptionInscribe
+class MyInscriptions_Inscription extends MyInscriptions_Inscription_Inscribe
 {
 }
 

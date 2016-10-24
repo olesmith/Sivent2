@@ -8,9 +8,10 @@ include_once("MyEvents/DataGroups.php");
 include_once("MyEvents/Info.php");
 include_once("MyEvents/Tables.php");
 include_once("MyEvents/Create.php");
+include_once("MyEvents/Certificates.php");
 include_once("MyEvents/Handle.php");
 
-class MyEvents extends MyEventsHandle
+class MyEvents extends MyEvents_Handle
 {
     var $Unit2EventData=array
     (
@@ -34,6 +35,22 @@ class MyEvents extends MyEventsHandle
         $this->Sort=array("Name");
         $this->IDGETVar="Event";
         $this->NonGetVars=array("Event","CreateTable");
+        
+        $this->MyEvents_CellMethods_Init();
+    }
+
+    //*
+    //* function MyEvents_CellMethods, Parameter list: 
+    //*
+    //* Adds cell methods.
+    //*
+
+    function MyEvents_CellMethods_Init()
+    {
+        $this->CellMethods[ "Event_Date_Span" ]=TRUE;
+        $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
+        $this->CellMethods[ "Event_PreInscriptions_DateSpan" ]=TRUE;
+        $this->CellMethods[ "Event_PreInscriptions_Status" ]=TRUE;
     }
 
 
@@ -146,7 +163,6 @@ class MyEvents extends MyEventsHandle
         $this->ItemData[ "HtmlIcon1" ][ "Coordinator" ]=2;
         $this->ItemData[ "HtmlIcon2" ][ "Coordinator" ]=2;
         $this->ItemData[ "Initials" ][ "Coordinator" ]=2;
-        $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
     }
 
     //*

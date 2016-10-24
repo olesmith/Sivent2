@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsAccess extends ModulesCommon
+class MyInscriptions_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (
@@ -8,6 +8,47 @@ class MyInscriptionsAccess extends ModulesCommon
        "Edit"   => "CheckEditAccess",
        "Delete"   => "CheckDeleteAccess",
     );
+
+    //*
+    //* function MayInscribe, Parameter list: $item=array()
+    //*
+    //* Checks if $friend may be inscribed, that is:
+    //*
+    //* 1: Has Profile in $this->ApplicationObj()->UserProfiles.
+    //* 2: Not inscribed already.
+    //*
+
+    function MayInscribe($item=array())
+    {
+        if (empty($event)) { return TRUE; }
+        
+        $res=$this->Event_Inscriptions_Public_Is($event);
+        if ($res)
+        {
+            $res=!$this->IsInscribed($this->LoginData());
+        }
+
+        return $res;
+    }
+
+    //*
+    //* function IsInscribed, Parameter list: $friend
+    //*
+    //* Reads  inscription.
+    //*
+
+    function IsInscribed($friend)
+    {
+        $ninscriptions=$this->Sql_Select_NEntries
+        (
+           $this->Friend2SqlWhere($friend)
+        );
+
+        $res=FALSE;
+        if ($ninscriptions>0) { $res=TRUE; }
+
+        return $res;
+    }
 
     //*
     //* function CheckShowAccess, Parameter list: $item=array()

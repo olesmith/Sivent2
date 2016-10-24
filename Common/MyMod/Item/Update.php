@@ -37,7 +37,7 @@ trait MyMod_Item_Update
 
         $rupdate=0;
         $update=0;
-        $rdatas=array(); //datas that are actually updated
+        $updatedatas=array(); //datas that are actually updated
         foreach ($datas as $id => $rrdata)
         {
             $rrdatas=$rrdata;
@@ -58,12 +58,13 @@ trait MyMod_Item_Update
                     {
                         $item=$res;
                         $rupdate++;
-                        array_push($rdatas,$data);
+                        array_push($updatedatas,$data);
 
-                        if ($this->TriggerFunction($data))
+                        if ($this->MyMod_Data_Trigger_Function($data))
                         { 
-                            $item=$this->ApplyTriggerFunction($data,$item,$prepost);
+                            $item=$this->MyMod_Data_Trigger_Apply($data,$item,$prepost);
                         }
+                        
                         $update++;
                     }
                 }
@@ -85,9 +86,9 @@ trait MyMod_Item_Update
                     $oldvalue="";
                     if (!empty($item[ $data ])) { $oldvalue=$item[ $data ]; }
 
-                    if ($this->TriggerFunction($data))
+                    if ($this->MyMod_Data_Trigger_Function($data))
                     {
-                        $item=$this->ApplyTriggerFunction($data,$item,$prepost);
+                        $item=$this->MyMod_Data_Trigger_Apply($data,$item,$prepost);
                     }
                     else
                     {
@@ -98,13 +99,13 @@ trait MyMod_Item_Update
                     {
                         //var_dump("$data: $oldvalue => $newvalue") ;
                         $update++;
-                        array_push($rdatas,$data);
+                        array_push($updatedatas,$data);
                     }
                     
                 }
             }
         }
-        
+
         $this->FormWasUpdated=FALSE;
         if ($update>0)
         {
@@ -119,7 +120,7 @@ trait MyMod_Item_Update
             (
                 $item,
                 array("ID" => $item[ "ID" ]),
-                $rdatas
+                $updatedatas
             );
 
             $item=$this->ReadItemDerivedData($item);
@@ -127,7 +128,7 @@ trait MyMod_Item_Update
             $item=$this->SetItemTime("ATime",$item);
 
             $rdatanames=array();
-            foreach ($rdatas as $rdata)
+            foreach ($updatedatas as $rdata)
             {
                 array_push($rdatanames,$this->GetDataTitle($rdata));
             }

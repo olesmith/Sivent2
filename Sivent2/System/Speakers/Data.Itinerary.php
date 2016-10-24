@@ -3,13 +3,16 @@ array
    "Transport" => array
    (
       "Name" => "Meio de Viagem",
-      "Name_UK" => "Travel Form",
+      "Name_UK" => "Travel By",
+      "Name_ES" => "Viaje por",
       "Title" => "Meio de Viagem",
-      "Title_UK" => "Travel Form",
+      "Title_UK" => "Travel By",
+      "Title_ES" => "Viaje por",
 
       "Sql" => "ENUM",
       "Values"    => array("Conta Própria","Avião","Ônibus","Trem","Carro","Outro"),
       "Values_UK" => array("By Own Means","Air","Bus","Train","Car","Other"),
+      "Values_ES"    => array("Própria Cuenta ","Avion","Onibus","Tren","Coche","Outro"),
       
       "Public"   => 0,
       "Person"   => 0,

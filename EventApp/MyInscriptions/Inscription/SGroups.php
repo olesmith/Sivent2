@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsInscriptionSGroups extends MyInscriptionsInscriptionMessages
+class MyInscriptions_Inscription_SGroups extends MyInscriptions_Inscription_Messages
 {
     //*
     //* function InscriptionSGroups, Parameter list: $edit

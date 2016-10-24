@@ -215,21 +215,6 @@ class SchedulesTimes extends SchedulesAccess
     }
 
 
-    /* //\* */
-    /* //\* function TimesRoomsTopology, Parameter list: $edit,$times,$rooms */
-    /* //\* */
-    /* //\* Initializes topology. If we are NOT editing, performs 'shrinking on rows. */
-    /* //\* */
-
-    /* function TimesRoomsTopology($edit,$times,$rooms) */
-    /* { */
-    /*     $this->TimesRoomsInitTopology($times,$rooms); */
-    /*     if ($edit==0) */
-    /*     { */
-    /*         $this->TimesRoomsEditTopology($times,$rooms); */
-    /*     } */
-    /* }     */
-    
     //*
     //* function TimesRoomsInitTopology, Parameter list: $date,$times,$rooms
     //*
@@ -305,6 +290,7 @@ class SchedulesTimes extends SchedulesAccess
                 {
                     $submission=$this->Topology[ $timeid ][ $roomid ][ "ID" ];
                     $lasttimeid=$timeid;
+                    $nroomentries++;
                 }
             }
 
@@ -373,7 +359,7 @@ class SchedulesTimes extends SchedulesAccess
         $timeid=$time[ "ID" ];
         $roomid=$room[ "ID" ];
         
-        $cell=$this->ScheduleRoomSubmissionField($edit,$date,$time,$place,$room);
+        $cell=$this->Schedule_Field($edit,$date,$time,$place,$room);
         if ($this->Topology[ $timeid ][ $roomid ][ "Count" ]>1)
         {
             $nrows=$this->Topology[ $timeid ][ $roomid ][ "Count" ];

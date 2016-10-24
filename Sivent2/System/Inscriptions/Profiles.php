@@ -107,11 +107,13 @@ array
          'Coordinator' => array
          (
             "Emails" => 1,
+            "Zips" => 1,
             "GenCerts" => 1,
          ),
          'Admin' => array
          (
             "Emails" => 1,
+            "Zips" => 1,
             "GenCerts" => 1,
          ),
       ),

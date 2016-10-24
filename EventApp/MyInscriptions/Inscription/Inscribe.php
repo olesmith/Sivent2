@@ -1,7 +1,7 @@
 <?php
 
 
-class MyInscriptionsInscriptionInscribe extends MyInscriptionsInscriptionContents
+class MyInscriptions_Inscription_Inscribe extends MyInscriptions_Inscription_Contents
 {
     //*
     //* function Profile2Friend, Parameter list: $friend=array()

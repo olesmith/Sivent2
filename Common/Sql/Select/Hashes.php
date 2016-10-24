@@ -102,7 +102,7 @@ trait Sql_Select_Hashes
         $this->LastSqlWhere=$this->Sql_Select_Hashes_Query($where,$fieldnames,$orderby,$table,$limit,$offset);
         $result = $this->DB_Query_2Assoc_List($this->LastSqlWhere);
 
-        if ($result && $postprocess)
+        if ($result && $postprocess && method_exists($this,"PostProcessItemList"))
         {
             $this->PostProcessItemList($result);
         }

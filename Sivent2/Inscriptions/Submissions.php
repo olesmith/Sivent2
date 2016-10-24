@@ -30,7 +30,7 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     //*
     //* function Inscriptions_Submissions_Inscriptions_Has, Parameter list: 
     //*
-    //* Detects if current event has collaborations activated.
+    //* Detects if current event has Submissions activated.
     //*
 
     function Inscriptions_Submissions_Inscriptions_Has()
@@ -52,9 +52,9 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     }
 
     //*
-    //* function Inscriptions_Collaborations_Has, Parameter list: 
+    //* function Inscription_Submissions_Has, Parameter list: 
     //*
-    //* Detects if current event has collaborations activated.
+    //* Detects if current event has any Submissions.
     //*
 
     function Inscription_Submissions_Has($item=array())

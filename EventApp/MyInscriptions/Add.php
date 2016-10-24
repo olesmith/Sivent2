@@ -1,7 +1,7 @@
 <?php
 
 
-class MyInscriptionsAdd extends MyInscriptionsHandle
+class MyInscriptions_Add extends MyInscriptions_Handle
 {
     //*
     //* function FriendInscribedInEvent, Parameter list: $event,$friend

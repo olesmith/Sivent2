@@ -11,7 +11,6 @@ class PreInscriptionsSubmissions extends PreInscriptionsAccess
     function PreInscriptions_Submission_Read($submission,$datas=array())
     {
         if (empty($datas)) $datas=array("ID","Friend","Submission","Schedule");
-        
         return $this->Sql_Select_Hashes(array("Submission" => $submission[ "ID" ]),$datas);
     }
 

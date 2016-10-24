@@ -1,6 +1,6 @@
 <?php
 
-class MyFriendsAddNew extends MyFriendsAddMail
+class MyFriends_Add_New extends MyFriends_Add_Mail
 {
     //*
     //* function FriendSelectNewTable, Parameter list: $newitem

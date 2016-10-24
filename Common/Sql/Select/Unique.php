@@ -68,6 +68,45 @@ trait Sql_Select_Unique
         return array_keys($values);
     }
 
+     //*
+    //* function Sql_Select_ID_Items, Parameter list: $idcol="ID",$colids,$datas=array(),$table=""
+    //*
+    //* Returns ID'ed items in $ids.
+    //*
+    //* 
+
+    function Sql_Select_ID_Items($colids,$datas=array(),$idcol="ID",$table="")
+    {
+        $items=array();
+        foreach ($colids as $colid)
+        {
+            $items[ $colid ]=
+                $this->Sql_Select_Hash(array($idcol => $colid),$datas,$noecho=TRUE,$table);
+        }
+        
+        return $items;
+    }
+
+    
+   //*
+    //* function Sql_Select_Unique_Items, Parameter list: $idcol="ID",$where=array(),$datas=array(),$orderby="",$table=""
+    //*
+    //* Returns list of unique items conforming to $where.
+    //*
+    //* 
+
+    function Sql_Select_Unique_Items($idcol="ID",$where=array(),$datas=array(),$orderby="",$table="")
+    {
+        return
+            $this->Sql_Select_ID_Items
+            (
+                $this->Sql_Select_Unique_Col_Values($idcol,$where,$orderby,$table),
+                $datas,
+                $idcol,
+                $table
+            );
+   }
+
     
     //*
     //* function Sql_Select_Unique_Col_NValues, Parameter list: $col,$where,$table=""
@@ -100,14 +139,14 @@ trait Sql_Select_Unique
         if (count($items)>0)
         {
             $item=array_pop($items);
-            $item=$this->Sql_Select_Hash(array("ID" => $item[ "ID" ]));
+            $item=$this->Sql_Select_Hash(array("ID" => $item[ "ID" ],$datas,FALSE,$table));
         }
         
         if (count($items)>0)
         {
             $item=array();
-           var_dump("non-unique items");
-           $this->AddHtmlStatusMessage("Sql_Select_Unique_Item: non-unique items");
+            var_dump("non-unique items");
+            $this->AddHtmlStatusMessage("Sql_Select_Unique_Item: non-unique items");
            
             foreach ($items as $item)
             {

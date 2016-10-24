@@ -3,19 +3,6 @@
 
 class DataGroups extends HashesData
 {
-
-    //*
-    //* Variables of Items class:
-    //*
-
-    //var $Singular=TRUE;
-    var $ExtraData=array();
-    var $ItemDataGroupsCommon=array();
-    var $ItemDataGroupNames=array();
-
-    var $ItemDataSGroupsCommon=array();
-    var $ItemDataSGroupNames=array();
-
     //*
     //* Returns permitted data groups, based on $this->LoginTyoe or $this->Profile.
     //* Calls MyMod_Item_Group_Allowed forach item in ItemDataGroups.
@@ -317,6 +304,11 @@ class DataGroups extends HashesData
             {
                 if (isset($this->ItemData[ $rdata ]))
                 {
+                    if (!$single && preg_grep('/^'.$rdata.'$/',$this->MyMod_Language_Data))
+                    {
+                        $rdata.=$this->MyLanguage_GetLanguageKey();
+                    }
+                    
                     if ($this->MyMod_Access_HashAccess($this->ItemData[ $rdata ],array(1,2)))
                     {
                         array_push($rdatas,$rdata);

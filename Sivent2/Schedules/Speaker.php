@@ -3,6 +3,24 @@
 class SchedulesSpeaker extends SchedulesSchedules
 {
     //*
+    //* function Speakers, Parameter list: $friend
+    //*
+    //* Returns speaker's $friend data.
+    //*
+
+    function Speakers($friend)
+    {
+        if (is_array($friend)) { $friend=$friend[ "ID" ]; }
+        
+        if (empty($this->Speakers[ $friend ]))
+        {
+            $this->Speakers[ $friend ]=$this->Sql_Select_Hash(array("ID" => $friend));
+        }
+
+        return  $this->Speakers[ $friend ];
+    }
+
+    //*
     //* function Speaker2Schedules, Parameter list: $speaker,$datas=array()
     //*
     //* Returns speaker's submissions

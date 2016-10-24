@@ -206,7 +206,7 @@ array
        "Coordinator" => 1,
        "Single" => 1,
        "AccessMethod" => array("Event_Collaborations_Has","Event_Certificates_Has"),
-       "SubAction" => "Collaborators",
+       "SubAction" => "Collaborations",
     ),
     "Caravaneers_Latex" => array
     (

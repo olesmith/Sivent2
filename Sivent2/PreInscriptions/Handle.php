@@ -26,9 +26,7 @@ class PreInscriptionsHandle extends PreInscriptionsInscription
         $submission=$this->SubmissionsObj()->Sql_Select_Hash(array("ID" => $submissionid));
         if (empty($submission[ "ID" ])) { return "Submission not found"; }
 
-        $this->SubmissionsObj()->CellMethods[ "SubmissionAuthorsCell" ]=TRUE;
-        
-        echo
+       echo
             $this->H(1,$this->MyActions_Entry_Title("Manage")).
             $this->FrameIt($this->SubmissionsObj()->MyMod_Item_Table_Html
             (

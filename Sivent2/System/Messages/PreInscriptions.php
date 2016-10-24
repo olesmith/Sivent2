@@ -108,5 +108,11 @@ array
       "Title_ES" => "Selecione para Inscreber-se nessa Actividad",
       "Title_UK" => "Select to Inscribe in this Activity",
    ),
+   "PreInscriptions_NotPaid" => array
+   (
+      "Name" => "Pagamento não Confirmado. Preinscrições Condicionadas a Confirmação de Pagamento.",
+      "Name_ES" => "Recompensa no Confirmado. Preinscriciones Condicionadas al Confirmacion de Recompensa.",
+      "Name_UK" => "Payment Unconfirmed. Preinscriptions only after Confirmation.",
+   ),
 );
 

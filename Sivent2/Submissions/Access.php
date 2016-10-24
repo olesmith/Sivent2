@@ -145,7 +145,7 @@ class SubmissionsAccess extends ModulesCommon
     function CheckDeleteAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
-      
+
         $res=$this->CheckEditAccess($item);
         if ($item[ "Status" ]==2) { $res=FALSE; }
  

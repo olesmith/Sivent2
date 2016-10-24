@@ -1,6 +1,6 @@
 <?php
 
-class MyInscriptionsInscriptionContents extends MyInscriptionsInscriptionUpdate
+class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Update
 {
     //*
     //* function InscriptionContents, Parameter list: $edit,$buttons=TRUE

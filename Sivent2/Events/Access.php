@@ -10,7 +10,7 @@ class EventsAccess extends MyEvents
     //* Activated in System::Friends::Profiles.
     //*
 
-    function CheckShowAccess($item)
+    function CheckShowAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
         
@@ -29,7 +29,7 @@ class EventsAccess extends MyEvents
     //* Activated in  System::Friends::Profiles.
     //*
 
-    function CheckEditAccess($item)
+    function CheckEditAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
         
@@ -39,20 +39,6 @@ class EventsAccess extends MyEvents
 
         return $res;
     }
-
-    /* //\* */
-    /* //\* function CheckDeleteAccess, Parameter list: $item */
-    /* //\* */
-    /* //\* Checks if $item may be deleted. That is: */
-    /* //\* No questionary data defined - and no inscriptions. */
-    /* //\* */
-
-    /* function CheckDeleteAccess($item) */
-    /* {  */
-    /*     $res=parent::CheckDeleteAccess($item); */
-
-    /*     return $res; */
-    /* } */
-}
+ }
 
 ?>

@@ -295,6 +295,7 @@ trait MyMod_Globals
         if (empty($this->ItemData))
         {
             $this->MyMod_Data_Read();
+            $this->MyMod_Language_Datas_Init();
         }
 
         return $this->MyHash_HashHashes_Get($this->ItemData,$action,$key);

@@ -166,22 +166,25 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
 
     function Inscription_Event_Typed_Tables($edit,$inscription)
     {
-        $tables=
-            array_merge
-            (
-               $this->Inscription_Certificate_Table(0,$inscription),
-               $this->Inscription_Speaker_Tables(1,$inscription),
-               $this->Inscription_Submissions_Table(1,$inscription),
-               $this->Inscription_Assessors_Table(1,$inscription),
-               $this->Inscription_PreInscriptions_Table(1,$inscription),
-               $this->Inscription_Collaborations_Table(1,$inscription),               
-               $this->Inscription_Caravans_Table_Form(1,$inscription)
-           );
-
-
-        if (!empty($tables))
+        if (!empty($inscription))
         {
-            return $this->Html_Table("",$tables);
+            $tables=
+                array_merge
+                (
+                    $this->Inscription_Certificate_Table(0,$inscription),
+                    $this->Inscription_Speaker_Tables(1,$inscription),
+                    $this->Inscription_Submissions_Table(1,$inscription),
+                    $this->Inscription_Assessors_Table(1,$inscription),
+                    $this->Inscription_PreInscriptions_Table(1,$inscription),
+                    $this->Inscription_Collaborations_Table(1,$inscription),               
+                    $this->Inscription_Caravans_Table_Form(1,$inscription)
+                );
+
+
+            if (!empty($tables))
+            {
+                return $this->Html_Table("",$tables);
+            }
         }
 
         return "";

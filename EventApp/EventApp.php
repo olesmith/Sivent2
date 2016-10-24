@@ -487,12 +487,11 @@ class EventApp extends MyEventAppMail
 
     function ApplicationWindowTitle()
     {
-        return
-            $this->Unit("Name").
-            "::".
-            parent::ApplicationWindowTitle().
-            "";
-            
+        $comps=preg_split('/::/',parent::ApplicationWindowTitle());
+        $name=$this->Unit("Name");
+        array_push($comps,$name);
+
+        return join("::",$comps);            
     }
 
     //*

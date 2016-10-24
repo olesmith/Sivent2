@@ -4,6 +4,8 @@ include_once("Access/May.php");
 
 class MyEventAppAccess extends MyEventAppAccess_May
 {
+    var $__Event_Perms=array();
+    
     //*
     //* function EventAccess, Parameter list: $event=array(),$user=array(),$profile=""
     //*
@@ -115,6 +117,29 @@ class MyEventAppAccess extends MyEventAppAccess_May
     }
     
     //*
+    //* sub MayInscribe, Parameter list: 
+    //*
+    //* Checks whether we may inscribe. Calls EventsObj() function for the job.
+    //*
+    //*
+
+    function FriendMayInscribe($event=array(),$friend=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        if (empty($friend)) { $friend=$this->LoginData(); }
+
+        $res=$this->EventsObj()->MayInscribe($event);
+
+        if ($res)
+        {
+            $res=!$this->EventsObj()->FriendIsInscribed($event,$friend);
+        }
+
+        return $res;
+    }
+
+        
+    //*
     //* function Current_User_Admin_Is, Parameter list: 
     //*
     //* Returns TRUE if current user is admin.Otherwise FALSE.
@@ -152,7 +177,7 @@ class MyEventAppAccess extends MyEventAppAccess_May
     }
 
     //*
-    //* sub Coordinator_Access_Has, Parameter list: $type,$event=array()
+    //* sub Coordinator_Access_Has, Parameter list: $type,$event
     //*
     //* Checks whether coordinator (current login) has access to module.
     //*
@@ -160,6 +185,8 @@ class MyEventAppAccess extends MyEventAppAccess_May
 
     function Coordinator_Access_Has($type,$event=array())
     {
+        if (empty($event)) { $event=$this->Event(); }
+        
         $res=$this->Current_User_Admin_Is();
         if ($res) { return TRUE; }
 
@@ -171,9 +198,6 @@ class MyEventAppAccess extends MyEventAppAccess_May
 
         $types=$this->Current_User_Event_Coordinator_Types($event);
 
-        //var_dump($type);
-        //if (!empty($event[ "ID" ])) var_dump($event[ "ID" ]);
-        //var_dump($types);
         $res=FALSE;
         if (
               preg_grep('/^0$/',$types)
@@ -264,9 +288,13 @@ class MyEventAppAccess extends MyEventAppAccess_May
     {
         if (empty($event)) { $event=$this->Event("ID"); }
         if (is_array($event)) { $event=$event[ "ID" ]; }
+
+        if (isset($this->__Event_Perms[ $event ]))
+        {
+            //return $this->__Event_Perms[ $event ];
+        }
         
         $res=$this->Current_User_Admin_Is();
-
         if ($this->Current_User_Coordinator_Is() && !$res)
         {
             $events=
@@ -278,7 +306,9 @@ class MyEventAppAccess extends MyEventAppAccess_May
 
             if (preg_grep('/^(0|'.$event.')$/',$events)) { $res=TRUE; }
         }
-
+        
+        $this->__Event_Perms[ $event ]=$res;
+       
         return $res;
     }
 }

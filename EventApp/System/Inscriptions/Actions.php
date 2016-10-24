@@ -26,7 +26,7 @@ array
       ),
       'Show' => array
       (
-         "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=Edit&ID=#ID",
+         "HrefArgs" => "?ModuleName=Inscriptions&Event=".$this->Event("ID")."&Action=Edit&ID=#ID",
          'Public' => 1,
          'Person' => 0,
          "Admin" => 1,
@@ -44,7 +44,7 @@ array
       ),
       'Edit' => array
       (
-         "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=Edit&ID=#ID",
+         "HrefArgs" => "?ModuleName=Inscriptions&Event=".$this->Event("ID")."&Action=Edit&ID=#ID",
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,
@@ -76,12 +76,21 @@ array
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
+         "AccessMethod" => "CheckShowAccess",
+      ),
+      'Zip' => array
+      (
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
          "AccessMethod" => "CheckEditAccess",
       ),
    "Inscribe" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscribe&Event=#Event",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscribe&Event=".$this->Event("ID"),
       "Title"    => "Efetuar Inscrição no Processo Seletivo",
       "Title_UK" => "Inscribe to Selection Process",
       "Name"     => "Inscrever-se",
@@ -100,7 +109,7 @@ array
    "Inscription" => array
    (
       "Href"     => "",
-      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Event=#Event",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscription&Event=".$this->Event("ID"),
       "Title"    => "Acessar Inscrição",
       "Title_UK" => "Access Inscription",
       "Name"     => "Inscrição",
@@ -115,6 +124,7 @@ array
 
       "Singular"   => TRUE,
       "Handler"   => "HandleInscribe",
+      "AccessMethod"   => "MayInscribe",
    ),
    "Emails" => array
    (
@@ -133,5 +143,27 @@ array
       "Friend"     => 0,
       "Coordinator" => 1,
       "Admin"    => 1,
+  ),
+   "Zips" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Zips&ID=#ID",
+      "Title"    => "Zipar",
+      "Title_UK" => "Zip",
+      "ShortName"     => "Zipar",
+      "ShortName_UK"   => "Zip",
+      "Name"     => "Zipar Arquivos",
+      "Name_UK"   => "Zip Files",
+      
+      "Handler"   => "HandleZip",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"   => TRUE,
+      "NoHeads"   => 1,
+      "NoInterfaceMenu"   => 1,
   ),
 );

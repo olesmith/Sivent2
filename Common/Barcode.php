@@ -462,7 +462,7 @@ class BarImage
 }
 
 
-if (!empty($_GET[ "Code" ]))
+if (!empty($_GET[ "Code" ]) && preg_match('/Barcode/',$_SERVER['SCRIPT_NAME']))
 {
     $barimage=new BarImage();
     

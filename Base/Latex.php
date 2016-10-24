@@ -1179,31 +1179,6 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
             "  headsep=0.75cm\n".
             "}\n\n";
     }
-    //* function Latex_Minipage, Parameter list: $width,$latex,$pos="c",$align=""
-    //*
-    //* Generates mini page environment
-    //*
-
-    function Latex_Minipage($width,$latex,$pos="c",$align="",$height="")
-    {
-        $align=strtolower($align);
-            if ($align=="c") { $align="center"; }
-        elseif ($align=="l") { $align="flushleft"; }
-        elseif ($align=="r") { $align="flushright"; }
-        
-        if (!empty($height)) { $height="[".$height."cm]"; }
-
-        if (!empty($align)) { $latex=$this->LatexEnv($align,$latex,array(),FALSE); }
-        $latex=
-            "\\begin{minipage}[".$pos."]".$height."{".$width."cm}\n".
-            $latex."\n".
-            "\\end{minipage}".
-            "";
-        
-
-        return $latex;   
-    }
-
     
 }
 ?>

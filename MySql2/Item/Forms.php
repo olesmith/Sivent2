@@ -403,7 +403,7 @@ class ItemForms extends Fields
             }
         }
 
-        $this->AddDefaults=$this->TestItem($this->AddDefaults);
+        //$this->AddDefaults=$this->TestItem($this->AddDefaults);
     }
 
 
@@ -562,7 +562,18 @@ class ItemForms extends Fields
         $this->Singular=TRUE;
         $this->NoFieldComments=TRUE;
 
-        $this->InitAddDefaults($this->ItemHash);
+        /* $id=$this->CGI_GETint("ID"); */
+        /* if (!empty($id)) */
+        /* { */
+        /*     $this->ItemHash=$this->Sql_Select_Hash(array("ID" => $id)); */
+        /*     if (empty($this->ItemHash)) */
+        /*     { */
+        /*         $this->DoDie("No such item ".$id); */
+        /*     } */
+        /* } */
+
+        $item=$this->ItemHash;
+        $this->InitAddDefaults();
 
         $action="Copy";
         $msg="";
@@ -592,7 +603,9 @@ class ItemForms extends Fields
                     unset($args[ $var ]);
                 }
 
-                //Now added, reload as edit, preventing multiple adds
+                $this->ApplicationObj->LogMessage("Copy","Item Added");
+                
+                //Now added, reload as edit, preventing multiple adds, the user reloading the page.
                 header("Location: ?".$this->Hash2Query($args));
                 exit();
             }
@@ -604,12 +617,10 @@ class ItemForms extends Fields
 
         
         $this->ApplicationObj->MyApp_Interface_Head();
-        //$this->ApplicationObj->LogMessage("CopyForm","Form Loaded");
 
-        $item=$this->ItemHash;
         foreach ($this->AddDefaults as $data => $value)
         {
-            if (!empty($item[ $data ]))
+            if (empty($item[ $data ]))
             {
                 $item[ $data ]=$value;
                 $item[ $data."_Value" ]=$value;

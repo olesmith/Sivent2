@@ -27,6 +27,7 @@ array
          (
             "Show" => 1,
             "Inscribe" => 1,
+            "Inscription" => 1,
          ),
          'Assessor' => array
          (

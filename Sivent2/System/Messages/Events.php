@@ -2,12 +2,9 @@ array
 (
    "Sivent_Old_Message" => array
    (
-      "Name" => "Sivent2 é uma versão nova do antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Cadastros do sistema antigo NÃO foram transferidos. Todos precisam recadastrar-se no Sivent2.",
-      "Name_ES" => "Sivent2 es un versión nuevo del antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registros do sistema antigo NO foram transferidos. Todos necessitan recadastrar-se no Sivent2.",
-      "Name_UK" => "Sivent2 is a new version  of the old SiVent. Certificados emitted  by the old sistema, contines available acessing: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registrations in the old system has NOT been transfered. Everybodu needs to reregister in Sivent2.",
-      "Title" => "Sivent2 é uma versão nova do antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Cadastros do sistema antigo não foram transferidos. Todos precisam recadastrar-se aqui no Sivent2.",
-      "Title_ES" => "Sivent2 es un versión nuevo del antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registros do sistema antigo NO foram transferidos. Todos necessitan recadastrar-se no Sivent2.",
-      "Title_UK" => "Sivent2 is a new version  of the old SiVent. Certificados emitted  by the old sistema, contines available acessing: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registrations in the old system has NOT been transfered. Everybodu needs to reregister in Sivent2.",
+      "Name" => "Sivent2 é uma versão nova do antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Cadastros do sistema antigo NÃO foram transferidos.<H2>Todos precisam recadastrar-se no Sivent2.</H2>",
+      "Name_ES" => "Sivent2 es un versión nuevo del antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registros do sistema antigo NO foram transferidos. <H2>Todos necessitan recadastrar-se no Sivent2.</H2>",
+      "Name_UK" => "Sivent2 is a new version  of the old SiVent. Certificados emitted  by the old sistema, contines available acessing: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registrations in the old system has NOT been transfered. <H2>Everybody needs to reregister in Sivent2.</H2>",
    ),
    "Events_Handle_Candidate_Title" => array
    (
@@ -161,6 +158,12 @@ array
       "Title" => "PreInscrições Abertas",
       "Title_ES" => "PreInscriciones Abiertas",
       "Title_UK" => "PreInscriptions Open",
+   ),
+   "Event_Setup_Menu_Title" => array
+   (
+      "Name" => "Configurações",
+      "Name_ES" => "Configuraciones",
+      "Name_UK" => "Configurations",
    ),
 );
 

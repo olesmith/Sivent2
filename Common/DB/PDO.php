@@ -11,14 +11,25 @@ trait DB_PDO
 
     function DB_PDO_Connect(&$dbhash)
     {
-        $link=new PDO
-        (
-           $dbhash[ "ServType" ].":".
-           "host=".$dbhash[ "Host" ].";".
-           "dbname=".$dbhash[ "DB" ].";",
-           $dbhash[ "User" ],
-           $dbhash[ "Password" ]
-        );
+        $link=FALSE;
+        try
+        {
+            $link=
+                new PDO
+                (
+                    $dbhash[ "ServType" ].":".
+                    "host=".$dbhash[ "Host" ].";".
+                    "dbname=".$dbhash[ "DB" ].";",
+                    $dbhash[ "User" ],
+                    $dbhash[ "Password" ]
+               );
+        }
+
+        catch (Exception $e)
+        {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+            exit(1);
+        }
 
         if (!$link)
         {
@@ -104,8 +115,10 @@ trait DB_PDO
 
     function DB_PDO_Query_Html($query)
     {
-        $query=preg_replace('/(UPDATE|SELECT|INSERT|DELETE|WHERE|SET)/',"$1<BR>",$query);
-        $query=preg_replace('/,/',"$1<BR>",$query);
+        $query=preg_replace('/\s*(UPDATE|SELECT|INSERT|DELETE|WHERE|SET|IN)\s*/i'," $1<BR>",$query);
+        $query=preg_replace('/\s*,\s*/',"$1,<BR>",$query);
+        $query=preg_replace('/\s*\(\s*/',"(<BR>",$query);
+        $query=preg_replace('/\s*\)\s*/',"<BR>)",$query);
         $query=preg_replace('/(\S+)=/',"&nbsp;&nbsp;&nbsp;$1=",$query);
 
         return $query."<BR>";
@@ -248,7 +261,9 @@ trait DB_PDO
                 $rkey=$key;
                 if ($lowercasekeys) { $rkey=strtolower($key); }
                 
-                $item[ $rkey ]=$value;
+                $item[ $rkey ]=preg_replace('/\s+/'," ",$value);
+                $item[ $rkey ]=preg_replace('/^\s/',"", $item[ $rkey ]);
+                $item[ $rkey ]=preg_replace('/\s$/',"", $item[ $rkey ]);
                 if ($key=="ID") { $id=$row[$key]; }
                 $n++;
             }

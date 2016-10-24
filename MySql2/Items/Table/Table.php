@@ -5,7 +5,35 @@ class ItemsTableTable extends ItemsTableRow
 {
     var $ItemTableRowMethod="ItemsTableRow";
 
+     //*
+    //* function ItemsTableData, Parameter list: $title,$edit=0,$datas=array(),$items=array(),$countdef=array(),$titles=array(),$sumvars=TRUE,$cgiupdatevar="Update"
     //*
+    //* Returns list of data in items table.
+    //* 
+
+    function ItemsTableData($datas)
+    {
+        $rdatas=array();
+
+        $unique=array();
+        foreach ($datas as $data)
+        {
+            if (preg_match('/newline/',$data))
+            {
+                array_push($rdatas,$data);
+            }
+            elseif (empty($unique[ $data ]))
+            {
+                array_push($rdatas,$data);
+                $unique[ $data ]=TRUE;
+            }
+        }
+
+        return $rdatas;
+    }
+
+    
+   //*
     //* function ItemsTable, Parameter list: $title,$edit=0,$datas=array(),$items=array(),$countdef=array(),$titles=array(),$sumvars=TRUE,$cgiupdatevar="Update"
     //*
     //* Joins table as a matrix for items in $items, or if empty, in $this->ItemHashes.
@@ -25,7 +53,7 @@ class ItemsTableTable extends ItemsTableRow
             $datas=$this->AddSearchVarsToDataList($datas);
         }
 
-        $datas=$this->ListUniqueValues($datas);
+        $datas=$this->ItemsTableData($datas);
 
         if (!empty($cgiupdatevar) && $this->GetPOST($cgiupdatevar))
         {

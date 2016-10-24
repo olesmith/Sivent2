@@ -1,7 +1,7 @@
 <?php
 
 
-class MyInscriptionsHandle extends MyInscriptionsInscription
+class MyInscriptions_Handle extends MyInscriptions_Inscription
 {
     //*
     //* function HandleEmails, Parameter list:

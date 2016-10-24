@@ -226,7 +226,12 @@ class HtmlTags extends HtmlCSS
 
     function DIV($contents,$options=array())
     {
-        return $this->HtmlTags("DIV",$contents,$options);
+        if (!$this->LatexMode())
+        {
+            $contents=$this->HtmlTags("DIV",$contents,$options);
+        }
+        
+        return $contents;
     }
 
     //*

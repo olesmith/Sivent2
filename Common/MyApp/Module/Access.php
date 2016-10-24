@@ -16,6 +16,12 @@ trait MyApp_Module_Access
             $res=TRUE;
         }
 
+        if ($res)
+        {
+            $obj=$module."Obj";
+            $res=$this->$obj()->MyMod_Access_Has();
+        }
+        
         return $res;
     }
 

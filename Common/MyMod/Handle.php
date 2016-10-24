@@ -3,6 +3,7 @@
 include_once("Handle/Help.php");
 include_once("Handle/Show.php");
 include_once("Handle/Edit.php");
+include_once("Handle/Copy.php");
 include_once("Handle/Delete.php");
 include_once("Handle/Search.php");
 include_once("Handle/Prints.php");
@@ -14,6 +15,7 @@ trait MyMod_Handle
     use MyMod_Handle_Help,
         MyMod_Handle_Show,
         MyMod_Handle_Edit,
+        MyMod_Handle_Copy,
         MyMod_Handle_Delete,
         MyMod_Handle_Search,
         MyMod_Handle_Prints,

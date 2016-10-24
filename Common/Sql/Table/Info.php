@@ -134,8 +134,13 @@ trait Sql_Table_Info
 
         if (!empty($hash[ "Name" ]))
         {
-            $infotable=$this->Sql_Tables_Info_Table_Name();
-            $hash=$this->Sql_Unique_Item_Update($where,$hash,$infotable);
+            $hash=
+                $this->Sql_Unique_Item_Update
+                (
+                   $where,
+                   $hash,
+                   $infotable=$this->Sql_Tables_Info_Table_Name()
+                );
         }
 
         return $hash;

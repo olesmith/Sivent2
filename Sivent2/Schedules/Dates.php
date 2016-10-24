@@ -35,6 +35,21 @@ class SchedulesDates extends SchedulesTimes
     }
         
     //*
+    //* function Dates_Menu, Parameter list: 
+    //*
+    //* Creates Date's select menu
+    //*
+
+    function Dates_Menu()
+    {
+        $args=$this->CGI_URI2Hash();
+        unset($args[ "Place" ]);
+
+        return $this->DatesObj()->MyMod_Items_Menu($args,$this->Dates(),"Date",$idkey="ID",$titlekey="Title");
+    }
+
+    
+    //*
     //* function Date, Parameter list: $key=""
     //*
     //* Reads event date, if necessary.
@@ -192,7 +207,12 @@ class SchedulesDates extends SchedulesTimes
 
         $this->Schedules=$this->ReadDateSchedules($date);
         
-        $table=array();
+        $table=
+            array
+            (
+               $this->Dates_Menu(),
+               $this->Places_Menu()
+            );
         foreach ($this->SchedulePlaces() as $place)
         {
             $table=array_merge

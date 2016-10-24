@@ -1,11 +1,12 @@
 <?php
 
+include_once("MyFriends/Events.php");
 include_once("MyFriends/Groups.php");
 include_once("MyFriends/Add.php");
 include_once("MyFriends/Friend.php");
 include_once("MyFriends/Access.php");
 
-class MyFriends extends MyFriendsAccess
+class MyFriends extends MyFriends_Access
 {
     var $StateKeys=array("Address_State","RG_UF");
     var $FriendDataMessages="Friends.php";
@@ -340,10 +341,10 @@ class MyFriends extends MyFriendsAccess
 
     function PostProcessTextName(&$item)
     {
+        $this->MakeSureWeHaveRead("",$item,"Name","TextName");
         $updatedatas=array();
         if (!empty($item[ "Name" ]))
         {
-            $this->MakeSureWeHaveRead("",$item,"TextName");
             $name=$this->Html2Sort($item[ "Name" ]);
             $name=$this->Text2Sort($name); 
 
@@ -398,6 +399,33 @@ class MyFriends extends MyFriendsAccess
             $this->HandleSendEmails(array("Email" =>  "NOT LIKE ''"),array("ID"),$fixedvars).
              "";
     }
-}
 
+    
+    //*
+    //* function Friend_Name_Text, Parameter list: $friendid
+    //*
+    //* Returns Friend text (sort) name.
+    //*
+
+    function Friend_Name_Text($friendid)
+    {
+        $friend=
+            $this->FriendsObj()->Sql_Select_Hash
+            (
+               array("ID" => $friendid),
+               array("ID","Name","TextName")
+            );
+
+        
+        if (empty($friend[ "TextName" ]))
+        {
+            $this->PostProcessTextName($friend);
+        }
+        
+        $name=preg_replace('/\s+/',".",$friend[ "TextName" ]);
+        $name=strtolower($name);
+
+        return $name;
+    }
+}
 ?>

@@ -82,9 +82,9 @@ class ItemsUpdate extends ItemsPost
                         $rupdate++;
                         array_push($datas,$key);
 
-                        if ($this->TriggerFunction($key))
+                        if ($this->MyMod_Data_Trigger_Function($key))
                         { 
-                            $ritems[ $id ]=$this->ApplyTriggerFunction
+                            $ritems[ $id ]=$this->MyMod_Data_Trigger_Apply
                             (
                                $key,
                                $ritems[ $id ],
@@ -104,9 +104,9 @@ class ItemsUpdate extends ItemsPost
                     $newvalue=$this->TestUpdateItem($key,$ritems[ $id ],TRUE);
                     if (!isset($ritems[ $id ][ $key ]) || $newvalue!=$ritems[ $id ][ $key ])
                     {
-                        if ($this->TriggerFunction($key))
+                        if ($this->MyMod_Data_Trigger_Function($key))
                         { 
-                            $ritems[ $id ]=$this->ApplyTriggerFunction
+                            $ritems[ $id ]=$this->MyMod_Data_Trigger_Apply
                             (
                                $key,
                                $ritems[ $id ],

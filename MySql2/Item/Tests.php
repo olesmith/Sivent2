@@ -4,26 +4,6 @@ include_once("Tests/Item.php");
 
 class ItemTests extends ItemTestsItem
 {
-    //*
-    //* Variables of Item class:
-    //*
-
-    var $ID,$ItemHash;
-    var $PersonIDRow,$CoordIDRow;
-    var $AddDefaults=array();
-    var $ItemPostProcessor,$TestMethod;
-    var $BackRefDBs=array();
-    var $TriggerFunctions=array();
-    var $Upload;
-    var $ParentTables=array();
-    var $HasFileFields,$FileVars=array();
-    var $ItemDataMessages="Item.php";
-    var $NoFieldComments=FALSE;
-    var $FormWasUpdated=FALSE;
-    var $CreatorField="Creator";
-    var $UniqueSqlWhere=array();
-
-
    //*
     //* function ItemCompulsoriesUndefined, Parameter list: $item=array(),$datas=array()
     //*

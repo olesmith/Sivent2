@@ -61,7 +61,7 @@ class MyEventsCells extends MyEventsFriend
         {
             if ($open)
             {
-                $res=$this->InscriptionsObj()->MyActions_Entry("Inscribe");
+                $res=$this->EventsObj()->MyActions_Entry("Inscribe",$event);
             }
             else
             {
@@ -70,7 +70,7 @@ class MyEventsCells extends MyEventsFriend
         }
         elseif ($inscribed>0)
         {
-            $res=$this->InscriptionsObj()->MyActions_Entry("Inscription");
+            $res=$this->EventsObj()->MyActions_Entry("Inscription",$event);
         }
 
         return preg_replace('/#Event/',$event[ "ID" ],$res);

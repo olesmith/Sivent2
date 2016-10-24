@@ -105,7 +105,7 @@ array
       "Name_UK" => "Activities, Certificate (LaTeX)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
 
       "Search" => FALSE,
       "Default" =>
@@ -146,7 +146,7 @@ array
       "Name_UK" => "Activities, Certificate (UK)",
 
       "Sql" => "TEXT",
-      "Size" => "100x10",
+      "Size" => "100x",
 
       "Search" => FALSE,
       "Default" =>
