@@ -57,14 +57,14 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     //* Detects if current event has any Submissions.
     //*
 
-    function Inscription_Submissions_Has($item=array())
+    function Inscription_Submissions_Has($inscription=array())
     {
         $res=FALSE;
 
         $nentries=0;
-        if (!empty($item[ "Friend" ]))
+        if (!empty($inscription[ "Friend" ]))
         {
-            $nentries=$this->SubmissionsObj()->Sql_Select_NEntries(array("Friend" => $item[ "Friend" ]));
+            $nentries=$this->SubmissionsObj()->Sql_Select_NEntries(array("Friend" => $inscription[ "Friend" ]));
         }
         
         if ($nentries>0) { $res=TRUE; }
@@ -78,12 +78,12 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     //* Detects if current event has collaborations activated.
     //*
 
-    function Inscriptions_Submissions_Show_Should($item=array())
+    function Inscriptions_Submissions_Show_Should($inscription=array())
     {
         $res=
             $this->EventsObj()->Event_Submissions_Inscriptions_Open($this->Event())
             ||
-            $this->Inscription_Submissions_Has($item);
+            $this->Inscription_Submissions_Has($inscription);
 
         return $res;
     }
@@ -94,10 +94,10 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     //* Generates  name for Submissions link.
     //*
 
-    function Inscriptions_Submissions_Show_Name($data,$item=array())
+    function Inscriptions_Submissions_Show_Name($data,$inscription=array())
     {
         $title="";
-        if ($this->Inscription_Submissions_Has($item))
+        if ($this->Inscription_Submissions_Has($inscription))
         {
             $title=$this->MyLanguage_GetMessage("Events_Submissions_Show_Has_Name");
         }
@@ -115,10 +115,10 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     //* Generates title for Collaborators link.
     //*
 
-    function Inscriptions_Submissions_Show_Title($data,$item=array())
+    function Inscriptions_Submissions_Show_Title($data,$inscription=array())
     {
         $title="";
-        if ($this->Inscription_Submissions_Has($item))
+        if ($this->Inscription_Submissions_Has($inscription))
         {
             $title=$this->MyLanguage_GetMessage("Events_Submissions_Show_Has_Title");
         }
@@ -129,13 +129,14 @@ class InscriptionsSubmissions extends InscriptionsCaravans
 
         return $title;
     }
+    
     //*
-    //* function Inscription_Submissions_Table_Edit, Parameter list: $edit
+    //* function Friend_Submissions_Table_Edit, Parameter list: $edit
     //*
     //* Detects value of $edit: are inscriptions open? if not, set $edit=0.
     //*
 
-    function Inscription_Submissions_Table_Edit($edit)
+    function Friend_Submissions_Table_Edit($edit)
     {
         $startdate=$this->Event("Submissions_StartDate");
         $enddate=$this->Event("Submissions_EndDate");
@@ -147,43 +148,30 @@ class InscriptionsSubmissions extends InscriptionsCaravans
     }
     
     //*
-    //* function Inscription_Submissions_Table_DateSpan, Parameter list: $edit
+    //* function Friend_Submissions_Table_DateSpan, Parameter list: $edit
     //*
     //* Returns date span title.
     //*
 
-    function Inscription_Submissions_Table_DateSpan()
+    function Friend_Submissions_Table_DateSpan()
     {
         return $this->Date_Span_Interval($event,"Submissions_StartDate","Submissions_EndDate");
     }
     
     //*
-    //* function Inscription_Submissions_Table_Show, Parameter list: $edit,$item
+    //* function Friend_Submissions_Table_Show, Parameter list: $edit,$inscription
     //*
-    //* Shows currently allocated collaborations for inscription in $item.
+    //* Shows currently allocated collaborations for inscription in $inscription.
     //*
 
-    function Inscription_Submissions_Table_Show($edit,$item)
+    function Friend_Submissions_Table_Show($edit,$friend,$inscription)
     {
         $this->SubmissionsObj()->ItemData("ID");
         $this->SubmissionsObj()->ItemDataGroups("Basic");
         $this->SubmissionsObj()->Actions("Show");
         
         return
-            $this->Submissionsobj()->Submissions_Table_Show($edit,$item);
-    }
-    
-    //*
-    //* function Inscription_Event_Submissions_Table, Parameter list: $edit
-    //*
-    //* Creates a table listing inscription colaborations.
-    //*
-
-    function Inscription_Event_Submissions_Table($edit,$inscription)
-    {
-        return
-            $this->Inscription_Submissions_Table_Show($edit,$inscription).
-            "";
+            $this->Submissionsobj()->Submissions_Table_Show($edit,$friend,$inscription);
     }
 }
 

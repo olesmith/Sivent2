@@ -173,8 +173,17 @@ class HtmlTags extends HtmlCSS
         $options[ "ALT" ]=$src;
         $options[ "BORDER" ]=0;
 
-        if ($height>0) { $options[ "HEIGHT" ]=$height."px"; }
-        if ($width>0)  { $options[ "WIDTH" ]=$width."px"; }
+        if (!empty($height))
+        {
+            $options[ "HEIGHT" ]=$height;
+            if (!preg_match('/\%$/',$height)) { $options[ "HEIGHT" ].="px"; }
+        }
+        
+        if (!empty($width))
+        {
+            $options[ "WIDTH" ]=$width;
+            if (!preg_match('/\%$/',$width))  { $options[ "WIDTH" ].="px"; }
+        }
 
         return $this->Html_IMG
         (

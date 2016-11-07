@@ -1,238 +1,117 @@
 <?php
 
+include_once("File/Update.php");
+include_once("File/Decorator.php");
+include_once("File/Extensions.php");
+
+//Should be obsolete
+include_once("File/Correct.php");
 
 trait MyMod_Data_Fields_File
 {
+    use
+        MyMod_Data_Fields_File_Update,
+        MyMod_Data_Fields_File_Decorator,
+        MyMod_Data_Fields_File_Extensions,
+        MyMod_Data_Fields_File_Correct;
+    
     //*
-    //* Updates File field (ie moves file)
+    //* function MyMod_Data_Fields_File_Contents_Save, Parameter list: &$item,$file,$filefield
+    //*
+    //* Saves properly formatted version of file contents.
     //*
 
-    function MyMod_Data_Fields_File_Update($data,&$item,$rdata="")
+    function MyMod_Data_Fields_File_Contents_Save(&$item,$file,$filefield)
     {
-        if (empty($rdata)) { $rdata=$data; }
+        $this->Sql_Update_Item_Value_Set
+        (
+            $item[ "ID" ],
+            $filefield."_Contents",
+            $this->MyMod_Data_Fields_File_Contents_2DB($file),
+            "ID"
+        );
 
-        $uploadpath=$this->GetUploadPath();
-        $extensions=$this->FileFieldExtensions($data);
+        $rfilefield=$filefield."_Time";
+        $item[ $rfilefield ]=time();
+        $this->Sql_Update_Item_Value_Set
+        (
+            $item[ "ID" ],
+            $rfilefield,
+            $item[ $rfilefield ],
+            "ID"
+        );
 
-        if (!empty($_FILES[ $rdata ]) && !empty($_FILES[ $rdata ][ 'tmp_name' ]))
-        {
-            $uploadinfo=$_FILES[ $rdata ];
-            $tmpname=$uploadinfo['tmp_name'];
-            $name=$uploadinfo['name'];
-            $error=$uploadinfo['error'];
+        $rfilefield=$filefield."_Size";
+        $item[ $rfilefield ]=filesize($file);
+        $this->MySqlSetItemValue
+        (
+            $item[ "ID" ],
+            $rfilefield,
+            $item[ $rfilefield ],
+            "ID"
+        );
+    }
 
-            $comps=preg_split('/\./',$name);
-            $ext=$comps[ count($comps)-1 ];
+    //*
+    //* function MyMod_Data_Fields_File_Contents_2DB, Parameter list: &$item,$file,$filefield
+    //*
+    //* Returns properly formatted version of file contents.
+    //*
 
-            $comps=preg_split('/\//',$name);
-            $rname=$comps[ count($comps)-1 ];
-            $datatitle=$this->GetDataTitle($data);
+    //*
+    //* function FileContents2DB, Parameter list: $file
+    //*
+    //* Returns properly formatted file contents ready to store in DB.
+    //*
 
-             if (preg_grep('/^'.$ext.'$/i',$extensions))
-            {
-                $destfile=$this->GetUploadedFileName($data,$item,$ext);
-                $res=move_uploaded_file($tmpname,$destfile);
+    function MyMod_Data_Fields_File_Contents_2DB($file)
+    {
+        $fp      = fopen($file, 'r');
+        $content = fread($fp, filesize($file));
+        fclose($fp);
 
-                $item[ $data."_OrigName" ]=$name;
-                $item[ $data ]=$destfile;
-                $this->MySqlSetItemValues
+        if (empty($content)) { return $content; }
+      
+        return 
+            strtr
+            (
+                base64_encode
                 (
-                   $this->SqlTableName(),
-                   array($data,$data."_OrigName"),
-                   $item
-                );
-
-                $msgtext=$this->GetMessage($this->ItemDataMessages,"FileUploaded");
-                $msgtext=preg_replace('/#Extensions/',join(",",$extensions),$msgtext);
-                $msgtext=preg_replace('/#Ext/',$ext,$msgtext);
-                $msgtext=preg_replace('/#Name/',$rname,$msgtext);
-                $msgtext=preg_replace('/#Data/',$datatitle,$msgtext);
-                
-                $this->HtmlStatus=$msgtext."<BR><BR>";
-
-                $this->ApplicationObj->AddHtmlStatusMessage($msgtext);
-
-                $item[ "__Res__" ]=TRUE;
-                return $item;
-            }
-            elseif ($name!='')
-            {
-                $msgtext=$this->GetMessage($this->ItemDataMessages,"InvalidExtension");
-                $msgtext=preg_replace('/#Extensions/',join(",",$extensions),$msgtext);
-                $msgtext=preg_replace('/#Ext/',$ext,$msgtext);
-                $msgtext=preg_replace('/#Name/',$rname,$msgtext);
-                $msgtext=preg_replace('/#Data/',$rdata,$msgtext);
-                $item[ $data."_Message" ]=$msgtext;
-
-                $msgtext=$this->GetMessage($this->ItemDataMessages,"InvalidExtensionStatus");
-                $msgtext=preg_replace('/#Extensions/',join(",",$extensions),$msgtext);
-                $msgtext=preg_replace('/#Ext/',$ext,$msgtext);
-                $msgtext=preg_replace('/#Name/',$rname,$msgtext);
-                $msgtext=preg_replace('/#Data/',$rdata,$msgtext);
-                 $this->HtmlStatus=$msgtext."<BR><BR>";
-                 $item[ "__Res__" ]=FALSE;
-
-                 $this->ApplicationObj->AddHtmlStatusMessage($msgtext);
-                 echo $this->Div($msgtext,array("CLASS" => 'errors',"ALIGN" => 'center'));
-           }
-        }
-
-        return FALSE;
+                    addslashes
+                    (
+                        gzcompress( serialize($content) , 9)
+                    )
+                ),
+                '+/=',
+                '-_,'
+            );
     }
     
     //*
-    //* Create file field decorator, being a link to download the file
+    //* function DB2FileContents, Parameter list: $content
+    //*
+    //* Reverses db file content encodings.
     //*
 
-    function MyMod_Data_Fields_File_Decorator($data,$item,$plural=FALSE,$edit=0)
+    function MyMod_Data_Fields_File_DB_2Contents($content)
     {
-        $value="";
-        if (isset($item[ $data ])) { $value=$item[ $data ]; }
-
-        //If file has been uploaded, print download link and date uploaded
-
-        $this->MakeSureWeHaveRead("",$item,array($data."_Time",$data."_OrigName"));
-
-        $rvalue="";
-        if (!empty($value))
-        {
-            $filetime="";
-            if (!empty($item[ $data."_Time" ]))
-            {
-                $filetime=$item[ $data."_Time" ];
-            }
-            elseif (file_exists($value))
-            {
-                $filetime=filemtime($value);
-            }
-
-            $rvalue=$value;
-            if (!empty($item[ $data."_OrigName" ]))
-            {
-                $rvalue=$item[ $data."_OrigName" ];
-            }
-            
-            if (!empty($filetime))
-            {
-                if (empty($rvalue))
-                {
-                    $rvalue=$item[ $data ];
-                    $item[ $data."_OrigName" ]=$rvalue;
-                    $this->MySqlSetItemValues
+        if (empty($content)) { return $content; }
+      
+        return unserialize
+            (
+                gzuncompress
+                (
+                    stripslashes
                     (
-                       $this->SqlTableName(),
-                       array($data."_OrigName"),
-                       $item
-                    );
-                }
-                
-
-                $src="";
-                $name="";
-                if (!empty($this->ItemData[ $data ][ "Icon" ]))
-                {
-                    $icon="icons/".$this->ItemData[ $data ][ "Icon" ];
-                    if (file_exists($icon))
-                    {
-                        $name=$this->IMG
+                        base64_decode
                         (
-                           "icons/".$this->ItemData[ $data ][ "Icon" ],
-                           $item [ $data."_OrigName" ],
-                           20,20
-                        );
-                    }
-                    else
-                    {
-                        $name=$item [ $data."_OrigName" ];
-                    }
-                    
-                    $src=$this->FileDownloadHref($item,$data);
-                }
-                elseif (!empty($this->ItemData[ $data ][ "Iconify" ]))
-                {
-                    $ext=preg_split('/\./',$rvalue);
-                    $ext=array_pop($ext);
-                    $args=$this->CGI_URI2Hash();
-                    
-                    $args[ "ModuleName" ]=$this->ModuleName;
-                    $args[ "Action" ]="Download";
-                    $args[ "ID" ]= $item[ "ID" ];                    
-                    $args[ "Data" ]=$data;
-                        
-                        
-                    $src=
-                        "?".$this->CGI_Hash2URI($args);
-
-                    //$src=$this->GetUploadedFileName($data,$item,$ext);
-                    $name=$this->IMG
-                    (
-                       $src,
-                       $item [ $data."_OrigName" ],
-                       20,20
-                    );
-                }
-                else
-                {
-                    $name=$rvalue;
-                    $src=$this->FileDownloadHref($item,$data);
-                }
-
-                $title=
-                    "Carregado: ".
-                    $this->TimeStamp2Text($filetime,FALSE).
-                    " (".
-                    $this->FileFieldSizeInfo($item,$data).
-                    ")";
-
-                if ($edit==1)
-                {
-                    $title.=
-                        " ".
-                        $this->PermittedFileExtensionsText($data);                
-                }
-               
-                $rvalue=" ".$this->A
-                (
-                   $src,
-                   $name,
-                   array
-                   (
-                      "CLASS" => "uploadmsg",
-                      "TITLE" =>
-                      preg_replace('/<BR>/',"\n",$title)
-                   )
-                );
-            }
-            else
-            {
-                $rvalue.="- '".$value."' non-existent";
-            }
-        }
-        elseif (!empty($item[ "ID" ]))
-        {
-            //Try to correct if appeas as uploaded...
-            $val=strlen($this->Sql_Select_Hash_Value($item[ "ID" ],$data."_Contents"));
-
-            if ($val>0)
-            {
-                $destfile=$this->GetUploadedFileName($data,$item,"pdf");
-
-                $item[ $data."_OrigName" ]=$destfile;
-                $item[ $data."_Size" ]=$val;
-                $item[ $data ]=$destfile;
-
-                $this->MySqlSetItemValues
-                (
-                   $this->SqlTableName(),
-                   array($data,$data."_OrigName",$data."_Size"),
-                   $item
-                );
-
-            }
-        }
-
-        return $rvalue."\n";
+                            strtr($content,'-_,', '+/=')
+                        )
+                    )
+                )
+            );
     }
+
 }
 
 ?>

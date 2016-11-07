@@ -7,6 +7,24 @@ include_once("Presences/Register.php");
 
 class Presences extends Presences_Register
 {
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 4,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__Name",
+                3 => "Friend__Email",
+                4 => "Schedule",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                4 => "1",
+            ),
+        );
     //*
     //* function Units, Parameter list: $args=array()
     //*

@@ -145,18 +145,20 @@ class InscriptionsAccess extends MyInscriptions
             $res=
                 $this->ApplicationObj()->Current_User_Event_Inscriptions_May_Edit($this->Event());
         }
-
-        if (!empty($item[ "Certificate" ]) && $item[ "Certificate" ]==2)
+        elseif (!empty($item[ "Friend" ]) && $item[ "Friend" ]==$this->LoginData("ID"))
         {
             $res=TRUE;
         }
-        
-        
+
+        if (empty($item[ "Certificate" ]) || $item[ "Certificate" ]!=2)
+        {
+            $res=FALSE;
+        }
         
         $res=
             $res
             &&
-            $this->Inscriptions_Certificates_Published()
+            $this->EventsObj()->Event_Certificates_Published()
             &&
             $this->CheckEditAccess($item);
         
@@ -182,7 +184,7 @@ class InscriptionsAccess extends MyInscriptions
         $res=
             $res
             &&
-            $this->Inscriptions_Certificates_Published();
+            $this->EventsObj()->Event_Certificates_Published();
 
         return $res;
     }

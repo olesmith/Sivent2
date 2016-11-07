@@ -1,5 +1,14 @@
 array
 (
+      'Export' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
       'Search' => array
       (
          'Public' => 0,
@@ -189,4 +198,23 @@ array
       "AccessMethod"    => "Event_Collaborations_Has",
       "Handler"    => "Collaborators_Friend_Collaborations_Handle",
    ),
+    "Emails" => array
+    (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Collaborators&Action=Emails",
+        "Title"    => "Emails",
+        "Title_UK" => "Emails",
+        "ShortName"     => "Emails",
+        "ShortName_UK"   => "Emails",
+        "Name"     => "Emails",
+        "Name_UK"   => "Emails",
+        "Handler"   => "HandleEmails",
+
+        'Public' => 0,
+        'Person' => 0,
+        "Admin" => 1,
+        "Friend"     => 0,
+        "Coordinator" => 1,
+        "AccessMethod" => "CheckEditListAccess",
+    ),
 );

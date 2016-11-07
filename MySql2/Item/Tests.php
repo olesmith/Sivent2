@@ -224,11 +224,13 @@ class ItemTests extends ItemTestsItem
         {
             if (!isset($_POST[ $rdata ]))
             {
-                return 1;
+                $newvalue=1;
+                //$item[ $data ]=$newvalue;
             }
             else
             {
-                return 2;
+                $newvalue=2;
+                //$item[ $data ]=$newvalue;
             }
         }
         else

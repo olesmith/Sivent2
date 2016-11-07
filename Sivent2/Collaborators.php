@@ -1,14 +1,38 @@
 <?php
 
 include_once("Collaborators/Access.php");
+include_once("Collaborators/Emails.php");
 include_once("Collaborators/Table.php");
 include_once("Collaborators/Certificate.php");
 
 
 
-class Collaborators extends CollaboratorsCertificate
+class Collaborators extends Collaborators_Certificate
 {
     var $Certificate_Type=3;
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 6,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__Name",
+                3 => "Friend__Email",
+                4 => "Collaboration",
+                5 => "Homologated",
+                6 => "Certificate",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                3 => "0",
+                4 => "0",
+                5 => "0",
+                6 => "0",
+            ),
+        );
     
     //*
     //* function Units, Parameter list: $args=array()
@@ -140,6 +164,20 @@ class Collaborators extends CollaboratorsCertificate
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
         }
         
+        $friend=array("ID" => $item[ "Friend" ]);
+        $event=array("ID" => $item[ "Event" ]);
+        
+        $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+        if (!$isinscribed)
+        {
+            $this->InscriptionsObj()->DoInscribe($friend);
+        }
+
+        if ($item[ "Homologated" ]!=2)
+        {
+            $item[ "Certificate_ReadOnly" ]=TRUE;
+        }
+        
         return $item;
     }
     
@@ -224,6 +262,20 @@ class Collaborators extends CollaboratorsCertificate
                 }
             }
         }
+    }
+
+    
+    //*
+    //* function AddForm_PostText, Parameter list:
+    //*
+    //* Pretext function. Shows add inscriptions form.
+    //*
+
+    function AddForm_PostText()
+    {
+        return
+            $this->BR().
+            $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
 }
 

@@ -201,14 +201,34 @@ trait MyTime
     //* Returns formatted date of $mtime, today if empty.
     //*
 
+    function MyTime_Date2Hash($date=0)
+    {
+        if (empty($date)) { $date=$this->MyTime_2Sort(); }
+
+        return
+            array
+            (
+                "Year"  => substr($date,0,4),
+                "Month" => substr($date,4,2),
+                "Day"   => substr($date,6,2),
+            );
+    }
+
+    //* function MyTime_Sort2Date, Parameter list: $date=0
+    //*
+    //* Returns formatted date of $mtime, today if empty.
+    //*
+
     function MyTime_Sort2Date($date=0)
     {
         if (empty($date)) { $date=$this->MyTime_2Sort(); }
 
+        $date=$this->MyTime_Date2Hash($date);
+        
         return 
-            substr($date,6,2)."/".
-            substr($date,4,2)."/".
-            substr($date,0,4);
+            $date[ "Day" ]."/".
+            $date[ "Month" ]."/".
+            $date[ "Year" ];
     }
 
     

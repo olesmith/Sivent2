@@ -108,9 +108,19 @@ class AssessorsAccess extends ModulesCommon
             &&
             $this->HasModuleAccess();
 
-        //add delete check
-        //$nsubmissions=$this->SubmissionsObj()->Sql_Select_NHashes($this->UnitEventWhere(array("Area" => $item[ "ID" ])));
-        //if ($nsubmissions>0) { $res=FALSE; }
+        $nassessments=
+            $this->AssessmentsObj()->Sql_Select_NHashes
+            (
+                $this->UnitEventWhere
+                (
+                    array
+                    (
+                        "Friend" => $item[ "Friend" ],
+                        "Submission" => $item[ "Submission" ],
+                    )
+                )
+            );
+        if ($nassessments>0) { $res=FALSE; }
         
         return $res;
     }

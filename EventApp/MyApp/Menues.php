@@ -102,6 +102,8 @@ class MyEventAppMenues extends MyEventAppAccess
         if ($this->Unit) { $args[ "Unit" ]=$this->Unit[ "ID" ]; }
         $args[ "ModuleName" ]="";
         $args[ "Action" ]="Search";
+
+        unset($args[ "Type" ]);
  
         $currentunitid=$this->GetCGIVarValue("Unit");
         $units=$this->UnitsObj()->SelectHashesFromTable
@@ -185,7 +187,7 @@ class MyEventAppMenues extends MyEventAppAccess
 
     function HtmlEventsData()
     {
-        return array("ID","Name","Date");
+        return array("ID","Unit","Name","Date","Initials");
     }
     
     //*
@@ -197,6 +199,8 @@ class MyEventAppMenues extends MyEventAppAccess
     function HtmlEventsMenu()
     {
         $args=$this->ScriptQueryHash();
+        unset($args[ "Type" ]);
+ 
         $uid=$this->Unit("ID");
         if (!empty($uid)) { $args[ "Unit" ]=$uid; }
 
@@ -259,13 +263,21 @@ class MyEventAppMenues extends MyEventAppAccess
 
     function HtmlEventMenu($event,$args)
     {
+        $args[ "Unit" ]=$event[ "Unit" ];
         $args[ "Event" ]=$event[ "ID" ];
-        $args[ "ModuleName" ]="Events";
+        unset($args[ "Type" ]);
+ 
 
         $args[ "Action" ]="Show";
         if (preg_match('/^(Admin|Coordinator)$/',$this->Profile()))
         {
             $args[ "Action" ]="Edit";
+            $args[ "ModuleName" ]="Events";
+        }
+        elseif (preg_match('/^(Friend)$/',$this->Profile()))
+        {
+            $args[ "Action" ]="Inscription";
+            $args[ "ModuleName" ]="Inscriptions";
         }
         
         $args[ "ID" ]=$event[ "ID" ];
@@ -281,7 +293,7 @@ class MyEventAppMenues extends MyEventAppAccess
                $name,
                array
                (
-                  "HREF" => "?".$this->Hash2Query($args),
+                  "HREF" => "?".$this->Hash2Query($args)."#Top",
                   "TITLE" => $event[ "Name" ],
                )
              );

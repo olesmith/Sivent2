@@ -13,20 +13,12 @@ class EventsCertificate extends EventsCertificates
         $latex="";
         foreach (array(1,2,3,4) as $type)
         {
-            $cert=
-                array
-                (
-                   "Unit" => $this->Unit("ID"),
-                   "Event" => $this->Event("ID"),
-                   "Type" => $type,
-                );
-            
-            if ($this->CertificatesObj()->Sql_Select_NHashes($cert)>0)
-            {
-                $latex.=
-                    $this->CertificatesObj()->Certificate_Generate($cert).
-                    "";
-            }
+            $cert[ "Type" ]=$type;
+            $cert=$this->CertificatesObj()->Certificate_Get_Empty();
+            $latex.=
+                $this->CertificatesObj()->Certificate_Generate($cert).
+                "";
+            //var_dump($cert);
         }
         
         $latex=preg_replace('/#/',"\\#",$latex);

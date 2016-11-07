@@ -65,12 +65,12 @@ array
    ),
    "Assessments_Inscriptions_Assessment_Friend_Title" => array
    (
-      "Name" => "Autor da Proposta",
-      "Name_ES" => "Autor da Propuesta",
-      "Name_UK" => "Proposal Author",
-      "Title" => "Autor da Proposta",
-      "Title_ES" => "Autor da Propuesta",
-      "Title_UK" => "Proposal Author",
+      "Name" => "Autor(es) da Proposta",
+      "Name_ES" => "Autor(es) da Propuesta",
+      "Name_UK" => "Proposal Author(s)",
+      "Title" => "Autor(es) da Proposta",
+      "Title_ES" => "Autor(es) da Propuesta",
+      "Title_UK" => "Proposal Author(s)",
    ),
    "Assessments_Inscriptions_Assessment_Submission_Title" => array
    (
@@ -80,6 +80,18 @@ array
       "Title" => "Proposta de Atividade",
       "Title_ES" => "Propuesta de Actividade",
       "Title_UK" => "Activity Proposed",
+   ),
+   "Assessments_Link" => array
+   (
+      "Name" => "Avaliação de Atividades",
+      "Name_ES" => "Evaluación de Propuestas",
+      "Name_UK" => "Assessment of Activities",
+   ),
+   "Assessments_Closed" => array
+   (
+      "Name" => "Avaliação de Atividades Encerrada",
+      "Name_ES" => "Evaluación de Propuestas Encerrada",
+      "Name_UK" => "Assessment Closed",
    ),
 );
 

@@ -60,6 +60,15 @@ array
          "Coordinator" => 1,
          "AccessMethod" => "CheckShowAccess",
       ),
+      'Unlink' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditAccess",
+      ),
       'Zip' => array
       (
          'Public' => 1,

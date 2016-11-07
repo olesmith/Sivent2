@@ -5,15 +5,31 @@ class AssessorsInscriptionAssessorsRead extends AssessorsAccess
 {
 
     //*
-    //* function Assessors_Inscription_Assessors_Read, Parameter list: $edit,$inscription
+    //* function Assessors_Friend_Assessors_Read, Parameter list: $edit,$inscription
     //*
-    //* Reads assessors.
+    //* Reads $friend assessors.
     //*
 
-    function Assessors_Inscription_Assessors_Read($edit,$inscription)
+    function Assessors_Friend_Assessors_Read($edit,$friend)
     {
-        $where=$this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ]));
+        $where=$this->UnitEventWhere(array("Friend" => $friend[ "ID" ]));
+
+        $cond=$this->CGI_GETint("Cond");
+        if ($cond==1)
+        {
+            $where[ "HasAssessed" ]=1;
+        }
+        elseif ($cond==2)
+        {
+            $where[ "HasAssessed" ]=2;
+        }
+
         $assessors=$this->Sql_Select_Hashes($where);
+        if (empty($assessors))
+        {
+            unset($where[ "HasAssessed" ]);
+            $assessors=$this->Sql_Select_Hashes($where);
+       }
 
         foreach (array_keys($assessors) as $aid)
         {

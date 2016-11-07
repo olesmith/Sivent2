@@ -10,6 +10,8 @@ include_once("Certificates/Code.php");
 
 class Certificates extends Certificates_Code
 {
+    var $Certificate_NTypes=4;
+    
     var $Code_Data=array
     (
        "Unit" => "%02d",
@@ -65,7 +67,7 @@ class Certificates extends Certificates_Code
         
         return $key;
     }
-    
+ 
     //*
     //* function Type2NameKey, Parameter list: $item
     //*
@@ -75,12 +77,12 @@ class Certificates extends Certificates_Code
     function Type2NameKey($item)
     {
         $type2key=array
-        (
-           1 => "Name",
-           2 => "Name",
-           3 => "Name",
-           4 => "Title",
-        );
+            (
+                1 => "Name",
+                2 => "Name",
+                3 => "Name",
+                4 => "Title",
+            );
         
         $key="";
         if (isset($type2key[ $item[ "Type" ] ])) { $key=$type2key[ $item[ "Type" ] ]; }
@@ -88,7 +90,29 @@ class Certificates extends Certificates_Code
         return $key;
     }
     
-     //*
+    //*
+    //* function Type2TimeloadKey, Parameter list: $item
+    //*
+    //* Returns certificate timeload key of certificate $item.
+    //*
+
+    function Type2TimeloadKey($item)
+    {
+        $type2key=array
+            (
+                1 => "Certificate_CH",
+                2 => "TimeLoad",
+                3 => "TimeLoad",
+                4 => "Certificate_TimeLoad",
+            );
+        
+        $key="";
+        if (isset($type2key[ $item[ "Type" ] ])) { $key=$type2key[ $item[ "Type" ] ]; }
+        
+        return $key;
+    }
+    
+    //*
     //* function Type2LatexKey, Parameter list: $item
     //*
     //* Returns certificate key in $this->Event containing latex for the certificate.
@@ -186,17 +210,20 @@ class Certificates extends Certificates_Code
 
     
     //*
-    //* function Certificates_Friend_Table, Parameter list: $datas,$friend
+    //* function Certificates_Friend_Table, Parameter list: $datas,$friend,$event=array()
     //*
     //* Creates Friend certificates table.
     //*
 
-    function Certificates_Friend_Table($datas,$friend)
+    function Certificates_Friend_Table($datas,$friend,$event=array())
     {
+        $where=$this->UnitWhere(array("Friend" => $friend[ "ID" ]));
+        if (!empty($event)) { $where[ "Event" ]=$event[ "ID" ]; }
+        
         $certs=
             $this->Sql_Select_Hashes
             (
-               array("Friend" => $friend[ "ID" ]),
+               $where,
                array(),
                "Type,Name"
             );
@@ -212,10 +239,12 @@ class Certificates extends Certificates_Code
 
             if (!$this->EventsObj()->Event_Certificates_Published($event)) { continue; }
             $first=array($this->GetRealNameKey($event,"Name"));
-            
+            $cht=0;
             foreach ($eventcerts as $eventcert)
             {
-                array_push
+                $this->Certificate_TimeLoad_Update($eventcert);
+        
+                 array_push
                 (
                    $table,
                    array_merge
@@ -225,8 +254,22 @@ class Certificates extends Certificates_Code
                    )
                 );
 
+                if (!empty($eventcert[ "TimeLoad" ])) { $cht+=$eventcert[ "TimeLoad" ]; }
+                
                 $first=array("");
             }
+
+            $pos=array_search("TimeLoad",$datas);
+            array_push
+            (
+                $table,
+                array
+                (
+                    $this->MultiCell($this->ApplicationObj->Sigma,$pos+1,'r'),
+                    $this->B($cht),
+                    ""
+                )
+            );
         }
 
         return $table;
@@ -248,17 +291,17 @@ class Certificates extends Certificates_Code
     }
     
     //*
-    //* function Certificates_Friend_Table_Html, Parameter list: $friend
+    //* function Certificates_Friend_Table_Html, Parameter list: $friend,$event=array()
     //*
     //* Creates Friend certificates table.
     //*
 
-    function Certificates_Friend_Table_Html($friend)
+    function Certificates_Friend_Table_Html($friend,$event=array())
     {
         $this->ItemData("ID");
         $this->Actions("Show");
         
-        $datas=array("Generated","Mailed","Type","Name","Code","Generate",);
+        $datas=array("Generate","Generated","Mailed","Type","Name","TimeLoad","Code",);
         
         $table=$this->Certificates_Friend_Table($datas,$friend);
 
@@ -270,7 +313,7 @@ class Certificates extends Certificates_Code
             $this->Html_Table
             (
                $this->Certificates_Friend_Table_Titles($datas),
-               $this->Certificates_Friend_Table($datas,$friend)
+               $this->Certificates_Friend_Table($datas,$friend,$event)
             ).
             "";
     }

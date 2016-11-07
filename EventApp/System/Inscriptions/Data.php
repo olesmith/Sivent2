@@ -192,6 +192,7 @@ array
       "Title_UK" => "Selected",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
+      "SelectCheckBoxes" => "3",
    ),
    "Comment" => array
    (

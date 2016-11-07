@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsCalc extends SubmissionsCertificate
+class Submissions_Handle_Assessments_Calc extends Submissions_Assessments
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Criteria_Calc_Sum, Parameter list: $$assessments,assessors,$criteria,$weighted=TRUE

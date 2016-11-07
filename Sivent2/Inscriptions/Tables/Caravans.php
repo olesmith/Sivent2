@@ -3,12 +3,12 @@
 class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 {
     //*
-    //* function Inscription_Caravans_Link, Parameter list: 
+    //* function Friend_Caravans_Link, Parameter list: 
     //*
-    //* Creates inscription caravan info row (no details).
+    //* Creates friend caravan info row (no details).
     //*
 
-    function Inscription_Caravans_Link($item,$caravan)
+    function Friend_Caravans_Link($caravan)
     {
         $message="Caravans_Inscribe_Link";
         if (!$this->Inscriptions_Caravans_Inscriptions_Open())
@@ -25,20 +25,20 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     }
     
     //*
-    //* function Inscription_Caravans_Row, Parameter list: $item,$caravan
+    //* function Inscription_Caravans_Row, Parameter list: $inscription,$caravan
     //*
     //* Creates inscription caravan info row (no details).
     //*
 
-    function Inscription_Caravans_Rows($item,$caravan)
+    function Inscription_Caravans_Rows($inscription,$caravan)
     {
         $event=$this->Event();
         return
             $this->Inscription_Type_Rows
             (
-               $item,
+               $inscription,
                "Caravans",
-               $this->Inscription_Caravans_Link($item,$caravan),
+               $this->Friend_Caravans_Link($caravan),
                array("Caravans","Caravans_StartDate","Caravans_EndDate"),
                array()
             );
@@ -111,14 +111,14 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     
     //*
-    //* function Inscription_Caravans_Caravan_Empty, Parameter list: $edit,$item
+    //* function Friend_Caravans_Caravan_Empty, Parameter list: $edit,$friend,$inscription
     //*
     //* Creates Confirm form for registering caravan.
     //*
 
-    function Inscription_Caravans_Caravan_Empty($edit,$group,$item)
+    function Friend_Caravans_Caravan_Empty($edit,$group,$friend,$inscription)
     {
-        $caravan=$this->Inscription_Caravan_New($item);
+        $caravan=$this->Friend_Caravan_New($friend);
 
         
         return
@@ -140,12 +140,12 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     }
     
     //*
-    //* function Inscription_Caravans_Caravan_Info, Parameter list: $edit,$group,$item
+    //* function Friend_Caravans_Caravan_Info, Parameter list: $edit,$group,$friend
     //*
-    //* Creates inscrition caravan html table.
+    //* Creates $friend caravan html info table.
     //*
 
-    function Inscription_Caravans_Caravan_Info($edit,$group,$item)
+    function Friend_Caravans_Caravan_Info($edit,$group,$friend)
     {
         $buttons="";
         if ($edit==1)
@@ -153,7 +153,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             $buttons=$this->Buttons();
         }
         
-        $caravan=$this->Inscription_Caravan_Read($item);
+        $caravan=$this->Friend_Caravan_Read($friend);
 
         return
             array
@@ -167,18 +167,18 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     
     
     //*
-    //* function Inscription_Caravan_New, Parameter list: $item
+    //* function Friend_Caravan_New, Parameter list: $friend
     //*
     //* Creates new $caravan.
     //*
 
-    function Inscription_Caravan_New($item)
+    function Friend_Caravan_New($friend)
     {
         return array
         (
            "Unit"   => $this->Unit("ID"),
            "Event"  => $this->Event("ID"),
-           "Friend" => $item[ "Friend" ],
+           "Friend" => $friend[ "ID" ],
            "Status" => 1,
            "Homologated" => 1,
         );
@@ -188,27 +188,27 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     
         
     //*
-    //* function Inscription_Caravan_Read, Parameter list: $item
+    //* function Friend_Caravan_Read, Parameter list: $friend
     //*
-    //* Tries to read registered caravan.
+    //* Tries to read $friend registered caravan.
     //*
 
-    function Inscription_Caravan_Read($item)
+    function Friend_Caravan_Read($friend)
     {
-        $caravan=$this->CaravansObj()->Sql_Select_Hash(array("Friend" => $item[ "Friend" ]));
+        $caravan=$this->CaravansObj()->Sql_Select_Hash(array("Friend" => $friend[ "ID" ]));
 
         return $caravan;
     }
 
     //*
-    //* function Inscription_Caravan_Get, Parameter list: $edit,$item
+    //* function Friend_Caravan_Get, Parameter list: $edit,$friend
     //*
-    //* Creates inscrition caravan html table.
+    //* Creates $friend caravan html table.
     //*
 
-    function Inscription_Caravan_Get($edit,$item)
+    function Friend_Caravan_Get($edit,$friend)
     {
-        $caravan=$this->Inscription_Caravan_Read($item);
+        $caravan=$this->Friend_Caravan_Read($friend);
 
         if ($edit==1)
         {
@@ -216,7 +216,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             {
                 if ($this->CGI_POSTint("Add")==1)
                 {
-                    $caravan=$this->Inscription_Caravan_New($item);
+                    $caravan=$this->Friend_Caravan_New($friend);
                     $datas=$this->CaravansObj()->MyMod_Item_Group_CGI2Item("Basic",$caravan);
 
                     $add=TRUE;
@@ -248,12 +248,12 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     
     //*
-    //* function Inscription_Caravans_Table, Parameter list: $edit,$item,$group=""
+    //* function Friend_Caravans_Table, Parameter list: $edit,$friend,$inscription,$group=""
     //*
     //* Creates inscrition caravan html table.
     //*
 
-    function Inscription_Caravans_Table($edit,$item,$group="")
+    function Friend_Caravans_Table($edit,$friend,$inscription,$group="")
     {
         if (!$this->Inscriptions_Caravans_Has()) { return array(); }
 
@@ -267,9 +267,9 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
         }
         
 
-        $caravan=$this->Inscription_Caravan_Get($edit,$item);
+        $caravan=$this->Friend_Caravan_Get($edit,$friend);
         
-        $table=$this->Inscription_Caravans_Rows($item,$caravan);
+        $table=$this->Inscription_Caravans_Rows($inscription,$caravan);
 
         if (empty($group)) { $group="Caravans"; }
 
@@ -281,7 +281,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
         
         if ($edit==1 && $this->CGI_POSTint("Update")==1)
         {
-            $this->Inscription_Group_Update($group,$item);
+            $this->Inscription_Group_Update($group,$inscription);
         }
                 
         $caravanstable=array();
@@ -290,7 +290,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             $redit=$edit;
             if ($caravan[ "Status" ]==2) { $redit=0; }
             
-            $caravanstable=$this->Inscription_Caravaneers_Table_Show($redit,$item);
+            $caravanstable=$this->Inscription_Caravaneers_Table_Show($redit,$inscription);
         }
 
         array_push
@@ -304,25 +304,25 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             array_push
             (
                $table,
-               $this->Inscription_Caravans_Caravan_Info($edit,$group,$item),
+               $this->Friend_Caravans_Caravan_Info($edit,$group,$friend),
                array($caravanstable)
             );
         }
         else
         {
-            array_push($table,$this->Inscription_Caravans_Caravan_Empty($edit,$group,$item));
+            array_push($table,$this->Friend_Caravans_Caravan_Empty($edit,$group,$friend,$inscription));
         }
         
         return $table;
     }
     
     //*
-    //* function Inscription_Caravans_Form, Parameter list: $edit,&$item
+    //* function Friend_Caravans_Form, Parameter list: $edit,$friend,&$inscription
     //*
-    //* Shows currently allocated collaborations for inscription in $item.
+    //* Shows currently allocated collaborations for inscription in $inscription.
     //*
 
-    function Inscription_Caravans_Table_Form($edit,&$item)
+    function Friend_Caravans_Table_Form($edit,$friend,&$inscription)
     {
         if (!$this->Inscriptions_Caravans_Has()) { return array(); }
 
@@ -336,13 +336,13 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             $this->$module()->Actions("Show");
         }
 
-        $caravan=$this->Inscription_Caravan_Get($edit,$item);
+        $caravan=$this->Friend_Caravan_Get($edit,$friend);
         
-        $table=$this->Inscription_Caravans_Rows($item,$caravan);
-        $type=$this->InscriptionTablesType($item);
+        //$table=$this->Inscription_Caravans_Rows($inscription,$caravan);
+        $type=$this->InscriptionTablesType($inscription);
         if ($type!="Caravans")
         {
-            return $this->Inscription_Caravans_Rows($item,$caravan);
+            return $this->Inscription_Caravans_Rows($inscription,$caravan);
         }
         
         $buttons="";
@@ -350,14 +350,14 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
         if ($edit==1)
         {
             $buttons=$this->Buttons();
-            $html.=$this->StartForm();
+            $html.=$this->StartForm($action="",$method="post",$fileupload=FALSE,$options=array("Anchor" => "Caravan"));
         }
 
         $html.=
             $this->Html_Table
             (
                "",
-               $this->Inscription_Caravans_Table($edit,$item)
+               $this->Friend_Caravans_Table($edit,$friend,$inscription)
             ).
             "";
 
@@ -372,30 +372,30 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     }
     
     //*
-    //* function Inscription_Caravaneers_Show, Parameter list: $edit,&$item
+    //* function Inscription_Caravaneers_Show, Parameter list: $edit,&$inscription
     //*
-    //* Shows currently allocated collaborations for inscription in $item.
+    //* Shows currently allocated collaborations for inscription in $inscription.
     //*
 
-    function Inscription_Caravaneers_Table_Show($edit,&$item)
+    function Inscription_Caravaneers_Table_Show($edit,&$inscription)
     {
         if ($edit==1)
         {
-            $this->MyMod_Item_Update_SGroup($item,"Caravans");
+            $this->MyMod_Item_Update_SGroup($inscription,"Caravans");
         }
                                             
-        //if ($item[ "Caravans" ]==1) { return "No"; }
+        //if ($inscription[ "Caravans" ]==1) { return "No"; }
 
-        return $this->Inscription_Event_Caravaneers_Table($edit,$item);
+        return $this->Inscription_Event_Caravaneers_Table($edit,$inscription);
     }
     
     //*
-    //* function Inscription_Event_Caravaneers_Table, Parameter list: $edit,&$item
+    //* function Inscription_Event_Caravaneers_Table, Parameter list: $edit,&$inscription
     //*
     //* Creates a table listing inscription caravaneers.
     //*
 
-    function Inscription_Event_Caravaneers_Table($edit,&$item)
+    function Inscription_Event_Caravaneers_Table($edit,&$inscription)
     {
         foreach (array("CaravansObj","CaravaneersObj") as $module)
         {
@@ -405,7 +405,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
         }
         
         return 
-            $this->CaravaneersObj()->Caravaneers_Table_Show($edit,$item).
+            $this->CaravaneersObj()->Caravaneers_Table_Show($edit,$inscription).
             "";
     }
 }

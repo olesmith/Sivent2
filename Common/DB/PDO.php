@@ -261,9 +261,9 @@ trait DB_PDO
                 $rkey=$key;
                 if ($lowercasekeys) { $rkey=strtolower($key); }
                 
-                $item[ $rkey ]=preg_replace('/\s+/'," ",$value);
-                $item[ $rkey ]=preg_replace('/^\s/',"", $item[ $rkey ]);
-                $item[ $rkey ]=preg_replace('/\s$/',"", $item[ $rkey ]);
+                $item[ $rkey ]=preg_replace('/ +/'," ",$value);
+                $item[ $rkey ]=preg_replace('/^\s+/',"", $item[ $rkey ]);
+                $item[ $rkey ]=preg_replace('/\s+$/',"", $item[ $rkey ]);
                 if ($key=="ID") { $id=$row[$key]; }
                 $n++;
             }

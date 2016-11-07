@@ -1,6 +1,6 @@
 <?php
 
-class CollaboratorsTableRead extends CollaboratorsTableRow
+class Collaborators_Table_Read extends Collaborators_Table_Row
 {
     //*
     //* function Collaborators_Table_Collaborations_Read, Parameter list: 

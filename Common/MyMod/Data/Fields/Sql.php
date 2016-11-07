@@ -56,7 +56,7 @@ trait MyMod_Data_Fields_Sql
            $this->MyMod_Data_Fields_Sql_Where($data)
         );
 
-        //if (empty($colvalues)) { return "-"; }
+         //if (empty($colvalues)) { return "-"; }
         
         if (!empty($colvalues))
         {

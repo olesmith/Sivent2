@@ -35,7 +35,7 @@ class MySponsors extends MySponsorsAccess
     //* Returns full (relative) upload path: UploadPath/Module.
     //*
 
-    function GetUploadPath()
+    function MyMod_Data_Upload_Path()
     {
         $path="Uploads/".$this->Unit("ID")."/Sponsors";
         

@@ -134,23 +134,48 @@ trait MyMod_Data_Fields_Enums
     //* Applies ENUM and SQL fields on $item.
     //*
 
-    function MyMod_Data_Fields_Enums_ApplyAll($item=array(),$latex=FALSE)
+    function MyMod_Data_Fields_Enums_ApplyAll($item=array(),$latex=FALSE,$datas=array())
     {
         if (empty($item)) { $item=$this->ItemHash; }
         if (empty($item)) { return $item; }
+        if (empty($datas)) { $datas=$this->DatasRead; }
 
-        if (empty($this->DatasRead)) { $this->DatasRead=array_keys($item); }
+        if (empty($datas)) { $datas=array_keys($item); }
 
         $this->ItemData("ID");
-
-        foreach ($this->DatasRead as $no => $data)
+        foreach ($datas as $no => $data)
         {
             if (
+                  $this->MyMod_Data_Field_Is_Sql($data)
+               )
+            {
+                if (!isset($item[ $data."_Orig" ]) || $item[ $data."_Orig" ]=="")
+                {
+                    $value="";
+                    if (isset($item[ $data ])) { $value=$item[ $data ]; }
+                    
+                    if (!empty($item[ $data ]))
+                    {
+                        $subitem=$this->MyMod_Data_Fields_Module_SubItem_Get($data,$item);
+                        if (is_array($subitem) && !empty($subitem))
+                        {
+                            foreach ($subitem as $key => $val)
+                            {
+                                $item[ $data."_".$key ]=$val;
+                            }
+                            
+                            $item[ $data."__ID" ]=$item[ $data."_ID" ];
+                        }
+                    }
+                    
+                    $item[ $data ]=$this->MyMod_Data_Fields_Enums_Value($data,$item,$latex);
+                    $item[ $data."_Orig" ]=$value;
+                }
+            }
+            elseif (
                   $this->MyMod_Data_Field_Is_Enum($data)
                   ||
                   $this->MyMod_Data_Field_Is_Derived($data)
-                  ||
-                  $this->MyMod_Data_Field_Is_Sql($data)
                )
             {
                 if (!isset($item[ $data."_Orig" ]) || $item[ $data."_Orig" ]=="")
@@ -166,16 +191,23 @@ trait MyMod_Data_Fields_Enums
                 }
             }
             elseif (
-                      isset($this->ItemData[ $data ]["IsDate" ])
-                      &&
-                      $this->ItemData[ $data ][ "IsDate" ]
+                      $this->MyMod_Data_Field_Is_Date($data)
                    )
             {
                 $value="";
                 if (!empty($item[ $data ])) { $value=$item[ $data ]; }
                 $item[ $data ]=$this->CreateDateShowField($data,$item,$value);
             }
-        }
+             elseif (
+                      $this->MyMod_Data_Field_Is_Time($data)
+                   )
+            {
+                $value="";
+                if (!empty($item[ $data ])) { $value=$item[ $data ]; }
+                
+                $item[ $data ]=$this->TimeStamp2Text($value);
+            }
+       }
 
         return $item;
     }    

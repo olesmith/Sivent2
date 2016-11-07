@@ -17,9 +17,7 @@ class MyFriends_Add extends MyFriends_Add_Search
     {
         $datas=$this->MyMod_Data_Compulsories();
 
-        var_dump($datas);
-
-        return "AffRriendForm";
+        return "AddFriendForm";
     }
 
     
@@ -40,7 +38,6 @@ class MyFriends_Add extends MyFriends_Add_Search
         }
 
         $friends=array();
-
         $subtitle="";
         if (!empty($where))
         {
@@ -83,7 +80,11 @@ class MyFriends_Add extends MyFriends_Add_Search
 
 
 
-        $friends=$this->AddReadFriends();
+        $friends=array();
+        if (!empty($newitem[ "Email" ]) || !empty($newitem[ "Name" ]))
+        {
+            $friends=$this->AddReadFriends();
+        }
 
         $subtitle="";
         if (!empty($where))
@@ -105,8 +106,13 @@ class MyFriends_Add extends MyFriends_Add_Search
 
         if ($this->GetPOST("AddFriend")==1)
         {
-            $msg=$this->FriendSelectAddFriend($newitem);
-            $html.=$this->H(3,$msg);
+            $html.=
+                $this->H
+                (
+                    3,
+                    $this->FriendSelectAddFriend($newitem)
+                ).
+                "";
         }
 
         $html.=
@@ -126,22 +132,57 @@ class MyFriends_Add extends MyFriends_Add_Search
                 ""; 
         }
 
-        if (!empty($newitem[ "Name" ]) && !empty($newitem[ "Email" ]) && $this->ValidEmailAddress($newitem[ "Email" ]))
+        if (!empty($newitem[ "Email" ]))
         {
-            $friends=$this->Sql_Select_Hashes(array("Email" => $newitem[ "Email" ]));
+            if ($this->ValidEmailAddress($newitem[ "Email" ]))
+            {
+                if (!empty($newitem[ "Name" ]))
+                {
+                    $friends=$this->Sql_Select_Hashes(array("Email" => $newitem[ "Email" ]));
 
-            if (count($friends)==0 && $this->GetPOST("Search")==1 || $this->GetPOST("AddFriend")==1)
+                    if (
+                           count($friends)==0
+                           &&
+                           (
+                               $this->GetPOST("Search")==1
+                               ||
+                               $this->GetPOST("AddFriend")==1
+                           )
+                       )
+                    {
+                       $html.=
+                            $this->H
+                            (
+                                6,
+                                $this->MyLanguage_GetMessage("Friend_Select_Table_Empty")
+                            ).
+                            $this->FriendSelectNewForm($newitem).
+                            "";
+                    }
+                }
+                else
+                {
+                    $html.=
+                        $this->H
+                        (
+                            6,
+                            $this->MyLanguage_GetMessage("Friend_Select_Name_Empty")
+                        ).
+                        "";
+                }
+            }
+            else
             {
                 $html.=
-                   $this->H
+                    $this->H
                     (
-                       6,
-                       $this->MyLanguage_GetMessage("Friend_Select_Table_Empty")
+                        6,
+                        $this->MyLanguage_GetMessage("Friend_Select_Email_Invalid")
                     ).
-                    $this->FriendSelectNewForm($newitem).
                     "";
             }
         }
+        //else { $html.="???"; }
 
         $html.=
             $this->H

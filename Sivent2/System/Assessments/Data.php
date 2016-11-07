@@ -124,7 +124,7 @@ array
 
       "Size" => 2,
       "Sql" => "ENUM",
-      "Values" => array("01","02","03","04","05","06","07","08","09","10",),
+      "Values" => array("1","2","3","4","5","6","7","8","9","10",),
       "EmptyName" => " ",
       "Default" => "0 ",
       
@@ -134,6 +134,7 @@ array
       "Friend" => 1,
       "Coordinator" => 2,
       
+      "NoSelectSort"      => TRUE,
       "Search"  => FALSE,
       "Compulsory"  => FALSE,
    ),   

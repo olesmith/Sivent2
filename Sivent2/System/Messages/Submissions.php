@@ -90,5 +90,11 @@ array
       "Title_ES" => "Restante",
       "Title_UK" => "Remaining",
    ),
+   "Submissions_Accessor_Add_Title" => array
+   (
+      "Name" => "Adicionar Avaliador",
+      "Name_ES" => "Adicionar Avaliador",
+      "Name_UK" => "Add Assessor",
+   ),
 );
 

@@ -779,6 +779,7 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
         $latex=preg_replace("/&nbsp;/",'',$latex);
         //$latex=preg_replace('/&#92;/','\\\\',$latex);
         $latex=preg_replace('/\\"/','"',$latex);
+        $latex=preg_replace('/#/','',$latex);
         //$latex=preg_replace('/%/','\%',$latex);
         $latex=preg_replace('/\r/','',$latex);
 

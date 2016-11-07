@@ -18,7 +18,7 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
             array
             (
                "Friend"      => $inscription[ "Friend" ],
-               "Inscription" => $inscription[ "ID" ],
+               //"Inscription" => $inscription[ "ID" ],
                "Type"        => $this->Certificate_Type,
             ),
             $inscription[ "Event" ]
@@ -43,7 +43,7 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
 
         if ($type==1)
         {
-            $where[ "Inscription" ]=$inscription[ "ID" ];
+            //$where[ "Inscription" ]=$inscription[ "ID" ];
             $where[ "Type" ]=$this->Certificate_Type;
         }
 
@@ -54,7 +54,7 @@ class InscriptionsCertificate extends InscriptionsCertificateHandle
     //*
     //* function Certificate_All_Where, Parameter list: 
     //*
-    //* Checks whether certificate has been generated.
+    //* SQL where for locating all event certs.
     //*
 
     function Inscription_Certificates_All_Where()

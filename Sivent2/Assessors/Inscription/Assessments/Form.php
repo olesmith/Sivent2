@@ -5,24 +5,26 @@
 class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessmentsUpdate
 {
     //*
-    //* function Assessors_Inscription_Assessments_Form, Parameter list: $edit,$inscription,$assessor
+    //* function Assessors_Inscription_Assessments_Form, Parameter list: $edit,$assessor
     //*
     //* Creates $assessor assessment form.
     //*
 
-    function Assessors_Inscription_Assessments_Form($edit,$inscription,&$assessor)
+    function Assessors_Inscription_Assessments_Form($edit,&$assessor)
     {
+        $this->CriteriasObj()->ItemData("ID");
+        $this->CriteriasObj()->ItemDataGroups("Basic");
+        
         $criteriadatas=array("No","Weight","Name");
         $assessmentdatas=array("Value");
 
         $criterias=$this->CriteriasObj()->Criterias_Read();
-        $assessments=$this->Assessors_Inscription_Assessments_Read($assessor);
-
+        $assessments=$this->Assessors_Inscription_Assessments_Read($assessor);        
 
         $start=$end="";
         if ($edit==1)
         {
-            $start=$this->StartForm();
+            $start=$this->StartForm("","post",FALSE,array("Anchor" => "ASSESSED_".$assessor[ "ID" ]));
             $end=
                 $this->MakeHidden("Save",1).
                 $this->EndForm();
@@ -35,6 +37,7 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
         
 
         return
+            $this->Anchor("ASSESSED_".$assessor[ "ID" ]).
             $this->FrameIt
             (
                $this->H(2,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Title")).

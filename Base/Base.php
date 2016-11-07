@@ -320,6 +320,14 @@ class Base extends Filters
       return strtr($text, $this->Html2SortTable() );
   }
 
+  function Html2Tex($text)
+  {
+      $text=$this->Html2Text($text);
+      $text=$this->Text2Tex($text);
+
+      return $text;
+  }
+
 
 
   function InvertHash($hash)

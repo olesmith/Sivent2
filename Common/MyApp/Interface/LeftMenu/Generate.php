@@ -137,7 +137,7 @@ trait MyApp_Interface_LeftMenu_Generate
                            "leftmenulinks",
                            FALSE,
                            array(),
-                           "HorMenu"
+                           $anchor
                         );
                     
                     if (isset($submenu[ $menuid ][ "OmitArgs" ]))

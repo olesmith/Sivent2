@@ -2,9 +2,8 @@
 
 include_once("Handle/Assessments.php");
 
-class SubmissionsHandle extends SubmissionsHandleAssessments
-{
-    
+class Submissions_Handle extends Submissions_Authors
+{    
     //*
     //* function Submissions_Handle_Submission, Parameter list: $submission=array()
     //*
@@ -41,8 +40,8 @@ class SubmissionsHandle extends SubmissionsHandleAssessments
             $this->BR().
             $this->Div
             (
-             join(";".$this->BR(),$this->SubmissionAuthors($submission)),
-               array("CLASS" => "submissionauthors")
+                join(";".$this->BR(),$this->Submission_Authors_Info($submission)),
+                array("CLASS" => "submissionauthors")
             ).
             $this->BR().
             $this->FrameIt

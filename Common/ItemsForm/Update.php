@@ -25,7 +25,7 @@ trait ItemsFormUpdate
         {
             $this->ItemsForm_FromUpdated=TRUE;
             //Update List items
-            $this->Args[ "Items" ]=$this->UpdateItems($this->Args[ "Items" ]);
+            $this->Args[ "Items" ]=$this->MyMod_Items_Update($this->Args[ "Items" ]);
 
 
             //Update Detailed Item

@@ -51,6 +51,26 @@ class MyFriends extends MyFriends_Access
     /*      usando o link 'Recuperar Senha' no menu esquerda da tela de Login!<P>\n */
     /*      No primeiro acesso ao sistema, o preenchimento dos dados pessoais será exigido do cadastrante.\n"; */
 
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 4,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "ID",
+                3 => "Name",
+                4 => "Email",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "0",
+                3 => "1",
+                4 => "0",
+            ),
+                
+        );
 
     //*
     //* function Friends, Parameter list: $args=array()
@@ -133,6 +153,31 @@ class MyFriends extends MyFriends_Access
     {
         return "../EventApp/System/Friends/Profiles.php";
     }
+
+    
+    //*
+    //* Returns full (relative) upload path: UploadPath/#Unit/#Event/Submissions.
+    //*
+
+    function MyMod_Data_Upload_Path()
+    {
+        $path=
+            join
+            (
+               "/",
+               array
+               (
+                  "Uploads",
+                  $this->Unit("ID"),
+                  "Friends"
+               )
+            );
+        
+        $this->Dir_Create_AllPaths($path);
+        
+        return $path;
+    }
+    
     //*
     //* function PreActions, Parameter list:
     //*
@@ -384,23 +429,7 @@ class MyFriends extends MyFriends_Access
         return $this->_Names[ $key ][ $id ];
     }
     
-    //*
-    //* function HandleEmails, Parameter list:
-    //*
-    //* Handle friend inscription. 
-    //*
-
-    function HandleEmails()
-    {
-        $where=array();
-        $fixedvars=$where;
-        
-        echo 
-            $this->HandleSendEmails(array("Email" =>  "NOT LIKE ''"),array("ID"),$fixedvars).
-             "";
-    }
-
-    
+   
     //*
     //* function Friend_Name_Text, Parameter list: $friendid
     //*

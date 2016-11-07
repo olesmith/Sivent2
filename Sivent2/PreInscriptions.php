@@ -8,6 +8,23 @@ include_once("PreInscriptions/Handle.php");
 
 class PreInscriptions extends PreInscriptionsHandle
 {
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 3,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__Name",
+                3 => "Friend__Email",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+            ),
+        );
+    
     //*
     //* function Units, Parameter list: $args=array()
     //*

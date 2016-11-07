@@ -105,6 +105,7 @@ trait MyMod_Data_Defaults
             "IsColor"          => FALSE,
             "IsBarcode"          => FALSE,
             "TabIndex"          => "",
+            "PermsMethod"      => "",
         );
 
     }

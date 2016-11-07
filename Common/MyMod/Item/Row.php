@@ -41,6 +41,8 @@ trait MyMod_Item_Row
 
     function MyMod_Item_Table_Row($edit,$item,$datas,$plural=TRUE)
     {
+        $this->ItemData("ID");
+        
         if (!is_array($datas)) { $datas=array($datas); }
 
         $row=array();

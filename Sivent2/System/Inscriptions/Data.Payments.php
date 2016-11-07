@@ -7,7 +7,6 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => FALSE,
       "Values" => array("Não","Sim","Isento"),
       "Values_UK" => array("No","Yes","Exonerated"),
       "Default"  => 1,
@@ -17,5 +16,6 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
+      "Search" => TRUE,
    ),
 );

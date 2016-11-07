@@ -1,6 +1,7 @@
 <?php
 
 include_once("Caravans/Access.php");
+include_once("Caravans/Emails.php");
 include_once("Caravans/Caravaneers.php");
 include_once("Caravans/Certificate.php");
 
@@ -9,6 +10,27 @@ include_once("Caravans/Certificate.php");
 class Caravans extends Caravans_Certificate
 {
     var $Certificate_Type=5;
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 5,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__Name",
+                3 => "Friend__Email",
+                4 => "Homologated",
+                5 => "Certificate",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                3 => "0",
+                4 => "0",
+                5 => "0",
+            ),
+        );
     
     //*
     //* function Units, Parameter list: $args=array()
@@ -53,6 +75,23 @@ class Caravans extends Caravans_Certificate
     }
 
 
+     //*
+    //* function PostProcessItemData, Parameter list:
+    //*
+    //* Post process item data; this function is called BEFORE
+    //* any updating DB cols, so place any additonal data here.
+    //*
+
+    function PostProcessItemData()
+    {
+        $this->AddUnitEventDefault();
+        
+        $unitid=$this->GetCGIVarValue("Unit");
+        $eventid=$this->GetCGIVarValue("Event");
+        
+        $this->ItemData[ "Unit" ][ "Default" ]=$unitid;
+        $this->ItemData[ "Event" ][ "Default" ]=$eventid;
+    }
     
 
     //*
@@ -87,8 +126,29 @@ class Caravans extends Caravans_Certificate
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
         }
+
+        $friend=array("ID" => $item[ "Friend" ]);
+        
+        $isinscribed=$this->EventsObj()->FriendIsInscribed($this->Event(),$friend);
+        if (!$isinscribed)
+        {
+            $this->InscriptionsObj()->DoInscribe($friend);
+        }
         
         return $item;
+    }
+    
+    //*
+    //* function AddForm_PostText, Parameter list:
+    //*
+    //* Pretext function. Shows add inscriptions form.
+    //*
+
+    function AddForm_PostText()
+    {
+        return
+            $this->BR().
+            $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
 }
 

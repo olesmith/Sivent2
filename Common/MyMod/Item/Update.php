@@ -4,6 +4,30 @@
 trait MyMod_Item_Update
 {
     //*
+    //* Updates item form.
+    //*
+
+    function MyMod_Item_Update(&$item,$datas)
+    {
+        $items=$this->MyMod_Items_Update
+        (
+           array($item),
+           $datas
+        );
+
+        $item=array_pop($items);
+    }
+
+    //*
+    //* Updates item form.
+    //*
+
+    function MyMod_Item_Table_Update(&$args)
+    {
+        $this->MyMod_Item_Update_CGI($args[ "Item" ],$args[ "Datas" ],$args[ "Item" ][ "ID" ]."_");
+    }
+
+    //*
     //* Updates item according to CGI.
     //*
 
@@ -31,13 +55,13 @@ trait MyMod_Item_Update
         }
 
         $olditem=$item;
-
         if (count($datas)==0) { $datas=array_keys($this->ItemData); }
 
 
         $rupdate=0;
         $update=0;
         $updatedatas=array(); //datas that are actually updated
+
         foreach ($datas as $id => $rrdata)
         {
             $rrdatas=$rrdata;
@@ -53,7 +77,11 @@ trait MyMod_Item_Update
                 }
                 elseif (preg_match('/^FILE$/',$this->ItemData[ $data ][ "Sql" ]))
                 {
-                    $res=$this->MyMod_Data_Fields_File_Update($data,$item);
+                    $rrdata=$data;
+                    if (!empty($prepost)) { $rrdata=$prepost.$data; }
+                    
+                    $res=$this->MyMod_Data_Fields_File_Update($data,$item,$rrdata);
+
                     if (is_array($res) && $res[ "__Res__" ])
                     {
                         $item=$res;
@@ -75,6 +103,7 @@ trait MyMod_Item_Update
                        )
                 {                    
                     $newvalue=$this->TestUpdateItem($data,$item,FALSE,$prepost);
+                    
                     $default=$this->ItemData($data,"Default");
                    
                     if (empty($newvalue) && !empty($default))
@@ -89,7 +118,7 @@ trait MyMod_Item_Update
                     if ($this->MyMod_Data_Trigger_Function($data))
                     {
                         $item=$this->MyMod_Data_Trigger_Apply($data,$item,$prepost);
-                    }
+                   }
                     else
                     {
                         $item[ $data ]=$newvalue;
@@ -98,8 +127,8 @@ trait MyMod_Item_Update
                     if ($item[ $data ]!=$oldvalue)
                     {
                         //var_dump("$data: $oldvalue => $newvalue") ;
-                        $update++;
                         array_push($updatedatas,$data);
+                        $update++;
                     }
                     
                 }
@@ -107,7 +136,7 @@ trait MyMod_Item_Update
         }
 
         $this->FormWasUpdated=FALSE;
-        if ($update>0)
+        if (count($updatedatas)>0)
         {
             $this->ApplicationObj->LogMessage
             (

@@ -22,8 +22,6 @@ class MyInscriptions extends MyInscriptions_Add
            ),
          );
 
-    var $InscriptionFriendTableData=array("Name","Email",);
-    
     //*
     //* function Inscriptions, Parameter list: $args=array()
     //*

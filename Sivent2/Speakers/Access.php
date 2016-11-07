@@ -1,6 +1,6 @@
 <?php
 
-class SpeakersAccess extends ModulesCommon
+class Speakers_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (
@@ -85,6 +85,33 @@ class SpeakersAccess extends ModulesCommon
             if ($nitems>0) { $res=FALSE; }
         }
         
+        return $res;
+    }
+    
+     //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        $res=$this->Current_User_Event_Coordinator_Is();
+
+        return $res;
+    }
+     //*
+    //* function CheckEditListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item may be viewed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ]
+    //*
+
+    function CheckEditListAccess($item=array())
+    {
+        $res=$this->Current_User_Event_Coordinator_Is();
+
         return $res;
     }
 }

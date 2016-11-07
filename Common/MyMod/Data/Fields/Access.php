@@ -18,7 +18,7 @@ trait MyMod_Data_Fields_Access
         $pres=$this->GetHashKeyValue($this->ItemData[ $data ],$this->Profile());
 
         $res=$this->Max($lres,$pres);
-        
+
         if ($res==2)
         {
             if ($this->ReadOnly) 
@@ -38,6 +38,13 @@ trait MyMod_Data_Fields_Access
                 $res=1;
             }
         }
+
+        if (!empty($itemdata[ "PermsMethod" ]))
+        {
+            $method=$itemdata[ "PermsMethod" ];
+            return $this->$method($data,$item);
+        }
+        
 
         return $res;
     }

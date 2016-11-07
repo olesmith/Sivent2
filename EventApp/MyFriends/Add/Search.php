@@ -105,23 +105,33 @@ class MyFriends_Add_Search extends MyFriends_Add_Table
         $where=array();
         if (!empty($email))
         {
-            $where[ "__Email" ]=
+            array_push
+            (
+                $where,
                 "LOWER(".
                 $this->Sql_Table_Column_Name_Qualify("Email").
-                ") LIKE ".
-                $this->Sql_Table_Column_Value_Qualify('%'.$email.'%');
+                ") REGEXP ".
+                $this->Sql_Table_Column_Value_Qualify(''.$email.'')
+            );
         }
 
         if (count($names)>0)
         {
-            $where[ "__Name" ]= 
+            array_push
+            (
+                $where,
                 "LOWER(".
                 $this->Sql_Table_Column_Name_Qualify("TextName").
                 ") LIKE ".
-                $this->Sql_Table_Column_Value_Qualify('%'.join("%",$names).'%');
+                $this->Sql_Table_Column_Value_Qualify('*'.join("%",$names).'*')
+            );
         }
 
-        return $where;
+        return
+            array
+            (
+                "__Email__" => join(" OR ",$where)
+            );
     }
 
 }

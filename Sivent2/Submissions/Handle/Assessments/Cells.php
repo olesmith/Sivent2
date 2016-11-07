@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsCells extends SubmissionsHandleAssessmentsCalc
+class Submissions_Handle_Assessments_Cells extends Submissions_Handle_Assessments_Calc
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Criteria_Cells_Sum, Parameter list: $$assessments,assessors,$criteria

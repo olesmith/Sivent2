@@ -196,15 +196,14 @@ class MyInscriptions_Add extends MyInscriptions_Handle
 
     
     //*
-    //* function HandleAdd, Parameter list: $echo=TRUE
+    //* function DoAdd, Parameter list: $echo=TRUE
     //*
-    //* Handle add advisor.
+    //* Does adding.
     //*
 
-    function HandleAdd($echo=TRUE)
+    function DoAdd($echo=TRUE)
     {
         $this->IDGETVar="";
-        $this->PrintDocHeadsAndInterfaceMenu(); 
         $this->FriendsObj()->InitActions();
 
         array_push($this->FriendsObj()->FriendSelectNewDatas,"Profile_Monitor");
@@ -254,8 +253,21 @@ class MyInscriptions_Add extends MyInscriptions_Handle
            )
         );
 
-        echo 
+        return 
             $this->FriendsObj()->HandleFriendSelect($newitem,TRUE,$leadingrows,$resulthiddens);
+    }
+
+    
+    //*
+    //* function HandleAdd, Parameter list: $echo=TRUE
+    //*
+    //* Handle add advisor.
+    //*
+
+    function HandleAdd($echo=TRUE)
+    {
+        $this->PrintDocHeadsAndInterfaceMenu(); 
+        echo $this->DoAdd($echo);
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-class FriendsInscriptions extends FriendsEvents
+class Friends_Inscriptions extends Friends_Events
 {
     var $Inscriptions_Friend_Table_Event_Data=array("Name","EventStart","EventEnd");
     var $Inscriptions_Friend_Table_Inscription_Data=array("Inscription","GenCert","CTime","Status","Name","Email",);

@@ -3,12 +3,12 @@
 class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
 {
     //*
-    //* function Inscription_Submissions_Link, Parameter list: 
+    //* function Friend_Submissions_Link, Parameter list: $friend
     //*
-    //* Creates inscription caravan info row (no details).
+    //* Creates inscription submissions link.
     //*
 
-    function Inscription_Submissions_Link($item)
+    function Friend_Submissions_Link($friend)
     {
         $message="Submissions_Inscribe_Link";
         if (!$this->Inscriptions_Submissions_Inscriptions_Open())
@@ -19,7 +19,7 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
         $nsubmissions=
             $this->SubmissionsObj()->FriendNSubmissions
             (
-               $item[ "Friend" ],
+               $friend[ "ID" ],
                array("Status"   => 2)
             );
 
@@ -37,41 +37,41 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
     //* Creates inscription collaboration info row (no details).
     //*
 
-    function Inscription_Submissions_Rows($item)
+    function Friend_Submissions_Rows($friend,$inscription)
     {
         return
             $this->Inscription_Type_Rows
             (
-               $item,
+               $inscription,
                "Submissions",
-               $this->Inscription_Submissions_Link($item),
+               $this->Friend_Submissions_Link($friend),
                array("Submissions","Submissions_StartDate","Submissions_EndDate")
             );
     }
     
     //*
-    //* function Inscription_Submissions_Table, Parameter list: 
+    //* function Friend_Submissions_Table, Parameter list: $edit,$friend,$inscription,$group=""
     //*
     //* Creates inscrition collaboration html table.
     //*
 
-    function Inscription_Submissions_Table($edit,$item,$group="")
+    function Friend_Submissions_Table($edit,$friend,$inscription,$group="")
     {
-        if (
-              !$this->Inscriptions_Submissions_Has()
+       if (
+              !$this->Event_Submissions_Has()
               &&
-              !$this->Inscription_Submissions_Has($item)
+              !$this->Friend_Submissions_Has($friend)
            )
         { return array(); }
         
-        if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
+        //06/11/2016 if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
 
-        $type=$this->InscriptionTablesType($item);
+        $type=$this->InscriptionTablesType($inscription);
         if ($type!="Submissions")
         {
-            return $this->Inscription_Submissions_Rows($item);
+            return $this->Friend_Submissions_Rows($friend,$inscription);
         }
-        
+
         $this->SubmissionsObj()->Sql_Table_Structure_Update();
         
         $this->SubmissionsObj()->Actions("Edit");
@@ -88,14 +88,14 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
         
         if ($edit==1 && $this->CGI_POSTint("Update")==1)
         {
-            $this->Inscription_Group_Update($group,$item);
+            $this->Inscription_Group_Update($group,$inscription);
         }
-
-        $table=$this->Inscription_Submissions_Rows($item);
+        
+        $table=$this->Friend_Submissions_Rows($friend,$inscription);
         array_push
         (
            $table,
-           array($this->Inscription_Submissions_Table_Show(0,$item))
+           array($this->Friend_Submissions_Table_Show($edit,$friend,$inscription))
         );
         
         return $table;

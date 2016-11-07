@@ -58,12 +58,16 @@ array
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Export" => 1,
+            "Emails" => 1,
          ),
          'Admin' => array
          (
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Export" => 1,
+            "Emails" => 1,
          ),
       ),
       'SingularPlural' => array

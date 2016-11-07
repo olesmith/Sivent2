@@ -6,6 +6,23 @@ include_once("Places/Access.php");
 
 class Places extends PlacesAccess
 {
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 3,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Name",
+                3 => "Title",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                3 => "0",
+            ),
+        );
     //*
     //* function Units, Parameter list: $args=array()
     //*

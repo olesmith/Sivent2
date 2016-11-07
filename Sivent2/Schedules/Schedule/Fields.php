@@ -56,7 +56,7 @@ class Schedules_Schedule_Fields extends SchedulesSubmissions
             $cell=
                 $this->B
                 (
-                 join("; ",$this->SubmissionsObj()->SubmissionAuthors($submission)).":\n"
+                   join("; ",$this->SubmissionsObj()->Submission_Authors($submission)).":\n"
                 ).
                 $this->BR().
                 $this->BR().

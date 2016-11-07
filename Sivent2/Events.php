@@ -63,18 +63,6 @@ class Events extends Events_Handle
     }
 
     //*
-    //* Returns full (relative) upload path: UploadPath/Module.
-    //*
-
-    function GetUploadPath()
-    {
-        $path="Uploads/".$this->Unit("ID")."/Events";
-        $this->Dir_Create_AllPaths($path);
-        
-        return $path;
-    }
-    
-    //*
     //* function PreProcessItemData, Parameter list:
     //*
     //* Pre process item data; this function is called BEFORE

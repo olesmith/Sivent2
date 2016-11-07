@@ -259,6 +259,16 @@ class SearchTable extends SearchFields
         }
         if (empty($action)) { $action="Search"; }
 
+        $anchor=preg_replace('/^[^#]+#/',"",$action);
+        $action=preg_replace('/#[^#]+$/',"",$action);
+
+        $options=array();
+        if (!empty($anchor))
+        {
+            $options[ "Anchor" ]=$anchor;
+        }
+        
+
         $this->Singular=FALSE;
         $this->Plural=TRUE;
         $this->SearchVarsTableWritten=FALSE;
@@ -272,7 +282,7 @@ class SearchTable extends SearchFields
                "?ModuleName=".$module."&Action=".$action,
                "post",
                0,
-               array(),
+               $options,
                array
                (
                   $module."_NItemsPerPage",

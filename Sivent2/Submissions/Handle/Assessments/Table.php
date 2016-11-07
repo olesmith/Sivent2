@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsTable extends SubmissionsHandleAssessmentsRead
+class Submissions_Handle_Assessments_Table extends Submissions_Handle_Assessments_Read
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Table, Parameter list: $edit,$submission,$assessors
@@ -67,7 +67,7 @@ class SubmissionsHandleAssessmentsTable extends SubmissionsHandleAssessmentsRead
                )
             );
         }
-        
+
         array_push
         (
            $table,

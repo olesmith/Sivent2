@@ -32,8 +32,8 @@ array
    ),
    "Friend_Select_Title" => array
    (
-      "Name"    => "Cadastros",
-      "Name_UK" => "Registrations",
+      "Name"    => "Adicionar ou Pesquisar Cadastros",
+      "Name_UK" => "Add or Search for Registrations",
    ),
    "Friend_Select_Table_Title" => array
    (
@@ -45,6 +45,18 @@ array
       "Name"    => "Nenhum Cadastro encontrado. Deseja adicionar Cadastro?",
       "Name_UK" => "No matching Registrations. Want to add one?",
    ),
+   "Friend_Select_Name_Empty" => array
+   (
+      "Name"    => "Por favor, digite nome.",
+      "Name_ES" => "Por favor, digite nombre.",
+      "Name_UK" => "Please type name.",
+   ),
+   "Friend_Select_Email_Invalid" => array
+   (
+      "Name"    => "Endereço Email Invalido!",
+      "Name_ES" => "Endereço Email Invalido!",
+      "Name_UK" => "Invalid Email Address!",
+   ),
    "Friend_Select_Table_Promote_Msg" => array //???
    (
       "Name"    => "",
@@ -54,13 +66,23 @@ array
    (
       "Name"    =>
         "Cadastrantes adicionados neste tela, pode obter acesso a sistema,<BR>".
-        "usando o link 'Recuperar Senha' no menu esquerda da tela!<P>\n".
+        "usando o link 'Recuperar Senha' no menu esquerda da tela!\n".
+        "<P>\n".
+        "Caso a 'Senha de Acesso' é vasil, uma senha aleatória será gerada.\n".
+        "<P>\n".
+        "O Usuario será notificado deste Cadastro por Email.\n".
+        "<P>\n".
         "No primeiro acesso ao sistema, o preenchimento dos dados pessoais será exigido do cadastrante.\n".
         "",
       
       "Name_UK" =>
         "Users added on this screen, may obtain access to the system,".
-        "using the link 'Recover Password' in the left menu!<P>\n".
+        "using the link 'Recover Password' in the left menu!\n".
+        "<P>\n".
+        "If an empty Password is given, a random password  will be generated.".
+        "<P>\n".
+        "The user will be notified of this Registration by Email.".
+        "<P>\n".
         "On first access, the user will be prompted for personal information.".
         "",
    ),

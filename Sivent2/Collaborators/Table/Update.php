@@ -1,6 +1,6 @@
 <?php
 
-class CollaboratorsTableUpdate extends CollaboratorsTableRead
+class Collaborators_Table_Update extends Collaborators_Table_Read
 {
     //*
     //* function Collaborators_Table_Collaborations_Update, Parameter list: $userid,$collaborations,$collaborators

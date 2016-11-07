@@ -28,6 +28,8 @@ class Certificates_Code extends Certificates_Mail
               &&
               !empty($item[ "Friend" ])
               &&
+              !empty($item[ "Unit" ])
+              &&
               !empty($item[ "Event" ])
            )
         {

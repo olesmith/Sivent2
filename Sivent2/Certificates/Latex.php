@@ -21,7 +21,7 @@ class Certificates_Latex extends Certificates_Validate
                "%%%!\n".
                "%%%! Watermark contribution to preamble\n".
                "\\usepackage{draftwatermark}\n".
-               "\\SetWatermarkText{\\includegraphics[width=26cm]{".$watermark."}}\n". 
+               "\\SetWatermarkText{\\includegraphics[width=29.8cm]{".$watermark."}}\n". 
                "\\SetWatermarkAngle{0}\n".
                "\\SetWatermarkScale{1}\n".
                "\\SetWatermarkColor[rgb]{0,0,0}\n".

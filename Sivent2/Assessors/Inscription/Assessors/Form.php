@@ -4,21 +4,21 @@
 class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTable
 {
     //*
-    //* function Assessors_Inscription_Assessor_Form, Parameter list: $edit,$inscription,&$assessor
+    //* function Assessors_Friend_Assessor_Form, Parameter list: $edit,$friend,&$assessor
     //*
     //* Creates $assessor assessment form.
     //*
 
-    function Assessors_Inscription_Assessor_Form($edit,$inscription,&$assessor)
+    function Assessors_Friend_Assessor_Form($edit,$inscription,&$assessor)
     {
         $frienddatas=array("Name","Email","NickName","Titulation","Curriculum",);
         $submissiondatas=array("Name","Title","Area","Level","Keywords","Summary","File");
-
+        
         $table=
             array_merge
             (
                array($this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Friend_Title"))),
-               $this->FriendsObj()->MyMod_Item_Table(0,$assessor[ "Friend_Hash" ],$frienddatas),
+               $this->SubmissionsObj()->Submission_Authors_Tables($assessor[ "Submission_Hash" ],$frienddatas),
                array($this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Submission_Title"))),
                $this->SubmissionsObj()->MyMod_Item_Table(0,$assessor[ "Submission_Hash" ],$submissiondatas)
             );
@@ -26,20 +26,79 @@ class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTab
         
         return $this->FrameIt
         (
+            $this->Assessors_Inscription_Assessors_Menu().
             $this->H(2,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Title")).
             $this->Html_Table("",$table).
-            $this->Assessors_Inscription_Assessments_Form($edit,$inscription,$assessor).
+            $this->Assessors_Inscription_Assessments_Form($edit,$assessor).
             ""
         );
     }
     
     //*
-    //* function Assessors_Inscription_Assessors_Table, Parameter list: $edit,$inscription,&$assessors
+    //* function Assessors_Inscription_Assessors_Menu, Parameter list:
+    //*
+    //* Creates assesments menu: search links: Not assessed, assessed, all.
+    //*
+
+    function Assessors_Inscription_Assessors_Menu()
+    {
+        $args=$this->CGI_URI2Hash();
+        unset($args[ "Assessor" ]);
+        
+        $opts=
+            array
+            (
+                "Todo" => array
+                (
+                    "Name" => "Não Avaliados",
+                    "Name_ES" => "No Avaliados",
+                    "Name_UK" => "Not Assessed",
+                    "Value" => 1,
+                ),
+                "Done" => array
+                (
+                    "Name" => "Avaliados",
+                    "Name_ES" => "Avaliados",
+                    "Name_UK" => "Assessed",
+                    "Value" => 2,
+                ),
+                "All" => array
+                (
+                    "Name" => "Todos",
+                    "Name_ES" => "Todos",
+                    "Name_UK" => "All",
+                    "Value" => 3,
+                ),
+            );
+
+        $hrefs=array();
+        foreach ($opts as $opt => $hash)
+        {
+            $args[ "Cond" ]=$hash[ "Value" ];
+
+            $href=
+                $this->Href
+                (
+                    "?".$this->CGI_Hash2URI($args),
+                    $this->GetRealNameKey($hash,"Name"),
+                    "","","",0,array(),
+                    "CondMenu"
+                );
+            array_push($hrefs,$href);
+        }
+
+        return
+            $this->Anchor("CondMenu").
+            $this->Center("[".join(" | ",$hrefs)." ]");
+    }
+    
+    //*
+    //* function Assessors_Inscription_Assessors_Table, Parameter list: $edit,$friend,&$assessors
     //*
     //* Loops over $assessors, if ID equals POST Assessor, shows this Assessors form.
     //*
 
-    function Assessors_Inscription_Assessors_Form($edit,$inscription,&$assessors)
+    function Assessors_Friend_Assessors_Form($edit,$friend,&$assessors)
     {
         $assessorid=$this->CGI_GETint("Assessor");
 
@@ -48,7 +107,7 @@ class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTab
         {
             if ($assessors[ $aid ][ "ID" ]==$assessorid)
             {
-                $html=$this->Assessors_Inscription_Assessor_Form($edit,$inscription,$assessors[ $aid ]);
+                $html.=$this->Assessors_Friend_Assessor_Form($edit,$friend,$assessors[ $aid ]);
                 break;
             }
         }

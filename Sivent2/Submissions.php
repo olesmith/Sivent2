@@ -1,14 +1,17 @@
 <?php
 
 include_once("Submissions/Access.php");
+include_once("Submissions/Emails.php");
 include_once("Submissions/Table.php");
+include_once("Submissions/Export.php");
 include_once("Submissions/Schedule.php");
 include_once("Submissions/Certificate.php");
+include_once("Submissions/Assessments.php");
+include_once("Submissions/Authors.php");
 include_once("Submissions/Handle.php");
 
 
-
-class Submissions extends SubmissionsHandle
+class Submissions extends Submissions_Handle
 {
     var $Certificate_Type=4;
     
@@ -31,18 +34,19 @@ class Submissions extends SubmissionsHandle
             );
         
         $this->Sort=array("Name","Title");
-        if ($this->CGI_VarValue("Submissions_GroupName")=="Assessments")
-        {
-            $this->Sort=array("Result");
-            $this->Reverse=TRUE;
-        }
+        /* if ($this->CGI_VarValue("Submissions_GroupName")=="Assessments") */
+        /* { */
+        /*     $this->Sort=array("Result","Name","Title"); */
+        /*     $this->Reverse=TRUE; */
+        /* } */
+        
         $this->IncludeAllDefault=TRUE;
 
         $this->Coordinator_Type=5;
 
         $this->MyMod_Language_Data=array("Title");
         
-        $this->CellMethods[ "SubmissionAuthorsCell" ]=TRUE;
+        $this->CellMethods[ "Submission_Authors_Cell" ]=TRUE;
         $this->CellMethods[ "SubmissionNPreInscriptionsCell" ]=TRUE;
         $this->CellMethods[ "SubmissionVacanciesCell" ]=TRUE;
         $this->CellMethods[ "SubmissionNPreInscriptionsCell" ]=TRUE;
@@ -66,7 +70,7 @@ class Submissions extends SubmissionsHandle
     //* Returns full (relative) upload path: UploadPath/#Unit/#Event/Submissions.
     //*
 
-    function GetUploadPath()
+    function MyMod_Data_Upload_Path()
     {
         $path=
             join
@@ -141,6 +145,8 @@ class Submissions extends SubmissionsHandle
 
         
         $this->PostProcess_Certificate($item);
+        $updatedatas=$this->PostProcess_Results($item,$updatedatas);
+        
         
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
@@ -159,7 +165,7 @@ class Submissions extends SubmissionsHandle
 
     function PostProcess_Friends(&$item,$updatedatas=array())
     {
-        $this->Sql_Select_Hash_Datas_Read($item,array("Author1","Author2","Author3"));
+        $this->Sql_Select_Hash_Datas_Read($item,array("Event","Author1","Author2","Author3"));
 
         //Take default author names, if empty
         $hash=array
@@ -169,23 +175,68 @@ class Submissions extends SubmissionsHandle
            "Friend3" => "Author3",
         );
 
+        $event=array("ID" => $item[ "Event" ]);
         foreach ($hash as $fkey => $akey)
         {
             if (empty($item[ $akey ]) && !empty($item[ $fkey ]))
             {
                 $item[ $akey ]=$this->FriendsObj()->Sql_Select_Hash_Value($item[ $fkey ],"Name");
                 array_push($updatedatas,$akey);
-            }
 
-            if (!empty($item[ $fkey ]) && $item[ "Status" ]==2)
-            {            
-                //Make sure author is speaker
-                $this->UpdateSpeaker($item,$fkey,$item[ $fkey ]);
+                $friend=array("ID" => $item[ $fkey ]);
+                $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+                if (!$isinscribed)
+                {
+                    $this->InscriptionsObj()->DoInscribe($friend);
+                }
             }
         }
 
+        $this->Submission_Speakers_Update($item);
+
         return $updatedatas;
     }
+    
+    //*
+    //* function PostProcess_Results, Parameter list: $item,$updatedatas=array()
+    //*
+    //* Postprocesses $item friends.
+    //*
+
+    function PostProcess_Results(&$item,$updatedatas=array())
+    {
+        if (isset($item[ "Result" ]))
+        {
+            $where=$this->UnitEventWhere(array("Submission" => $item[ "ID" ]));
+            
+            $assessors=$this->AssessorsObj()->Sql_Select_Hashes($where,array("ID","Result"));
+
+            $n=0;
+            $result=0.0;
+            foreach ($assessors as $assessor)
+            {
+                if ($assessor[ "Result" ]>0)
+                {
+                    $n++;
+                    $result+=$assessor[ "Result" ];
+                }
+            }
+
+            if ($n>0)
+            {
+                $result/=(1.0*$n);
+            }
+
+            if ($item[ "Result" ]!=$result)
+            {
+                $item[ "Result" ]=$result;
+                array_push($updatedatas,"Result");
+            }
+        }
+        
+        return $updatedatas;
+    }
+
     
     //*
     //* Overrides InitAddDefaults.
@@ -247,6 +298,35 @@ class Submissions extends SubmissionsHandle
     }
         
     //*
+    //* function UpdateSpeakers, Parameter list: $item,$updatedatas=array()
+    //*
+    //* Postprocesses $item friends.
+    //*
+
+    function Submission_Speakers_Update(&$item)
+    {
+        $this->Sql_Select_Hash_Datas_Read($item,array("Event","Author1","Author2","Author3"));
+
+        //Take default author names, if empty
+        $hash=array
+        (
+           "Friend"  => "Author1",
+           "Friend2" => "Author2",
+           "Friend3" => "Author3",
+        );
+
+        $event=array("ID" => $item[ "Event" ]);
+        foreach ($hash as $fkey => $akey)
+        {
+            if (!empty($item[ $fkey ]) && $item[ "Status" ]==2)
+            {            
+                //Make sure author is speaker
+                $this->UpdateSpeaker($item,$fkey,$item[ $fkey ]);
+            }
+        }
+    }
+    
+    //*
     //* Overrides UpdateSpeaker.
     //*
     //* Updates speaker value: adds, if not in speakers.
@@ -254,14 +334,17 @@ class Submissions extends SubmissionsHandle
 
     function UpdateSpeaker($item,$data,$newvalue)
     {
-        if ($item[ "Status" ]!=2) { return $item; }
+        // if ($item[ "Status" ]!=2) { return $item; }
+        
         $oldvalue=0;
         if (!empty($item[ $data ])) { $oldvalue=$item[ $data ]; }
+        $item[ $data ]=$newvalue;
+        
 
-        if ($oldvalue==$newvalue)
-        {
-            return $item;
-        }
+        /* if ($oldvalue==$newvalue) */
+        /* { */
+        /*     return $item; */
+        /* } */
        
         $friend=array();
         if (!empty($newvalue))
@@ -269,6 +352,7 @@ class Submissions extends SubmissionsHandle
             $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $newvalue));
         }
 
+        
         
         $hash=
             array
@@ -278,12 +362,13 @@ class Submissions extends SubmissionsHandle
                "Friend3" => "Author3",
             );
 
+        $updatedatas=array();
         if (!empty($friend))
         {
             $this->SpeakersObj()->Sql_Table_Structure_Update();
             
             $speaker=$this->SpeakersObj()->Sql_Select_Hash(array("Friend" => $newvalue));
-            if (empty($speaker))
+            if (empty($speaker) && $item[ "Status" ]==2)
             {
                 $speaker=
                     array
@@ -295,23 +380,26 @@ class Submissions extends SubmissionsHandle
                     );
 
                 $this->SpeakersObj()->Sql_Insert_Item($speaker);
-            }            
+
+                var_dump("added speaker");
+            }
             
             $item[ $data ]=$newvalue;
-            $item[ $hash[ $data ] ]=$friend[ "Name" ];
-        }
-        else
-        {
-            $item[ $data ]=0;
-            $item[ $hash[ $data ] ]="";
+            if ($oldvalue!=$newvalue)
+            {
+                $item[ $hash[ $data ] ]=$friend[ "Name" ];
+                $updatedatas=array($hash[ $data ],$data);
+           }
         }
             
-        
-        $this->Sql_Update_Item_Values_Set
-        (
-           array($hash[ $data ],$data),
-           $item
-        );
+        if (count($updatedatas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set
+            (
+               $updatedatas,
+               $item
+            );
+        }
 
         return $item;
     }
@@ -402,64 +490,7 @@ class Submissions extends SubmissionsHandle
         }
     }
     
-    //*
-    //* function ReadSubmissionFriendData, Parameter list: &$submission,$datas=array()
-    //*
-    //* Reads event submission Friends and Authors data.
-    //*
-
-    function ReadSubmissionFriendData(&$submission,$datas=array())
-    {
-        $this->ReadSubmission($submission);
-        
-        $where=$this->UnitWhere();
-        
-        $friends=array();
-        foreach ($submission[ "Friends" ] as $id => $fid)
-        {
-            $where[ "ID" ]=$fid;
-            array_push
-            (
-               $friends,
-               $this->FriendsObj()->Sql_Select_Hash($where,$datas)
-            );
-        }
-
-        return $friends;
-    }
-    //*
-    //* function SubmissionAuthors, Parameter list: &$submission
-    //*
-    //* Returns list of titled authors.
-    //*
-
-    function SubmissionAuthors(&$submission)
-    {
-        $friends=$this->ReadSubmissionFriendData($submission,array("Title","Name","Institution","Lattes"));
-        $authors=array();
-        foreach ($friends as $id => $friend)
-        {
-            array_push($authors,$this->FriendsObj()->FriendInfo($friend));
-        }
-
-        
-
-        return $submission[ "Authors" ];
-    }
-    
-    //*
-    //* function SubmissionAuthorsCell, Parameter list: $submission=array()
-    //*
-    //* Returns $submission cell of titled authors.
-    //*
-
-    function SubmissionAuthorsCell($submission=array())
-    {
-        if (empty($submission)) { return $this->MyLanguage_GetMessage("Submissions_Authors_Title"); }
-        
-        return join(";".$this->BR(),$this->SubmissionAuthors($submission));
-    }
-    
+ 
     //* function SubmissionNPreInscriptions, Parameter list: $submission
     //*
     //* Returns $submission number of preinscriptions.
@@ -512,5 +543,17 @@ class Submissions extends SubmissionsHandle
         
         return $n;
     }
+    
+    //*
+    //* function AddForm_PreText, Parameter list:
+    //*
+    //* Pretext function. Shows add inscriptions form.
+    //*
+
+    function AddForm_PreText()
+    {
+        return
+            $this->FrameIt($this->InscriptionsObj()->DoAdd());
+    }   
 }
 ?>

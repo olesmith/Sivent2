@@ -271,4 +271,24 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   "TimeLoad" => array
+   (
+      "Name" => "CH",
+      "Title" => "Carga Horario",
+      "Name_UK" => "Timeload",
+      "Title_UK" => "Timeload",
+
+      "Size" => "2",
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+      //"AccessMethod" => "Inscriptions_Certificates_May",
+      "TabIndex"  => 5,
+   ),
 );

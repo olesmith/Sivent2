@@ -10,6 +10,9 @@ array
       ),
       'Add' => array
       (
+          "Name"     => "Inscrição Avulsa",
+          "Name_ES"     => "Adicionar Inscricion",
+          "Name_UK"   => "Add Inscription",
          'Public' => 0,
          'Person' => 0,
          "Admin" => 1,

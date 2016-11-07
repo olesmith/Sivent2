@@ -5,7 +5,7 @@ include_once("Table/Row.php");
 include_once("Table/Read.php");
 include_once("Table/Update.php");
 
-class CollaboratorsTable extends CollaboratorsTableUpdate
+class Collaborators_Table extends Collaborators_Table_Update
 {
     var $Items=array();
     
@@ -68,7 +68,7 @@ class CollaboratorsTable extends CollaboratorsTableUpdate
         {
             if ($this->CGI_POSTint("Update")==1)
             {
-                $this->Items=$this->UpdateItems($this->Items);
+                $this->Items=$this->MyMod_Items_Update($this->Items);
             }
             
             $html.=        

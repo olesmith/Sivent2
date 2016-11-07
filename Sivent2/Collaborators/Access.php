@@ -1,6 +1,6 @@
 <?php
 
-class CollaboratorsAccess extends ModulesCommon
+class Collaborators_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (

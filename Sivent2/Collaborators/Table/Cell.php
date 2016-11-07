@@ -1,6 +1,6 @@
 <?php
 
-class CollaboratorsTableCell extends CollaboratorsAccess
+class Collaborators_Table_Cell extends Collaborators_Emails
 {
    //*
     //* function Collaborators_Table_Collaborations_Cell_Name, Parameter list: $collaboration

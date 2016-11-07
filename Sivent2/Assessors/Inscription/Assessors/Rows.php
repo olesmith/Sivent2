@@ -14,54 +14,57 @@ class AssessorsInscriptionAssessorsRows extends AssessorsInscriptionAssessorsRea
         return
             array_merge
             (
-               $this->GetDataTitles($datas),
-               $this->FriendsObj()->GetDataTitles($frienddatas),
-               $this->SubmissionsObj()->GetDataTitles($submissiondatas),
-               array("")
+                array($this->B("No")),
+                $this->FriendsObj()->GetDataTitles($frienddatas),
+                $this->SubmissionsObj()->GetDataTitles($submissiondatas),
+                $this->GetDataTitles($datas),
+                array("")
             );
     }
     
     //*
-    //* function Assessors_Inscription_Assessor_Row, Parameter list: $edit,$inscription,$assessor,$datas,$frienddatas,$submissiondatas
+    //* function Assessors_Inscription_Assessor_Row, Parameter list: $edit,$friend,$assessor,$datas,$frienddatas,$submissiondatas
     //*
     //* Creates row with $inscription $assessor, friend and submissiondata.
     //*
 
-    function Assessors_Inscription_Assessor_Row($edit,$n,$inscription,$assessor,$datas,$frienddatas,$submissiondatas)
+    function Assessors_Friend_Assessor_Row($edit,$n,$friend,$assessor,$datas,$frienddatas,$submissiondatas)
     {
         $assessor[ "Result" ]=$this->Sql_Select_Hash_Value($assessor[ "ID" ],"Result");
         
         return
             array_merge
             (
-               $this->MyMod_Items_Table_Row
-               (
-                  0,
-                  $n,
-                  $assessor,
-                  $datas,
-                  TRUE
-               ),
-               $this->FriendsObj()->MyMod_Items_Table_Row
-               (
-                  0,
-                  $n,
-                  $assessor[ "Friend_Hash" ],
-                  $frienddatas,
-                  TRUE
-               ),
-               $this->SubmissionsObj()->MyMod_Items_Table_Row
-               (
-                  0,
-                  $n,
-                  $assessor[ "Submission_Hash" ],
-                  $submissiondatas,
-                  TRUE
-               ),
-               array
-               (
-                  $this->Assessors_Inscription_Assessment_Link($assessor)
-               )
+                array($n),
+                $this->FriendsObj()->MyMod_Items_Table_Row
+                (
+                    0,
+                    $n,
+                    $assessor[ "Friend_Hash" ],
+                    $frienddatas,
+                    TRUE
+                ),
+                $this->SubmissionsObj()->MyMod_Items_Table_Row
+                (
+                    0,
+                    $n,
+                    $assessor[ "Submission_Hash" ],
+                    $submissiondatas,
+                    TRUE
+                ),
+                $this->MyMod_Items_Table_Row
+                (
+                    0,
+                    $n,
+                    $assessor,
+                    $datas,
+                    TRUE
+                ),
+                array
+                (
+                    $this->Assessors_Inscription_Assessment_Link($assessor).
+                    $this->Anchor("ASSESS_".$assessor[ "ID" ])
+                )
             );
     }
 }

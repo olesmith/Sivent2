@@ -155,7 +155,8 @@ trait MyApp_Interface_Doc_Head
         return $this->HtmlTags
         (
            "TD",
-           $this->MyApp_Interface_Icon(2)
+           $this->MyApp_Interface_Icon(2),
+           array("WIDTH" => '10%')
         );
     }
 

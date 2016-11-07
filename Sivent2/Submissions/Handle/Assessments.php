@@ -8,7 +8,7 @@ include_once("Assessments/Table.php");
 include_once("Assessments/Update.php");
 
 
-class SubmissionsHandleAssessments extends SubmissionsHandleAssessmentsUpdate
+class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Update
 {
     //*
     //* function Submissions_Assessors_Datas, Parameter list: 
@@ -96,6 +96,32 @@ class SubmissionsHandleAssessments extends SubmissionsHandleAssessmentsUpdate
         return $this->AssessorsObj()->Sql_Select_Hashes($where,$assessordatas);
     }
 
+    //*
+    //* function Submissions_Handle_Assessor_Add_Row, Parameter list: $submission,$assessordatas=array()
+    //*
+    //* Creates assesemnts table.
+    //*
+
+    function Submissions_Handle_Assessor_Add_Row($cgipost="")
+    {
+        return
+           array
+           (
+               $this->B($this->Language_Message("Submissions_Accessor_Add_Title").":").
+               $this->AssessorsObj()->MyMod_Data_Fields_Edit
+               (
+                   "Friend",
+                   array(),
+                   $value="",
+                   $tabindex="",
+                   $plural=FALSE,
+                   $links=TRUE,
+                   $callmethod=TRUE,
+                   "Assessor".$cgipost
+               ),
+           );
+    }
+
     
     //*
     //* function Submissions_Handle_Assessors_Calc, Parameter list: $assessors
@@ -166,11 +192,7 @@ class SubmissionsHandleAssessments extends SubmissionsHandleAssessmentsUpdate
         (
            $table,
            $sumrow,
-           array
-           (
-              $this->B("Add Assessor:").
-              $this->AssessorsObj()->MyMod_Data_Fields_Edit("Friend",array(),$value="",$tabindex="",$plural=FALSE,$links=TRUE,$callmethod=TRUE,"Assessor"),
-           ),
+           $this->Submissions_Handle_Assessor_Add_Row(),
            array($this->Buttons())
         );
 

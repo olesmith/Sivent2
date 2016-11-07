@@ -1,5 +1,14 @@
 array
 (
+      'Export' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
       'Search' => array
       (
          'Public' => 0,
@@ -79,8 +88,25 @@ array
       "Icon"   => "print_dark.png",
       "Public"   => 0,
       "Person"   => 0,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
+     "Caravans" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Caravans&Action=Search&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Caravans",
+        "Title_UK" => "Manage Caravans",
+        "Name"     => "Caravans",
+        "Name_UK"     => "Caravans",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        //'AccessMethod'    => "Current_User_Event_Caravans_May_Edit",
+      ),
 );

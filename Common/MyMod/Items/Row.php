@@ -10,6 +10,8 @@ trait MyMod_Items_Row
 
     function MyMod_Items_Table_Row($edit,$n,$item,$datas,$plural=TRUE,$pre="")
     {
+        $this->ItemData("ID");
+        
         if (!is_array($datas)) { $datas=array($datas); }
 
         $row=array();

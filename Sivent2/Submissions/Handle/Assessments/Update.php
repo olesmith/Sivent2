@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsUpdate extends SubmissionsHandleAssessmentsTable
+class Submissions_Handle_Assessments_Update extends Submissions_Handle_Assessments_Table
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Update, Parameter list: $submission,$assessors,$criterias,$assessments

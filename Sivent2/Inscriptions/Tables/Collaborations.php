@@ -3,31 +3,30 @@
 class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
 {
     //*
-    //* function Inscription_Collaborations_Link, Parameter list: 
+    //* function Friend_Collaborations_Link, Parameter list: $friend
     //*
-    //* Creates inscription collaborations info row (no details).
+    //* Creates $friend collaborations info row (no details).
     //*
 
-    function Inscription_Collaborations_Link($item)
+    function Friend_Collaborations_Link($friend)
     {
         $message="Collaborations_Inscribe_Link";
         if (!$this->Inscriptions_Collaborations_Inscriptions_Open())
         {
             $message="Collaborations_Inscriptions_Closed";
         }
-        
+
         $where=
             $this->UnitEventWhere
             (
                array
                (
-                "Friend" => $item[ "Friend" ],
+                "Friend" => $friend[ "ID" ],
                 "Homologated" => 2
                )
             );
 
-        $ncollaborations=$this->CollaboratorsObj()->Sql_Select_NHashes($where);
-        if ($ncollaborations>0)
+        if ($this->Friend_Collaborators_Has($friend))
         {
             $message="Collaborations_Inscribed_Link";
         }
@@ -40,39 +39,40 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
     }
     
     //*
-    //* function Inscription_Collaborations_Row, Parameter list: 
+    //* function Inscription_Collaborations_Row, Parameter list: $friend,$inscription
     //*
     //* Creates inscription collaboration info row (no details).
     //*
 
-    function Inscription_Collaborations_Row($item)
+    function Friend_Collaborations_Row($friend,$inscription)
     {
         return
             $this->Inscription_Type_Rows
             (
-               $item,
+               $inscription,
                "Collaborations",
-               $this->Inscription_Collaborations_Link($item),
+               $this->Friend_Collaborations_Link($friend),
                array("Collaborations","Collaborations_StartDate","Collaborations_EndDate")
             );
     }
     
     //*
-    //* function Inscription_Collaborations_Table, Parameter list: 
+    //* function Friend_Collaborations_Table, Parameter list: $edit,$friend,$inscription,$group=""
     //*
     //* Creates inscrition collaboration html table.
     //*
 
-    function Inscription_Collaborations_Table($edit,$item,$group="")
+    function Friend_Collaborations_Table($edit,$friend,$inscription,$group="")
     {
-        if (!$this->Inscriptions_Collaborations_Has()) { return array(); }
+        if (!$this->FriendsObj()->Friend_Collaborations_Should($friend)) { return array(); }
 
-        if (!$this->Inscriptions_Collaborations_Inscriptions_Open()) { $edit=0; }
+        //if (!$this->Inscriptions_Collaborations_Inscriptions_Open()) { $edit=0; }
 
-        $type=$this->InscriptionTablesType($item);
+        $type=$this->InscriptionTablesType($inscription);
+
         if ($type!="Collaborations")
         {
-            return $this->Inscription_Collaborations_Row($item);
+            return $this->Friend_Collaborations_Row($friend,$friend);
         }
         
         $this->CollaborationsObj()->Sql_Table_Structure_Update();
@@ -88,7 +88,7 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
         
         if ($edit==1 && $this->CGI_POSTint("Update")==1)
         {
-            $this->Inscription_Group_Update($group,$item);
+            $this->Inscription_Group_Update($group,$inscription);
         }
         
         $html="";
@@ -113,10 +113,10 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
             $this->MyMod_Item_Table_Html
             (
                $this->Inscription_Collaborations_Table_Edit($edit),
-               $item,
+               $inscription,
                $this->GetGroupDatas($group,TRUE)
             ).
-            $this->Inscription_Collaborations_Table_Show($edit,$item).
+            $this->Friend_Collaborations_Table_Show($edit,$friend,$inscription).
             "";
         
         if ($edit==1)
@@ -133,12 +133,12 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
     
     
     //*
-    //* function Inscription_Event_Collaborations_Table, Parameter list: $edit
+    //* function Inscription_Event_Collaborations_Table, Parameter list: $edit,$friend,$inscription
     //*
     //* Creates a table listing inscription colaborations.
     //*
 
-    function Inscription_Event_Collaborations_Table($edit,$inscription)
+    function Inscription_Event_Collaborations_Table($edit,$friend,$inscription)
     {
         return
             $this->Inscription_Collaborations_Table_Show($edit,$inscription,"Collaborators_User_Table_Title").

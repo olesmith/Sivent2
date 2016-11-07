@@ -48,5 +48,38 @@ array
       "Public" => 0,
       "Friend"     => 2,
       "Coordinator" => 2,
+      "HRefIt" => 1,
+    ),
+   "MiniCurriculum"     => array
+   (
+      "Sql" => "TEXT",
+      "Name"  => "Mini Curriculo",
+      "Name_UK"  => "Mini Curriculum",
+      "Size"  => "50x10",
+
+      "Compulsory" => FALSE,
+
+      "Admin" => 2,
+      "Person" => 0,
+      "Public" => 0,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+    ),
+   "Photo"     => array
+   (
+      "Sql" => "FILE",
+      "Name"  => "Foto",
+      "Name_UK"  => "Photo",
+      "Size"  => "10",
+
+      "Compulsory" => FALSE,
+
+      "Admin" => 2,
+      "Person" => 0,
+      "Public" => 1,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "Iconify" => TRUE,
+      "Extensions" => array("png","jpg"),
     ),
 );

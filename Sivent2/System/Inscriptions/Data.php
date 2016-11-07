@@ -83,6 +83,7 @@ array
       "Title_UK" => "Homologated",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
+      "SelectCheckBoxes" => "3",
    ),
    /* "Score" => array */
    /* ( */

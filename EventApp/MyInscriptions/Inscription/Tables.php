@@ -2,7 +2,6 @@
 
 class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGroups
 {
-    
     //*
     //* function InscriptionHtmlTable, Parameter list: $edit,$buttons=FALSE,$inscription,$title="",$includeassessments=FALSE
     //*
@@ -68,7 +67,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
                   (
                      "Edit"          => $edit,
                      "Item"          => $friend,
-                     "Datas"         => $this->InscriptionFriendTableData,
+                     "Datas"         => $this->InscriptionFriendTableData(),
                      "TablePostRows" => array($this->InscriptionMessageRow()),
                      "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
                   )
@@ -157,15 +156,15 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
 
         return $table;
     }
+    
     //*
-    //* function Inscription_Event_Typed_Tables, Parameter list: $edit
+    //* function Inscription_Event_Typed_Tables, Parameter list: $edit,$friend,$inscription
     //*
     //* Creates Event typed tables:
     //*
 
-    function Inscription_Event_Typed_Tables($edit,$inscription)
-    {
-        
+    function Inscription_Event_Typed_Tables($edit,$friend,$inscription)
+    {        
         return "";
     }
 }

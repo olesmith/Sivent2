@@ -26,12 +26,12 @@ class InscriptionsAssessments extends InscriptionsSubmissions
     }
     
     //*
-    //* function Inscriptions_Assessments_Inscriptions_Open, Parameter list: 
+    //* function Inscriptions_Assessments_Open, Parameter list: 
     //*
     //* Detects if current event has  activated.
     //*
 
-    function Inscriptions_Assessments_Inscriptions_Open()
+    function Inscriptions_Assessments_Open()
     {
         return $this->EventsObj()->Event_Assessments_Inscriptions_Open($this->Event());
     }
@@ -42,35 +42,68 @@ class InscriptionsAssessments extends InscriptionsSubmissions
     //* Detects if current event has any Assessments.
     //*
 
-    function Inscription_Assessments_Has($item=array())
+    function Inscription_Assessments_Has($inscription=array())
     {
-        $res=FALSE;
-
-        $nentries=0;
-        if (!empty($item[ "Friend" ]))
-        {
-            $nentries=$this->AssessmentsObj()->Sql_Select_NEntries(array("Friend" => $item[ "Friend" ]));
-        }
-
-        if ($nentries>0) { $res=TRUE; }
-
-        return $res;
+        return $this->Friend_Assessments_Has(array("ID" => $inscription[ "Friend" ]));
     }
     
     //*
-    //* function Inscription_Assessors_Table_Show, Parameter list: $edit,$item
+    //* function Inscription_Assessments_Link, Parameter list: 
+    //*
+    //* Creates inscription assessments link.
+    //*
+
+    function Inscription_Assessments_Link($friend)
+    {
+        $message="Assessments_Link";
+        if (!$this->Inscriptions_Assessments_Open())
+        {
+            $message="Assessments_Closed";
+        }
+        
+        
+        return $this->Inscription_Type_Link("Assessments",$message);
+    }
+    
+    //*
+    //* function Inscription_Assessments_Rows, Parameter list: $friend,$inscription
+    //*
+    //* Creates inscription assessment info row (no details).
+    //*
+
+    function Inscription_Assessments_Rows($friend,$inscription)
+    {
+        return
+            $this->Inscription_Type_Rows
+            (
+               $inscription,
+               "Assessments",
+               $this->Inscription_Assessments_Link($friend),
+               array("Assessments","Assessments_StartDate","Assessments_EndDate")
+            );
+    }
+    
+    //*
+    //* function Inscription_Assessors_Table_Show, Parameter list: $edit,$inscription
     //*
     //* Shows currently allocated collaborations for inscription in $item.
     //*
 
-    function Inscription_Assessors_Table($edit,$item)
+    function Friend_Assessors_Table($edit,$friend,$inscription)
     {
+        
         if (
-              !$this->Inscriptions_Submissions_Has()
+              !$this->EventsObj()->Event_Assessments_Inscriptions_Open()
               ||
-              !$this->Inscription_Assessments_Has($item)
+              !$this->Friend_Assessments_Has($friend)
            )
         { return array(); }
+        
+        $type=$this->GetTablesType();
+        if (!empty($type) && $type!="Assessments")
+        {
+            return $this->Inscription_Assessments_Rows($friend,$inscription);
+        }
         
         $this->AssessorsObj()->Actions("Show");
         $this->AssessorsObj()->ItemData("ID");
@@ -81,7 +114,7 @@ class InscriptionsAssessments extends InscriptionsSubmissions
         $this->AssessmentsObj()->ItemData("ID");
         
         return 
-            $this->AssessorsObj()->Assessors_Inscription_Table_Html($edit,$item);
+            $this->AssessorsObj()->Assessors_Friend_Table_Html($edit,$friend);
     }
     
 }

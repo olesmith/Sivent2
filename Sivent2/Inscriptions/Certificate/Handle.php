@@ -11,6 +11,9 @@ class InscriptionsCertificateHandle extends InscriptionsCertificateCells
 
     function Inscription_Handle_Certificate_Generate()
     {
+        $this->FriendsObj()->Sql_Table_Structure_Update();
+        $this->CertificatesObj()->Sql_Table_Structure_Update();
+        
         $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $this->ItemHash[ "Friend" ]));
         
         $where=$this->Inscription_Certificates_Where($this->ItemHash);

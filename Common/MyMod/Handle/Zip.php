@@ -96,7 +96,7 @@ trait MyMod_Handle_Zip
     {
         if (preg_match('/^(Admin)$/',$this->Profile()))
         {
-            $zip->addEmptyDir($this->GetUploadPath());
+            $zip->addEmptyDir($this->MyMod_Data_Upload_Path());
         }
 
         $nfiles=0;

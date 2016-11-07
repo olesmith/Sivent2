@@ -134,7 +134,6 @@ class Assessments extends AssessmentsAccess
         }
 
         
-        
         return array
         (
             $this->MyMod_Data_Fields_Edit
@@ -211,9 +210,8 @@ class Assessments extends AssessmentsAccess
             
             if ($nassessments==0)
             {
-                $assessment=$this->Assessments_Criteria_Assessment_New($criteria,$assessor,$newvalue);
+                $assessment=$this->Assessments_Criteria_Assessor_New($criteria,$assessor,$newvalue);
                 $this->Sql_Insert_Item($assessment);
-                //var_dump("ins");
                
                 $updated=TRUE;
             }                    
@@ -257,10 +255,8 @@ class Assessments extends AssessmentsAccess
                 $assessments[ $criteria[ "ID" ] ]=array();
             }
 
-            $updated=
-                $updated
-                ||
-                $this->Assessments_Criteria_Assessor_Update($criteria,$assessor,$assessments[ $criteria[ "ID" ] ]);
+            $rupdated=$this->Assessments_Criteria_Assessor_Update($criteria,$assessor,$assessments[ $criteria[ "ID" ] ]);
+            $updated=$updated || $rupdated;
             
             $wsum+=1.0*$criteria[ "Weight" ]*$assessments[ $criteria[ "ID" ] ][ "Value" ];
         }
@@ -278,7 +274,6 @@ class Assessments extends AssessmentsAccess
 
         if ($complete) $complete=2;
         else           $complete=1;
-        
 
         if ($assessor[ "HasAssessed" ]!=$complete)
         {

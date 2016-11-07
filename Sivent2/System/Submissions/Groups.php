@@ -9,7 +9,7 @@ array
          "No","Edit","Copy","Delete","GenCert","Assessments",
          "Name","Status",
          "Type","Area","Level",
-         "SubmissionAuthorsCell",
+         "Submission_Authors_Cell",
          "Title",
          "File","PreInscriptions","Vacancies",
       ),
@@ -55,7 +55,7 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Name","Author1","Status",
+         "Author1","Status",
          "Type","Area","Level",
          "Title","File",
       ),
@@ -101,8 +101,8 @@ array
    ),
    "Assessments" => array
    (
-      "Name" => "Avaliações",
-      "Name_UK" => "Assessments",
+      "Name" => "Avaliadores & Avaliações",
+      "Name_UK" => "Assessors & Assessments",
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
@@ -123,7 +123,7 @@ array
       "Public" => 1,
       "Friend"     => 0,
       "Coordinator" => 1,
-      "GenTableMethod" => "Submission_Assessments_Table",
+      "GenTableMethod" => "Submissions_Assessments_Table",
       "AccessMethod" => "Event_Assessments_Has",
    ),
 );

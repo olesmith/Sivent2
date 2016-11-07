@@ -1,8 +1,39 @@
 array
 (
-   "01_Inscription" => array
+   "01_EditEvent" => array
    (
-      "AccessMethod" => "FriendIsInscribed",
+      "AccessMethod" => "Current_User_Event_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Edit&Event=#Event",
+      "Name" => "Configuração do Evento",
+      "Name_ES" => "Configuracion del Evento",
+      "Name_UK" => "Event Configuration",
+      "Person" => "0",
+      "Public" => "1",
+      "ShortName" => "Configuração",
+      "ShortName_ES" => "Configuracion",
+      "ShortName_UK" => "Configuration",
+      "Title" => "Setup do Evento",
+      "Title_ES" => "Setup",
+      "Title_UK" => "Event Setup",
+   ),
+   "02_ShowEvent" => array
+   (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Show&Event=#Event",
+      "Name" => "Sobre o Evento",
+      "Name_ES" => "Sobre el Evento",
+      "Name_UK" => "About the Event",
+      "Person" => "0",
+      "Public" => "1",
+   ),
+   "031_Inscription" => array
+   (
+       //"AccessMethod" => "FriendIsInscribed",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "1",
@@ -18,43 +49,20 @@ array
       "Title" => "Minha Inscrição",
       "Title_ES" => "Mi Inscrición",
       "Title_UK" => "My Inscription",
+      "Anchor" => "Top",
    ),
-   "02_ShowEvent" => array
+   "032_Assessments" => array
    (
+      "AccessMethod" => "Friend_Assessments_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "1",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Show&Event=#Event",
-      "Name" => "Sobre",
-      "Name_ES" => "Sobre",
-      "Name_UK" => "About",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event",
+      "Name" => "Minhas Avaliações",
+      "Name_ES" => "Mi Avaliaciones",
+      "Name_UK" => "My Asessments",
       "Person" => "0",
-      "Public" => "1",
-      "ShortName" => "Sobre",
-      "ShortName_ES" => "Sobre",
-      "ShortName_UK" => "About",
-      "Title" => "Sobre o Evento",
-      "Title_ES" => "Sobre el Evento",
-      "Title_UK" => "About the Event",
-   ),
-   "03_EditEvent" => array
-   (
-      "AccessMethod" => "Current_User_Event_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Edit&Event=#Event",
-      "Name" => "Setup",
-      "Name_ES" => "Setup",
-      "Name_UK" => "Setup",
-      "Person" => "0",
-      "Public" => "1",
-      "ShortName" => "Setup",
-      "ShortName_ES" => "Setup",
-      "ShortName_UK" => "Setup",
-      "Title" => "Setup do Evento",
-      "Title_ES" => "Setup",
-      "Title_UK" => "Event Setup",
+      "Public" => "0",
    ),
    "04_Inscriptions" => array
    (
@@ -95,16 +103,35 @@ array
       "Title_ES" => "Certificados",
       "Title_UK" => "Presences and Certificates",
    ),
-   "06_Collaborations" => array
+   "061_Collaborations" => array
    (
       "AccessMethod" => "Coordinator_Collaborations_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Collaborations&Action=Search&Event=#Event",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Collaborations&Action=EditList&Event=#Event",
       "Name" => "Colaborações",
       "Name_ES" => "Colaboraciones",
       "Name_UK" => "Collaborations",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Colaborações",
+      "ShortName_ES" => "Colaboraciones",
+      "ShortName_UK" => "Collaborations",
+      "Title" => "Colaborações",
+      "Title_ES" => "Colaboraciones",
+      "Title_UK" => "Collaborations",
+   ),
+   "062_Collaborators" => array
+   (
+      "AccessMethod" => "Coordinator_Collaborations_Access_Has",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Collaborators&Action=EditList&Event=#Event",
+      "Name" => "Colaboradores",
+      "Name_ES" => "Colaboradores",
+      "Name_UK" => "Collaborators",
       "Person" => "0",
       "Public" => "0",
       "ShortName" => "Colaborações",
@@ -133,7 +160,7 @@ array
       "Title_ES" => "Caravanas",
       "Title_UK" => "Manage Caravans",
    ),
-   "09_Submissions" => array
+   "091_Submissions" => array
    (
       "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
       "Admin" => "1",
@@ -151,6 +178,19 @@ array
       "Title" => "Gerenciar Atividades",
       "Title_ES" => "Actividades",
       "Title_UK" => "Manage Activities",
+   ),
+   "092_Submissions" => array
+   (
+      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=EditList&Event=#Event&Submissions_GroupName=Assessments",
+      "Name" => "Avaliações",
+      "Name_ES" => "Avaliaciones",
+      "Name_UK" => "Assessments",
+      "Person" => "0",
+      "Public" => "0",
    ),
    "10_Submissions_Pub" => array
    (

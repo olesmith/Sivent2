@@ -83,7 +83,27 @@ array
       
       "Search"  => TRUE,
    ),
-   "Carrier" => array
+    "Confirmed" => array
+   (
+      "Name" => "Confirmado pelo Autor",
+      "Name_UK" => "Confirmed by Author",
+
+      "Sql" => "ENUM",
+
+      "Search" => TRUE,
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Values_ES" => array("No","Si"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "PermsMethod" => "Submission_Confirm_Should",
+   ),
+  "Carrier" => array
    (
       "Name" => "Empresa",
       "Name_UK" => "Carrier",
@@ -142,6 +162,7 @@ array
       "Sql" => "ENUM",
       "Values"    => array("Sim","Não"),
       "Values_UK" => array("Yes","No"),
+      "Values_ES" => array("Si","No"),
 
       "Public"   => 0,
       "Person"   => 0,
@@ -166,6 +187,26 @@ array
       "Coordinator" => 2,
 
       "Search" => TRUE,
+      "Compulsory"  => FALSE,
+   ),
+   "Confirmed" => array
+   (
+      "Name" => "Confirmo Presença",
+      "Name_UK" => "I Confirm Presence",
+      "Name_ES" => "Confirmo Presencia",
+
+      "Sql" => "ENUM",
+      "Values"    => array("Não","Sim",),
+      "Values_UK" => array("No","Yes",),
+      "Values_ES" => array("No","Si",),
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 2,
+      "Coordinator" => 2,
+
+      "Default"  => 1,
       "Compulsory"  => FALSE,
    ),
 );

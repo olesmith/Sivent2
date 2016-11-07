@@ -1,6 +1,6 @@
 <?php
 
-class Caravans_Caravaneers extends Caravans_Access
+class Caravans_Caravaneers extends Caravans_Emails
 {
     //*
     //* function Caravan_Info_Data, Parameter list: $edit,$caravan

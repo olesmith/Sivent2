@@ -57,7 +57,7 @@ class ItemsTableTable extends ItemsTableRow
 
         if (!empty($cgiupdatevar) && $this->GetPOST($cgiupdatevar))
         {
-            $items=$this->UpdateItems($items);
+            $items=$this->MyMod_Items_Update($items,$datas);
         }
 
         $showall=$this->GetPOST($this->ModuleName."_Page");

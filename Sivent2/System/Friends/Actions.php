@@ -1,5 +1,32 @@
 array
 (
+      'Export' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
+      'Download' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod"  => "CheckDownloadAccess",
+      ),
+      'Unlink' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         //"AccessMethod"  => "CheckEditAccess",
+      ),
    "Clean" => array
    (
       "Href"     => "",
@@ -28,7 +55,7 @@ array
       "Name_UK"   => "Collaborations",
       
       "Handler"   => "Friend_Collaborations_Handle",
-      "AccessMethod"   => "Friend_Collaborations_Has",
+      "AccessMethod"   => "Friend_Collaborations_Should",
 
       "Public"   => 0,
       "Person"   => 0,

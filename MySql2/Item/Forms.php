@@ -473,6 +473,25 @@ class ItemForms extends Fields
 
 
     //*
+    //* Pretext function. Returns empty string, supposed to be overridden.
+    //*
+
+    function AddForm_PreText()
+    {
+        return "";
+    }
+
+    //*
+    //* Posttext function. Returns empty string, supposed to be overridden.
+    //*
+
+    function AddForm_PostText()
+    {
+        return "";
+    }
+
+    
+    //*
     //* Creates form for adding an item. If $_POST[ "Update" ]==1,
     //* calls Add.
     //*
@@ -530,14 +549,16 @@ class ItemForms extends Fields
         }
 
         $this->ApplicationObj->MyApp_Interface_Head();
-        //$this->ApplicationObj->LogMessage("AddForm","Load form");
         $html=
+            $this->AddForm_PreText().
             $this->H(2,$title).
             $msg.
             $this->StartForm("?Action=".$action).
             $this->MakeAddTable($datas).
             $this->MakeHidden("Add",1).
-            $this->EndForm();
+            $this->EndForm().
+            $this->AddForm_PostText().
+            "";
 
         if ($echo)
         {

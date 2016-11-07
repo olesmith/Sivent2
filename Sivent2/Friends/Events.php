@@ -1,7 +1,7 @@
 <?php
 
 
-class FriendsEvents extends FriendsCollaborations
+class Friends_Events extends Friends_Speakers
 {
 }
 

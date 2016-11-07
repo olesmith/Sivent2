@@ -184,17 +184,6 @@ class App_Override extends App_Handle
             );
     }
     
-     //*
-    //* function  HtmlEventsWhere, Parameter list: 
-    //*
-    //* Returns menu def as read from system file. May be overridden.
-    //*
-
-    function HtmlEventsData()
-    {
-        return array("ID","Name","Date","Initials");
-    }
-    
     //*
     //* sub PostHandle, Parameter list: 
     //*
@@ -206,41 +195,14 @@ class App_Override extends App_Handle
     {
         $event=$this->CGI_GETint("Event");
         if (empty($event)) { return ""; }
+        $event=$this->Event();
+
         
         chdir(dirname($_SERVER[ "SCRIPT_FILENAME" ]));
-       
-        $table=$this->ApplicationObj()->AppEventInfoPostTable();
 
-        $iconrow=array_shift($table);
-
-        $html="";
-        if (count($iconrow)==1)
-        {
-            $html=
-                $this->HtmlTags
-                (
-                   "TR",
-                   $this->HtmlTags("TD").
-                   $this->HtmlTags("TD",$iconrow[0][ "Text" ]).
-                   $this->HtmlTags("TD")
-                ).
-                "";
-        }
-        else
-        {
-            $html=
-                $this->HtmlTags
-                (
-                   "TR",
-                   $this->HtmlTags("TD",$iconrow[0][ "Text" ]).
-                   $this->HtmlTags("TD",$iconrow[1][ "Text" ]).
-                   $this->HtmlTags("TD",$iconrow[2][ "Text" ])
-                ).
-                "";
-        }
-
-        return 
-            $html.
+        return
+            
+            //$html.
             $this->HtmlTags
             (
                "TR",
@@ -248,7 +210,7 @@ class App_Override extends App_Handle
                $this->HtmlTags
                (
                   "TD",
-                  $this->Html_Table("",$table)
+                  $this->Html_Table("",$this->ApplicationObj()->AppEventInfoPostTable(),array("WIDTH" => '100%'))
                ).
                $this->HtmlTags("TD")
              ).

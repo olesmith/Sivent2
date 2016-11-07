@@ -140,29 +140,49 @@ trait MyActions_Entry
             $method=$this->Actions[ $data ][ "NameMethod" ];
             return $this->$method($data,$item);
         }
-         $size=20;
 
-         $text=$this->Actions[ $data ][ "Icon" ];
+        return $this->MyActions_Entry_Icon($data,$noicons,$size=20);
+    }
 
-         if ($noicons==1 || $text=="")
+    //*
+    //* function MyActions_Entry_Alert, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
+    //*
+    //* Creates Aler'ed link: will raise confirming message, via java.
+    //*
+
+    function MyActions_Entry_Alert($url,$title)
+    {
+        return "javascript:goto('".$url."','".$title."')";
+    }
+    
+    //*
+    //* function MyActions_Entry_Icon, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
+    //*
+    //* Generates only action icon.
+    //*
+
+    function MyActions_Entry_Icon($data,$noicons=0,$size=20)
+    {
+         $icon=$this->Actions[ $data ][ "Icon" ];
+
+         if ($noicons==1 || empty($icon))
          {
-             $text=$this->GetRealNameKey($this->Actions[ $data ],$this->ActionNameKey); 
+             $icon=$this->GetRealNameKey($this->Actions[ $data ],$this->ActionNameKey); 
          }
          else
          {
-             $text=$this->IMG
+             $icon=$this->IMG
              (
-                $this->Icons."/".$text,
-                $text,
+                $this->Icons."/".$icon,
+                $icon,
                 $size,
                 $size
              );
          }
 
-         return $text;
+         return $icon;
     }
-
-
+    
     //*
     //* function MyActions_Entry_URL, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
     //*
@@ -255,12 +275,12 @@ trait MyActions_Entry
         {
             $action=preg_replace('/\&?ID=/',"&".$this->IDGETVar."=",$action);
         }
-        
+
         if (!empty($this->Actions[ $data ][ "Confirm" ]))
         {
             $title=$this->GetRealNameKey($this->Actions[ $data ],"ConfirmTitle");
             
-            $action="javascript:goto('".$action."','".$title."')";
+            $action=$this->MyActions_Entry_Alert($action,$title);
         }
 
 

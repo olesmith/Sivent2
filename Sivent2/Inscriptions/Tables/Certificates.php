@@ -5,13 +5,13 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
     //*
     //* function Inscription_Certificate_Link, Parameter list: 
     //*
-    //* Creates inscription certificate info row (no details).
+    //* Creates inscription certificate link.
     //*
 
-    function Inscription_Certificate_Link($item)
+    function Inscription_Certificate_Link($inscription)
     {
         $message="Certificate_Link";
-        if (!$this->Inscriptions_Certificates_Published())
+        if (!$this->EventsObj()->Event_Certificates_Published())
         {
             return $this->MyLanguage_GetMessage("Certificate_Not_Available_Yet");
         }
@@ -21,39 +21,40 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
     }
     
     //*
-    //* function Inscription_Certificate_Row, Parameter list: 
+    //* function Inscription_Certificate_Row, Parameter list: $friend,$inscription
     //*
     //* Creates inscription speaker info row (no details).
     //*
 
-    function Inscription_Certificate_Rows($item)
+    function Friend_Certificate_Rows($friend,$inscription)
     {
         return
             $this->Inscription_Type_Rows
             (
-               $item,
+               $inscription,
                "Certificate",
-               $this->Inscription_Certificate_Link($item),
+               $this->Inscription_Certificate_Link($inscription),
                array("Certificates","Certificates_Published",)
             );
     }
 
     
     //*
-    //* function InscriptionCertificateTable, Parameter list: $edit,$item,$group="Certificates"
+    //* function Friend_Certificate_Table, Parameter list: $edit,$friend,$inscription,$group="Certificates"
     //*
     //* Creates inscrition certificate html table.
     //*
 
-    function Inscription_Certificate_Table($edit,$item,$group="Certificates")
+    function Friend_Certificate_Table($edit,$friend,$inscription,$group="Certificates")
     {
-        if (!$this->Inscriptions_Certificates_Published()) { return array(); }
+        if (!$this->EventsObj()->Event_Certificates_Published()) { return array(); }
         
         $table=array();
-        $type=$this->InscriptionTablesType($item);
-        if ($type!="Certificate")
+        $type=$this->InscriptionTablesType($inscription);
+
+        if ($type!="Certificate"&& !empty($type))
         {
-            return $this->Inscription_Certificate_Rows($item);
+            return $this->Friend_Certificate_Rows($friend,$inscription);
         }
         
         if (empty($group)) { $group="Certificates"; }
@@ -66,12 +67,24 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
         }
         
         
-        $rdatas=$this->GetGroupDatas($group,TRUE);
-
-        if ($item[ "Certificate" ]!=2)
+        $itable="";
+        if (!empty($inscription))
         {
-            $rdatas=array("Certificate");
+            $rdatas=$this->GetGroupDatas($group,TRUE);
+
+            if (empty($inscription[ "Certificate" ]) || $inscription[ "Certificate" ]!=2)
+            {
+                $rdatas=array("Certificate");
+            }
+
+            $itable=
+                $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
+                $this->MyMod_Item_Table_Html($edit,$inscription,$rdatas).
+                "";
         }
+        
+
+        
 
         array_push
         (
@@ -80,12 +93,12 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
            (
               $this->FrameIt
               (
-                 $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-                 $this->MyMod_Item_Table_Html($edit,$item,$rdatas)
+                 $itable.
+                 $this->CertificatesObj()->Certificates_Friend_Table_Html($friend,$this->Event())
               )
            )
         );
-            
+
         return $table;
     }
 }

@@ -162,6 +162,32 @@ class Certificates_Generate extends Certificates_Latex
     }
     
     
+    //*
+    //* function Certificate_Get_Empty, Parameter list: $cert=array()
+    //*
+    //* Sets Generated to current time().
+    //*
+
+    function Certificate_Get_Empty($cert=array())
+    {
+        $cert=$this->UnitEventWhere();
+        foreach (array("Type","Inscription","Friend") as $key)
+        {
+            if (empty($cert[$key  ])) { $cert[ $key ]=1; }
+        }
+        
+        foreach (array("Name") as $key)
+        {
+            if (empty($cert[$key  ])) { $cert[ $key ]=""; }
+        }
+        foreach (array("Code") as $key)
+        {
+            if (empty($cert[$key  ])) { $cert[ $key ]="1.1.1.1"; }
+        }
+
+        return $cert;
+    }
+    
 
     
     //*
@@ -172,7 +198,7 @@ class Certificates_Generate extends Certificates_Latex
 
     function Certificate_Set_Generated($cert)
     {
-        if (!empty($item[ "ID" ]))
+        if (!empty($cert[ "ID" ]))
         {
             $this->Sql_Update_Item
             (
@@ -200,29 +226,77 @@ class Certificates_Generate extends Certificates_Latex
     }
 
     //*
-    //* function Certificate_Read, Parameter list: $cert,$type
+    //* function Certificate_TimeLoad_Update, Parameter list: &$cert
     //*
-    //* Sets Mailed to current time().
+    //* Reads certificate sub data.
+    //*
+
+    function Certificate_TimeLoad_Update(&$cert)
+    {
+        $timeloadkey=$this->Type2TimeloadKey($cert);
+        $key=$this->Type2Key($cert);
+
+        if (empty($cert[ $key."_Hash" ]))
+        {
+           $this->Certificate_Read_Data($cert,$key);
+        }
+        
+        $timeload=$cert[ $key."_Hash" ][ $timeloadkey ];
+        if (empty($cert[ "TimeLoad" ]) || $cert[ "TimeLoad" ]!=$timeload)
+        {
+            $cert[ "TimeLoad" ]=$timeload;
+            $this->Sql_Update_Item_Value_Set($cert[ "ID" ],"TimeLoad",$timeload);
+        }
+    }
+    
+    //*
+    //* function Certificate_Read_Data, Parameter list: &$cert,$data
+    //*
+    //* Reads certificate sub data.
+    //*
+
+    function Certificate_Read_Data(&$cert,$data)
+    {
+        if (!empty($cert[ $data ]) && empty($cert[ $data."_Hash" ]))
+        {
+            $objmethod=$data."sObj";
+
+            $cert[ $data."_Hash" ]=
+                $this->$objmethod()->Sql_Select_Hash
+                (
+                    array("ID" => $cert[ $data ],),
+                    array(),
+                    FALSE,
+                    $this->SqlEventTableName($data."s",$cert[ "Event" ])
+                );
+        }
+    }
+
+    //*
+    //* function Certificate_Read_Datas, Parameter list: &$cert
+    //*
+    //* Reads certificate sub data.
+    //*
+
+    function Certificate_Read_Datas(&$cert)
+    {
+       foreach (array("Event","Friend","Inscription","Submission","Collaborator","Collaboration","Caravaneer") as $data)
+        {
+            $this->Certificate_Read_Data($cert,$data);
+        }
+    }
+    
+    //*
+    //* function Certificate_Read, Parameter list: $cert
+    //*
+    //* Reads certificate sub data.
     //*
 
     function Certificate_Read($cert)
     {
-        foreach (array("Event","Friend","Inscription","Submission","Collaborator","Collaboration","Caravaneer") as $data)
-        {
-            $cert[ $data."_Hash" ]=array();
-            if (!empty($cert[ $data ]))
-            {
-                $objmethod=$data."sObj";
-                $cert[ $data."_Hash" ]=
-                    $this->$objmethod()->Sql_Select_Hash
-                    (
-                       array("ID" => $cert[ $data ],)
-                    );
-
-                
-            }
-        }
-
+        $this->Certificate_Read_Datas($cert);
+        $this->Certificate_TimeLoad_Update($cert);
+        
         if (!empty($cert[ "Submission_Hash" ]))
         {
             $cert[ "Submission_Hash" ][ "Authors" ]=

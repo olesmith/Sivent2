@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsRows extends SubmissionsHandleAssessmentsCells
+class Submissions_Handle_Assessments_Rows extends Submissions_Handle_Assessments_Cells
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Titles, Parameter list: $assessors
@@ -107,7 +107,8 @@ class SubmissionsHandleAssessmentsRows extends SubmissionsHandleAssessmentsCells
         }
 
         /* $media=$asum/(1.0*count($assessors)); */
-        $wmedia=$wsum/$weightsum;
+        $wmedia=$wsum;
+        if ($wmedia>0.0) { $wmedia=$wsum/$weightsum; }
 
         array_push
         (

@@ -7,7 +7,7 @@ array
       "Data" => array
       (
          "No","Show","Edit","Delete","Generate",
-         "Event","Name","Type","Code","Generated","Mailed",
+         "Event","Name","Type","TimeLoad","Code","Generated","Mailed",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -25,7 +25,7 @@ array
       (
          "No",
          "Unit","Event",
-         "Name","Type","Code",
+         "Name","Type","TimeLoad","Code",
          "Generated","Mailed",
          "Generate",
       ),

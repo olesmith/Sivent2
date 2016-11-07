@@ -3,12 +3,15 @@
 include_once("../EventApp/MyFriends.php");
 
 include_once("Friends/Clean.php");
+include_once("Friends/Access.php");
 include_once("Friends/Collaborations.php");
+include_once("Friends/Submissions.php");
+include_once("Friends/Speakers.php");
 include_once("Friends/Events.php");
 include_once("Friends/Inscriptions.php");
 include_once("Friends/Handle.php");
 
-class Friends extends FriendsHandle
+class Friends extends Friends_Handle
 {
     var $StateKeys=array("Address_State","RG_UF");
     var $FriendDataMessages="Friends.php";

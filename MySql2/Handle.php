@@ -57,25 +57,6 @@ class Handle extends HandleLatex
       $this->MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
   }
 
-  /* //\* */
-  /* //\* function HandleCopy, Parameter list:  */
-  /* //\* */
-  /* //\*  */
-  /* //\* */
-
-  /* function HandleCopy() */
-  /* { */
-  /*     $title=$this->GetRealNameKey($this->Actions[ "Copy" ]); */
-  /*     $ptitle=$this->GetRealNameKey($this->Actions[ "Copy" ],"PName"); */
-
-  /*     $this->CopyForm($title,$ptitle); */
-  /* } */
-
-  //*
-  //* function , Parameter list: 
-  //*
-  //* 
-  //*
 
   function HandleDelete($echo=TRUE,$actionname="Delete",$formurl="?Action=Delete",$idvar="ID")
   {
@@ -88,23 +69,6 @@ class Handle extends HandleLatex
   /* //\* */
   /* //\*  */
   /* //\* */
-
-  /* function HandleComposedAdd() */
-  /* { */
-  /*     $this->HandleAdd(); */
-  /*     $this->HandleList("",TRUE,1); */
-  /* } */
-
-  //*
-  //* function , Parameter list: 
-  //*
-  //* 
-  //*
-
-  function HandleExport()
-  {
-      $this->ExportForm();
-  }
 
   //*
   //* function , Parameter list: 

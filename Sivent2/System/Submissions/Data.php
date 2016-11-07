@@ -72,7 +72,7 @@ array
       "Sql" => "INT",
 
       "SqlClass" => "Friends",
-      "Search" => FALSE,
+      "Search" => TRUE,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -254,6 +254,7 @@ array
       "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
+      "Values_ES" => array("No","Si"),
       "Default"  => 1,
 
       "Public"   => 0,

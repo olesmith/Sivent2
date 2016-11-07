@@ -3,44 +3,44 @@
 class InscriptionsTablesSpeaker extends InscriptionsCells
 {
     //*
-    //* function Inscription_Speaker_Link, Parameter list: 
+    //* function Friend_Speaker_Link, Parameter list: 
     //*
     //* Creates inscription speaker info row (no details).
     //*
 
-    function Inscription_Speaker_Link()
+    function Friend_Speaker_Link()
     {
         return $this->Inscription_Type_Link("Speaker","Speaker_Link");
     }
     
      //*
-    //* function Inscription_Speaker_Row, Parameter list: 
+    //* function Friend_Speaker_Row, Parameter list: 
     //*
-    //* Creates inscription speaker info row (no details).
+    //* Creates $friend speaker info row (no details).
     //*
 
-    function Inscription_Speaker_Row($item,$speaker)
+    function Friend_Speaker_Row($friend,$speaker)
     {                
         return
             $this->Inscription_Type_Rows
             (
-               $item,
+               $friend,
                "Speaker",
-               $this->Inscription_Speaker_Link(),
+               $this->Friend_Speaker_Link(),
                array("EventStart","EventEnd")
             );
     }
    
     //*
-    //* function Inscription_Speaker_Tables, Parameter list: $edit,$inscription=array()
+    //* function Friend_Speaker_Tables, Parameter list: $edit,$friend,$inscription=array()
     //*
     //* Checks whether person in $inscription is a speaker. If so, displays table
     //* with editable travel info and event schedule.
     //*
 
-    function Inscription_Speaker_Tables($edit,$inscription=array())
+    function Friend_Speaker_Tables($edit,$friend,$inscription=array())
     {
-        $where=$this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ]));
+        $where=$this->UnitEventWhere(array("Friend" => $friend[ "ID" ]));
         $speaker=$this->SpeakersObj()->Sql_Select_Hash($where);
 
         $form=array(array());
@@ -49,9 +49,9 @@ class InscriptionsTablesSpeaker extends InscriptionsCells
             $edit=$this->SpeakersObj()->CheckEditAccess($speaker);
             
             $type=$this->InscriptionTablesType($inscription);
-            if ($type!="Speaker")
+            if ($type!="Speaker" && !empty($type))
             {
-                return $this->Inscription_Speaker_Row($inscription,$speaker);
+                return $this->Friend_Speaker_Row($inscription,$speaker);
             }
         
             $this->SpeakersObj()->ItemData("ID");

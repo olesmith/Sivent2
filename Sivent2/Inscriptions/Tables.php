@@ -114,6 +114,18 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     }
     
     //*
+    //* function GetTablesType, Parameter list: $friend
+    //*
+    //* Detects tables type from CGI.
+    //*
+
+    function GetTablesType()
+    {
+        return $this->CGI_GET("Type");
+    }
+
+    
+     //*
     //* function InscriptionTablesType, Parameter list: $inscription
     //*
     //* Detects tables type from CGI.
@@ -124,31 +136,31 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         $type=$this->CGI_GET("Type");
         if (empty($type))
         {
-            $speaker=
-                $this->SpeakersObj()->Sql_Select_Hash
-                (
-                   $this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ])),
-                   array("ID")
-                );
+            /* $speaker= */
+            /*     $this->SpeakersObj()->Sql_Select_Hash */
+            /*     ( */
+            /*        $this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ])), */
+            /*        array("ID") */
+            /*     ); */
             
-            if (!empty($speaker))
-            {
-                $type="Speaker";
-            }
-            else
-            {
-                if ($this->Inscriptions_PreInscriptions_Has())
-                {
-                    $type="PreInscriptions";
-                }
-            }
+            /* if (!empty($speaker)) */
+            /* { */
+            /*     $type="Speaker"; */
+            /* } */
+            /* else */
+            /* { */
+            /*     if ($this->Inscriptions_PreInscriptions_Has()) */
+            /*     { */
+            /*         $type="PreInscriptions"; */
+            /*     } */
+            /* } */
         }
 
         return $type;
     }
     
     //*
-    //* function Inscription_Event_Typed_Tables, Parameter list: $edit
+    //* function Inscription_Event_Typed_Tables, Parameter list: $edit,$friend,$inscription
     //*
     //* Creates Event typed tables:
     //*
@@ -164,27 +176,35 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     //* Assessments info
     //*
 
-    function Inscription_Event_Typed_Tables($edit,$inscription)
+    function Inscription_Event_Typed_Tables($edit,$friend,$inscription)
     {
+        $tables=array();
         if (!empty($inscription))
         {
             $tables=
                 array_merge
                 (
-                    $this->Inscription_Certificate_Table(0,$inscription),
-                    $this->Inscription_Speaker_Tables(1,$inscription),
-                    $this->Inscription_Submissions_Table(1,$inscription),
-                    $this->Inscription_Assessors_Table(1,$inscription),
-                    $this->Inscription_PreInscriptions_Table(1,$inscription),
-                    $this->Inscription_Collaborations_Table(1,$inscription),               
-                    $this->Inscription_Caravans_Table_Form(1,$inscription)
+                    $tables,
+                    $this->Inscription_PreInscriptions_Table($edit,$inscription)
                 );
-
-
-            if (!empty($tables))
-            {
-                return $this->Html_Table("",$tables);
-            }
+        }
+        
+        //var_dump($this->Friend_Collaborations_Table($edit,$friend,$inscription));
+        $tables=
+            array_merge
+            (
+                $tables,
+                $this->Friend_Certificate_Table(0,$friend,$inscription),
+                $this->Friend_Speaker_Tables($edit,$friend,$inscription),
+                $this->Friend_Assessors_Table($edit,$friend,$inscription),
+                $this->Friend_Submissions_Table($edit,$friend,$inscription),
+                $this->Friend_Collaborations_Table($edit,$friend,$inscription),
+                $this->Friend_Caravans_Table_Form($edit,$friend,$inscription)         
+            );
+            
+        if (!empty($tables))
+        {
+            return $this->Html_Table("",$tables);
         }
 
         return "";
@@ -218,7 +238,7 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     //* Returns typed link: Speaker, Collaborators, etc.
     //*
 
-    function Inscription_Type_Rows($item,$type,$link,$eventdatas=array(),$inscrdatas=array())
+    function Inscription_Type_Rows($inscription,$type,$link,$eventdatas=array(),$inscrdatas=array())
     {
         $titles=
             array_merge
@@ -229,12 +249,12 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
             );
 
         $link=$this->DIV($link,array("CLASS" => 'right'));
-        
+
         $row=
             array_merge
             (
                $this->EventsObj()->MyMod_Item_Row(0,$this->Event(),$eventdatas),
-               $this->MyMod_Item_Row(0,$item,$inscrdatas),
+               $this->MyMod_Item_Row(0,$inscription,$inscrdatas),
                array($link)
             );
                 

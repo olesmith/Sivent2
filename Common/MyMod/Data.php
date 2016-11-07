@@ -11,6 +11,7 @@ include_once("Data/Language.php");
 include_once("Data/Info.php");
 include_once("Data/Title.php");
 include_once("Data/Triggers.php");
+include_once("Data/Upload.php");
 
 trait MyMod_Data
 {
@@ -24,7 +25,8 @@ trait MyMod_Data
         MyMod_Data_Language,
         MyMod_Data_Info,
         MyMod_Data_Title,
-        MyMod_Data_Triggers;
+        MyMod_Data_Triggers,
+        MyMod_Data_Upload;
 
 
     //*
@@ -234,6 +236,35 @@ trait MyMod_Data
 
         return $rdatas;
     }
+    
+    //*
+    //* function MyMod_Data_Icon, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
+    //*
+    //* Generates only action icon.
+    //*
+
+    function MyMod_Data_Icon($data,$noicons=0,$size=20)
+    {
+         $icon=$this->ItemData[ $data ][ "Icon" ];
+
+         if ($noicons==1 || empty($icon))
+         {
+             $icon=$this->GetRealNameKey($this->ItemData[ $data ],$this->NameKey); 
+         }
+         else
+         {
+             $icon=$this->IMG
+             (
+                $this->Icons."/".$icon,
+                $icon,
+                $size,
+                $size
+             );
+         }
+
+         return $icon;
+    }
+    
 }
 
 ?>

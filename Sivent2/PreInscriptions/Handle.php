@@ -32,7 +32,7 @@ class PreInscriptionsHandle extends PreInscriptionsInscription
             (
                0,
                $submission,
-               array("Title","SubmissionAuthorsCell","Type","Area","Status","PreInscriptions","Vacancies")
+               array("Title","Submission_Authors_Cell","Type","Area","Status","PreInscriptions","Vacancies")
              )).
             $this->PreInscriptions_Show
             (

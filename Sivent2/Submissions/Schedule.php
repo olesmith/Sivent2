@@ -2,7 +2,7 @@
 
 
 
-class SubmissionsSchedule extends SubmissionsTable
+class Submissions_Schedule extends Submissions_Export
 {
     //*
     //* function Submission_Schedules_Read, Parameter list: $datas,$submission=array()

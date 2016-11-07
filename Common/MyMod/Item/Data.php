@@ -45,8 +45,7 @@ trait MyMod_Item_Data
                 $item[ $data."_Message" ];
         }
 
-
-        return $value=$this->Span($value,array("CLASS" => 'data'));
+        return $this->Span($value,array("CLASS" => 'data'));
     }
    
     //*

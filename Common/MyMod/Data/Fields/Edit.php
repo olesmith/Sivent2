@@ -90,10 +90,10 @@ trait MyMod_Data_Fields_Edit
                    array
                    (
                     "SIZE" => $this->ItemData[ $data ][ "Size" ],
-                    "Title" => $this->PermittedFileExtensionsText($data)
+                    "Title" => $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data)
                    )
                 ).
-                $this->FileFieldDecorator($data,$item,$plural,1);
+                $this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,1);
         }
         elseif ($this->ItemData[ $data ][ "Password" ])
         {

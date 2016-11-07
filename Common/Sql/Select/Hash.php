@@ -142,7 +142,8 @@ trait Sql_Select_Hash
             
             foreach ($rdatas as $id => $data)
             {
-                $item[ $data ]=$ritem[ $data ];
+                $item[ $data ]="";
+                if (isset($ritem[ $data ])) { $item[ $data ]=$ritem[ $data ]; }
             }
         }
     }

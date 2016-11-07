@@ -20,11 +20,11 @@ array
    ),
    "Assessments" => array
    (
-      "Name" => "Avaliações**",
-      "Name_UK" => "Assessments**",
+      "Name" => "Avaliações",
+      "Name_UK" => "Assessments",
       "Data" => array
       (
-         "No","Edit","Copy","Delete",
+         "No","Edit","Copy","Delete","Assessors",
          "Friend","HasAssessed","HasAccessed",
          "Result"
       ),
@@ -34,5 +34,6 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "Visible" => FALSE,
    ),
 );

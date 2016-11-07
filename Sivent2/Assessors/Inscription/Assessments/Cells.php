@@ -37,7 +37,7 @@ class AssessorsInscriptionAssessmentsCells extends AssessorsInscriptionAssessmen
                $class="",
                $noqueryargs=FALSE,
                $options=array(),
-               $anchor="TABLE"
+               $anchor="ASSESS_".$assessor[ "ID" ]
             );
     }
 

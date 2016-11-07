@@ -476,7 +476,7 @@
       "ItemName" => "Critério",
       "ItemName_ES" => "Critério",
       "ItemName_UK" => "Criteria",
-      "ItemsName" => "Critério",
+      "ItemsName" => "Critérios",
       "ItemsName_ES" => "Critérios",
       "ItemsName_UK" => "Criterias",
       "ItemsNamer" => "Name",

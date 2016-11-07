@@ -5,20 +5,6 @@ include_once("MyPermissions/Access.php");
 
 class MyPermissions extends MyPermissionsAccess
 {
-    /* //\* */
-    /* //\* function Units, Parameter list: $args=array() */
-    /* //\* */
-    /* //\* Constructor. */
-    /* //\* */
-
-    /* function MyPermissions($args=array()) */
-    /* { */
-    /*     $this->Hash2Object($args); */
-    /*     $this->AlwaysReadData=array(); */
-    /*     $this->Sort=array("Name"); */
-    /*     $this->NonGetVars=array("Event","CreateTable"); */
-    /* } */
-
     //*
     //* function SqlTableName, Parameter list: $table=""
     //*
@@ -35,7 +21,7 @@ class MyPermissions extends MyPermissionsAccess
     //* Returns full (relative) upload path: UploadPath/Module.
     //*
 
-    function GetUploadPath()
+    function MyMod_Data_Upload_Path()
     {
         $path="Uploads/".$this->Unit("ID")."/Permissions";
         

@@ -54,11 +54,17 @@ array
          ),
          'Coordinator' => array
          (
-            "Grade" => 1,
-         ),
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
+            "Export" => 1,
+          ),
          'Admin' => array
          (
-            "Grade" => 1,
+            "Add" => 1,
+            "Search" => 1,
+            "EditList" => 1,
+            "Export" => 1,
          ),
       ),
       'SingularPlural' => array

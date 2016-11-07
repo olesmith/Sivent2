@@ -76,7 +76,21 @@ class Assessors extends AssessorsInscription
 
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
-        $updatedatas=array();
+        $friend=array("ID" => $item[ "Friend" ]);
+
+        $event=array("ID" => $this->Event("ID"));
+        if (!empty($item[ "Event" ]))
+        {
+            $event=array("ID" => $item[ "Event" ]);
+        }
+        
+        $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+        if (!$isinscribed)
+        {
+            $this->InscriptionsObj()->DoInscribe($friend);
+        }
+
+         $updatedatas=array();
  
         if (count($updatedatas)>0)
         {
@@ -164,6 +178,7 @@ class Assessors extends AssessorsInscription
     function Assessor_Assessments_Criterias_Complete($assessor,$criterias,$assessments)
     {
         $res=TRUE;
+        if (empty($criterias)) { $res=FALSE; }
         foreach ($criterias as $criteria)
         {
             if (!empty($assessments[ $criteria[ "ID" ] ]))
@@ -172,8 +187,36 @@ class Assessors extends AssessorsInscription
                 if (empty($value)) { $res=FALSE; break; }
             }
         }
-   
-        return $res;
+
+         return $res;
+    }
+    
+    //*
+    //* function HandleEdit, Parameter list: 
+    //*
+    //* Overrides module HandleEdit: adds assessments table..
+    //*
+    
+    function HandleEdit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false)
+    {
+        parent::HandleEdit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false);
+
+        echo
+            $this->Assessors_Inscription_Assessments_Form(1,$this->ItemHash).
+            "";
+    }
+    
+    //*
+    //* function AddForm_PostText, Parameter list:
+    //*
+    //* Pretext function. Shows add inscriptions form.
+    //*
+
+    function AddForm_PostText()
+    {
+        return
+            $this->BR().
+            $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
 }
 

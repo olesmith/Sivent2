@@ -71,15 +71,30 @@ class MyFriends_Access extends MyFriends_Friend
         
         $res=$this->CheckEditAccess($item);
 
+        //Check if inscribed somewhere
         if ($res)
         {
-            $regexp='_(Inscriptions|Collaborators|Submissions|Certificates)';
+            $regexp='_(Inscriptions|Collaborators|Submissions|Certificates|Speakers)';
             $entries=$this->Sql_Tables_Select_Hashes($regexp,array("Friend" => $item[ "ID" ]),array("ID"));
             
             if (count($entries)>0) { $res=FALSE; }
         }
 
         
+        return $res;
+    }
+    
+    //*
+    //* function CheckShowListAccess, Parameter list: $item=array()
+    //*
+    //* Checks if we may list registrations
+    //*
+
+    function CheckShowListAccess($item=array())
+    {
+        //shouldn't receite $item!
+        $res=$this->Current_User_Event_Coordinator_Is();
+
         return $res;
     }
 }

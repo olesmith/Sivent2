@@ -1,6 +1,6 @@
 <?php
 
-class InscriptionsRead extends InscriptionsAccess
+class InscriptionsRead extends InscriptionsOverrides
 {
     //*
     //* function Inscriptions_Read_Friend_IDs, Parameter list: $where=array()

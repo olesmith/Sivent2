@@ -13,7 +13,7 @@ trait MyMod_Sort_Items
     function MyMod_Sort_Items($sort="",$reverse="")
     {
         if ($sort=="") { $sort=$this->MyMod_Sort_Get(); }
-        $reverse=$this->MyMod_Sort_Reverse_Get($reverse);
+        if ($reverse=="") { $reverse=$this->MyMod_Sort_Reverse_Get($reverse); }
 
         if (!is_array($sort))
         {

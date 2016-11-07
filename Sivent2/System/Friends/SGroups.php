@@ -1,12 +1,31 @@
 array
 (
-    "Friend" => array
+   "Basic" => array
    (
-       "Name" => "Dados do Cadastro",
-       "Name_UK" => "Registration Data",
+       "Name" => "Básicos",
+       "Name_UK" => "Basic",
        "Data" => array
        (
-          "Name","NickName","Title","Email","Cell","Phone",
+           "ID","Email","Name","Cell","Phone","Matricula","Titulation",
+           "Photo"
+
+       ), 
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 0,
+
+       "Friend" => 1,
+       "Coordinator" => 0,
+   ),
+   "Personal" => array
+   (
+       "Name" => "Dados Profissionais",
+       "Name_UK" => "Professional Data",
+       "Data" => array
+       (
+          "Address",
+          "Institution",
+          "NickName","Curriculum","MiniCurriculum",
        ), 
        "Admin" => 1,
        "Person" => 0,
@@ -14,6 +33,5 @@ array
 
        "Friend" => 1,
        "Coordinator" => 1,
-       "Assessor" => 0,
-   ),
+    ),
 );

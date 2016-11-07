@@ -42,7 +42,8 @@ class HtmlForm extends HtmlInput
         global $NForms;
         $NForms++;
 
-        $anchor="FORM".$NForms;
+        //$anchor="FORM".$NForms;
+        $anchor="HorMenu";
         if (!empty($options[ "Anchor" ]))
         {
             $anchor=$options[ "Anchor" ];
@@ -95,8 +96,14 @@ class HtmlForm extends HtmlInput
             $options[ "ENCTYPE" ]="application/x-www-form-urlencoded";
         }
 
+        $html="";
+        if (!preg_match('/^_/',$anchor))
+        {
+            $html="<A NAME=\"".$anchor."\"></A>\n";
+        }
+        
         return
-            "<A NAME=\"".$anchor."\"></A>\n".
+            $html.
             $this->HtmlTag("FORM","",$options).
             "\n";
     }

@@ -6,7 +6,26 @@ include_once("Times/Access.php");
 
 class Times extends TimesAccess
 {
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 3,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Date__Name",
+                3 => "Name",
+                4 => "Capacity",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                3 => "1",
+            ),
+        );
     //*
+    
     //* function Units, Parameter list: $args=array()
     //*
     //* Constructor.

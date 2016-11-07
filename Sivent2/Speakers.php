@@ -1,10 +1,11 @@
 <?php
 
 include_once("Speakers/Access.php");
+include_once("Speakers/Emails.php");
 
 
 
-class Speakers extends SpeakersAccess
+class Speakers extends Speakers_Emails
 {
     //*
     //* function Units, Parameter list: $args=array()

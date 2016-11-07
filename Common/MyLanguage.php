@@ -45,15 +45,15 @@ trait MyLanguage
               "Title_PT" => "Ingles",
               "Icon" => "uk.png",
            ),
-           "ES" => array
-           (
-              "Key" => "ES",
-              "Name" => "ES",
-              "Title" => "Espanhol",
-              "Title_UK" => "Spanish",
-              "Title_UK" => "Castilhano",
-              "Icon" => "es.png",
-           ),
+           /* "ES" => array */
+           /* ( */
+           /*    "Key" => "ES", */
+           /*    "Name" => "ES", */
+           /*    "Title" => "Espanhol", */
+           /*    "Title_UK" => "Spanish", */
+           /*    "Title_UK" => "Castilhano", */
+           /*    "Icon" => "es.png", */
+           /* ), */
         );
 
         $language=$this->MyLanguage_Detect();;

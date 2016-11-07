@@ -1,6 +1,6 @@
 <?php
 
-class SubmissionsAccess extends ModulesCommon
+class Submissions_Access extends ModulesCommon
 {
     var $Access_Methods=array
     (
@@ -131,7 +131,7 @@ class SubmissionsAccess extends ModulesCommon
             $this->Current_User_Coordinator_Is()
             &&
             $this->HasModuleAccess();
-       
+
         return $res;
     }
     

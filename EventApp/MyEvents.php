@@ -79,6 +79,18 @@ class MyEvents extends MyEvents_Handle
     }
     
     //*
+    //* Returns full (relative) upload path: UploadPath/Module.
+    //*
+
+    function MyMod_Data_Upload_Path()
+    {
+        $path="Uploads/".$this->Unit("ID")."/Events";
+        $this->Dir_Create_AllPaths($path);
+        
+        return $path;
+    }
+    
+    //*
     //* function PreActions, Parameter list:
     //*
     //* 

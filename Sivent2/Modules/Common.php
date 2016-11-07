@@ -6,6 +6,74 @@ class ModulesCommon extends EventMod
 {
     var $Coordinator_Type=0;
 
+    //*
+    //* function Friend_Assessments_Has, Parameter list: $friend
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Assessments_Has($friend)
+    {
+        $res=FALSE;
+
+        $nentries=0;
+        if (!empty($friend[ "ID" ]))
+        {
+            $nentries=$this->AssessorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]));
+        }
+
+        if ($nentries>0) { $res=TRUE; }
+
+        return $res;
+    }
+    
+   //*
+    //* function Friend_Collaborators_Has, Parameter list: $friend
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Collaborators_Has($friend)
+    {
+        $res=FALSE;
+
+        $nentries=0;
+        if (!empty($friend[ "ID" ]))
+        {
+            $nentries=$this->CollaboratorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]));
+        }
+
+        if ($nentries>0) { $res=TRUE; }
+
+        return $res;
+    }
+    
+   //*
+    //* function Friend_Submissions_Has, Parameter list: $friend
+    //*
+    //* Detects if $friend has any Submissions.
+    //*
+
+    function Friend_Submissions_Has($friend)
+    {
+        $res=FALSE;
+
+        $nentries=0;
+        if (!empty($friend[ "ID" ]))
+        {
+            $nentries=
+                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]))
+                +
+                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend2" => $friend[ "ID" ]))
+                +
+                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend3" => $friend[ "ID" ]));
+        }
+
+        if ($nentries>0) { $res=TRUE; }
+
+        return $res;
+    }
+    
     
     //*
     //* sub Coordinator_Access_Has, Parameter list: $event=array(),$type=""
@@ -118,21 +186,21 @@ class ModulesCommon extends EventMod
         return $this->ApplicationObj()->Current_User_Event_May_Access($event);
     }
 
-    //*
-    //* function Inscriptions_Certificates_Published, Parameter list: 
-    //*
-    //* Returns true or false, whether event should provide certificates.
-    //*
+    /* //\* */
+    /* //\* function Inscriptions_Certificates_Published, Parameter list:  */
+    /* //\* */
+    /* //\* Returns true or false, whether event should provide certificates. */
+    /* //\* */
 
-    function Inscriptions_Certificates_Published()
-    {
-        $event=$this->Event();
+    /* function Inscriptions_Certificates_Published() */
+    /* { */
+    /*     $event=$this->Event(); */
 
-        return
-            $this->EventsObj()->Event_Certificates_Has($event)
-            &&
-            $this->EventsObj()->Event_Certificates_Published($event);
-    }
+    /*     return */
+    /*         $this->EventsObj()->Event_Certificates_Has($event) */
+    /*         && */
+    /*         $this->EventsObj()->Event_Certificates_Published($event); */
+    /* } */
     
     //*
     //* function Inscriptions_Certificates_May, Parameter list: 
@@ -154,92 +222,12 @@ class ModulesCommon extends EventMod
         }
         elseif ($this->Profiles_Is(array("Public","Friend")))
         {
-            $res=$this->Inscriptions_Certificates_Published();
+            $res=$this->EventsObj()->Event_Certificates_Published();
         }
             
         return $res;
     }
-    
-    /* //\* */
-    /* //\* sub Unit, Parameter list: $key="" */
-    /* //\* */
-    /* //\* Reads Unit - dies, if not admin and no unit. */
-    /* //\* */
-    /* //\* */
 
-    /* function Unit($key="") */
-    /* { */
-    /*     return $this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE); */
-    /* } */
-
-    /* //\* */
-    /* //\* sub Event, Parameter list: $key="" */
-    /* //\* */
-    /* //\* Reads Unit - dies, if not admin and no unit. */
-    /* //\* */
-    /* //\* */
-
-    /* function Event($key="") */
-    /* { */
-    /*     return $this->ApplicationObj()->CGI_GET2Hash("Event","EventsObj",$key,"Event",FALSE); */
-    /* } */
-
-    /* //\* */
-    /* //\* function PrintDocHeads, Parameter list:  */
-    /* //\* */
-    /* //\* Overrides Application::PrintDocHeads. */
-    /* //\* */
-
-    /* function PrintDocHeads() */
-    /* { */
-    /*     $this->ApplicationObj()->MyApp_Interface_Head(); */
-    /* } */
-
-
-    /* //\* */
-    /* //\* function SetEvent, Parameter list:  */
-    /* //\* */
-    /* //\* Sets $this->ApplicationObj->Event to $event. */
-    /* //\* */
-
-    /* function SetEvent($event) */
-    /* { */
-    /*     $this->ApplicationObj->Event=$event; */
-    /* } */
-
-
-    /* //\* */
-    /* //\* */
-    /* //\* function SqlEventTableName, Parameter list: $table="",$event=array() */
-    /* //\* */
-    /* //\* Used by specific module to override SqlTableName, prepending Unit id. */
-    /* //\* */
-
-    /* function SqlEventTableName($module,$event=array()) */
-    /* { */
-    /*     $table="#Unit__#Event_".$module; */
-
-    /*     $eventid=0; */
-    /*     if ($this->CGI_GET("ModuleName")=="Events") */
-    /*     { */
-    /*         $eventid=$this->CGI_GET("ID"); */
-    /*     } */
-
-    /*     if (empty($eventid)) */
-    /*     { */
-    /*         $eventid=$this->CGI_GET("Event"); */
-    /*     } */
-
-    /*     if (!empty($event)) */
-    /*     { */
-    /*         $eventid=$event[ "ID" ]; */
-    /*     } */
-
-    /*     $table=preg_replace('/#Event/',$eventid,$table); */
-
-    /*     return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table); */
-    /* } */
-    
     //*
     //* sub MyMod_Mail_Texts_Get, Parameter list: $files=array()
     //*
@@ -314,9 +302,9 @@ class ModulesCommon extends EventMod
     function Event_Collaborations_Has($item=array())
     {
         return
-            $this->EventsObj()->Event_Collaborations_Has($item)
+            $this->EventsObj()->Event_Collaborations_Has()
             &&
-            $this->EventsObj()->Event_Collaborations_May($item);
+            $this->EventsObj()->Event_Collaborations_May();
     }
     
     //*
@@ -369,77 +357,6 @@ class ModulesCommon extends EventMod
         }
 
         return $res;
-    }
-
-    //*
-    //* function , Parameter list: $date1,$date2
-    //*
-    //* Returns: formatted date span string.
-    //*
-
-    function Date_Span_Interval($item,$key1,$key2)
-    {
-        $cell=
-            $this->MyTime_Sort2Date($item[ $key1 ]);
-
-        if (!empty($key2) && !empty($item[ $key2 ]))
-        {
-            $cell.=
-                " - ".
-                $this->MyTime_Sort2Date($item[ $key2 ]).
-                "";
-        }
-
-        return $cell;
-    }
-
-    //*
-    //* function , Parameter list: $date1,$date2,$date=0
-    //*
-    //* Returns:
-    //* 0 if $date is smaller than both dates.
-    //* 1 if $date inbetween dates
-    //* 2 if $date greater that both dates.
-    //*
-
-    function Date_Span_Position($item,$key1,$key2,$date=0)
-    {
-        if (empty($date)) { $date=$this->MyTime_2Sort(); }
-        
-        $res=1;
-        $date1=$item[ $key1 ];
-        $date2=$item[ $key2 ];
-        
-        if     ($date<$date1 && $date<$date2) { $res=0; }
-        elseif ($date>$date1 && $date>$date2) { $res=2; }
-
-        return $res;
-    }
-
-    //*
-    //* function Date_Span_Status, Parameter list: $date1,$date2,$date=0
-    //*
-    //* Returns formatted messgae according to date dates span status.
-    //*
-
-    function Date_Span_Status($item,$key1,$key2,$date=0)
-    {
-        if (empty($date)) { $date=$this->MyTime_2Sort(); }
-        
-        
-        $res=$this->Date_Span_Position($item,$key1,$key2,$date);
-
-        $key="Events_ToOpen_Title";
-        if ($res==1)
-        {
-            $key="Events_Open_Title";
-        }
-        elseif ($res==2)
-        {
-            $key="Events_Closed_Title";
-        }
-
-        return $this->MyLanguage_GetMessage($key);
     }
 
     
@@ -521,7 +438,51 @@ class ModulesCommon extends EventMod
         return TRUE;
     }
 
+    //*
+    //* function AddUnitDefault, Parameter list: 
+    //*
+    //* Adds unit default.
+    //*
 
+    function AddUnitDefault()
+    {
+        $unitid=$this->GetCGIVarValue("Unit");
+        $eventid=$this->GetCGIVarValue("Event");
+        $this->AddDefaults[ "Unit" ]=$unitid;
+        $this->AddFixedValues[ "Unit" ]=$unitid;
+    }
+   //*
+    //* function AddUnitEventDefault, Parameter list: 
+    //*
+    //* Adds unit default.
+    //*
+
+    function AddUnitEventDefault()
+    {
+        $this->AddUnitDefault();
+        
+        $eventid=$this->GetCGIVarValue("Event");
+        $this->AddDefaults[ "Event" ]=$eventid;
+        $this->AddFixedValues[ "Event" ]=$eventid;
+    }
+
+    
+    //*
+    //* function Submission_Confirm_Should, Parameter list: $submission
+    //*
+    //* Determine Confirmed fields access permissions.
+    //*
+
+    function Submission_Confirm_Should($data,$submission)
+    {
+        $res=0;
+        if (!empty($submission[ "Status" ]) && $submission[ "Status" ]==2)
+        {
+            $res=2;
+        }
+
+        return $res;
+    }
 }
 
 ?>

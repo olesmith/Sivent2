@@ -25,7 +25,7 @@ array
        "Name_UK" => "Basic",
        "Data" => array
        (
-          "Cell","Phone","Matricula","Titulation","Institution",
+           "ID","Email","Name","Cell","Phone","Matricula","Titulation",
        ), 
        "Admin" => 1,
        "Person" => 0,

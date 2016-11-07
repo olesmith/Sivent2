@@ -14,7 +14,7 @@ array
       "Person" => 0,
       "Public" => 0,
       "Admin" => 1,
-      "Friend"     => 0,
+      "Friend"     => 1,
       "Coordinator" => 1,
    ),
    "Info" => array
@@ -23,8 +23,8 @@ array
       "Name_UK" => "Info",
       "Data" => array
       (
-         "Origin","Carrier","Hotel","Other",
-         "Allocated",
+         "Confirmed","Origin","Carrier","Hotel","Other",
+         "Allocated",         
       ),
       "Admin" => 1,
       "Person" => 0,

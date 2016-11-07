@@ -5,6 +5,7 @@ include_once("../EventApp/MyInscriptions.php");
 
 
 include_once("Inscriptions/Access.php");
+include_once("Inscriptions/Overrides.php");
 include_once("Inscriptions/Read.php");
 include_once("Inscriptions/Cells.php");
 include_once("Inscriptions/Tables.php");
@@ -32,6 +33,26 @@ class Inscriptions extends InscriptionsHandle
     var $Certificate_Type=1;
 
     var $Load_Other_Data=TRUE;
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 4,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__ID",
+                3 => "Friend__Name",
+                4 => "Friend__Email",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "0",
+                3 => "1",
+                4 => "0",
+            ),
+                
+           );
     
     //*
     //* function Inscriptions, Parameter list: $args=array()
@@ -53,12 +74,7 @@ class Inscriptions extends InscriptionsHandle
               "Inscriptions" => 0,
            ),
         );
-        $this->InscriptionFriendTableData=
-            array
-            (
-               "Name","NickName","Email","Cell",
-               "Curriculum","Friend_Data_Edit_Link"
-            );
+
         $this->IncludeAllDefault=TRUE;
 
         $this->CellMethods[ "Inscription_Collaborators_Noof_Cell" ]=TRUE;
@@ -332,8 +348,8 @@ class Inscriptions extends InscriptionsHandle
                     $cert=
                         array
                         (
-                           "Inscription" => $item[ "ID" ],
-                           "Unit"        => $item[ "Unit" ],
+                           "Inscription" =>  $item[ "ID" ],
+                           "Unit"        =>  $item[ "Unit" ],
                            "Event"        => $item[ "Event" ],
                            "Friend"       => $item[ "Friend" ],
                            "Type"         => $this->Certificate_Type,

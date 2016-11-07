@@ -69,6 +69,15 @@ class ItemsEmailsSend extends ItemsEmailsForm
                 $body=preg_replace('/\s+$/',"",$body);
                 $body=preg_replace('/\s+/'," ",$body);
 
+                array_push($bccs,$this->ApplicationObj->LoginData[ "Email" ]);
+                foreach (array("AdmEmail","BCCEmail") as $key)
+                {
+                    if (!empty($this->ApplicationObj->MailInfo[ $key ]))
+                    {
+                        array_push($bccs,$this->ApplicationObj->MailInfo[ $key ]);
+                    }
+                }
+
                 if (preg_match('/\S/',$body))
                 {                
                     $mailhash=array
@@ -80,15 +89,7 @@ class ItemsEmailsSend extends ItemsEmailsForm
                        "BCC" => join
                        (
                           ",",
-                          array_merge
-                          (
-                             array
-                             (
-                                $this->ApplicationObj->MailInfo[ "AdmEmail" ],
-                                $this->ApplicationObj->LoginData[ "Email" ]
-                             ),
-                             $bccs
-                          )
+                          $bccs
                        ),
                        "ReplyTo" => $this->ApplicationObj->LoginData[ "Email" ],
                        "Subject" => $this->GetPOST("Subject"),

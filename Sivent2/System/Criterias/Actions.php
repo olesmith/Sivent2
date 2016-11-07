@@ -1,6 +1,15 @@
 array
 (
-      'Search' => array
+      'Export' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
+       'Search' => array
       (
          'Public' => 1,
          'Person' => 0,

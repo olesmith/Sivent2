@@ -1,7 +1,7 @@
 <?php
 
 
-class CollaboratorsCertificate extends CollaboratorsTable
+class Collaborators_Certificate extends Collaborators_Table
 {
     //*
     //* function Collaborator_Certificate_Where, Parameter list: $collaborator,$friendid=0

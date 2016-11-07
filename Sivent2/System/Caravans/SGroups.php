@@ -6,7 +6,8 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Friend","Name","City","Status",
+          "Unit","Event",
+          "Friend","Name","City","Status",
          "Homologated","NParticipants",
          "Certificate","Certificate_CH",
       ),

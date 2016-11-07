@@ -6,6 +6,26 @@ include_once("Rooms/Access.php");
 
 class Rooms extends RoomsAccess
 {
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 4,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Place__Name",
+                3 => "Name",
+                4 => "Capacity",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "1",
+                3 => "1",
+                4 => "0",
+                5 => "0",
+            ),
+        );
     //*
     //* function Units, Parameter list: $args=array()
     //*

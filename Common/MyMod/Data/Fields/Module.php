@@ -95,6 +95,18 @@ trait MyMod_Data_Fields_Module
 
         return $where;
     }
+    
+    //*
+    //* function MyMod_Data_Module_Name, Parameter list: $data
+    //*
+    //* Returns name of submodule $data.
+    //*
+
+    function MyMod_Data_Fields_Module_Name($data)
+    {
+        return $this->ApplicationObj()->MyApp_Module_GetObject($this->MyMod_Data_Fields_Module_Class($data))->ModuleName;
+    }
+
 
     //*
     //* function MyMod_Data_Module_2Object, Parameter list: $data
@@ -118,6 +130,24 @@ trait MyMod_Data_Fields_Module
         return $this->MyMod_Data_Fields_Module_Select($data,$item,"",0,$rdata,"",FALSE);
     }
 
+    //*
+    //* function MyMod_Data_Fields_Module_SubItem_Get, Parameter list: $data,$item
+    //*
+    //* Creates sql object show field.
+    //*
+
+    function MyMod_Data_Fields_Module_SubItem_Get($data,$item)
+    {
+        $value=$item[ $data ];
+        if (empty($this->ItemData[ $data ][ "Items" ][ $value ]))
+        {
+            $subitem=$this->MyMod_Data_Fields_Module_SubItems_Read($data,$item,array($value));
+            $this->ItemData[ $data ][ "Items" ][ $value ]=array_pop($subitem);
+        }
+
+        return $this->ItemData[ $data ][ "Items" ][ $value ];
+    }
+    
     //*
     //* function MyMod_Data_Fields_Module_Show, Parameter list: $data,$item,$value="",$tabindex="",$plural=FALSE,$links=TRUE,$callmethod=TRUE
     //*
@@ -238,8 +268,8 @@ trait MyMod_Data_Fields_Module
            {
                $soptions
                [
-                 $this->Html2Sort($option[ "Name" ]).
-                 sprintf("%06d",$option[ "ID" ])
+                   strtolower($this->Html2Sort($option[ "Name" ])).
+                   sprintf("%06d",$option[ "ID" ])
                ]=$option;
            }
 

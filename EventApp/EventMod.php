@@ -6,6 +6,110 @@ class EventMod extends DBDataObj
     var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
     
     //*
+    //* function , Parameter list: $date1,$date2
+    //*
+    //* Returns: formatted date span string.
+    //*
+
+    function Date_Span_Interval($item,$key1,$key2)
+    {
+        $cell=$this->MyTime_Sort2Date($item[ $key1 ]);
+
+        if (!empty($key2) && !empty($item[ $key2 ]))
+        {
+
+            if (empty($item[ $key2 ])) { $item[ $key2 ]=$item[ $key1 ]; }
+            $date1=$this->MyTime_Date2Hash($item[ $key1 ]);
+            $date2=$this->MyTime_Date2Hash($item[ $key2 ]);
+
+            if ($date1[ "Year" ]==$date2[ "Year" ])
+            {
+                if ($date1[ "Month" ]==$date2[ "Month" ])
+                {
+                    if ($date1[ "Day" ]==$date2[ "Day" ])
+                    {
+                        $cell=
+                            $date1[ "Day" ]."/".$date1[ "Month" ]."/".$date1[ "Year" ];
+                    }
+                    else
+                    {
+                        $cell=
+                            $date1[ "Day" ]."-".$date2[ "Day" ].
+                            "/".
+                            $date1[ "Month" ]."/".$date1[ "Year" ];
+                    }
+                }
+                else
+                {
+                    $cell=
+                        $date1[ "Day" ]."/".$date1[ "Month" ].
+                        "-".
+                        $date2[ "Day" ]."/".$date2[ "Month" ].
+                        $date1[ "Year" ];
+                }
+            }
+            else
+            {
+                $cell=
+                    $date1[ "Day" ]."/".$date1[ "Month" ].$date1[ "Year" ].
+                    "-".
+                    $date2[ "Day" ]."/".$date2[ "Month" ].$date2[ "Year" ];
+            }
+        }
+
+        return $cell;
+    }
+
+    //*
+    //* function , Parameter list: $date1,$date2,$date=0
+    //*
+    //* Returns:
+    //* 0 if $date is smaller than both dates.
+    //* 1 if $date inbetween dates
+    //* 2 if $date greater that both dates.
+    //*
+
+    function Date_Span_Position($item,$key1,$key2,$date=0)
+    {
+        if (empty($date)) { $date=$this->MyTime_2Sort(); }
+        
+        $res=1;
+        $date1=$item[ $key1 ];
+        $date2=$item[ $key2 ];
+        
+        if     ($date<$date1 && $date<$date2) { $res=0; }
+        elseif ($date>$date1 && $date>$date2) { $res=2; }
+
+        return $res;
+    }
+
+    //*
+    //* function Date_Span_Status, Parameter list: $date1,$date2,$date=0
+    //*
+    //* Returns formatted messgae according to date dates span status.
+    //*
+
+    function Date_Span_Status($item,$key1,$key2,$date=0)
+    {
+        if (empty($date)) { $date=$this->MyTime_2Sort(); }
+        
+        
+        $res=$this->Date_Span_Position($item,$key1,$key2,$date);
+
+        $key="Events_ToOpen_Title";
+        if ($res==1)
+        {
+            $key="Events_Open_Title";
+        }
+        elseif ($res==2)
+        {
+            $key="Events_Closed_Title";
+        }
+
+        return $this->MyLanguage_GetMessage($key);
+    }
+
+    //*
     //* function PreActions, Parameter list:
     //*
     //* 
@@ -214,7 +318,14 @@ class EventMod extends DBDataObj
 
         if (!empty($event))
         {
-            $eventid=$event[ "ID" ];
+            if (is_array($event))
+            {
+                $eventid=$event[ "ID" ];
+            }
+            else
+            {
+                $eventid=$event;
+            }
         }
 
         $table=preg_replace('/#Event/',$eventid,$table);

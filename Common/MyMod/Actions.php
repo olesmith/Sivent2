@@ -26,6 +26,29 @@ trait MyMod_Actions
 
         return $res;
     }
+    
+    //*
+    //* function  MyMod_Item_Action_Icon, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
+    //*
+    //* Generates only action icon.
+    //*
+
+    function MyMod_Item_Action_Icon($data,$item)
+    {   
+        $args[ "ModuleName" ]=$this->ModuleName;
+        $args[ "Action" ]="Download";
+        $args[ "ID" ]= $item[ "ID" ];
+        $args[ "Data" ]=$data;
+                        
+        return
+            $this->IMG
+            (
+                "icons/".$this->Actions[ $data ][ "Icon" ],
+                $data,
+                20,20
+            );
+    }
+    
 }
 
 ?>

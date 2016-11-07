@@ -1,5 +1,14 @@
 array
 (
+      'Export' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowListAccess",
+      ),
       'Emails' => array
       (
          'Public' => 0,
@@ -57,10 +66,10 @@ array
    (
       "Href"     => "",
       "HrefArgs" => "?ModuleName=Inscriptions&Event=#Event&Action=GenCert&Latex=1&ID=#ID",
-      "Title"    => "Gerar Certificado (PDF)",
-      "Title_UK" => "Generate Certificate (PDF)",
-      "Name"     => "Certificado",
-      "Name_UK"   => "Certificate",
+      "Title"    => "Gerar Certificado(s) (PDF)",
+      "Title_UK" => "Generate Certificate(s) (PDF)",
+      "Name"     => "Certificado(s)",
+      "Name_UK"   => "Certificate(s)",
       
       "Handler"   => "Inscription_Handle_Certificate_Generate",
       "Icon"   => "print_dark.png",

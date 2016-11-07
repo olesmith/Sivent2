@@ -335,12 +335,13 @@ class EventApp extends MyEventAppMail
                 (
                    "",
                    $table,
-                   array(),
+                   array("WIDTH" => '100%'),
                    array(),
                    array(),
                    $evenodd=FALSE
                 ).
-                ""
+                "",
+                array("WIDTH" => '75%')
             ).
             $this->BR();
     }

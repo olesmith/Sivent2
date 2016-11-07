@@ -17,7 +17,14 @@ class AssessorsInscriptionAssessmentsRead extends AssessorsInscriptionAssessors
             (
                $this->AssessmentsObj()->Sql_Select_Hashes
                (
-                  $this->UnitEventWhere(array("Submission" => $assessor[ "Submission" ]))
+                  $this->UnitEventWhere
+                  (
+                      array
+                      (
+                          "Friend" => $assessor[ "Friend" ],
+                          "Submission" => $assessor[ "Submission" ],
+                      )
+                  )
                ),
                "Criteria"
             );

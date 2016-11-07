@@ -492,6 +492,8 @@ class DataGroups extends HashesData
             //Check if group allowed
             if ($this->MyMod_Item_Group_Allowed($group) && $this->GetRealNameKey($group,"Name")!="")
             {
+                if (isset($group[ "Visible" ]) && !$group[ "Visible" ]) { continue; }
+                
                 array_push($values,$groupid);
                 array_push($names,$this->GetRealNameKey($group));
                 array_push($titles,$this->GetRealNameKey($group,"Title"));

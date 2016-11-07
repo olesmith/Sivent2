@@ -51,14 +51,13 @@ class GroupDatas extends DBGroups
 
     function PostProcessItemData()
     {
+        $this->AddUnitEventDefault();
+        
         $unitid=$this->GetCGIVarValue("Unit");
         $eventid=$this->GetCGIVarValue("Event");
-        $this->AddDefaults[ "Unit" ]=$unitid;
-        $this->AddFixedValues[ "Unit" ]=$unitid;
+        
         $this->ItemData[ "Unit" ][ "Default" ]=$unitid;
-
-        $this->AddDefaults[ "Event" ]=$eventid;
-        $this->AddFixedValues[ "Event" ]=$eventid;
+        $this->ItemData[ "Event" ][ "Default" ]=$eventid;
 
         parent::PostProcessItemData();
     }

@@ -78,4 +78,23 @@ array
          "Icon"    => "time_light.png",
          "Singular"    => TRUE,
       ),
+    "Emails" => array
+    (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Speakers&Action=Emails",
+        "Title"    => "Emails",
+        "Title_UK" => "Emails",
+        "ShortName"     => "Emails",
+        "ShortName_UK"   => "Emails",
+        "Name"     => "Emails",
+        "Name_UK"   => "Emails",
+        "Handler"   => "HandleEmails",
+
+        'Public' => 0,
+        'Person' => 0,
+        "Admin" => 1,
+        "Friend"     => 0,
+        "Coordinator" => 1,
+        "AccessMethod" => "CheckEditListAccess",
+    ),
 );

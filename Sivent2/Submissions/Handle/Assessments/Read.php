@@ -1,7 +1,7 @@
 <?php
 
 
-class SubmissionsHandleAssessmentsRead extends SubmissionsHandleAssessmentsRows
+class Submissions_Handle_Assessments_Read extends Submissions_Handle_Assessments_Rows
 {
     //*
     //* function Submissions_Handle_Assessors_Assessments_Read, Parameter list: $submission,$assessors,$assesmentsdatas=array()

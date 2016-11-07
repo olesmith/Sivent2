@@ -84,7 +84,6 @@ array
          (
              "Add" => 1,
              "Search" => 1,
-             "EditList" => 1,
              "Emails" => 1,
          ),
          'Assessor' => array
@@ -95,6 +94,7 @@ array
              "Add" => 1,
              "Search" => 1,
              "EditList" => 1,
+             "Export" => 1,
              "Emails" => 1,
          ),
       ),

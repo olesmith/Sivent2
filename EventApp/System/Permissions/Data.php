@@ -64,7 +64,7 @@ array
          "Inscrições",
          "Colaborações",
          "Caravanas",
-         "Submissõess",
+         "Submissões",
          "PreInscrições",
          "Presenças",         
       ),

@@ -121,7 +121,7 @@ trait ShowDir
 
                     if (!empty($dbinfo[ $col."_Contents" ]))
                     {
-                        $dbsize=strlen($this->$mod()->DB2FileContents($dbinfo[ $col."_Contents" ]));
+                        $dbsize=strlen($this->$mod()->MyMod_Data_Fields_File_DB_2Contents($dbinfo[ $col."_Contents" ]));
                         $dbtime=$dbinfo[ $col."_Time" ];
                     }
                 }

@@ -53,6 +53,7 @@ trait MyMod_Data_Triggers
                 die("Warning: ($data) TriggerFunction: $method(\$item,\$data,\$newvalue): \$item undefined");
             }
         }
+        
         return $item;
     }
 }

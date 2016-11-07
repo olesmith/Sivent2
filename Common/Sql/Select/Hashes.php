@@ -217,5 +217,25 @@ trait Sql_Select_Hashes
            $table           
         );
     }
+    
+    //*
+    //* function Sql_Select_Hashes_Has, Parameter list: $where,$table=""
+    //*
+    //* Returns TRUE, if a Select Hashes sdatement returns any hashes.
+    //*
+    //* 
+
+    function Sql_Select_Hashes_Has($where=array(),$table="")
+    {
+        $n=$this->Sql_Select_NHashes($where,$table);
+
+        $res=FALSE;
+        if ($n>0)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
 }
 ?>

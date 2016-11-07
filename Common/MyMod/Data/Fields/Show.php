@@ -123,7 +123,7 @@ trait MyMod_Data_Fields_Show
             $value="";
             if (isset($item[ $data ])) { $value=$item[ $data ]; }
 
-            $rvalue=$this->FileFieldDecorator($data,$item,$plural,0);
+            $rvalue=$this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,0);
             $value=$rvalue;
         }
         elseif ($this->ItemData[ $data ][ "IsColor" ])
@@ -305,6 +305,25 @@ trait MyMod_Data_Fields_Show
 
         if (preg_match('/^0\s?$/',$value)) { $value=""; }
 
+        if (!empty($this->ItemData[ $data ][ "HRefIt" ]))
+        {
+            if (!empty($value) && !preg_match('/^(https?):/i',$value))
+            {
+                $value="http://".$value;
+            }
+            $value=
+                $this->Html_Tags
+                (
+                    "A",
+                    $value,
+                    array
+                    (
+                        "HREF" => $value,
+                        "TARGET" => '_blank',
+                    )
+                );
+        }
+        
         return $value;
     }
 
@@ -358,7 +377,10 @@ trait MyMod_Data_Fields_Show
             }
         }
 
-        if (preg_match('/\S/',$rvalue)) { array_push($rvalues,$rvalue); }
+        if (preg_match('/\S/',$rvalue))
+        {
+            array_push($rvalues,$rvalue);
+        }
 
         return join($this->BR(),$rvalues);
     }

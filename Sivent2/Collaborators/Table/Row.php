@@ -1,6 +1,6 @@
 <?php
 
-class CollaboratorsTableRow extends CollaboratorsTableCell
+class Collaborators_Table_Row extends Collaborators_Table_Cell
 {
     //*
     //* function Collaborators_Table_Collaborations_Titles, Parameter list: 

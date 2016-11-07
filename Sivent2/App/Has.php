@@ -3,6 +3,19 @@
 class App_Has extends App_Head_Table
 {
     //*
+    //* function Friend_Assessments_Has, Parameter list: $friend
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Assessments_Has($friend=array())
+    {
+        if (empty($friend)) { $friend=$this->LoginData(); }
+        
+        return $this->FriendsObj()->Friend_Assessments_Has($friend);
+    }
+    
+    //*
     //* function HasCollaborations, Parameter list:$event=array()
     //*
     //* Checks whether current event has collaborations.

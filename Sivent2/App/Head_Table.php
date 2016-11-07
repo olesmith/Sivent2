@@ -17,34 +17,35 @@ class App_Head_Table extends App_Events
                $event,
                array($datas)
              );
-
-         $title=$this->MyLanguage_GetMessage($msgkey);
-        if (!empty($datekeys))
-        {
-            if (empty($datekeys[1])) { $datekeys[1]=""; }
-            $title.=
-                ": ".
-                $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1]);
-        }
          
-        array_push
-        (
-           $table,
-           array
-           (
-               $this->B($this->MyLanguage_GetMessage($msgkey).":"),
-               $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1])
-           )
-        );
+         $title=$this->MyLanguage_GetMessage($msgkey);
+         if (!empty($datekeys))
+         {
+             if (empty($datekeys[1])) { $datekeys[1]=""; }
+             $title.=
+                 ": ".
+                 $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1]);
+         }
+         
+         array_push
+         (
+             $table,
+             array
+             (
+                 $this->B($this->MyLanguage_GetMessage($msgkey).":"),
+                 $this->EventsObj()->Date_Span_Interval($event,$datekeys[0],$datekeys[1])
+             )
+         );
         
-        if (count($rtable)>0)
-        {
-            $table=array_merge
-            (
-               $table,
-               array($rtable[0])
-            );
-        }
+         if (count($rtable)>0)
+         {
+             $table=
+                 array_merge
+                 (
+                     $table,
+                     array($rtable[0])
+                 );
+         }
 
    }
 
@@ -69,35 +70,6 @@ class App_Head_Table extends App_Events
     function AppEventInfoPostTable()
     {
         $event=$this->Event();
-
-        /* $tabledata= */
-        /*     array */
-        /*     ( */
-        /*        array */
-        /*        ( */
-        /*           "Name","Date","Status" */
-        /*        ), */
-        /*        array */
-        /*        ( */
-        /*           "Place","Place_Address","Place_Site", */
-        /*        ), */
-        /*        array */
-        /*        ( */
-        /*           "EventStart","EventEnd","Inscriptions_Public", */
-        /*        ), */
-        /*     ); */
-
-        /* $table= */
-        /*     array_merge */
-        /*     ( */
-        /*        $this->EventInfoRow($event), */
-        /*        $this->EventsObj()->MyMod_Item_Table */
-        /*        ( */
-        /*           0, */
-        /*           $event, */
-        /*           $tabledata */
-        /*        ) */
-        /*     ); */
         
         $table=$this->EventInfoRow($event);
         $groupdefs=
@@ -147,6 +119,7 @@ class App_Head_Table extends App_Events
                ),
             );
 
+        $rtable=array();
         foreach ($groupdefs as $group => $def)
         {
             if (!empty($def[ "AccessMethod" ]))
@@ -160,14 +133,30 @@ class App_Head_Table extends App_Events
 
             $this->AppEventTableGroup
             (
-               $table,
+               $rtable,
                $event,
                $def[ "Title" ],
                $def[ "Data" ],
                $def[ "Dates" ]
             );
         }
-               
+
+        array_push
+        (
+            $table,
+            array
+            (
+                "","",
+                $this->Html_Table("",$rtable,array("ALIGN" => 'center')),
+                "",""
+            )
+        );
+
+        if (count($table)==3)
+        {
+            $table=array($table[1],$table[2],$table[0]);
+        }
+        
         return $table;
     }
     
@@ -208,6 +197,7 @@ class App_Head_Table extends App_Events
     function EventTitleCell($event=array())
     {
         $titlecell=
+            $this->Anchor("Top").
             $this->H(3,$this->GetRealNameKey($event,"Title")).
             $this->H(4,$this->Event_Inscriptions_DateSpan($event)).
             $this->H(5,$this->EventPlaceCell($event)).
@@ -227,35 +217,65 @@ class App_Head_Table extends App_Events
     {
         if (empty($event)) { $event=$this->Event(); }
         
-        $logos=$this->EventLogos();
+        $nlogos=$this->EventLogos_Count($event);
 
         $titlecell=$this->EventTitleCell($event);
 
-        if (count($logos)==2)
+        if ($nlogos==2)
         {
             return
                 array
                 (
                    array
                    (
-                      $this->MultiCell($logos[0],2),
-                      $this->MultiCell($titlecell,2),
-                      $this->MultiCell($logos[1],2),
+                       $this->MultiCell
+                       (
+                          $this->EventsObj()->MyMod_Data_Field_Logo($event,"HtmlIcon1","",'100%'),
+                          2,
+                          "c",
+                          array("WIDTH" => '25%')
+                       ),
+                       $this->MultiCell
+                       (
+                           $titlecell,
+                           2,
+                          "c",
+                          array("WIDTH" => '50%')
+                       ),
+                       $this->MultiCell
+                       (
+                          $this->EventsObj()->MyMod_Data_Field_Logo($event,"HtmlIcon2","",'100%'),
+                          2,
+                          "c",
+                          array("WIDTH" => '25%')
+                       ),
                    ),
                 );
         }
-        elseif (count($logos)==1)
+        elseif ($nlogos==1)
         {
             return
                 array
                 (
                    array
                    (
-                      $this->MultiCell($logos[0],6),
+                      $this->MultiCell
+                      (
+                          $this->EventsObj()->MyMod_Data_Field_Logo($event,"HtmlIcon1","",'100%'),
+                          6,
+                          "c",
+                          array("WIDTH" => '100%')
+                      ),
                    ),
                    array
                    (
-                      $this->MultiCell($titlecell,6),
+                      $this->MultiCell
+                      (
+                          $titlecell,
+                          6,
+                          "c",
+                          array("WIDTH" => '100%')
+                      ),
                    ),
                 );
         }
@@ -274,12 +294,34 @@ class App_Head_Table extends App_Events
 
     
     //*
-    //* function EventLogos, Parameter list: $event=array()
+    //* function EventLogos_Count, Parameter list: $event=array()
     //*
     //* Returns event logo as list of (2) imgs.
     //*
 
-    function EventLogos($event=array())
+    function EventLogos_Count($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        $count=0;
+        for ($no=1;$no<=2;$no++)
+        {
+            if (!empty($event[ "HtmlIcon".$no ]))
+            {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+    
+    //*
+    //* function EventLogos_obsolete, Parameter list: $event=array()
+    //*
+    //* Returns event logo as list of (2) imgs.
+    //*
+
+    function EventLogos_obsolete($event=array())
     {
         if (empty($event)) { $event=$this->Event(); }
         

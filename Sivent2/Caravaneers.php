@@ -9,6 +9,28 @@ include_once("Caravaneers/Certificate.php");
 class Caravaneers extends Caravaneers_Certificate
 {
     var $Certificate_Type=2;
+    var $Export_Defaults=
+        array
+        (
+            "NFields" => 8,
+            "Data" => array
+            (
+                1 => "No",
+                2 => "Friend__Name",
+                3 => "Name",
+                4 => "Email",
+                5 => "Status",
+                6 => "PRN",
+                7 => "Comment",
+                8 => "Certificate",
+            ),
+            "Sort" => array
+            (
+                1 => "0",
+                2 => "0",
+                3 => "1",
+            ),
+        );
     
     //*
     //* function Units, Parameter list: $args=array()

@@ -41,30 +41,6 @@ trait MyMod_Item_Form
             "";
     }
 
-    //*
-    //* Updates item form.
-    //*
-
-    function MyMod_Item_Update(&$item,$datas)
-    {
-        $items=$this->UpdateItems
-        (
-           array($item),
-           $datas
-        );
-
-        $item=array_pop($items);
-    }
-
-    //*
-    //* Updates item form.
-    //*
-
-    function MyMod_Item_Table_Update(&$args)
-    {
-        $this->MyMod_Item_Update($args[ "Item" ],$args[ "Datas" ]);
-    }
-
     
     //*
     //* Runs item form.
@@ -72,6 +48,7 @@ trait MyMod_Item_Form
 
     function MyMod_Item_Table_Form($args=array())
     {
+        $this->Actions();
         $submit=
             $this->GetMessage($this->HtmlMessages,"SendButton").
             " ".
@@ -82,7 +59,7 @@ trait MyMod_Item_Form
            array
            (
               "Anchor"     => "TOP",
-              "Uploads" => FALSE,
+              "Uploads" => TRUE,
               "CGIGETVars" => array(),
               "CGIPOSTVars" => array(),
 

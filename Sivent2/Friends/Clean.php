@@ -1,7 +1,7 @@
 <?php
 
 
-class FriendsClean extends MyFriends
+class Friends_Clean extends MyFriends
 {
     //*
     //* function HandleClean, Parameter list: 

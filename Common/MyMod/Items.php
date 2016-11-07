@@ -10,6 +10,7 @@ include_once("Items/Search.php");
 include_once("Items/PHP.php"); 
 include_once("Items/Print.php"); 
 include_once("Items/Latex.php"); 
+include_once("Items/Update.php"); 
 
 trait MyMod_Items
 {
@@ -22,7 +23,8 @@ trait MyMod_Items
         MyMod_Items_Search,
         MyMod_Items_PHP,
         MyMod_Items_Print,
-        MyMod_Items_Latex;
+        MyMod_Items_Latex,
+        MyMod_Items_Update;
         
 }
 
