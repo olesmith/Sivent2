@@ -189,7 +189,6 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
                 );
         }
         
-        //var_dump($this->Friend_Collaborations_Table($edit,$friend,$inscription));
         $tables=
             array_merge
             (

@@ -167,7 +167,7 @@ class Collaborators extends Collaborators_Certificate
         $friend=array("ID" => $item[ "Friend" ]);
         $event=array("ID" => $item[ "Event" ]);
         
-        $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+        $isinscribed=$this->EventsObj()->Friend_Inscribed_Is($event,$friend);
         if (!$isinscribed)
         {
             $this->InscriptionsObj()->DoInscribe($friend);

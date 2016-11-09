@@ -1,6 +1,6 @@
 <?php
 
-class MyEventAppAccess_May extends MyEventAppAccessors
+class MyEventApp_Access_May extends MyEventApp_Accessors
 {
     var $Coordinator_Types=array
     (

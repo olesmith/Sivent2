@@ -11,7 +11,7 @@ class MyInscriptions_Add extends MyInscriptions_Handle
 
     function FriendInscribedInEvent($event,$friend)
     {
-        return $this->EventsObj()->FriendIsInscribed($event,$friend);
+        return $this->EventsObj()->Friend_Inscribed_Is($event,$friend);
     }
 
     

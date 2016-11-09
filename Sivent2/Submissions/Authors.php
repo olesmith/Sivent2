@@ -1,7 +1,7 @@
 <?php
 
 
-class Submissions_Authors extends Submissions_Assessments
+class Submissions_Authors extends Submissions_Certificate
 {   
     //*
     //* function Submission_Author_Data, Parameter list: 
@@ -54,7 +54,6 @@ class Submissions_Authors extends Submissions_Assessments
 
     function Submission_Authors(&$submission,$friends=array())
     {
-        var_dump($friends);
         if (empty($friends))
         {
             $friends=$this->Submission_Authors_Read($submission);

@@ -108,16 +108,12 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
            array
            (
                $this->B($this->Language_Message("Submissions_Accessor_Add_Title").":").
-               $this->AssessorsObj()->MyMod_Data_Fields_Edit
+               $this->AssessorsObj()->MyMod_Data_Fields_Module_Edit
                (
                    "Friend",
                    array(),
-                   $value="",
-                   $tabindex="",
-                   $plural=FALSE,
-                   $links=TRUE,
-                   $callmethod=TRUE,
-                   "Assessor".$cgipost
+                   $value="",$tabindex="",$plural=FALSE,$options=array(),
+                   "Friend_Add".$cgipost
                ),
            );
     }
@@ -192,7 +188,7 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
         (
            $table,
            $sumrow,
-           $this->Submissions_Handle_Assessor_Add_Row(),
+           $this->Submissions_Handle_Assessor_Add_Row("_".$submission[ "ID" ]),
            array($this->Buttons())
         );
 
@@ -201,17 +197,18 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
     
     //*
-    //* function Submissions_Handle_Assessors_Update, Parameter list: $submission,$assessors
+    //* function Submissions_Handle_Assessors_Update, Parameter list: $submission,&$assessors
     //*
     //* Updates $submission Assessors and Assessments info.
     //*
 
-    function Submissions_Handle_Assessors_Update($submission,$assessors)
+    function Submissions_Handle_Assessors_Update($submission,&$assessors)
     {
         foreach (array_keys($assessors) as $aid)
         {
             $key=$assessors[ $aid ][ "ID" ]."_Friend";
             $newvalue=$this->CGI_POSTint($key);
+
             if ($newvalue>0 && $newvalue!=$assessors[ $aid ][ "Friend" ])
             {
                $where=
@@ -232,7 +229,7 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
             }
         }
         
-        $addassessor=$this->CGI_POSTint("Assessor");
+        $addassessor=$this->CGI_POSTint("Friend_Add_".$submission[ "ID" ]);
         if ($addassessor>0)
         {
             $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $addassessor));

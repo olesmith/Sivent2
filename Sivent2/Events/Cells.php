@@ -66,7 +66,7 @@ class EventsCells extends EventsAccess
         if (count($msgs)>0)
         {
             $cell=$this->HtmlList($msgs);
-            if ($this->EventsObj()->FriendIsInscribed($event,$this->LoginData()))
+            if ($this->EventsObj()->Friend_Inscribed_Is($event,$this->LoginData()))
             {
                 $cell.=
                     $this->MyLanguage_GetMessage("Event_Inscriptions_InfoCell_Message_Inscribed").

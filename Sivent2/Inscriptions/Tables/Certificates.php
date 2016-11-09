@@ -47,7 +47,7 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
 
     function Friend_Certificate_Table($edit,$friend,$inscription,$group="Certificates")
     {
-        if (!$this->EventsObj()->Event_Certificates_Published()) { return array(); }
+        if (!$this->Friend_Certificates_Should($friend)) { return array(); }
         
         $table=array();
         $type=$this->InscriptionTablesType($inscription);

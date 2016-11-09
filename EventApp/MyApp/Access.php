@@ -2,7 +2,7 @@
 
 include_once("Access/May.php");
 
-class MyEventAppAccess extends MyEventAppAccess_May
+class MyEventApp_Access extends MyEventApp_Access_May
 {
     var $__Event_Perms=array();
     
@@ -103,19 +103,30 @@ class MyEventAppAccess extends MyEventAppAccess_May
     }
     
     //*
-    //* function FriendIsInscribed, Parameter list: $event=array(),$friend=array()
+    //* function Friend_Inscribed_Is, Parameter list: $event=array(),$friend=array()
     //*
     //* Gets user event access. If false, aborts.
     //*
 
-    function FriendIsInscribed($event=array(),$friend=array())
+    function Friend_Inscribed_Is($event=array(),$friend=array())
     {
         if (empty($event)) { $event=$this->Event(); }
         if (empty($friend)) { $friend=$this->LoginData(); }
         
-        return $this->EventsObj()->FriendIsInscribed($event,$friend);
+        return $this->EventsObj()->Friend_Inscribed_Is($event,$friend);
     }
     
+    //*
+    //* function Friend_Inscribed_Not, Parameter list: $event=array(),$friend=array()
+    //*
+    //* Returns TRUE if current user is admin.Otherwise FALSE.
+    //*
+
+    function Friend_Inscribed_Not($event=array(),$friend=array())
+    {
+        return !$this->Friend_Inscribed_Is($event,$friend);
+     }
+
     //*
     //* sub MayInscribe, Parameter list: 
     //*
@@ -132,13 +143,12 @@ class MyEventAppAccess extends MyEventAppAccess_May
 
         if ($res)
         {
-            $res=!$this->EventsObj()->FriendIsInscribed($event,$friend);
+            $res=!$this->EventsObj()->Friend_Inscribed_Is($event,$friend);
         }
 
         return $res;
     }
-
-        
+      
     //*
     //* function Current_User_Admin_Is, Parameter list: 
     //*

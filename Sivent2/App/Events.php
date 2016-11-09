@@ -54,6 +54,7 @@ class App_Events extends App_CGIVars
         return $menudef;
     }
     
+
     //*
     //* function GetCoordinatorEvents, Parameter list: 
     //*
@@ -84,5 +85,4 @@ class App_Events extends App_CGIVars
                array(),
                "Date"
             );
-    }
-}
+    }}

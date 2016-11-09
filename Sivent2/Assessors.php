@@ -84,7 +84,7 @@ class Assessors extends AssessorsInscription
             $event=array("ID" => $item[ "Event" ]);
         }
         
-        $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+        $isinscribed=$this->EventsObj()->Friend_Inscribed_Is($event,$friend);
         if (!$isinscribed)
         {
             $this->InscriptionsObj()->DoInscribe($friend);
@@ -204,6 +204,30 @@ class Assessors extends AssessorsInscription
         echo
             $this->Assessors_Inscription_Assessments_Form(1,$this->ItemHash).
             "";
+    }
+    
+    //*
+    //* function Assessor_Field, Parameter list:
+    //*
+    //* Field generating method for submissions activities form.
+    //*
+
+    function Assessor_Field($data,$assessor=array())
+    {
+        $rdata=$data;
+        if (!empty($assessor[ "ID" ]))
+        {
+            $rdata=$assessor[ "ID" ]."_Friend";
+        }
+        
+        return
+            $this->MyMod_Data_Fields_Module_Edit
+            (
+                $data,
+                $assessor,
+                $value="",$tabindex="",$plural=FALSE,$options=array(),
+                $rdata
+            );
     }
     
     //*

@@ -6,8 +6,8 @@ include_once("Submissions/Table.php");
 include_once("Submissions/Export.php");
 include_once("Submissions/Schedule.php");
 include_once("Submissions/Certificate.php");
-include_once("Submissions/Assessments.php");
 include_once("Submissions/Authors.php");
+include_once("Submissions/Assessments.php");
 include_once("Submissions/Handle.php");
 
 
@@ -43,6 +43,7 @@ class Submissions extends Submissions_Handle
         $this->IncludeAllDefault=TRUE;
 
         $this->Coordinator_Type=5;
+        $this->NItemsPerPage=10;
 
         $this->MyMod_Language_Data=array("Title");
         
@@ -184,7 +185,7 @@ class Submissions extends Submissions_Handle
                 array_push($updatedatas,$akey);
 
                 $friend=array("ID" => $item[ $fkey ]);
-                $isinscribed=$this->EventsObj()->FriendIsInscribed($event,$friend);
+                $isinscribed=$this->EventsObj()->Friend_Inscribed_Is($event,$friend);
                 if (!$isinscribed)
                 {
                     $this->InscriptionsObj()->DoInscribe($friend);

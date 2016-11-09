@@ -237,6 +237,7 @@ array
          "High School Complete","Fund. Complete"
       ),
       "Compulsory" => FALSE,
+      "NoSelectSort" => TRUE,
 
       "Admin" => 2,
       "Person" => 0,

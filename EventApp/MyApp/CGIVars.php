@@ -1,6 +1,6 @@
 <?php
 
-class MyEventAppCGIVars extends Application
+class MyEventApp_CGIVars extends Application
 {
     //*
     //* function ReadUnitOpenEvents, Parameter list:

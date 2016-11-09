@@ -44,7 +44,7 @@ class InscriptionsAssessments extends InscriptionsSubmissions
 
     function Inscription_Assessments_Has($inscription=array())
     {
-        return $this->Friend_Assessments_Has(array("ID" => $inscription[ "Friend" ]));
+        return $this->Friend_Assessors_Has(array("ID" => $inscription[ "Friend" ]));
     }
     
     //*
@@ -91,13 +91,7 @@ class InscriptionsAssessments extends InscriptionsSubmissions
 
     function Friend_Assessors_Table($edit,$friend,$inscription)
     {
-        
-        if (
-              !$this->EventsObj()->Event_Assessments_Inscriptions_Open()
-              ||
-              !$this->Friend_Assessments_Has($friend)
-           )
-        { return array(); }
+        if (!$this->Friend_Assessors_Should($friend)) { return array(); }
         
         $type=$this->GetTablesType();
         if (!empty($type) && $type!="Assessments")

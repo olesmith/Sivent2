@@ -172,5 +172,35 @@ array
       "Title_ES" => "Código",
       "Title_UK" => "Code",
    ),
+   "Institution" => array
+   (
+      "Admin" => "2",
+      "Assessor" => "0",
+      "Coordinator" => "2",
+      "Friend" => "2",
+      "Name" => "Instituição",
+      "Name_ES" => "Instituicion",
+      "Name_UK" => "Institution",
+      
+      "Person" => "0",
+      "Public" => "1",
+      "Search" => "",
+      "Sql" => "VARCHAR(256)",
+   ),
+   "City" => array
+   (
+      "Admin" => "2",
+      "Assessor" => "0",
+      "Coordinator" => "2",
+      "Friend" => "2",
+      "Name" => "Cidade",
+      "Name_ES" => "Ciudad",
+      "Name_UK" => "City",
+      
+      "Person" => "0",
+      "Public" => "1",
+      "Search" => "",
+      "Sql" => "VARCHAR(256)",
+   ),
 );
 

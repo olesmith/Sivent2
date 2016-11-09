@@ -1,6 +1,6 @@
 <?php
 
-class MyEventAppAccessors extends MyEventAppCGIVars
+class MyEventApp_Accessors extends MyEventApp_CGIVars
 {
     //*
     //*

@@ -35,6 +35,7 @@ trait MyMod_Data_Groups_Defaults
             "OtherClass"  => FALSE,
             "OtherGroup" => FALSE,
             "PreMethod" => FALSE,
+            "NItemsPerPage" => FALSE,
         );
 
     }

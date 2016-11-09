@@ -55,7 +55,7 @@ array
       "Name_UK"   => "Collaborations",
       
       "Handler"   => "Friend_Collaborations_Handle",
-      "AccessMethod"   => "Friend_Collaborations_Should",
+      "AccessMethod"   => "Friend_Collaborators_Should",
 
       "Public"   => 0,
       "Person"   => 0,

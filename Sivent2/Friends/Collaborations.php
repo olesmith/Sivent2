@@ -4,42 +4,6 @@
 class Friends_Collaborations extends Friends_Access
 {
     //*
-    //* function Friend_Collaborations_Has, Parameter list: $friend=array()
-    //*
-    //* Checks whether $friend has Collaborations.
-    //*
-
-    function Friend_Collaborations_Has($friend=array())
-    {
-        if (empty($friend)) { $friend=$this->LoginData(); }
-        
-        return
-            $this->CollaboratorsObj()->Sql_Select_Hashes_Has
-            (
-                $this->UnitEventWhere(array("Friend" => $friend[ "ID" ]))
-            );
-    }
-    
-    //*
-    //* function Friend_Collaborations_Should, Parameter list: $friend=array()
-    //*
-    //* Checks whether $friend has Collaborations.
-    //*
-
-    function Friend_Collaborations_Should($friend=array())
-    {
-        if (empty($friend)) { $friend=$this->LoginData(); }
-
-        $res=
-            $this->EventsObj()->Event_Collaborations_Inscriptions_Open()
-            ||
-            $this->Friend_Collaborations_Has($friend);
-        
-        
-        return $res;
-    }
-    
-    //*
     //* function Friend_Collaborations_Select_Table, Parameter list: 
     //*
     //* Returns friend specification table.

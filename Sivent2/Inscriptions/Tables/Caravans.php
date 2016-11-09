@@ -255,9 +255,11 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     function Friend_Caravans_Table($edit,$friend,$inscription,$group="")
     {
-        if (!$this->Inscriptions_Caravans_Has()) { return array(); }
+        if (!$this->Friend_Caravans_Should($friend)) { return array(); }
+        
+//        if (!$this->Inscriptions_Caravans_Has()) { return array(); }
 
-        if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
+//        if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
 
         foreach (array("CaravansObj","CaravaneersObj") as $module)
         {
@@ -324,7 +326,9 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
     function Friend_Caravans_Table_Form($edit,$friend,&$inscription)
     {
-        if (!$this->Inscriptions_Caravans_Has()) { return array(); }
+        if (!$this->Friend_Caravans_Should($friend)) { return array(); }
+        
+        //if (!$this->Inscriptions_Caravans_Has()) { return array(); }
 
         $edit=$this->Inscription_Caravans_Table_Edit($edit);
         if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }

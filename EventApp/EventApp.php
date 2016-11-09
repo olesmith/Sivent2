@@ -33,7 +33,7 @@ include_once("MyApp/Menues.php");
 include_once("MyApp/Mail.php");
 
 
-class EventApp extends MyEventAppMail
+class EventApp extends MyEventApp_Mail
 {
     use _accessor_;
 

@@ -129,7 +129,7 @@ class Caravans extends Caravans_Certificate
 
         $friend=array("ID" => $item[ "Friend" ]);
         
-        $isinscribed=$this->EventsObj()->FriendIsInscribed($this->Event(),$friend);
+        $isinscribed=$this->EventsObj()->Friend_Inscribed_Is($this->Event(),$friend);
         if (!$isinscribed)
         {
             $this->InscriptionsObj()->DoInscribe($friend);

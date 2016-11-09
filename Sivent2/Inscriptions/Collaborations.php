@@ -36,26 +36,26 @@ class InscriptionsCollaborations extends InscriptionsForm
         return $this->EventsObj()->Event_Collaborations_Inscriptions_Open($this->Event());
     }
 
-    //*
-    //* function Friend_Collaborations_Has, Parameter list: $inscription
-    //*
-    //* Detects if $inscription has any collaborations.
-    //*
+    /* //\* */
+    /* //\* function Friend_Collaborators_Has, Parameter list: $inscription */
+    /* //\* */
+    /* //\* Detects if $inscription has any collaborations. */
+    /* //\* */
 
-    function Friend_Collaborations_Has($friend,$inscription=array())
-    {
-        $res=FALSE;
+    /* function Friend_Collaborators_Has($friend,$inscription=array()) */
+    /* { */
+    /*     $res=FALSE; */
 
-        $nentries=0;
-        if (!empty($friend[ "ID" ]))
-        {
-            $nentries=$this->CollaboratorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]));
-        }
+    /*     $nentries=0; */
+    /*     if (!empty($friend[ "ID" ])) */
+    /*     { */
+    /*         $nentries=$this->CollaboratorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ])); */
+    /*     } */
 
-        if ($nentries>0) { $res=TRUE; }
+    /*     if ($nentries>0) { $res=TRUE; } */
 
-        return $res;
-    }
+    /*     return $res; */
+    /* } */
 
     
     //*
@@ -69,7 +69,7 @@ class InscriptionsCollaborations extends InscriptionsForm
         $res=
             $this->EventsObj()->Event_Collaborations_Inscriptions_Open($this->Event())
             ||
-            $this->Friend_Collaborations_Has(array("ID" => $inscription[ "Friend" ]),$inscription);
+            $this->Friend_Collaborators_Has(array("ID" => $inscription[ "Friend" ]));
 
         return $res;
     }
@@ -83,7 +83,7 @@ class InscriptionsCollaborations extends InscriptionsForm
     function Inscriptions_Collaborations_Show_Name($data,$inscription=array())
     {
         $title="";
-        if ($this->Friend_Collaborations_Has(array("ID" => $inscription[ "Friend" ]),$inscription))
+        if ($this->Friend_Collaborators_Has(array("ID" => $inscription[ "Friend" ])))
         {
             $title=$this->MyLanguage_GetMessage("Events_Collaborations_Show_Has_Name");
         }
@@ -104,7 +104,7 @@ class InscriptionsCollaborations extends InscriptionsForm
     function Inscriptions_Collaborations_Show_Title($data,$inscription=array())
     {
         $title="";
-        if ($this->Friend_Collaborations_Has(array("ID" => $inscription[ "Friend" ]),$inscription))
+        if ($this->Friend_Collaborators_Has(array("ID" => $inscription[ "Friend" ])))
         {
             $title=$this->MyLanguage_GetMessage("Events_Collaborations_Show_Has_Title");
         }

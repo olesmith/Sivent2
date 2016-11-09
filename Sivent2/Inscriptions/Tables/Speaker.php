@@ -40,6 +40,8 @@ class InscriptionsTablesSpeaker extends InscriptionsCells
 
     function Friend_Speaker_Tables($edit,$friend,$inscription=array())
     {
+        if (!$this->Friend_Speakers_Should($friend)) { return array(); }
+        
         $where=$this->UnitEventWhere(array("Friend" => $friend[ "ID" ]));
         $speaker=$this->SpeakersObj()->Sql_Select_Hash($where);
 

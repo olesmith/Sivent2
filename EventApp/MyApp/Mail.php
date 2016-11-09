@@ -1,6 +1,6 @@
 <?php
 
-class MyEventAppMail extends MyEventAppMenues
+class MyEventApp_Mail extends MyEventApp_Menues
 {
     //*
     //* function MailInfo, Parameter list: 

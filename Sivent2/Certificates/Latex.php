@@ -47,6 +47,20 @@ class Certificates_Latex extends Certificates_Validate
         return $this->GetLatexSkel("Tail.Cert.tex");
     }
 
+   //*
+    //* function Certificate_Latex_Filter_Data, Parameter list: $data,$cert
+    //*
+    //* Generates latex certificate tail.
+    //*
+
+    function Certificate_Latex_Filter_Data($data,$cert,&$latex)
+    {
+        if (!empty($cert[ $data."_Hash" ]))
+        {
+            $latex=$this->FilterHash($latex,$cert[ $data."_Hash" ],$data."_");
+        }
+    }
+
     //*
     //* function Certificate_Latex_Filter, Parameter list: $cert,$inscription=array(),$friend=array(),$eventkey=""
     //*
@@ -55,15 +69,10 @@ class Certificates_Latex extends Certificates_Validate
 
     function Certificate_Latex_Filter($cert,$latex)
     {
-        $latex=$this->FilterHash($latex,$cert[ "Event_Hash" ],"Event_");
-        $latex=$this->FilterHash($latex,$cert[ "Friend_Hash" ],"Friend_");
-        $latex=$this->FilterHash($latex,$cert[ "Inscription_Hash" ],"Inscription_");
-        $latex=$this->FilterHash($latex,$cert[ "Collaboration_Hash" ],"Collaboration_");
-        $latex=$this->FilterHash($latex,$cert[ "Collaborator_Hash" ],"Collaborator_");
-        $latex=$this->FilterHash($latex,$cert[ "Caravaneer_Hash" ],"Caravaneer_");
-        $latex=$this->FilterHash($latex,$cert[ "Submission_Hash" ],"Submission_");
-        $latex=$this->FilterHash($latex,$cert,"Certificate_");
-        $latex=$this->FilterHash($latex,$cert[ "Inscription_Hash" ]);
+        foreach (array("Event","Friend","Inscription","Collaboration","Collaborator","Caravaneer","Submission","Certificate","Inscription",) as $data)
+        {
+            $this->Certificate_Latex_Filter_Data($data,$cert,$latex);
+        }
 
         return $latex;
     }

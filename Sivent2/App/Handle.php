@@ -71,7 +71,7 @@ class App_Handle extends App_Has
         $event=$this->Event();
         if (!empty($event))
         {
-            if ($this->FriendIsInscribed($event,$this->LoginData()))
+            if ($this->Friend_Inscribed_Is($event,$this->LoginData()))
             {
                 $this->InscriptionsObj()->HandleInscribe();
                 exit();

@@ -3,17 +3,164 @@
 class App_Has extends App_Head_Table
 {
     //*
-    //* function Friend_Assessments_Has, Parameter list: $friend
+    //* function Friend_Caravans_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Caravans.
+    //*
+
+    function Friend_Caravans_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Caravans_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Caravans_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Caravans.
+    //*
+
+    function Friend_Caravans_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Caravans_Should($friend);
+    }
+    
+    //*
+    //* function Friend_Certificates_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Certificates.
+    //*
+
+    function Friend_Certificates_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Certificates_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Certificates_Should, Parameter list: $friend
+    //*
+    //* Detects if current event has any Certificates.
+    //*
+
+    function Friend_Certificates_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Certificates_Should($friend);
+    }
+    
+    //*
+    //* function Friend_Submissions_Has, Parameter list: $friend=array()
     //*
     //* Detects if current event has any Assessments.
     //*
 
-    function Friend_Assessments_Has($friend=array())
+    function Friend_Submissions_Has($friend=array())
     {
-        if (empty($friend)) { $friend=$this->LoginData(); }
-        
-        return $this->FriendsObj()->Friend_Assessments_Has($friend);
+        return $this->FriendsObj()->Friend_Submissions_Has($friend);
     }
+    
+    //*
+    //* function Friend_Submissions_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Submissions_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Submissions_Should($friend);
+    }
+    
+    //*
+    //* function Friend_Collaborators_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any .
+    //*
+
+    function Friend_Collaborators_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Collaborators_Has($friend);
+    }
+    
+    
+    //*
+    //* function Friend_Collaborators_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any .
+    //*
+
+    function Friend_Collaborators_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Collaborators_Should($friend);
+    }
+    
+    
+    //*
+    //* function Friend_Assessors_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Assessors_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Assessors_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Assessors_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Assessors_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Assessors_Should($friend);
+    }
+
+    //*
+    //* function Friend_Speakers_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Speakers.
+    //*
+
+    function Friend_Speakers_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Speakers_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Speakers_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Speakers.
+    //*
+
+    function Friend_Speakers_Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Speakers_Should($friend);
+    }
+    
+    //*
+    //* function Friend_Schedules_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Schedules.
+    //*
+
+    function Friend_Schedules_Has($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Schedules_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Schedules_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Schedules.
+    //*
+
+    function Friend__Should($friend=array())
+    {
+        return $this->FriendsObj()->Friend_Schedules_Should($friend);
+    }
+    
+
+
+
     
     //*
     //* function HasCollaborations, Parameter list:$event=array()

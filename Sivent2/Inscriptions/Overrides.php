@@ -27,16 +27,16 @@ class InscriptionsOverrides extends InscriptionsAccess
         $datas=
             array
             (
-               "Name","NickName","Email","Cell",
+               "Name","Institution","Titulation","NickName","Email","Cell",
                
             );
 
         if (
-               $this->FriendsObj()->Friend_Speakers_Has()
+               $this->Friend_Speakers_Has()
                ||
-               $this->FriendsObj()->Friend_Collaborations_Has()
+               $this->Friend_Collaborators_Has()
                ||
-               $this->FriendsObj()->Friend_Submissions_Has()
+               $this->Friend_Submissions_Has()
            )
         {
             array_push($datas,"Curriculum","MiniCurriculum","Photo");

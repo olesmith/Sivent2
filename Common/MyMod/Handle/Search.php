@@ -42,9 +42,9 @@ trait MyMod_Handle_Search
       }
 
       $datas=$this->GetGroupDatas($group);
-      if ($group!="")
+      if (!empty($group))
       {
-          if ($where=="" && isset($this->ItemDataGroups[ $group ][ "SqlWhere" ]))
+          if (empty($where) && isset($this->ItemDataGroups[ $group ][ "SqlWhere" ]))
           {
               $where=$this->ItemDataGroups[ $group ][ "SqlWhere" ];
           }
@@ -57,7 +57,16 @@ trait MyMod_Handle_Search
           {
               $edit=1;
           }
+
+          
+          if (!empty($this->ItemDataGroups[ $group ][ "NItemsPerPage" ]))
+          {
+              $this->NItemsPerPage=$this->ItemDataGroups[ $group ][ "NItemsPerPage" ];
+              
+          }
       }
+
+      
 
       $this->MyMod_Sort_Detect($group);
       if ($output=="html")
@@ -162,8 +171,13 @@ trait MyMod_Handle_Search
 
       if ($hasitems && $edit && $output=="html")
       {
-          echo 
-              $this->StartForm("?ModuleName=".$this->GetGET("ModuleName")."&Action=".$this->MyActions_Detect()).
+          echo
+              $this->Anchor("EditListForm").
+              $this->StartForm
+              (
+                  "?ModuleName=".$this->GetGET("ModuleName")."&Action=".$this->MyActions_Detect(),
+                  $method="post",$fileupload=FALSE,$options=array("Anchor" => "EditListForm")
+              ).
               $this->MakeHidden("Update",1).
               $this->Buttons($savebuttonname,$resetbottonname);
       }

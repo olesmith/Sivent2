@@ -2,7 +2,7 @@
 
 include_once("Handle/Assessments.php");
 
-class Submissions_Handle extends Submissions_Authors
+class Submissions_Handle extends Submissions_Handle_Assessments
 {    
     //*
     //* function Submissions_Handle_Submission, Parameter list: $submission=array()

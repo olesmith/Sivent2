@@ -7,72 +7,224 @@ class ModulesCommon extends EventMod
     var $Coordinator_Type=0;
 
     //*
-    //* function Friend_Assessments_Has, Parameter list: $friend
+    //* function Friend_Items_Has, Parameter list: $module,$friend
     //*
     //* Detects if current event has any Assessments.
     //*
 
-    function Friend_Assessments_Has($friend)
+    function Friend_Items_Has($module,$friend,$friendfield="Friend")
     {
-        $res=FALSE;
+        if (empty($friend)) { $friend=$this->LoginData(); }
 
-        $nentries=0;
-        if (!empty($friend[ "ID" ]))
-        {
-            $nentries=$this->AssessorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]));
-        }
-
-        if ($nentries>0) { $res=TRUE; }
-
-        return $res;
+        $module.="Obj";
+        return
+            $this->$module()->Sql_Select_Hashes_Has
+            (
+                $this->UnitEventWhere(array($friendfield => $friend[ "ID" ]))
+            );
     }
     
-   //*
-    //* function Friend_Collaborators_Has, Parameter list: $friend
+    //*
+    //* function Friend_Certificates_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Certificates.
+    //*
+
+    function Friend_Certificates_Has($friend=array())
+    {
+        return $this->Friend_Items_Has("Certificates",$friend);
+    }
+    
+    //*
+    //* function Friend_Certificates_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if we should show certificates for current event.
+    //*
+
+    function Friend_Certificates_Should($friend=array())
+    {
+        return
+            $this->Friend_Items_Has("Certificates",$friend)
+            &&
+            $this->EventsObj()->Event_Certificates_Published();
+    }
+    
+    //*
+    //* function Friend_Assessors_Has, Parameter list: $friend=array()
     //*
     //* Detects if current event has any Assessments.
     //*
 
-    function Friend_Collaborators_Has($friend)
+    function Friend_Assessors_Has($friend=array())
     {
-        $res=FALSE;
+        return $this->Friend_Items_Has("Assessors",$friend);
+    }
+    
+    //*
+    //* function Friend_Assessors_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Assessments.
+    //*
 
-        $nentries=0;
-        if (!empty($friend[ "ID" ]))
-        {
-            $nentries=$this->CollaboratorsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]));
-        }
+    function Friend_Assessors_Should($friend=array())
+    {
+        return
+            $this->EventsObj()->Event_Assessments_Inscriptions_Open()
+            ||
+            $this->Friend_Assessors_Has($friend);
+    }
+    
+    //*
+    //* function Friend_Caravans_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Caravans.
+    //*
 
-        if ($nentries>0) { $res=TRUE; }
+    function Friend_Caravans_Has($friend=array())
+    {
+        return $this->Friend_Items_Has("Caravans",$friend);
+    }
+    
+    //*
+    //* function Friend_Caravans_Should, Parameter list: $friend=array()
+    //*
+    //* Checks whether we should show Caravans for $friend.
+    //*
 
+    function Friend_Caravans_Should($friend=array())
+    {
+        $res=
+            $this->EventsObj()->Event_Caravans_Inscriptions_Open()
+            ||
+            $this->Friend_Caravans_Has($friend);
+        
+        
+        return $res;
+    }
+
+    //*
+    //* function Friend_Collaborators_Has, Parameter list: $friend=array()
+    //*
+    //* Detects if current event has any Assessments.
+    //*
+
+    function Friend_Collaborators_Has($friend=array())
+    {
+        return $this->Friend_Items_Has("Collaborators",$friend);
+    }
+    
+    //*
+    //* function Friend_Collaborators_Should, Parameter list: $friend=array()
+    //*
+    //* Checks whether $friend has Collaborations.
+    //*
+
+    function Friend_Collaborators_Should($friend=array())
+    {
+        $res=
+            $this->EventsObj()->Event_Collaborations_Inscriptions_Open()
+            ||
+            $this->Friend_Collaborators_Has($friend);
+        
+        
         return $res;
     }
     
+    //*
+    //* function Friend_Speakers_Has, Parameter list: $friend=array()
+    //*
+    //* Checks whether $friend has spekker entries.
+    //*
+
+    function Friend_Speakers_Has($friend=array())
+    {
+        return $this->Friend_Items_Has("Speakers",$friend);
+    }
    //*
-    //* function Friend_Submissions_Has, Parameter list: $friend
+    //* function Friend_Speakers_Should, Parameter list: $friend=array()
+    //*
+    //* Checks whether $friend has Speakers.
+    //*
+
+    function Friend_Speakers_Should($friend=array())
+    {
+        if (empty($friend)) { $friend=$this->LoginData(); }
+
+        $res=
+            $this->Friend_Speakers_Has($friend);
+        
+        
+        return $res;
+    }
+        
+    //*
+    //* function Friend_Schedules_Has, Parameter list: $friend=array()
+    //*
+    //* Checks whether $friend has Schedules entries.
+    //*
+
+    function Friend_Schedules_Has($friend=array())
+    {
+        return $this->Friend_Items_Has("Schedules",$friend);
+    }
+    
+    //*
+    //* function Friend_Schedules_Should, Parameter list: $friend=array()
+    //*
+    //* Checks whether $friend has .
+    //*
+
+    function Friend_Schedules_Should($friend=array())
+    {
+        if (empty($friend)) { $friend=$this->LoginData(); }
+
+        $res=
+            $this->Friend_Schedules_Has($friend);
+        
+        
+        return $res;
+    }
+        
+     //*
+    //* function Friend_Submissions_Has, Parameter list: $friend=array()
     //*
     //* Detects if $friend has any Submissions.
     //*
 
-    function Friend_Submissions_Has($friend)
+    function Friend_Submissions_Has($friend=array())
     {
-        $res=FALSE;
+        if (empty($friend)) { $friend=$this->LoginData(); }
 
-        $nentries=0;
+        $res=FALSE;
         if (!empty($friend[ "ID" ]))
         {
-            $nentries=
-                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend" => $friend[ "ID" ]))
-                +
-                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend2" => $friend[ "ID" ]))
-                +
-                $this->SubmissionsObj()->Sql_Select_NEntries(array("Friend3" => $friend[ "ID" ]));
+            foreach (array("Friend","Friend2","Friend3") as $fkey)
+            {
+                if ($this->Friend_Items_Has("Submissions",$friend,$fkey))
+                {
+                    $res=TRUE;
+                    break;
+                }
+             }
         }
-
-        if ($nentries>0) { $res=TRUE; }
 
         return $res;
     }
+    
+    //*
+    //* function Friend_Submissions_Should, Parameter list: $friend=array()
+    //*
+    //* Detects if we should show Submissions for current event.
+    //*
+
+    function Friend_Submissions_Should($friend=array())
+    {
+        return
+            $this->Friend_Items_Has("Submissions",$friend)
+            ||
+            $this->EventsObj()->Event_Submissions_Open();
+    }
+    
     
     
     //*
@@ -186,21 +338,6 @@ class ModulesCommon extends EventMod
         return $this->ApplicationObj()->Current_User_Event_May_Access($event);
     }
 
-    /* //\* */
-    /* //\* function Inscriptions_Certificates_Published, Parameter list:  */
-    /* //\* */
-    /* //\* Returns true or false, whether event should provide certificates. */
-    /* //\* */
-
-    /* function Inscriptions_Certificates_Published() */
-    /* { */
-    /*     $event=$this->Event(); */
-
-    /*     return */
-    /*         $this->EventsObj()->Event_Certificates_Has($event) */
-    /*         && */
-    /*         $this->EventsObj()->Event_Certificates_Published($event); */
-    /* } */
     
     //*
     //* function Inscriptions_Certificates_May, Parameter list: 

@@ -64,7 +64,7 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
 
     function Friend_Collaborations_Table($edit,$friend,$inscription,$group="")
     {
-        if (!$this->FriendsObj()->Friend_Collaborations_Should($friend)) { return array(); }
+        if (!$this->FriendsObj()->Friend_Collaborators_Should($friend)) { return array(); }
 
         //if (!$this->Inscriptions_Collaborations_Inscriptions_Open()) { $edit=0; }
 

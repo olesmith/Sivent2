@@ -57,11 +57,7 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
 
     function Friend_Submissions_Table($edit,$friend,$inscription,$group="")
     {
-       if (
-             !$this->EventsObj()->Event_Submissions_Open()
-             &&
-             !$this->Friend_Submissions_Has($friend)
-           )
+        if (!$this->Friend_Submissions_Should($friend))
         { return array(); }
         
         //06/11/2016 if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }

@@ -123,7 +123,7 @@ array
       "Public" => 1,
       "Friend"     => 0,
       "Coordinator" => 1,
-      "GenTableMethod" => "Submissions_Assessments_Table",
+      "GenTableMethod" => "Submissions_Assessors_Table",
       "AccessMethod" => "Event_Assessments_Has",
    ),
 );

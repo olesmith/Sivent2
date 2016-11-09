@@ -31,39 +31,19 @@ array
       "Person" => "0",
       "Public" => "1",
    ),
-   "031_Inscription" => array
-   (
-       //"AccessMethod" => "FriendIsInscribed",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "1",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event",
-      "Name" => "Inscrição",
-      "Name_ES" => "Inscrición",
-      "Name_UK" => "Inscription",
-      "Person" => "0",
-      "Public" => "0",
-      "ShortName" => "Inscrição",
-      "ShortName_ES" => "Inscrición",
-      "ShortName_UK" => "Inscription",
-      "Title" => "Minha Inscrição",
-      "Title_ES" => "Mi Inscrición",
-      "Title_UK" => "My Inscription",
-      "Anchor" => "Top",
-   ),
-   "032_Assessments" => array
-   (
-      "AccessMethod" => "Friend_Assessments_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "1",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event",
-      "Name" => "Minhas Avaliações",
-      "Name_ES" => "Mi Avaliaciones",
-      "Name_UK" => "My Asessments",
-      "Person" => "0",
-      "Public" => "0",
-   ),
+   /* "032_Assessments" => array */
+   /* ( */
+   /*    "AccessMethod" => "Friend_Assessors_Has", */
+   /*    "Admin" => "1", */
+   /*    "Coordinator" => "1", */
+   /*    "Friend" => "1", */
+   /*    "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event", */
+   /*    "Name" => "Minhas Avaliações", */
+   /*    "Name_ES" => "Mi Avaliaciones", */
+   /*    "Name_UK" => "My Asessments", */
+   /*    "Person" => "0", */
+   /*    "Public" => "0", */
+   /* ), */
    "04_Inscriptions" => array
    (
       "AccessMethod" => "Coordinator_Inscriptions_Access_Has",

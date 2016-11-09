@@ -32,6 +32,7 @@ trait MyMod_Items_Row
                     $redit=$edit;
 
                     if ($access<=1) { $redit=0; }
+                    
                     if ($access>=1)
                     {
                         $rdata=$pre.$data;

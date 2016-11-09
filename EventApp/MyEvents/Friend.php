@@ -3,12 +3,12 @@
 class MyEventsFriend extends MyEventsAccess
 {
     //*
-    //* function FriendIsInscribed, Parameter list: $event,$friend
+    //* function Friend_Inscribed_Is, Parameter list: $event,$friend
     //*
     //* Detects whether $friend is inscribed in $event.
     //*
 
-    function FriendIsInscribed($event,$friend)
+    function Friend_Inscribed_Is($event,$friend)
     {
         if (empty($event)) { return FALSE; }
         

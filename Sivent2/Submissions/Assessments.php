@@ -2,15 +2,15 @@
 
 
 
-class Submissions_Assessments extends Submissions_Certificate
+class Submissions_Assessments extends Submissions_Authors
 {
     //*
-    //* function Submissions_Assessments_Update, Parameter list: &$submission
+    //* function Submissions_Assessors_Update, Parameter list: &$submission
     //*
     //* Displays search list of submissions.
     //*
 
-    function Submission_Assessments_Update(&$submission)
+    function Submission_Assessors_Update(&$submission)
     {
         $key=$submission[ "ID" ]."_Status";
         $newvalue=$this->CGI_POSTint($key);
@@ -43,35 +43,35 @@ class Submissions_Assessments extends Submissions_Certificate
     }
 
     
-    //*
-    //* function Submissions_Assessments_Update, Parameter list:
-    //*
-    //* Displays search list of submissions.
-    //*
+    /* //\* */
+    /* //\* function Submission_Assessors_Update, Parameter list: */
+    /* //\* */
+    /* //\* Displays search list of submissions. */
+    /* //\* */
 
-    function Submissions_Assessments_Update()
-    {
-        foreach (array_keys($this->ItemHashes) as $sid)
-        {
-            $this->Submission_Assessments_Update($this->ItemHashes[ $sid ]);
-        }
-    }
+    /* function Submission_Assessors_Update($submission,$assessors) */
+    /* { */
+    /*     foreach (array_keys($this->ItemHashes) as $sid) */
+    /*     { */
+    /*         $this->Submission_Assessors_Update($this->ItemHashes[ $sid ]); */
+    /*     } */
+    /* } */
 
     
     //*
-    //* function Submission_Assessments_Table, Parameter list: $edit
+    //* function Submission_Assessors_Table, Parameter list: $edit
     //*
     //* Displays search list of submissions.
     //*
 
-    function Submissions_Assessments_Table($edit)
+    function Submissions_Assessors_Table($edit)
     {
         $this->AssessorsObj()->Sql_Table_Structure_Update();
         $this->AssessorsObj()->ItemData();
         $this->AssessorsObj()->ItemDataGroups();
         $this->AssessorsObj()->Actions();
         
-        
+        $this->AssessorsObj()->ItemData[ "Friend" ][ "EditFieldMethod" ]="Assessor_Field";       
         $datas=$this->GetGroupDatas("Assessments");
 
         $profile=$this->Profile();
@@ -87,10 +87,6 @@ class Submissions_Assessments extends Submissions_Certificate
             }
         }
 
-        if ($edit==1 && $this->CGI_POSTint("Update")==1)
-        {
-            $this->Submissions_Assessments_Update();
-        }
 
         $table=array();
         $n=1;
@@ -100,7 +96,7 @@ class Submissions_Assessments extends Submissions_Certificate
             $table=array_merge
             (
                $table,
-               $this->Submission_Assessments_Rows($edit,$n++,$datas,$submission)
+               $this->Submission_Assessors_Table($edit,$n++,$datas,$submission)
             );
         }
         
@@ -114,12 +110,12 @@ class Submissions_Assessments extends Submissions_Certificate
     }
     
     //*
-    //* function Submission_Assessments_Rows, Parameter list: $edit,$n,$datas,$submission
+    //* function Submission_Assessors_Table, Parameter list: $edit,$n,$datas,$submission
     //*
     //* Generatres $submission rows: $datas row and assessments rows.
     //*
 
-    function Submission_Assessments_Rows($edit,$n,$datas,$submission)
+    function Submission_Assessors_Table($edit,$n,$datas,$submission)
     {
         $rows=array($this->MyMod_Items_Table_Row($edit,$n,$submission,$datas,TRUE,$submission[ "ID" ]."_"));
 
@@ -127,6 +123,11 @@ class Submissions_Assessments extends Submissions_Certificate
         
         $assessors=$this->Submissions_Handle_Assessors_Read($submission);
 
+        if ($edit==1 && $this->CGI_POSTint("Update")==1)
+        {
+            $assessors=$this->Submissions_Handle_Assessors_Update($submission,$assessors);
+        }
+        
         $table=array();
         if (count($assessors)>0)
         {
@@ -139,6 +140,8 @@ class Submissions_Assessments extends Submissions_Certificate
                     $assessorsgroup
                 );
         }
+
+        
         $table=
             $this->H
             (
@@ -151,7 +154,8 @@ class Submissions_Assessments extends Submissions_Certificate
                 $assessors,
                 "",
                 $assessorsgroup
-            );
+            ).
+            "";
 
         if ($edit==1)
         {
