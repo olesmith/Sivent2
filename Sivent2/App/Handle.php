@@ -78,11 +78,13 @@ class App_Handle extends App_Has
             }
         }
         
-        
+        $this->FriendsObj()->Sql_Table_Structure_Update();
+        $this->CertificatesObj()->Sql_Table_Structure_Update();
+                
         $this->FriendsObj()->Friend_Events_Table();
 
         echo
-            $this->CertificatesObj()->Certificates_Friend_Table_Html($this->LoginData());
+            $this->CertificatesObj()->Certificates_Friend_Tables_Html($this->LoginData());
     }
 
     //*

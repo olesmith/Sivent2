@@ -2,10 +2,60 @@
 
 class Certificates_Generate extends Certificates_Latex
 {
+    
+    //*
+    //* function Certificate_Generate, Parameter list: &$cert
+    //*
+    //* Generates $cert.
+    //*
+
+    function Certificate_Generate(&$cert)
+    {
+        $this->Certificate_Set_Generated($cert);
+
+        $this->Certificate_Read($cert);
+
+        $latex="";
+        if ($this->Certificate_Verify($cert))
+        {
+             $latex=
+                $this->FilterHash
+                (
+                    $this->FilterHash
+                    (
+                        $this->Certificate_Latex($cert),
+                        $this->Event(),
+                        "Event_"
+                    ),
+                    $this->Unit(),
+                    "Unit_"
+                );
+        }
+
+        return $latex;
+    }
+
+    //*
+    //* function Certificates_Generate, Parameter list: $certs
+    //*
+    //* Generates $certs.
+    //*
+
+    function Certificates_Generate($certs)
+    {
+        $latex="";
+        foreach ($certs as $cert)
+        {
+            $latex.=$this->Certificate_Generate($cert);
+        }
+        
+        return $this->Certificate_Filter_EventUnit($latex);
+    }
+  
     //*
     //* function Certificate_Filter_EventUnit, Parameter list: $latex
     //*
-    //* Generates signatures field.
+    //* Filters $latex for event and unit data.
     //*
 
     function Certificate_Filter_EventUnit($latex)
@@ -20,7 +70,7 @@ class Certificates_Generate extends Certificates_Latex
     //*
     //* function Certificate_TexName, Parameter list: $name
     //*
-    //* Generates signatures field.
+    //* Name of cert tex file name.
     //*
 
     function Certificate_TexName($name)
@@ -225,106 +275,6 @@ class Certificates_Generate extends Certificates_Latex
         );
     }
 
-    //*
-    //* function Certificate_TimeLoad_Update, Parameter list: &$cert
-    //*
-    //* Reads certificate sub data.
-    //*
-
-    function Certificate_TimeLoad_Update(&$cert)
-    {
-        $timeloadkey=$this->Type2TimeloadKey($cert);
-        $key=$this->Type2Key($cert);
-
-        if (empty($cert[ $key."_Hash" ]))
-        {
-           $this->Certificate_Read_Data($cert,$key);
-        }
-        
-        $timeload=$cert[ $key."_Hash" ][ $timeloadkey ];
-        if (empty($cert[ "TimeLoad" ]) || $cert[ "TimeLoad" ]!=$timeload)
-        {
-            $cert[ "TimeLoad" ]=$timeload;
-            $this->Sql_Update_Item_Value_Set($cert[ "ID" ],"TimeLoad",$timeload);
-        }
-    }
-    
-    //*
-    //* function Certificate_Read_Data, Parameter list: &$cert,$data
-    //*
-    //* Reads certificate sub data.
-    //*
-
-    function Certificate_Read_Data(&$cert,$data)
-    {
-        if (!empty($cert[ $data ]) && empty($cert[ $data."_Hash" ]))
-        {
-            $objmethod=$data."sObj";
-
-            $cert[ $data."_Hash" ]=
-                $this->$objmethod()->Sql_Select_Hash
-                (
-                    array("ID" => $cert[ $data ],),
-                    array(),
-                    FALSE,
-                    $this->SqlEventTableName($data."s",$cert[ "Event" ])
-                );
-        }
-    }
-
-    //*
-    //* function Certificate_Read_Datas, Parameter list: &$cert
-    //*
-    //* Reads certificate sub data.
-    //*
-
-    function Certificate_Read_Datas(&$cert)
-    {
-       foreach (array("Event","Friend","Inscription","Submission","Collaborator","Collaboration","Caravaneer") as $data)
-        {
-            $this->Certificate_Read_Data($cert,$data);
-        }
-    }
-    
-    //*
-    //* function Certificate_Read, Parameter list: $cert
-    //*
-    //* Reads certificate sub data.
-    //*
-
-    function Certificate_Read($cert)
-    {
-        $this->Certificate_Read_Datas($cert);
-        $this->Certificate_TimeLoad_Update($cert);
-        
-        if (!empty($cert[ "Submission_Hash" ]))
-        {
-            $cert[ "Submission_Hash" ][ "Authors" ]=
-                join("\\\\\\\\\n",$this->SubmissionsObj()->Submission_Authors_Get($cert[ "Submission_Hash" ]));
-        }
-        
-        $cert[ "Event_Hash" ][ "DateSpan" ]=$this->EventsObj()->Event_Date_Span($cert[ "Event_Hash" ]);
-                
-        return $cert;
-    }
-
-
-    //*
-    //* function Certificates_Generate, Parameter list: $certs
-    //*
-    //* Generates $certs.
-    //*
-
-    function Certificates_Generate($certs)
-    {
-        $latex="";
-        foreach ($certs as $cert)
-        {
-            $latex.=$this->Certificate_Generate($cert);
-        }
-        
-        return $this->Certificate_Filter_EventUnit($latex);
-    }
 
     //*
     //* function Certificates_Latex_Ambles_Put, Parameter list: $latex
@@ -341,63 +291,7 @@ class Certificates_Generate extends Certificates_Latex
             "\n\n".
             $this->Certificate_Latex_Tail().
             "";
-    }
-
-    
-    //*
-    //* function Certificates_Generate_Handle_ByCode, Parameter list: 
-    //*
-    //* Generates cert.
-    //*
-
-    function Certificates_Generate_Handle_ByCode()
-    {
-        $code=$this->CGI_GET("Code");
-        $certs=$this->Certificate_Code2Cert($code);
-
-        $name="";
-        $latex=
-            $this->Certificates_Latex_Ambles_Put
-            (
-               $this->Certificates_Generate($certs)
-            );
-        
-        if ($this->CGI_GET("Latex")!=1)
-        {
-            return $this->ShowLatexCode($latex);
-        }
-
-        return $this->Latex_PDF($this->CertificatesObj()->Certificate_TexName($name),$latex);
-    }
-    
-    //*
-    //* function Certificates_Generate_Handle, Parameter list: 
-    //*
-    //* Generates cert.
-    //*
-
-    function Certificates_Generate_Handle($where,$latexname)
-    {
-        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);            
-
-        $latex=$this->CertificatesObj()->Certificates_Generate($certs);
-
-        $latex=$this->CertificatesObj()->Certificates_Latex_Ambles_Put($latex);
-        
-        if ($this->CGI_GET("Latex")!=1)
-        {
-            $this->ShowLatexCode($latex);
-            exit();
-        }
-
-        return
-            $this->Latex_PDF
-            (
-               $this->CertificatesObj()->Certificate_TexName($latexname),
-               $latex
-             );
-    }
-    
+    }    
 }
 
 ?>

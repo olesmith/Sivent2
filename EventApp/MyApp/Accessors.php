@@ -25,6 +25,12 @@ class MyEventApp_Accessors extends MyEventApp_CGIVars
 
     function SqlEventTableName($module,$table="",$event=array())
     {
+        if (empty($event) && is_array($table))
+        {
+            $event=$table;
+            $table="";
+        }
+
         if (empty($event)) { $event=$this->Event(); }
         if (empty($table)) { $table="#Unit__#Event_".$module; }
 
@@ -41,11 +47,23 @@ class MyEventApp_Accessors extends MyEventApp_CGIVars
 
         if (!empty($event))
         {
-            $eventid=$event[ "ID" ];
+            if (is_array($event))
+            {
+                $eventid=$event[ "ID" ];
+            }
+            else
+            {
+                $eventid=$event;
+            }
         }
 
-        $table=preg_replace('/#Event/',$eventid,$table);
-        return preg_replace('/#Unit/',$this->Unit("ID"),$table);
+        return
+            preg_replace
+            (
+                '/#Unit/',
+                $this->Unit("ID"),
+                preg_replace('/#Event/',$eventid,$table)
+            );
     }
 }
 ?>

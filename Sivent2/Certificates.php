@@ -4,13 +4,39 @@ include_once("Certificates/Access.php");
 include_once("Certificates/Validate.php");
 include_once("Certificates/Latex.php");
 include_once("Certificates/Generate.php");
+include_once("Certificates/Read.php");
 include_once("Certificates/Mail.php");
 include_once("Certificates/Code.php");
+include_once("Certificates/Verify.php");
+include_once("Certificates/Friend.php");
+include_once("Certificates/Table.php");
+include_once("Certificates/Handle.php");
 
 
-class Certificates extends Certificates_Code
+class Certificates extends Certificates_Handle
 {
+    var $UnitDatas=array("Event","Friend");
+    var $EventDatas=
+        array
+        (
+            "Inscription",
+            "Submission",//"Assessor",
+            "Collaborator","Collaboration",
+            "Caravaneer",//"Caravan",
+        );
+    
     var $Certificate_NTypes=4;
+    var $Certificate_Data=
+        array
+        (
+            1 => "Inscription",
+            2 => "Caravaneer",
+            3 => "Collaborator",
+            4 => "Submission",
+            5 => "Caravan",
+            6 => "Assessor",
+        );
+            
     
     var $Code_Data=array
     (
@@ -155,6 +181,8 @@ class Certificates extends Certificates_Code
         $this->Certificate_Name_PostProcess($item,$updatedatas);
         $this->Certificate_Code_PostProcess($item,$updatedatas);
         
+        $this->Certificate_Verify($item,$updatedatas);
+        
  
         if (count($updatedatas)>0)
         {
@@ -206,117 +234,7 @@ class Certificates extends Certificates_Code
             $item[ "Name" ]=$name;
             array_push($updatedatas,"Name");
         }
-    }
-
-    
-    //*
-    //* function Certificates_Friend_Table, Parameter list: $datas,$friend,$event=array()
-    //*
-    //* Creates Friend certificates table.
-    //*
-
-    function Certificates_Friend_Table($datas,$friend,$event=array())
-    {
-        $where=$this->UnitWhere(array("Friend" => $friend[ "ID" ]));
-        if (!empty($event)) { $where[ "Event" ]=$event[ "ID" ]; }
-        
-        $certs=
-            $this->Sql_Select_Hashes
-            (
-               $where,
-               array(),
-               "Type,Name"
-            );
-
-        if (empty($certs)) { return ""; }
-
-
-        $table=array();
-        $n=1;
-        foreach ($this->MyHash_HashesList_Key($certs,"Event") as $eventid => $eventcerts)
-        {
-            $event=$this->EventsObj()->Sql_Select_Hash(array("ID" => $eventid),array("ID","Name","Certificates","Certificates_Published"));
-
-            if (!$this->EventsObj()->Event_Certificates_Published($event)) { continue; }
-            $first=array($this->GetRealNameKey($event,"Name"));
-            $cht=0;
-            foreach ($eventcerts as $eventcert)
-            {
-                $this->Certificate_TimeLoad_Update($eventcert);
-        
-                 array_push
-                (
-                   $table,
-                   array_merge
-                   (
-                      $first,
-                      $this->MyMod_Items_Table_Row(0,$n++,$eventcert,$datas)
-                   )
-                );
-
-                if (!empty($eventcert[ "TimeLoad" ])) { $cht+=$eventcert[ "TimeLoad" ]; }
-                
-                $first=array("");
-            }
-
-            $pos=array_search("TimeLoad",$datas);
-            array_push
-            (
-                $table,
-                array
-                (
-                    $this->MultiCell($this->ApplicationObj->Sigma,$pos+1,'r'),
-                    $this->B($cht),
-                    ""
-                )
-            );
-        }
-
-        return $table;
-    }
-        
-    //*
-    //* function Certificates_Friend_Table_Titles, Parameter list: $datas
-    //*
-    //* Creates Friend certificates table title row.
-    //*
-
-    function Certificates_Friend_Table_Titles($datas)
-    {
-        $titles=$this->GetDataTitles($datas);
-
-        array_unshift($titles,$this->EventsObj()->MyMod_ItemName());
-
-        return $titles;
-    }
-    
-    //*
-    //* function Certificates_Friend_Table_Html, Parameter list: $friend,$event=array()
-    //*
-    //* Creates Friend certificates table.
-    //*
-
-    function Certificates_Friend_Table_Html($friend,$event=array())
-    {
-        $this->ItemData("ID");
-        $this->Actions("Show");
-        
-        $datas=array("Generate","Generated","Mailed","Type","Name","TimeLoad","Code",);
-        
-        $table=$this->Certificates_Friend_Table($datas,$friend);
-
-        if (empty($table)) { return ""; }
-
-        return
-            $this->H(1,$this->MyLanguage_GetMessage("Certificate_Friend_Table_Title")).
-            $this->H(2,$friend[ "Name" ]).
-            $this->Html_Table
-            (
-               $this->Certificates_Friend_Table_Titles($datas),
-               $this->Certificates_Friend_Table($datas,$friend,$event)
-            ).
-            "";
-    }
+    }    
 }
 
 ?>

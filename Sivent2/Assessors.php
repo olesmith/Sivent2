@@ -6,6 +6,8 @@ include_once("Assessors/Inscription.php");
 
 class Assessors extends AssessorsInscription
 {
+    var $Certificate_Type=6;
+    
     //*
     //* function Units, Parameter list: $args=array()
     //*

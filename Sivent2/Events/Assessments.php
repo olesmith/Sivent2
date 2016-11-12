@@ -13,8 +13,9 @@ class EventsAssessments extends EventsSubmissions
         if (empty($item)) { $item=$this->Event(); }
         if (empty($item)) { return FALSE; }
 
+        
         $res=FALSE;
-        if ($item[ "Assessments" ]==2)
+        if (!empty($item[ "Assessments" ]) && $item[ "Assessments" ]==2)
         {
             $res=TRUE;
         }

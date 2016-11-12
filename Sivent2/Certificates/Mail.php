@@ -1,6 +1,6 @@
 <?php
 
-class Certificates_Mail extends Certificates_Generate
+class Certificates_Mail extends Certificates_Read
 {
     //*
     //* function Certificates_Generate_Mail_Send, Parameter list: 

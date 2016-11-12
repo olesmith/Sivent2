@@ -292,7 +292,18 @@ class EventMod extends DBDataObj
     {
         $this->ApplicationObj->Event=$event;
     }
+    
+    //*
+    //*
+    //* function SqlUnitTableName, Parameter list: $module,$table=""
+    //*
+    //* Used by specific module to override SqlTableName, prepending Unit id.
+    //*
 
+    function SqlUnitTableName($module,$table="")
+    {
+        return $this->ApplicationObj()->SqlUnitTableName($module,$table);
+    }
 
     //*
     //*
@@ -303,34 +314,36 @@ class EventMod extends DBDataObj
 
     function SqlEventTableName($module,$event=array())
     {
-        $table="#Unit__#Event_".$module;
+        return $this->ApplicationObj()->SqlEventTableName($module,"",$event);
+        
+        /* $table="#Unit__#Event_".$module; */
 
-        $eventid=0;
-        if ($this->CGI_GET("ModuleName")=="Events")
-        {
-            $eventid=$this->CGI_GET("ID");
-        }
+        /* $eventid=0; */
+        /* if ($this->CGI_GET("ModuleName")=="Events") */
+        /* { */
+        /*     $eventid=$this->CGI_GET("ID"); */
+        /* } */
 
-        if (empty($eventid))
-        {
-            $eventid=$this->CGI_GET("Event");
-        }
+        /* if (empty($eventid)) */
+        /* { */
+        /*     $eventid=$this->CGI_GET("Event"); */
+        /* } */
 
-        if (!empty($event))
-        {
-            if (is_array($event))
-            {
-                $eventid=$event[ "ID" ];
-            }
-            else
-            {
-                $eventid=$event;
-            }
-        }
+        /* if (!empty($event)) */
+        /* { */
+        /*     if (is_array($event)) */
+        /*     { */
+        /*         $eventid=$event[ "ID" ]; */
+        /*     } */
+        /*     else */
+        /*     { */
+        /*         $eventid=$event; */
+        /*     } */
+        /* } */
 
-        $table=preg_replace('/#Event/',$eventid,$table);
+        /* $table=preg_replace('/#Event/',$eventid,$table); */
 
-        return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table);
+        /* return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table); */
     }
     
 }

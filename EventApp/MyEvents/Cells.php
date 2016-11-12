@@ -128,7 +128,7 @@ class MyEventsCells extends MyEventsFriend
     function NoOfInscriptionsCell($edit=0,$event=array(),$data="")
     {
         if (empty($event)) { return $this->Language_Message("Events_Inscriptions_Cell_Noof_Title"); }
-       
+        //var_dump($event);
         $sqltable=$this->SqlEventTableName("Inscriptions",$event);
         
         $ninscribed="-";

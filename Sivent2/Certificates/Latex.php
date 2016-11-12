@@ -122,27 +122,6 @@ class Certificates_Latex extends Certificates_Validate
 
         return $latex;
     }
-    
-    //*
-    //* function Certificate_Generate, Parameter list: &$cert
-    //*
-    //* Generates $cert.
-    //*
-
-    function Certificate_Generate(&$cert)
-    {
-        $this->Certificate_Set_Generated($cert);
-
-        return $this->FilterHash
-        (
-           $this->FilterHash
-           (
-              $this->Certificate_Latex($cert),
-              $this->Event(),"Event_"
-           ),
-           $this->Unit(),"Unit_"
-        );
-    }
 }
 
 ?>

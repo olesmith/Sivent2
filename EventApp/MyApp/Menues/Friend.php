@@ -31,6 +31,7 @@ class MyEventApp_Menues_Friend extends MyEventApp_Menues_Event
 
     function HtmlFriendEventMenu($event,$friend)
     {
+        if (preg_match('/^Public$/',$this->Profile())) { return ""; }
         if (empty($friend)) { $friend=$this->LoginData(); }
         
         $menufile=$this->HtmlFriendMenuFile();

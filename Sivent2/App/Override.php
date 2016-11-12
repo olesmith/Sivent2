@@ -23,6 +23,7 @@ class App_Override extends App_Handle
                 "";
             exit();
         }
+        
         parent::MyApp_Handle($args);
     }
 

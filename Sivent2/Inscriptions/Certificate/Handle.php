@@ -61,7 +61,7 @@ class InscriptionsCertificateHandle extends InscriptionsCertificateCells
 
     function Inscription_Handle_Certificates_Generate()
     {
-         return
+        return
             $this->CertificatesObj()->Certificates_Generate_Handle
             (
                $this->Inscription_Certificates_All_Where(),

@@ -80,6 +80,8 @@ class MyFriends_Events extends ModulesCommon
         $this->EventsObj()->ItemData();
         $this->EventsObj()->Actions();
 
+        
+
         $table=array();
         $n=1;
         foreach ($this->Friend_Events_Read($friend) as $event)

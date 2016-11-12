@@ -94,7 +94,7 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
               $this->FrameIt
               (
                  $itable.
-                 $this->CertificatesObj()->Certificates_Friend_Table_Html($friend,$this->Event())
+                 $this->CertificatesObj()->Certificates_Friend_Tables_Html($friend,$this->Event())
               )
            )
         );

@@ -2,6 +2,7 @@
 
 class EventsCertificates extends EventsSchedules
 {
+    
     /* //\* Moved to EventApp/MyEvents/Certificates.php */
     /* //\* function Event_Certificates_Has, Parameter list: $item */
     /* //\* */
