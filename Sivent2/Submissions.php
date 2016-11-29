@@ -7,7 +7,9 @@ include_once("Submissions/Export.php");
 include_once("Submissions/Schedule.php");
 include_once("Submissions/Certificate.php");
 include_once("Submissions/Authors.php");
+include_once("Submissions/Assessors.php");
 include_once("Submissions/Assessments.php");
+include_once("Submissions/Statistics.php");
 include_once("Submissions/Handle.php");
 
 

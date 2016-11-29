@@ -4,6 +4,65 @@
 class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTable
 {
     //*
+    //* function Assessors_Friend_Assessor_Authors_Table, Parameter list: $edit,$friend,&$assessor
+    //*
+    //* Creates $assessor assessment authors inf table.
+    //*
+
+    function Assessors_Friend_Assessor_Authors_Table(&$assessor)
+    {
+        if
+            (
+                preg_match('/^(Friend)$/',$this->Profile())
+                &&
+                $this->LoginData("ID")==$assessor[ "Friend" ]
+            )
+        {
+            
+            return array();
+        }
+        
+        return
+            array_merge
+            (
+                array
+                (
+                    $this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Friend_Title"))
+                ),
+                $this->SubmissionsObj()->Submission_Authors_Tables
+                (
+                    $assessor[ "Submission_Hash" ],
+                    array("Name","Email","NickName","Titulation","Curriculum",)
+                )
+            );
+    }
+
+     //*
+    //* function Assessors_Friend_Assessor_Submission_Table, Parameter list: $edit,$friend,&$assessor
+    //*
+    //* Creates $assessor assessment submission inf table.
+    //*
+
+    function Assessors_Friend_Assessor_Submission_Table($edit,&$assessor)
+    {
+        return
+            array_merge
+            (
+                array
+                (
+                    $this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Submission_Title"))
+                ),
+                $this->SubmissionsObj()->MyMod_Item_Table
+                (
+                    $edit,
+                    $assessor[ "Submission_Hash" ],
+                    array("Name","Title","Area","Level","Keywords","Summary","File")
+                )
+            );
+    }
+
+    
+    //*
     //* function Assessors_Friend_Assessor_Form, Parameter list: $edit,$friend,&$assessor
     //*
     //* Creates $assessor assessment form.
@@ -14,22 +73,20 @@ class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTab
         $frienddatas=array("Name","Email","NickName","Titulation","Curriculum",);
         $submissiondatas=array("Name","Title","Area","Level","Keywords","Summary","File");
         
-        $table=
-            array_merge
-            (
-               array($this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Friend_Title"))),
-               $this->SubmissionsObj()->Submission_Authors_Tables($assessor[ "Submission_Hash" ],$frienddatas),
-               array($this->H(3,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Submission_Title"))),
-               $this->SubmissionsObj()->MyMod_Item_Table(0,$assessor[ "Submission_Hash" ],$submissiondatas)
-            );
- 
-        
         return $this->FrameIt
         (
             $this->Assessors_Inscription_Assessors_Menu().
             $this->H(2,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Title")).
-            $this->Html_Table("",$table).
-            $this->Assessors_Inscription_Assessments_Form($edit,$assessor).
+            $this->Html_Table
+            (
+                "",
+                array_merge
+                (
+                    $this->Assessors_Friend_Assessor_Authors_Table($assessor),
+                    $this->Assessors_Friend_Assessor_Submission_Table(0,$assessor)
+                )
+            ).
+            $this->Assessor_Inscription_Assessments_Form($edit,$assessor).
             ""
         );
     }

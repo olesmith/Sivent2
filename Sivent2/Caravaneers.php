@@ -12,23 +12,22 @@ class Caravaneers extends Caravaneers_Certificate
     var $Export_Defaults=
         array
         (
-            "NFields" => 8,
+            "NFields" => 7,
             "Data" => array
             (
                 1 => "No",
-                2 => "Friend__Name",
-                3 => "Name",
-                4 => "Email",
-                5 => "Status",
-                6 => "PRN",
-                7 => "Comment",
-                8 => "Certificate",
+                2 => "Name",
+                3 => "Email",
+                4 => "Status",
+                5 => "PRN",
+                6 => "Comment",
+                7 => "Certificate",
             ),
             "Sort" => array
             (
                 1 => "0",
-                2 => "0",
-                3 => "1",
+                2 => "1",
+                3 => "0",
             ),
         );
     

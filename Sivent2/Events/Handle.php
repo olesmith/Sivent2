@@ -1,13 +1,7 @@
 <?php
 
-class Events_Handle extends Events_SubActions
+class Events_Handle extends Events_Statistics
 {
-    //*
-    //* function MyMod_Handle_Event_Menu, Parameter list: 
-    //*
-    //* Creates horisontal menu with access to different SGroups.
-    //*
-
     //*
     //* function MyMod_Handle_Show, Parameter list: $title
     //*

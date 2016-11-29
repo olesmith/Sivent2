@@ -5,21 +5,41 @@
 class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessmentsUpdate
 {
     //*
+    //* function Assessor_Inscription_Form_Criterias__Data, Parameter list: 
+    //*
+    //* Returns criterias data to display.
+    //*
+
+    function Assessor_Inscription_Form_Criterias_Data()
+    {
+        return array("No","Weight","Name");
+    }
+
+    //*
+    //* function Assessors_Inscription_Form_Assessments__Data, Parameter list: 
+    //*
+    //* Returns criterias data to display.
+    //*
+
+    function Assessor_Inscription_Form_Assessments_Data()
+    {
+        return array("Value","Weighted");
+    }
+
+    
+    //*
     //* function Assessors_Inscription_Assessments_Form, Parameter list: $edit,$assessor
     //*
     //* Creates $assessor assessment form.
     //*
 
-    function Assessors_Inscription_Assessments_Form($edit,&$assessor)
+    function Assessor_Inscription_Assessments_Form($edit,&$assessor)
     {
         $this->CriteriasObj()->ItemData("ID");
         $this->CriteriasObj()->ItemDataGroups("Basic");
         
-        $criteriadatas=array("No","Weight","Name");
-        $assessmentdatas=array("Value");
 
-        $criterias=$this->CriteriasObj()->Criterias_Read();
-        $assessments=$this->Assessors_Inscription_Assessments_Read($assessor);        
+        $assessments=$this->Assessor_Inscription_Assessments_Read($assessor);        
 
         $start=$end="";
         if ($edit==1)
@@ -31,7 +51,7 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
 
             if ($this->CGI_POSTint("Save")==1)
             {
-                $updated=$this->Assessors_Inscription_Assessments_Update($edit,$assessor,$criterias,$assessments);
+                $updated=$this->Assessor_Inscription_Assessments_Update($edit,$assessor,$assessments);
             }
         }
         
@@ -44,20 +64,13 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
                $start.
                $this->Html_Table
                (
-                  $this->Assessors_Inscription_Assessments_Titles
-                  (
-                     $criteriadatas,
-                     $assessmentdatas
-                  ),
-                  $this->Assessors_Inscription_Assessments_Table
-                  (
-                     $edit,
-                     $assessor,
-                     $criterias,
-                     $assessments,
-                     $criteriadatas,
-                     $assessmentdatas
-                  )
+                   $this->Assessor_Inscription_Assessments_Titles(),
+                   $this->Assessor_Inscription_Assessments_Table
+                   (
+                       $edit,
+                       $assessor,
+                       $assessments
+                   )
                ).
                $end
             ).

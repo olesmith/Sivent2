@@ -95,9 +95,9 @@ class ItemsRead extends ItemsLatex
             (
                $rwhere,
                $rdatas,
-               FALSE,
                $orderby
             );
+
             $this->LastWhereClause=$rwhere;
 
             //var_dump($rwhere);

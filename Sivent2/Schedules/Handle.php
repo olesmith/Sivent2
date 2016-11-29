@@ -1,7 +1,7 @@
 <?php
 
 
-class SchedulesHandle extends SchedulesUpdate
+class Schedules_Handle extends Schedules_Statistics
 {
     var $Date=array();
     var $Dates=array();

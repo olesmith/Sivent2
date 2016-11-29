@@ -4,10 +4,11 @@ include_once("Caravans/Access.php");
 include_once("Caravans/Emails.php");
 include_once("Caravans/Caravaneers.php");
 include_once("Caravans/Certificate.php");
+include_once("Caravans/Statistics.php");
 
 
 
-class Caravans extends Caravans_Certificate
+class Caravans extends Caravans_Statistics
 {
     var $Certificate_Type=5;
     var $Export_Defaults=

@@ -10,11 +10,12 @@ include_once("Schedules/Schedule.php");
 include_once("Schedules/Schedules.php");
 include_once("Schedules/Speaker.php");
 include_once("Schedules/Update.php");
+include_once("Schedules/Statistics.php");
 include_once("Schedules/Handle.php");
 
 
 
-class Schedules extends SchedulesHandle
+class Schedules extends Schedules_Handle
 {
     //*
     //* function Units, Parameter list: $args=array()

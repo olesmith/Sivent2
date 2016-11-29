@@ -5,12 +5,12 @@
 class AssessorsInscriptionAssessmentsRead extends AssessorsInscriptionAssessors
 {
     //*
-    //* function Assessors_Inscription_Assessments_Read, Parameter list: $assessor
+    //* function Assessor_Inscription_Assessments_Read, Parameter list: $assessor
     //*
-    //* Reads relevant assessments.
+    //* Reads $assessor assessments.
     //*
 
-    function Assessors_Inscription_Assessments_Read($assessor)
+    function Assessor_Inscription_Assessments_Read($assessor)
     {
         return
             $this->MyHash_HashesList_2ID

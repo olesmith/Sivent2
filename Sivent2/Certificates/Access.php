@@ -1,6 +1,6 @@
 <?php
 
-class Certificates_Access extends ModulesCommon
+class Certificates_Access extends MyCertificates
 {
     var $Access_Methods=array
     (

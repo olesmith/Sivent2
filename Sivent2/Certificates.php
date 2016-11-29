@@ -1,5 +1,7 @@
 <?php
 
+include_once("../EventApp/MyCertificates.php");
+
 include_once("Certificates/Access.php");
 include_once("Certificates/Validate.php");
 include_once("Certificates/Latex.php");
@@ -10,12 +12,13 @@ include_once("Certificates/Code.php");
 include_once("Certificates/Verify.php");
 include_once("Certificates/Friend.php");
 include_once("Certificates/Table.php");
+include_once("Certificates/Statistics.php");
 include_once("Certificates/Handle.php");
 
 
 class Certificates extends Certificates_Handle
 {
-    var $UnitDatas=array("Event","Friend");
+    var $UnitDatas=array("Unit","Event","Friend");
     var $EventDatas=
         array
         (
@@ -24,6 +27,7 @@ class Certificates extends Certificates_Handle
             "Collaborator","Collaboration",
             "Caravaneer",//"Caravan",
         );
+    
     
     var $Certificate_NTypes=4;
     var $Certificate_Data=
@@ -45,7 +49,7 @@ class Certificates extends Certificates_Handle
        "Friend" => "%06d",
        "ID" => "%06d",       
     );
-    
+
     //*
     //* function Certificates, Parameter list: $args=array()
     //*
@@ -55,23 +59,17 @@ class Certificates extends Certificates_Handle
     function Certificates($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Unit","Event","Name","Code","Type","Friend","Inscription","Submission","Collaborator","Caravaneer");
+        $this->AlwaysReadData=
+            array
+            (
+                "Unit","Event","Name","Code","Type","Friend",
+                "Inscription",
+                "Submission","Collaborator","Caravaneer"
+            );
         $this->Sort=array("Name");
         $this->IncludeAllDefault=TRUE;
     }
 
-    //*
-    //* function SqlTableName, Parameter list: $table=""
-    //*
-    //* Overrides SqlTableName, prepending period id.
-    //* Calls ApplicationObj->SqlPeriodTableName.
-    //*
-
-    function SqlTableName($table="")
-    {
-        return $this->ApplicationObj()->SqlUnitTableName("Certificates",$table);
-    }
-    
     //*
     //* function Type2Key, Parameter list: $item
     //*

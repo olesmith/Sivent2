@@ -96,5 +96,11 @@ array
       "Name_ES" => "Adicionar Avaliador",
       "Name_UK" => "Add Assessor",
    ),
+   "Submissions_Statistics_TitleRow" => array
+   (
+       "Name" => array("Atividades","Aprovados","Certificados Liberados","Carga Horária",""),
+       "Name_ES" => array("Atividades","Aprovados","Certificados Liberados","Carga Horária",""),
+       "Name_UK" => array("Activities","Approved","Certificates Liberated","Time Load",""),
+   ),
 );
 

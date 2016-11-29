@@ -1,6 +1,6 @@
 <?php
 
-class InscriptionsForm extends InscriptionsUpdate
+class InscriptionsForm extends InscriptionsStatistics
 {
     //*
     //* function InscriptionForm, Parameter list: $edit

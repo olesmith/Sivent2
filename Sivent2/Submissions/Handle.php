@@ -5,6 +5,64 @@ include_once("Handle/Assessments.php");
 class Submissions_Handle extends Submissions_Handle_Assessments
 {    
     //*
+    //* function MyMod_Handle_Show_Assessors, Parameter list: $submission
+    //*
+    //* Shows $submission assessments.
+    //*
+
+    function MyMod_Handle_Show_Assessors($submission)
+    {
+        $this->AssessorsObj()->ItemData("ID");
+        $this->AssessorsObj()->ItemDataGroups("Assessments");
+        $this->AssessorsObj()->Actions("Show");
+
+        $datas=$this->AssessorsObj()->GetGroupDatas("Assessments");
+        
+        return
+            $this->Html_Table
+            (
+                $this->AssessorsObj()->GetDataTitles($datas),
+                $this->Submission_Assessors_Table
+                (
+                    1,
+                    1,
+                    $datas,
+                    $submission
+                )
+            );
+    }
+    
+    //*
+    //* function MyMod_Handle_Show, Parameter list: $title=""
+    //*
+    //* Handles module object Edit.
+    //*
+
+    function MyMod_Handle_Show($title="")
+    {
+        parent::MyMod_Handle_Show($title);
+
+        echo
+            $this->MyMod_Handle_Show_Assessors($this->ItemHash);
+        
+    }
+
+     //*
+    //* function MyMod_Handle_Edit, Parameter list: $echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE
+    //*
+    //* Handles module object Edit.
+    //*
+
+    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
+    {
+        parent::MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
+           
+        echo
+            $this->MyMod_Handle_Show_Assessors($this->ItemHash);
+    }
+
+    
+    //*
     //* function Submissions_Handle_Submission, Parameter list: $submission=array()
     //*
     //* Elaborated display of Submission.

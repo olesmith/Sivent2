@@ -93,6 +93,7 @@ array
       "Coordinator" => 2,
       
       "Format"  => '%.1f',
+      "Align"  => 'right',
       "Regexp"  => '^\d*\.?\d*$',
       "Search"  => FALSE,
       "Compulsory"  => TRUE,

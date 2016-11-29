@@ -5,17 +5,17 @@
 class AssessorsInscriptionAssessmentsTable extends AssessorsInscriptionAssessmentsRows
 {
     //*
-    //* function Assessors_Inscription_Assessments_Table, Parameter list: $edit,$assessor,$criterias,$assessments,$criteriadatas,$assessmentdata
+    //* function Assessor_Inscription_Assessments_Table, Parameter list: $edit,$assessor,$criterias,$assessments,$criteriadatas,$assessmentdata
     //*
     //* Creates $assessor assessment table (matrix).
     //*
 
-    function Assessors_Inscription_Assessments_Table($edit,$assessor,$criterias,$assessments,$criteriadatas,$assessmentdata)
+    function Assessor_Inscription_Assessments_Table($edit,$assessor,$assessments)
     {
         $n=1;
 
         $table=array();
-        foreach ($criterias as $criteria)
+        foreach ($this->Criterias() as $cid => $criteria)
         {
             $assessment=array();
             if (!empty($assessments[ $criteria[ "ID" ] ]))
@@ -26,14 +26,21 @@ class AssessorsInscriptionAssessmentsTable extends AssessorsInscriptionAssessmen
             array_push
             (
                $table,
-               $this->Assessors_Inscription_Assessment_Row($edit,$n++,$assessor,$criteria,$assessment,$criteriadatas,$assessmentdata)
+               $this->Assessors_Inscription_Assessment_Row
+               (
+                   $edit,
+                   $n++,
+                   $assessor,
+                   $criteria,
+                   $assessment
+               )
             );
         }
 
         $table=array_merge
         (
            $table,
-           $this->Assessors_Inscription_Assessment_Sum_Rows($assessor,$criterias,$assessments,$criteriadatas)
+           $this->Assessors_Inscription_Assessment_Sum_Rows($assessor,$assessments)
         );
 
         if ($edit==1)

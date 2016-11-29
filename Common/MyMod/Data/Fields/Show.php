@@ -324,6 +324,11 @@ trait MyMod_Data_Fields_Show
                 );
         }
         
+        if (!empty($this->ItemData[ $data ][ "Align" ]))
+        {
+            $value=$this->Div($value,array("ALIGN" => $this->ItemData[ $data ][ "Align" ]));
+        }
+        
         return $value;
     }
 

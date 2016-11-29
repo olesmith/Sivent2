@@ -2,9 +2,11 @@
 
 include_once("Assessors/Access.php");
 include_once("Assessors/Inscription.php");
+include_once("Assessors/Submission.php");
+include_once("Assessors/Statistics.php");
 
 
-class Assessors extends AssessorsInscription
+class Assessors extends Assessors_Statistics
 {
     var $Certificate_Type=6;
     
@@ -115,83 +117,6 @@ class Assessors extends AssessorsInscription
         return $res;
     }
 
-    
-    //*
-    //* function Assessor_Assessments_Criterias_Sum_Calc, Parameter list: $assessor,$criterias,$assessments,$weighted=TRUE
-    //*
-    //* Sums $criterias weights.
-    //*
-
-    function Assessor_Assessments_Criterias_Sum_Calc($assessor,$criterias,$assessments,$weighted=TRUE)
-    {
-        $sum=0.0;
-        foreach ($criterias as $criteria)
-        {
-            if (!empty($assessments[ $assessor[ "Friend" ] ][ $criteria[ "ID" ] ]))
-            {
-                $value=$assessments[ $assessor[ "Friend" ] ][ $criteria[ "ID" ] ][ "Value" ];
-                if ($weighted) { $value*=$criteria[ "Weight" ]; }
-                    
-                $sum+=1.0*$value;
-            }
-        }
-
-        if ($weighted && $assessor[ "Result" ]!=$sum)
-        {
-            $assessor[ "Result" ]=$sum;
-            $this->Sql_Update_Item_Value_Set($assessor[ "ID" ],"Result",$sum);
-        }
-    
-        return 1.0*$sum;
-    }
-    
-    //*
-    //* function Assessors_Assessments_Criteria_Sum_Calc, Parameter list: $assessor,$criterias,$assessments,$weighted=TRUE
-    //*
-    //* Sums $criterias weights.
-    //*
-
-    function Assessors_Assessments_Criteria_Sum_Calc($assessors,$criteria,$assessments,$weighted=TRUE)
-    {
-        $sum=0.0;
-        foreach ($assessors as $assessor)
-        {
-            $assessment=array();
-            if (!empty($assessments[ $assessor[ "Friend" ] ][ $criteria[ "ID" ] ]))
-            {
-                $assessment=$assessments[ $assessor[ "Friend" ] ][ $criteria[ "ID" ] ];
-                
-                $value=$assessments[ $assessor[ "Friend" ] ][ $criteria[ "ID" ] ][ "Value" ];
-                if ($weighted) { $value*=$criteria[ "Weight" ]; }
-                
-                $sum+=1.0*$value;
-            }
-        }
-    
-        return 1.0*$sum;
-    }
-
-    //*
-    //* function Assessor_Assessments_Criterias_Complete, Parameter list: $assessor,$criterias,$assessments,$weighted=TRUE
-    //*
-    //* Returns TRUE if all $criterias has been assessed.
-    //*
-
-    function Assessor_Assessments_Criterias_Complete($assessor,$criterias,$assessments)
-    {
-        $res=TRUE;
-        if (empty($criterias)) { $res=FALSE; }
-        foreach ($criterias as $criteria)
-        {
-            if (!empty($assessments[ $criteria[ "ID" ] ]))
-            {
-                $value=$assessments[ $criteria[ "ID" ] ][ "Value" ];
-                if (empty($value)) { $res=FALSE; break; }
-            }
-        }
-
-         return $res;
-    }
     
     //*
     //* function HandleEdit, Parameter list: 

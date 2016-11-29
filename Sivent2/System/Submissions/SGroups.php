@@ -8,8 +8,8 @@ array
       "Data" => array
       (
          "Status",
-         "Name","Title","Title_UK","Title_ES",
-         "Type","Area","Level","Certificate","Certificate_TimeLoad",
+         "Friend","Name","Title","Title_UK","Title_ES",
+         "Type","Area","Level","Certificate","Certificate_TimeLoad","Result",
       ),
       "Admin" => 1,
       "Person" => 0,

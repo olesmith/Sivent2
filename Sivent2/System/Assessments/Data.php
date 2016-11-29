@@ -133,6 +133,8 @@ array
       "Admin"    => 2,
       "Friend" => 1,
       "Coordinator" => 2,
+      "Format" => "%02d",
+      "Align" => "right",
       
       "NoSelectSort"      => TRUE,
       "Search"  => FALSE,

@@ -45,5 +45,11 @@ array
       "Title_ES" => "Local e Horário das mis Actividades",
       "Title_UK" => "Time and Place of my Activities",
    ),
+   "Schedules_Statistics_TitleRow" => array
+   (
+       "Name"    => array("Slots","Salas","Dias","Horários","Duraçao",""),
+       "Name_ES" => array("Slots","Salas","Dias","Horários","Duracion",""),
+       "Name_UK" => array("Slots","Rooms","Days","Time Slots","Duration",""),
+   ),
 );
 

@@ -101,10 +101,10 @@ class SearchTable extends SearchFields
                     }
                     else
                     {
-                        array_push($row,$input,"");
+                        array_push($row,$input);
                     }
 
-                    array_push($row,"");
+                    //array_push($row,"");
                     array_push($tbl,$row);
                 }
             }
@@ -150,8 +150,7 @@ class SearchTable extends SearchFields
                    array
                    (
                       $this->B($addvar[ "Title" ]),
-                      $this->MakeInput($addvar[ "Name" ],$val,$width),
-                      ""
+                      $this->MakeInput($addvar[ "Name" ],$val,$width)
                    )
                 );
             }
@@ -178,33 +177,43 @@ class SearchTable extends SearchFields
             );
         }
 
+        $action=$this->CGI_GET("Action");
+        $action=$this->Actions($action);
+        if (!empty($action[ "Edit" ]))
+        {
+            array_push
+            (
+                $tbl,
+                array
+                (
+                    $this->B
+                    (
+                        $this->GetMessage($this->SearchDataMessages,"TabMovesDown").":"
+                    ),
+                    $this->MultiCell
+                    (
+                        $this->MakeCheckBox
+                        (
+                            $this->ModuleName."_TabMovesDown",
+                            1,
+                            $this->GetCGIVarValue($this->ModuleName."_TabMovesDown")
+                        ).
+                        " ".
+                        $this->GetMessage($this->SearchDataMessages,"TabMovesDownText"),
+                        3,
+                        'left'
+                    )
+                )
+            );
+        }
+
         array_push
         (
-           $tbl,
-           array
-           (
-              $this->B
-              (
-                 $this->GetMessage($this->SearchDataMessages,"TabMovesDown").":"
-              ),
-              $this->MultiCell
-              (
-                 $this->MakeCheckBox
-                 (
-                    $this->ModuleName."_TabMovesDown",
-                    1,
-                    $this->GetCGIVarValue($this->ModuleName."_TabMovesDown")
-                 ).
-                 " ".
-                 $this->GetMessage($this->SearchDataMessages,"TabMovesDownText"),
-                 3,
-                 'left'
-               )
-           ),
-           $this->Html_Input_Button_Make("submit",strtoupper($btitle)).
-           join("",$buttons)
+            $tbl,
+            $this->Html_Input_Button_Make("submit",strtoupper($btitle)).
+            join("",$buttons)
         );
-
+        
         //Title line
         array_unshift
         (

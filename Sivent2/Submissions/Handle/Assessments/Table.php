@@ -4,23 +4,23 @@
 class Submissions_Handle_Assessments_Table extends Submissions_Handle_Assessments_Read
 {
     //*
-    //* function Submissions_Handle_Assessors_Assessments_Table, Parameter list: $edit,$submission,$assessors
+    //* function Submission_Handle_Assessors_Assessments_Table, Parameter list: $edit,$submission,$assessors
     //*
     //* Generate $assessors assessments table.
     //*
 
-    function Submissions_Handle_Assessors_Assessments_Table($edit,$submission,&$assessors)
+    function Submission_Handle_Assessors_Assessments_Table($edit,$submission,&$assessors)
     {
         $assessments=$this->Submissions_Handle_Assessors_Assessments_Read($submission,$assessors);
-        $criterias=$this->CriteriasObj()->Criterias_Read();
+
         
         if ($this->CGI_POSTint("Update")==1)
         {
-            $this->Submissions_Handle_Assessors_Assessments_Update($submission,$assessors,$criterias,$assessments);
+            $this->Submissions_Handle_Assessors_Assessments_Update($submission,$assessors,$assessments);
         }
         
         $weight=0.0;
-        foreach ($criterias as $criteria)
+        foreach ($this->Criterias() as $cid => $criteria)
         {
             $weight+=$criteria[ "Weight" ];
         }
@@ -35,7 +35,7 @@ class Submissions_Handle_Assessments_Table extends Submissions_Handle_Assessment
 
         $table=array();
         $n=1;
-        foreach ($criterias as $criteria)
+        foreach ($this->Criterias() as $cid => $criteria)
         {
             $criteriaid=$criteria[ "ID" ];
             $criteria[ "No" ]=$n++;
@@ -57,7 +57,7 @@ class Submissions_Handle_Assessments_Table extends Submissions_Handle_Assessment
             array_push
             (
                $table,
-               $this->Submissions_Handle_Assessors_Assessments_Criteria_Rows
+               $this->Submission_Handle_Assessors_Assessments_Criteria_Rows
                (
                   $edit,
                   $submission,
@@ -71,10 +71,17 @@ class Submissions_Handle_Assessments_Table extends Submissions_Handle_Assessment
         array_push
         (
            $table,
-           $this->Submissions_Handle_Assessors_Assessments_Criterias_Row_Sum($submission,$assessments,$assessors,$criterias),
-           /* $this->Submissions_Handle_Assessors_Assessments_Criterias_Row_Media($submission,$assessments,$assessors,$criterias), */
-           array($this->Buttons())
+           $this->AssessorsObj()->Assessors_Submission_Media_Row($submission,$assessors)
         );
+
+        if ($edit==1)
+        {
+            array_push
+            (
+                $table,
+                array($this->Buttons())
+            );
+        }
         
         return $table;
     }

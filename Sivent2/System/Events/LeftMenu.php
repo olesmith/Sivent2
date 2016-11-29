@@ -121,7 +121,7 @@ array
       "Title_ES" => "Colaboraciones",
       "Title_UK" => "Collaborations",
    ),
-   "07_Caravans" => array
+   "071_Caravans" => array
    (
       "AccessMethod" => "Coordinator_Caravans_Access_Has",
       "Admin" => "1",
@@ -139,6 +139,22 @@ array
       "Title" => "Gerenciar Caravanas",
       "Title_ES" => "Caravanas",
       "Title_UK" => "Manage Caravans",
+   ),
+   "072_Caravans" => array
+   (
+      "AccessMethod" => "Coordinator_Caravans_Access_Has",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Caravaneers&Action=Search&Event=#Event",
+      "Name" => "Caravaneiros",
+      "Name_ES" => "Caravaneiros",
+      "Name_UK" => "Caravaneers",
+      "Person" => "0",
+      "Public" => "0",
+      "Title" => "Membros de Caravanas",
+      "Title_ES" => "Membros de Caravanas",
+      "Title_UK" => "Caravan Members",
    ),
    "091_Submissions" => array
    (
@@ -285,6 +301,22 @@ array
       "Title" => "Presenças",
       "Title_ES" => "Presencias",
       "Title_UK" => "Presences",
+   ),
+   "16_Statistics" => array
+   (
+       //"AccessMethod" => "Coordinator_Presences_Access_Has",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "1",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Events&Action=Statistics&Event=#Event",
+      "Name" => "Estatisticas",
+      "Name_ES" => "Estatisticas",
+      "Name_UK" => "Statistics",
+      "Person" => "1",
+      "Public" => "1",
+      "Title" => "Estatisticas do Evento",
+      "Title_ES" => "Estatisticas do Evento",
+      "Title_UK" => "Event Statistics",
    ),
 );
 

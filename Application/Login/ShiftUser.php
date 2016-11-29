@@ -21,10 +21,25 @@ class LoginShiftUser extends LoginLogin
             $profiles=$this->ApplicationObj()->ShiftUserUnallowedProfiles();
 
             $peoplewhere[ "Unit" ]=$this->Unit[ "ID" ];
+
+            $ors=array();
             foreach ($profiles as $profile)
             {
-                $peoplewhere[ "Profile_".$profile ]=1;
+                $key="Profile_".$profile;
+                array_push
+                (
+                    $ors,
+                    "(".$this->Sql_Table_Column_Name_Qualify($key).
+                    "!=".
+                    $this->Sql_Table_Column_Value_Qualify(2).
+                    " OR ".
+                    $this->Sql_Table_Column_Name_Qualify($key).
+                    " IS NULL".
+                    ")"
+                );
             }
+
+            $peoplewhere[ "__Profiles" ]=join(" AND ",$ors);
         }
 
         return $this->UsersObj()->GetRealWhereClause($peoplewhere);
@@ -38,9 +53,8 @@ class LoginShiftUser extends LoginLogin
 
     function GetShiftUsers()
     {
-        return $this->UsersObj()->MySqlUniqueColValues
+        return $this->UsersObj()->Sql_Select_Unique_Col_Values
         (
-           "",
            "ID",
            $this->ShiftUsersSqlWhere(),
            ""

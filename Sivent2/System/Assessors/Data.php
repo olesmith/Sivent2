@@ -4,7 +4,7 @@ array
    (
       "Name" => "ID",
       "Sql" => "INT NOT NULL PRIMARY KEY AUTO_INCREMENT",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 1,
       "Friend" => 1,
@@ -21,7 +21,7 @@ array
       "SqlDerivedData" => array("Name"),
       "GETSearchVarName"  => "Unit",
 
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
@@ -41,7 +41,7 @@ array
       "SqlDerivedData" => array("Name"),
       "GETSearchVarName"  => "Event",
       "Sql" => "INT",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend"     => 1,
@@ -59,10 +59,10 @@ array
       "GETSearchVarName"  => "Friend",
       
       "Sql" => "INT",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 2,
     ),
    "Submission" => array
@@ -90,10 +90,10 @@ array
 
       "Size" => 50,
       "Sql" => "VARCHAR(256)",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend" => 1,
+      "Friend" => 0,
       "Coordinator" => 2,
       
       "Search"  => FALSE,
@@ -110,7 +110,7 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"   => 1,
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 1,
       "Friend" => 1,
@@ -130,7 +130,7 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"   => 1,
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 1,
       "Friend" => 1,
@@ -146,11 +146,48 @@ array
 
       "Sql" => "REAL",
       
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 1,
       "Friend" => 1,
       "Coordinator" => 1,
+      
+      "Search"  => FALSE,
+      "Compulsory"  => FALSE,
+      "Align"  => "right",
+      "Format"  => "%.1f",
+   ),
+   "CoordComment" => array
+   (
+      "Name"    => "Comentário para Coordenação",
+      "Name_ES" => "Comentário para Coordenacion",
+      "Name_UK" => "Comment to Coordination",
+
+      "Sql" => "REAL",
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 0,
+      "Coordinator" => 2,
+      
+      "Search"  => FALSE,
+      "Compulsory"  => FALSE,
+      "Format"  => "%.1f",
+   ),
+   "FriendComment" => array
+   (
+      "Name"    => "Comentário para Autor",
+      "Name_ES" => "Comentário para Autor",
+      "Name_UK" => "Comment to Author",
+
+      "Sql" => "REAL",
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
       
       "Search"  => FALSE,
       "Compulsory"  => FALSE,

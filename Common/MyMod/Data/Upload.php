@@ -68,8 +68,6 @@ trait MyMod_Data_Upload
             $uploadpath.=".";
         }
 
-        var_dump($uploadpath);
-
         //Make files hidden
         return $uploadpath.$data."_".$item[ "ID" ].".".$ext;
     }

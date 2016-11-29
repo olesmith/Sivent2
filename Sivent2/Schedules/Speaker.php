@@ -1,6 +1,6 @@
 <?php
 
-class SchedulesSpeaker extends SchedulesSchedules
+class Schedules_Speaker extends SchedulesSchedules
 {
     //*
     //* function Speakers, Parameter list: $friend

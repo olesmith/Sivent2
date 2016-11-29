@@ -5,48 +5,61 @@
 class AssessorsInscriptionAssessmentsRows extends AssessorsInscriptionAssessmentsCells
 {
     //*
-    //* function Assessors_Inscription_Assessments_Titles, Parameter list: 
+    //* function Assessor_Inscription_Assessments_Titles, Parameter list: 
     //*
     //* Creates $assessor assessment form.
     //*
 
-    function Assessors_Inscription_Assessments_Titles($criteriadatas)
+    function Assessor_Inscription_Assessments_Titles()
     {
         return
             array_merge
             (
-               $this->CriteriasObj()->GetDataTitles($criteriadatas),
-               $this->AssessmentsObj()->GetDataTitles(array("Value","Weighted"))
+               $this->CriteriasObj()->GetDataTitles
+               (
+                   $this->Assessor_Inscription_Form_Criterias_Data()
+               ),
+               $this->AssessmentsObj()->GetDataTitles
+               (
+                   $this->Assessor_Inscription_Form_Assessments_Data()
+               )
             );
     }
 
     //*
-    //* function Assessors_Inscription_Assessment_Row, Parameter list: $n,$assessor,$criterias,$assessments,$criteriadatas,$assessmentdata
+    //* function Assessors_Inscription_Assessment_Row, Parameter list: $n,$assessor,$criterias,$assessments
     //*
     //* Creates $assessor $assessment row.
     //*
 
-    function Assessors_Inscription_Assessment_Row($edit,$n,$assessor,$criteria,$assessment,$criteriadatas,$assessmentdata)
+    function Assessors_Inscription_Assessment_Row($edit,$n,$assessor,$criteria,$assessment)
     {
         return
             array_merge
             (
-               $this->CriteriasObj()->MyMod_Items_Table_Row(0,$n,$criteria,$criteriadatas,TRUE),
+               $this->CriteriasObj()->MyMod_Items_Table_Row
+               (
+                   0,
+                   $n,
+                   $criteria,
+                   $this->Assessor_Inscription_Form_Criterias_Data(),
+                   TRUE
+               ),
                $this->AssessmentsObj()->Assessment_Cells($edit,$criteria,$assessor,$assessment)
             );
     }
     
     //*
-    //* function Assessors_Inscription_Assessment_Sum_Row, Parameter list: $assessor,$criterias,$assessments,$criteriadatas
+    //* function Assessors_Inscription_Assessment_Sum_Row, Parameter list: $assessor,$assessments
     //*
     //* Creates $assessor $assessment row.
     //*
 
-    function Assessors_Inscription_Assessment_Sum_Row($assessor,$criterias,$assessments,$criteriadatas)
+    function Assessors_Inscription_Assessment_Sum_Row($assessor,$assessments)
     {
         $sum=0.0;
         $wsum=0.0;
-        foreach ($criterias as $criteria)
+        foreach ($this->Criterias() as $cid => $criteria)
         {
             $assessment=array();
             if (!empty($assessments[ $criteria[ "ID" ] ]))
@@ -62,7 +75,7 @@ class AssessorsInscriptionAssessmentsRows extends AssessorsInscriptionAssessment
         }
 
         $row=array();
-        foreach ($criteriadatas as $data) { array_push($row,""); }
+        foreach ($this->Assessor_Inscription_Form_Criterias_Data() as $data) { array_push($row,""); }
 
         array_pop($row);
         array_push($row,$this->MultiCell($this->ApplicationObj()->Sigma.":",1,"right"));
@@ -74,18 +87,18 @@ class AssessorsInscriptionAssessmentsRows extends AssessorsInscriptionAssessment
     }
     
     //*
-    //* function Assessors_Inscription_Assessment_Sum_Rows, Parameter list: $assessor,$criterias,$assessments,$criteriadatas
+    //* function Assessors_Inscription_Assessment_Sum_Rows, Parameter list: $assessor,$assessments
     //*
     //* Creates $assessor $assessment rows. Adds sum row. and HR's
     //*
 
-    function Assessors_Inscription_Assessment_Sum_Rows($assessor,$criterias,$assessments,$criteriadatas)
+    function Assessors_Inscription_Assessment_Sum_Rows($assessor,$assessments)
     {
         return
             array
             (
                array($this->HR()),
-               $this->Assessors_Inscription_Assessment_Sum_Row($assessor,$criterias,$assessments,$criteriadatas),
+               $this->Assessors_Inscription_Assessment_Sum_Row($assessor,$assessments),
                array($this->HR())
             );
     }

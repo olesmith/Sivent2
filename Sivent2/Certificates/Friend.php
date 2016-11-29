@@ -62,12 +62,23 @@ class Certificates_Friend extends Certificates_Verify
 
     function Certificates_Friend_Tables_Html($friend,$event=array())
     {
+        if (empty($event)) { $event=$this->Event(); }
+        
         $this->ItemData("ID");
         $this->Actions("Show");
         
-        $datas=array("Generate","Generated","Mailed","Type","Name","TimeLoad","Code",);
+        if
+            (
+                !empty($event)
+                &&
+                $event[ "Certificates_Published" ]!=2
+                &&
+                !$this->Current_User_Event_Coordinator_Is($event)
+            )
+        {
+            return "";
+        }
         
-
         return
             $this->H(1,$this->MyLanguage_GetMessage("Certificate_Friend_Table_Title")).
             $this->H(2,$friend[ "Name" ]).

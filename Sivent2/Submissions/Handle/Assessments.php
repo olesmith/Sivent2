@@ -11,25 +11,29 @@ include_once("Assessments/Update.php");
 class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Update
 {
     //*
-    //* function Submissions_Assessors_Datas, Parameter list: 
+    //* function Submission_Assessors_Datas, Parameter list: 
     //*
     //* List of data to show for assessors.
     //*
 
-    function Submissions_Assessors_Datas()
+    function Submission_Assessors_Datas()
     {
         return array("No","Edit","Delete","Friend","HasAccessed","HasAssessed","Result");
     }
     
     //*
-    //* function Submissions_Handle_Assessments, Parameter list: $submission=array()
+    //* function Submission_Handle_Assessments, Parameter list: $submission=array()
     //*
     //* Show $submission Assessors and Assessments info.
     //*
 
-    function Submissions_Handle_Assessments($submission=array())
+    function Submission_Handle_Assessments($submission=array())
     {
-        $edit=1;
+        $edit=0;
+        if (preg_match('/^(Coordinator|Admin)$/',$this->Profile()))
+        {
+            $edit=1;
+        }
         
         $this->AssessorsObj()->Sql_Table_Structure_Update();
         $this->AssessorsObj()->ItemData();
@@ -43,38 +47,46 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
         if (empty($submission)) { $submission=$this->ItemHash; }
 
-        $assessors=$this->Submissions_Handle_Assessors_Read($submission);
+        $assessors=$this->Submission_Handle_Assessors_Read($submission);
         
-        if ($this->CGI_POSTint("Update")==1)
+        if ($edit==1 && $this->CGI_POSTint("Update")==1)
         {
-            $assessors=$this->Submissions_Handle_Assessors_Update($submission,$assessors);
+            $assessors=$this->Submission_Handle_Assessors_Update($submission,$assessors);
         }
 
-        $assessordatas=$this->Submissions_Assessors_Datas();
+        $assessordatas=$this->Submission_Assessors_Datas();
 
-        //Must generate first, as it updates $assessors.
+        //Must generate first, as it updates $assessors (if $edit on).
         $assessmentstable=$this->Html_Table
             (
-               $this->Submissions_Handle_Assessors_Assessments_Titles($assessors),
-               $this->Submissions_Handle_Assessors_Assessments_Table($edit,$submission,$assessors)
+               $this->Submission_Handle_Assessors_Assessments_Titles($assessors),
+               $this->Submission_Handle_Assessors_Assessments_Table($edit,$submission,$assessors)
              );
 
 
         echo
-            $this->H(1,"Atividade").
+            $this->H(1,$this->SubmissionsObj()->MyMod_ItemName()).
             $this->Html_Table
             (
                "",
                $this->MyMod_Item_Group_Table(0,"Basic",$submission)
-            ).
-            $this->H(1,"Avaliadores").
-            $this->StartForm().
-            $this->Html_Table
-            (
-               $this->AssessorsObj()->GetDataTitles($assessordatas),
-               $this->Submissions_Handle_Assessors_Table($edit,$submission,$assessordatas,$assessors)
-            ).
-            $this->H(1,"Avaliações").
+            );
+
+        if (preg_match('/^(Coordinator|Admin)$/',$this->Profile()))
+        {
+            echo
+                $this->H(2,$this->AssessorsObj()->MyMod_ItemsName()).
+                $this->StartForm().
+                $this->Html_Table
+                (
+                    $this->AssessorsObj()->GetDataTitles($assessordatas),
+                    $this->Submission_Handle_Assessors_Table($edit,$submission,$assessordatas,$assessors)
+                ).
+                "";
+        }
+
+        echo
+            $this->H(3,$this->AssessmentsObj()->MyMod_ItemsName()).
             
             $assessmentstable.
             $this->MakeHidden("Update",1).
@@ -84,12 +96,12 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
     }
     
     //*
-    //* function Submissions_Handle_Assessors_Read, Parameter list: $submission,$assessordatas=array()
+    //* function Submission_Handle_Assessors_Read, Parameter list: $submission,$assessordatas=array()
     //*
     //* Creates assesemnts table.
     //*
 
-    function Submissions_Handle_Assessors_Read($submission,$assessordatas=array())
+    function Submission_Handle_Assessors_Read($submission,$assessordatas=array())
     {
         $where=$this->UnitEventWhere(array("Submission" => $submission[ "ID" ]));
 
@@ -120,12 +132,12 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
     
     //*
-    //* function Submissions_Handle_Assessors_Calc, Parameter list: $assessors
+    //* function Submission_Handle_Assessors_Calc, Parameter list: $assessors
     //*
     //* Creates assesemnts table.
     //*
 
-    function Submissions_Handle_Assessors_Calc($assessors)
+    function Submission_Handle_Assessors_Calc($assessors)
     {
         if (empty($assessors)) { return "-"; }
         
@@ -140,14 +152,15 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
     
     //*
-    //* function Submissions_Handle_Assessors_Table, Parameter list: $edit,$submission,$assessordatas
+    //* function Submission_Handle_Assessors_Table, Parameter list: $edit,$submission,$assessordatas
     //*
     //* Creates assesemnts table.
     //*
 
-    function Submissions_Handle_Assessors_Table($edit,$submission,$assessordatas,$assessors)
+    function Submission_Handle_Assessors_Table($edit,$submission,$assessordatas,$assessors)
     {
         $table=array();
+
         $n=1;
         foreach ($assessors as $assessor)
         {
@@ -165,7 +178,9 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
             array_push($table,$row);
         }
 
-        $result=$this->Submissions_Handle_Assessors_Calc($assessors);
+        $result=$this->Submission_Handle_Assessors_Calc($assessors);
+
+        var_dump($result);
         if ($submission[ "Result" ]!=$result)
         {
             $submission[ "Result" ]=$result;
@@ -197,12 +212,12 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
     
     //*
-    //* function Submissions_Handle_Assessors_Update, Parameter list: $submission,&$assessors
+    //* function Submission_Handle_Assessors_Update, Parameter list: $submission,&$assessors
     //*
     //* Updates $submission Assessors and Assessments info.
     //*
 
-    function Submissions_Handle_Assessors_Update($submission,&$assessors)
+    function Submission_Handle_Assessors_Update($submission,&$assessors)
     {
         foreach (array_keys($assessors) as $aid)
         {

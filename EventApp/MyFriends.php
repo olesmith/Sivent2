@@ -375,6 +375,28 @@ class MyFriends extends MyFriends_Access
 
         $this->PostProcessTextName($item);
 
+        $profiles=array_keys($this->Profiles());
+        $profiles=preg_grep('/^Public$/',$profiles,PREG_GREP_INVERT);
+        
+        $updatedatas=array();
+        foreach ($profiles as $profile)
+        {
+            $pkey="Profile_".$profile;
+            if (isset($item[ $pkey ]))
+            {
+                if (empty($item[ $pkey ]))
+                {
+                    $item[ $pkey ]=1;
+                    array_push($updatedatas,$pkey);
+                }
+            }
+        }
+        
+        if (count($updatedatas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+        }
+
         return $item;
     }
 
@@ -402,7 +424,7 @@ class MyFriends extends MyFriends_Access
 
         if (count($updatedatas)>0)
         {
-            $this->MySqlSetItemValues("",$updatedatas,$item);
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
         }
     }
 

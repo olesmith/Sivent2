@@ -9,7 +9,7 @@ trait MyMod_Data_Fields_Access
     //* Generates data field.
     //*
 
-    function MyMod_Data_Access($data,$item=array())
+    function MyMod_Data_Access($data,$item=array(),$callmethod=TRUE)
     {
         $itemdata=$this->ItemData($data);
         if (empty($itemdata)) { return 0; }
@@ -39,7 +39,7 @@ trait MyMod_Data_Fields_Access
             }
         }
 
-        if (!empty($itemdata[ "PermsMethod" ]))
+        if (!empty($itemdata[ "PermsMethod" ]) && $callmethod)
         {
             $method=$itemdata[ "PermsMethod" ];
             return $this->$method($data,$item);

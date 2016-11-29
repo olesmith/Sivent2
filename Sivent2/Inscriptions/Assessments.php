@@ -108,7 +108,7 @@ class InscriptionsAssessments extends InscriptionsSubmissions
         $this->AssessmentsObj()->ItemData("ID");
         
         return 
-            $this->AssessorsObj()->Assessors_Friend_Table_Html($edit,$friend);
+            $this->AssessorsObj()->Assessor_Friend_Table_Html($edit,$friend);
     }
     
 }

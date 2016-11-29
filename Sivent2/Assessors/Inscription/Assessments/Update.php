@@ -5,12 +5,12 @@
 class AssessorsInscriptionAssessmentsUpdate extends AssessorsInscriptionAssessmentsTable
 {
     //*
-    //* function Assessors_Inscription_Assessments_Update, Parameter list: $edit,&$assessor,$criterias,&$assessments
+    //* function Assessor_Inscription_Assessments_Update, Parameter list: $edit,&$assessor,&$assessments
     //*
     //* Updates $assessor assessments form.
     //*
 
-    function Assessors_Inscription_Assessments_Update($edit,&$assessor,$criterias,&$assessments)
+    function Assessor_Inscription_Assessments_Update($edit,&$assessor,&$assessments)
     {
         if
             (
@@ -22,7 +22,6 @@ class AssessorsInscriptionAssessmentsUpdate extends AssessorsInscriptionAssessme
         return
             $this->AssessmentsObj()->Assessments_Criterias_Assessor_Update
             (
-               $criterias,
                $assessor,
                $assessments
             );

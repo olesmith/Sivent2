@@ -2,6 +2,38 @@
 
 class App_Events extends App_CGIVars
 {
+    //Global Criterias
+    var $Criterias=array();
+
+    //*
+    //* function Criterias, Parameter list: $id=0,$key=""
+    //*
+    //* All modules Criterias accessor!
+    //*
+
+    function Criterias($id=0,$key="")
+    {
+        if (empty($this->Criterias))
+        {
+            $this->Criterias=$this->CriteriasObj()->Criterias_Read();
+            $this->Criterias=$this->MyHash_HashesList_2ID($this->ApplicationObj()->Criterias,"ID");
+        }
+
+        if (!empty($id))
+        {
+            if (!empty($key))
+            {
+                return $this->Criterias[ $id ][ $key ];
+            }
+            
+            return $this->Criterias[ $id ];
+        }
+
+        return $this->Criterias;
+    }
+
+    
+           
     //*
     //* function EventSelect, Parameter list: $data,$item,$edit,$rdata=""
     //*
@@ -54,7 +86,6 @@ class App_Events extends App_CGIVars
         return $menudef;
     }
     
-
     //*
     //* function GetCoordinatorEvents, Parameter list: 
     //*

@@ -80,6 +80,10 @@ trait Sql_Where
                 }
 
                 
+                elseif (preg_match('/\s*\!=\s*(\S+)/i',$value,$matches))
+                {
+                    array_push($wheres,$prekey."!!!=".$matches[1]);
+                }
                 elseif (preg_match('/\s+LE\s+(\S+)/i',$value,$matches))
                 {
                     array_push($wheres,$prekey."<=".$matches[1]);

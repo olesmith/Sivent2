@@ -5,12 +5,12 @@
 class AssessorsInscriptionAssessmentsCells extends AssessorsInscriptionAssessmentsRead
 {
     //*
-    //* function Assessors_Inscription_Assessment_Link, Parameter list: $assessor
+    //* function Assessor_Inscription_Assessment_Link, Parameter list: $assessor
     //*
     //* Creates row with $inscription $assessor, friend and submissiondata.
     //*
 
-    function Assessors_Inscription_Assessment_Link($assessor)
+    function Assessor_Inscription_Assessment_Link($assessor)
     {
         $value=$this->CGI_GETint("Assessor");
 

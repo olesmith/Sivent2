@@ -202,6 +202,7 @@ array
         "Handler"   => "MyMod_Handle_Search",
         //"AltAction"   => "Search",
         "Edits"   => 1,
+        "Edit"   => 1,
         "Singular"   => FALSE,
        ),
        "Delete" => array

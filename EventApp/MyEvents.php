@@ -8,6 +8,7 @@ include_once("MyEvents/DataGroups.php");
 include_once("MyEvents/Info.php");
 include_once("MyEvents/Tables.php");
 include_once("MyEvents/Create.php");
+include_once("MyEvents/Certificate.php");
 include_once("MyEvents/Certificates.php");
 include_once("MyEvents/Handle.php");
 

@@ -1,7 +1,7 @@
 <?php
 
 
-class Friends_Handle extends Friends_Inscriptions
+class Friends_Handle extends Friends_Statistics
 {
     //*
     //* function MyMod_Handle_Show, Parameter list: $friend=array()

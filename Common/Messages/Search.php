@@ -9,6 +9,12 @@ array
       "Name_ES" => "Versão Imprimível",
       "Title_ES" => "Versão Imprimível",
    ),
+   "Printable_Versions" => array
+   (
+      "Name" => "Versões Imprimíveis",
+      "Name_UK" => "Printable Versions",
+      "Name_ES" => "Version Imprimible",
+   ),
    "IncludeAll_Inactive_Message" => array
    (
       "Name" => "Pesquisa Ativa",

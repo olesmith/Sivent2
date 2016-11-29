@@ -140,4 +140,23 @@ array
         //"AccessMethod"    => "Event_Caravans_Has",
         "AccessMethod"    => "Coordinator_Caravans_Access_Has",
       ),
+     "Statistics" => array
+     (
+        "Handler"     => "Event_Statistics_Handle",
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Events&Action=Statistics&Event=#ID",
+
+        "Public"   => 1,
+        "Person"   => 1,
+        "Admin"    => 1,
+        "Friend"   => 1,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "Name" => "Estatisticas",
+        "Name_ES" => "Estatisticas",
+        "Name_UK" => "Statistics",
+        "Title" => "Estatisticas do Evento",
+        "Title_ES" => "Estatisticas do Evento",
+        "Title_UK" => "Event Statistics",
+      ),
 );

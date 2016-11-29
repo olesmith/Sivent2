@@ -167,12 +167,14 @@ trait Sql_Select_Hashes
         $type=$this->DB_Dialect();
         if ($type=="mysql")
         {
-            return $result[0][ 'COUNT('.$this->Sql_Select_Hashes_Unique_Col.')' ];
+            return intval($result[0][ 'COUNT('.$this->Sql_Select_Hashes_Unique_Col.')' ]);
         }
         elseif ($type=="pgsql")
         {
-            return $result[0][ 'count' ];
+            return intval($result[0][ 'count' ]);
         }
+
+        return 0;
     }
     
     

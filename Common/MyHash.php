@@ -487,8 +487,10 @@ trait MyHash
 
             if (!is_array($value))
             {
-                $lines=preg_replace('/#'.$rdata.'\b/',$value,$lines);
-                $lines=preg_replace('/#'.$rdata.'_/',$value."_",$lines);
+                $vvalue=preg_replace('/\\\\\\\\/',"__NEWLINE__",$value);
+                $lines=preg_replace('/#'.$rdata.'\b/',$vvalue,$lines);
+                $lines=preg_replace('/#'.$rdata.'_/',$vvalue."_",$lines);
+                $lines=preg_replace('/__NEWLINE__/',"\\\\\\\\",$lines);
                 while (preg_match("/#{([^}]+)}$rdata/",$lines,$matches))
                 {
                     $format=$matches[1];
@@ -496,7 +498,7 @@ trait MyHash
 
                     $format=preg_replace('/%/',"\\%",$format);
                     $lines=preg_replace('/'.$matches[0].'/',$value,$lines);
-                }
+               }
             }
         }
 

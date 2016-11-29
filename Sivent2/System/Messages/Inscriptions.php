@@ -288,5 +288,11 @@ array
       "Title_ES" => "Em anexo, certificado da sa participación, #Event_Title.",
       "Title_UK" => "Attached, certificate for your participation, #Event_Title",
    ),
+   "Inscriptions_Statistics_TitleRow" => array
+   (
+       "Name" => array("Cadastros","Inscritos","Homologados","Seleccionados","Certificados Liberados","Carga Horária",""),
+       "Name_ES" => array("Cadastros","Inscritos","Homologados","Seleccionados","Certificados Liberados","Carga Horária",""),
+       "Name_UK" => array("Registrations","Inscribed","Homologated","Selecteds","Certificates Liberated","Time Load",""),
+   ),
 );
 

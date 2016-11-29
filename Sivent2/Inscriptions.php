@@ -11,6 +11,7 @@ include_once("Inscriptions/Cells.php");
 include_once("Inscriptions/Tables.php");
 include_once("Inscriptions/Inscribe.php");
 include_once("Inscriptions/Update.php");
+include_once("Inscriptions/Statistics.php");
 include_once("Inscriptions/Form.php");
 include_once("Inscriptions/Collaborations.php");
 include_once("Inscriptions/Caravans.php");

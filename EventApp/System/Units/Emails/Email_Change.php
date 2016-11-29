@@ -20,8 +20,8 @@ array
       "Default_UK"   => "#ApplicationName: Email Address Change, #Unit_Name, #Unit_Title",
 
       "Public"   => 0,
-      "Person"   => 1,
-      "Friend"    => 1,
+      "Person"   => 0,
+      "Friend"    => 0,
       "Admin"    => 2,
       "Coordinator" => 2,
    ),
@@ -51,8 +51,8 @@ array
       ,
       
       "Public"   => 0,
-      "Person"   => 1,
-      "Friend"    => 1,
+      "Person"   => 0,
+      "Friend"    => 0,
       "Admin"    => 2,
       "Coordinator" => 2,
    ),

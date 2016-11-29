@@ -1,6 +1,6 @@
 <?php
 
-class SchedulesUpdate extends SchedulesSpeaker
+class Schedules_Update extends Schedules_Speaker
 {
     //*
     //* function UpdateScheduleDate, Parameter list: $date

@@ -99,7 +99,6 @@ trait MyMod_Data_Fields_Sql
                        $sqltable
                     );
             }
-            
             $hashes=
                 $this->Module2Object($data)->Sql_Select_Hashes
                 (
@@ -111,11 +110,13 @@ trait MyMod_Data_Fields_Sql
         }
         else
         {
-            $hashes=
+             $class=$this->ItemData[ $data ][ "SqlClass" ];
+             $hashes=
                 $this->Module2Object($data)->Sql_Select_Hashes
                 (
                    $where,
-                   $datas
+                   $datas,
+                   join(",",$this->ApplicationObj()->SubModulesVars[ $class ][ "SqlDerivedData" ])
                 );
         }
 

@@ -36,5 +36,11 @@ array
       "Title_ES" => "Acessar Caravana",
       "Title_UK" => "Access Caravan",
    ),
+   "Caravans_Statistics_TitleRow" => array
+   (
+       "Name" => array("Caravanas","Homologados","Caravaneiros","Certificados Liberados","Carga Horária",""),
+       "Name_ES" => array("Caravanas","Homologados","Caravaneiros","Certificados Liberados","Carga Horária",""),
+       "Name_UK" => array("Caravans","Homologated","Caravaneers","Certificates Liberated","Time Load",""),
+   ),
 );
 

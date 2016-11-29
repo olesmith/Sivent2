@@ -108,24 +108,6 @@ class Criterias extends CriteriasAccess
     }
     
     //*
-    //* function Criterias_Weight_Sum, Parameter list: $criterias
-    //*
-    //* Sums $criterias weights.
-    //*
-
-    function Criterias_Weight_Sum($criterias)
-    {
-        $sum=0.0;
-        foreach ($criterias as $criteria)
-        {
-            $criteriaid=$criteria[ "ID" ];
-            $sum+=$criteria[ "Weight" ];
-        }
-       
-        return 1.0*$sum;
-    }
-    
-    //*
     //* function Criterias_Read, Parameter list: $datas=array(),$where=array()
     //*
     //* Reads all U nit/Event criterias.

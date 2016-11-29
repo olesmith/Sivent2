@@ -168,7 +168,7 @@ class ItemForms extends Fields
             $row=array();
             foreach ($this->ItemDataSGroups as $group => $groupdef)
             {
-                if (isset($groupdef[ "Visible" ]) && !empty($groupdef[ "Visible" ])) { continue; }
+                if (isset($groupdef[ "Visible" ]) && empty($groupdef[ "Visible" ])) { continue; }
 
                 if (
                     !empty($groupdef[ $this->ApplicationObj->Profile ])

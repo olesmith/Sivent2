@@ -54,8 +54,8 @@ class MyUnitsMailsTypes extends MyUnitsMails
            "HRef"          => "?ModuleName=MailTypes&Action=Edit&ID=#",
       
            "Public"   => 0,
-           "Person"   => 1,
-           "Friend"    => 1,
+           "Person"   => 0,
+           "Friend"    => 0,
            "Admin"    => 1,
            "Coordinator" => 1,
            "Default" => "0 ",
@@ -85,13 +85,8 @@ class MyUnitsMailsTypes extends MyUnitsMails
         {
             $langkey=$this->MyLanguage_GetLanguageKey($lang);
             $hash[ $lang ]=array();
-            /* ( */
-            /*    "Subject".$langkey => 1, */
-            /*    "Body".$langkey => 1, */
-            /* ); */
         }
         
-        /* $mailgroups=$this->MyLanguage_ItemData_Groups_Get($hash,$gfile); */
         $mailsgroups=$this->ReadPHPArray($sgfile);
         
 

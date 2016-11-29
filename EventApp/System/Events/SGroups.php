@@ -47,7 +47,7 @@ array
       ),
       "Admin" => 1,
       "Person" => 0,
-      "Public" => 1,
+      "Public" => 0,
       "Admin" => 1,
       "Friend"     => 0,
       "Coordinator" => 1,

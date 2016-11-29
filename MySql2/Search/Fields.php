@@ -213,7 +213,7 @@ class SearchFields extends SearchCookies
             $value=$this->DefaultSearchField($data,$rdata,$rval);
         }
 
-        return $value;
+        return $this->Div($value,array("ALIGN" => 'left'));
     }
 
     //*

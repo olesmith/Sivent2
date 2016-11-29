@@ -9,8 +9,13 @@ class Submissions_Handle_Assessments_Read extends Submissions_Handle_Assessments
     //* Reads all $assessors assessments.
     //*
 
-    function Submissions_Handle_Assessors_Assessments_Read($submission,$assessors,$assesmentsdatas=array())
+    function Submissions_Handle_Assessors_Assessments_Read($submission,&$assessors,$assesmentsdatas=array())
     {
+        foreach (array_keys($assessors) as $aid)
+        {
+            $this->AssessorsObj()->Assessor_Submission_Complete($submission,$assessors[ $aid ]);
+        }
+        
         $assessorids=$this->MyHash_HashesList_Values($assessors,"Friend");
         
         $where=$this->UnitEventWhere

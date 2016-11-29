@@ -16,6 +16,7 @@ include_once("Events/Schedules.php");
 include_once("Events/Certificates.php");
 include_once("Events/Certificate.php");
 include_once("Events/SubActions.php");
+include_once("Events/Statistics.php");
 include_once("Events/Handle.php");
 
 class Events extends Events_Handle

@@ -4,37 +4,52 @@
 class Submissions_Handle_Assessments_Rows extends Submissions_Handle_Assessments_Cells
 {
     //*
-    //* function Submissions_Handle_Assessors_Assessments_Titles, Parameter list: $assessors
+    //* function Submission_Handle_Assessors_Assessments_Titles, Parameter list: $assessors
     //*
     //* Generate $assessors assessments table title row.
     //*
 
-    function Submissions_Handle_Assessors_Assessments_Titles($assessors)
+    function Submission_Handle_Assessors_Assessments_Titles($assessors)
     {
-        $row=array("No","Criteria","Peso");
+        $row1=array("No","Criteria","Peso");
+        $row2=array($this->MultiCell("&nbsp;",count($row1)));
+
+        $n=1;
         foreach ($assessors as $assessor)
         {
-            array_push($row,$this->MultiCell($this->FriendsObj()->Sql_Select_Hash_Value($assessor[ "Friend" ],"Name"),2));
+            $cell=$this->AssessorsObj()->MyMod_ItemName()." #".$n++;
+            if (preg_match('/^(Coordinator|Admin)$/',$this->Profile()))
+            {
+                $cell=$this->FriendsObj()->Sql_Select_Hash_Value($assessor[ "Friend" ],"Name");
+            }
+            
+            array_push($row1,$this->MultiCell($cell,2));
+            array_push($row2,"N","W");
         }
         
         array_push
         (
-           $row,
-           $this->ApplicationObj()->Sigma,
-           $this->ApplicationObj()->Pi,
-           $this->ApplicationObj()->Mu
+            $row1,
+            $this->MultiCell(count($this->AssessorsObj()->Assessors_Submission_HasAssesed($assessors)),2)
         );
         
-        return $row;
+        array_push
+        (
+           $row2,
+           $this->ApplicationObj()->Mu,
+           $this->ApplicationObj()->Pi
+        );
+        
+        return array($row1,$row2);
     }
-    
+
     //*
-    //* function Submissions_Handle_Assessors_Assessments_Criteria_Rows, Parameter list: $edit,$submission,$assessments,$assessors,$criteria
+    //* function Submission_Handle_Assessors_Assessments_Criteria_Rows, Parameter list: $edit,$submission,$assessments,$assessors,$criteria
     //*
     //* Generate $assessors $criteria row.
     //*
 
-    function Submissions_Handle_Assessors_Assessments_Criteria_Rows($edit,$submission,$assessments,$assessors,$criteria)
+    function Submission_Handle_Assessors_Assessments_Criteria_Rows($edit,$submission,$assessments,$assessors,$criteria)
     {
         $criteriaid=$criteria[ "ID" ];
             
@@ -43,7 +58,7 @@ class Submissions_Handle_Assessments_Rows extends Submissions_Handle_Assessments
             (
                $this->B($criteria[ "No" ]),
                $criteria[ "Name" ],
-               sprintf("%.1f",$criteria[ "Weight" ])
+               $this->B(sprintf("%.1f",$criteria[ "Weight" ]))
             );
 
         //$sum=0.0;
@@ -64,115 +79,12 @@ class Submissions_Handle_Assessments_Rows extends Submissions_Handle_Assessments
         $row=array_merge
         (
            $row,
-           $this->Submissions_Handle_Assessors_Assessments_Criteria_Cells_Sum($assessments,$assessors,$criteria)
+           $this->Submissions_Handle_Assessors_Assessments_Criteria_Cells($submission,$assessments,$assessors,$criteria)
         );
             
         return $row;
     }
     
-    //*
-    //* function Submissions_Handle_Assessors_Assessments_Criteria_Row_Sum, Parameter list: $submission,$assessments,$assessors,$criterias
-    //*
-    //* Generate summed row, sums over criterias, per assessor.
-    //*
-
-    function Submissions_Handle_Assessors_Assessments_Criterias_Row_Sum($submission,$assessments,$assessors,$criterias)
-    {
-        $weightsum=$this->CriteriasObj()->Criterias_Weight_Sum($criterias);
-        
-        $row=
-            array
-            (
-               "",
-               $this->MultiCell($this->ApplicationObj()->Sigma.":",1,"right"),
-               sprintf("%.1f",$weightsum),
-            );
-
-        $sum=0.0;
-        $wsum=0.0;
-        foreach ($assessors as $assessor)
-        {
-            $friendid=$assessor[ "Friend" ];
-            $asum=$this->Submissions_Handle_Assessor_Assessments_Criterias_Calc_Sum($assessments,$assessor,$criterias,FALSE);
-            $awsum=$this->Submissions_Handle_Assessor_Assessments_Criterias_Calc_Sum($assessments,$assessor,$criterias);
-            
-            array_push
-            (
-               $row,
-               "",//sprintf("%.1f",$asum),
-               sprintf("%.1f",$awsum)
-            );
-            $sum+=$asum;
-            $wsum+=$awsum;
-        }
-
-        /* $media=$asum/(1.0*count($assessors)); */
-        $wmedia=$wsum;
-        if ($wmedia>0.0) { $wmedia=$wsum/$weightsum; }
-
-        array_push
-        (
-           $row,
-           /* sprintf("%.1f",$sum), */
-           /* sprintf("%.1f",$wsum), */
-           sprintf("%.1f",$wmedia)
-        );
-
-        return $row;
-    }
-    
-    //*
-    //* function Submissions_Handle_Assessors_Assessments_Criteria_Row_Media, Parameter list: $submission,$assessments,$assessors,$criterias
-    //*
-    //* Generate media row, sums over criterias, per assessor.
-    //*
-
-    function Submissions_Handle_Assessors_Assessments_Criterias_Row_Media($submission,$assessments,$assessors,$criterias)
-    {
-        $weightsum=$this->CriteriasObj()->Criterias_Weight_Sum($criterias);
-
-        $factor=1.0/(1.0*count($criterias));
-        $weightmedia=$weightsum*$factor;
-        
-        $row=
-            array
-            (
-               "",
-               $this->MultiCell($this->ApplicationObj()->Mu.":",1,"right"),
-               sprintf("%.1f",$weightmedia),
-            );
-
-        $sum=0.0;
-        $wsum=0.0;
-        foreach ($assessors as $assessor)
-        {
-            $friendid=$assessor[ "Friend" ];
-            $asum=$factor*$this->Submissions_Handle_Assessor_Assessments_Criterias_Calc_Sum($assessments,$assessor,$criterias,FALSE);
-            $awsum=$factor*$this->Submissions_Handle_Assessor_Assessments_Criterias_Calc_Sum($assessments,$assessor,$criterias);
-            
-            array_push
-            (
-               $row,
-               sprintf("%.1f",$asum),
-               sprintf("%.1f",$awsum)
-            );
-            $sum+=$asum;
-            $wsum+=$awsum;
-        }
-
-        //$media=$asum/(1.0*count($assessors));
-        $wmedia=$wsum/$weightsum;
-
-        array_push
-        (
-           $row,
-           sprintf("%.1f",$sum),
-           sprintf("%.1f",$wsum),
-           sprintf("%.1f",$wmedia)
-        );
-
-        return $row;
-    }
 }
 
 ?>

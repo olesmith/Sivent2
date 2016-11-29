@@ -9,6 +9,9 @@ trait MyMod_Items_Table
 
     function MyMod_Items_Table($edit,$items,$datas,$options=array())
     {
+        $plural=FALSE;
+        if (!empty($options[ "Plural" ])) { $plural=TRUE; }
+
         $table=array();
         $n=1;
         foreach ($items as $id => $item)
@@ -20,7 +23,9 @@ trait MyMod_Items_Table
                 $item[ "No" ]=sprintf($options[ "Format" ],$item[ "No" ]);
             }
 
-            $table[ $id ]=$this->MyMod_Items_Table_Row($edit,$n,$item,$datas);;
+            $pre="";
+            if ($plural) { $pre=$item[ "ID" ]."_"; }
+            $table[ $id ]=$this->MyMod_Items_Table_Row($edit,$n,$item,$datas,$plural,$pre);;
 
             $n++;
         }
@@ -36,15 +41,14 @@ trait MyMod_Items_Table
     {
         if (!is_array($datas)) { $datas=$this->ItemDataGroups($datas,"Data"); }
         
-        $tableoptions=array();
-        //if (empty($options[ "TABLE_Options" ])) { $options[ "TABLE_Options" ]=array(); }
-        
+        $plural=FALSE;
+        if (!empty($options[ "Plural" ])) { $plural=TRUE; unset($options[ "Plural" ]); }
+
         return
             $this->Html_Table
             (
                $this->MyMod_Item_Titles($datas),
-               $this->MyMod_Items_Table($edit,$items,$datas),
-               //$options[ "TABLE_Options"  ]
+               $this->MyMod_Items_Table($edit,$items,$datas,array("Plural" => $plural)),
                $options,$troptions,$tdoptions
             ).
             "";

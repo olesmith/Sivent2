@@ -620,6 +620,64 @@ class ModulesCommon extends EventMod
 
         return $res;
     }
-}
+    
+    //*
+    //* function Criterias, Parameter list: $id=0,$key=""
+    //*
+    //* All modules Criterias accessor!
+    //*
+
+    function Criterias($id=0,$key="")
+    {
+        return $this->ApplicationObj()->Criterias($id,$key);
+    }
+
+    //*
+    //* function Criteria_IDs, Parameter list: 
+    //*
+    //* Reyturns Criteria IDs
+    //*
+
+    function Criteria_IDs()
+    {
+        return array_keys($this->Criterias());
+    }
+
+    //*
+    //* function Criterias_N, Parameter list: 
+    //*
+    //* Returns no of Criterias
+    //*
+
+    function Criterias_N()
+    {
+        return count($this->Criteria_IDs());
+    }
+
+    //*
+    //* function Criterias_Weight, Parameter list: 
+    //*
+    //*  Returns Criterias summed weights.
+    //*
+
+    function Criterias_Weight($id=0)
+    {
+        $weight="";
+        if (!empty($id))
+        {
+            $weight=$this->Criterias($id,"Weight");
+        }
+        else
+        {
+            $weight=0.0;
+            foreach ($this->Criterias() as $cid => $criteria)
+            {
+                $weight+=$criteria[ "Weight" ];
+            }
+        }
+        
+        return $weight;
+    }
+ }
 
 ?>

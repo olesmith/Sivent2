@@ -51,7 +51,24 @@ class MyInscriptions_Inscription_Read extends MyInscriptions_Quest
                     );
                 }
             }
+            else
+            {
+                $fid=$this->CGI_GETint("Friend");
+                if (!empty($fid))
+                {
+                    $this->Friend=
+                        $this->FriendsObj()->Sql_Select_Hash
+                        (
+                            array("ID" => $fid),
+                            TRUE,
+                            array()
+                        );
+                }
+                
+            }
         }
+
+        if (empty($this->Friend)) { die("No such inscription/friend"); }
  
         $this->Inscription=$this->Sql_Select_Hash
         (
@@ -59,6 +76,8 @@ class MyInscriptions_Inscription_Read extends MyInscriptions_Quest
            TRUE,
            array_keys($this->ItemData)
         );
+
+        $this->Inscription=$this->PostProcess( $this->Inscription);
     }
 }
 

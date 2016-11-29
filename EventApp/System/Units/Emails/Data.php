@@ -16,8 +16,8 @@ array
       "Sql" => "BLOB",
       
       "Public"   => 0,
-      "Person"   => 1,
-      "Friend"    => 1,
+      "Person"   => 0,
+      "Friend"    => 0,
       "Admin"    => 2,
       "Coordinator" => 2,
    ),
@@ -37,8 +37,8 @@ array
       "Sql" => "BLOB",
       
       "Public"   => 0,
-      "Friend"    => 1,
-      "Person"   => 1,
+      "Friend"    => 0,
+      "Person"   => 0,
       "Admin"    => 2,
       "Coordinator" => 2,
    ),

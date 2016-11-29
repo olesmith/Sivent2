@@ -2,6 +2,7 @@
 
 class MyEvents_Handle extends MyEvents_Certificates
 {
+
     //*
     //* function HandleOpenEvents, Parameter list:
     //*

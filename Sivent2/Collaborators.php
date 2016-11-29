@@ -4,10 +4,11 @@ include_once("Collaborators/Access.php");
 include_once("Collaborators/Emails.php");
 include_once("Collaborators/Table.php");
 include_once("Collaborators/Certificate.php");
+include_once("Collaborators/Statistics.php");
 
 
 
-class Collaborators extends Collaborators_Certificate
+class Collaborators extends Collaborators_Statistics
 {
     var $Certificate_Type=3;
     var $Export_Defaults=

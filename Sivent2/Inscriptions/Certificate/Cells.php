@@ -2,55 +2,7 @@
 
 
 class InscriptionsCertificateCells extends InscriptionsAssessments
-{
-    //*
-    //* function Certificate_Where, Parameter list: $inscription
-    //*
-    //* Checks whether certificate has been generated.
-    //*
-
-    function Inscription_Certificate_Where($inscription)
-    {
-        $where=
-            array
-            (
-               "Unit"        => $inscription[ "Unit" ],
-               "Event"       => $inscription[ "Event" ],
-               "Friend"      => $inscription[ "Friend" ],
-               "Inscription" => $inscription[ "ID" ],
-               "Type"        => $this->Certificate_Type,
-            );
-
-        return $where;
-    }
- 
-    //*
-    //* function Certificate_Where, Parameter list: $inscription
-    //*
-    //* Checks whether certificate has been generated.
-    //*
-
-    function Inscription_Certificates_Where($inscription)
-    {
-        $type=$this->CGI_GET("Type");
-        
-        $where=
-            array
-            (
-               "Unit"        => $inscription[ "Unit" ],
-               "Event"       => $inscription[ "Event" ],
-               "Friend"      => $inscription[ "Friend" ],
-            );
-
-        if ($type==1)
-        {
-            $where[ "Inscription" ]=$inscription[ "ID" ];
-            $where[ "Type" ]=$this->Certificate_Type;
-        }
-
-        return $where;
-    }
- 
+{ 
     //*
     //* function Inscription_Certificate_Latex, Parameter list: $inscription,$friend=array()
     //*

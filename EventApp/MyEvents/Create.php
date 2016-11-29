@@ -1,6 +1,6 @@
 <?php
 
-class MyEventsCreate extends MyEventsTables
+class MyEvents_Create extends MyEventsTables
 {
     //*
     //* function CreateUpdateTable, Parameter list:

@@ -27,6 +27,7 @@ array
          (
             "Edit" => 1,
             "Submission" => 1,
+            "Assessments" => 1,
          ),
          'Assessor' => array
          (

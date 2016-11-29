@@ -1,6 +1,6 @@
 <?php
 
-class MyEvents_Certificates extends MyEventsCreate
+class MyEvents_Certificates extends MyEvents_Certificate
 {
     //*
     //* function Event_Certificates_Has, Parameter list: $item
@@ -32,9 +32,10 @@ class MyEvents_Certificates extends MyEventsCreate
         if (empty($event)) { $event=$this->Event(); }
 
         $res=$this->EventsObj()->Event_Certificates_Has($event);
-        if (!empty($event[ "Certificates_Published" ]) && $event[ "Certificates_Published" ]==2)
+
+        if (empty($event[ "Certificates_Published" ]) || $event[ "Certificates_Published" ]!=2)
         {
-            $res=TRUE;
+            $res=FALSE;
         }
 
         return $res;

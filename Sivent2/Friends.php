@@ -9,6 +9,7 @@ include_once("Friends/Submissions.php");
 include_once("Friends/Speakers.php");
 include_once("Friends/Events.php");
 include_once("Friends/Inscriptions.php");
+include_once("Friends/Statistics.php");
 include_once("Friends/Handle.php");
 
 class Friends extends Friends_Handle

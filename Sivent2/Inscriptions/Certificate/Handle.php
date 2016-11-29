@@ -17,11 +17,9 @@ class InscriptionsCertificateHandle extends InscriptionsCertificateCells
         $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $this->ItemHash[ "Friend" ]));
         
         $where=$this->Inscription_Certificates_Where($this->ItemHash);
-            
-        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
 
         $latex="";
-        foreach ($certs as $cert)
+        foreach ($this->CertificatesObj()->Sql_Select_Hashes($where) as $cert)
         {
             $latex.=$this->CertificatesObj()->Certificate_Generate($cert);
             $this->CertificatesObj()->Certificate_Set_Generated($cert);

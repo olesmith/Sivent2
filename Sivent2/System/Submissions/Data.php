@@ -46,6 +46,7 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "AccessMethod" => "Submission_Authors_May_Show",
     ),
    "Author1" => array
    (
@@ -63,6 +64,7 @@ array
       "Admin"    => 2,
       "Friend"     => 2,
       "Coordinator" => 2,
+      ///"AccessMethod" => "Submission_Authors_May_Show",
    ),
    "Friend" => array
    (

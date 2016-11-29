@@ -128,15 +128,19 @@ class Assessments extends AssessmentsAccess
     function Assessment_Cells($edit,$criteria,$assessor,$assessment)
     {
         $weighted="-";
-        if (!empty($assessment[ "Value" ]))
+        if (empty($assessment[ "Value" ]))
         {
-            $weighted=1.0*$criteria[ "Weight" ]*$assessment[ "Value" ];
+            $weighted="-";
+        }
+        else
+        {
+            $weighted=sprintf("%.1f",1.0*$criteria[ "Weight" ]*$assessment[ "Value" ]);
         }
 
-        
-        return array
-        (
-            $this->MyMod_Data_Fields_Edit
+        $cell="";
+        if ($edit==1)
+        {
+            $cell=$this->MyMod_Data_Fields_Edit
             (
                "Value",
                $assessment,
@@ -146,9 +150,33 @@ class Assessments extends AssessmentsAccess
                $links=TRUE,
                $callmethod=TRUE,
                $this->Assessment_Criteria_Assessor_CGI_Key($criteria,$assessor)
-            ),
-            sprintf("%.1f",$weighted)
-        );
+            );
+        }
+        else
+        {
+            if (empty($assessment[ "Value" ]))
+            {
+                $cell="-";
+            }
+            else
+            {
+                $cell=$this->MyMod_Data_Fields_Show
+                (
+                   "Value",
+                   $assessment,
+                   TRUE,
+                   $iconify=TRUE,$callmethod=TRUE
+                );
+            }
+        }
+
+        if ($assessor[ "HasAssessed" ]!=2)
+        {
+            $cell=$this->I($cell);
+            $weighted="-";
+        }
+
+        return array($cell,$this->Div($weighted,array("ALIGN" => 'right')));
     }
 
     
@@ -237,17 +265,17 @@ class Assessments extends AssessmentsAccess
     }
 
     //*
-    //* function Assessments_Submission_Criterias_Assessor_Update, Parameter list: $submission,$criterias,$assessor,&$assessments
+    //* function Assessments_Submission_Criterias_Assessor_Update, Parameter list: &$assessor,&$assessments
     //*
     //* Updates  $submission, $criterias and $assessor assessment fields.
     //*
 
-    function Assessments_Criterias_Assessor_Update($criterias,&$assessor,&$assessments)
+    function Assessments_Criterias_Assessor_Update(&$assessor,&$assessments)
     {
         $updated=FALSE;
 
         $wsum=0.0;
-        foreach ($criterias as $criteria)
+        foreach ($this->Criterias() as $cid => $criteria)
         {
             $assessment=array();
             if (empty($assessments[ $criteria[ "ID" ] ]))
@@ -263,44 +291,39 @@ class Assessments extends AssessmentsAccess
 
         $this->Sql_Select_Hash_Datas_Read($assessor,array("Result","HasAssessed","HasAccessed"));
         
-        $updatedatas=array();
-        if ($assessor[ "Result" ]!=$wsum)
-        {
-            $assessor[ "Result" ]=$wsum;
-            array_push($updatedatas,"Result");
-        }
-
-        $complete=$this->AssessorsObj()->Assessor_Assessments_Criterias_Complete($assessor,$criterias,$assessments);
-
-        if ($complete) $complete=2;
-        else           $complete=1;
-
-        if ($assessor[ "HasAssessed" ]!=$complete)
-        {
-             $assessor[ "HasAssessed" ]=$complete;
-             array_push($updatedatas,"HasAssessed");
-        }
-       
-        if (empty($assessor[ "HasAccessed" ]) || $assessor[ "HasAccessed" ]!=2)
-        {
-            if ($this->LoginData("ID")==$assessor[ "Friend" ] )
-            {
-                $assessor[ "HasAccessed" ]=2;
-                array_push($updatedatas,"HasAccessed");
-            }
-        }
-       
-        
-        if (count($updatedatas)>0)
-        {
-            $this->AssessorsObj()->Sql_Update_Item_Values_Set
-            (
-               $updatedatas,
-               $assessor
-            );
-        }
+ 
+        $this->AssessorsObj()->Assessor_Submission_Complete
+        (
+            array("ID" => $assessor[ "Submission" ]),
+            $assessor
+        );
         
         return $updated;
+    }
+
+    
+    //*
+    //* function Assessments_Submission_Assessor_Criterias_Read, Parameter list: $submission,$assessor,$datas=array("Criteria","Value")
+    //*
+    //* Reads $submission $assessor assessments for all $criterias.
+    //*
+
+    function Assessments_Submission_Assessor_Criterias_Read($submission,$assessor,$datas=array("Criteria","Value"))
+    {
+        return
+            $this->Sql_Select_Hashes
+            (
+                array
+                (
+                    "Submission" => $submission[ "ID" ],
+                    "Friend"     => $assessor[ "Friend" ],
+                    "Criteria"   => $this->Sql_Where_IN
+                    (
+                        $this->Criteria_IDs()
+                    ),
+                    $datas
+                )
+            );
     }
 }
 

@@ -72,6 +72,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Search"  => TRUE,
+      "TrimCase"  => TRUE,
    ),
    "TextName"         => array
    (
