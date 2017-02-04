@@ -50,7 +50,7 @@ array
        (
           "No","Edit","Delete",
           "Event","Friend",
-          "Certificates","Certificates_CH","Certificates_Published","Certificates_Watermark"
+          "Certificates","TimeLoad","Certificates_Published","Certificates_Watermark"
         ),
 
        "Person" => 1,
@@ -87,7 +87,7 @@ array
           "Event","Friend",
           "Caravans","Caravans_StartDate","Caravans_EndDate",
           "Caravans_Min","Caravans_Max",
-          "Caravans_Public","Caravans_Timeload",
+          "Caravans_Public","Caravans_Coord_Timeload","Caravans_Timeload",
         ),
 
        "Person" => 1,

@@ -98,9 +98,6 @@ array
 
       "Search" => FALSE,
       "Default" =>
-
-      "\n\n\\hspace{1cm}\\vspace{4.5cm}\n\n".
-
       "\\begin{Large}\n".
       "Certificamos que:\n\n".
 
@@ -137,9 +134,6 @@ array
 
       "Search" => FALSE,
       "Default" =>
-      
-      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
-
       "\\begin{Large}\n".
       "We hereby certify, that:\n\n".
 

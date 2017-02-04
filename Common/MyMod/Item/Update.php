@@ -24,7 +24,8 @@ trait MyMod_Item_Update
 
     function MyMod_Item_Table_Update(&$args)
     {
-        $this->MyMod_Item_Update_CGI($args[ "Item" ],$args[ "Datas" ],$args[ "Item" ][ "ID" ]."_");
+        $args[ "Item" ]=
+            $this->MyMod_Item_Update_CGI($args[ "Item" ],$args[ "Datas" ],$args[ "Item" ][ "ID" ]."_");
     }
 
     //*
@@ -56,7 +57,6 @@ trait MyMod_Item_Update
 
         $olditem=$item;
         if (count($datas)==0) { $datas=array_keys($this->ItemData); }
-
 
         $rupdate=0;
         $update=0;
@@ -101,9 +101,9 @@ trait MyMod_Item_Update
                           && 
                           empty($this->ItemData[ $data ][ "TimeType" ])
                        )
-                {                    
+                {
                     $newvalue=$this->TestUpdateItem($data,$item,FALSE,$prepost);
-                    
+
                     $default=$this->ItemData($data,"Default");
                    
                     if (empty($newvalue) && !empty($default))
@@ -118,7 +118,7 @@ trait MyMod_Item_Update
                     if ($this->MyMod_Data_Trigger_Function($data))
                     {
                         $item=$this->MyMod_Data_Trigger_Apply($data,$item,$prepost);
-                   }
+                    }
                     else
                     {
                         $item[ $data ]=$newvalue;

@@ -85,7 +85,7 @@ class DBDataForm extends DBDataUpdate
                       "Event" => $this->Event("ID"),
                       "Pertains" => $this->ApplicationObj()->Pertains,
                   ),
-                  "AddDatas" => array("Pertains","DataGroup","SqlKey","Type","SortOrder","Text","Text_UK"),
+                  "AddDatas" => array("Pertains","DataGroup","SqlKey","Type","SortOrder","Text"),
                   "UniqueDatas" => array("SqlKey"),
                   "NCols" => 20,
                   

@@ -415,10 +415,10 @@ class Submissions extends Submissions_Handle
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->ItemExistenceMessage();
+        $res=$this->Item_Existence_Message();
         if ($res)
         {
-            $res=$this->AreasObj()->ItemExistenceMessage("Areas");
+            $res=$this->AreasObj()->Item_Existence_Message("Areas");
         }
 
         return $res;
@@ -555,6 +555,10 @@ class Submissions extends Submissions_Handle
 
     function AddForm_PreText()
     {
+        if (!preg_match("(Coordinator|Admin)",$this->Profile()))
+        {
+            return "";
+        }
         return
             $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }   

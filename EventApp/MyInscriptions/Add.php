@@ -211,7 +211,6 @@ class MyInscriptions_Add extends MyInscriptions_Handle
         $this->FriendsObj()->FriendSelectNewDatas=array("Name","Email","Password",);
         $this->FriendsObj()->FriendSelectDatas=array("ID","Name","Email","Profile_Friend");
         $this->FriendsObj()->InscriptionSelectDatas=array("Certificate","Certificate_CH");
-        //$this->FriendsObj()->FriendSelectTitle="Adicionar Inscrição ou Cadastro";
         $this->FriendsObj()->FriendSelectProfileName="Candidato";
         $this->FriendsObj()->FriendSelectProfile="Friend";
 
@@ -253,7 +252,7 @@ class MyInscriptions_Add extends MyInscriptions_Handle
            )
         );
 
-        return 
+        return
             $this->FriendsObj()->HandleFriendSelect($newitem,TRUE,$leadingrows,$resulthiddens);
     }
 

@@ -180,7 +180,6 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
 
         $result=$this->Submission_Handle_Assessors_Calc($assessors);
 
-        var_dump($result);
         if ($submission[ "Result" ]!=$result)
         {
             $submission[ "Result" ]=$result;

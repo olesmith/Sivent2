@@ -6,9 +6,9 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Edit","Delete",
+         "No","Edit","Delete","GenCert",
          "Event","Friend","Name","Email","PRN","Comment",
-         "Status","Registration",
+         "Status","Certificate","Registration",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -38,8 +38,8 @@ array
    ),
    "Latex" => array
    (
-      "Name" => "Inscrição",
-      "Name_UK" => "Inscription",
+      "Name" => "Latex",
+      "Name_UK" => "Latex",
       "Data" => array
       (
          "No",
@@ -52,8 +52,9 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
+      "Visible" => FALSE,
    ),
-   "Times" => array
+   "TimeStamps" => array
    (
       "Name" => "Tempos",
       "Name_UK" => "Times",

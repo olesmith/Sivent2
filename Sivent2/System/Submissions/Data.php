@@ -207,23 +207,6 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
-   /* "Title_UK" => array */
-   /* ( */
-   /*    "Name" => "Título (UK)", */
-   /*    "Name_UK" => "Title", */
-
-   /*    "Sql" => "VARCHAR(256)", */
-
-   /*    "Search" => FALSE, */
-   /*    "Size" => 35, */
-
-   /*    "Public"   => 1, */
-   /*    "Person"   => 0, */
-   /*    "Admin"    => 2, */
-   /*    "Friend"     => 2, */
-   /*    "Coordinator" => 2, */
-   /*    "Assessor"  => 0, */
-   /* ), */
    "Type" => array
    (
       "Name" => "Tipo",
@@ -234,8 +217,8 @@ array
       "Sql" => "ENUM",
 
       "Search" => TRUE,
-      "Values" => array("Palestra","Minicurso","Oficina"),
-      "Values_UK" => array("Talk","Minicourse","Workshop"),
+      "Values" => array("Palestra","Minicurso","Oficina","Comunicação Científica","Relato de Experiência","Sessão de Pôster"),
+      "Values_UK" => array("Talk","Minicourse","Workshop","Scientific Communication","Experience Report","Poster Session"),
       "Default"  => 1,
 
       "Public"   => 1,
@@ -301,7 +284,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
-      "Compulsory" => TRUE,
+      "Compulsory" => FALSE,
    ),
    "Level" => array
    (
@@ -395,6 +378,7 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
+      "SelectCheckBoxes"  => 3,
    ),
    "Certificate_TimeLoad" => array
    (
@@ -460,7 +444,7 @@ array
       "Sql" => "FILE",
 
       "Search" => FALSE,
-      "Extensions" => array("pdf"),
+      "Extensions" => array("pdf","odt","doc","docx","zip","tar","tgz"),
 
       "Public"   => 1,
       "Person"   => 0,

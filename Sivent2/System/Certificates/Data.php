@@ -109,8 +109,8 @@ array
 
       "Size" => "50",
       "Sql" => "ENUM",
-      "Values" => array("Participante","Participante de Caravana","Colaborador","Palestrante",),
-      "Values_UK" => array("Participant","Caravaneer","Collaborator","Speaker",),
+      "Values" => array("Participante","Participante de Caravana","Colaborador","Palestrante","Coordenador de Caravana",),
+      "Values_UK" => array("Participant","Caravaneer","Collaborator","Speaker","Caravan Coordinator"),
       "Default" => 1,
       
 
@@ -252,9 +252,30 @@ array
    ),
    "Caravaneer" => array
    (
-      "Name" => "Caravaneiros",
-      "Name_UK" => "Caravaneers",
+      "Name" => "Caravaneiro",
+      "Name_UK" => "Caravaneer",
       "SqlClass" => "Caravaneers",
+      
+      "Search" => TRUE,
+      "Search_Depends" => "Event",
+      "Search_Vars" => array("Unit","Event"),
+      
+      //"SqlTables_Regex"  => "#Unit__\d+__Caravaneers",
+
+      "Compulsory"  => FALSE,
+
+      "Sql" => "INT",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Caravan" => array
+   (
+      "Name" => "Caravana",
+      "Name_UK" => "Caravan",
+      "SqlClass" => "Caravans",
       
       "Search" => TRUE,
       "Search_Depends" => "Event",

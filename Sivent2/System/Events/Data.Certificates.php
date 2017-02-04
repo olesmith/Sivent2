@@ -40,7 +40,7 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
-   "Certificates_CH" => array
+   "TimeLoad" => array
    (
       "Name" => "Certificados, CH Padrão",
       "Name_UK" => "Certificates, Default TimeLoad",
@@ -294,9 +294,6 @@ array
 
       
       "Default" =>
-
-      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
-
       "\\begin{Large}\n".
       "Certificamos que:\n\n".
 
@@ -326,8 +323,6 @@ array
       "Sql" => "TEXT",
       "Size" => "100x",
       "Default" =>
-      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
-
       "\\begin{Large}\n".
       "We hereby certify, that:\n\n".
 

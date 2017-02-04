@@ -4,11 +4,12 @@ include_once("MyEmail.php");
 include_once("ItemForm.php");
 include_once("MyLanguage.php");
 include_once("MyLatex.php");
+include_once("Cookies.php");
 
 
 trait MyCommon
 {
-    use MyEmail,ItemForm,MyLanguage,MyLatex;
+    use MyEmail,ItemForm,MyLanguage,MyLatex,Cookies;
     
     //*
     //* function Caller, Parameter list: $level=1

@@ -12,6 +12,9 @@ class Caravaneers_Table_Update extends Caravaneers_Table_Table
     {
         $name=$this->Caravaneer_Table_CGI2Name($n);
         $email=$this->Caravaneer_Table_CGI2Email($n);
+        $prn=$this->Caravaneer_Table_CGI2PRN($n);
+        $comment=$this->Caravaneer_Table_CGI2Comment($n);
+            
             
         $updatedatas=array();
         
@@ -22,13 +25,15 @@ class Caravaneers_Table_Update extends Caravaneers_Table_Table
             $rcaravaneer=$empty;
             $rcaravaneer[ "Name" ]=$name;
             $rcaravaneer[ "Email" ]=$email;
+            $rcaravaneer[ "PRN" ]=$prn;
+            $rcaravaneer[ "Comment" ]=$comment;
             $rcaravaneer[ "Status" ]=0;
 
             if (count($caravaneers)>0)
             {
                 $caravaneer=array_shift($caravaneers);
 
-                foreach (array("Name","Email") as $data)
+                foreach (array("Name","Email","PRN","Comment") as $data)
                 {
                     if ($caravaneer[ $data ]!=$rcaravaneer[ $data ])
                     {

@@ -112,12 +112,12 @@ array
    ),
    "Caravans_Timeload" => array
    (
-      "Name" => "CH Padrão",
-      "Title" => "CH Padrão (Cert)",
+      "Name" => "CH Padrão Participantes",
+      "Title" => "CH Padrão Participantes (Cert)",
       "Default" => "10",
       
-      "Name_UK" => "Default Timeload",
-      "Title_UK" => "Default Timeload (Cert)",
+      "Name_UK" => "Default Timeload Participants",
+      "Title_UK" => "Default Timeload Participants (Cert)",
       "Sql" => "INT",
       "Size" => 2,
       "Regexp" => '^\d+$',
@@ -130,6 +130,60 @@ array
       
       "Compulsory" => FALSE,
       "Search" => FALSE,
+   ),
+   "Caravans_Coord_Timeload" => array
+   (
+      "Name" => "CH Padrão Coordenador",
+      "Title" => "CH Padrão Coordenador (Cert)",
+      "Default" => "20",
+      
+      "Name_UK" => "Default Timeload Coordinator",
+      "Title_UK" => "Default Timeload Coordinator (Cert)",
+      "Sql" => "INT",
+      "Size" => 2,
+      "Regexp" => '^\d+$',
+      
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+   ),
+   "Certificates_Caravans_Latex" => array
+   (
+      "Name" => "Caravanas, Certificado (LaTeX)",
+      "Name_UK" => "Caravans, Certificate (LaTeX)",
+
+      "Sql" => "TEXT",
+      "Size" => "100x",
+
+      "Search" => FALSE,
+      "Default" =>
+
+      "\\begin{Large}\n".
+      "Certificamos que:\n\n".
+
+      "\\begin{center}\\huge{\\textbf{#Friend_Name}}\\end{center}\n\n".
+      
+      "\\vspace{0.25cm}\n\n".
+
+      "participou do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
+      "no dia \\textit{#Event_DateSpan}, coordenando a caravana #Name.\n\n".
+      "Carga horária: \\textbf{#TimeLoad horas}.\n".
+      "\\end{Large}\n\n".
+      
+      "",
+
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
    ),
    "Certificates_Caravaneers_Latex" => array
    (
@@ -149,8 +203,9 @@ array
       
       "\\vspace{0.25cm}\n\n".
 
-      "participou, como participante de caravana, do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
-      "no dia \\textit{#Event_DateSpan}. Carga horária: \\textbf{#Caravaneer_TimeLoad horas}.\n".
+      "participou do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
+      "no dia \\textit{#Event_DateSpan}, como participante da caravana #Caravan_Name.\n\n".
+      "Carga horária: \\textbf{#Caravaneer_TimeLoad horas}.\n".
       "\\end{Large}\n\n".
       
       "",

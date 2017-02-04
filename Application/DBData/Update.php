@@ -14,7 +14,10 @@ class DBDataUpdate extends DBDataQuest
         
         $newvalue=$this->Html2Sort($newvalue);
         $newvalue=$this->Text2Sort($newvalue);
-        
+
+        //Remove invalid characters. Allow only letters and numbers.
+        $newvalue=preg_replace('/[^a-z0-9]/i',"",$newvalue);
+
         if ($value!=$newvalue)
         {
             if ($this->DBDataObj()->Sql_Table_Field_Exists($value))

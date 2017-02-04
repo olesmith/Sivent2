@@ -20,6 +20,7 @@ trait MyApp_Interface_LeftMenu_Generate
         {
             $html.=
                 $this->MyApp_Interface_LeftMenu_Generate_SubMenu($submenu);
+
         }
 
         return $html;
@@ -41,8 +42,10 @@ trait MyApp_Interface_LeftMenu_Generate
        }
        else
        {
-           if (!$this->MyMod_Access_HashAccess($submenu,1)) { return $html; }
-
+           if (!$this->MyMod_Access_HashAccess($submenu,1))
+           {
+               return $html;
+           }
            $menu=$this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu);
 
            if (empty($menu)) { return ""; }

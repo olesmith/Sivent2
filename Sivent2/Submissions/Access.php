@@ -148,6 +148,26 @@ class Submissions_Access extends ModulesCommon
 
         $res=$this->CheckEditAccess($item);
         if ($item[ "Status" ]==2) { $res=FALSE; }
+
+        $res=
+            $res
+            &&
+            $this->SchedulesObj()->Sql_Select_Hashes_Has_Not
+            (
+                $this->UnitEventWhere
+                (
+                    array("Submission" => $item[ "ID" ],)
+                )
+            )
+            &&
+            $this->AssessorsObj()->Sql_Select_Hashes_Has_Not
+            (
+                $this->UnitEventWhere
+                (
+                    array("Submission" => $item[ "ID" ],)
+                )
+            )
+            ;
  
         return $res;
     }

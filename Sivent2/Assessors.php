@@ -112,7 +112,7 @@ class Assessors extends Assessors_Statistics
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->SubmissionsObj()->ItemExistenceMessage("Submissions");
+        $res=$this->SubmissionsObj()->Item_Existence_Message("Submissions");
 
         return $res;
     }

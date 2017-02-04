@@ -38,7 +38,7 @@ array
       "Public"   => 0,
       "Person"   => 0,
       "Monitor"     => 0,
-      "Coordinator" => 10
+      "Coordinator" => 1,
       "Friend"  => 0,
       "Admin"    => 1,
       "Handler"   => "HandleClean",

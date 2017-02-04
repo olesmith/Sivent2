@@ -3,18 +3,18 @@
 include_once("Html.php");
 include_once("CSV.php");
 include_once("Latex.php");
-include_once("Cookies.php");
+//include_once("Cookies.php");
 include_once("../Base/Messages.php");
 include_once("SqlQuery.php");
 include_once("Lists.php");
 
 class CGI extends Lists
 {
-    var $URL="";
+    #var $URL="";
     var $HiddenVars=array();
-    var $CookieVars=array();
-    var $GlobalGCVars=array();
-    var $CookieTTL=0;
+    #var $CookieVars=array();
+    #var $GlobalGCVars=array();
+    #var $CookieTTL=0;
 
     var $URL_Args_Separator="&";
 

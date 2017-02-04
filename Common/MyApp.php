@@ -23,6 +23,7 @@ include_once("MyApp/Access.php");
 include_once("MyApp/Module.php");
 include_once("MyApp/CGIVars.php");
 include_once("MyApp/Globals.php");
+include_once("MyApp/Cookies.php");
 
 
 trait MyApp
@@ -31,7 +32,7 @@ trait MyApp
         MyMessage,
         ShowDir,
         MyApp_CGI,MyApp_Messages,MyApp_Logging,MyApp_Interface,MyApp_Language,
-        MyApp_Mail,
+        MyApp_Mail,MyApp_Cookies,
         MyApp_Login,MyApp_Session,
         MyApp_Actions,MyApp_Access,MyApp_Module,
         MyApp_Profiles,MyApp_Handle,MyApp_Setup,

@@ -36,7 +36,7 @@ trait MyMod_Item_Form
         
         $method=$this->TableMethod();
         return
-            $this->H(5,"Editar ".$this->ItemName).
+            $this->H(5,$args[ "Form_Title" ]).
             $this->$method("",$table).
             "";
     }
@@ -67,6 +67,7 @@ trait MyMod_Item_Form
               "Datas"   => array(),
               "Contents"   => "MyMod_Item_Table_Contents",
               "Options"    => array(),
+              "Form_Title"    => "Editar ".$this->ItemName,
 
               "EndButtons"   => $this->Buttons($submit),
               "Hiddens"   => array(),

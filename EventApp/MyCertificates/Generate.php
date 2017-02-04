@@ -2,7 +2,6 @@
 
 class MyCertificates_Generate extends MyCertificates_Read
 {
-    
     //*
     //* function Certificate_Generate, Parameter list: &$cert
     //*
@@ -11,8 +10,6 @@ class MyCertificates_Generate extends MyCertificates_Read
 
     function Certificate_Generate(&$cert)
     {
-        $this->Certificate_Set_Generated($cert);
-
         $this->Certificate_Read($cert);
 
         $latex="";
@@ -23,30 +20,56 @@ class MyCertificates_Generate extends MyCertificates_Read
                 $this->Current_User_Event_Coordinator_Is()
             )
         {
-             $latex=
+            $this->Certificate_Set_Generated($cert);
+            
+            $latex=$this->Certificate_Latex($cert);
+            $latex=$this->Certificate_Filter_Datas($latex,$cert);
+            $latex=
                 $this->MyHash_Filter
                 (
                     $this->MyHash_Filter
                     (
-                        $this->Certificate_Latex($cert),
+                        $latex,
                         $this->Event(),
                         "Event_"
                     ),
                     $this->Unit(),
                     "Unit_"
                 );
-            
-             $latex=
-                $this->MyHash_Filter
-                (
-                    $latex,
-                    $cert
-                );
         }
 
         return $latex;
     }
 
+    //*
+    //* function Certificate_Filter_Datas, Parameter list: $latex,$cert
+    //*
+    //* Filter $cert over sub datas..
+    //*
+
+    function Certificate_Filter_Datas($latex,$cert)
+    {
+        foreach
+            (
+                array_merge($this->UnitDatas,$this->EventDatas)
+                as $data
+            )
+        {
+            if (!empty($cert[ $data."_Hash" ]))
+            {
+                $latex=$this->MyHash_Filter
+                (
+                    $latex,
+                    $cert[ $data."_Hash" ],
+                    $data."_"
+                );
+            }
+        }
+
+        return $this->MyHash_Filter($latex,$cert);
+    }
+
+    
     //*
     //* function Certificates_Generate, Parameter list: $certs
     //*
@@ -145,13 +168,6 @@ class MyCertificates_Generate extends MyCertificates_Read
 
     function Certificate_Verification_Info($cert)
     {
-        $url=
-            preg_replace('/[^https?]/',"",strtolower($_SERVER[ 'SERVER_PROTOCOL' ])).
-            ":/".
-            strtolower($_SERVER[ 'SERVER_NAME' ]).
-            preg_replace('/index\.php/',"",$_SERVER[ 'SCRIPT_NAME' ]).
-            "?Unit=".$this->Unit("ID")."\&Action=Validate";
-
         $code="Certificate Code";
         if (!empty($cert[ "Code" ]))
         {
@@ -163,11 +179,15 @@ class MyCertificates_Generate extends MyCertificates_Read
             "\\let\\thefootnote\\relax\n\\footnote{\n".
             $this->MyLanguage_GetMessage("Certificates_Validation_Message1").
             ": ".
-            preg_replace('/0+/',"",$code).
-            ".".
+            preg_replace('/\.0+/',".",preg_replace('/^0+/',"",$code)).
+            ". ".
             $this->MyLanguage_GetMessage("Certificates_Validation_Message2").
             ": ".
-            $url.
+            preg_replace('/[^https?]/',"",strtolower($_SERVER[ 'SERVER_PROTOCOL' ])).
+            ":/".
+            strtolower($_SERVER[ 'SERVER_NAME' ]).
+            preg_replace('/index\.php/',"",$_SERVER[ 'SCRIPT_NAME' ]).
+            "?Unit=".$this->Unit("ID")."\&Action=Validate".
             "}";
     }
 

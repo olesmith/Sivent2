@@ -31,20 +31,21 @@ trait MakeLatex_Table
     function Latex_Table_Specs($options,&$count)
     {
         $spec="l";
-        if (!empty($options[ "Spec" ])) { $spec=$options[ "Spec" ]; }
+        if (!empty($options[ "Spec" ])) { return array($options[ "Spec" ]); }
         
         if (!empty($options[ "Specs" ]) && is_array($options[ "Specs" ]))
         {
             $specs=$options[ "Specs" ];
-            $count=count();
+            $count=count($specs);
         }
         else
         {
-            $specs=array();
+            $specs=array("");
             for ($n=0;$n<$count;$n++)
             {
-                $specs[$n]=$spec;
+                array_push($specs,$spec);
             }
+            array_push($specs,"");
         }
 
         return $specs;
@@ -289,7 +290,7 @@ trait MakeLatex_Table
             $this->Latex_Table_Options_Get($options,"PageHead").
             "\n\n".
             "\\begin{".$size."}\n".
-            "\\begin{tabular}{|".join("|",$specs)."|}\n".
+            "\\begin{tabular}{".join("|",$specs)."}\n".
             $this->Latex_Table_Titles($titlerows,$hline).
             "";
     

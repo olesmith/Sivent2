@@ -23,7 +23,7 @@ class Caravaneers_Table_CGI extends Caravaneers_Table_Read
                (
                   '/^\s+/',
                   "",
-                  preg_replace('/s+$/',"",$value)
+                  preg_replace('/\s+$/',"",$value)
                )
             );
     }
@@ -37,6 +37,34 @@ class Caravaneers_Table_CGI extends Caravaneers_Table_Read
     function Caravaneer_Table_CGI2Email($n)
     {
         $value="No_".$n."_Email";
+        $value=$this->CGI_POST($value);
+        
+        return preg_replace('/\s+/',"",$value);
+    }
+    
+    //*
+    //* function Caravaneer_Table_CGI2PRN, Parameter list: $n
+    //*
+    //* Returns cgi value.
+    //*
+
+    function Caravaneer_Table_CGI2PRN($n)
+    {
+        $value="No_".$n."_PRN";
+        $value=$this->CGI_POST($value);
+        
+        return preg_replace('/\s+/',"",$value);
+    }
+    
+    //*
+    //* function Caravaneer_Table_CGI2Comment, Parameter list: $n
+    //*
+    //* Returns cgi value.
+    //*
+
+    function Caravaneer_Table_CGI2Comment($n)
+    {
+        $value="No_".$n."_Comment";
         $value=$this->CGI_POST($value);
         
         return preg_replace('/\s+/',"",$value);

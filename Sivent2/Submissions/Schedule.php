@@ -43,12 +43,16 @@ class Submissions_Schedule extends Submissions_Export
         
         $where=$this->UnitEventWhere(array("Submission" => $submission[ "ID" ]));
 
+        $schedules=$this->Submission_Schedules_Read($datas,$submission);
+
+        if (empty($schedules)) { return ""; }
+        
         return
             $this->H(3,$this->MyLanguage_GetMessage("Submissions_Schedule_Table_Title")).
             $this->SchedulesObj()->MyMod_Items_Table_Html
             (
                0,
-               $this->Submission_Schedules_Read($datas,$submission),
+               $schedules,
                $rdatas
             );
     }

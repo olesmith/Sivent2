@@ -109,9 +109,6 @@ array
 
       "Search" => FALSE,
       "Default" =>
-
-      "\n\n\\hspace{1cm}\\vspace{4.5cm}\n\n".
-
       "\\begin{Large}\n".
       "Certificamos que:\n\n".
 
@@ -120,14 +117,14 @@ array
       "\\vspace{0.25cm}\n\n".
 
       "participou do \\textbf{#Event_Name}, #Event_Title, realizado na \\textit{#Event_Place},\n".
-      "no dia \\textit{#Event_DateSpan},\n".
+      "nos dias \\textit{#Event_DateSpan},\n".
       "contribuindo com a palestra:\n\n".
       
       "\\begin{center}\\huge{\\textbf{#Submission_Title}}\\end{center}\n\n".
 
       "\\vspace{0.25cm}\n\n".
       
-     "Carga horária de \\textbf{#Submission_Certificate_TimeLoad horas}.\n".
+     "Carga horária: \\textbf{#Submission_Certificate_TimeLoad horas}.\n".
       "\\end{Large}\n\n".
       
       "",
@@ -150,9 +147,6 @@ array
 
       "Search" => FALSE,
       "Default" =>
-      
-      "\n\n\\hspace{1cm}\\vspace{5.5cm}\n\n".
-
       "\\begin{Large}\n".
       "We hereby certify, that:\n\n".
 
@@ -167,7 +161,7 @@ array
 
       "\\vspace{0.25cm}\n\n".
       
-      "Timeload: \\textbf{#Submission_Certificate_TimeLoad hours}.\n".
+      "Time Load: \\textbf{#Submission_Certificate_TimeLoad hours}.\n".
       "\\end{Large}\n\n".
       
       "",

@@ -213,10 +213,10 @@ class Times extends TimesAccess
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->DatesObj()->ItemExistenceMessage("Dates");
+        $res=$this->DatesObj()->Item_Existence_Message("Dates");
         if ($res)
         {
-            $res=$this->ItemExistenceMessage();
+            $res=$this->Item_Existence_Message();
         }
 
         return $res;

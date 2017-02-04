@@ -9,7 +9,7 @@ class Session extends Login
     var $NoInitSession=0;
     var $SessionData=array();
     var $SessionMessages="Session.php";
-    var $CookieTTL=3600;
+    #var $CookieTTL=3600;
 
     var $Authenticated=FALSE;
 

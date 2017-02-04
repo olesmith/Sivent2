@@ -3,6 +3,7 @@
 trait MyFile
 {
     var $Files_Incomplete=array();
+    var $Files_Logging=0;
     
     //**
     //** function MyFile_Read, Parameter list: $file,$regex=""
@@ -97,6 +98,11 @@ trait MyFile
         }
 
 
+        if ($this->Files_Logging>0)
+        {
+            echo $file.": ".count($text)." bytes<BR>";
+        }
+        
         return $hash;
     }
 

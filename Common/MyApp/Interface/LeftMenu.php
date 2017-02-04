@@ -81,7 +81,14 @@ trait MyApp_Interface_LeftMenu
         //Read menus
         if ($this->Profile=="") { $this->Profile="Public"; }
 
-        return $this->MyApp_Setup_Files2Hash("System","LeftMenu.php");
+        $menu=
+            $this->MyApp_Setup_Files2Hash
+            (
+                $this->MyApp_Setup_Path(),
+                "LeftMenu.php"
+            );
+
+        return $menu;
     }
 
 

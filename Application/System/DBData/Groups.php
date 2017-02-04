@@ -10,9 +10,9 @@ array
       ),
       "Data" => array
       (
-         "Event","Pertains","DataGroup","SortOrder",
+         "Pertains","DataGroup","Friend","SortOrder",
          "SqlKey","Type","SqlDef",
-         "Text","Text_UK",
+         "Text",
       ),
       "Admin" => 1,
       "Person" => 0,

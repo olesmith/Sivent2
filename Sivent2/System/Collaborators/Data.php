@@ -149,7 +149,7 @@ array
 
       "Sql" => "ENUM",
 
-      "Search" => FALSE,
+      "Search" => TRUE,
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,

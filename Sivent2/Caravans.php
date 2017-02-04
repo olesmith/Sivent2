@@ -11,6 +11,7 @@ include_once("Caravans/Statistics.php");
 class Caravans extends Caravans_Statistics
 {
     var $Certificate_Type=5;
+    var $Coordinator_Type=4;
     var $Export_Defaults=
         array
         (
@@ -42,12 +43,10 @@ class Caravans extends Caravans_Statistics
     function Caravans($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration","NParticipants");
+        $this->AlwaysReadData=array("Unit","Event","Name","Email","TimeLoad","Registration","NParticipants");
         $this->Sort=array("Name");
 
         $this->IncludeAllDefault=TRUE;
-
-        $this->Coordinator_Type=4;
     }
 
     
@@ -123,6 +122,10 @@ class Caravans extends Caravans_Statistics
             array_push($updatedatas,"NParticipants");
         }
                 
+        $this->PostProcess_Certificate_TimeLoad($item,$updatedatas);
+        $this->PostProcess_Code($item,$updatedatas);
+        $this->PostProcess_Certificate($item,$updatedatas);
+
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
@@ -147,6 +150,11 @@ class Caravans extends Caravans_Statistics
 
     function AddForm_PostText()
     {
+        if (!preg_match("(Coordinator|Admin)",$this->Profile()))
+        {
+            return "";
+        }
+        
         return
             $this->BR().
             $this->FrameIt($this->InscriptionsObj()->DoAdd());

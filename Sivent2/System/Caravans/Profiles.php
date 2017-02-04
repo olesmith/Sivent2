@@ -62,7 +62,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Export" => 1,
-            "Caravaneers_Search" => 1,
+            "GenCerts" => 1,
          ),
          'Admin' => array
          (
@@ -71,7 +71,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Export" => 1,
-            "Caravaneers_Search" => 1,
+            "GenCerts" => 1,
          ),
       ),
       'SingularPlural' => array
@@ -90,9 +90,11 @@ array
          ),
          'Coordinator' => array
          (
+            "Caravaneers_Search" => 1,
          ),
          'Admin' => array
          (
+            "Caravaneers_Search" => 1,
          ),
       ),
       'ActionsPlural' => array

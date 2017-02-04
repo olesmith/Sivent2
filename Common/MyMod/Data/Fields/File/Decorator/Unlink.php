@@ -68,6 +68,7 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
     function MyMod_Data_Fields_File_Decorator_Unlink_Link($edit,$item,$data,$value)
     {
         if ($edit==0 || empty($item[ $data ])) { return ""; }
+        if (!file_exists($item[ $data ])) { return ""; }
 
         
         return

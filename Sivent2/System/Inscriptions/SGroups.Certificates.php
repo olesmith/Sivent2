@@ -6,7 +6,8 @@ array
        "Name_UK" => "Certificate",
        "Data" => array
        (
-          "Selected","Certificate","Certificate_CH","GenCert","Inscription_Certificate_Generated_Cell","Inscription_Certificate_Mailed_Cell"
+          "Selected","Certificate","Certificate_CH","GenCert",
+          "Inscription_Certificate_Generated_Cell","Inscription_Certificate_Mailed_Cell"
         ),
 
        "Single" => TRUE,

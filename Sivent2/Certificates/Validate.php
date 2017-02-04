@@ -24,7 +24,7 @@ class Certificates_Validate extends Certificates_Access
     {
         $comps=preg_split('/\./',$code);
 
-        return $this-> Certificate_Decode($code);
+        return $this->Certificate_Decode($code);
     }
     
     //*

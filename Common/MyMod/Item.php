@@ -62,6 +62,70 @@ trait MyMod_Item
         return $row;
     }
     
+    //*
+    //* function Item_Existence_Message, Parameter list: $message,$where=array()
+    //*
+    //* Prints informing $message, if no item exists in sql table.
+    //* Default $where=$this->UnitEventWhere().
+    //*
+
+    function Item_Existence_Message($othermodule="",$where=array())
+    {
+        if (!preg_match('/^(Coordinator|Admin)$/',$this->Profile())) return;
+            
+        if (empty($where)) $where=$this->UnitEventWhere();
+
+        $obj=$this;
+        if (empty($othermodule))
+        {
+            $othermodule=$this->ModuleName;
+            $obj=$this;
+        }
+
+        $message="No_Items_Defined_Message";
+        $message=$this->MyLanguage_GetMessage("No_Items_Defined_Message");
+
+        $message=preg_replace('/#ItemName/',$obj->MyMod_ItemName(),$message);
+        $message=preg_replace('/#ItemsName/',$obj->MyMod_ItemName("ItemsName"),$message);
+
+
+        if (
+              !$this->Sql_Table_Exists()
+              ||
+              $this->Sql_Select_NHashes($this->UnitEventWhere())==0
+           )
+        {
+            echo
+                $this->Div
+                (
+                   $message.
+                   ": ".
+                   $this->Href
+                   (
+                      "?".$this->CGI_Hash2URI
+                      (
+                         array
+                         (
+                            "Unit" => $this->Unit("ID"),
+                            "Event" => $this->Event("ID"),
+                            "ModuleName" => $othermodule,
+                            "Action" => "Add",
+                         )                         
+                      ),
+                      $this->MyLanguage_GetMessage("Add_Action_Name").
+                      " ".
+                      $obj->MyMod_ItemName(),
+                      "","","",$noqueryargs=FALSE,$options=array(),"HorMenu"
+                   ),
+                   array("CLASS" => 'warning')
+                ).
+                $this->BR();
+
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }
 
 ?>

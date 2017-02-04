@@ -77,6 +77,18 @@ class Certificates_Read extends Certificates_Generate
                 $cert,
                 $data
             );
+
+            if ($data=="Caravaneer" && !empty($cert[ "Caravaneer" ]))
+            {
+                $cert[ "Caravan" ]=
+                    $this->CaravansObj()->Sql_Select_Hash
+                    (
+                        array("Friend" => $cert[ "Friend" ]),
+                        array("ID")
+                    );
+                $cert[ "Caravan" ]=$cert[ "Caravan" ][ "ID" ];
+            }
+            
         }
     }
     

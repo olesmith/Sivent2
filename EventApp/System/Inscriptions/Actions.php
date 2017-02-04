@@ -129,6 +129,46 @@ array
       "Handler"   => "HandleInscribe",
       "AccessMethod"   => "MayInscribe",
    ),
+   "Receit" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Receit&Latex=1&ID=#ID&Event=".$this->Event("ID"),
+      "Title"    => "Gerar Recibo (PDF)",
+      "Title_UK" => "Generate Receit (PDF)",
+      "Name"     => "Recibo",
+      "Name_UK"   => "Receit",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"       => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+
+
+      "Singular"   => TRUE,
+      "Handler"   => "HandleReceit",
+      "AccessMethod"   => "CheckEditAccess",
+   ),
+   "Receits" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Inscriptions&Action=Receits&Latex=1&ID=#ID&Event=".$this->Event("ID"),
+      "Title"    => "Gerar Recibos (PDF)",
+      "Title_UK" => "Generate Receits (PDF)",
+      "Name"     => "Recibos",
+      "Name_UK"   => "Receits",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"       => 1,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+
+
+      "Singular"   => TRUE,
+      "Handler"   => "HandleReceits",
+      "AccessMethod"   => "CheckEditAccess",
+   ),
    "Emails" => array
    (
       "Href"     => "",

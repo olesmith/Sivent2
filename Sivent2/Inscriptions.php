@@ -408,7 +408,7 @@ class Inscriptions extends InscriptionsHandle
             {
                 if (empty($item[ "Certificate_CH" ]))
                 {
-                    $item[ "Certificate_CH" ]=$event[ "Certificates_CH" ];
+                    $item[ "Certificate_CH" ]=$event[ "TimeLoad" ];
                     array_push($updatedatas,"Certificate_CH");
                 }
             }

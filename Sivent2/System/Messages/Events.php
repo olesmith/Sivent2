@@ -107,12 +107,12 @@ array
    ),
    "Event_Inscriptions_Collaborations_Open" => array
    (
-      "Name" => "Chamada de Colaboradores Abertas",
-      "Name_ES" => "Chamada de Colaboradores Abiertas",
-      "Name_UK" => "Call for Collaborators Open",
-      "Title" => "Chamada de Colaboradores Abertas",
-      "Title_ES" => "Chamada de Colaboradores Abiertas",
-      "Title_UK" => "Call for Collaborators Open",
+      "Name" => "Chamada de Colaboradores",
+      "Name_ES" => "Llamada de Colaboradores",
+      "Name_UK" => "Call for Collaborators",
+      "Title" => "Chamada de Colaboradores",
+      "Title_ES" => "Llamada de Colaboradores",
+      "Title_UK" => "Call for Collaborators",
    ),
    "Event_Inscriptions_Submissions_Has" => array
    (
@@ -125,12 +125,12 @@ array
    ),
    "Event_Inscriptions_Submissions_Open" => array
    (
-      "Name" => "Chamada de Trabalhos Abertas",
-      "Name_ES" => "Llamada de Trabajos Abiertas",
-      "Name_UK" => "Call for Papers Open",
-      "Title" => "Chamada de Trabalhos Abertas",
-      "Title_ES" => "Llamada de Trabajos Abiertas",
-      "Title_UK" => "Call for Papers Open",
+      "Name" => "Chamada de Trabalhos",
+      "Name_ES" => "Llamada de Trabajos",
+      "Name_UK" => "Call for Papers",
+      "Title" => "Chamada de Trabalhos",
+      "Title_ES" => "Llamada de Trabajos",
+      "Title_UK" => "Call for Papers",
    ),
    "Event_Inscriptions_Caravans_Has" => array
    (
@@ -143,12 +143,12 @@ array
    ),
    "Event_Inscriptions_Caravans_Open" => array
    (
-      "Name" => "Chamada de Caravanas Abertas",
-      "Name_ES" => "Llamada de Caravanas Abiertas",
-      "Name_UK" => "Call for Caravans Open",
-      "Title" => "Chamada de Caravanas Abertas",
-      "Title_ES" => "Llamada de Caravanas Abiertas",
-      "Title_UK" => "Call for Caravans Open",
+      "Name" => "Chamada de Caravanas",
+      "Name_ES" => "Llamada de Caravanas",
+      "Name_UK" => "Call for Caravans",
+      "Title" => "Chamada de Caravanas",
+      "Title_ES" => "Llamada de Caravanas",
+      "Title_UK" => "Call for Caravans",
    ),
    "Event_Inscriptions_PreInscriptions_Open" => array
    (

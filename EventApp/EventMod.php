@@ -1,10 +1,21 @@
 <?php
 
+include_once("../EventApp/UnitMod.php");
 
-class EventMod extends DBDataObj
+class EventMod extends UnitMod
 {
     var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
     
+   //*
+    //* function Latex_PDF, Parameter list: $file,$latex
+    //*
+    //* Filters out Unit and Event and calls parent Latex_PDF.
+    //*
+
+    function Latex_PDF($file,$latex, $printpdf = true, $runbibtex = false, $copypdfto = false)
+    {
+        return $this->ApplicationObj()->Latex_PDF($file,$latex,$printpdf,$runbibtex,$copypdfto);
+    }
     //*
     //* function , Parameter list: $date1,$date2
     //*
@@ -109,53 +120,6 @@ class EventMod extends DBDataObj
         return $this->MyLanguage_GetMessage($key);
     }
 
-    //*
-    //* function PreActions, Parameter list:
-    //*
-    //* 
-    //*
-
-    function PreActions()
-    {
-    }
-    
-    //*
-    //* function InitActions, Parameter list:
-    //*
-    //* Overrides MySql2::InitActions.
-    //*
-
-    function InitActions()
-    {
-        parent::InitActions();
-
-        foreach ($this->Access_Methods as $action => $method)
-        {
-            $this->Actions[ $action ][ "AccessMethod" ]=$method;
-        }
-    }
-
-    //*
-    //* function Current_User_Admin_Is, Parameter list: 
-    //*
-    //* Returns TRUE if current user is admin.Otherwise FALSE.
-    //*
-
-    function Current_User_Admin_Is()
-    {
-        return $this->ApplicationObj()->Current_User_Admin_Is();
-    }
-
-    //*
-    //* function Current_User_Coordinator_Is, Parameter list: 
-    //*
-    //* Returns TRUE if current user is admin.Otherwise FALSE.
-    //*
-
-    function Current_User_Coordinator_Is()
-    {
-        return $this->ApplicationObj()->Current_User_Coordinator_Is();
-    }
 
     //*
     //* function Unit_Events_Has, Parameter list: $unit=array()
@@ -198,20 +162,6 @@ class EventMod extends DBDataObj
     {
         return $this->EventsObj()->Event_Inscriptions_DateSpan($event);
     }
-    //*
-    //* function UnitWhere, Parameter list: $event=array(),$unit=array()
-    //*
-    //* Returns Unit => sql where clause.
-    //*
-
-    function UnitWhere($where=array(),$unit=array())
-    {
-        if (empty($unit))  $unit=$this->Unit();
-        
-        $where[ "Unit" ]=$unit[ "ID" ];
-
-        return $where;
-    }
 
     //*
     //* function UnitEventWhere, Parameter list: $event=array(),$unit=array()
@@ -235,28 +185,6 @@ class EventMod extends DBDataObj
         return $where;
     }
 
-    //*
-    //* sub Unit, Parameter list: $key=""
-    //*
-    //* Reads Unit - dies, if not admin and no unit.
-    //*
-    //*
-
-    function Unit($key="")
-    {
-        $res=$this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE);
-
-        $action=$this->CGI_GET("Action");
-        if (empty($this->ApplicationObj()->Unit) && $action!="Start")
-        {
-            echo
-                "No such unit: ".$this->CGI_GETint("Unit");
-
-            exit(1);
-        }
-        
-        return $res;
-    }
 
     //*
     //* sub Event, Parameter list: $key=""
@@ -295,18 +223,6 @@ class EventMod extends DBDataObj
     
     //*
     //*
-    //* function SqlUnitTableName, Parameter list: $module,$table=""
-    //*
-    //* Used by specific module to override SqlTableName, prepending Unit id.
-    //*
-
-    function SqlUnitTableName($module,$table="")
-    {
-        return $this->ApplicationObj()->SqlUnitTableName($module,$table);
-    }
-
-    //*
-    //*
     //* function SqlEventTableName, Parameter list: $table="",$event=array()
     //*
     //* Used by specific module to override SqlTableName, prepending Unit id.
@@ -315,35 +231,6 @@ class EventMod extends DBDataObj
     function SqlEventTableName($module,$event=array())
     {
         return $this->ApplicationObj()->SqlEventTableName($module,"",$event);
-        
-        /* $table="#Unit__#Event_".$module; */
-
-        /* $eventid=0; */
-        /* if ($this->CGI_GET("ModuleName")=="Events") */
-        /* { */
-        /*     $eventid=$this->CGI_GET("ID"); */
-        /* } */
-
-        /* if (empty($eventid)) */
-        /* { */
-        /*     $eventid=$this->CGI_GET("Event"); */
-        /* } */
-
-        /* if (!empty($event)) */
-        /* { */
-        /*     if (is_array($event)) */
-        /*     { */
-        /*         $eventid=$event[ "ID" ]; */
-        /*     } */
-        /*     else */
-        /*     { */
-        /*         $eventid=$event; */
-        /*     } */
-        /* } */
-
-        /* $table=preg_replace('/#Event/',$eventid,$table); */
-
-        /* return preg_replace('/#Unit/',$this->ApplicationObj->Unit("ID"),$table); */
     }
     
 }

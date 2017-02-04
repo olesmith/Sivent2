@@ -32,10 +32,22 @@ class EventsAccess extends MyEvents
     function CheckEditAccess($item=array())
     {
         if (empty($item)) { return TRUE; }
-        
-        $res=parent::CheckEditAccess($item);
 
-        if ($res) { $res=$this->Current_User_Event_May_Edit($item); }
+        $res=parent::CheckEditAccess($item);
+ 
+        if ($res)
+        {
+            $subaction=$this->CGI_GET("SubAction");
+            if (empty($subaction))
+            {
+                $res=$this->Current_User_Event_May_Edit($item);
+            }
+            else
+            {
+                $res=$this->Current_User_Event_Type_May_Edit($subaction,$item);
+            }
+        }
+        
 
         return $res;
     }

@@ -35,8 +35,19 @@ trait MyMod_Item_Group_Tables
            
         $title=$this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name");
         if ($edit==1) { $title.=$this->SUP("","&dagger;"); }
-           
-        array_unshift($table,$this->H(3,$title));
+
+        if ($this->LatexMode())
+        {
+            $title=
+                "\\large{\\textbf{".$title."}}".
+                "";
+        }
+        else
+        {
+            $title=$this->H(3,$title);
+        }
+        
+        array_unshift($table,$title);
 
         return $table;
     }
@@ -66,11 +77,17 @@ trait MyMod_Item_Group_Tables
             $post=$this->ItemDataSGroups[ $group ][ "PostText" ];
         }
 
+        $method="Html_Table";
+        if ($this->LatexMode())
+        {
+            $method="Latex_Table";
+        }
+
         $table="";
         if (!empty($this->ItemDataSGroups[ $group ][ "Data" ]))
         {
             $table=
-               $this->Html_Table
+               $this->$method
                (
                   "",
                   $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$precgikey),
@@ -109,6 +126,8 @@ trait MyMod_Item_Group_Tables
                    $this->ItemDataSGroups[ $group ],
                    $item
                 );
+
+                
 
                 if ($res)
                 {
@@ -161,6 +180,48 @@ trait MyMod_Item_Group_Tables
                 $options,
                 array(),
                 array()
+            ).
+            "";
+    }
+    
+   //*
+    //* Create item Group tables latex version.
+    //*
+
+    function MyMod_Item_Groups_Tables_Latex($groupdefs,$item,$options)
+    {
+        $table=array();
+        foreach ($groupdefs as $groupdef)
+        {
+            foreach ($groupdef as $group => $edit)
+            {
+                $res=
+                    $this->MyMod_Item_Group_Allowed
+                    (
+                        $this->ItemDataSGroups[ $group ],
+                        $item
+                    );
+
+                
+
+                if ($res)
+                {
+                    $table=
+                        array_merge
+                        (
+                            $table,
+                            $this->MyMod_Item_Group_Table($edit,$group,$item)
+                        );
+                }
+            }
+        }
+        
+        return
+            $this->Latex_Table
+            (
+                "",
+                $table,
+                $options
             ).
             "";
     }

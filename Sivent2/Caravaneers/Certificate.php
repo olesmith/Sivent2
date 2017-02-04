@@ -111,6 +111,15 @@ class Caravaneers_Certificate extends Caravaneers_Table
 
                         $this->CertificatesObj()->Sql_Insert_Item($cert);
                     }
+
+                    if (count($certs)>1)
+                    {
+                        array_shift($certs);
+                        foreach ($certs as $cert)
+                        {
+                            $this->CertificatesObj()->Sql_Delete_Item($cert[ "ID" ]);
+                        }
+                    }
                 }
             }
         }
@@ -167,7 +176,7 @@ class Caravaneers_Certificate extends Caravaneers_Table
             (
                $this->CertificatesObj()->Certificate_TexName
                (
-                  $cert[ "Friend_Hash" ][ "Name" ]
+                  $cert[ "Caravaneer_Hash" ][ "Name" ]
                ),
                $latex
              );
@@ -189,38 +198,43 @@ class Caravaneers_Certificate extends Caravaneers_Table
     }
     
     //*
-    //* function Caravaneer_Certificates_Where, Parameter list: 
+    //* function Caravaneers_Certificates_Where, Parameter list: 
     //*
     //* Returns $where clause for all submission certificates.
     //*
 
-    function Caravaneer_Certificates_Where()
+    function Caravaneers_Certificates_Where()
     {
         return
             array
             (
-               "Unit"        => $this->Unit("ID"),
-               "Event"       => $this->Event("ID"),
-               "Type"        => $this->Certificate_Type,
+                "Caravaneer"  =>
+                $this->Sql_Select_Unique_Col_Values
+                (
+                    "ID",
+                    $this->UnitEventWhere(array("Certificate" => 2))
+                ),
+                "Unit"        => $this->Unit("ID"),
+                "Event"       => $this->Event("ID"),
+                "Type"        => $this->Certificate_Type,
             );
     }
 
     //*
-    //* function Caravaneer_Handle_Certificates_Generate, Parameter list: 
+    //* function Caravaneers_Handle_Certificates_Generate, Parameter list: 
     //*
     //* Generates certificate in Latex, generates and sends the PDF.
     //*
 
-    function Caravaneer_Handle_Certificates_Generate()
+    function Caravaneers_Handle_Certificates_Generate()
     {
         return
             $this->CertificatesObj()->Certificates_Generate_Handle
             (
-               $this->Caravaneer_Certificates_Where(),
+               $this->Caravaneers_Certificates_Where(),
                "Certs.Caravaneers.".
                $this->Event("Name")
             );
     }
-    
 }
 ?>

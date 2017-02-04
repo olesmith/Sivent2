@@ -238,7 +238,7 @@ class DBDataObj extends Table
 
     function DBDataFileDatas()
     {
-        $fdatas=array("No","Edit","Zips","CTime","Friend","Homologated","Result","Selected");
+        $fdatas=array("No","Edit","Delete","Zips","CTime","Friend","Homologated","Result","Selected");
 
         $count=count($fdatas)-1;
 

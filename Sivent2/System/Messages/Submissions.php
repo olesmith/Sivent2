@@ -72,6 +72,12 @@ array
       "Title_ES" => "Palestrante(s)",
       "Title_UK" => "Speaker(s)",
    ),
+   "Submissions_Authors_Details_Title" => array
+   (
+      "Name" => "Detalhes do(s) Palestrante(s)",
+      "Name_ES" => "Palestrante(s) Detalies",
+      "Name_UK" => "Speaker(s) Details",
+   ),
    "Submissions_NPreInscriptions_Title" => array
    (
       "Name" => "Inscritos",

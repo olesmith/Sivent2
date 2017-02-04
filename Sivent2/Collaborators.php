@@ -274,6 +274,11 @@ class Collaborators extends Collaborators_Statistics
 
     function AddForm_PostText()
     {
+        if (!preg_match("(Coordinator|Admin)",$this->Profile()))
+        {
+            return "";
+        }
+        
         return
             $this->BR().
             $this->FrameIt($this->InscriptionsObj()->DoAdd());

@@ -32,7 +32,7 @@ class MyCertificates_Latex extends MyCertificates_Verify
                "%%%!\n".
                "%%%! Watermark contribution to preamble\n".
                "\\usepackage{draftwatermark}\n".
-               "\\SetWatermarkText{\\includegraphics[width=29.8cm]{".$watermark."}}\n". 
+               "\\SetWatermarkText{\\includegraphics[height=20cm]{".$watermark."}}\n". 
                "\\SetWatermarkAngle{0}\n".
                "\\SetWatermarkScale{1}\n".
                "\\SetWatermarkColor[rgb]{0,0,0}\n".

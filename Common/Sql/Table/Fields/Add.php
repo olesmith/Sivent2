@@ -117,7 +117,7 @@ trait Sql_Table_Fields_Add
                     $this->Sql_Table_Column_Name_Qualify($rrdata)." ".
                     " ".
                     $sqltype;
-
+                
                 $this->AddMsg("Add Column Original ".$rdata." in $table: $query<BR>");
                 $this->DB_Query($query);
             }

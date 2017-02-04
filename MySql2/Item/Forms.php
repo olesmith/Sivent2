@@ -18,7 +18,13 @@ class ItemForms extends Fields
     function ItemDataSGroupTable($edit,$item,$group,$datas=array(),$rtbl=array(),$nofilefields=FALSE)
     {
         $res=$this->MyMod_Item_Group_Allowed($this->ItemDataSGroups[ $group ],$item);
-        
+
+        if ($edit==1)
+        {
+            $rres=$this->MyMod_Item_Group_Editable($this->ItemDataSGroups[ $group ],$item);
+            if (!$rres) { $edit=0; }
+        }
+                   
         if (empty($res)) { return ""; }
 
         $rdatas=array();
@@ -29,6 +35,7 @@ class ItemForms extends Fields
         elseif ($group!="All")
         {
             $rdatas=$this->GetGroupDatas($group,TRUE); //use single data groups
+
             if (empty($rdatas)) { return array(); }
         }
         else

@@ -123,7 +123,8 @@ trait MyMod_Data_Fields_Show
             $value="";
             if (isset($item[ $data ])) { $value=$item[ $data ]; }
 
-            $rvalue=$this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,0);
+            $rvalue=
+                $this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,0);
             $value=$rvalue;
         }
         elseif ($this->ItemData[ $data ][ "IsColor" ])

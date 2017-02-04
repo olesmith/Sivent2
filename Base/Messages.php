@@ -4,7 +4,7 @@
 global $HtmlMessages; //global and common for all classes
 $HtmlMessages=array();
 
-class SqlMessages extends Cookies
+class SqlMessages extends Latex
 {
     var $BackTraceLevel=1; 
     var $Debug=0;

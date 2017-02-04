@@ -9,7 +9,9 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
     //*
 
     function InscriptionContents($edit,$buttons=TRUE)
-    {         
+    {
+        $this->InscriptionsObj()->Sql_Table_Structure_Update_Force=TRUE; //force update
+        $this->Sql_Table_Structure_Update();
         $method=$this->TableMethod();
 
         return

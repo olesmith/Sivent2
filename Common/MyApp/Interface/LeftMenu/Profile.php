@@ -11,7 +11,7 @@ trait MyApp_Interface_LeftMenu_Profile
 
     function MyApp_Interface_LeftMenu_Profile()
     {
-        if ($this->LoginType=="Public") { return; }
+        if ($this->LoginType=="Public") { return array(); }
 
         $links=array();
 

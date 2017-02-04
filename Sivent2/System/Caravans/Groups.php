@@ -6,8 +6,9 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Edit","Delete","Caravaneers",
+         "No","Edit","Delete","GenCert","Caravaneers",
          "Friend","Name","City","Status","NParticipants","Certificate","Certificate_CH",
+         "Code",
       ),
       "Admin" => 1,
       "Person" => 0,

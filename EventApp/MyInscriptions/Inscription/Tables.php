@@ -76,45 +76,97 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
         );
     }
     
+    //*
+    //* function Inscription_Compulsory_Undef, Parameter list: $inscription
+    //*
+    //* Returns list of undefined data.
+    //*
 
+    function Inscription_Compulsory_Undef($inscription,$singular)
+    {
+        $compdatas=$this->MyMod_Item_Groups_Compulsory_Data($this->InscriptionSGroups(0),$singular);
+
+        $datas=array();
+        foreach ($compdatas as $data)
+        {
+            if (empty($inscription[ $data ]))
+            {
+                array_push($datas,$data);
+            }
+        }
+
+        return $datas;
+    }
+    
+    //*
+    //* function Inscription_Diag_Message, Parameter list: $inscription
+    //*
+    //* Creates Inscription pure dig message.
+    //*
+
+    function Inscription_Diag_Message($inscription)
+    {
+        $lkey="Friend_Data_Diag_";
+
+        $singular=TRUE;
+        $compdatas=$this->Inscription_Compulsory_Undef($inscription,$singular);
+
+        $rkey=$lkey."OK";
+        if (count($compdatas)>0)
+        {
+            $rkey=$lkey."Error";
+        }
+
+        return $this->Messages($rkey);
+    }
+
+    
+    //*
+    //* function Inscription_Diag_Msg, Parameter list: $inscription
+    //*
+    //* Creates Inscription dig message.
+    //*
+
+    function Inscription_Diag_Msg($inscription)
+    {
+       return
+            $this->H(5,$this->Inscription_Diag_Message($inscription)).
+            "";
+    }
+
+    
     //*
     //* function InscriptionDiagList, Parameter list: $inscription
     //*
-    //* Creates Inscription edit table as matrix.
+    //* Creates Inscription digag list (datas undefined).
     //*
 
     function InscriptionDiagList($inscription)
     {
         $lkey="Friend_Data_Diag_";
+
+        $singular=TRUE;
         
+        $compdatas=$this->Inscription_Compulsory_Undef($inscription,$singular);
+
         $messages=array();
-        foreach ($this->InscriptionSGroups(0) as $id => $groups)
+        foreach ($compdatas as $data)
         {
-            foreach ($groups as $group => $edit)
-            {
-                foreach ($this->MyMod_Item_Group_Data($group,TRUE) as $data)
-                {
-                    if ($this->MyMod_Data_Field_Is_Compulsory($data))
-                    {
-                        if (empty($inscription[ $data ]))
-                        {
-                            array_push
-                            (
-                               $messages,
-                               $this->GetDataTitle($data).
-                               ": ".
-                               $this->Messages($lkey."Message")."."
-                            );
-                        }
-                    }
-                }
-            }
+            array_push
+            (
+                $messages,
+                $this->GetDataTitle($data).
+                ": ".
+                $this->Messages($lkey."Message")."."
+            );
         }
 
+        $message=$this->Inscription_Diag_Msg($inscription);
+        
         if (count($messages)>0)
         {
             return
-                $this->H(5,$this->Messages($lkey."Error").":").
+                $message.
                 $this->DIV
                 (
                    $this->HtmlList($messages),
@@ -122,9 +174,46 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
                 );
         }
 
-        return $this->H(5,$this->Messages($lkey."OK").".");
+        return
+            $message.
+            $this->InscriptionReceitLink($inscription);
     }
     
+    
+    //*
+    //* function InscriptionReceitLink, Parameter list: $inscription
+    //*
+    //* Creates Inscription receit link, if all compulsory defined.
+    //*
+
+    function InscriptionReceitLink($inscription)
+    {
+        return
+            "Gerar Recibo: ".
+            $this->MyActions_Entry("Receit",$inscription);
+    }
+
+    //*
+    //* function Inscriptions_Table_Groups, Parameter list: $edit,$buttons=FALSE,$inscription=array(),
+    //*
+    //* Creates Inscription edit table as matrix.
+    //*
+
+    function Inscriptions_Table_Groups($edit,$buttons=FALSE,$inscription=array())
+    {
+        $buttons="";
+        if ($edit==1) { $buttons=$this->Buttons(); }
+        
+        $this->SGroups_NumberItems=TRUE;
+        
+        return
+            $this->MyMod_Item_Group_Tables
+            (
+                $this->InscriptionSGroups($edit),
+                $inscription,
+                $buttons
+            );
+    }
     
     //*
     //* function InscriptionTable, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
@@ -135,23 +224,18 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     function InscriptionTable($edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE)
     {
         if (empty($inscription)) { $inscription=$this->Inscription; }
-
-        $buttons="";
-        if ($edit==1) { $buttons=$this->Buttons(); }
         
-        $this->SGroups_NumberItems=TRUE;
-        $table=$this->MyMod_Item_Group_Tables
-        (
-           $this->InscriptionSGroups($edit),
-           $inscription,
-           $buttons
-        );
+        $table=$this->Inscriptions_Table_Groups($edit,$buttons,$inscription);
 
-        array_unshift($table,$this->InscriptionDiagList($inscription));
+        array_unshift
+        (
+            $table,
+            $this->InscriptionDiagList($inscription)
+        );
 
         if ($edit==1 && $buttons) 
         {
-            array_push($table,$this->Buttons());
+            #array_push($table,$this->Buttons());
         }
 
         return $table;

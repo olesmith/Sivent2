@@ -328,8 +328,6 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
     {
         if (!$this->Friend_Caravans_Should($friend)) { return array(); }
         
-        //if (!$this->Inscriptions_Caravans_Has()) { return array(); }
-
         $edit=$this->Inscription_Caravans_Table_Edit($edit);
         if (!$this->Inscriptions_Caravans_Inscriptions_Open()) { $edit=0; }
 
@@ -342,7 +340,6 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
 
         $caravan=$this->Friend_Caravan_Get($edit,$friend);
         
-        //$table=$this->Inscription_Caravans_Rows($inscription,$caravan);
         $type=$this->InscriptionTablesType($inscription);
         if ($type!="Caravans")
         {

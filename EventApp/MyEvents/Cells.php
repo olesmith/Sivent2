@@ -16,9 +16,7 @@ class MyEventsCells extends MyEventsFriend
 
         if ($item[ "EventStart" ]!=$item[ "EventEnd" ])
         {
-            $cell.=
-                " - ".
-                $this->MyTime_Sort2Date($item[ "EventEnd" ]);
+            $cell=$this->Date_Span_Interval($item,"EventStart","EventEnd");
         }
 
         return $cell;

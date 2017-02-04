@@ -29,6 +29,7 @@ include_once("../Application/Application.php");
 include_once("MyApp/CGIVars.php");
 include_once("MyApp/Accessors.php");
 include_once("MyApp/Access.php");
+include_once("MyApp/Overrides.php");
 include_once("MyApp/Menues.php");
 include_once("MyApp/Mail.php");
 
@@ -56,7 +57,7 @@ class EventApp extends MyEventApp_Mail
     (
        1 => array
        (
-          "Title" => "Questinário",
+          "Title" => "Questionário",
           "Title_UK" => "Questionary",
           
           "Object_Accessor" => "InscriptionsObj",
@@ -496,14 +497,17 @@ class EventApp extends MyEventApp_Mail
     }
 
     //*
-    //* function HandleShowUnits, Parameter list: 
+    //* function HandleShowUnits, Parameter list: $head=TRUE
     //*
     //* Displays Units in DB.
     //*
 
-    function HandleShowUnits()
+    function HandleShowUnits($head=TRUE)
     {
-        $this->MyApp_Interface_Head();
+        if ($head)
+        {
+            $this->MyApp_Interface_Head();
+        }
 
         echo
             $this->UnitsObj()->ShowUnits(0);

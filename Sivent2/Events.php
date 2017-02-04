@@ -30,7 +30,12 @@ class Events extends Events_Handle
     function Events($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Unit","Name","Certificates","Collaborations","Collaborations");
+        $this->AlwaysReadData=
+            array
+            (
+                "Unit","Name","Certificates","Collaborations","Collaborations",
+                "Certificates_Latex_Sep_Vertical","Certificates_Latex_Sep_Horisontal"
+            );
         $this->Sort=array("Name");
         $this->IDGETVar="Event";
         $this->IncludeAllDefault=TRUE;
@@ -84,6 +89,7 @@ class Events extends Events_Handle
            "Data.PreInscriptions.php"
         );
         
+        $this->Sql_Table_Column_Rename("Certificates_CH","TimeLoad");
         parent::PreProcessItemData();
     }
 

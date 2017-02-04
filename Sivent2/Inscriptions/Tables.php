@@ -101,15 +101,6 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
            $this->Inscription_Event_Info()
         );
         
-        /* if (!empty($inscription[ "ID" ])) */
-        /* { */
-        /*     array_push */
-        /*     ( */
-        /*        $table, */
-        /*        $this->Inscription_Event_Typed_Tables($edit,$inscription) */
-        /*     ); */
-        /* } */
-
         return $table;
     }
     
@@ -136,24 +127,6 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         $type=$this->CGI_GET("Type");
         if (empty($type))
         {
-            /* $speaker= */
-            /*     $this->SpeakersObj()->Sql_Select_Hash */
-            /*     ( */
-            /*        $this->UnitEventWhere(array("Friend" => $inscription[ "Friend" ])), */
-            /*        array("ID") */
-            /*     ); */
-            
-            /* if (!empty($speaker)) */
-            /* { */
-            /*     $type="Speaker"; */
-            /* } */
-            /* else */
-            /* { */
-            /*     if ($this->Inscriptions_PreInscriptions_Has()) */
-            /*     { */
-            /*         $type="PreInscriptions"; */
-            /*     } */
-            /* } */
         }
 
         return $type;

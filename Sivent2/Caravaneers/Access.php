@@ -118,8 +118,11 @@ class Caravaneers_Access extends ModulesCommon
                   &&
                   $item[ "Friend" ]==$this->LoginData("ID")
                )
-            {            
-                $res=TRUE;
+            {
+                if ($this->EventsObj()->Event_Certificates_Published())
+                {
+                    $res=TRUE;
+                }
             }
         }
 

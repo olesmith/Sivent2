@@ -85,6 +85,46 @@ trait MyMod_Item_Group_Data
 
         return array_keys($undefs);
     }
+    
+    //*
+    //* Returns list of data of $group that are compulsory.
+    //*
+
+    function MyMod_Item_Group_Compulsory_Data($group,$singular=FALSE)
+    {
+        $datas=array();
+        foreach ($this->MyMod_Item_Group_Data($group,$singular) as $data)
+        {
+            if ($this->MyMod_Data_Field_Is_Compulsory($data))
+            {
+                $datas[ $data ]=1;
+            }
+        }
+
+        return array_keys($datas);
+    }
+    
+    //*
+    //* Returns list of data of all groups that are compulsory.
+    //*
+
+    function MyMod_Item_Groups_Compulsory_Data($groups,$singular=FALSE)
+    {
+        $datas=array();
+        foreach ($groups as $id => $rgroups)
+        {
+            foreach ($rgroups as $group => $edit)
+            {
+                foreach ($this->MyMod_Item_Group_Compulsory_Data($group,$singular) as $data)
+                {
+                    $datas[ $data ]=1;
+                }
+            }
+        }
+
+        return array_keys($datas);
+    }
+    
 }
 
 ?>

@@ -61,6 +61,39 @@ trait MyMod_Item_Group
     }
     
     //*
+    //* Chekcs edit to data group.
+    //*
+
+    function MyMod_Item_Group_Editable($groupdef,$item=array())
+    {
+        $res=$this->MyMod_Item_Group_Allowed($groupdef,$item);
+        if ($res && count($item)>0)
+        {
+            if (!empty($groupdef[ "EditAccessMethod" ]))
+            {
+                $accessmethods=$groupdef[ "EditAccessMethod" ];
+                if (!is_array($accessmethods)) { $accessmethods=array($accessmethods); }
+
+                foreach ($accessmethods as $accessmethod)
+                {
+                   if (method_exists($this,$accessmethod))
+                    {
+                        if (!$this->$accessmethod($item)) { return FALSE; }
+                    }
+                    else
+                    {
+                        $this->Debug=1;
+                        $this->AddMsg("Warning: Invalid group def access method: ".
+                                      $accessmethod.", ignored");
+                    }
+                }
+            }
+        }
+                
+        return $res;
+    }
+    
+    //*
     //* Chekcs access to data group.
     //*
 

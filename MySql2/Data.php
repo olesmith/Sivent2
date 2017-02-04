@@ -325,9 +325,22 @@ class Data extends DataPrint
       return $this->MyMod_Data_Title($data,$nohtml);
   }
 
-  function DecorateDataTitle($name,$title="")
+  function DecorateDataTitle($name,$title="",$includecolon=FALSE)
   {
-      return $this->Span($name,array("CLASS" => 'datatitlelink',"TITLE" => $title)); 
+      if (empty($title)) { $title=$name; }
+      
+      if ($includecolon) { $title.=":"; }
+
+      if ($this->LatexMode())
+      {
+          $title="\\textbf{".$title."}";
+      }
+      else
+      {
+          $title=$this->Span($name,array("CLASS" => 'datatitlelink',"TITLE" => $title));
+      }
+
+      return $title;
   }
 
   function DecoratedDataTitle($data,$includecolon=FALSE)

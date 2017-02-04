@@ -60,6 +60,7 @@ class SearchVars extends SearchInit
         return $searchvars;
     }
 
+     
     //*
     //* function GetPostSearchVars, Parameter list: 
     //*

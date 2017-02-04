@@ -23,7 +23,7 @@ class Certificates_Friend extends Certificates_Verify
     {
         $where=$this->UnitWhere(array("Friend" => $friend[ "ID" ]));
         if (!empty($event)) { $where[ "Event" ]=$event[ "ID" ]; }
-        
+
         $certs=
             $this->Sql_Select_Hashes
             (

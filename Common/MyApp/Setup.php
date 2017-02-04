@@ -8,7 +8,8 @@ include_once("Setup/Read.php");
 
 trait MyApp_Setup
 {
-    use MyApp_Setup_Profiles,
+    use
+        MyApp_Setup_Profiles,
         MyApp_Setup_ConfigFiles,
         MyApp_Setup_Defs,
         MyApp_Setup_Data,

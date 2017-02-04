@@ -89,10 +89,8 @@ class Submissions_Authors extends Submissions_Certificate
             array_push($authors,$this->FriendsObj()->FriendInfo($friend));
         }
 
-        
-
         return
-            $this->Submission_Authors($submission,$friends).
+            //join("; ",$this->Submission_Authors($submission,$friends)).
             $this->Submission_Authors_Info_Tables($submission,$friends);
     }
 
@@ -102,19 +100,24 @@ class Submissions_Authors extends Submissions_Certificate
     //* Returns list of titled authors.
     //*
 
-    function Submission_Authors_Info_Tables($submission,$friends)
+    function Submission_Authors_Info_Tables($submission,$friends=array())
     {
+        if (empty($friends))
+        {
+            $friends=$this->Submission_Authors_Read($submission);
+        }
+
         $tables=array();
         foreach ($friends as $id => $friend)
         {
             array_push
             (
-                $authors,
+                $tables,
                 $this->Submission_Author_Info_Table($submission,$friend)
             );
         }
 
-        return $tables;
+        return $this->Html_Table("",array($tables));
     }
     
     //*
@@ -126,7 +129,15 @@ class Submissions_Authors extends Submissions_Certificate
     function Submission_Author_Info_Table($submission,$friend)
     {
         return
-            $this->Submission_Authors($submission,$friends);
+            $this->FriendsObj()->MyMod_Item_Table_Html
+            (
+                0,
+                $friend,
+                array
+                (
+                    "Name","Title","Institution","Curriculum","MiniCurriculum","Photo"
+                )
+            );
     }
 
     

@@ -274,7 +274,7 @@ array
 
       "Search" => TRUE,
       "Compulsory"  => TRUE,
-      "Default" => 1,
+      "Default" => 3,
       "Values" => array("Sem Acesso","Mostrar","Editar"),
       "Values_UK" => array("No Access","Read","Write"),
 
@@ -293,7 +293,7 @@ array
 
       "Search" => TRUE,
       "Compulsory"  => TRUE,
-      "Default" => 1,
+      "Default" => 2,
       "Values" => array("Sem Acesso","Mostrar","Editar"),
       "Values_UK" => array("No Access","Read","Write"),
 
@@ -416,7 +416,7 @@ array
 
       "SqlClass" => "GroupDatas",
       "Search" => FALSE,
-      "SqlDerivedData" => array("Text"),
+      "SqlDerivedData" => array("Text","Text_UK"),
       "GETSearchVarName"  => "GroupData",
 
       "Compulsory"  => FALSE,

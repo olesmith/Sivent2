@@ -241,4 +241,40 @@ array
       "Icon" => "pdf.png",
       "Iconify" => TRUE, 
    ),
+   "HtmlLogoHeight" => array
+   (
+      "Name" => "Altura do Logotipo (px)",
+      "Name_UK" => "Logo Height (px)",
+
+      "Sql" => "INT",
+
+      "Search" => FALSE,
+      "Size" => 3,
+      "Default"  => "0",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
+   "HtmlLogoWidth" => array
+   (
+      "Name" => "Largura do Logotipo (px)",
+      "Name_UK" => "Logo Width (px)",
+
+      "Sql" => "INT",
+      "Size" => 3,
+
+      "Search" => FALSE,
+      "Default"  => "0",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
 );

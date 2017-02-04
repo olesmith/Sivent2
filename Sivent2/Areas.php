@@ -95,10 +95,10 @@ class Areas extends AreasAccess
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->ItemExistenceMessage();
+        $res=$this->Item_Existence_Message();
         if ($res)
         {
-            $res=$this->SubmissionsObj()->ItemExistenceMessage("Submissions");
+            $res=$this->SubmissionsObj()->Item_Existence_Message("Submissions");
         }
 
         return $res;

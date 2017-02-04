@@ -26,7 +26,7 @@ array
          "Friend" => array
          (
             "Edit" => 1,
-            "Submission" => 1,
+            "Details" => 1,
             "Assessments" => 1,
          ),
          'Assessor' => array
@@ -34,19 +34,19 @@ array
          ),
          'Coordinator' => array
          (
-            "Submission" => 1,
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
             "Assessments" => 1,
+            "Details" => 1,
             "GenCert" => 1,
          ),
          'Admin' => array
          (
-            "Submission" => 1,
             'Edit' => 1,
             'Copy' => 1,
             'Delete' => 1,
+            "Details" => 1,
             "GenCert" => 1,
          ),
       ),
@@ -96,22 +96,10 @@ array
          ),
          'Coordinator' => array
          (
-            "Event" => 1,
-            "Areas" => 1,
-            "Criterias" => 1,
-            "Assessors" => 1,
-            "Times" => 1,
-            "Rooms" => 1,
             "Schedule" => 1,
          ),
          'Admin' => array
          (
-            "Event" => 1,
-            "Areas" => 1,
-            "Criterias" => 1,
-            "Assessors" => 1,
-            "Times" => 1,
-            "Rooms" => 1,
             "Schedule" => 1,
          ),
       ),

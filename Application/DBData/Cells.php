@@ -72,7 +72,6 @@ class DBDataCells extends DBDataPertains
                 {
                     $type=$this->DBDataObj()->Sql_Table_Column_Type($item[ "SqlKey" ]);
 
-
                     $sqldef=strtolower($item[ "SqlDef" ]);
                     $sqldef=preg_replace('/\)/',"\)",preg_replace('/\(/',"\(",$sqldef));
 
@@ -80,7 +79,7 @@ class DBDataCells extends DBDataPertains
                     
                     if ($item[ "SqlDef" ]=="FILE")
                     {
-                        if (preg_match('/^VARCHAR\(\d+\)$/i',$type))
+                        if (preg_match('/^VARCHAR\(\d+\)\(\d+\)$/i',$type))
                         {
                             $value.=
                                 "<BR>".

@@ -198,7 +198,8 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
-      "AccessMethod" => "Inscriptions_Certificates_May",
+      //"AccessMethod" => "Inscriptions_Certificates_May",
+      "AccessMethod" => "CheckCertAccess",
       "TabIndex"  => 3,
    ),
    "TimeLoad" => array
@@ -218,7 +219,8 @@ array
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
-      "AccessMethod" => "Inscriptions_Certificates_May",
+      //"AccessMethod" => "Inscriptions_Certificates_May",
+      "AccessMethod" => "CheckCertAccess",
       "TabIndex"  => 5,
    ),
    "Code" => array
@@ -233,11 +235,12 @@ array
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 1,
-      "Friend" => 1,
+      "Friend" => 0,
       "Coordinator" => 1,
       
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
-      "AccessMethod" => "Inscriptions_Certificates_May",
+      //"AccessMethod" => "Inscriptions_Certificates_May",
+      "AccessMethod" => "CheckCertAccess",
    ),
 );

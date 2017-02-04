@@ -173,10 +173,10 @@ class Rooms extends RoomsAccess
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->PlacesObj()->ItemExistenceMessage("Places");
+        $res=$this->PlacesObj()->Item_Existence_Message("Places");
         if ($res)
         {
-            $res=$this->ItemExistenceMessage();
+            $res=$this->Item_Existence_Message();
         }
         
         return $res;

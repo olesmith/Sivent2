@@ -172,6 +172,25 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
+   "Code" => array
+   (
+      "Name" => "Código",
+      "Title" => "Código do Certificado",
+      "Name_UK" => "Code",
+      "Title_UK" => "Certificate Code",
+
+      "Size" => "50",
+      "Sql" => "VARCHAR(64)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend" => 1,
+      "Coordinator" => 1,
+      
+      "Search"  => TRUE,
+      "Compulsory"  => FALSE,
+      "AccessMethod" => "Inscriptions_Certificates_May",
+   ),
    "Certificate_CH" => array
    (
       "Name" => "Certificado CH",

@@ -228,10 +228,10 @@ class Places extends PlacesAccess
 
     function PostInterfaceMenu($args=array())
     {
-        $res=$this->ItemExistenceMessage();
+        $res=$this->Item_Existence_Message();
         if ($res)
         {
-            $res=$this->RoomsObj()->ItemExistenceMessage("Rooms");
+            $res=$this->RoomsObj()->Item_Existence_Message("Rooms");
         }
 
         return $res;

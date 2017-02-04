@@ -6,9 +6,11 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
     (
        "Event"           => 1,
        "Inscriptions"    => 2,
+       "Certificates"    => 2,
        "Collaborations"  => 3,
        "Caravans"        => 4,
        "Submissions"     => 5,
+       "Assessments"     => 5,
        "PreInscriptions" => 6,
        "Presences"       => 7,
     );

@@ -18,6 +18,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Single" => FALSE,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
     ),
     "Components" => array
     (
@@ -35,6 +36,7 @@ array
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
+       "EditAccessMethod" => "Current_User_Event_May_Edit",
        //"GenTableMethod" => "Event_Collaborations_Table",
     ),
     "Collaborations" => array
@@ -53,6 +55,7 @@ array
        "Coordinator" => 1,
        "AccessMethod" => "Event_Collaborations_Has",
        "SubAction" => "Collaborations",
+       "EditAccessMethod" => "Current_User_Event_Collaborations_May_Edit",
     ),
     "Caravans" => array
     (
@@ -62,7 +65,7 @@ array
        (
         "Caravans","Caravans_StartDate","Caravans_EndDate",
         "Caravans_Min","Caravans_Max",
-        "Caravans_Timeload",
+        "Caravans_Coord_Timeload","Caravans_Timeload",
        ),
 
        "Person" => 1,
@@ -73,6 +76,7 @@ array
        "GenTableMethod" => "Event_Caravans_Table_Html",
        "AccessMethod" => "Event_Caravans_Has",
        "SubAction" => "Caravans",
+       "EditAccessMethod" => "Current_User_Event_Caravans_May_Edit",
     ),
     "Submissions" => array
     (
@@ -93,6 +97,7 @@ array
        "GenTableMethod" => "Event_Submissions_Table",
        "AccessMethod" => "Event_Submissions_Has",
        "SubAction" => "Submissions",
+       "EditAccessMethod" => "Current_User_Event_Submissions_May_Edit",
     ),
     "PreInscriptions" => array
     (
@@ -111,6 +116,7 @@ array
        //"GenTableMethod" => "Event_Submissions_Table",
        "AccessMethod" => "Event_PreInscriptions_Has",
        "SubAction" => "PreInscriptions",
+       "EditAccessMethod" => "Current_User_Event_PreInscriptions_May_Edit",
     ),
     "Certificates" => array
     (
@@ -118,7 +124,7 @@ array
        "Name_UK" => "Certificates",
        "Data" => array
        (
-          "Certificates","Certificates_Published","Certificates_CH","Certificates_Watermark",
+          "Certificates","Certificates_Published","TimeLoad","Certificates_Watermark",
           "GenCert",
           "Certificates_Latex_Sep_Vertical",
           "Certificates_Latex_Sep_Horisontal",
@@ -131,6 +137,7 @@ array
        "Coordinator" => 1,
        "GenTableMethod" => "Event_Certificate_Table",
        "SubAction" => "Certificates",
+       "EditAccessMethod" => "Current_User_Event_Inscriptions_May_Edit",
     ),
     "Certificate_Signatures" => array
     (
@@ -150,6 +157,7 @@ array
        "Coordinator" => 1,
        "AccessMethod" => "Event_Certificates_Has",
        "SubAction" => "Certificates",
+       "EditAccessMethod" => "Current_User_Event_Inscriptions_May_Edit",
     ),
     "Certificate_Latex" => array
     (
@@ -157,7 +165,7 @@ array
        "Name_UK" => "Certificates, Participant",
        "Data" => array
        (
-          "Certificates_Latex","Certificates_Latex_UK"
+           "Certificates_Latex",//"Certificates_Latex_UK"
         ),
 
        "Person" => 0,
@@ -168,6 +176,7 @@ array
        "Single" => 1,
        "AccessMethod" => "Event_Certificates_Has",
        "SubAction" => "Certificates",
+       "EditAccessMethod" => "Current_User_Event_Inscriptions_May_Edit",
     ),
     "Submissions_Latex" => array
     (
@@ -188,6 +197,7 @@ array
        "Single" => 1,
        "AccessMethod" => array("Event_Submissions_Has","Event_Certificates_Has"),
        "SubAction" => "Submissions",
+       "EditAccessMethod" => "Current_User_Event_Submissions_May_Edit",
     ),
     "Collaborators_Latex" => array
     (
@@ -207,15 +217,16 @@ array
        "Single" => 1,
        "AccessMethod" => array("Event_Collaborations_Has","Event_Certificates_Has"),
        "SubAction" => "Collaborations",
-    ),
+       "EditAccessMethod" => "Current_User_Event_Collaborations_May_Edit",
+   ),
     "Caravaneers_Latex" => array
     (
        "Name" => "Caravaneiros, Certificados",
        "Name_UK" => "Caravaneers, Certificates",
        "Data" => array
        (
-          "Certificates_Caravaneers_Latex",
-          "Certificates_Caravaneers_Latex_UK",         
+          "Certificates_Caravans_Latex",
+          "Certificates_Caravaneers_Latex",         
         ),
 
        "Person" => 0,
@@ -226,6 +237,7 @@ array
        "Single" => 1,
        "AccessMethod" => array("Event_Caravans_Has","Event_Certificates_Has"),
        "SubAction" => "Caravans",
+       "EditAccessMethod" => "Current_User_Event_Caravans_May_Edit",
     ),
     "Assessments" => array
     (
@@ -243,5 +255,6 @@ array
        "Coordinator" => 1,
        "SubAction" => "Assessments",
        "AccessMethod" => "Event_Assessments_Has",
+       "EditAccessMethod" => "Current_User_Event_Submissions_May_Edit",
     ),
 );

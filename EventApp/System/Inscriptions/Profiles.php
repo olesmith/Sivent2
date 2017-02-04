@@ -57,6 +57,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Zip" => 1,
+            "Receits" => 1,
          ),
          'Admin' => array
          (
@@ -65,6 +66,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Zip" => 1,
+            "Receits" => 1,
          ),
       ),
       'SingularPlural' => array

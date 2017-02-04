@@ -4,10 +4,12 @@ include_once("MyInscriptions/Access.php");
 include_once("MyInscriptions/Zip.php");
 include_once("MyInscriptions/Quest.php");
 include_once("MyInscriptions/Inscription.php");
+include_once("MyInscriptions/Receit.php");
 include_once("MyInscriptions/Handle.php");
 include_once("MyInscriptions/Add.php");
+include_once("MyInscriptions/Certificate.php");
 
-class MyInscriptions extends MyInscriptions_Add
+class MyInscriptions extends MyInscriptions_Certificate
 {
     var $InscriptionEventTableSGroups=
         array

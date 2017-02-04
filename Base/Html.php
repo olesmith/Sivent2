@@ -15,7 +15,7 @@ include_once("Html/Form.php");
 
 class Html extends HtmlForm
 {
-    var $URL;
+    #var $URL;
     var $LatexMode=FALSE;
     var $HiddenVars=array();
     var $IconsPath="icons";

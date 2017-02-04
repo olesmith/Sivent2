@@ -40,7 +40,7 @@ class Caravaneers extends Caravaneers_Certificate
     function Caravaneers($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","Email","TimeLoad","Registration","Certificate","Certificate_CH");
+        $this->AlwaysReadData=array("Unit","Event","Name","Email","TimeLoad","Registration","Certificate","Certificate_CH");
         $this->Sort=array("Name");
     }
 

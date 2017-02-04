@@ -28,7 +28,7 @@ class Sivent2 extends App_Override
     (
        1 => array
        (
-          "Title" => "Questinário",
+          "Title" => "Questionário",
           "Title_UK" => "Questionary",
           
           "Object_Accessor" => "InscriptionsObj",

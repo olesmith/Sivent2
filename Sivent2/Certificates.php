@@ -25,11 +25,11 @@ class Certificates extends Certificates_Handle
             "Inscription",
             "Submission",//"Assessor",
             "Collaborator","Collaboration",
-            "Caravaneer",//"Caravan",
+            "Caravaneer","Caravan",
         );
     
     
-    var $Certificate_NTypes=4;
+    var $Certificate_NTypes=5;
     var $Certificate_Data=
         array
         (
@@ -84,6 +84,7 @@ class Certificates extends Certificates_Handle
            2 => "Caravaneer",
            3 => "Collaborator",
            4 => "Submission",
+           5 => "Caravan",
         );
         
         $key="";
@@ -106,6 +107,7 @@ class Certificates extends Certificates_Handle
                 2 => "Name",
                 3 => "Name",
                 4 => "Title",
+                4 => "Name",
             );
         
         $key="";
@@ -128,6 +130,7 @@ class Certificates extends Certificates_Handle
                 2 => "TimeLoad",
                 3 => "TimeLoad",
                 4 => "Certificate_TimeLoad",
+                5 => "Certificate_CH",
             );
         
         $key="";
@@ -150,6 +153,7 @@ class Certificates extends Certificates_Handle
            2 => "Certificates_Caravaneers_Latex",
            3 => "Certificates_Collaborations_Latex",
            4 => "Certificates_Submissions_Latex",
+           5 => "Certificates_Caravans_Latex",
         );
         
         $key="";

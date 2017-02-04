@@ -327,6 +327,18 @@ class ModulesCommon extends EventMod
     }
 
     //*
+    //* sub Current_User_Event_Type_May_Edit, Parameter list: $type,$event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to module.
+    //*
+    //*
+
+    function Current_User_Event_Type_May_Edit($type,$event=array())
+    {
+        return $this->ApplicationObj()->Current_User_Event_Type_May_Edit($type,$event);
+    }
+
+    //*
     //* sub Current_User_Event_May_Access, Parameter list: $event=array()
     //*
     //* Checks whether coordinator (current login) has access to module.
@@ -361,6 +373,7 @@ class ModulesCommon extends EventMod
         {
             $res=$this->EventsObj()->Event_Certificates_Published();
         }
+
             
         return $res;
     }
@@ -511,68 +524,17 @@ class ModulesCommon extends EventMod
     }
 
     //*
-    //* function ItemExistenceMessage, Parameter list: $message,$where=array()
+    //* function Item_Existence_Message, Parameter list: $message,$where=array()
     //*
     //* Prints informing $message, if no item exists in sql table.
     //* Default $where=$this->UnitEventWhere().
     //*
 
-    function ItemExistenceMessage($othermodule="",$where=array())
+    function Item_Existence_Message($othermodule="",$where=array())
     {
-        if (!preg_match('/^(Coordinator|Admin)$/',$this->Profile())) return;
-            
         if (empty($where)) $where=$this->UnitEventWhere();
 
-        $obj=$this;
-        if (empty($othermodule))
-        {
-            $othermodule=$this->ModuleName;
-            $obj=$this;
-        }
-
-        $message="No_Items_Defined_Message";
-        $message=$this->MyLanguage_GetMessage("No_Items_Defined_Message");
-
-        $message=preg_replace('/#ItemName/',$obj->MyMod_ItemName(),$message);
-        $message=preg_replace('/#ItemsName/',$obj->MyMod_ItemName("ItemsName"),$message);
-
-
-        if (
-              !$this->Sql_Table_Exists()
-              ||
-              $this->Sql_Select_NHashes($this->UnitEventWhere())==0
-           )
-        {
-            echo
-                $this->Div
-                (
-                   $message.
-                   ": ".
-                   $this->Href
-                   (
-                      "?".$this->CGI_Hash2URI
-                      (
-                         array
-                         (
-                            "Unit" => $this->Unit("ID"),
-                            "Event" => $this->Event("ID"),
-                            "ModuleName" => $othermodule,
-                            "Action" => "Add",
-                         )                         
-                      ),
-                      $this->MyLanguage_GetMessage("Add_Action_Name").
-                      " ".
-                      $obj->MyMod_ItemName(),
-                      "","","",$noqueryargs=FALSE,$options=array(),"HorMenu"
-                   ),
-                   array("CLASS" => 'warning')
-                ).
-                $this->BR();
-
-            return FALSE;
-        }
-
-        return TRUE;
+        return parent::Item_Existence_Message($othermodule,$where);
     }
 
     //*

@@ -88,7 +88,7 @@ array
       "Icon"   => "print_dark.png",
       "Public"   => 0,
       "Person"   => 0,
-      "Friend"     => 0,
+      "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
@@ -96,9 +96,9 @@ array
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Caravans&Action=Search&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Caravans",
+        "Title"    => "Gerenciar Caravanas",
         "Title_UK" => "Manage Caravans",
-        "Name"     => "Caravans",
+        "Name"     => "Caravanas",
         "Name_UK"     => "Caravans",
 
         "Public"   => 0,
@@ -109,4 +109,23 @@ array
         "Advisor"    => 0,
         //'AccessMethod'    => "Current_User_Event_Caravans_May_Edit",
       ),
+   "GenCerts" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravaneers&Action=GenCerts&Latex=1",
+
+      "Title"    => "Gerar Certificados dos Caravaneiros",
+      "Title_UK" => "Generate Caravaneer Certificates",
+      "Name"     => "Certificados dos  Caravaneiros",
+      "Name_UK"   => "Caravaneer Certificates",
+       
+      "Handler"   => "Caravaneers_Handle_Certificates_Generate",
+
+      "Icon"   => "print_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
 );

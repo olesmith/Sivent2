@@ -68,8 +68,6 @@ class Assessors_Submission extends Assessors_Inscription
        
         if (!empty($updatedatas))
         {
-             var_dump($updatedatas);
-       
              $this->AssessorsObj()->Sql_Update_Item_Values_Set
              (
                  $updatedatas,
@@ -198,12 +196,6 @@ class Assessors_Submission extends Assessors_Inscription
     {
         $ncriterias=1.0*$this->Criterias_N();
         if (empty($ncriterias)) { return "-"; }
-        
-        /* $sum=0.0; */
-        /* foreach ($this->Criterias() as $cid => $criteria) */
-        /* { */
-        /*     $sum+=$this->Assessors_Submission_Criteria_Media_Calc($assessors,$submission,$criteria,$weighted); */
-        /* } */
 
         $sum=0.0;
         $n=0;
@@ -216,7 +208,11 @@ class Assessors_Submission extends Assessors_Inscription
             }
         }
 
-        $media=$sum/$n;
+        $media=$sum;
+        if ($n>0)
+        {
+            $media=$sum/(1.0*$n);
+        }
 
         return sprintf("%.1f",$media);
      }
@@ -261,8 +257,6 @@ class Assessors_Submission extends Assessors_Inscription
             {
                 $resultsum+=$assessor[ "Result" ];
                 $result=$this->B(sprintf("%.1f",$assessor[ "Result" ]));
-                var_dump($assessor[ "Result" ]);
-                var_dump($resultsum);
             }
             
             array_push

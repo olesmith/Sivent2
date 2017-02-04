@@ -7,7 +7,7 @@ array
 
       "Data" => array
       (
-         "Initials","Name","Title","Name_UK","Title_UK",
+          "Initials","Name","Title","Initials","Name_UK","Title_UK",
       ),
       "Admin" => 1,
       "Person" => 0,

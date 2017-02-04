@@ -59,7 +59,6 @@ class MyCertificates_Verify extends MyCertificates_Code
     function Certificate_TimeLoad_Update(&$cert)
     {
         $timeloadkey=$this->Type2TimeloadKey($cert);
-
         $key=$this->Type2Key($cert);
 
         if (empty($cert[ $key."_Hash" ]))

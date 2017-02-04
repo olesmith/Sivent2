@@ -8,8 +8,9 @@ array
       (
           "Unit","Event",
           "Friend","Name","City","Status",
-         "Homologated","NParticipants",
-         "Certificate","Certificate_CH",
+          "Homologated","NParticipants",
+          "Code",
+          "Certificate","Certificate_CH","GenCert",
       ),
       "Admin" => 1,
       "Person" => 0,

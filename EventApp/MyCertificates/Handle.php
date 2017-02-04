@@ -36,7 +36,7 @@ class MyCertificates_Handle extends MyCertificates_Generate
 
     function Certificates_Generate_Handle($where,$latexname)
     {
-        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);            
+        $certs=$this->CertificatesObj()->Sql_Select_Hashes($where);
 
         $latex=$this->CertificatesObj()->Certificates_Generate($certs);
 

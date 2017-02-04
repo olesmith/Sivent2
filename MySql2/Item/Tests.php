@@ -214,6 +214,11 @@ class ItemTests extends ItemTestsItem
         }
         elseif ($this->ItemData[ $data ][ "Sql" ]=="REAL")
         {
+            if (!isset($_POST[ $rdata ]))
+            {
+                return $oldvalue;
+            }
+            
             $newvalue=$this->GetPOST($rdata);
             $newvalue=preg_replace('/,/',".",$newvalue);
         }
@@ -251,11 +256,11 @@ class ItemTests extends ItemTestsItem
             {
                 $newvalue=$oldvalue;
                 
-               $msg=
+                $msg=
                     $this->GetItemName($item)." ".
                     $data.": ".$newvalue."': ".
                     $this->GetMessage($this->ItemDataMessages,"DataNotUniqued");
-               $this->ApplicationObj()->AddHtmlStatusMessage($msg);
+                $this->ApplicationObj()->AddHtmlStatusMessage($msg);
                 
                 $item[ $data."_Message" ]=$msg;
             }

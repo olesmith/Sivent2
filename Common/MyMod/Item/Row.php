@@ -85,7 +85,7 @@ trait MyMod_Item_Row
                     array_push
                     (
                        $row,
-                       $this->MyActions_Entry_Title($data),
+                       $this->MyActions_Entry_Title($data).":",
                        $this->MyActions_Entry($data,$item)
                     );
                 }

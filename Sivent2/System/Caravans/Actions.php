@@ -128,4 +128,42 @@ array
         "Coordinator" => 1,
         "AccessMethod" => "CheckEditListAccess",
     ),
+   "GenCert" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravans&Action=GenCert&Latex=1&ID=#ID",
+      "Title"    => "Gerar Certificado",
+      "Title_UK" => "Generate Certificate",
+      "Name"     => "Certificado(s)",
+      "Name_UK"   => "Certificado(s)",
+      
+      "Handler"   => "Caravan_Handle_Certificate_Generate",
+      "AccessMethod"  => "CheckCertAccess",
+
+      "Icon"   => "print_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
+   "GenCerts" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravans&Action=GenCerts&Latex=1",
+
+      "Title"    => "Gerar Certificados dos Caravanas",
+      "Title_UK" => "Generate Caravan Certificates",
+      "Name"     => "Certificados dos  Caravanas",
+      "Name_UK"   => "Caravan Certificates",
+       
+      "Handler"   => "Caravans_Handle_Certificates_Generate",
+
+      "Icon"   => "print_dark.png",
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+   ),
 );

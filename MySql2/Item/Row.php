@@ -116,7 +116,7 @@ class ItemRow extends ItemEdits
                 $value=$this->MyMod_Data_Fields($edit,$item,$data,$plural,"",$rdata);
             }
 
-            if (isset($item[ $data."_Message" ]) && $item[ $data."_Message" ]!="" && $this->LoginType!="Public")
+            if (!$this->LatexMode() && isset($item[ $data."_Message" ]) && $item[ $data."_Message" ]!="" && $this->LoginType!="Public")
             {
                 $value.="<FONT CLASS='errors'>".$item[ $data."_Message" ]."</FONT>";
             }
@@ -155,7 +155,8 @@ class ItemRow extends ItemEdits
                $this->DecorateDataTitle
                (
                   $this->ItemTableRowCellName($edit,$data),
-                  $this->ItemTableRowCellTitle($edit,$data)
+                  $this->ItemTableRowCellTitle($edit,$data),
+                  TRUE
                ).
                $add,
                

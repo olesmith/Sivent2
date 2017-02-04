@@ -34,7 +34,7 @@ array
        "Data" => array
        (
           "No","Edit","Copy",
-          //"Delete",
+          "Delete",
           "GenCert","MailCert","Assessments",
           "Name","Status",
           "Title","Title_UK","Selected",

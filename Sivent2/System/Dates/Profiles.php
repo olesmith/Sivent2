@@ -82,21 +82,11 @@ array
          ),
          'Coordinator' => array
          (
-            "Event" => 1,
-            "Submissions" => 1,
             "Times" => 1,
-            "Places" => 1,
-            "Rooms" => 1,
-            "Schedule" => 1,
           ),
          'Admin' => array
          (
-            "Event" => 1,
-            "Submissions" => 1,
             "Times" => 1,
-            "Places" => 1,
-            "Rooms" => 1,
-            "Schedule" => 1,
           ),
       ),
       'ActionsPlural' => array

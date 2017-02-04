@@ -15,6 +15,11 @@ trait MyMod_Data_Fields_File_Decorator
 
     function MyMod_Data_Fields_File_Decorator($data,$item,$plural=FALSE,$edit=0)
     {
+        if ($this->LatexMode())
+        {
+            return $this->MyMod_Data_Fields_File_Decorator_Latex($data,$item,$plural,$edit);
+        }
+        
         $value="";
         if (isset($item[ $data ])) { $value=$item[ $data ]; }
 
@@ -64,6 +69,7 @@ trait MyMod_Data_Fields_File_Decorator
         elseif (!empty($item[ "ID" ]))
         {
             //Try to correct if appears as uploaded...
+            //Should be deprecated!
             $val=strlen($this->Sql_Select_Hash_Value($item[ "ID" ],$data."_Contents"));
 
             if ($val>0)
@@ -84,17 +90,58 @@ trait MyMod_Data_Fields_File_Decorator
             }
         }
 
+        if ($edit==1)
+        {
+            $rvalue.=
+                " ".
+                $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data).
+                "";
+        }
+
         return
             $rvalue.
-            " ".
-            $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data).
             " ".
             $this->MyMod_Data_Fields_File_Decorator_Unlink_Link($edit,$item,$data,$value).
             "\n";
     }
     
     
+    //*
+    //* Create file field decorator, being a link to download the file
+    //*
 
+    function MyMod_Data_Fields_File_Decorator_Latex($data,$item,$plural=FALSE)
+    {
+        $rvalue="-";
+        if (!empty($item[ $data ]))
+        {
+            $value=$item[ $data ];
+            $origname=$this->Sql_Select_Hash_Value($item[ "ID" ],$data."_OrigName","ID");
+
+            
+            $rvalue=$value;
+            if (!empty($origname))
+            {
+                $destfile=$this->MyMod_Data_Upload_FileName_Get($data,$item,"pdf");
+
+                $filetime="-";
+                $filesize="-";
+                if (file_exists($destfile))
+                {
+                    $filetime=$this->TimeStamp2Text(filemtime($destfile));
+                    $filesize=filesize($destfile);
+                }
+                
+                $rvalue=
+                    basename($origname).": ".
+                    $filetime." (".$filesize." bytes)";
+            }            
+        }
+        
+        return $rvalue;
+    }
+
+    
     //* FileFieldSizeInfo
     //* 
     //*

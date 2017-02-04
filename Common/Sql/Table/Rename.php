@@ -5,8 +5,7 @@ trait Sql_Table_Rename
     //*
     //* function Sql_Table_Rename_Query, Parameter list: $oldname,$newname
     //*
-    //* Returns listwith the names of the Tables in current database.
-    //* If $regexp given, applies it to list returned.
+    //* Generates table rename query.
     //* 
     //* 
 
@@ -22,8 +21,7 @@ trait Sql_Table_Rename
     //*
     //* function Sql_Table_Rename, Parameter list: $oldname,$newname
     //*
-    //* Returns listwith the names of the Tables in current database.
-    //* If $regexp given, applies it to list returned.
+    //* Tries to rename $oldtable to $newtable.
     //* 
     //* 
 

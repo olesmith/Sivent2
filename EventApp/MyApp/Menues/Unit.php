@@ -1,6 +1,6 @@
 <?php
 
-class MyEventApp_Menues_Unit extends MyEventApp_Access
+class MyEventApp_Menues_Unit extends MyEventApp_Overrides
 {
     //*
     //* function  MyEvent_App_Menues_Unit_Paths, Parameter list: 

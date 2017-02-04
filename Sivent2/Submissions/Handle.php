@@ -12,13 +12,17 @@ class Submissions_Handle extends Submissions_Handle_Assessments
 
     function MyMod_Handle_Show_Assessors($submission)
     {
+        if (!preg_match('/(Coordinator|Admin)/',$this->Profile()))
+        {
+            return "";
+        }
         $this->AssessorsObj()->ItemData("ID");
         $this->AssessorsObj()->ItemDataGroups("Assessments");
         $this->AssessorsObj()->Actions("Show");
 
         $datas=$this->AssessorsObj()->GetGroupDatas("Assessments");
         
-        return
+        return 
             $this->Html_Table
             (
                 $this->AssessorsObj()->GetDataTitles($datas),
@@ -83,8 +87,8 @@ class Submissions_Handle extends Submissions_Handle_Assessments
             (
                $this->Span
                (
-                  $this->GetRealNameKey($submission,"Name").": ",
-                  array("CLASS" => "submissionkey")
+                   $this->GetRealNameKey($submission,"Name"),
+                   array("CLASS" => "submissionkey")
                ).
                $this->GetRealNameKey($submission,"Title"),
                array("CLASS" => "submissiontitle")
@@ -98,7 +102,7 @@ class Submissions_Handle extends Submissions_Handle_Assessments
             $this->BR().
             $this->Div
             (
-                join(";".$this->BR(),$this->Submission_Authors_Info($submission)),
+                join(";".$this->BR(),$this->Submission_Authors($submission)),
                 array("CLASS" => "submissionauthors")
             ).
             $this->BR().
@@ -114,8 +118,15 @@ class Submissions_Handle extends Submissions_Handle_Assessments
                   array("CLASS" => 'submissioninfotable')
                ).
                $this->HR().
-               $this->Submission_Schedules($submission)
-            ).
+               $this->Submission_Schedules($submission).
+               $this->BR().
+               $this->Div
+               (
+                   $this->H(4,$this->MyLanguage_GetMessage("Submissions_Authors_Details_Title")).
+                   $this->Submission_Authors_Info_Tables($submission),
+                   array("CLASS" => "submissionauthors")
+               )
+           ).
             "";
 
         echo $this->FrameIt($text,array("WIDTH" => '80%'));

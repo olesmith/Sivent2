@@ -7,7 +7,7 @@ array
       "Data" => array
       (
          "Status","Online",
-         "Initials","Name","Title",
+         "Initials","Name","Title","Initials",
          "Sivent2URL",
       ),
       "Admin" => 1,

@@ -29,6 +29,44 @@ trait MyApp_Setup_Read
     }
 
     //*
+    //* function MyApp_Setup_Globals_File, Parameter list: 
+    //*
+    //* Returns App global data file name.
+    //*
+
+    function MyApp_Setup_Globals_File()
+    {
+        return $this->MyApp_Setup_FileName("Globals.php");
+    }
+
+    //*
+    //* function MyApp_Setup_Globals_Read, Parameter list: 
+    //*
+    //* Returns App global data file name.
+    //*
+
+    function MyApp_Setup_Globals_Read()
+    {
+        return $this->ReadPHPArray
+        (
+           $this->MyApp_Setup_Globals_File()
+        );
+    }
+
+    //*
+    //* function MyApp_Setup_Globals_Load, Parameter list: 
+    //*
+    //* Returns App global data file name.
+    //*
+
+    function MyApp_Setup_Globals_Load()
+    {
+        $hash=$this->MyApp_Setup_Globals_Read();
+        $this->MyHash_Args2Object($hash);
+    }
+
+    
+    //*
     //* function MyApp_Setup_Read, Parameter list: 
     //*
     //* Returns App global data.
@@ -36,12 +74,8 @@ trait MyApp_Setup_Read
 
     function MyApp_Setup_Read()
     {
-        $hash=$this->ReadPHPArray
-        (
-           $this->MyApp_Setup_FileName("Globals.php")
-        );
+        $this->MyApp_Setup_Globals_Load();
 
-        $this->MyHash_Args2Object($hash);
         $this->MyApp_Setup_LoadFile("Html.php","HtmlSetupHash");
         $this->MyApp_Setup_LoadFile("Company.php","CompanyHash");
     }

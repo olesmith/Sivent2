@@ -5,14 +5,14 @@ array_push($ClassList,"Cookies");
 
 class Cookies extends Latex
 {
-    var $URL;
-    var $ConstantCookieVars=array("SID","Profile");
-    var $CookieVars=array();
-    var $CookieValues=array();
-    var $CookieTTL=3600;
-    var $CookiesWritten=0;
-    var $CookiesSet=array();
-    var $CookieLog=array();
+    #var $URL;
+    #var $ConstantCookieVars=array("SID","Profile");
+    #var $CookieVars=array();
+    #var $CookieValues=array();
+    #var $CookieTTL=3600;
+    #var $CookiesWritten=0;
+    #var $CookiesSet=array();
+    #var $CookieLog=array();
 
     //*
     //* function AddCookieVar, Parameter list: $var,$value=""

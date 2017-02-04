@@ -44,7 +44,7 @@ trait MyApp_Handle
         {
             $this->ApplicationCheckAccess();
         }
-        
+
         //Try to handle module $action if given
         $res=FALSE;
         if (!empty($this->ModuleName))
@@ -94,14 +94,14 @@ trait MyApp_Handle
 
     function MyApp_Handle_TryModule($action)
     {
-        //Test Module access
-         $res=$this->MyApp_Module_Access_Has($this->ModuleName);
-
-        if (!$res) { return FALSE; }
-        
         //Load module
         $this->MyApp_Module_Load($this->ModuleName);
+        
+        //Test Module access
+        $res=$this->MyApp_Module_Access_Has($this->ModuleName);
 
+        if (!$res) { return FALSE; }
+ 
         //Handle module
         $this->ExecMTime=time();
         if ($this->Module)
@@ -135,7 +135,6 @@ trait MyApp_Handle
             $this->Module->Handle=TRUE; //bug - SetCookieVars changes Handle??
             $this->Module->AddSearchVars2Cookies();
             $this->Module->SetCookieVars();
-            
             $this->Module->MyMod_Handle();
         }
 
