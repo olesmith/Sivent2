@@ -275,8 +275,6 @@ class MyEvents extends MyEvents_Handle
         
         $updatedatas=array();
         if (
-            //isset($item[ "Status" ])
-            // &&
               !empty($item[ "StartDate" ])
               &&
               !empty($item[ "EndDate" ])
@@ -376,17 +374,31 @@ class MyEvents extends MyEvents_Handle
 
     
     //*
+    //* function Event_DateSpan, Parameter list: $edit
+    //*
+    //* Returns event dates span cell.
+    //*
+
+    function Event_DateSpan($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return $this->Date_Span_Interval($event,"EventStart","EventEnd");
+    }
+    
+    //*
     //* function Event_Inscriptions_DateSpan, Parameter list: $edit
     //*
-    //* Returns date span title.
+    //* Returns event inscriptions date span cell.
     //*
 
     function Event_Inscriptions_DateSpan($event=array())
     {
         if (empty($event)) { $event=$this->Event(); }
         
-        return $this->Date_Span_Interval($event,"EventStart","EventEnd");
+        return $this->Date_Span_Interval($event,"StartDate","EndDate");
     }
+    
     
     
     //*

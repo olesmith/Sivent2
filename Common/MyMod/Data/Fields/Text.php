@@ -50,7 +50,17 @@ trait MyMod_Data_Fields_Text
 
     function MyMod_Data_Fields_Text_Show($data,$item,$value="",$options=array())
     {
-        $value=preg_replace('/\n/',$this->BR(),$value);
+        if (empty($value) && isset($item[ $data ]))
+        {
+            $value=$item[ $data ];
+        }
+        
+        if (empty($options[ "NoBR" ]))
+        {
+            $value=preg_replace('/\n/',$this->BR(),$value);
+        }
+        
+        //Remove leading and trailing white space
         $value=preg_replace('/^\s+/',"",$value);
         $value=preg_replace('/\s+$/',"",$value);
 

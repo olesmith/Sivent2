@@ -50,7 +50,7 @@ trait MyMod_Item_Table
                   $this->MultiCell
                   (
                      $this->ItemAnchor($item).
-                     $this->H(5,$this->GetItemName($item)),
+                     $this->H(5,$this->MyMod_Item_Name_Get($item)),
                      $ncols
                   )
                )

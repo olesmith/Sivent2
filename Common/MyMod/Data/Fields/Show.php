@@ -105,19 +105,19 @@ trait MyMod_Data_Fields_Show
             $value=$this->MyMod_Data_Fields_Text_Show($data,$item,$value);
             $value=html_entity_decode($value);
         }
-        elseif (
-                  $this->ItemData[ $data ][ "Sql" ]=="TEXT"
-                  ||
-                  (
-                     !empty($this->ItemData[ $data ][ "Size" ])
-                     &&
-                     preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
-                  )
-               )
-        {
-            $value=$this->MyMod_Data_Field_Show_Text($data,$value);
-            $value=preg_replace('/\n/',"<BR>",$value);
-        }
+        /* elseif ( */
+        /*           $this->ItemData[ $data ][ "Sql" ]=="TEXT" */
+        /*           || */
+        /*           ( */
+        /*              !empty($this->ItemData[ $data ][ "Size" ]) */
+        /*              && */
+        /*              preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ]) */
+        /*           ) */
+        /*        ) */
+        /* { */
+        /*     $value=$this->MyMod_Data_Field_Show_Text($data,$value); */
+        /*     $value=preg_replace('/\n/',"<BR>",$value); */
+        /* } */
         elseif (preg_match('/^FILE$/',$this->ItemData[ $data ][ "Sql" ]))
         {
             $value="";
@@ -301,7 +301,7 @@ trait MyMod_Data_Fields_Show
         
         if (!$plural)
         {
-            $value.=$this->FieldComment($data);
+            $value.=$this->MyMod_Data_Field_Comment($data,0);
         }
 
         if (preg_match('/^0\s?$/',$value)) { $value=""; }

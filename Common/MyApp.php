@@ -40,6 +40,7 @@ trait MyApp
 
     var $Tables=array();
     var $TablesColumns=array();
+    var $ItemHash=array();
     
     var $MyApp_URL="";
     var $MyApp_Latex_Filters=array();

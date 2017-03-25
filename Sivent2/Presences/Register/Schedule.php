@@ -88,15 +88,15 @@ class Presences_Register_Schedule extends Presences_Access
         $where=array("ID" => $submissionids);
         $where=$this->UnitEventWhere($where);
 
-        $datas=array("ID","Name","Title","Author1");
+        $datas=array("ID","Name","Title","Author");
         
-        $submissions=$this->SubmissionsObj()->Sql_Select_Hashes_ByID($where,$datas,"ID","Name,Title,Author1","ID");
+        $submissions=$this->SubmissionsObj()->Sql_Select_Hashes_ByID($where,$datas,"ID","Name,Title,Author","ID");
         foreach (array_keys($submissions) as $sid)
         {
             $submissions[ $sid ][ "Name" ]=
                 $this->FilterHash("#Name: #Title",$submissions[ $sid ]);
             $submissions[ $sid ][ "Title" ]=
-                $this->FilterHash("#Name: #Author1",$submissions[ $sid ]);
+                $this->FilterHash("#Name: #Author",$submissions[ $sid ]);
 
             $scheduleids=$this->SchedulesObj()->Sql_Select_Unique_Col_Values("ID",array("ID" => $submissions[ $sid ][ "ID" ]));
             $scheduleid=array_shift($scheduleids);

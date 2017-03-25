@@ -31,59 +31,26 @@ array
       "Person" => "0",
       "Public" => "1",
    ),
-   /* "032_Assessments" => array */
-   /* ( */
-   /*    "AccessMethod" => "Friend_Assessors_Has", */
-   /*    "Admin" => "1", */
-   /*    "Coordinator" => "1", */
-   /*    "Friend" => "1", */
-   /*    "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Inscription&Event=#Event", */
-   /*    "Name" => "Minhas Avaliações", */
-   /*    "Name_ES" => "Mi Avaliaciones", */
-   /*    "Name_UK" => "My Asessments", */
-   /*    "Person" => "0", */
-   /*    "Public" => "0", */
-   /* ), */
-   "04_Inscriptions" => array
+   "03_Inscriptions" => array
    (
       "AccessMethod" => "Coordinator_Inscriptions_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=Search&Event=#Event",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=EditList&Event=#Event",
       "Name" => "Inscrições",
-      "Name_ES" => "Inscriciónes",
+      "Name_ES" => "Inscriciones",
       "Name_UK" => "Inscriptions",
       "Person" => "0",
       "Public" => "0",
       "ShortName" => "Inscrições",
-      "ShortName_ES" => "Inscriciónes",
+      "ShortName_ES" => "Inscriciones",
       "ShortName_UK" => "Inscriptions",
-      "Title" => "Inscrições do Evento",
-      "Title_ES" => "Inscriciónes do Evento",
-      "Title_UK" => "Event Inscriptions",
+      "Title" => "Inscrições",
+      "Title_ES" => "Inscriciones",
+      "Title_UK" => "Inscriptions",
    ),
-   "05_Certificates" => array
-   (
-       //"AccessMethod" => "Current_User_Event_Certificates_May_Edit",
-      "AccessMethod" => "Coordinator_Inscriptions_Access_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Inscriptions&Action=EditList&Event=#Event&Inscriptions_GroupName=Certificates",
-      "Name" => "Certificados",
-      "Name_ES" => "Certificados",
-      "Name_UK" => "Certificates",
-      "Person" => "0",
-      "Public" => "0",
-      "ShortName" => "Certificados",
-      "ShortName_ES" => "Certificados",
-      "ShortName_UK" => "Certificates",
-      "Title" => "Presenças e Certificados",
-      "Title_ES" => "Certificados",
-      "Title_UK" => "Presences and Certificates",
-   ),
-   "061_Collaborations" => array
+   "04_Collaborations" => array
    (
       "AccessMethod" => "Coordinator_Collaborations_Access_Has",
       "Admin" => "1",
@@ -102,26 +69,7 @@ array
       "Title_ES" => "Colaboraciones",
       "Title_UK" => "Collaborations",
    ),
-   "062_Collaborators" => array
-   (
-      "AccessMethod" => "Coordinator_Collaborations_Access_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Collaborators&Action=EditList&Event=#Event",
-      "Name" => "Colaboradores",
-      "Name_ES" => "Colaboradores",
-      "Name_UK" => "Collaborators",
-      "Person" => "0",
-      "Public" => "0",
-      "ShortName" => "Colaborações",
-      "ShortName_ES" => "Colaboraciones",
-      "ShortName_UK" => "Collaborations",
-      "Title" => "Colaborações",
-      "Title_ES" => "Colaboraciones",
-      "Title_UK" => "Collaborations",
-   ),
-   "071_Caravans" => array
+   "05_Caravans" => array
    (
       "AccessMethod" => "Coordinator_Caravans_Access_Has",
       "Admin" => "1",
@@ -140,36 +88,7 @@ array
       "Title_ES" => "Caravanas",
       "Title_UK" => "Manage Caravans",
    ),
-   "072_Caravans" => array
-   (
-      "AccessMethod" => "Coordinator_Caravans_Access_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Caravaneers&Action=Search&Event=#Event",
-      "Name" => "Caravaneiros",
-      "Name_ES" => "Caravaneiros",
-      "Name_UK" => "Caravaneers",
-      "Person" => "0",
-      "Public" => "0",
-      "Title" => "Membros de Caravanas",
-      "Title_ES" => "Membros de Caravanas",
-      "Title_UK" => "Caravan Members",
-   ),
-   "091_Submissions_Areas" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Areas&Action=Search&Event=#Event",
-      "Name" => "Trilhas",
-      "Name_ES" => "Areas",
-      "Name_UK" => "Areas",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "092_Submissions" => array
+   "061_Submissions" => array
    (
       "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
       "Admin" => "1",
@@ -188,104 +107,7 @@ array
       "Title_ES" => "Actividades",
       "Title_UK" => "Manage Activities",
    ),
-   "093_Submissions_Criterias" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Criterias&Action=Search&Event=#Event",
-      "Name" => "Critérios",
-      "Name_ES" => "Critérios",
-      "Name_UK" => "Criterias",
-      "Title" => "Critérios, Avaliadores e Avaliações",
-      "Title_ES" => "Critérios, Avaliadores e Avaliaciones",
-      "Title_UK" => "Criterias, Assessors and Assessments",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "094_Submissions" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=EditList&Event=#Event&Submissions_GroupName=Assessments",
-      "Name" => "Avaliações",
-      "Name_ES" => "Avaliaciones",
-      "Name_UK" => "Assessments",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "094_Submissions" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=EditList&Event=#Event&Submissions_GroupName=Assessments",
-      "Name" => "Avaliações",
-      "Name_ES" => "Avaliaciones",
-      "Name_UK" => "Assessments",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "094_Submissions_Certificates" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Submissions&Action=EditList&Event=#Event&Submissions_GroupName=Authors",
-      "Name" => "Certificados das Atividades",
-      "Name_ES" => "Certificados de las Actividades",
-      "Name_UK" => "Activity Certificates",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "096_Submissions_Places" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Rooms&Action=Search&Event=#Event",
-      "Name" => "Locais & Salas",
-      "Name_ES" => "Locais & Salas",
-      "Name_UK" => "Places & Rooms",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   "097_Submissions_Dates" => array
-   (
-      "AccessMethod" => "Current_User_Event_Submissions_May_Edit",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Times&Action=Search&Event=#Event",
-      "Name" => "Datas & Horários",
-      "Name_ES" => "Datas & Horários",
-      "Name_UK" => "Dates & Times",
-      "Title" => "Datas & Horários (Slots)",
-      "Title_ES" => "Datas & Horários (Slots)",
-      "Title_UK" => "Dates & Times (Slots)",
-      "Person" => "0",
-      "Public" => "0",
-   ),
-   /* "096_Submissions_Grade" => array */
-   /* ( */
-   /*    "AccessMethod" => "Current_User_Event_Submissions_May_Edit", */
-   /*    "Admin" => "1", */
-   /*    "Coordinator" => "1", */
-   /*    "Friend" => "0", */
-   /*    "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Schedules&Action=EditList&Event=#Event", */
-   /*    "Name" => "Grade", */
-   /*    "Name_ES" => "Grade", */
-   /*    "Name_UK" => "Schedule", */
-   /*    "Person" => "0", */
-   /*    "Public" => "0", */
-   /* ), */
-   "10_Submissions_Pub" => array
+   "062_Submissions_Pub" => array
    (
       "AccessMethod" => "SubmissionsPublic",
       "Admin" => "0",
@@ -304,7 +126,7 @@ array
       "Title_ES" => "Palestres",
       "Title_UK" => "Talks at the Event",
    ),
-   "11_Schedule" => array
+   "07_Schedule" => array
    (
       "AccessMethod" => "SchedulePublic",
       "Admin" => "0",
@@ -323,45 +145,7 @@ array
       "Title_ES" => "Mostrar Grade del Evento",
       "Title_UK" => "Show Event Schedule",
    ),
-   "12_Schedule" => array
-   (
-      "AccessMethod" => "Coordinator_Submissions_Access_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Schedules&Action=Schedule&Event=#Event",
-      "Name" => "Grade",
-      "Name_ES" => "Grade",
-      "Name_UK" => "Schedule",
-      "Person" => "0",
-      "Public" => "0",
-      "ShortName" => "Grade",
-      "ShortName_ES" => "Grade",
-      "ShortName_UK" => "Schedule",
-      "Title" => "Grade do Evento",
-      "Title_ES" => "Grade",
-      "Title_UK" => "Event Schedule",
-   ),
-   "13_Speakers" => array
-   (
-      "AccessMethod" => "Coordinator_Submissions_Access_Has",
-      "Admin" => "1",
-      "Coordinator" => "1",
-      "Friend" => "0",
-      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Speakers&Action=Search&Event=#Event",
-      "Name" => "Palestrantes",
-      "Name_ES" => "Palestrantes",
-      "Name_UK" => "Speakers",
-      "Person" => "0",
-      "Public" => "0",
-      "ShortName" => "Palestrantes",
-      "ShortName_ES" => "Palestrantes",
-      "ShortName_UK" => "Speakers",
-      "Title" => "Palestrantes",
-      "Title_ES" => "Palestrantes",
-      "Title_UK" => "Speakers",
-   ),
-   "14_PreInscriptions" => array
+   "08_PreInscriptions" => array
    (
       "AccessMethod" => "Coordinator_PreInscriptions_Access_Has",
       "Admin" => "1",
@@ -379,8 +163,9 @@ array
       "Title" => "Preinscrições",
       "Title_ES" => "Preinscriciones",
       "Title_UK" => "Preinscriptions",
+      'AccessMethod'    => "Current_User_Event_PreInscriptions_May_Edit",
    ),
-   "15_Presences" => array
+   "09_Presences" => array
    (
       "AccessMethod" => "Coordinator_Presences_Access_Has",
       "Admin" => "1",
@@ -401,7 +186,6 @@ array
    ),
    "16_Statistics" => array
    (
-       //"AccessMethod" => "Coordinator_Presences_Access_Has",
       "Admin" => "1",
       "Coordinator" => "1",
       "Friend" => "1",

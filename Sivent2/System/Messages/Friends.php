@@ -1,10 +1,28 @@
 array
 (
+   "Friend_Events_Open_Table_Title" => array
+   (
+      "Name" => "Eventos com Inscrições Abertas:",
+      "Name_ES" => "Eventos con Registros Abiertos:",
+      "Name_UK" => "Events with Ongoing Inscriptions:",
+      "Title" => "Eventos com Inscrições Abertas:",
+      "Title_ES" => "Eventos con Registros Abiertos:",
+      "Title_UK" => "Events with Ongoing Inscriptions:",
+   ),
+   "Friend_Events_Inscribed_Table_Title" => array
+   (
+      "Name" => "Minhas Inscrições:",
+      "Name_ES" => "Mi Registros:",
+      "Name_UK" => "My Inscriptions:",
+      "Title" => "Minhas Inscrições:",
+      "Title_ES" => "Mi Registros:",
+      "Title_UK" => "My Inscriptions:",
+   ),
    "Friend_Events_Table_Title" => array
    (
-      "Name" => "Eventos:",
-      "Name_ES" => "Eventos:",
-      "Name_UK" => "Events:",
+      "Name" => "Histórico de Eventos:",
+      "Name_ES" => "Histórico Eventos:",
+      "Name_UK" => "History of Events:",
       "Title" => "Eventos:",
       "Title_ES" => "Eventos:",
       "Title_UK" => "Events:",

@@ -13,6 +13,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
        "Assessments"     => 5,
        "PreInscriptions" => 6,
        "Presences"       => 7,
+       "Payments"        => 8,
     );
 
     //*

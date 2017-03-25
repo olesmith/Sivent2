@@ -52,7 +52,7 @@ class AssessorsInscriptionAssessorsTable extends AssessorsInscriptionAssessorsRo
         $frienddatas=array();
 
         
-        $submissiondatas=array("Title","Author1","Area","Level");
+        $submissiondatas=array("Title","Author","Area","Level");
 
         $table=
             $this->Assessor_Friend_Assessors_Table

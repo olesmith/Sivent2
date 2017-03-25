@@ -18,24 +18,6 @@ class MyEvents_Handle extends MyEvents_Certificates
              "";
     }
 
-    
-    //*
-    //* function HandleEventDatas, Parameter list:
-    //*
-    //* Handle EventDatas edit.
-    //*
-
-    function HandleEventDatas()
-    {
-        $this->DatasObj(TRUE);
-
-        echo
-            $this->EventDatasInfoTable().
-            $this->DatasObj()->EventDatasForm($this->Event()).
-            "";
-
-        
-     }
 }
 
 ?>

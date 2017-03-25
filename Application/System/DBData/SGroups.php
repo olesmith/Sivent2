@@ -16,12 +16,13 @@ array
       "Coordinator" => 1,
       //"Assessor"  => 1,
    ),
+   
    "SQL" => array
    (
       "Name" => "SQL",
       "Data" => array
       (
-         "SqlKey","Type","SqlDef","SqlDefault",
+         "SqlKey","Type","SqlDef","SqlDefault","SqlSearch",
       ),
       "Admin" => 1,
       "Person" => 0,

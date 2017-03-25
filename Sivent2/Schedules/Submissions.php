@@ -3,6 +3,17 @@
 class SchedulesSubmissions extends SchedulesPlaces
 {
     //*
+    //* function SubmissionsData, Parameter list: 
+    //*
+    //* Returns subnmissions data to expose.
+    //*
+
+    function SubmissionsData()
+    {
+        return $this->SubmissionsObj()->Authors_Datas("Author",array("ID","Name","Title"));
+    }
+
+    //*
     //* function ReadSubmissions, Parameter list: $where
     //*
     //* Reads event submissions, if necessary.
@@ -17,24 +28,14 @@ class SchedulesSubmissions extends SchedulesPlaces
               "Event" => $this->Event("ID"),
            );
 
-        $submissions=$this->SubmissionsObj()->Sql_Select_Hashes_ByID($where,$this->SubmissionsData,"ID","Name,Title");
+        $submissions=$this->SubmissionsObj()->Sql_Select_Hashes_ByID($where,$this->SubmissionsData(),"ID","Name,Title");
         
         $this->Submissions=array();
         foreach (array_keys($submissions) as $sid)
         {
             $this->SubmissionsObj()->ReadSubmission($submissions[ $sid ]);
             
-            /* $submissions[ $sid ][ "Authors" ]=array(); */
-            /* foreach ($submissions[ $sid ][ "Friends" ] as $fid) */
-            /* { */
-            /*     if (empty($this->Speakers[ $fid ])) */
-            /*     { */
-            /*         $this->Speakers[ $fid ]= */
-            /*             $this->FriendsObj()->Sql_Select_Hash(array("ID" => $fid)); */
-            /*     } */
-            /* } */
-
-            $submissions[ $sid ][ "Authors" ]=join(", ",$submissions[ $sid ][ "Authors" ]);
+             $submissions[ $sid ][ "Authors" ]=join(", ",$submissions[ $sid ][ "Authors" ]);
             
             $this->Submissions[ $sid ]=$submissions[ $sid ];
         }

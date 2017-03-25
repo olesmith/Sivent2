@@ -73,7 +73,7 @@ trait MyHash
     {
         foreach ($defaults as $key => $value)
         {
-            if (empty($hash[ $key ]))
+            if (!isset($hash[ $key ]))
             {
                 $hash[ $key ]=$value;
             }
@@ -128,7 +128,7 @@ trait MyHash
     //* Keys list in sublists by ID $key values.
     //*
 
-    function MyHash_HashesList_2IDs($list,$key="ID")
+    function MyHash_HashesList_2IDs($list,$key="ID",$sortorder=array())
     {
         $rlist=array();
         foreach (array_keys($list) as $id)
@@ -136,6 +136,20 @@ trait MyHash
             $val=$list[ $id ][ $key ];
             $this->MyHash_Value_Save_Set($rlist,$val);
             $rlist[ $val ][ $id ]=$list[ $id ];
+        }
+
+        if (!empty($sortorder))
+        {
+            $rrlist=array();
+            foreach ($sortorder as $val)
+            {
+                if (isset($rlist[ $val ]))
+                {
+                    $rrlist[ $val ]=$rlist[ $val ];
+                }
+            }
+
+            return $rrlist;
         }
 
         return $rlist;
@@ -636,6 +650,26 @@ trait MyHash
                $table
             ).
             "";
+    }
+
+    
+    //*
+    //* function MyHashes_Key_Make_First, Parameter list: $list,$key
+    //*
+    //* Tries to put $key first in $list. That is, if there.
+    //* Uses regex for comparison.
+    //*
+
+    function MyHashes_Key_Make_First($list,$key)
+    {
+        $len=count($list);
+        $list=preg_grep('/^'.strval($key).'$/',$list,PREG_GREP_INVERT);
+        if (count($list)!=$len)
+        {
+            array_unshift($list,intval($key));
+        }
+
+        return $list;
     }
 }
 

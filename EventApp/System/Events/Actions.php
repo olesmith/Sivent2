@@ -76,8 +76,28 @@ array
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
-         "AccessMethod" => "CheckShowAccess",
+         "AccessMethod" => "CheckEditAccess",
       ),
+   "Details" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?Event=#ID&ModuleName=&Action=",
+      "Title"    => "Detalhes",
+      "Title_UK" => "Details",
+      "Name"     => "Detalhes",
+      "Name_UK"   => "Details",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"       => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+
+      "Icon"     => "show_light.png",
+
+      "Singular"   => TRUE,
+      "AccessMethod"   => "CheckShowAccess",
+   ),
    "Datas" => array
    (
       "Href"     => "",

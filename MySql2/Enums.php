@@ -169,7 +169,7 @@ class Enums extends DataGroups
                 //Cargada? Room calls rooms
                 if ($object->ModuleName==$this->ModuleName) { return $value; }
 
-                $value=$object->GetItemName($value,$this->ItemData[ $data ][ "SqlDerivedData" ]);
+                $value=$object->MyMod_Item_Name_Get($value,$this->ItemData[ $data ][ "SqlDerivedData" ]);
             }
             else { $value=""; }
         }

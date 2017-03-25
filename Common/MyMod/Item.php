@@ -76,13 +76,17 @@ trait MyMod_Item
         if (empty($where)) $where=$this->UnitEventWhere();
 
         $obj=$this;
-        if (empty($othermodule))
+        if (!empty($othermodule))
+        {
+            $tmp=$othermodule."Obj";
+            
+            $obj=$this->$tmp();
+        }
+        else
         {
             $othermodule=$this->ModuleName;
-            $obj=$this;
         }
 
-        $message="No_Items_Defined_Message";
         $message=$this->MyLanguage_GetMessage("No_Items_Defined_Message");
 
         $message=preg_replace('/#ItemName/',$obj->MyMod_ItemName(),$message);
@@ -90,9 +94,9 @@ trait MyMod_Item
 
 
         if (
-              !$this->Sql_Table_Exists()
+              !$obj->Sql_Table_Exists()
               ||
-              $this->Sql_Select_NHashes($this->UnitEventWhere())==0
+              $obj->Sql_Select_NHashes($this->UnitEventWhere())==0
            )
         {
             echo
@@ -125,6 +129,65 @@ trait MyMod_Item
         }
 
         return TRUE;
+    }
+    
+    //*
+    //* function MyMod_Item_Name_Get, Parameter list: $item=array(),$datas=array()
+    //*
+    //* Returns item name.
+    //*
+
+    function MyMod_Item_Name_Get($item=array(),$datas=array())
+    {
+        if (!is_array($item) && preg_match('/^\d+$/',$item))
+        {
+            $item=$this->ReadItem($item,$datas);
+        }
+        elseif (count($item)==0)
+        {
+            $item=$this->ItemHash;
+        }
+
+        $name="";
+        if (!empty($this->ItemsNamer))
+        {
+            $this->ItemNamer=$this->ItemsNamer;
+        }
+
+        
+        if (!empty($this->ItemNamer))
+        {
+            if (preg_match('/#/',$this->ItemNamer))
+            {
+                $name=$this->Filter($this->ItemNamer,$item);
+            }
+            else
+            {
+                if (count($item)>0)
+                {
+                    $namer=$this->ItemNamer;
+                    if (!isset($item[ $this->ItemNamer ]))
+                    {
+                        $namer="Name";
+                    }
+
+                    if (!isset($item[ $namer ]))
+                    {
+                        if (!isset($this->ItemData[ $namer ]))
+                        {
+                            print "Item: ".$this->ModuleName.": Invalid Itemnamer: ".$namer."<BR>";
+                            //var_dump($item);
+                        }
+                    }
+                    else
+                    {
+                        $name=$item[ $this->ItemNamer ];
+                    }
+                }
+            }
+        }
+
+        return $name;
     }
 }
 

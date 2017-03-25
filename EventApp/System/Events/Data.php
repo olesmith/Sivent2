@@ -90,27 +90,6 @@ array
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
    ),
-   /* "AnnouncementLink" => array */
-   /* ( */
-   /*    "HRefIt" => TRUE, */
-   /*    "ShortName" => "URL", */
-   /*    "ShortName_UK" => "URL", */
-   /*    "Name" => "Link Oficial", */
-   /*    "Name_UK" => "Official Link", */
-   /*    "Title" => "Link Oficial", */
-   /*    "Title_UK" => "Official Link", */
-
-   /*    "Size" => "35", */
-   /*    "Sql" => "VARCHAR(256)", */
-   /*    "Public"   => 1, */
-   /*    "Person"   => 0, */
-   /*    "Admin"    => 2, */
-   /*    "Friend" => 1, */
-   /*    "Coordinator" => 2, */
-      
-   /*    "Search"  => TRUE, */
-   /*    "Compulsory"  => TRUE, */
-   /* ), */
    "Date" => array
    (
       "Name" => "Data de Publicação",
@@ -239,6 +218,26 @@ array
       "Compulsory" => 0,
       "Extensions" => "pdf",
       "Icon" => "pdf.png",
+      "Iconify" => TRUE, 
+   ),
+   "Site" => array
+   (
+      "Name" => "Site do Evento",
+      "Name_UK" => "Event Site",
+      "Title" => "Site Oficial do Evento",
+      "Title_UK" => "Official Event Site",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Search" => FALSE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Compulsory" => 0,
       "Iconify" => TRUE, 
    ),
    "HtmlLogoHeight" => array

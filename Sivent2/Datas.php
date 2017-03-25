@@ -41,6 +41,7 @@ class Datas extends DBData
     function PreProcessItemData()
     {
         //Don't remove function, since parent would be called instead.
+        array_unshift($this->ItemDataPaths,"../Application/System/DBData");
     }
 
     

@@ -198,7 +198,7 @@ class ModulesCommon extends EventMod
         $res=FALSE;
         if (!empty($friend[ "ID" ]))
         {
-            foreach (array("Friend","Friend2","Friend3") as $fkey)
+            foreach ($this->SubmissionsObj()->Authors_Datas("Friend") as $fkey)
             {
                 if ($this->Friend_Items_Has("Submissions",$friend,$fkey))
                 {

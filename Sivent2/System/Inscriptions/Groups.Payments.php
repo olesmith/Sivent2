@@ -7,9 +7,10 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend","Status",
-          "Inscription",
-          "Paid",
+          "Friend","Status",
+          "Type","Lot",
+          "Value_Nominal","Receit_Paid",
+          "Value_Paid" ,"Date_Paid","Has_Paid",
         ),
 
        "Person" => 0,
@@ -17,6 +18,5 @@ array
        "Admin" => 1,
        "Friend"     => 0,
        "Coordinator" => 1,
-       //"GenTableMethod" => "Inscription_Caravans_Table",
      ),
 );

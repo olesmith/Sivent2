@@ -43,7 +43,7 @@ trait MyMod_Sort_Items
                 if (isset($this->ItemData[ $key ][ "SqlObject" ]))
                 {
                     $object=$this->ItemData[ $key ][ "SqlObject" ];
-                    $rvalue=$this->ApplicationObj->$object->GetItemName($rvalue);
+                    $rvalue=$this->ApplicationObj->$object->MyMod_Item_Name_Get($rvalue);
                 }
 
                 if (

@@ -18,6 +18,28 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   /* "Short" => array */
+   /* ( */
+   /*    "Name" => "Básicos", */
+   /*    "Name_UK" => "Basic", */
+   /*    "Data" => array */
+   /*    ( */
+   /*       "No", */
+   /*       "Details", */
+   /*       "Date","Title", */
+   /*       "Event_Period_Show", */
+   /*       "Event_Place_Show", */
+   /*       "Status","Inscriptions_Public","Payments", */
+   /*       "Inscribe","Inscription", */
+   /*       "NoOfInscriptionsCell" */
+   /*    ), */
+   /*    "Admin" => 1, */
+   /*    "Person" => 0, */
+   /*    "Public" => 1, */
+   /*    "Admin" => 1, */
+   /*    "Friend"     => 1, */
+   /*    "Coordinator" => 1, */
+   /* ), */
    "Inscriptions" => array
    (
       "Name" => "Inscrições",

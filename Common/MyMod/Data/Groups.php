@@ -98,6 +98,17 @@ trait MyMod_Data_Groups
 
         $this->MyLanguage_HashTakeNameKeys($this->$accgroups);
    }
+    
+    //*
+    //* Initialize Data Plural Groups
+    //*
+
+    function MyMod_Data_Groups_Get($singular=FALSE)
+    {
+        $accgroups=$this->MyMod_Data_Groups_AccName($singular);
+
+        return array_keys($this->$accgroups);
+   }
 }
 
 ?>

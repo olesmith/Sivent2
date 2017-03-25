@@ -159,6 +159,7 @@ class DBDataCells extends DBDataPertains
             array
             (
                "Permissions" => $edit,
+               "CSS" => $edit,
             ),
         );
 

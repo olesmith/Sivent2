@@ -103,13 +103,13 @@ trait MyMod_Handle
                     $res=$this->MyAction_Allowed($action,$item);
                 }
             }
-
             if ($res)
             {
                 if (empty($this->Actions[ $action ][ "NoLogging" ]))
                 {
                     $this->ApplicationObj()->LogMessage($action,"MyMod_Handle");
                 }
+                
                 $this->Handle($action);
             }
             else

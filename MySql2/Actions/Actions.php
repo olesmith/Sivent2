@@ -397,7 +397,7 @@ array
         "Public"   => 0,
         "Person"   => 0,
         "Admin"   => 1,
-        "Handler"   => "HandleZip",
+        "Handler"   => "MyMod_Handle_Zip",
         "NoHeads"   => 1,
         "NoInterfaceMenu"   => 1,
         "Edits"   => 0,

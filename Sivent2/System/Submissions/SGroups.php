@@ -8,8 +8,10 @@ array
       "Data" => array
       (
          "Status",
-         "Friend","Name","Title","Title_UK","Title_ES",
+         //"Friend","Name",
+         "Title","Title_UK","Title_ES",
          "Type","Area","Level","Certificate","Certificate_TimeLoad","Result",
+         "PreInscriptions","Vacancies",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -18,22 +20,6 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
-    "Authors" => array
-    (
-       "Name" => "Autores",
-       "Name_ES" => "Autores",
-       "Name_UK" => "Authors",
-       "Data" => array
-       (
-           "Friend","Author1","Friend2","Author2","Friend3","Author3",
-        ),
-
-       "Person" => 0,
-       "Public" => 1,
-       "Admin" => 1,
-       "Friend"     => 1,
-       "Coordinator" => 1,
-    ),
     "Info" => array
     (
        "Name" => "Resumo",
@@ -57,7 +43,7 @@ array
        "Name_UK" => "Neccessities",
        "Data" => array
        (
-        "Need_Projector","Need_Computer","Need_Other",
+           "Need_Projector","Need_Computer","Need_Other",
         ),
 
        "Person" => 0,
@@ -66,20 +52,35 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "PreInscriptions" => array
+    "Certificates" => array
     (
-       "Name" => "Preinscrições",
-       "Name_ES" => "Preinscriciónes",
-       "Name_UK" => "PreInscriptions",
+       "Name" => "Certificados",
+       "Name_UK" => "Certificates",
        "Data" => array
        (
-           "PreInscriptions","Vacancies",
+          "Certificate","Certificate_TimeLoad",
         ),
+       
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+    ),
+    "Authors" => array
+    (
+       "Name" => "Autores",
+       "Name_ES" => "Autores",
+       "Name_UK" => "Authors",
+       "Data" => array("Author"),
+       "AuthorData" => array("Author"),
 
        "Person" => 0,
        "Public" => 1,
        "Admin" => 1,
-       "Friend"     => 0,
+       "Friend"     => 1,
        "Coordinator" => 1,
+       "GenTableMethod" => "Submission_Authors_SGroup_Gen",
+       "Single" => TRUE,
     ),
 );

@@ -5,6 +5,7 @@ include_once("../EventApp/MyInscriptions.php");
 
 
 include_once("Inscriptions/Access.php");
+include_once("Inscriptions/Payments.php");
 include_once("Inscriptions/Overrides.php");
 include_once("Inscriptions/Read.php");
 include_once("Inscriptions/Cells.php");
@@ -65,7 +66,7 @@ class Inscriptions extends InscriptionsHandle
     {
         $this->Hash2Object($args);
         
-        $this->AlwaysReadData=array("Friend","Name","SortName","Unit","Event","CH");
+        $this->AlwaysReadData=array("Friend","Name","SortName","Unit","Event","CH","Has_Paid");
         $this->Sort=array("Name");
         $this->InscriptionEventTableSGroups= array
         (
@@ -97,6 +98,30 @@ class Inscriptions extends InscriptionsHandle
     }
 
     //*
+    //* Returns full (relative) upload path: UploadPath/#Unit/#Event/Submissions.
+    //*
+
+    function MyMod_Data_Upload_Path()
+    {
+        $path=
+            join
+            (
+               "/",
+               array
+               (
+                  "Uploads",
+                  $this->Unit("ID"),
+                  $this->Event("ID"),
+                  "Inscriptions"
+               )
+            );
+        
+        $this->Dir_Create_AllPaths($path);
+        
+        return $path;
+    }
+    
+    //*
     //* function PreProcessItemDataGroups, Parameter list:
     //*
     //* 
@@ -112,29 +137,31 @@ class Inscriptions extends InscriptionsHandle
             array_push($this->ItemDataSGroupFiles,"SGroups.Certificates.php");
         }
 
-        if (!$this->Load_Other_Data) { return; }
-    
-        
-        if ($this->EventsObj()->Event_Collaborations_Has($event))
+        if ($this->Load_Other_Data)
         {
-            array_push($this->ItemDataSGroupFiles,"SGroups.Collaborations.php");
+            if ($this->EventsObj()->Event_Payments_Has($event))
+            {
+                array_push($this->ItemDataSGroupFiles,"SGroups.Payments.php");
+                array_push($this->ItemDataGroupFiles,"Groups.Payments.php");
+            }
+        
+            if ($this->EventsObj()->Event_Collaborations_Has($event))
+            {
+                array_push($this->ItemDataSGroupFiles,"SGroups.Collaborations.php");
+            }
+        
+            if ($this->EventsObj()->Event_Submissions_Has($event))
+            {
+                array_push($this->ItemDataSGroupFiles,"SGroups.Submissions.php");
+            }
+        
+            if ($this->EventsObj()->Event_Caravans_Has($event))
+            {
+                array_push($this->ItemDataSGroupFiles,"SGroups.Caravans.php");
+            }
+            
         }
         
-         if ($this->EventsObj()->Event_Submissions_Has($event))
-        {
-            array_push($this->ItemDataSGroupFiles,"SGroups.Submissions.php");
-        }
-        
-        if ($this->EventsObj()->Event_Caravans_Has($event))
-        {
-            array_push($this->ItemDataSGroupFiles,"SGroups.Caravans.php");
-        }
-        
-        if ($this->EventsObj()->Event_Payments_Has($event))
-        {
-            array_push($this->ItemDataSGroupFiles,"SGroups.Payments.php");
-            array_push($this->ItemDataGroupFiles,"Groups.Payments.php");
-        }
     }
     
     //*
@@ -188,7 +215,7 @@ class Inscriptions extends InscriptionsHandle
         (
            $this->ItemDataFiles,
            "Data.Certificate.php","Data.Collaborations.php",
-           "Data.Submissions.php","Data.Caravans.php"
+           "Data.Submissions.php","Data.Caravans.php","Data.Payments.php"
         );
         
         $event=$this->Event();
@@ -206,7 +233,8 @@ class Inscriptions extends InscriptionsHandle
         
         if ($this->EventsObj()->Event_Payments_Has($event))
         {
-            array_push($this->ItemDataFiles,"Data.Payments.php");
+            //array_push($this->ItemDataFiles,"Data.Payments.php");
+            //array_push($this->AlwaysReadData,"Has_Paid");
         }
     }
     
@@ -271,13 +299,14 @@ class Inscriptions extends InscriptionsHandle
         $this->PostProcess_Friend_Data($item,$updatedatas);
         $this->PostProcess_Certificate_CH($item,$updatedatas);
         $this->PostProcess_Code($item,$updatedatas);
-
         
         $this->PostProcess_Certificate($item);
         
+        $this->PostProcess_Payment($item,$updatedatas);
+
         if (count($updatedatas)>0)
         {
-           $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
         }
         
         return $item;

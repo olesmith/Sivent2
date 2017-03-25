@@ -85,6 +85,31 @@ trait MakeCGI
         return intval($value);
     }
     
+     //*
+    //* sub CGI_Treat_Real, Parameter list: $value
+    //*
+    //* Treats int value.
+    //*
+
+    function CGI_Treat_Real($value)
+    {
+        //Multiple selects
+        if (is_array($value))
+        {
+            foreach (array_keys($value) as $id)
+            {
+                $value[ $id ]=$this->CGI_Treat_Real($value[ $id ]);
+            }
+
+            return $value;
+        }
+        $value=$this->CGI_TreatValue($value);
+        $value=preg_replace('/[^-,\.\d]+/',"",$value);
+        $value=preg_replace('/,/',".",$value);
+
+        return floatval($value);
+    }
+    
     //*
     //* sub CGI_GetPOST, Parameter list: $name
     //*
@@ -113,6 +138,19 @@ trait MakeCGI
         $value=$this->CGI_POST($name);
 
         return $this->CGI_Treatint($value);
+    }
+
+    //*
+    //* sub CGI_GetPOSTint, Parameter list: $name
+    //*
+    //* $_POST $name key as an int.
+    //*
+
+    function CGI_POST_Real($name)
+    {
+        $value=$this->CGI_POST($name);
+
+        return $this->CGI_Treat_Real($value);
     }
 
     //*

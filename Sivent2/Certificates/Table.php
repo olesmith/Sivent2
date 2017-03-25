@@ -85,7 +85,7 @@ class Certificates_Table extends Certificates_Friend
         $row=
             array
             (
-                $this->MultiCell($this->ApplicationObj->Sigma,$pos+1,'r'),
+                $this->MultiCell($this->ApplicationObj->Sigma,$pos,'r'),
                 $this->B($cht),
                 ""
             );

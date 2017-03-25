@@ -74,9 +74,9 @@ trait MyMod_Data_Defaults
             "TrimCase"          => FALSE,
             "Iconify"           => FALSE,
             "Compulsory"        => FALSE,
-            "FieldMethod"       => "",
-            "ShowFieldMethod"   => "",
-            "EditFieldMethod"   => "",
+            "FieldMethod"       => "",  //args: $data,$item,$edit=0,$rdata=$data
+            "ShowFieldMethod"   => "",  //args: $data,$item
+            "EditFieldMethod"   => "",  //args: $data,$item,$edit=0,$rdata=$data
             "NoAdd"             => FALSE,
             "NoSort"            => FALSE,
             "NoSelectSort"      => FALSE,
@@ -105,7 +105,13 @@ trait MyMod_Data_Defaults
             "IsColor"          => FALSE,
             "IsBarcode"          => FALSE,
             "TabIndex"          => "",
-            "PermsMethod"      => "",
+            "PermsMethod"      => "",  // args: $data,$item
+            
+            "Comment"      => "",
+            "Comment_UK"      => "",
+            "Comment_ES"      => "",
+            
+            "AccessMethod" => "", //args: (??$item??)
         );
 
     }

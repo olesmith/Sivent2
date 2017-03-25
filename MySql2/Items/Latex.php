@@ -381,7 +381,7 @@ class ItemsLatex extends Item
             $latex.=
                 "\\begin{center}\n".
                 "\\begin{Large}\n".
-                $this->ItemName." ".$item[ "ID" ].": ".$this->GetItemName($item).
+                $this->ItemName." ".$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item).
                 "\n\\end{Large}\n\\vspace{0.25cm}\n\n".
                 $this->LatexTable("",$tbl).
                 "\\end{center}\n\n".

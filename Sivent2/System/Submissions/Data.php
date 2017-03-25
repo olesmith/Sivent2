@@ -29,6 +29,7 @@ array
       
       "Compulsory" => TRUE,
    ),
+   
    "Event" => array
    (
       "Name" => "Evento",
@@ -48,7 +49,7 @@ array
       "Coordinator" => 1,
       "AccessMethod" => "Submission_Authors_May_Show",
     ),
-   "Author1" => array
+   "Author" => array
    (
     //Author names MUST come before Friend data
       "Name" => "Autor Proponente",
@@ -64,6 +65,26 @@ array
       "Admin"    => 2,
       "Friend"     => 2,
       "Coordinator" => 2,
+      "PermsMethod"  => "Submission_Author_Data_Perms",
+      ///"AccessMethod" => "Submission_Authors_May_Show",
+   ),
+   "Author_Email" => array
+   (
+    //Author names MUST come before Friend data
+      "Name" => "Email, Autor",
+      "Name_UK" => "Author Email",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Size" => 35,
+      "Search" => TRUE,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "PermsMethod"  => "Submission_Author_Data_Perms",
       ///"AccessMethod" => "Submission_Authors_May_Show",
    ),
    "Friend" => array
@@ -82,74 +103,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
       "TriggerFunction" => "UpdateSpeaker",
-   ),
-   "Author2" => array
-   (
-      "Name" => "Coautor #1",
-      "Name_UK" => "Coauthor #1",
-
-      "Sql" => "VARCHAR(256)",
-      "Search" => FALSE,
-
-      "Size" => 35,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-      "Assessor"  => 0,
-   ),
-   "Friend2" => array
-   (
-      "Name" => "Cadastro, Coautor #1",
-      "Name_UK" => "Registration, Coautor #1",
-
-      "Sql" => "INT",
-
-      "SqlClass" => "Friends",
-      "Search" => FALSE,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
-      "TriggerFunction" => "UpdateSpeaker",
-   ),
-   "Author3" => array
-   (
-      "Name" => "Coautor #2",
-      "Name_UK" => "Coauthor #2",
-
-      "Sql" => "VARCHAR(256)",
-      "Search" => FALSE,
-
-      "Size" => 50,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 2,
-      "Coordinator" => 2,
-      "Assessor"  => 0,
-   ),
-   "Friend3" => array
-   (
-      "Name" => "Cadastro, Coautor #2",
-      "Name_UK" => "Registration, Coautor #2",
-
-      "Sql" => "INT",
-
-      "SqlClass" => "Friends",
-      "Search" => FALSE,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
-      "TriggerFunction" => "UpdateSpeaker",
+      "EditFieldMethod"  => "Author_Friend_Select",
    ),
    "Name" => array
    (
@@ -423,7 +377,7 @@ array
       "Name" => "Resumo",
       "Name_UK" => "Summary",
 
-      "Sql" => "VARCHAR(1048)",
+      "Sql" => "TEXT",
 
       "Search" => FALSE,
       "Size" => "50x5",

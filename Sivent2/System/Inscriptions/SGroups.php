@@ -14,6 +14,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
-      "Single" => 1,
+      "Single" => 0,
+      "Visible" => 0,
    ),
 );

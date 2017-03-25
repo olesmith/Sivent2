@@ -202,8 +202,8 @@ class Speakers extends Speakers_Emails
         $where[ "__Speaker" ]=
             $this->Sql_Where_Data_Ors
             (
-               array("Friend","Friend2","Friend3"),
-               $speaker
+                $this->SubmissionsObj()->Authors_Datas("Friend"),
+                $speaker
             );
 
         //var_dump($where);

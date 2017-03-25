@@ -123,5 +123,23 @@ array
       "Title_ES" => "Editar Registros até",
       "Title_UK" => "Edit Inscriptions Untill",
    ),
+   "Event_Period_Title" => array
+   (
+      "Name" => "Período do Evento",
+      "Name_ES" => "Período del Evento",
+      "Name_UK" => "Event Period",
+   ),
+   "Event_Inscriptions_Period_Title" => array
+   (
+      "Name" => "Período de Inscrições",
+      "Name_ES" => "Período de Registro",
+      "Name_UK" => "Inscription Period",
+   ),
+   "Event_Place_Title" => array
+   (
+      "Name" => "Local do Evento",
+      "Name_ES" => "Local del Evento",
+      "Name_UK" => "Place of Event",
+   ),
 );
 

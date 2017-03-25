@@ -137,7 +137,7 @@ class ItemTests extends ItemTestsItem
             $this->ApplicationObj->LogMessage
             (
                "UpdateItem",
-               "Outdated attempt: ".$item[ "ID" ].": ".$this->GetItemName($item)
+               "Outdated attempt: ".$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item)
             );
 
             $msg=
@@ -145,7 +145,7 @@ class ItemTests extends ItemTestsItem
                 "atualização insegura omitido<BR>Recarregar cliqando aqui: ".
                 $this->MyActions_Entry("Edit",$this->ItemHash,1);
 
-            $this->AddMsg($this->GetItemName($item).": ".$msg);
+            $this->AddMsg($this->MyMod_Item_Name_Get($item).": ".$msg);
             $this->HtmlStatus.=$msg."<BR>";
 
             $item[ "MTime" ]=$formmtime;
@@ -257,7 +257,7 @@ class ItemTests extends ItemTestsItem
                 $newvalue=$oldvalue;
                 
                 $msg=
-                    $this->GetItemName($item)." ".
+                    $this->MyMod_Item_Name_Get($item)." ".
                     $data.": ".$newvalue."': ".
                     $this->GetMessage($this->ItemDataMessages,"DataNotUniqued");
                 $this->ApplicationObj()->AddHtmlStatusMessage($msg);
@@ -284,7 +284,7 @@ class ItemTests extends ItemTestsItem
                )
             {
                 $item[ $data."_Message" ]=
-                    $this->GetItemName($item)." ".
+                    $this->MyMod_Item_Name_Get($item)." ".
                     "'".$newvalue."': ".
                     $this->GetMessage($this->ItemDataMessages,"DataInvalid");
 

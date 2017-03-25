@@ -13,6 +13,8 @@ class MyEventsDataGroups extends MyEventsDatas
     {
         $this->GroupDatasObj(TRUE);
 
+        $this->GroupDatasObj()->Sql_Table_Structure_Update();
+
         echo
             $this->EventDatasInfoTable().
             $this->GroupDatasObj()->EventGroupDatasForm($this->ItemHash).

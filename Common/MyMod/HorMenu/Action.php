@@ -99,7 +99,7 @@ trait MyMod_HorMenu_Action
             }
             else
             {
-                $itemname=$this->GetItemName();
+                $itemname=$this->MyMod_Item_Name_Get();
 
                 $name=$this->GetRealNameKey($this->Actions[ $action ],"Name");
                 $name=preg_replace('/#ID/',$id,$name);

@@ -1,7 +1,7 @@
 <?php
 
 
-class Submissions_Authors extends Submissions_Certificate
+class Submissions_Authors extends Submissions_Author
 {   
     //*
     //* function Submission_Author_Data, Parameter list: 
@@ -177,7 +177,7 @@ class Submissions_Authors extends Submissions_Certificate
     function Submission_Authors_Tables($submission,$datas=array())
     {
         $row=array();
-        foreach (array("Friend","Friend1","Friend2",) as $data)
+        foreach ($this->Authors_Datas("Friend") as $data)
         {
             if (!empty($submission[ $data ]) && $submission[ $data ]>0)
             {
@@ -190,9 +190,6 @@ class Submissions_Authors extends Submissions_Certificate
         }
 
         return array($row);
-    }
-    
-
-    
+    }    
 }
 ?>

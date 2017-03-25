@@ -24,7 +24,12 @@ class MyInscriptions_Inscription_Messages extends MyInscriptions_Inscription_Rea
          
         }
 
-        return array($this->B($this->MyLanguage_GetMessage("Friend_Data_Status_Title").":"),$msg);
+        return
+            array
+            (
+                $this->B($this->MyLanguage_GetMessage("Friend_Data_Status_Title").":"),
+                $msg
+            );
     }
 }
 

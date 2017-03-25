@@ -23,6 +23,8 @@ trait MyTime
         {
             $msg=$this->ApplicationObj()->Messages[ "WeekDays" ][ intval($weekday) ];
         }
+
+        return $msg;
     }
 
     //*
@@ -42,9 +44,10 @@ trait MyTime
         {
             $msg=$this->ApplicationObj()->Messages[ "WeekDays" ][ "Name".$lkey ];
         }
-        if (!empty($this->ApplicationObj()->Messages[ "WeekDays" ]))
+        
+        if (empty($msg) && !empty($this->ApplicationObj()->Messages[ "WeekDays" ]))
         {
-            $msg= $this->ApplicationObj()->Messages[ "WeekDays" ];
+            $msg=$this->ApplicationObj()->Messages[ "WeekDays" ];
         }
 
         return $msg;

@@ -77,54 +77,6 @@ class Item extends ItemUpdate
     }
 
 
-    function GetItemName($item=array(),$datas=array())
-    {
-        if (!is_array($item) && preg_match('/^\d+$/',$item))
-        {
-            $item=$this->ReadItem($item,$datas);
-        }
-        elseif (count($item)==0)
-        {
-            $item=$this->ItemHash;
-        }
-
-
-        $name="";
-        if (!empty($this->ItemNamer))
-        {
-            if (preg_match('/#/',$this->ItemNamer))
-            {
-                $name=$this->Filter($this->ItemNamer,$item);
-            }
-            else
-            {
-                if (count($item)>0)
-                {
-                    $namer=$this->ItemNamer;
-                    if (!isset($item[ $this->ItemNamer ]))
-                    {
-                        $namer="Name";
-                    }
-
-                    if (!isset($item[ $namer ]))
-                    {
-                        if (!isset($this->ItemData[ $namer ]))
-                        {
-                            print "Item: ".$this->ModuleName.": Invalid Itemnamer: ".$namer."<BR>";
-                            //var_dump($item);
-                        }
-                    }
-                    else
-                    {
-                        $name=$item[ $this->ItemNamer ];
-                    }
-                }
-            }
-        }
-
-        return $name;
-    }
-
 
     //*
     //* function TreatDataAsLatex, Parameter list: $value

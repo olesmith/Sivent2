@@ -10,10 +10,33 @@ array
          "Edit",
          "Delete",
          //"Datas","GroupDatas",
-         "Date","Title","Place","Place_Address","Place_Site",
+         "Date","Title","Site","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
          "Visible","Status","Inscriptions_Public","Payments",
          "Inscribe","Inscription",
+         "NoOfInscriptionsCell"
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Short" => array
+   (
+      "Name" => "Breve",
+      "Name_UK" => "Short",
+      "Data" => array
+      (
+         "No",
+         "Details",
+         "Date","Event_Title_Show","Site",
+         "Event_Period_Show",
+         "Event_Place_Show",
+         "Event_Inscriptions_Period_Show",
+         "Status","Payments",
+         "Event_Inscription_Action",
          "NoOfInscriptionsCell"
       ),
       "Admin" => 1,
@@ -49,7 +72,7 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend",
+          "Name",//"Friend",
           "Certificates","TimeLoad","Certificates_Published","Certificates_Watermark"
         ),
 
@@ -66,7 +89,7 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend",
+          "Name",//"Friend",
           "Collaborations",
           "Collaborations_Inscriptions","Collaborations_StartDate","Collaborations_EndDate",
         ),
@@ -84,7 +107,7 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend",
+          "Name",//"Friend",
           "Caravans","Caravans_StartDate","Caravans_EndDate",
           "Caravans_Min","Caravans_Max",
           "Caravans_Public","Caravans_Coord_Timeload","Caravans_Timeload",
@@ -103,9 +126,10 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend",
-          "Submissions","Submission_Public",
-          "Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate",
+          "Name",//"Friend",
+          "Submissions","Submissions_Public","Submissions_Inscriptions",
+          "Submissions_NAuthors",
+          "Submissions_StartDate","Submissions_EndDate",
           "Certificate_Submission_TimeLoad"
         ),
 
@@ -122,8 +146,28 @@ array
        "Data" => array
        (
           "No","Edit","Delete",
-          "Event","Friend",
+          "Name",//"Friend",
           "Assessments","Assessments_StartDate","Assessments_EndDate",
+        ),
+
+       "Person" => 1,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+    ),
+    "Payments" => array
+    (
+       "Name" => "Pagamentos",
+       "Name_UK" => "Payments",
+       "Data" => array
+       (
+          "No","Edit","Delete",
+          "Name",//"Friend",
+          "Payment",
+          "Payments_Type","Payments_Institution",
+          "Payments_Name","Payments_Agency","Payments_Account","Payments_Variation",
+          "Payments_Info","Payments_URL",
         ),
 
        "Person" => 1,

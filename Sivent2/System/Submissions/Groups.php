@@ -29,8 +29,33 @@ array
    ),
     "Authors" => array
     (
-       "Name" => "Autores & Certificados",
-       "Name_UK" => "Authors & Certificates",
+       "Name" => "Autores",
+       "Name_UK" => "Authors",
+       "Data" => array
+       (
+          "No","Edit","Copy",
+          "Delete",
+          "Assessments",
+          "Name","Status",
+          "Title","Title_UK","Selected",
+        ),
+       "NIndent" => 5,
+
+       //"AuthorData" => array("Friend","Author","Author_Email"),
+       "AuthorTitles" => array("Autor, Cadastro","Nome","Email"),
+       "AuthorTitles_UK" => array("Author Registration","Name","Author"),
+       
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       "GenTableMethod" => "Submissions_Authors_Group_Gen",
+   ),
+   "Certificates" => array
+   (
+       "Name" => "Certificados",
+       "Name_UK" => "Certificates",
        "Data" => array
        (
           "No","Edit","Copy",
@@ -39,9 +64,12 @@ array
           "Name","Status",
           "Title","Title_UK","Selected",
           "Certificate","Certificate_TimeLoad",
-          "Author1","Author2","Author3",
         ),
 
+       "AuthorData" => array("Author"),
+       "AuthorTitles" => array("Nome do Autor"),
+       "AuthorTitles_UK" => array("Author Name"),
+       
        "Admin" => 1,
        "Person" => 0,
        "Public" => 1,
@@ -55,14 +83,14 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Author1","Status",
+         "Author","Status",
          "Type","Area","Level",
          "Title","File",
       ),
       "Data_UK" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Author1","Status",
+         "Author","Status",
          "Type","Area","Level",
          "Name","Title_UK","File",
       ),

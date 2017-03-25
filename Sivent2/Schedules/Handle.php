@@ -10,12 +10,12 @@ class Schedules_Handle extends Schedules_Statistics
     var $Places=array();
     var $Room=array();
     var $Rooms=array();
-    var $SubmissionsData=array("ID","Name","Title","Friend","Friend2","Friend3","Author1","Author2","Author2");
     var $Submissions=array();
     var $Speakers=array();
     var $Schedules_Submissions=array();
     var $Schedules_Authors=array();
      
+    
     //*
     //* function HandleScheduleSelectTable, Parameter list: 
     //*

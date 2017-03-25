@@ -40,7 +40,7 @@ trait MyMod_Item_Group_Form
 
         return
             $pre.
-            $this->MyMod_Item_Group_Tables_Html($groupdefs,$item,$buttons,$plural).
+            $this->MyMod_Item_Group_Tables_Html($edit,$groupdefs,$item,$buttons,$plural).
             $post.
             "";
     }

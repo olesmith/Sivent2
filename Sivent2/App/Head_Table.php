@@ -46,8 +46,7 @@ class App_Head_Table extends App_Events
                      array($rtable[0])
                  );
          }
-
-   }
+    }
 
     //*
     //* function AppEventInfoTable, Parameter list: $event
@@ -199,7 +198,7 @@ class App_Head_Table extends App_Events
         $titlecell=
             $this->Anchor("Top").
             $this->H(3,$this->GetRealNameKey($event,"Title")).
-            $this->H(4,$this->Event_Inscriptions_DateSpan($event)).
+            $this->H(4,$this->Event_DateSpan($event)).
             $this->H(5,$this->EventPlaceCell($event)).
             "";
 

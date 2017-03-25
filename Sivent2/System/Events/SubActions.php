@@ -27,6 +27,15 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   "Payments" => array
+   (
+      "Name" => "Pagamentos",
+      "Name_UK" => "Payments",
+      "AccessMethod" => "Coordinator_Payments_Access_Has",
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
    "Certificates" => array
    (
       "Name" => "Certificados",

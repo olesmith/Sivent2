@@ -3,6 +3,19 @@
 class EventsSubmissions extends EventsPayments
 {
     //*
+    //* function Event_Submissions_NAuthors, Parameter list: $item=array()
+    //*
+    //* Returns number of authors per event.
+    //*
+
+    function Event_Submissions_NAuthors($item=array())
+    {
+        if (empty($item)) { $item=$this->Event(); }
+
+        return $item[ "Submissions_NAuthors" ];
+    }
+
+    //*
     //* function Event_Submissions_Has, Parameter list: $item=array()
     //*
     //* Returns TRUE if event has collaborations.

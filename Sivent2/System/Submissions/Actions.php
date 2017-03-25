@@ -229,4 +229,26 @@ array
         "Coordinator" => 1,
         "AccessMethod" => "CheckEditListAccess",
     ),
+   "Zips" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Submissions&Action=Zips&ID=#ID",
+      "Title"    => "Zipar",
+      "Title_UK" => "Zip",
+      "ShortName"     => "Zipar",
+      "ShortName_UK"   => "Zip",
+      "Name"     => "Zipar Arquivos",
+      "Name_UK"   => "Zip Files",
+      
+      "Handler"   => "MyMod_Handle_Zip",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"   => TRUE,
+      "NoHeads"   => 1,
+      "NoInterfaceMenu"   => 1,
+  ),
 );

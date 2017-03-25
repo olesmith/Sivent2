@@ -6,13 +6,16 @@ array
        "Name_UK" => "Inscription Fee",
        "Data" => array
        (
-          "Paid",
-        ),
+           "Type","Lot","Has_Paid",
+           "Value_Nominal","Receit_Paid",
+           "Value_Paid" ,"Date_Paid",
+         ),
 
        "Person" => 0,
        "Public" => 0,
        "Admin" => 1,
-       "Friend"     => 1,
+       "Friend"     => 2,
        "Coordinator" => 1,
+       "Visible" => 1,
      ),
 );

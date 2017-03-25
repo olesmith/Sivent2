@@ -19,7 +19,7 @@ class Submissions_Emails extends Submissions_Access
                 array
                 (
                 ),
-                array("Friend","Friend2","Friend3"),
+                $this->Authors_Datas("Friend"),
                 $fixedvars
             ).
             "";

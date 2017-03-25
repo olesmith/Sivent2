@@ -79,7 +79,7 @@ class Submissions_Certificate extends Submissions_Schedule
     {
         if (!empty($item[ "Certificate" ]))
         {
-            foreach (array("Friend","Friend2","Friend3") as $fdata)
+            foreach ($this->Authors_Datas("Friend") as $fdata)
             {
                 if (empty($item[ $fdata ])) { continue; }
                 
@@ -146,7 +146,7 @@ class Submissions_Certificate extends Submissions_Schedule
     function Submission_Authors_Get($submission)
     {
         $authors=array();
-        foreach (array("Author1","Author2","Author3") as $data)
+        foreach ($this->Authors_Datas("Author") as $data)
         {
             if (!empty($submission[ $data ]))
             {

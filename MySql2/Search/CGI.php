@@ -122,6 +122,7 @@ class SearchCGI extends SearchOptions
             return $value;
         }
 
+        $this->ItemData();
         if (
               empty($value)
               &&

@@ -33,14 +33,23 @@ class Events extends Events_Handle
         $this->AlwaysReadData=
             array
             (
-                "Unit","Name","Certificates","Collaborations","Collaborations",
+                "Unit","Name","EventStart","Certificates","Collaborations","Collaborations",
                 "Certificates_Latex_Sep_Vertical","Certificates_Latex_Sep_Horisontal"
             );
-        $this->Sort=array("Name");
+
+        //Sort
+        $this->Sort=array("EventStart");
+        $this->Reverse=TRUE;
         $this->IDGETVar="Event";
         $this->IncludeAllDefault=TRUE;
         $this->NonGetVars=array("Event","CreateTable");
         
+        $this->CellMethods[ "Event_Title_Show" ]=TRUE;
+        $this->CellMethods[ "Event_Period_Show" ]=TRUE;
+        $this->CellMethods[ "Event_Inscriptions_Period_Show" ]=TRUE;
+        $this->CellMethods[ "Event_Place_Show" ]=TRUE;
+        $this->CellMethods[ "Event_Inscription_Action" ]=TRUE;
+
         $this->MyEvents_CellMethods_Init();
     }
 
@@ -81,6 +90,7 @@ class Events extends Events_Handle
         (
            $this->ItemDataFiles,
            "Data.Selection.php",
+           "Data.Payments.php",
            "Data.Certificates.php",
            "Data.Collaborations.php",
            "Data.Caravans.php",
@@ -93,6 +103,7 @@ class Events extends Events_Handle
         parent::PreProcessItemData();
     }
 
+    
     //*
     //* function PreActions, Parameter list:
     //*

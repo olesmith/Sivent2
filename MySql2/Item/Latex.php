@@ -281,9 +281,9 @@ class ItemLatex extends ItemPostProcess
 
     function ItemLatexTablePrint($title,$item=array(),$noid=0,$rdatalist=array())
     {
-        $this->ApplicationObj->LogMessage("ItemLatexTablePrint",$item[ "ID" ].": ".$this->GetItemName($item));
+        $this->ApplicationObj->LogMessage("ItemLatexTablePrint",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
         $item=$this->ApplyAllEnums($item); 
-       $title=$this->ItemName.": ".$this->GetItemName($item);
+       $title=$this->ItemName.": ".$this->MyMod_Item_Name_Get($item);
 
         $this->LatexData[ "PageTitle" ]="\\begin{Large}\n".$title."\n\\end{Large}\n\n\\vspace{0.25cm}";
         $this->LatexData[ "NItemsPerPage" ]=50;

@@ -65,6 +65,7 @@ array
             "EditList" => 1,
             "Export" => 1,
             "Emails" => 1,
+            "Zips" => 1,
             "GenCerts" => 1,
          ),
          'Admin' => array
@@ -74,6 +75,7 @@ array
             "EditList" => 1,
             "Export" => 1,
             "Emails" => 1,
+            "Zips" => 1,
             "GenCerts" => 1,
          ),
       ),
@@ -88,7 +90,7 @@ array
          "Friend" => array
          (
             "Add" => 1,
-            "Search" => 1,
+            //"Search" => 1,
             "Inscription" => 1,
          ),
          'Assessor' => array

@@ -50,7 +50,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     {
         if (empty($friend)) { $friend=$this->Friend; }
         if ($this->LatexMode()) { $edit=0; }
-        
+
         return join
         (
            "",
@@ -189,8 +189,10 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     function InscriptionReceitLink($inscription)
     {
         return
-            "Gerar Recibo: ".
-            $this->MyActions_Entry("Receit",$inscription);
+            $this->Center
+            (
+                $this->MyActions_Entry("Receit",$inscription)
+            );
     }
 
     //*
@@ -232,11 +234,6 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
             $table,
             $this->InscriptionDiagList($inscription)
         );
-
-        if ($edit==1 && $buttons) 
-        {
-            #array_push($table,$this->Buttons());
-        }
 
         return $table;
     }

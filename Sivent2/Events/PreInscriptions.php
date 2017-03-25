@@ -22,6 +22,11 @@ class EventsPreInscriptions extends EventsAssessments
         $res=FALSE;
         if ($nsubmissions>0) { $res=TRUE; }
 
+        if (empty($item[ "PreInscriptions_StartDate" ]) || empty($item[ "PreInscriptions_EndDate" ]))
+        {
+            $res=FALSE;
+        }
+
         return $res;
     }
     

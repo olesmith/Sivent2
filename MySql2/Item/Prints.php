@@ -7,7 +7,7 @@ class ItemPrints extends ItemTable
     function PrintItem($item=array(),$printpdf=TRUE)
     {
         if  (count($item)==0) { $item=$this->ItemHash; }
-        $this->ApplicationObj->LogMessage("PrintItem",$item[ "ID" ].": ".$this->GetItemName($item));
+        $this->ApplicationObj->LogMessage("PrintItem",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
         $latexdocno=$this->CGI2LatexDocNo();
 
         $latex=

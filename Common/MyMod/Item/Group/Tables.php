@@ -4,122 +4,18 @@
 trait MyMod_Item_Group_Tables
 {
     //*
-    //* Create item Group table (matrix).
-    //*
-
-    function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="")
-    {
-        $table=
-            $this->ItemTable
-            (
-               $edit,
-               $item,
-               TRUE,
-               $this->ItemDataSGroups[ $group ][ "Data" ],
-               array(),
-               $plural,
-               FALSE,
-               FALSE,
-               $precgikey
-             );
-
-        if ($this->SGroups_NumberItems)
-        {
-            $n=1;
-            foreach (array_keys($table) as $id)
-            {
-                array_unshift($table[ $id ],$this->B($n.":"));
-                $n++;
-            }
-        }
-           
-        $title=$this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name");
-        if ($edit==1) { $title.=$this->SUP("","&dagger;"); }
-
-        if ($this->LatexMode())
-        {
-            $title=
-                "\\large{\\textbf{".$title."}}".
-                "";
-        }
-        else
-        {
-            $title=$this->H(3,$title);
-        }
-        
-        array_unshift($table,$title);
-
-        return $table;
-    }
-    
-    //*
-    //* Create item Group html table.
-    //*
-
-    function MyMod_Item_Group_Table_HTML($edit,$group,$item,$plural=FALSE,$precgikey="",$options=array())
-    {
-        if (!empty($this->ItemDataSGroups[ $group ][ "GenTableMethod" ]))
-        {
-            $method=$this->ItemDataSGroups[ $group ][ "GenTableMethod" ];
-
-            return $this->$method($edit,$item,$group);
-        }
-
-        $pre="";
-        if (!empty($this->ItemDataSGroups[ $group ][ "PreText" ]))
-        {
-            $pre=$this->ItemDataSGroups[ $group ][ "PreText" ];
-        }
-
-        $post="";
-        if (!empty($this->ItemDataSGroups[ $group ][ "PostText" ]))
-        {
-            $post=$this->ItemDataSGroups[ $group ][ "PostText" ];
-        }
-
-        $method="Html_Table";
-        if ($this->LatexMode())
-        {
-            $method="Latex_Table";
-        }
-
-        $table="";
-        if (!empty($this->ItemDataSGroups[ $group ][ "Data" ]))
-        {
-            $table=
-               $this->$method
-               (
-                  "",
-                  $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$precgikey),
-                  $options,
-                  array(),
-                  array(),
-                  TRUE,
-                  TRUE
-               );
-        }
-
-        return 
-            $pre.
-            $table.
-            $post.
-            "";
-    }
-
-    //*
     //* Create item Group tables. Returns row list.
     //*
 
-    function MyMod_Item_Group_Tables($groupdefs,$item,$buttons="",$plural=FALSE,$prekey="")
+    function MyMod_Item_Group_Tables($redit,$groupdefs,$item,$buttons="",$plural=FALSE,$prekey="")
     {
         $tables=array();
-        $redit=0;
         foreach ($groupdefs as $groupdef)
         {
             $row=array();
-            foreach ($groupdef as $group => $edit)
+            foreach ($groupdef as $group => $gedit)
             {
-                $redit=$this->Max($edit,$redit);
+                $gredit=$this->Max($gedit,$redit);
                 
                 $res=$this->MyMod_Item_Group_Allowed
                 (
@@ -134,7 +30,18 @@ trait MyMod_Item_Group_Tables
                     array_push
                     (
                        $row,
-                       $this->MyMod_Item_Group_Table_HTML($edit,$group,$item,$plural,$prekey,array("WIDTH" => '100%'))
+                       $this->MyMod_Item_Group_Table_HTML
+                       (
+                           $gredit,
+                           $group,
+                           $item,
+                           $plural,
+                           $prekey,
+                           array
+                           (
+                               "WIDTH" => '100%'
+                           )
+                       )
                     );
                 }
                 else { array_push($row,$group); }
@@ -161,25 +68,27 @@ trait MyMod_Item_Group_Tables
     //* Create item Group tables html version.
     //*
 
-    function MyMod_Item_Group_Tables_Html($groupdefs,$item,$buttons,$plural=FALSE,$options=array())
+    function MyMod_Item_Group_Tables_Html($redit,$groupdefs,$item,$buttons,$plural=FALSE,$options=array())
     {
         if (empty($options))
         {
             $options=
                 array
                 (
-                   "ALIGN" => 'center'
+                    "ALIGN" => 'center',
                 );
         }
+
+        $tdoptions=array("VALIGN" => "middle");
         
         return
             $this->Html_Table
             (
                 "",
-                $this->MyMod_Item_Group_Tables($groupdefs,$item,$buttons,$plural),
+                $this->MyMod_Item_Group_Tables($redit,$groupdefs,$item,$buttons,$plural),
                 $options,
                 array(),
-                array()
+                $tdoptions
             ).
             "";
     }

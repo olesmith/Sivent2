@@ -57,6 +57,7 @@ trait MyMod_HorMenu
     {
         return
             $this->Anchor("HorMenu").
+            $this->ApplicationObj()->MyApp_Module_Group_Menu_Horisontal($this).
             join
             (
                "",

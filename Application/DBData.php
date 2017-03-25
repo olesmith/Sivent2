@@ -101,6 +101,18 @@ class DBData extends DBDataForm
             array_push($updatedatas,"SortOrder");
         }
 
+        foreach (array("UK") as $lang)
+        {
+            $data="SValues";
+            $rdata=$data."_".$lang;
+            
+            if (empty($item[ $rdata ]) && !empty($item[ $data ]))
+            {
+                $item[ $rdata ]=$item[ $data ];
+                array_push($updatedatas,$rdata);
+            }
+        }
+
         foreach (array("Text","Text_UK") as $data)
         {
             $rdata=preg_replace('/^Text/',"Title",$data);
@@ -112,6 +124,7 @@ class DBData extends DBDataForm
         }
 
 
+
         if (count($updatedatas)>0)
         {
             $this->MySqlSetItemValues("",$updatedatas,$item);
@@ -119,6 +132,43 @@ class DBData extends DBDataForm
 
         return $item;
     }
+
+    
+    //*
+    //* function Edit_Default_Field, Parameter list: $item
+    //*
+    //* Creates sutiable default spec field.
+    //*
+
+    function Edit_Default_Field($data,$item,$edit=0,$rdata="")
+    {
+        if ($item[ "SqlDef" ]=="ENUM")
+        {
+            $valuenames=$this->GetRealNameKey($item,"SValues");
+            $valuenames=preg_split('/\s*,\s*/',$valuenames);
+            $values=array();
+
+            $n=1;
+            foreach ($valuenames as $valuename)
+            {
+                array_push($values,$n++);
+            }
+            array_unshift($values,0);
+            array_unshift($valuenames,"");
+            
+            $value=$this->MakeSelectField($rdata,$values,$valuenames,$item[ $data ]);
+            return $value;
+        }
+
+        return
+            $this->MyMod_Data_Fields_Edit
+            (
+                $data,$item,$value="",$tabindex="",$plural=FALSE,$links=TRUE,
+                $callmethod=FALSE,
+                $rdata
+            );
+    }
+    
 }
 
 ?>

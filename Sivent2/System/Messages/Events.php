@@ -1,10 +1,30 @@
 array
 (
+   "Sivent_Inscribe_Message" => array
+   (
+      "Name" => "Primeira vez por aqui? Você precisa ser cadastrado para inscrever-se nos eventos.\n".
+      "Por favor, use o link 'Cadastrar-se' no menu esquerda.<BR><BR>",
+      "Name_ES" => "",
+      "Name_UK" => "First time here? You need to be registered to inscribe to events.\n".
+      "Please use the link 'Register' in the left menu to register.<BR><BR>",
+   ),
    "Sivent_Old_Message" => array
    (
-      "Name" => "Sivent2 é uma versão nova do antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Cadastros do sistema antigo NÃO foram transferidos.<H2>Todos precisam recadastrar-se no Sivent2.</H2>",
-      "Name_ES" => "Sivent2 es un versión nuevo del antigo SiVent. Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registros do sistema antigo NO foram transferidos. <H2>Todos necessitan recadastrar-se no Sivent2.</H2>",
-      "Name_UK" => "Sivent2 is a new version  of the old SiVent. Certificados emitted  by the old sistema, contines available acessing: <A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<BR>Registrations in the old system has NOT been transfered. <H2>Everybody needs to reregister in Sivent2.</H2>",
+      "Name" => "Sivent2 é uma versão nova do antigo SiVent.<P>\n".
+      "Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: ".
+      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "<CENTER>Cadastros do sistema antigo NÃO foram transferidos.</CENTER>\n".
+      "<H2>Todos precisam recadastrar-se no Sivent2.</H2>",
+      "Name_ES" => "Sivent2 es un versión nuevo del antigo SiVent.<P>\n".
+      "Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: ".
+      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "<CENTER>Registros do sistema antigo NO foram transferidos.</CENTER>\n".
+      "<H2>Todos necessitan recadastrar-se no Sivent2.</H2>",
+      "Name_UK" => "Sivent2 is a new version  of the old SiVent.<P>\n".
+      "Certificados emitted  by the old sistema, contines available acessing: ".
+      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "<CENTER>Registrations in the old system has NOT been transfered.</CENTER>\n".
+      "<H2>All users needs to reregister in Sivent2.</H2>",
    ),
    "Events_Handle_Candidate_Title" => array
    (
@@ -164,6 +184,24 @@ array
       "Name" => "Configurações",
       "Name_ES" => "Configuraciones",
       "Name_UK" => "Configurations",
+   ),
+   "Event_Payments_Info_URL_Title" => array
+   (
+      "Name" => "Link para mais Informações",
+      "Name_ES" => "Link para mais Informciones",
+      "Name_UK" => "Link for Further Information",
+   ),
+   "Event_Payments_Info_Table_Title" => array
+   (
+      "Name" => "Valores",
+      "Name_ES" => "Valores",
+      "Name_UK" => "Values",
+   ),
+   "Event_Info_Title" => array
+   (
+      "Name" => "Mensagem das Coordenações do Evento",
+      "Name_ES" => "Mensaje de las Coordenaciones del Evento",
+      "Name_UK" => "Message from the Event Coordinators",
    ),
 );
 

@@ -147,9 +147,10 @@ trait MyMod_Data_Fields_Edit
                 );
         }
 
+
         if (!$plural)
         {
-            $value.=$this->FieldComment($data,1);
+           $value.=$this->MyMod_Data_Field_Comment($data,1);
         }
 
         if (!empty($this->ItemData[ $data ][ "CGIName" ]) && !$plural)
@@ -165,6 +166,34 @@ trait MyMod_Data_Fields_Edit
         return $value;
     }
 
+
+   //*
+    //* Returns comment to add to field
+    //*
+
+    function MyMod_Data_Field_Comment($data,$edit=0)
+    {
+        if (
+            !$this->NoFieldComments
+            &&
+            !isset($this->ItemData[ $data ][ "NoComment" ])
+           )
+        {
+            $comment=$this->GetRealNameKey($this->ItemData[ $data ],"Comment");
+            if ($comment!="")
+            {
+                return $comment;
+            }
+            
+            $comment=$this->GetRealNameKey($this->ItemData[ $data ],"EditComment");
+            if ($edit==1 && $comment!="")
+            {
+                return $comment;
+            }
+        }
+
+        return "";
+    }
 
 }
 

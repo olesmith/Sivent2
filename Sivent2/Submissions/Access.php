@@ -259,6 +259,42 @@ class Submissions_Access extends ModulesCommon
         
         return $res;
     }
+
+    //*
+    //* function Submission_Author_Data_Perms, Parameter list: $data,$item
+    //*
+    //* Checks if author data is editable:
+    //*
+    //* True if $item "Freind".$n is positive.
+    //*
+
+    function Submission_Author_Data_Perms($data,$item)
+    {
+        if (empty($item)) { return 1; }
+
+        $res=$this->ItemData[ $data ][ $this->Profile() ];
+
+        //Show access, decision reached.
+        if ($res<=1) { return $res; }
+        
+        if (preg_match('/\d+$/',$data,$matches))
+        {
+            $n=array_shift($matches);
+        }
+        else
+        {
+            $n=1;
+        }
+        
+        $friendkey=$this->Author_Data_Get($n,"Friend");
+        if ($res>0 && $item[ $friendkey ]>0)
+        {
+            $res=1;
+        }
+        
+        return $res;
+    }
+
 }
 
 ?>

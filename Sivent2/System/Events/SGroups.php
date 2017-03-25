@@ -7,7 +7,8 @@ array
 
       "Data" => array
       (
-         "Status","Visible","Initials","Name","Title","Place","Place_Address","Place_Site",
+         "Status","Visible","Initials","Name","Title","Site",
+         "Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
          "Date","AnnouncementLink","Announcement",
       ),
@@ -38,6 +39,27 @@ array
        "Coordinator" => 1,
        "EditAccessMethod" => "Current_User_Event_May_Edit",
        //"GenTableMethod" => "Event_Collaborations_Table",
+    ),
+    "Payments" => array
+    (
+       "Name" => "Pagamentos",
+       "Name_UK" => "Payments",
+       "Data" => array
+       (
+          "Payments",
+          "Payments_Info","Payments_URL",
+          "Payments_Type","Payments_Institution",
+          "Payments_Name","Payments_Agency","Payments_Account","Payments_Variation",
+        ),
+
+       "Person" => 1,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       "AccessMethod" => "Event_Payments_Has",
+       "SubAction" => "Payments",
+       "EditAccessMethod" => "Current_User_Event_Payments_May_Edit",
     ),
     "Collaborations" => array
     (
@@ -84,8 +106,9 @@ array
        "Name_UK" => "Submission of Activities",
        "Data" => array
        (
-          "Submissions","Submissions_Inscriptions",
-          "Submissions_StartDate","Submissions_EndDate","Submissions_Public",
+          "Submissions","Submissions_Public","Submissions_Inscriptions",
+          "Submissions_NAuthors",
+          "Submissions_StartDate","Submissions_EndDate",
           "Certificates_Submissions_TimeLoad",
        ),
 

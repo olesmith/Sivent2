@@ -163,13 +163,17 @@ trait ItemsFormDetails
 
     function ItemsForm_ItemDetailsCell($edit,$item)
     {
-        return $this->MyMod_Item_Group_Tables_Html
-        (
-           $this->ItemsForm_DetailsSGroupsMatrix($edit,$item),
-           $item,
-           ""
-        );
-
+        $table=
+            $this->MyMod_Item_Group_Tables
+            (
+                $edit,
+                $this->ItemsForm_DetailsSGroupsMatrix($edit,$item),
+                $item,
+                ""
+            );
+            
+        
+        return $this->Html_Table("",$table);
     }
     
     //*
@@ -191,8 +195,8 @@ trait ItemsFormDetails
               "",
               $this->MultiCell
               (
-                 $obj->$cellmethod($edit,$item),
-                 $this->ItemsForm_ItemRows_NCols()+1
+                  $obj->$cellmethod($edit,$item),
+                  $this->ItemsForm_ItemRows_NCols()+1
               )
            )
         );
@@ -257,12 +261,12 @@ trait ItemsFormDetails
         $updatedatas=$this->MyMod_Item_Groups_CGI2Item
         (
            $groups,
-           $ritem
+           $item
         );
 
         if (count($updatedatas)>0)
         {
-            $item=$this->UpdateItem($item,$updatedatas);
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
             $item=$this->PostProcessItem($item);
         }
 

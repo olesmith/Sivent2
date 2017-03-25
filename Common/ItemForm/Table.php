@@ -20,9 +20,10 @@ trait ItemForm_Table
 
         $table=$this->MyMod_Item_Group_Tables
         (
-           $groups,
-           $item,
-           $buttons
+            $edit,
+            $groups,
+            $item,
+            $buttons
         );
         
         return $table;

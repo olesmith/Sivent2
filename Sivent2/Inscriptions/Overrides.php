@@ -1,6 +1,6 @@
 <?php
 
-class InscriptionsOverrides extends InscriptionsAccess
+class InscriptionsOverrides extends InscriptionsPayments
 {
     //*
     //* function MyMod_Data_Upload_Path, Parameter list: 

@@ -145,6 +145,9 @@ array
       //"Assessor"  => 1,
       "Search"  => TRUE,
       "Compulsory"  => TRUE,
+      "Comment" => "ASCII (SQL)",
+      "Comment_UK" => "ASCII (SQL)",
+      "Comment_ES" => "ASCII (SQL)",
    ),
    "SqlDef" => array
    (
@@ -167,12 +170,13 @@ array
    ),
    "SqlDefault" => array
    (
-      "Name" => "SQL, Valor Padrão",
-      "Name_UK" => "SQL, Default Value",
+      "Name" => "Valor Padrão",
+      "Name_UK" => "Default Value",
 
       "Compulsory"  => FALSE,
       "Search" => TRUE,
       "Size" => 20,
+      "EditFieldMethod" => "Edit_Default_Field",
 
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
@@ -378,6 +382,9 @@ array
       "Name" => "Extensões Permitidos",
       "Name_UK" => "Permitted Extensions",
 
+      "Title" => "Extensões Permitidos (ex: pdf,jpg)",
+      "Title_UK" => "Permitted Extensions (ex: pdf,jpg)",
+
       "Compulsory"  => FALSE,
       "Search" => FALSE,
       "Size" => 30,
@@ -389,6 +396,9 @@ array
       //"Friend"     => 1,
       "Coordinator" => 2,
       //"Assessor"  => 1,
+      "Comment" => "Ex: pdf,jpg",
+      "Comment_UK" => "Ex: pdf,jpg",
+      "Comment_ES" => "Ex: pdf,jpg",
    ),
    "DataGroup" => array
    (

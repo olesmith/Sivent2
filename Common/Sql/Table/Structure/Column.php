@@ -215,5 +215,24 @@ trait Sql_Table_Structure_Column
 
         return $type;
     }
+    
+    //*
+    //* function Sql_Table_Column_Enum_Values, Parameter list: $column,$table=""
+    //*
+    //* Return column info.
+    //* 
+
+    function Sql_Table_Column_Enum_Values($column,$table="")
+    {
+        $columninfo=$this->Sql_Table_Column_Info($column);
+        $values=$columninfo[ "column_type" ];
+        $values=preg_replace('/enum\(/i',"",$values);
+        $values=preg_replace('/\)/',"",$values);
+        $values=preg_replace('/\'/',"",$values);
+        $values=preg_split('/\s*,\s*/',$values);
+        
+        return $values;
+    }
+    
 }
 ?>

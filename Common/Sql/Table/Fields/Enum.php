@@ -78,9 +78,9 @@ trait Sql_Table_Fields_Enum
                  $values=$datadef[ "Values" ];
                  $nvalues=count($values);
              }
-
              //add values, if number of enums in table insufficient
-             $cnvalues=$this->ApplicationObj()->TablesColumns[ $table ][ $data ][ "Values" ];
+             $cnvalues=$this->Sql_Table_Column_Enum_Values($data);
+             
              if (count($cnvalues)<=$nvalues)
              {
                  $def=array();
@@ -96,7 +96,7 @@ trait Sql_Table_Fields_Enum
                  
                  $this->DB_Query($query);
                  $this->ApplicationObj()->AddPostMessage("Mod Column ".$data.": $query");
-                 $this->ApplicationObj->LogMessage(5,"Mod Column: ".$query);
+                 $this->ApplicationObj->LogMessage(5,"Mod Column ".$data.": ".$query);
 
                  return TRUE;
              }

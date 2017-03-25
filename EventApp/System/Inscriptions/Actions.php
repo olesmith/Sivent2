@@ -133,10 +133,10 @@ array
    (
       "Href"     => "",
       "HrefArgs" => "?ModuleName=Inscriptions&Action=Receit&Latex=1&ID=#ID&Event=".$this->Event("ID"),
-      "Title"    => "Gerar Recibo (PDF)",
-      "Title_UK" => "Generate Receit (PDF)",
-      "Name"     => "Recibo",
-      "Name_UK"   => "Receit",
+      "Title"    => "Gerar Recibo da Inscrição (PDF)",
+      "Title_UK" => "Generate Inscription Receit (PDF)",
+      "Name"     => "Recibo da Inscrição",
+      "Name_UK"   => "Inscription Receit",
 
       "Public"   => 0,
       "Person"   => 0,
@@ -198,7 +198,7 @@ array
       "Name"     => "Zipar Arquivos",
       "Name_UK"   => "Zip Files",
       
-      "Handler"   => "HandleZip",
+      "Handler"   => "MyMod_Handle_Zip",
 
       "Public"   => 0,
       "Person"   => 0,

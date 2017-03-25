@@ -478,5 +478,34 @@ class MyFriends extends MyFriends_Access
 
         return $name;
     }
+
+    
+    //*
+    //* function Friends_Read, Parameter list: $where=array(),$datas=array(),$orderby=""
+    //*
+    //* Returns friends $datas, qaccording to $where.
+    //*
+
+    function Friends_Read($where=array(),$datas=array(),$orderby="")
+    {
+        if (empty($datas))   { $datas=array("ID","Name","Email","Titulation"); }
+        if (empty($orderby)) { $orderby="Name"; }
+        
+        return $this->Sql_Select_Hashes($where,$datas,$orderby);
+    }
+
+    //*
+    //* function Friends_Active_Read, Parameter list: $where=array(),$datas=array(),$orderby=""
+    //*
+    //* Returns active friends $datas, qaccording to $where.
+    //*
+
+    function Friends_Active_Read($where=array(),$datas=array(),$orderby="")
+    {
+        $where[ "__" ]=" Email IS NOT NULL";
+        
+        return $this->Friends_Read($where,$datas,$orderby);
+    }
+
 }
 ?>

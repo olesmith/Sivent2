@@ -45,7 +45,7 @@ class EventMod extends UnitMod
                     else
                     {
                         $cell=
-                            $date1[ "Day" ]."-".$date2[ "Day" ].
+                            $date1[ "Day" ]." - ".$date2[ "Day" ].
                             "/".
                             $date1[ "Month" ]."/".$date1[ "Year" ];
                     }
@@ -54,17 +54,18 @@ class EventMod extends UnitMod
                 {
                     $cell=
                         $date1[ "Day" ]."/".$date1[ "Month" ].
-                        "-".
+                        " - ".
                         $date2[ "Day" ]."/".$date2[ "Month" ].
+                        "/".
                         $date1[ "Year" ];
                 }
             }
             else
             {
                 $cell=
-                    $date1[ "Day" ]."/".$date1[ "Month" ].$date1[ "Year" ].
-                    "-".
-                    $date2[ "Day" ]."/".$date2[ "Month" ].$date2[ "Year" ];
+                    $date1[ "Day" ]."/".$date1[ "Month" ]."/".$date1[ "Year" ].
+                    " - ".
+                    $date2[ "Day" ]."/".$date2[ "Month" ]."/".$date2[ "Year" ];
             }
         }
 
@@ -161,6 +162,17 @@ class EventMod extends UnitMod
     function Event_Inscriptions_DateSpan($event=array())
     {
         return $this->EventsObj()->Event_Inscriptions_DateSpan($event);
+    }
+
+    //*
+    //* function Event_DateSpan, Parameter list: $edit
+    //*
+    //* Returns date span title.
+    //*
+
+    function Event_DateSpan($event=array())
+    {
+        return $this->EventsObj()->Event_DateSpan($event);
     }
 
     //*

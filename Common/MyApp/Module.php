@@ -2,12 +2,14 @@
 
 include_once("Module/Load.php");
 include_once("Module/Access.php");
+include_once("Module/Groups.php");
 
 trait MyApp_Module
 {
     use 
         MyApp_Module_Load,
-        MyApp_Module_Access;
+        MyApp_Module_Access,
+        MyApp_Module_Groups;
 
     //*
     //* function MyApp_Module_Init, Parameter list: $args=array(),$initdbtable=TRUE

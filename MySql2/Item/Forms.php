@@ -150,7 +150,7 @@ class ItemForms extends Fields
             $item=$this->UpdateItem($item);
         }
 
-        //$this->ApplicationObj->LogMessage("EditForm",$item[ "ID" ].": ".$this->GetItemName($item));
+        //$this->ApplicationObj->LogMessage("EditForm",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
 
         $tbl=array();
         $hiddens=array();
@@ -276,7 +276,7 @@ class ItemForms extends Fields
         );
 
 
-        $name=$this->GetItemName($item);
+        $name=$this->MyMod_Item_Name_Get($item);
         $html.=$this->H(1,$title);
 
         $infotables=array();
@@ -659,7 +659,7 @@ class ItemForms extends Fields
         echo
             $this->H(2,$title).
             $msg.
-            $this->H(3,$this->GetItemName($item)).
+            $this->H(3,$this->MyMod_Item_Name_Get($item)).
             $this->StartForm("?Action=".$action).
             $this->HTMLTable
             (

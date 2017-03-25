@@ -15,7 +15,7 @@ trait Html_Input_Select
        $namefilter="#Name",$titlefilter="",
        $selected=0,$addempty=TRUE,$disabledkey="",
        $selectoptions=array(),$optionsoptions=array(),
-       $maxlen=30
+       $maxlen=50
     )
     {
         $select="\n";
@@ -185,8 +185,8 @@ trait Html_Input_Select
                    "OPTION",
                    $item[ $namekey ],
                    $roptionsoptions
-                ).$titlekey.
-                "11\n";
+                ).
+                "\n";
         }
         
         $selectoptions[ "NAME" ]=$fieldname;

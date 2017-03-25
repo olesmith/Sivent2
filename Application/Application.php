@@ -134,6 +134,7 @@ class Application extends ApplicationCGIVars
         $this->Sigma   = '$'."\\Sigma".  '$';
         $this->Mu      = '$'."\\mu".     '$';
         $this->Percent = "\\%";
+        $this->Dagger = '$'."\\dagger".  '$';
 
         $this->LatexMode=TRUE;
     }
@@ -149,6 +150,7 @@ class Application extends ApplicationCGIVars
         $this->Sigma   = '&Sigma;';
         $this->Mu      = '&mu;';
         $this->Percent = "%";
+        $this->Dagger = "&dagger;";
 
         $this->LatexMode=FALSE;
     }

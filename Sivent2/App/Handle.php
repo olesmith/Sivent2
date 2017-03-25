@@ -68,23 +68,21 @@ class App_Handle extends App_Has
 
     function HandleFriend()
     {
-        $event=$this->Event();
-        if (!empty($event))
-        {
-            if ($this->Friend_Inscribed_Is($event,$this->LoginData()))
-            {
-                $this->InscriptionsObj()->HandleInscribe();
-                exit();
-            }
-        }
-        
         $this->FriendsObj()->Sql_Table_Structure_Update();
         $this->CertificatesObj()->Sql_Table_Structure_Update();
-                
-        $this->FriendsObj()->Friend_Events_Table();
-
-        echo
-            $this->CertificatesObj()->Certificates_Friend_Tables_Html($this->LoginData());
+        $friend=$this->LoginData();
+        
+        /* $event=$this->Event(); */
+        /* if (!empty($event)) */
+        /* { */
+        /*     if ($this->Friend_Inscribed_Is($event,$friend)) */
+        /*     { */
+        /*         $this->InscriptionsObj()->HandleInscribe(); */
+        /*         exit(); */
+        /*     } */
+        /* } */
+        
+        $this->FriendsObj()->Friend_Events_Handle($friend);
     }
 
     //*

@@ -1,107 +1,93 @@
 <?php
 
-class MyFriends_Events extends ModulesCommon
-{
-    //*
-    //* function Friend_Events_Read, Parameter list: $friend=array()
-    //*
-    //* Reads suitable events for friend.
-    //*
+include_once("Events/Read.php");
+include_once("Events/Rows.php");
+include_once("Events/Table.php");
 
-    function Friend_Events_Read($friend=array())
-    {
-        if (empty($friend))
-        {
-            $friend=$this->LoginData();
-        }
-        
-        $events=array();
-        foreach ($this->EventsObj()->Events_Open_Get() as $event)
-        {
-            $events[ $event ]=TRUE;
-        }
-        
-        foreach ($this->EventsObj()->Sql_Select_Unique_Col_Values("ID","","ID") as $event)
-        {
-            $inscr=
-                $this->Sql_Select_Unique_Col_Values
-                (
-                   "ID",
-                   array("Friend" => $friend[ "ID" ]),
-                   "ID",
-                   $this->ApplicationObj->SqlEventTableName("Inscriptions","",array("ID" => $event))
-                );
-
-            if (count($inscr)>0) { $events[ $event ]=TRUE; }
-        }
-        
-        $events=array_keys($events);
-        sort($events,SORT_NUMERIC);
-
-        return $this->EventsObj()->Sql_Select_Hashes(array("ID" => $this->Sql_Where_IN($events)));
-    }
-    
+class MyFriends_Events extends MyFriends_Events_Table
+{   
     //*
-    //* function Friend_Event_Rows, Parameter list: $event
+    //* function Friend_Events_Type, Parameter list: $msgkey,&$n,$excludeevents
     //*
     //* Show suitable events for friend.
     //*
 
-    function Friend_Event_Rows($event)
+    function Friend_Events_Type_Rows($friend,$msgkey,&$n,$events,$excludeevents=array())
     {
-        $row=$this->EventsObj()->MyMod_Item_Row(0,$event,$this->EventsObj()->GetGroupDatas("Basic"));
-
         return
-            array
+            array_merge
             (
-               $row,
-               array
-               (
-                  "","","","",
-                  $this->MultiCell
-                  (
-                     $this->EventsObj()->Event_Inscriptions_InfoCell($event),
-                     count($row)-4,
-                     "left"
-                  )
-               )
+                array($this->H(1,$this->MyLanguage_GetMessage($msgkey))),
+                $this->Friend_Events_Table($friend,$n,$events,$excludeevents)
             );
     }
 
     
     //*
-    //* function FriendEventsTable, Parameter list: $friend=array()
+    //* function Handle, Parameter list: $friend=array()
     //*
     //* Show suitable events for friend.
     //*
 
-    function Friend_Events_Table($friend=array())
+    function Friend_Events_Handle($friend=array())
     {
+        if (empty($friend)) { $friend=$this->LoginData(); }
+        
         $this->EventsObj()->ItemData();
         $this->EventsObj()->Actions();
+        $this->CertificatesObj()->ItemData();
+        $this->CertificatesObj()->Actions();
 
-        
+        $opens=$this->Friend_Events_Read_Open();
+        $inscribeds=$this->Friend_Events_Read_Inscribed();
+        $all=$this->Friend_Events_Read_All();
 
-        $table=array();
-        $n=1;
-        foreach ($this->Friend_Events_Read($friend) as $event)
+        $titles=$this->Html_Table_Head_Row($this->EventsObj()->GetDataTitles($this->Friend_Event_Datas()));
+
+        $omit=array();
+        foreach ($opens as $event)
         {
-            $event[ "No" ]=$n;
-            $table=
-                array_merge
-                (
-                   $table,
-                   $this->Friend_Event_Rows($event)
-                );
-            $n++;
+            $omit[ $event[ "ID" ] ]=$event;
         }
         
+        foreach ($inscribeds as $event)
+        {
+            $omit[ $event[ "ID" ] ]=$event;
+        }
+        
+        $n=1;
         echo
-            $this->H(1,$this->MyLanguage_GetMessage("Friend_Events_Table_Title")).
             $this->Html_Table
             (
-               $this->EventsObj()->GetDataTitles($this->EventsObj()->GetGroupDatas("Basic")),
-               $table
+                "",
+                array_merge
+                (
+                    $this->Friend_Events_Type_Rows
+                    (
+                        $friend,
+                        "Friend_Events_Open_Table_Title",
+                        $n,
+                        $opens
+                    ),
+                    array($this->HR(array("WIDTH" => "50%")).$this->BR()),
+                    $this->Friend_Events_Type_Rows
+                    (
+                        $friend,
+                        "Friend_Events_Inscribed_Table_Title",
+                        $n,
+                        $inscribeds,
+                        $opens
+                    ),
+                    array($this->HR(array("WIDTH" => "50%")).$this->BR()),
+                    $this->Friend_Events_Type_Rows
+                    (
+                        $friend,
+                        "Friend_Events_Table_Title",
+                        $n,
+                        $all,
+                        $omit
+                    )
+                )
             ).
             "";
     }

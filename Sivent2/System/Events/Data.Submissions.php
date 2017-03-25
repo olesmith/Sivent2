@@ -21,13 +21,13 @@ array
       "Search" => FALSE,
       "Compulsory"  => TRUE,
    ),
-   "Submissions_StartDate" => array
+   "Submissions_NAuthors" => array
    (
-      "Name" => "Inscrições Início",
-      "Title" => "Atividades, Inscrições Início, Data",
+      "Name" => "No. de Autores",
+      "Title" => "No. de Autores",
       
-      "Name_UK" => "Inscriptions Begins",
-      "Title_UK" => "Ativity Inscriptions Begins, Date",
+      "Name_UK" => "No. of Authors",
+      "Title_UK" => "No. of Authors",
       "Sql" => "INT",
       
       "Public"   => 1,
@@ -38,7 +38,8 @@ array
       
       "Compulsory" => FALSE,
       "Search" => FALSE,
-      "IsDate"  => TRUE,
+      "Default"  => 3,
+      "Size"  => 1,
    ),
    "Submissions_Inscriptions" => array
    (
@@ -60,13 +61,32 @@ array
       "Search" => FALSE,
       "Compulsory"  => TRUE,
    ),
+   "Submissions_StartDate" => array
+   (
+      "Name" => "Submissões Início",
+      "Title" => "Atividades, Submissões Início, Data",
+      
+      "Name_UK" => "Submissions Begins",
+      "Title_UK" => "Activity Submissions Begins, Date",
+      "Sql" => "INT",
+      
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+      "IsDate"  => TRUE,
+   ),
    "Submissions_EndDate" => array
    (
-      "Name" => "Inscrições Até",
-      "Title" => "Atividades, Inscrições Até, Data",
+      "Name" => "Submissões Até",
+      "Title" => "Atividades, Submissões Até, Data",
       
-      "Name_UK" => "Inscriptions Untill",
-      "Title_UK" => "Activity Inscriptions Untill, Date",
+      "Name_UK" => "Submissions Untill",
+      "Title_UK" => "Activity Submissions Untill, Date",
       "Sql" => "INT",
       
       "Public"   => 1,

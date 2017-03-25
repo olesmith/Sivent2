@@ -114,6 +114,6 @@ class App_Events extends App_CGIVars
                   "ID" => $this->Sql_Where_IN($events)
                ),
                array(),
-               "Date"
+               "Date DESC"
             );
     }}

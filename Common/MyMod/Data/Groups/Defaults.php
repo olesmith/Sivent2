@@ -31,11 +31,14 @@ trait MyMod_Data_Groups_Defaults
             "Sort" => "",
             "SubTable"  => NULL,
             "TitleData"  => NULL,
-            "GenTableMethod" => "",
+            "GenTableMethod" => "",  //arguments:
+                                     // singular: $edit,$item,$group
+                                     // plural:   $edit
             "OtherClass"  => FALSE,
             "OtherGroup" => FALSE,
             "PreMethod" => FALSE,
             "NItemsPerPage" => FALSE,
+            "Visible" => 1,
         );
 
     }

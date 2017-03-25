@@ -55,7 +55,7 @@ trait MyMod_Data_Fields_File_Update
                 $item[ "__Res__" ]=TRUE;
                 return $item;
             }
-             elseif (empty($name))
+            elseif (empty($name))
             {
                 $msgtext=$this->GetMessage($this->ItemDataMessages,"InvalidExtension");
                 $msgtext=preg_replace('/#Extensions/',join(",",$extensions),$msgtext);

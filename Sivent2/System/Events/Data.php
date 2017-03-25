@@ -1,8 +1,11 @@
 array
-(     
+(
    "Status" => array
    (
       "Name" => "Status",
+      "ShortName" => "Status",
+      "Title" => "Status",
+      
       "Sql" => "ENUM",
       "Values" => array("Aguardando Início das Inscrições","Inscrições Abertas","Inscrições Encerradas"),
       "Values_UK" => array("Awaiting Inscriptions to Open","Inscriptions Open","Inscriptions Closed"),
@@ -31,7 +34,7 @@ array
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,
-      "Friend" => 1,
+      "Friend" => 0,
       "Coordinator" => 1,
       
       "Default" => 1,
@@ -135,26 +138,7 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
       "Compulsory"  => TRUE,
-   ),
-   "Payments" => array
-   (
-      "Name" => "Taxa de Inscrição",
-      "Name_UK" => "Event Fee",
-      "Title" => "Evento Pago?",
-      "Title_UK" => "Paid Event?",
-      "Sql" => "ENUM",
-      "Values" => array("Não","Sim"),
-      "Values_UK" => array("No","Yes"),
-      "Default"  => "1",
-      "SelectCheckBoxes"  => 2,
-
-      "Public"   => 1,
-      "Person"   => 1,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
-      "Assessor"  => 1,
-      "Search"  => FALSE,
+      "Iconify"  => TRUE,
    ),
    "Info" => array
    (
@@ -171,27 +155,7 @@ array
       "Assessor"  => 1,
       "Search"  => FALSE,
    ),
-   "Payments" => array
-   (
-      "Name" => "Taxa de Inscrição",
-      "Name_UK" => "Paid Event",
-      "Title" => "Evento Pago?",
-      "Title_UK" => "Paid Event?",
-      "Sql" => "ENUM",
-      "Values" => array("Não","Sim"),
-      "Values_UK" => array("No","Yes"),
-      "Default"  => "1",
-      "SelectCheckBoxes"  => 2,
-
-      "Public"   => 1,
-      "Person"   => 1,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
-      "Assessor"  => 1,
-      "Search"  => FALSE,
-   ),
-    "Schedule_Public" => array
+   "Schedule_Public" => array
    (
       "Name" => "Grade Publicado",
       "Name_UK" => "Schedule Public",

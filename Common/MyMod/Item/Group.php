@@ -2,6 +2,7 @@
 
 include_once("Group/Data.php");
 include_once("Group/CGI.php");
+include_once("Group/Table.php");
 include_once("Group/Tables.php");
 include_once("Group/Update.php");
 include_once("Group/Form.php");
@@ -13,6 +14,7 @@ trait MyMod_Item_Group
     use
         MyMod_Item_Group_Data,
         MyMod_Item_Group_CGI,
+        MyMod_Item_Group_Table,
         MyMod_Item_Group_Tables,
         MyMod_Item_Group_Update,
         MyMod_Item_Group_Form;
@@ -47,6 +49,8 @@ trait MyMod_Item_Group
 
             foreach ($rgroups as $group)
             {
+                if (empty($this->ItemDataSGroups[ $group ][ "Visible" ])) { continue; }
+                
                 $redit=$edit;
                 if ($this->MyMod_Item_Group_Allowed($this->ItemDataSGroups[ $group ]))
                 {

@@ -14,7 +14,7 @@ class HandleLatex extends HandlePrints
       $item=$this->TrimLatexItem($item);
       if (method_exists($this,"InitPrint")) { $item=$this->InitPrint($item); }
 
-      $title=$this->ItemName." ".$item[ "ID" ].": ".$this->GetItemName($item);
+      $title=$this->ItemName." ".$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item);
 
       $this->ItemLatexTablePrint($title,$item);
   }

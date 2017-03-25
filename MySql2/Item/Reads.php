@@ -196,7 +196,7 @@ class ItemReads extends ItemPrints
 
                     if (!is_array($deriveditem))
                     {
-                        $name=$this->GetItemName($item);
+                        $name=$this->MyMod_Item_Name_Get($item);
                         
                         $this->AddMsg
                        (

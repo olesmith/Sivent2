@@ -2,10 +2,10 @@ array
 (     
    "PreInscriptions_StartDate" => array
    (
-      "Name" => "Inscrições Início",
+      "Name" => "Preinscrições Iníciam",
       "Title" => "Preinscrições, Inscrições Início, Data",
       
-      "Name_UK" => "Inscriptions Begins",
+      "Name_UK" => "PreInscriptions Begins",
       "Title_UK" => "PreInscriptions, Inscriptions Begins, Date",
       "Sql" => "INT",
       
@@ -21,11 +21,11 @@ array
    ),
    "PreInscriptions_EndDate" => array
    (
-      "Name" => "Inscrições Até",
+      "Name" => "Preinscrições Terminam",
       "Title" => "Preinscrições, Inscrições Até, Data",
       
-      "Name_UK" => "Inscriptions Untill",
-      "Title_UK" => "Preinscrições, Inscriptions Untill, Date",
+      "Name_UK" => "Preinscriptions Untill",
+      "Title_UK" => "Preinscriptions, Inscriptions Untill, Date",
       "Sql" => "INT",
       
       "Public"   => 1,

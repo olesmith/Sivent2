@@ -113,11 +113,15 @@ class App_Override extends App_Handle
                (
                  $this->Div
                  (
-                    $this->MyLanguage_GetMessage("Sivent_Old_Message"),
-                    array
-                    (
-                       "CLASS" => 'postloginmsg',
-                    )
+                     $this->Center
+                     (
+                         $this->MyLanguage_GetMessage("Sivent_Inscribe_Message").
+                         $this->MyLanguage_GetMessage("Sivent_Old_Message")
+                     ),
+                     array
+                     (
+                        "CLASS" => 'postloginmsg',
+                     )
                  ),
                  array
                  (

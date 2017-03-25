@@ -217,6 +217,12 @@ class DBDataObj extends Table
                 $this->ItemData[ $data ][ "Info" ]=$quest[ "SqlDefault" ];
             }
             
+            //Search
+            if (intval($quest[ "SqlSearch" ])==2)
+            {
+                $this->ItemData[ $data ][ "Search" ]=TRUE;
+            }
+            
             foreach (array("Friend","Assessor","Compulsory") as $key)
             {
                 if (!empty($this->ItemData[ $data ][ $key ]))

@@ -90,6 +90,51 @@ trait MyMod_Item_PostProcess
     }
 
    
+    //*
+    //* function MyMod_Item_PostProcess_Files, Parameter list: $item
+    //*
+    //* Verifyes file path, moving if necessary.
+    //*
+
+    function MyMod_Item_PostProcess_Files($item)
+    {
+        $datas=$this->GetFileFields();
+        $uploadpath=$this->MyMod_Data_Upload_Path();
+        $this->Sql_Select_Hash_Datas_Read($item,$datas);
+
+        //return $item;
+        foreach ($datas as $data)
+        {
+            if (!empty($item[ $data ]))
+            {
+                $fname=$uploadpath."/".basename($item[ $data ]);
+                
+                if ($item[ $data ]!=$fname)
+                {
+                    if (file_exists($item[ $data ]) && !file_exists($fname))
+                    {
+                        $res=rename($item[ $data ],$fname);
+                        if (file_exists($fname))
+                        {
+            var_dump("moving ".$item[ $data ]."  => ".$fname);
+                            $item[ $data ]=$fname;
+                            $this->Sql_Update_Item_Value_Set
+                            (
+                                $item[ "ID" ],
+                                $data,
+                                $item[ $data ],
+                                "ID"
+                            );
+                            
+                        }
+                    }
+
+                }
+            }
+        }
+        return $item;
+    }
+
 
 }
 

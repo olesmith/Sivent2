@@ -89,9 +89,10 @@ class ItemPostProcess extends ItemReads
         }
         
         $item=$this->MyMod_Item_PostProcess_Trim($item);
+        $item=$this->MyMod_Item_PostProcess_Files($item);
 
         $post=$this->ItemPostProcessor;
-        if ($post=="")
+        if (empty($post))
         {
             $post="PostProcess";
         }
@@ -115,6 +116,7 @@ class ItemPostProcess extends ItemReads
         return $item;
     }
 
+    
     //*
     //* function PostProcessSqlObjects, Parameter list: $item
     //*

@@ -58,7 +58,7 @@ trait MyMod_Items_Update
         }
         
         $udatas=$this->Datas2Datas($udatas);
-        
+
         foreach ($ids as $id)
         {
             //Test if we have individual access to Edit $item
@@ -147,7 +147,7 @@ trait MyMod_Items_Update
                 }
             }
 
-            $itemname=$this->GetItemName($ritems[$id]);
+            $itemname=$this->MyMod_Item_Name_Get($ritems[$id]);
             if ($update>0)
             {
                 $this->Sql_Update_Item
@@ -173,7 +173,7 @@ trait MyMod_Items_Update
                 (
                    "UpdateItem(s)",
                    $ritems[$id][ "ID" ].": ".
-                   $this->GetItemName($ritems[$id])
+                   $this->MyMod_Item_Name_Get($ritems[$id])
                 );
 
                 $ritems[$id]=$this->SetItemTime("ATime",$ritems[$id]);

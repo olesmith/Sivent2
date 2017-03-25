@@ -135,6 +135,9 @@ array
       "Size" => 20,
       "FieldMethod" => "SqlKeyField",
       "TriggerFunction" => "UpdateSqlKeyField",
+      "Comment" => "ASCII (SQL)",
+      "Comment_UK" => "ASCII (SQL)",
+      "Comment_ES" => "ASCII (SQL)",
 
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
@@ -175,6 +178,27 @@ array
       "Size" => 20,
 
       "Sql" => "VARCHAR(256)",
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      //"Friend"     => 1,
+      "Coordinator" => 2,
+      //"Assessor"  => 1,
+   ),
+   
+   "SqlSearch" => array
+   (
+      "Name" => "Pesquisar",
+      "Name_UK" => "Search",
+
+      "Search" => TRUE,
+      "Size" => 20,
+
+      "Sql" => "ENUM",
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      "Default" => 1,
+      
       "Public"   => 1,
       "Person"   => 0,
       "Admin"    => 2,

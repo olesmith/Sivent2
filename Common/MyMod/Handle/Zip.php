@@ -120,8 +120,6 @@ trait MyMod_Handle_Zip
         foreach ($this->GetFileFields() as $filefield)
         {
             $file=$this->MyMod_Handle_Zip_Item_Field($zip,$item,$filefield);
-
-            //$this->ZipItemFileField($zip,$item,$filefield);
             $nfiles++;
         }
 
@@ -137,8 +135,13 @@ trait MyMod_Handle_Zip
     function MyMod_Handle_Zip_Item_Field_FileName($item,$data)
     {
         $file=$item[ $data ];
-        
-        return basename($file);
+
+        $name=$this->MyMod_Item_Name_Get($item);
+        $name=$this->Html2Sort($name);
+        $name=strtolower($name);
+        $name=preg_replace('/\s+/',".",$name);
+
+        return $name.".".basename($file);
     }
 
     //*
@@ -161,7 +164,13 @@ trait MyMod_Handle_Zip
                 (
                    $file,
                    $this->MyMod_Handle_Zip_Item_Field_FileName($item,$data)
-                ); 
+                );
+                
+                if (preg_match('/^(Admin)$/',$this->Profile()))
+                {
+                    $zip->addFile($file);
+                }
+
             }
         }
     }

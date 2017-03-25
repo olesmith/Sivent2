@@ -67,6 +67,7 @@ array
          "Submissões",
          "PreInscrições",
          "Presenças",         
+         "Pagamentos",         
       ),
       "Values_UK" => array
       (
@@ -77,6 +78,7 @@ array
          "Submissions",
          "PreInscriptions",
          "Presences",         
+         "Payments",         
       ),
       
       "Default" => "0 ",

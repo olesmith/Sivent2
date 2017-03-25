@@ -11,7 +11,7 @@ array
       "Data" => array
       (
          "Event","Pertains","DataGroup","SortOrder",
-         "SqlKey","Type","SqlDef",
+         "SqlKey","Type","SqlDef","SqlSearch",
          "Text","Text_UK",
       ),
       "Admin" => 1,

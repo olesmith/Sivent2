@@ -3,17 +3,17 @@
 
 class HandleZip extends HandleFiles
 {
-    //*
-    //* function HandleZip, Parameter list: 
-    //*
-    //* Handles Module zipping of file.
-    //*
+    /* //\* */
+    /* //\* function HandleZip, Parameter list:  */
+    /* //\* */
+    /* //\* Handles Module zipping of file. */
+    /* //\* */
 
-    function HandleZip()
-    {
-        $this->MyMod_Handle_Zip();
+    /* function HandleZip() */
+    /* { */
+    /*     $this->MyMod_Handle_Zip(); */
         
-    }
+    /* } */
 
 
 

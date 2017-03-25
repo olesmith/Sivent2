@@ -66,23 +66,16 @@ class Speakers_Access extends ModulesCommon
 
         if ($res)
         {
-            $nitems=
-                $this->SubmissionsObj()->Sql_Select_NHashes
-                (
-                   array("Friend" => $item[ "Friend" ])
-                )
-                +
-                $this->SubmissionsObj()->Sql_Select_NHashes
-                (
-                   array("Friend2" => $item[ "Friend" ])
-                )
-                +
-                $this->SubmissionsObj()->Sql_Select_NHashes
-                (
-                   array("Friend3" => $item[ "Friend" ])
-                );
+            foreach ($this->SubmissionsObj()->Authors_Datas("Friend") as $data)
+            {
+                $nitems=
+                    $this->SubmissionsObj()->Sql_Select_NHashes
+                    (
+                        array("Friend" => $item[ "Friend" ])
+                    );
 
-            if ($nitems>0) { $res=FALSE; }
+                if ($nitems>0) { $res=TRUE; break; }
+            }
         }
         
         return $res;

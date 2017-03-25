@@ -514,14 +514,14 @@ class EventApp extends MyEventApp_Mail
     }
     
     //*
-    //* function Event_Inscriptions_DateSpan, Parameter list: $edit
+    //* function Event_DateSpan, Parameter list: $edit
     //*
     //* Returns date span title.
     //*
 
-    function Event_Inscriptions_DateSpan($event=array())
+    function Event_DateSpan($event=array())
     {
-        return $this->EventsObj()->Event_Inscriptions_DateSpan($event);
+        return $this->EventsObj()->Event_DateSpan($event);
     }
 }
 

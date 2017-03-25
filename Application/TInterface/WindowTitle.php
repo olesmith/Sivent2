@@ -48,7 +48,7 @@ class TInterfaceWindowTitle extends TInterfaceCSS
                 $id=$this->GetGET("ID");
                 if ($id!="" && $id>0)
                 {
-                    $name=$this->Module->GetItemName($this->Module->ItemHash);
+                    $name=$this->Module->MyMod_Item_Name_Get($this->Module->ItemHash);
                     array_push($vals,$name);
                 }
             }

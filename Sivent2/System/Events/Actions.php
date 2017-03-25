@@ -6,8 +6,9 @@ array
          'Person' => 0,
          "Admin" => 1,
          "Friend"     => 0,
-         "Coordinator" => 0,
+         "Coordinator" => 1,
          "Assessor"  => 0,
+         "AccessMethod"    => "CheckEditAccess",
       ),
       'Datas' => array
       (

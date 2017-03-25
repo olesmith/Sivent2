@@ -21,7 +21,7 @@ array
       "Name" => "SQL",
       "Data" => array
       (
-         "SqlKey","Type","SqlDef","SqlDefault",
+         "SqlKey","Type","SqlDef",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -46,6 +46,21 @@ array
       "Coordinator" => 1,
       //"Assessor"  => 1,
    ),
+   "CSS" => array
+   (
+      "Name" => "HTML",
+      "Data" => array
+      (
+          "CSS",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      //"Friend"     => 1,
+      "Coordinator" => 1,
+      //"Assessor"  => 1,
+    ),
    "INPUT" => array
    (
       "Name" => "INPUT (Text)",
@@ -81,7 +96,7 @@ array
       "Name" => "SELECT",
       "Data" => array
       (
-         "CSS","SValues","SValues_UK",
+         "SValues","SValues_UK","SqlDefault","SqlSearch",
       ),
       "Admin" => 1,
       "Person" => 0,

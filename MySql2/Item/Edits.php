@@ -101,7 +101,7 @@ class ItemEdits extends ItemForms
 
         if ($this->ItemIsUnique($item))
         {
-            //$this->ApplicationObj->LogMessage("Copy",$item[ "ID" ].": ".$this->GetItemName($item));
+            //$this->ApplicationObj->LogMessage("Copy",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
 
             $item[ "ATime" ]=time();
             $item[ "MTime" ]=time();
@@ -150,7 +150,7 @@ class ItemEdits extends ItemForms
     {
         if (count($item)>0) {} else { $item=$this->ItemHash; }
 
-        $this->ApplicationObj->LogMessage("Item Deleted",$item[ "ID" ].": ".$this->GetItemName($item));
+        $this->ApplicationObj->LogMessage("Item Deleted",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
         
         $this->Sql_Delete_Item($item[ "ID" ],"ID",$this->SqlTableName());
 

@@ -4,7 +4,7 @@
       "Assessor" => "0",
       "Coordinator" => "1",
       "Friend" => "1",
-      "Href" => "?Unit=".$this->Unit("ID")."&Action=Start",
+      "Href" => "?Unit=".$this->Unit("ID")."&Event=&Action=Start",
       "Name" => "Início",
       "Name_ES" => "Inicio",
       "Name_UK" => "Start",

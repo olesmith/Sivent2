@@ -29,10 +29,8 @@ trait MyMod_Item_Group_CGI
 
     function MyMod_Item_Group_CGI2Item($group,&$item,$plural=FALSE,$precgikey="")
     {
-        $updatedata=array();
-
         $datas=$this->MyMod_Item_Group_Data($group,TRUE);
-        $this->MyMod_Item_Datas_CGI2Item($datas,$item,$plural,$precgikey);
+        $updatedata=$this->MyMod_Item_Datas_CGI2Item($datas,$item,$plural,$precgikey);
 
         return $updatedata;
     }
@@ -46,8 +44,8 @@ trait MyMod_Item_Group_CGI
         $updatedata=array();
         foreach ($datas as $data)
         {
-              if ($this->MyMod_Data_Access($data,$item)>=2)
-             {
+             if ($this->MyMod_Data_Access($data,$item)>=2)
+            {
                  $rdata=$data;
                  if ($plural)
                  {

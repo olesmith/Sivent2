@@ -21,6 +21,11 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
 
     function InscriptionSGroupsTable($edit,$inscription)
     {
+        if (!empty($this->ItemDataSGroups[ "Payments" ]) && is_array($this->ItemDataSGroups[ "Payments" ]))
+        {
+            $this->ItemDataSGroups[ "Payments" ][ "Visible" ]=FALSE;
+        }
+
         $buttons="";
         if ($edit==1) { $buttons=$this->Buttons(); }
         
@@ -28,18 +33,27 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         unset($this->ItemDataSGroups[ "Submissions" ]);
         
         return
-            $this->MyMod_Item_Group_Tables_Form
+            $this->MyMod_Item_Group_Tables_Html
             (
                $edit,
-               "Update",
                $this->MyMod_Item_SGroups($edit),
                $inscription,
-               FALSE,  //mayupdate, done elsewhere
-               FALSE, //plural
-               "",
                $buttons
             ).
             "";
+        /* return */
+        /*     $this->MyMod_Item_Group_Tables_Form */
+        /*     ( */
+        /*        $edit, */
+        /*        "Update", */
+        /*        $this->MyMod_Item_SGroups($edit), */
+        /*        $inscription, */
+        /*        FALSE,  //mayupdate, done elsewhere */
+        /*        FALSE, //plural */
+        /*        "", */
+        /*        $buttons */
+        /*     ). */
+        /*     ""; */
     }
     
     //*
@@ -58,6 +72,60 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         
         return $eventmessage;
     }
+    
+    //*
+    //* function Inscription_Event_Info_Row, Parameter list:
+    //*
+    //* Creates Inscription edit table as matrix.
+    //*
+
+    function Inscription_Event_Info_Row($inscription)
+    {
+        $row=
+            array
+            (
+                $this->Anchor("TABLE").
+                $this->InscriptionDiagList($inscription),
+            );
+        $info=$this->Event("Info");
+
+        if (!empty($info))
+        {
+            array_push
+            (
+                $row,
+                array
+                (
+                    "Text" => $this->FriendsObj()->Friend_Event_Info_Cell($this->Event()),
+                    "Options" => array
+                    (
+                        "WIDTH" => "50%",
+                    )
+                )   
+            );
+        }
+
+        return $row;
+    }
+
+    //*
+    //* function Inscription_Event_Payments_Row, Parameter list:
+    //*
+    //* Creates Inscription edit table as matrix.
+    //*
+
+    function Inscription_Event_Payments_Row($inscription)
+    {
+        $this->ItemDataSGroups[ "Payments" ][ "Visible" ]=FALSE;
+
+        return
+            array
+            (
+                $this->FriendsObj()->Friend_Event_Payments_Cell($this->Event()),
+                $this->MyMod_Item_Group_Table_HTML(1,"Payments",$inscription)
+            );
+    }
+
     
     //*
     //* function InscriptionTable, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
@@ -91,16 +159,23 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
             
             array_push($table,$this->Button("submit",$title));
         }
-
-        array_unshift($table,$this->InscriptionDiagList($inscription));
-
-        array_push
-        (
-           $table,
-           $this->Anchor("TABLE").
-           $this->Inscription_Event_Info()
-        );
+        if ($this->EventsObj()->Event_Payments_Has())
+        {
+            array_unshift
+            (
+                $table,
+                $this->Inscription_Event_Payments_Row($inscription),
+                $this->Buttons()
+            );
+        }
         
+
+        array_unshift
+        (
+            $table,
+            $this->Inscription_Event_Info_Row($inscription)
+        );
+
         return $table;
     }
     
@@ -176,7 +251,10 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
             
         if (!empty($tables))
         {
-            return $this->Html_Table("",$tables);
+            return
+                $this->Anchor("TABLE").$this->Anchor("INSCR").
+                $this->Html_Table("",$tables).
+                "";
         }
 
         return "";

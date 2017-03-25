@@ -54,6 +54,9 @@
           "Speakers",
           "PreInscriptions",
           "Presences",
+          
+          "Lots",
+          "Types",
        ),
        "ModuleDependencies" => array
        (
@@ -93,13 +96,112 @@
           "Speakers" => array("Friends","Submissions"),
           "PreInscriptions" => array("Friends","Inscriptions","Submissions"),
           "Presences" => array("Friends","Schedules"),
+          
+          "Lots" => array("Events"),
+          "Types" => array("Events"),
        ),
 
        "SubModulesVars" => array
        (
          "include_file" => "System/Modules.php",
        ),
-       "PermissionVars" => array
+       "Module2Groups" => array
        (
+           "Events" => "Configuration",
+           "Datas" => "Configuration",
+           "DataGroups" => "Configuration",
+           
+           "Inscriptions" => "Inscriptions",
+           "Lots" => "Inscriptions",
+           "Types" => "Inscriptions",
+           
+           "Caravans" => "Caravans",
+           "Caravaneers" => "Caravans",
+           
+           "Collaborations" => "Collaborations",
+           "Collaborators" => "Collaborations",
+           
+           "Submissions" => "Submissions",
+           "Areas" => "Submissions",
+           
+           "Assessments" => "Submissions",
+           "Assessors" => "Submissions",
+           "Criterias" => "Submissions",
+
+           "Schedules" => "Grade",
+           "Rooms" => "Grade",
+           "Places" => "Grade",
+           "Times" => "Grade",
+           "Dates" => "Grade",
+           "Speakers" => "Grade",
+
+           
+           //"PreInscriptions" => "PreInscriptions",
+           //"Presences" => "Presences",
+           //"Statistics" => "Statistics",
+       ),
+       "ModuleGroups2Actions" => array
+       (
+           //Actions should be defined in System/Actions.php (or elsewhere)
+           "Configuration" => array
+           (
+               "Name" => "Configuração",
+               "Title" => "Configuração do Evento",
+               "Name_UK" => "",
+               "Title_UK" => "",
+               "Actions" => array("Event_Configuration","Datas","DataGroups",),
+           ),
+           "Inscriptions" => array
+           (
+               "Name" => "Inscrições",
+               "Title" => "Inscrições, Certificados e Pagamentos",
+               "Name_UK" => "Inscriptions",
+               "Title_UK" => "Inscriptions, Certificates and Payments",
+               "Actions" => array("Inscriptions","Types","Lots","Certificates","Payments",),
+           ),
+           "Collaborations" => array
+           (
+               "Name" => "Colaborações",
+               "Title" => "Gerenciar Colaborações e Colaboradores",
+               "Name_UK" => "Collaborations",
+               "Title_UK" => "Manage Collaborations and Collaborators",
+               "Actions" => array("Collaborations","Collaborators","Collaborators_Certificates",),
+           ),
+           "Caravans" => array
+           (
+               "Name" => "Caravans",
+               "Title" => "Gerenciar Caravans",
+               "Name_UK" => "Caravans",
+               "Title_UK" => "Manage Caravans",
+               "Actions" => array("Caravans","Caravaneers","Caravaneers_Certificates",),
+           ),
+           "Submissions" => array
+           (
+               "Name" => "Atividades",
+               "Title" => "Atividades e Avaliações",
+               "Name_UK" => "Activities",
+               "Title_UK" => "Activities and Assessments",
+               "Actions" => array
+               (
+                   "Submissions",
+                   "Areas",
+                   "Criterias","Assessments","Assessors",
+                   "Submissions_Certificates","Speakers",
+               ),
+           ),
+           "Grade" => array
+           (
+               "Name" => "Grade",
+               "Title" => "Gerenciar Grade",
+               "Name_UK" => "Schedule",
+               "Title_UK" => "Schedule Activities",
+               "Actions" => array
+               (
+                   "Schedule","Submissions",
+                   "Dates","Times",
+                   "Places","Rooms",
+                   "ScheduleEdit","Speakers",
+               ),
+           ),
        ),
     );

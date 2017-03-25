@@ -27,7 +27,7 @@ trait Sql_Table_Structure_Update
 
         $res=TRUE;
         $mtime=$this->MyMod_Data_Files_MTime();
-        
+
         if (
             $mtime>$tableinfo[ "Time" ]
             ||

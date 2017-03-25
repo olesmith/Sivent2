@@ -61,7 +61,6 @@ trait MyMod_Item_Update
         $rupdate=0;
         $update=0;
         $updatedatas=array(); //datas that are actually updated
-
         foreach ($datas as $id => $rrdata)
         {
             $rrdatas=$rrdata;
@@ -142,7 +141,7 @@ trait MyMod_Item_Update
             (
                "UpdateItem",
                $item[ "ID" ].": ".
-               $this->GetItemName($item)
+               $this->MyMod_Item_Name_Get($item)
             );
 
             $this->Sql_Update_Item

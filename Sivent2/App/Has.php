@@ -153,7 +153,7 @@ class App_Has extends App_Head_Table
     //* Detects if current event has any Schedules.
     //*
 
-    function Friend__Should($friend=array())
+    function Friend__Should00000000000000000000($friend=array())
     {
         return $this->FriendsObj()->Friend_Schedules_Should($friend);
     }
@@ -161,6 +161,18 @@ class App_Has extends App_Head_Table
 
 
 
+    
+    //*
+    //* function HasPayments, Parameter list:$event=array()
+    //*
+    //* Checks whether current event has Payments.
+    //* 
+    //*
+
+    function HasPayments($event=array())
+    {
+        return $this->EventsObj()->Event_Payments_Has($event);
+    }
     
     //*
     //* function HasCollaborations, Parameter list:$event=array()
@@ -290,6 +302,23 @@ class App_Has extends App_Head_Table
             $this->HasCollaborations($event)
             &&
             $this->Coordinator_Access_Has($this->CollaborationsObj()->Coordinator_Type,$event);
+    }
+
+    //*
+    //* sub Coordinator_Payments_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to payments.
+    //*
+    //*
+
+    function Coordinator_Payments_Access_Has($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return
+            $this->HasPayments($event)
+            &&
+            $this->Coordinator_Access_Has(8,$event);
     }
 
     //*

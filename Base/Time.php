@@ -486,29 +486,6 @@ class Time extends Language
         }
     }
 
-    /* function Time2Hash($mtime="") */
-    /* { */
-    /*     if (empty($mtime)) { $mtime=time(); } */
-
-    /*     $mtime=intval($mtime); */
-    /*     $timeinfo=localtime($mtime,TRUE); */
-
-    /*     $timeinfo[ "Year" ]=$timeinfo[ "tm_year" ]+1900; */
-    /*     $timeinfo[ "Month" ]=sprintf("%02d",$timeinfo[ "tm_mon" ]+1); */
-    /*     $timeinfo[ "MDay" ]=sprintf("%02d",$timeinfo[ "tm_mday" ]); */
-
-    /*     $wday=$timeinfo[ "tm_wday" ]; */
-    /*     if ($wday==0) { $wday=6; } */
-    /*     else          { $wday--; } */
-
-    /*     $timeinfo[ "WeekDay" ]=$this->MyTime_WeekDay($wday); */
-
-    /*     $timeinfo[ "Hour" ]=sprintf("%02d",$timeinfo[ "tm_hour" ]); */
-    /*     $timeinfo[ "Min" ]=sprintf("%02d",$timeinfo[ "tm_min" ]); */
-    /*     $timeinfo[ "Sec" ]=sprintf("%02d",$timeinfo[ "tm_sec" ]); */
-
-    /*     return $timeinfo; */
-    /* } */
 
 }
 ?>

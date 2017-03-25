@@ -6,6 +6,7 @@ include_once("Submissions/Table.php");
 include_once("Submissions/Export.php");
 include_once("Submissions/Schedule.php");
 include_once("Submissions/Certificate.php");
+include_once("Submissions/Author.php");
 include_once("Submissions/Authors.php");
 include_once("Submissions/Assessors.php");
 include_once("Submissions/Assessments.php");
@@ -16,6 +17,8 @@ include_once("Submissions/Handle.php");
 class Submissions extends Submissions_Handle
 {
     var $Certificate_Type=4;
+    var $Author_Datas=array("Friend","Author");
+    
     
     //*
     //* function Units, Parameter list: $args=array()
@@ -32,16 +35,12 @@ class Submissions extends Submissions_Handle
                "Unit","Event",
                "Title","Title_UK",
                "Status","TimeLoad",
-               "Friend","Friend2","Friend3"
+               "Author",
+               //Add Friend keys below
             );
         
         $this->Sort=array("Name","Title");
-        /* if ($this->CGI_VarValue("Submissions_GroupName")=="Assessments") */
-        /* { */
-        /*     $this->Sort=array("Result","Name","Title"); */
-        /*     $this->Reverse=TRUE; */
-        /* } */
-        
+
         $this->IncludeAllDefault=TRUE;
 
         $this->Coordinator_Type=5;
@@ -93,7 +92,6 @@ class Submissions extends Submissions_Handle
         return $path;
     }
     
-   
     //*
     //* function PostProcessItemData, Parameter list:
     //*
@@ -105,9 +103,17 @@ class Submissions extends Submissions_Handle
     {
         $this->PostProcessUnitData();
         $this->PostProcessEventData();
+        $this->Authors_Data_PostProcess();
 
+        $this->AlwaysReadData=array_merge
+        (
+            $this->AlwaysReadData,
+            $this->Authors_Datas("Friend")
+        );
+        
         $this->Actions();
     }
+
 
 
     //*
@@ -126,14 +132,10 @@ class Submissions extends Submissions_Handle
 
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
-        $updatedatas=array();
-        
-        $updatedatas=$this->PostProcess_Friends($item);
-
         $updatedatas=
             array_merge
             (
-               $updatedatas,
+               $this->PostProcess_Friends($item),
                $this->MyMod_Item_Language_Data_Defaults($item,"Title")
             );
         
@@ -149,8 +151,7 @@ class Submissions extends Submissions_Handle
         
         $this->PostProcess_Certificate($item);
         $updatedatas=$this->PostProcess_Results($item,$updatedatas);
-        
-        
+       
         if (count($updatedatas)>0 && !empty($item[ "ID" ]))
         {
              $this->Sql_Update_Item_Values_Set($updatedatas,$item);
@@ -160,6 +161,7 @@ class Submissions extends Submissions_Handle
         return $item;
     }
     
+    
     //*
     //* function PostProcess_Friends, Parameter list: $item,$updatedatas=array()
     //*
@@ -168,33 +170,7 @@ class Submissions extends Submissions_Handle
 
     function PostProcess_Friends(&$item,$updatedatas=array())
     {
-        $this->Sql_Select_Hash_Datas_Read($item,array("Event","Author1","Author2","Author3"));
-
-        //Take default author names, if empty
-        $hash=array
-        (
-           "Friend"  => "Author1",
-           "Friend2" => "Author2",
-           "Friend3" => "Author3",
-        );
-
-        $event=array("ID" => $item[ "Event" ]);
-        foreach ($hash as $fkey => $akey)
-        {
-            if (empty($item[ $akey ]) && !empty($item[ $fkey ]))
-            {
-                $item[ $akey ]=$this->FriendsObj()->Sql_Select_Hash_Value($item[ $fkey ],"Name");
-                array_push($updatedatas,$akey);
-
-                $friend=array("ID" => $item[ $fkey ]);
-                $isinscribed=$this->EventsObj()->Friend_Inscribed_Is($event,$friend);
-                if (!$isinscribed)
-                {
-                    $this->InscriptionsObj()->DoInscribe($friend);
-                }
-            }
-        }
-
+        $this->Submissions_Friends_PostProcess($item,$updatedatas);
         $this->Submission_Speakers_Update($item);
 
         return $updatedatas;
@@ -255,7 +231,7 @@ class Submissions extends Submissions_Handle
             $this->AddFixedValues[ "Friend" ]=$this->LoginData("ID");
             if (!empty($this->AddDefaults[ "Friend" ]))
             {
-                $this->AddDefaults[ "Author1" ]=$this->LoginData("Name");
+                $this->AddDefaults[ "Author" ]=$this->LoginData("Name");
             }
         }
         elseif (preg_match('/^(Admin|Coordinator)$/',$this->Profile()))
@@ -284,7 +260,7 @@ class Submissions extends Submissions_Handle
 
     function SubmissionID2Authors($submissionid)
     {
-        $datas=array("Friend","Friend2","Friend3",);
+        $datas=$this->Authors_Datas("Friend");
         
         $submission=$this->Sql_Select_Hash(array("ID" => $submissionid),$datas);
         
@@ -308,15 +284,11 @@ class Submissions extends Submissions_Handle
 
     function Submission_Speakers_Update(&$item)
     {
-        $this->Sql_Select_Hash_Datas_Read($item,array("Event","Author1","Author2","Author3"));
+        $datas=$this->Authors_Datas("Friend",array("Event"));
+        $this->Sql_Select_Hash_Datas_Read($item,$datas);
 
         //Take default author names, if empty
-        $hash=array
-        (
-           "Friend"  => "Author1",
-           "Friend2" => "Author2",
-           "Friend3" => "Author3",
-        );
+        $hash=$this->Authors_Datas_Skew();
 
         $event=array("ID" => $item[ "Event" ]);
         foreach ($hash as $fkey => $akey)
@@ -335,37 +307,48 @@ class Submissions extends Submissions_Handle
     //* Updates speaker value: adds, if not in speakers.
     //*
 
-    function UpdateSpeaker($item,$data,$newvalue)
+    function UpdateSpeaker(&$item,$data,$newvalue)
     {
-        // if ($item[ "Status" ]!=2) { return $item; }
+        $newvalue=intval($newvalue);
         
         $oldvalue=0;
         if (!empty($item[ $data ])) { $oldvalue=$item[ $data ]; }
-        $item[ $data ]=$newvalue;
+        $oldvalue=intval($oldvalue);
         
-
-        /* if ($oldvalue==$newvalue) */
-        /* { */
-        /*     return $item; */
-        /* } */
+        $item[ $data ]=$newvalue;
        
         $friend=array();
+
+        $updatedatas=array();
         if (!empty($newvalue))
         {
             $friend=$this->FriendsObj()->Sql_Select_Hash(array("ID" => $newvalue));
         }
+        elseif (!empty($oldvalue))
+        {
+            $item[ $data ]=0;
+            $n=$this->Authors_Data_2_No($data);
+
+            $authordatas=$this->Author_Datas_Get($n);
+
+            $updatedatas=array();
+            foreach ($authordatas as $rdata)
+            {
+                $item[ $rdata ]="";
+                array_push($updatedatas,$rdata);  
+            }
+            
+            $item[ $data ]=0;
+
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+
+            return $item;
+        }
 
         
         
-        $hash=
-            array
-            (
-               "Friend" => "Author1",
-               "Friend2" => "Author2",
-               "Friend3" => "Author3",
-            );
+        $hash=$this->Authors_Datas_Skew();
 
-        $updatedatas=array();
         if (!empty($friend))
         {
             $this->SpeakersObj()->Sql_Table_Structure_Update();
@@ -433,7 +416,7 @@ class Submissions extends Submissions_Handle
     function Friend2Ors($friendid,$where=array())
     {
         $ors=array();
-        foreach (array("Friend","Friend2","Friend3",) as $data)
+        foreach ($this->Authors_Datas("Friend") as $data)
         {
             array_push($ors,$data."='".$friendid."'");
         }
@@ -474,7 +457,7 @@ class Submissions extends Submissions_Handle
         if (!empty($submission[ "Friends" ])) { return; }
         
         $submission[ "Friends" ]=array();
-        foreach (array("Friend","Friend2","Friend3") as $key)
+        foreach ($this->Authors_Datas("Friend") as $key)
         {
             if (!empty($submission[ $key ]))
             {
@@ -484,7 +467,7 @@ class Submissions extends Submissions_Handle
         }
         
         $submission[ "Authors" ]=array();
-        foreach (array("Author1","Author2","Author3") as $key)
+        foreach ($this->Authors_Datas("Author") as $key)
         {
             if (!empty($submission[ $key ]))
             {

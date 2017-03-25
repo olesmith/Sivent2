@@ -314,7 +314,7 @@ class Items extends ItemsEmails
             array_push
             (
                $names,
-               $this->GetItemName($item)
+               $this->MyMod_Item_Name_Get($item)
             );
         }
 
