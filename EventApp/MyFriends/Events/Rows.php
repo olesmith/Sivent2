@@ -230,6 +230,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
                     "Payments_Institution",
                     "Payments_Name",
                     "Payments_Agency",
+                    "Payments_Operation",
                     "Payments_Account",
                     "Payments_Variation",
                 )

@@ -166,7 +166,7 @@ array
           "Name",//"Friend",
           "Payment",
           "Payments_Type","Payments_Institution",
-          "Payments_Name","Payments_Agency","Payments_Account","Payments_Variation",
+          "Payments_Name","Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation",
           "Payments_Info","Payments_URL",
         ),
 

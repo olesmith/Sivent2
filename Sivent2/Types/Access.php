@@ -17,7 +17,8 @@ class Types_Access extends ModulesCommon
 
     function HasModuleAccess($event=array())
     {
-        $res=$this->SubmissionsObj()->HasModuleAccess($event);
+        $res=$this->Coordinator_Inscriptions_Access_Has();
+
 
         return $res;
     }
