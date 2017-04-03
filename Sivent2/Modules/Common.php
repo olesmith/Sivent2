@@ -254,6 +254,18 @@ class ModulesCommon extends EventMod
     }
 
     //*
+    //* sub Coordinator_Sponsors_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Sponsors.
+    //*
+    //*
+
+    function Coordinator_Sponsors_Access_Has($event=array())
+    {
+        return $this->ApplicationObj()->Coordinator_Sponsors_Access_Has($event);
+    }
+
+    //*
     //* sub Coordinator_Collaborations_Access_Has, Parameter list: $event=array()
     //*
     //* Checks whether coordinator (current login) has access to Collaborations.

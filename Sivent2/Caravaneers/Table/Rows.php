@@ -6,12 +6,12 @@ class Caravaneers_Table_Rows extends Caravaneers_Table_Where
     //*
     //* function Caravaneers_Table_Titles, Parameter list: 
     //*
-    //* Title row.
+    //* Title rows (matrix).
     //*
 
     function Caravaneers_Table_Titles()
     {
-        return
+        $row=
             array
             (
                $this->GetDataTitles
@@ -19,6 +19,14 @@ class Caravaneers_Table_Rows extends Caravaneers_Table_Where
                   $this->Caravaneers_Table_Data()
                )
             );
+
+        $cred=$this->CGI_GET("Cred");
+        if ($cred==1)
+        {
+            array_push($row[0],$this->MyLanguage_GetMessage("Signatures"));
+        }
+
+        return $row;
     }
     
     //*
@@ -29,6 +37,14 @@ class Caravaneers_Table_Rows extends Caravaneers_Table_Where
 
     function Caravaneers_Table_Row($edit,$inscription,$n,$caravaneer)
     {
+        if ($this->LatexMode())
+        {
+            $caravaneer[ "Email" ]=preg_replace('/_/',"\_",strtolower($caravaneer[ "Email" ]));
+            $caravaneer[ "Name" ]=$this->TrimCase($caravaneer[ "Name" ]);
+        }
+
+        
+        
         $row=
             $this->MyMod_Items_Table_Row
             (
@@ -39,28 +55,13 @@ class Caravaneers_Table_Rows extends Caravaneers_Table_Where
                $plural=FALSE,
                "No_".$n."_"
             );
-
-        if (!empty($caravaneer[ "Email" ]))
+        
+        $cred=$this->CGI_GET("Cred");
+        if ($cred==1)
         {
-            $comps=preg_split('/@/',$caravaneer[ "Email" ]);
-            if (count($comps)>=2)
-            {
-                $mailname=$comps[0];
-                $mailhost=$comps[1];
-
-                $regex='[\/#,:<>]';
-                
-                if (
-                      preg_match('/'.$regex.'/',$mailname)
-                      ||
-                      preg_match('/'.$regex.'/',$mailname)
-                   )
-                {
-                    
-                }
-            }
+            array_push($row," \\hspace{6cm} ");
         }
-            
+          
         return $row;
     }
     

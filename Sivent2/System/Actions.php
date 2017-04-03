@@ -446,6 +446,23 @@ array
         "Advisor"    => 0,
         'AccessMethod'    => "Current_User_Event_Inscriptions_May_Edit",
       ),
+     "Sponsors" => array
+     (
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Sponsors&Action=EditList&Event=".$this->Event("ID"),
+        "Title"    => "Gerenciar Patrocinadores",
+        "Title_UK" => "Manage Sponsors",
+        "Name"     => "Patrocinadores",
+        "Name_UK"     => "Sponsors",
+
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"    => 1,
+        "Friend"   => 1,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        'AccessMethod'    => "Current_User_Event_Sponsors_May_Edit",
+      ),
      "Types" => array
      (
         "Href"     => "",

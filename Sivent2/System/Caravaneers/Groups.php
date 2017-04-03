@@ -54,6 +54,23 @@ array
       "Coordinator" => 1,
       "Visible" => FALSE,
    ),
+   "Latex_Cred" => array
+   (
+      "Name" => "Latex",
+      "Name_UK" => "Latex",
+      "Data" => array
+      (
+         "No",
+         "Name","Email",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => FALSE,
+   ),
    "TimeStamps" => array
    (
       "Name" => "Tempos",

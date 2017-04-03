@@ -52,6 +52,16 @@ trait MyMod_Item_Cells
     //* Creates item cell: data cell, action cell - or method cell..
     //*
 
+    function MyMod_Item_Action_Cell_Title($data)
+    {
+        return $this->B($this->MyActions_Entry_Title($data));
+    }
+
+    
+    //*
+    //* Creates item cell: data cell, action cell - or method cell..
+    //*
+
     function MyMod_Item_Cell_Title($data)
     {
         $cell="";

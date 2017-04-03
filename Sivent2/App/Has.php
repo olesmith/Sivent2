@@ -288,6 +288,18 @@ class App_Has extends App_Head_Table
     }
 
     //*
+    //* sub Coordinator_Sponsors_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to Sponsors.
+    //*
+    //*
+
+    function Coordinator_Sponsors_Access_Has($event=array())
+    {
+        return $this->Coordinator_Access_Has($this->SponsorsObj()->Coordinator_Type,$event);
+    }
+
+    //*
     //* sub Coordinator_Collaborations_Access_Has, Parameter list: $event=array()
     //*
     //* Checks whether coordinator (current login) has access to .

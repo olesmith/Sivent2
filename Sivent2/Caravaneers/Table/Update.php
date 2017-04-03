@@ -208,7 +208,7 @@ class Caravaneers_Table_Update extends Caravaneers_Table_Table
             elseif ($data=="Certificate")
             {
                 $cgivalue=1;
-                if ($caravaneer[ $data ]!=$cgivalue)
+                if (empty($caravaneer[ $data ]) || $caravaneer[ $data ]!=$cgivalue)
                 {
                     $caravaneer[ $data ]=$cgivalue;
                     array_push($updatedatas,$data);

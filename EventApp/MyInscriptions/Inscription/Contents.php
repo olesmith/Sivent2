@@ -99,7 +99,7 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
 
         return $this->FrameIt
         (
-            $this->InscriptionFriendForm(1,$this->Friend).
+            $this->InscriptionFriendForm(1,$this->Friend,$this->Inscription).
             $this->Inscription_Event_Typed_Tables($edit,$this->Friend,$this->Inscription).
             $html.
             ""

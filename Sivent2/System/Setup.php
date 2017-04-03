@@ -149,7 +149,11 @@
                "Title" => "Configuração do Evento",
                "Name_UK" => "",
                "Title_UK" => "",
-               "Actions" => array("Event_Configuration","Datas","DataGroups",),
+               "Actions" => array
+               (
+                   "Sponsors",
+                   "Event_Configuration","Datas","DataGroups",
+               ),
            ),
            "Inscriptions" => array
            (

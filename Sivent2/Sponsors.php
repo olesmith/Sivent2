@@ -4,6 +4,8 @@ include_once("../EventApp/MySponsors.php");
 
 class Sponsors extends MySponsors
 {
+    var $Coordinator_Type=9;
+    
     //*
     //* function Sponsors, Parameter list: $args=array()
     //*
@@ -13,9 +15,20 @@ class Sponsors extends MySponsors
     function Sponsors($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array();
+        $this->AlwaysReadData=array("Name","Event");
         $this->Sort=array("Name");
-        $this->NonGetVars=array("Event","CreateTable");
+        $this->IncludeAllDefault=TRUE;
+
+        $unit=$this->Unit("ID");
+        $event=$this->Event("ID");
+        
+        $this->SqlWhere[ "Unit" ]=$unit;
+       if (!empty($event))
+        {
+            $this->SqlWhere[ "Event" ]=$event;
+            
+        }
+        #$this->NonGetVars=array("Event","CreateTable");
     }
 
 
@@ -78,17 +91,19 @@ class Sponsors extends MySponsors
    /*  } */
     
    
-   /*  //\* */
-   /*  //\* function PostProcessItemData, Parameter list: */
-   /*  //\* */
-   /*  //\* Post process item data; this function is called BEFORE */
-   /*  //\* any updating DB cols, so place any additonal data here. */
-   /*  //\* */
+    //*
+    //* function PostProcessItemData, Parameter list:
+    //*
+    //* Post process item data; this function is called BEFORE
+    //* any updating DB cols, so place any additonal data here.
+    //*
 
-   /*  function PostProcessItemData() */
-   /*  { */
-   /*      parent::PostProcessItemData(); */
-   /*  } */
+    function PostProcessItemData()
+    {
+        parent::PostProcessItemData();
+        $this->PostProcessUnitData();
+        $this->PostProcessEventData();
+    }
 
     
     

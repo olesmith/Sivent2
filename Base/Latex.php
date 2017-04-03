@@ -785,6 +785,9 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
 
         $latex=$this->Html2Text($latex);
 
+        //Must be last - remove remaining html entities.
+        $latex=preg_replace('/&[a-zA-Z0-9]+;/','',$latex);
+
         return $latex;
     }
 
@@ -1104,6 +1107,7 @@ function LatexTable($titles,$rows,$tablespec=0,$footnumbers=FALSE,$hlines=TRUE,$
 
     function ShowLatexCode($latex)
     {
+        $latex=$this->TrimLatex($latex);
         $this->Latex_Code_Show($latex);
     }
 

@@ -58,6 +58,8 @@ class Datas extends DBData
         $this->AddDefaults[ "Unit" ]=$unitid;
         $this->AddFixedValues[ "Unit" ]=$unitid;
         $this->ItemData[ "Unit" ][ "Default" ]=$unitid;
+        $this->AddFixedValues[ "Friend" ]=3;
+        $this->ItemData[ "Friend" ][ "Default" ]=3;
 
         $eventid=$this->ApplicationObj->Event("ID");
         $this->AddDefaults[ "Event" ]=$eventid;

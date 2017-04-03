@@ -182,7 +182,7 @@ array
       "Values_UK" => array("Left","Center","Right"),
 
       "Search" => FALSE,
-      "Default" => 2,
+      "Default" => 1,
 
       "Public"   => 1,
       "Person"   => 0,

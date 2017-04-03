@@ -5,6 +5,11 @@
         "Name" => "aqui",
         "Name_UK" => "here",
        ),
+       "SaveUserData" => array
+       (
+        "Name" => "Salvar Dados do Usuário",
+        "Name_UK" => "Save User Data",
+       ),
        "ItemName" => array
        (
         "Name" => "Cadastro",

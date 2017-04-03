@@ -46,10 +46,16 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     //* Creates Inscription friend data table
     //*
 
-    function InscriptionFriendForm($edit,$friend=array())
+    function InscriptionFriendForm($edit,$friend=array(),$inscription=array())
     {
         if (empty($friend)) { $friend=$this->Friend; }
         if ($this->LatexMode()) { $edit=0; }
+
+        $btitle="DoInscription";
+        if (!empty($inscription))
+        {
+            $btitle="SaveUserData";
+        }
 
         return join
         (
@@ -70,6 +76,10 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
                      "Datas"         => $this->InscriptionFriendTableData(),
                      "TablePostRows" => array($this->InscriptionMessageRow()),
                      "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
+                     "EndButtons"   => $this->Buttons
+                     (
+                         $this->MyLanguage_GetMessage($btitle)
+                     ),
                   )
                ),
             )

@@ -6,6 +6,18 @@ array
       "Name_ES" => "Sistema cerrado",
       "Name_UK" => "System closed",
    ),
+   "Signature" => array
+   (
+      "Name" => "Assinatura",
+      "Name_ES" => "Firma",
+      "Name_UK" => "Signature",
+   ),
+   "Signatures" => array
+   (
+      "Name" => "Assinaturas",
+      "Name_ES" => "Firmas",
+      "Name_UK" => "Signatures",
+   ),
    "Events_Open_Title" => array
    (
       "Name" => "Inscrições Abertas",

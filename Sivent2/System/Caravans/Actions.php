@@ -109,6 +109,44 @@ array
       "Singular"    => TRUE,
       "AccessMethod"    => "CheckEditAccess",
   ),
+   "Print_List" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravans&Action=Caravaneers&ID=#ID&Latex=1",
+      "Title"    => "Para Viagem",
+      "Title_UK" => "For Travelling",
+      "Name"     => "Lista de Participantes",
+      "Name_UK"   => "List of Participants",
+      
+      "Handler"   => "Caravan_Caravaneers_Handle",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"    => TRUE,
+      "AccessMethod"    => "CheckEditAccess",
+  ),
+   "Print_Credencial" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Caravans&Action=Caravaneers&ID=#ID&Latex=1&Cred=1",
+      "Title"    => "Lista de Assinaturas",
+      "Title_UK" => "Signatures List",
+      "Name"     => "Lista de Assinaturas",
+      "Name_UK"   => "Signatures List",
+      
+      "Handler"   => "Caravan_Caravaneers_Handle",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+      "Singular"    => TRUE,
+      "AccessMethod"    => "CheckEditAccess",
+  ),
     "Emails" => array
     (
         "Href"     => "",

@@ -58,6 +58,7 @@ array
       "EmptyName" => "Todos",
       "EmptyName_UK" => "All",
       
+      //always add to these lists!
       "Values" => array
       (
          "Evento",
@@ -68,6 +69,7 @@ array
          "PreInscrições",
          "Presenças",         
          "Pagamentos",         
+         "Patrocinadores",         
       ),
       "Values_UK" => array
       (
@@ -79,6 +81,7 @@ array
          "PreInscriptions",
          "Presences",         
          "Payments",         
+         "Sponsors",         
       ),
       
       "Default" => "0 ",

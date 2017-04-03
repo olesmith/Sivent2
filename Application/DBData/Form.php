@@ -81,11 +81,12 @@ class DBDataForm extends DBDataUpdate
                   "AddGroup" => "Basic",
                   "AddItem" => array
                   (
-                      "Unit" => $this->Unit("ID"),
-                      "Event" => $this->Event("ID"),
+                      "Unit"     => $this->Unit("ID"),
+                      "Event"    => $this->Event("ID"),
                       "Pertains" => $this->ApplicationObj()->Pertains,
+                      "Friend"   => 3, //default access to friend is edit
                   ),
-                  "AddDatas" => array("Pertains","DataGroup","SqlKey","Type","SortOrder","Text"),
+                  "AddDatas" => array("Pertains","DataGroup","SqlKey","Type","SortOrder","Text","Text_UK"),
                   "UniqueDatas" => array("SqlKey"),
                   "NCols" => 20,
                   

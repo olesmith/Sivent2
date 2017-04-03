@@ -229,38 +229,19 @@ trait MyLatex
 
     function Latex_Code_Show($latex,$exit=TRUE)
     {
-        echo preg_replace
-        (
-           '/\n/',
-           "<BR>",
-           preg_replace
-           (
-              '/ /',
-              "&nbsp;",
-              $latex
-           )
-        );
+        $latex=preg_split('/\n/',$latex);
+        $n=1;
+        foreach ($latex as $llatex)
+        {
+            echo
+                sprintf("%06d: ",$n++).
+                $llatex.
+                "<BR>\n";
+            
+        }
 
         if ($exit) { exit(); }
     }
-
-    /* //\* */
-    /* //\* function Latex_Minipage, Parameter list: $width,$orient="t",$height="" */
-    /* //\* */
-    /* //\* Generate a latex minipage env. */
-    /* //\*  */
-    /* //\* */
-
-    /* function Latex_Minipage($content,$width,$orient="t",$height="") */
-    /* { */
-    /*     if (!empty($height)) { $height="[".$height."cm]"; } */
-
-    /*     return */
-    /*         "\\begin{minipage}[".$orient."]".$height."{".$width."cm}\n". */
-    /*         $content. */
-    /*         "\\end{minipage}\n". */
-    /*         ""; */
-    /* } */
 
      //* function Latex_Minipage, Parameter list: $latex,$width,$pos="c",$align=""
     //*

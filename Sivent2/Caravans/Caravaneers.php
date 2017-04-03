@@ -10,7 +10,13 @@ class Caravans_Caravaneers extends Caravans_Emails
 
     function Caravan_Info_Data()
     {
-        return $this->GetGroupDatas("Basic");
+        $datas=$this->GetGroupDatas("Basic");
+        if ($this->LatexMode())
+        {
+            $datas=$this->MyMod_Datas_Actions_Remove($datas);
+        }
+        
+        return $datas;
     }
 
     //*
@@ -75,13 +81,14 @@ class Caravans_Caravaneers extends Caravans_Emails
     function Caravan_Info_Print_Row($caravan)
     {
 
-        $action=$this->MyActions_Entry("Caravaneers",$caravan,$noicons=0,$class="",$rargs=array("Latex" => 1));
+        $action1=$this->MyActions_Entry("Print_List",$caravan,$noicons=0,$class="",$rargs=array("Latex" => 1));
 
+        $action2=$this->MyActions_Entry("Print_Credencial",$caravan,$noicons=0,$class="",$rargs=array("Latex" => 1));
         return
             array
             (
-               $this->B($this->Language_Message("Printable_Version").":"),
-               $action
+               $this->B($this->Language_Message("Printable_Versions").":"),
+               "[ ".$action1." | ".$action2." ]"
             );
     }
 
@@ -132,7 +139,7 @@ class Caravans_Caravaneers extends Caravans_Emails
         
         $method="Html_Table";
         if ($this->LatexMode()) { $method="Latex_Table"; }
-        
+
         return 
             $this->H(1,$this->MyLanguage_GetMessage("Caravans_Table_Title")).
             $this->$method("",$table).
@@ -209,12 +216,13 @@ class Caravans_Caravaneers extends Caravans_Emails
                 $this->EndForm();
         }
 
-        $table=$this->CaravaneersObj()->Caravaneers_Table_Show($edit,$caravan);
+        $infotable=$this->Caravan_Info_Table($edit,$caravan,$friend);
+        $table=$this->CaravaneersObj()->Caravaneers_Table_Show($edit,$caravan,$infotable);
+
         if ($this->LatexMode())
         {
             $latex=
                 $this->GetLatexSkel("Head.tex").
-                $this->Caravan_Info_Table($edit,$caravan,$friend).
                 $table.
                 $this->GetLatexSkel("Tail.tex").
                 "";
@@ -232,7 +240,6 @@ class Caravans_Caravaneers extends Caravans_Emails
         echo $this->FrameIt
         (    
             $formstart.
-            $this->Caravan_Info_Table($edit,$caravan,$friend).
             $table.
             $formend.
             ""

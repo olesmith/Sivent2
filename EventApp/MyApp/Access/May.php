@@ -14,6 +14,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
        "PreInscriptions" => 6,
        "Presences"       => 7,
        "Payments"        => 8,
+       "Sponsors"        => 9,
     );
 
     //*
@@ -84,6 +85,18 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
     function Current_User_Event_Inscriptions_May_Edit($event=array())
     {
         return $this->Current_User_Event_Type_May_Edit("Inscriptions",$event);
+    }
+
+    //*
+    //* sub Current_User_Event_Sponsors_May_Edit, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit sponsors.
+    //*
+    //*
+
+    function Current_User_Event_Sponsors_May_Edit($event=array())
+    {
+        return $this->Current_User_Event_Type_May_Edit("Sponsors",$event);
     }
 
     //*
