@@ -113,9 +113,9 @@ trait MyMod_Items_Update
                     }
                 }
                 elseif (
-                          $this->ItemData[ $key  ][ "Derived" ]==""
+                          empty($this->ItemData[ $key  ][ "Derived" ])
                           &&
-                          $this->ItemData[ $key ][ "TimeType" ]==""
+                          empty($this->ItemData[ $key ][ "TimeType" ])
                        )
                 {
                     $newvalue=$this->TestUpdateItem($key,$ritems[ $id ],TRUE);

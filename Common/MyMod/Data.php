@@ -55,7 +55,10 @@ trait MyMod_Data
         {
             if (isset($this->ItemData[ $data ][ "IsDate" ]) && $this->ItemData[ $data ][ "IsDate" ])
             {
-                $this->ItemData[ $data ][ "TriggerFunction" ]="TrimDateData";
+                if (empty($this->ItemData[ $data ][ "TriggerFunction" ]))
+                {
+                    $this->ItemData[ $data ][ "TriggerFunction" ]="TrimDateData";
+                }
             }
 
             foreach ($this->ItemData[ $data ] as $key => $value)
@@ -85,11 +88,7 @@ trait MyMod_Data
             /*     array_push($this->ItemDerivers,$data); */
             /* } */
 
-            if (
-                  isset($this->ItemData[ $data ][ "TriggerFunction" ])
-                  &&
-                  $this->ItemData[ $data ][ "TriggerFunction" ]!=""
-               )
+            if (!empty($this->ItemData[ $data ][ "TriggerFunction" ]))
             {
                 $this->TriggerFunctions[ $data ]=$this->ItemData[ $data ][ "TriggerFunction" ];
             }

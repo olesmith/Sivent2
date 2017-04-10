@@ -72,15 +72,23 @@ class App_Handle extends App_Has
         $this->CertificatesObj()->Sql_Table_Structure_Update();
         $friend=$this->LoginData();
         
-        /* $event=$this->Event(); */
-        /* if (!empty($event)) */
-        /* { */
-        /*     if ($this->Friend_Inscribed_Is($event,$friend)) */
-        /*     { */
-        /*         $this->InscriptionsObj()->HandleInscribe(); */
-        /*         exit(); */
-        /*     } */
-        /* } */
+        $event=$this->Event();
+        if (!empty($event))
+        {
+            if ($this->Friend_Inscribed_Is($event,$friend))
+            {
+                $this->InscriptionsObj()->HandleInscribe();
+                exit();
+            }
+            else
+            {
+                $this->InscriptionsObj()->HandleInscribe();
+                exit();
+            }
+        }
+
+
+        
         
         $this->FriendsObj()->Friend_Events_Handle($friend);
     }

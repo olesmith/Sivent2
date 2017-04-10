@@ -126,7 +126,7 @@ array
       "Title_ES" => "Palestres",
       "Title_UK" => "Talks at the Event",
    ),
-   "07_Schedule" => array
+   "07_Schedule_Public" => array
    (
       "AccessMethod" => "SchedulePublic",
       "Admin" => "0",
@@ -145,7 +145,26 @@ array
       "Title_ES" => "Mostrar Grade del Evento",
       "Title_UK" => "Show Event Schedule",
    ),
-   "08_PreInscriptions" => array
+   "08_Schedule" => array
+   (
+      #"AccessMethod" => "Current_User_Event_Submissions_May_Edit",
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Schedules&Action=Schedule&Event=#Event",
+      "Name" => "Grade",
+      "Name_ES" => "Grade",
+      "Name_UK" => "Schedule",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Grade",
+      "ShortName_ES" => "Grade",
+      "ShortName_UK" => "Schedule",
+      "Title" => "Gerenciar Grade",
+      "Title_ES" => "Gerenciar Grade",
+      "Title_UK" => "Manage Schedule",
+   ),
+   "09_PreInscriptions" => array
    (
       "AccessMethod" => "Coordinator_PreInscriptions_Access_Has",
       "Admin" => "1",
@@ -165,7 +184,7 @@ array
       "Title_UK" => "Preinscriptions",
       'AccessMethod'    => "Current_User_Event_PreInscriptions_May_Edit",
    ),
-   "09_Presences" => array
+   "10_Presences" => array
    (
       "AccessMethod" => "Coordinator_Presences_Access_Has",
       "Admin" => "1",

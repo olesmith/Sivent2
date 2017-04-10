@@ -2,6 +2,12 @@ array
 (
    array
    (
+      "Ana Paula Purcina Baumann",
+      "IME/UFG",
+      "",
+   ),
+   array
+   (
       "Filipe Bezerra",
       "Mobile Developer",
       "<A HREF='http://filipebezerra.github.io' TARGET='_blank'>http://filipebezerra.github.io</A>",
