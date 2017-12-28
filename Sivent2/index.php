@@ -21,6 +21,15 @@ class Sivent2 extends App_Override
     var $Sigma="&Sigma;";
     var $Mu="&mu;";
     var $Pi="&pi;";
+    var $Event_Import_Modules=
+        array
+        (
+            "GroupDatas","Datas",
+            "Collaborations","Collaborators",
+            "Areas","Criterias",
+            "Assessors",
+            "Caravans",
+        );
     
     var $IDGETVar="";
     var $Pertains=1; //Questionary: 1, 

@@ -19,8 +19,8 @@ trait MyApp_Interface_LeftMenu_Profile
         {
             $args[ $var ]=$value;
         }
-        
-        foreach ($this->AllowedProfiles as $id => $profile)
+
+        foreach ($this->AllowedProfiles() as $id => $profile)
         {
             $pname=$this->MyApp_Profile_Name($profile);
             if ($profile!=$this->Profile)

@@ -27,6 +27,14 @@ class MyFriends_Add_Search extends MyFriends_Add_Table
                 $hash=$this->SelectUniqueHash("",array("ID" => $friend),FALSE,array("Name","Email"));
             }
         }
+        elseif (isset($_GET[ "Email" ]))
+        {
+            $hash=array
+            (
+               "Name"  => $this->CGI_GET("Name"),
+               "Email" => $this->CGI_GET("Email"),
+            );
+        }
         else
         {
             $hash=array
@@ -91,8 +99,8 @@ class MyFriends_Add_Search extends MyFriends_Add_Table
 
     function FriendSelectCGI2Where()
     {
-        $name=$this->GetPOST("Name");
-        $email=$this->GetPOST("Email");
+        $name=$this->CGI_POSTOrGET("Name");
+        $email=$this->CGI_POSTOrGET("Email");
 
         $email=$this->Text2Sort($email);
         $email=preg_replace('/\s+/',"",$email);

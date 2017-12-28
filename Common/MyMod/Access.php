@@ -15,20 +15,27 @@ trait MyMod_Access
     }
 
     //*
-    //* function MyMod_Access_HashAccess, Parameter list: $hash,$value=array(1)
+    //* function MyMod_Access_HashAccess, Parameter list: $hash,$value=array(1,2),$profile="",$logintype=""
     //*
     //* Tests if $hash has $this->LoginType and $this->Profile keys with value $value.
     //*
 
-    function MyMod_Access_HashAccess($hash,$values=array(1))
+    function MyMod_Access_HashAccess($hash,$values=array(1,2),$profile="",$logintype="")
     {
         if (!is_array($values)) { $values=array($values); }
+        $res=$this->MyHash_Hash2Access($hash,$values,$profile,$logintype);
 
-        $logintype=$this->LoginType();
-        $profile=$this->Profile();
-
-        $res=$this->MyHash_Hash2Access($hash,$values);
-
+        if (empty($profile)) { $profile=$this->Profile(); }
+        
+        if (empty($logintype))
+        {
+            if (!preg_match('/^(Admin|Public)/',$profile))
+            {
+                $logintype="Person";
+            }
+        }
+        
+        if (empty($logintype)) { $logintype=$this->LoginType(); }
         if ($logintype=="Person")
         {
             if (!empty($hash[ "ConditionalAdmin" ]))
@@ -42,19 +49,47 @@ trait MyMod_Access
                 }
             }
         }
-        if ($res>0)
+        if ($res)
         {
             if (!empty($hash[ "AccessMethod" ]))
             {
-                $method=$hash[ "AccessMethod" ];
-                //$res=$this->$method($hash); 02/01/2016
-                $res=$this->$method();
+                if (!is_array($hash[ "AccessMethod" ]))
+                {
+                    $hash[ "AccessMethod" ]=array($hash[ "AccessMethod" ]);
+                }
+
+                foreach ($hash[ "AccessMethod" ] as $method)
+                {
+                    $res=$res && $this->$method();
+                }
             }
         }
 
         return $res;
     }
 
+    //*
+    //* function MyMod_Access_HashesAccess, Parameter list: $hashes,$value=array(1)
+    //*
+    //* Tests if $hashes, as an ItemData, Actions entry (or other hash), is
+    //* permitted for current user.
+    //*
+    //* Considered are LoginType and Profile keys. 
+    //*
+
+    function MyMod_Access_HashesAccess($hashes,$values=array(1,2),$profile="",$logintype="")
+    {
+        $names=array();
+        foreach ($hashes as $name => $hash)
+        {
+            if ($this->MyMod_Access_HashAccess($hash,$values,$profile,$logintype))
+            {
+                array_push($names,$name);
+            }
+        }
+
+        return $names;
+    }
 }
 
 ?>

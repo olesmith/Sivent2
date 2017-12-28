@@ -26,7 +26,7 @@ trait MyMod_Data_Fields_File_Update
 
             $comps=preg_split('/\//',$name);
             $rname=$comps[ count($comps)-1 ];
-            $datatitle=$this->GetDataTitle($data);
+            $datatitle=$this->MyMod_Data_Title($data);
 
             if (preg_grep('/^'.$ext.'$/i',$extensions))
             {

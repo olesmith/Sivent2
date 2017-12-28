@@ -21,6 +21,41 @@ class MyEventsCells extends MyEventsFriend
 
         return $cell;
     }
+    
+    //*
+    //* function Event_Inscriptions_Date_Span, Parameter list: $item=array()
+    //*
+    //* Generates and returns event date span.
+    //*
+
+    function Event_Inscriptions_Date_Span($item=array())
+    {
+        if (empty($item)) { return $this->MyLanguage_GetMessage("Event_Inscriptions_DateSpan_Title"); }
+        
+        $cell=$this->MyTime_Sort2Date($item[ "StartDate" ]);
+
+        if ($item[ "StartDate" ]!=$item[ "EndDate" ])
+        {
+            $cell=$this->Date_Span_Interval($item,"StartDate","EndDate");
+        }
+
+        return $cell;
+    }
+    
+    //*
+    //* function Event_Inscriptions_Date_Span, Parameter list: $item=array()
+    //*
+    //* Generates and returns event date span.
+    //*
+
+    function Event_Inscriptions_Editable_Date($item=array())
+    {
+        if (empty($item)) { return $this->MyLanguage_GetMessage("Event_Inscriptions_Editable_Title"); }
+        
+        $cell=$this->MyTime_Sort2Date($item[ "EditDate" ]);
+
+        return $cell;
+    }
 
     
     //*
@@ -126,8 +161,6 @@ class MyEventsCells extends MyEventsFriend
     function NoOfInscriptionsCell($edit=0,$event=array(),$data="")
     {
         if (empty($event)) { return $this->Language_Message("Events_Inscriptions_Cell_Noof_Title"); }
-        //var_dump($event);
-        $sqltable=$this->SqlEventTableName("Inscriptions",$event);
         
         $ninscribed="-";
         if ($this->InscriptionsObj()->Sql_Table_Exists($sqltable))
@@ -135,7 +168,7 @@ class MyEventsCells extends MyEventsFriend
             $ninscribed=$this->InscriptionsObj()->Sql_Select_NHashes
             (
                $this->UnitEventWhere(),
-               $sqltable
+               $this->SqlEventTableName("Inscriptions",$event)
             );
         }
 
@@ -205,6 +238,28 @@ class MyEventsCells extends MyEventsFriend
     }
 
     
+    //*
+    //* function Events_Status_Cell, Parameter list: $event=array()
+    //*
+    //* Returns open/closed/premature status cell message.
+    //*
+
+    function Events_Status_Cell($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        $msg="Events_Inscriptions_Cell_Status_Closed";
+        if ($this->Events_Open_Is($event))
+        {
+            $msg="Events_Inscriptions_Cell_Status_Open";
+        }
+        elseif ($this->Events_Open_Premature($event))
+        {
+            $msg="Events_Inscriptions_Cell_Status_Premature";
+        }
+        
+        return $this->MyLanguage_GetMessage($msg);
+    }
 }
 
 ?>

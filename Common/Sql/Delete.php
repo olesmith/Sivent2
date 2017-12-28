@@ -35,7 +35,7 @@ trait Sql_Delete
     //* Deletes $item (assoc array) to DB table $table, if needed.
     //* 
 
-    function Sql_Delete_Item($id,$var="ID",$table="")
+    function Sql_Delete_Item($id,$var="ID",$table="",$logging=TRUE)
     {
         if (is_array($id)) { $id=$id[ $var ]; }
 
@@ -102,5 +102,33 @@ trait Sql_Delete
         return $res;            
     }
 
- }
+    //*
+    //* function Sql_Delete_Items_ByID_Query Parameter list: $where,$table=""
+    //*
+    //* Deletes $item (assoc array) to DB table $table, if needed.
+    //* 
+
+    function Sql_Delete_Items_ByID_Query($ids,$table="")
+    {
+        $where[ "ID" ]=$ids;
+        
+        return $this->Sql_Delete_Items_Query($where,$table);
+    }
+    
+    //*
+    //* function Sql_Delete_Items_ByID Parameter list: $where,$table=""
+    //*
+    //* Deletes $item (assoc array) to DB table $table, if needed.
+    //* 
+
+    function Sql_Delete_Items_ByID($ids,$table="")
+    {
+        $query=$this->Sql_Delete_Items_ByID_Query($ids,$table);
+        
+        $result=$this->DB_Query($query);
+        
+        return $result;
+    }
+    
+}
 ?>

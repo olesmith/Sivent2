@@ -57,6 +57,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Export" => 1,
+            "Import" => 1,
          ),
          'Admin' => array
          (
@@ -64,6 +65,7 @@ array
             "Search" => 1,
             "EditList" => 1,
             "Export" => 1,
+            "Import" => 1,
          ),
       ),
       'SingularPlural' => array

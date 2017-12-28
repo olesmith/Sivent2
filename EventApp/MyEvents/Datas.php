@@ -16,6 +16,7 @@ class MyEventsDatas extends MyEventsCells
         $this->DatasObj()->Sql_Table_Structure_Update();
         
         echo
+            $this->EventMod_Import_Menu_Horisontal().
             $this->EventDatasInfoTable().
             $this->DatasObj()->EventDatasForm($this->Event()).
             "";

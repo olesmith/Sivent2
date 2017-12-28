@@ -53,7 +53,7 @@ class ItemsTableTable extends ItemsTableRow
             $datas=$this->AddSearchVarsToDataList($datas);
         }
 
-        $datas=$this->ItemsTableData($datas);
+        $datas=$this->ItemsTableData($datas); 
 
         if (!empty($cgiupdatevar) && $this->CGI_POSTint($cgiupdatevar)==1)
         {
@@ -91,7 +91,8 @@ class ItemsTableTable extends ItemsTableRow
                 array_push($rdatas,$data."1");
             }
 
-            $subtitles=$this->GetDataTitles($rdatas);
+            $subtitles=$this->MyMod_Data_Titles($rdatas);
+
 
             $title1="";
             if (isset($countdef[ "NoTitle" ])) { $title1=$countdef[ "NoTitle" ]; }
@@ -118,11 +119,12 @@ class ItemsTableTable extends ItemsTableRow
         {
             $sums[ $data ]=0;
         }
+        
+        $method=$this->ItemTableRowMethod;
 
         $even=FALSE;
         foreach ($items as $item)
         {
-            $method=$this->ItemTableRowMethod;
             $this->$method($edit,$item,$nn,$datas,$subdatas,$tbl,$even);
 
             foreach ($this->SumVars as $data)

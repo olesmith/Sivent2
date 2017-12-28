@@ -10,6 +10,22 @@ array
          "Assessor"  => 0,
          "AccessMethod"    => "CheckEditAccess",
       ),
+      'RegGroups' => array
+      (
+          "HrefArgs" => "?ModuleName=RegGroups&Event=#ID&Action=Search",
+         "Title"    => "Dados Vis&iacute;veis do Cadastro",
+         "Title_UK" => "Visible egistration Data",
+         "Name"     => "Dados Vis&iacute;veis do Cadastro ",
+         "Name_UK"   => "Visible Registration Data",
+        
+         'Public' => 0,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "Assessor"  => 0,
+         "AccessMethod"    => "Coordinator_Inscriptions_Access_Has",
+      ),
       'Datas' => array
       (
          'Public' => 0,

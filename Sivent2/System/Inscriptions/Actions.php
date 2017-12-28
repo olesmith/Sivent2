@@ -1,5 +1,15 @@
 array
 (
+      'Import' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditListAccess",
+         "Handler" => "MyMod_Handle_Import",
+      ),
       'Export' => array
       (
          'Public' => 1,
@@ -79,7 +89,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
-      "AccessMethod"    => "CheckCertificateAccess",
+      //"AccessMethod"    => "CheckCertificateAccess",
    ),
    "MailCert" => array
    (

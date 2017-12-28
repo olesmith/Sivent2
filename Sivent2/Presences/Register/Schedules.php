@@ -23,7 +23,7 @@ class Presences_Register_Schedules extends Presences_Register_Schedule
 
     function Presences_Register_Schedules_Titles()
     {
-        $schedulestitles=$this->SchedulesObj()->GetDataTitles($this->Presences_Schedules_Data());
+        $schedulestitles=$this->SchedulesObj()->MyMod_Data_Titles($this->Presences_Schedules_Data());
         array_push($schedulestitles,"");
         
         return $schedulestitles;

@@ -121,6 +121,5 @@ trait MakeHtml
 
         return $this->Html_Tag("IMG",$options)."\n";
     }
-
 }
 ?>

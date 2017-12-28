@@ -18,6 +18,7 @@ array
       (
          'Public' => array
          (
+            "Search" => 1,
             "Show" => 1,
          ),
          'Person' => array
@@ -38,6 +39,7 @@ array
             'Delete' => 1,
             'Datas' => 1,
             'GroupDatas' => 1,
+            'Inscriptions' => 1,
          ),
          'Admin' => array
          (
@@ -46,6 +48,7 @@ array
             'Delete' => 1,
             'Datas' => 1,
             'GroupDatas' => 1,
+            'RegGroups' => 1,
          ),
       ),
       'Plural' => array

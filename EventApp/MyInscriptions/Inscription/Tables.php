@@ -43,7 +43,35 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     //*
     //* function InscriptionFriendTable, Parameter list: $edit,$friend=array()
     //*
-    //* Creates Inscription friend data table
+    //* Creates Inscription friend data table.
+    //*
+
+    function InscriptionFriendTable($edit,$button_title,$friend=array(),$inscription=array())
+    {
+        return 
+            $this->FriendsObj()->MyMod_Item_Table_Form
+            (
+                array
+                (
+                    "Edit"          => $edit,
+                    "UpdateCGIVar" => "Update_Friend",
+                    "Item"          => $friend,
+                    "Datas"         => $this->InscriptionFriendTableData(),
+                    "TablePostRows" => array($this->InscriptionMessageRow()),
+                    "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
+                    "EndButtons"   => $this->Buttons
+                    (
+                        $this->MyLanguage_GetMessage($button_title)
+                    ),
+                )
+            );
+    }
+
+    
+    //*
+    //* function InscriptionFriendForm, Parameter list: $edit,$friend=array()
+    //*
+    //* Creates Inscription friend data form.
     //*
 
     function InscriptionFriendForm($edit,$friend=array(),$inscription=array())
@@ -51,39 +79,29 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
         if (empty($friend)) { $friend=$this->Friend; }
         if ($this->LatexMode()) { $edit=0; }
 
-        $btitle="DoInscription";
-        if (!empty($inscription))
-        {
-            $btitle="SaveUserData";
-        }
-
-        return join
-        (
-           "",
-            array
+        return
+            $this->FrameIt
             (
-               $this->H
-               (
-                  1,
-                  $this->Messages("Friend_Table_Title")
-               ),
-               $this->FriendsObj()->MyMod_Item_Table_Form
-               (
-                  array
-                  (
-                     "Edit"          => $edit,
-                     "Item"          => $friend,
-                     "Datas"         => $this->InscriptionFriendTableData(),
-                     "TablePostRows" => array($this->InscriptionMessageRow()),
-                     "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
-                     "EndButtons"   => $this->Buttons
-                     (
-                         $this->MyLanguage_GetMessage($btitle)
-                     ),
-                  )
-               ),
-            )
-        );
+                join
+                (
+                    "",
+                    array
+                    (
+                        $this->H
+                        (
+                            1,
+                            $this->Messages("Friend_Table_Title")
+                        ),
+                        $this->InscriptionFriendTable
+                        (
+                            $edit,
+                            "SaveUserData",
+                            $friend,
+                            $inscription)
+                    )
+                )
+            ).
+            "";
     }
     
     //*
@@ -165,7 +183,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
             array_push
             (
                 $messages,
-                $this->GetDataTitle($data).
+                $this->MyMod_Data_Title($data).
                 ": ".
                 $this->Messages($lkey."Message")."."
             );

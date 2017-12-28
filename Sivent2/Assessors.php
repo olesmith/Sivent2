@@ -169,6 +169,37 @@ class Assessors extends Assessors_Statistics
             $this->BR().
             $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
+
+    
+    //* function EventMod_Import_Events_Update_Compulsories, Parameter list: $dest_event,$dest_item
+    //*
+    //* Returns a module specific $hash of compulsory values.
+    //* Supposed to be overriden by specific modules!!!
+    //*
+
+    function EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item)
+    {
+        $dest_item=parent::EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item);
+        
+        #$dest_item[ "Certificate" ]=1;
+        #$dest_item[ "Code" ]=" ";
+
+        foreach (array("HasAssessed","HasAccessed",) as $data)
+        {
+            $dest_item[ $data ]=1;
+        }
+        foreach (array("Result",) as $data)
+        {
+            $dest_item[ $data ]=0.0;
+        }
+        
+        foreach (array("CoordComment","FriendComment",) as $data)
+        {
+            $dest_item[ $data ]="";
+        }
+        
+        return $dest_item;
+    }
 }
 
 ?>

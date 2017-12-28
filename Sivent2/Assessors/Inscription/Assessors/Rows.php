@@ -15,9 +15,9 @@ class AssessorsInscriptionAssessorsRows extends AssessorsInscriptionAssessorsRea
             array_merge
             (
                 array($this->B("No")),
-                $this->FriendsObj()->GetDataTitles($frienddatas),
-                $this->SubmissionsObj()->GetDataTitles($submissiondatas),
-                $this->GetDataTitles($datas),
+                $this->FriendsObj()->MyMod_Data_Titles($frienddatas),
+                $this->SubmissionsObj()->MyMod_Data_Titles($submissiondatas),
+                $this->MyMod_Data_Titles($datas),
                 array("")
             );
     }

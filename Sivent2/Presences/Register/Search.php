@@ -138,7 +138,7 @@ class Presences_Register_Search extends Presences_Register_Schedules
 
     function Presences_Register_Search_Result_Titles()
     {
-        $titles=$this->InscriptionsObj()->GetDataTitles($this->Presences_Inscriptions_Show_Data());
+        $titles=$this->InscriptionsObj()->MyMod_Data_Titles($this->Presences_Inscriptions_Show_Data());
 
         array_unshift($titles,"");
 

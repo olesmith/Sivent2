@@ -29,7 +29,7 @@
       "SqlClass" => "Friends",
       "SqlDerivedData" => array("Name","Email"),
       "SqlFile" => "Friends.php",
-      "SqlFilter" => "#Name (#Email)",
+      "SqlFilter" => "#Name",
       "SqlFilter_Public" => "#Name",
       "SqlHref" => "1",
       "SqlObject" => "FriendsObject",
@@ -90,6 +90,48 @@
       "SqlHref" => "1",
       "SqlObject" => "EventsObject",
       "SqlTable" => "#Unit__Events",
+   ),
+    "RegGroups" => array
+   (
+      "ItemName" => "Grupo Vis&iacute;vel, Cadastro",
+      "ItemName_ES" => "Grupo Vis&iacute;vel, Cadastro",
+      "ItemsName" => "Grupos Vis&iacute;veis, Cadastro",
+      "ItemsName_ES" => "Grupo Vis&iacute;veis, Cadastro",
+      
+      "ItemName_UK" => "Visible Group, Registration",
+      "ItemsName_UK" => "Visible Groups, Registration",
+      
+      "ItemsNamer" => "GroupKey",
+      "ItemsNamer_UK" => "GroupKey",
+      
+      "SqlAccessor" => "RegGroupsObj",
+      "SqlClass" => "RegGroups",
+      "SqlDerivedData" => array("GroupKey","Active"),
+      "SqlFile" => "RegGroups.php",
+      "SqlFilter" => "#GroupKey",
+      "SqlHref" => "1",
+      "SqlObject" => "RegGroupsObject",
+      "SqlTable" => "#Unit__#Event_RegGroups",
+   ),
+    "RegDatas" => array
+   (
+      "ItemName" => "Dado Vis&iacute;vel, Cadastro",
+      "ItemName_ES" => "Dado Vis&iacute;vel, Cadastro",
+      "ItemName_UK" => "Visible Data, Registration",
+      "ItemsName" => "Dados Vis&iacute;veis, Cadastro",
+      "ItemsName_ES" => "Dados Vis&iacute;veis, Cadastro",
+      "ItemsName_UK" => "Visible Data, Registration",
+      "ItemsNamer" => "DataKey",
+      "ItemsNamer_UK" => "DataKey",
+      
+      "SqlAccessor" => "RegDatasObj",
+      "SqlClass" => "RegDatas",
+      "SqlDerivedData" => array("DataKey","Active"),
+      "SqlFile" => "RegDatas.php",
+      "SqlFilter" => "#DataKey",
+      "SqlHref" => "1",
+      "SqlObject" => "RegDatasObject",
+      "SqlTable" => "#Unit__#Event_RegDatas",
    ),
    "Datas" => array
    (
@@ -289,8 +331,8 @@
       "ItemsName" => "Áreas de Interesse",
       "ItemsName_ES" => "Áreas de Interés",
       "ItemsName_UK" => "Areas of Interest",
-      "ItemsNamer" => "Title",
-      "ItemsNamer_UK" => "Title_UK",
+      "ItemsNamer" => "Name",
+      "ItemsNamer_UK" => "Name_UK",
       "SqlAccessor" => "AreasObj",
       "SqlClass" => "Areas",
       "SqlDerivedData" => array("Name"),

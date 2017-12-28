@@ -53,6 +53,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "Comment_Method"  => "Submission_Author_Email_Register_Link",
       "PermsMethod"  => "Submission_Author_Data_Perms",
    ),
 )

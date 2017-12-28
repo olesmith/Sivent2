@@ -49,7 +49,7 @@ class ItemTestsItem extends ItemBackRefs
                     array_push
                     (
                        $messages,
-                       $this->GetDataTitle($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
+                       $this->MyMod_Data_Title($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
                     );
                     $nerrors++;
                 }
@@ -76,7 +76,7 @@ class ItemTestsItem extends ItemBackRefs
                     array_push
                     (
                        $messages,
-                       $this->GetDataTitle($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
+                       $this->MyMod_Data_Title($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
                     );
                     $nerrors++;
                 }
@@ -93,7 +93,7 @@ class ItemTestsItem extends ItemBackRefs
                     array_push
                     (
                        $messages,
-                       $this->GetDataTitle($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
+                       $this->MyMod_Data_Title($data)." '".$item[ $data ]."': ".$item[ $data."_Message" ]
                     );
                     
                     $nerrors++;

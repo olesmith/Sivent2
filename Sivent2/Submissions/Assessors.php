@@ -103,7 +103,7 @@ class Submissions_Assessors extends Submissions_Authors
         return
             $this->Html_Table
             (
-               $this->GetDataTitles($datas),
+               $this->MyMod_Data_Titles($datas),
                $table
             ).
             "";

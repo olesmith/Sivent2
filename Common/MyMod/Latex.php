@@ -22,6 +22,54 @@ trait MyMod_Latex
         }
     }
     
+    //*
+    //* function MyMod_Latex_Skel, Parameter list: $type,$skel,$latexdocno=0
+    //*
+    //* Return latex header (until and including \begin{document}. 
+    //*
+
+    function MyMod_Latex_Skel($type,$skel,$latexdocno=0)
+    {
+        return $this->GetLatexSkel
+        (
+           $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ $skel ]
+        );
+    }
+    
+    //*
+    //* functionMyMod_Latex_Head , Parameter list: $type,$latexdocno=0
+    //*
+    //* Return latex header (until and including \begin{document}. 
+    //*
+
+    function MyMod_Latex_Head($type,$latexdocno=0)
+    {
+        return $this->MyMod_Latex_Skel($type,"Head",$latexdocno);
+    }
+
+    //*
+    //* function MyMod_Latex_Glue, Parameter list: $type,$latexdocno=0
+    //*
+    //* Return latex header (until and including \begin{document}. 
+    //*
+
+    function MyMod_Latex_Glue($type,$latexdocno=0)
+    {
+        return $this->MyMod_Latex_Skel($type,"Glue",$latexdocno);
+    }
+
+    //*
+    //* function GetLatexTail, Parameter list: $type,$latexdocno=0
+    //*
+    //* Return latex header (until and including \begin{document}. 
+    //*
+
+    function MyMod_Latex_Tail($type,$latexdocno=0)
+    {
+        return $this->MyMod_Latex_Skel($type,"Tail",$latexdocno);
+    }
+
+
 }
 
 ?>

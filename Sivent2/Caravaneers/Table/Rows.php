@@ -14,7 +14,7 @@ class Caravaneers_Table_Rows extends Caravaneers_Table_Where
         $row=
             array
             (
-               $this->GetDataTitles
+               $this->MyMod_Data_Titles
                (
                   $this->Caravaneers_Table_Data()
                )

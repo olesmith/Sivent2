@@ -39,7 +39,6 @@ trait MyApp_Session
         }
        
         $this->AuthData=$this->ReadPHPArray("Auth.Data.php");
-
         if ($SessionInitialized==0 && $this->NoInitSession==0)
         {
             $this->MyApp_Session_User_Init();

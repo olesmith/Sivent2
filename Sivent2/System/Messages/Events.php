@@ -47,11 +47,17 @@ array
    "Events_History_Table_Title" => array
    (
       "Name" => "Inscrições, Histórico",
-      "Name_ES" => "Inscriciones, Histórico",
+      "Name_ES" => "Inscriciónes, Histórico",
       "Name_UK" => "Inscription History",
       "Title" => "Inscrições, Histórico",
       "Title_ES" => "Inscriciones, Histórico",
       "Title_UK" => "Inscription History",
+   ),
+   "Events_Inscriptions_Status_Title" => array
+   (
+      "Name" => "Status das Inscrições",
+      "Name_ES" => "Status de las Inscriciónes",
+      "Name_UK" => "Status of the Inscriptions",
    ),
    "Events_Inscriptions_Cell_Status_Title" => array
    (

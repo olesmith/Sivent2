@@ -16,7 +16,7 @@ class ItemsTable extends ItemsTableTable
         return
             $this->Html_Table
             (
-               $this->GetDataTitles($datas),
+               $this->MyMod_Data_Titles($datas),
                $this->ItemsTable
                (
                   $title,

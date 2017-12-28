@@ -36,4 +36,22 @@ array
       "Coordinator" => 1,
       "Visible" => FALSE,
    ),
+   "Import" => array
+   (
+      "Name" => "Import",
+      "Name_UK" => "Import",
+      "Data" => array
+      (
+          "No","Edit",
+         "Friend","HasAssessed","HasAccessed",
+         "Result"
+      ),
+      "Visible" => False,
+      "Admin"       => 1,
+      "Person"      => 0,
+      "Public"      => 0,
+      "Admin"       => 1,
+      "Friend"      => 0,
+      "Coordinator" => 1,
+   ),
 );

@@ -8,12 +8,12 @@ trait MyMod_Handle_Export_Data
 
     function MyMod_Handle_Export_Data_Title($data,$subdata="")
     {
-        $name=$this->GetDataTitle($data);
+        $name=$this->MyMod_Data_Title($data);
         if (!empty($subdata))
         {
             $name.=
                 " - ".
-                $this->MyMod_Data_Fields_Module_2Object($data)->GetDataTitle($subdata);
+                $this->MyMod_Data_Fields_Module_2Object($data)->MyMod_Data_Title($subdata);
         }
 
         return $name;
@@ -35,7 +35,7 @@ trait MyMod_Handle_Export_Data
             }
             elseif (!empty($this->ItemData[ $data ]))
             {
-                $title=$this->GetDataTitle($data);
+                $title=$this->MyMod_Data_Title($data);
             }
             elseif (preg_match('/(\S+)__(\S+)/',$data,$matches))
             {

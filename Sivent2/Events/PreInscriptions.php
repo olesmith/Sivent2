@@ -13,7 +13,7 @@ class EventsPreInscriptions extends EventsAssessments
         if (empty($event)) { $event=$this->Event(); }
         
         //Older version
-        if (!$this->SubmissionsObj()->Sql_Table_Field_Exists("PreInscriptions")) { return FALSE; }
+        //if (!$this->SubmissionsObj()->Sql_Table_Field_Exists("PreInscriptions")) { return FALSE; }
         
         $where=$this->UnitEventWhere(array("PreInscriptions" => 2),$event);
         
@@ -22,7 +22,7 @@ class EventsPreInscriptions extends EventsAssessments
         $res=FALSE;
         if ($nsubmissions>0) { $res=TRUE; }
 
-        if (empty($item[ "PreInscriptions_StartDate" ]) || empty($item[ "PreInscriptions_EndDate" ]))
+        if (empty($event[ "PreInscriptions_StartDate" ]) || empty($event[ "PreInscriptions_EndDate" ]))
         {
             $res=FALSE;
         }

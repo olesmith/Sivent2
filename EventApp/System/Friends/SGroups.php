@@ -48,8 +48,8 @@ array
        "Person" => 0,
        "Public" => 0,
 
-       "Friend" => 1,
-       "Coordinator" => 1,
+       "Friend" => 0,
+       "Coordinator" => 0,
     ),
    "Confirm" => array
    (

@@ -16,6 +16,8 @@ trait MyMod_Item_Update
         );
 
         $item=array_pop($items);
+
+        return $item;
     }
 
     //*
@@ -151,6 +153,7 @@ trait MyMod_Item_Update
                 $updatedatas
             );
 
+            
             $item=$this->ReadItemDerivedData($item);
             $item=$this->SetItemTime("MTime",$item);
             $item=$this->SetItemTime("ATime",$item);
@@ -158,7 +161,7 @@ trait MyMod_Item_Update
             $rdatanames=array();
             foreach ($updatedatas as $rdata)
             {
-                array_push($rdatanames,$this->GetDataTitle($rdata));
+                array_push($rdatanames,$this->MyMod_Data_Title($rdata));
             }
 
             $this->ApplicationObj()->AddHtmlStatusMessage

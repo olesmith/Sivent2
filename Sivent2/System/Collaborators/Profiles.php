@@ -64,6 +64,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Export" => 1,
+            "Import" => 1,
             "GenCerts" => 1,
          ),
          'Admin' => array
@@ -73,6 +74,7 @@ array
             "EditList" => 1,
             "Emails" => 1,
             "Export" => 1,
+            "Import" => 1,
             "GenCerts" => 1,
          ),
       ),

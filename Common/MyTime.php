@@ -2,6 +2,17 @@
 
 trait MyTime
 {
+    //* function Host_IP2Address, Parameter list: $kost
+    //*
+    //* Returns host name of IP address. Should be moved to somewhere sensible...
+    //*
+
+    function Host_IP2Address($host)
+    {
+        return gethostbyaddr($host);
+    }
+
+    
     //*
     //* function MyTime_WeekDay, Parameter list: $weekday
     //*
@@ -80,6 +91,30 @@ trait MyTime
         return $this->ApplicationObj()->Messages[ "Months" ][ "Name".$lkey ];
     }
 
+    //* function MyTime_Date, Parameter list:
+    //*
+    //* Returns $mtime date: DD/MM/YYYY.
+    //*
+
+    function MyTime_Date($mtime="")
+    {
+        $timeinfo=$this->MyTime_Info($mtime);
+        return join("/",array($timeinfo[ "MDay" ],$timeinfo[ "Month" ],$timeinfo[ "Year" ]));
+            
+    }
+    
+    //* function MyTime_Time, Parameter list:
+    //*
+    //* Returns $mtime time: HH:MM
+    //*
+
+    function MyTime_Time($mtime="")
+    {
+        $timeinfo=$this->MyTime_Info($mtime);
+        return join(":",array($timeinfo[ "Hour" ],$timeinfo[ "Min" ]));
+            
+    }
+    
     //* function MyTime_Info, Parameter list:
     //*
     //* Reads file info.
@@ -111,6 +146,32 @@ trait MyTime
         return $timeinfo;
     }
 
+     //*
+    //* function TimeStamp2Hour, Parameter list: $mtime=""
+    //*
+    //* Format $mtime.
+    //*
+
+    function TimeStamp2Hour($mtime="")
+    {
+        $timeinfo=$this->MyTime_Info($mtime);
+
+        if (empty($timeinfo)) { return "--"; }
+
+        return
+            join
+            (
+               ".",
+               array
+               (
+                  $timeinfo[ "Hour" ],
+                  $timeinfo[ "Min" ]//,
+                  //$timeinfo[ "Sec" ]
+               )
+            );
+     }
+
+    
     //*
     //* function TimeStamp2Text, Parameter list: $mtime="",$sep=" "
     //*
@@ -119,7 +180,9 @@ trait MyTime
 
     function TimeStamp2Text($mtime="",$sep=" ")
     {
-        $timeinfo=$this->MyTime_Info();
+        $timeinfo=$this->MyTime_Info($mtime);
+
+        if (empty($timeinfo)) { return "--"; }
 
         return
             $timeinfo[ "WeekDay" ].
@@ -279,6 +342,83 @@ trait MyTime
 
         return $timeinfo;
     }
+    
+    //*
+    //* function MyTime_Month_MTime_First, Parameter list: $month
+    //*
+    //* Converts a $year/$month to first time.
+    //*
+
+    function MyTime_Month_MTime_First($month)
+    {
+        if (preg_match('/^(\d\d\d\d)(\d\d)/',$month,$matches) && count($matches)>=2)
+        {
+            $year=$matches[1];
+            $month=$matches[2];
+            $month=sprintf("01/%02d/%d 00:00:00",$month,$year);
+        }
+        
+        $dateobj = DateTime::createFromFormat("d/m/Y H:i:s",$month);
+        return $dateobj->format("U");
+    }
+    
+    //*
+    //* function MyTime_Month_MTime_Last, Parameter list: $month
+    //*
+    //* Converts a $year/$month to last time.
+    //*
+
+    function MyTime_Month_MTime_Last($month)
+    {
+        if (preg_match('/^(\d\d\d\d)(\d\d)/',$month,$matches) && count($matches)>=2)
+        {
+            $year=$matches[1];
+            $month=$matches[2];
+            
+            if ($month<12) { $month++; }
+            else           { $month=1; $year++; }
+
+            $month=sprintf("%d%02d",$year,$month);
+        }
+
+        return $this->MyTime_Month_MTime_First($month)-1;
+        
+    }
+    
+    //*
+    //* function MyTime_Date_MTime_First, Parameter list: $date
+    //*
+    //* Converts a $year/$month/$date to first time.
+    //*
+
+    function MyTime_Date_MTime_First($date)
+    {
+        if (preg_match('/^(\d\d\d\d)(\d\d)(\d\d)/',$date,$matches) && count($matches)>=3)
+        {
+            $year=$matches[1];
+            $month=$matches[2];
+            $mday=$matches[3];
+
+            $date=sprintf("%02d/%02d/%d 00:00:00",$mday,$month,$year);
+
+            $dateobj = DateTime::createFromFormat("d/m/Y H:i:s",$date);
+            return $dateobj->format("U");
+        }
+
+        return 0;
+    }
+    
+    //*
+    //* function MyTime_Date_End2MTime, Parameter list: $date
+    //*
+    //* Converts a $year/$month/$date to first time.
+    //*
+
+    function MyTime_Date_MTime_Last($date)
+    {
+        return $this->MyTime_Date_MTime_First($date)+60*60*24-1;
+    }
+    
 }
 
 ?>

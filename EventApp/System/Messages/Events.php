@@ -47,12 +47,24 @@ array
    ),
    "Event_DateSpan_Title" => array
    (
-      "Name" => "Período do Evento",
+      "Name" => "Período do Evento2",
       "Name_ES" => "Período do Evento",
       "Name_UK" => "Event Period",
       "Title" => "Período do Evento",
       "Title_ES" => "Período do Evento",
       "Title_UK" => "Event Period",
+   ),
+   "Event_Inscriptions_DateSpan_Title" => array
+   (
+      "Name" => "Período de Inscrições",
+      "Name_ES" => "Período de Inscriciónes",
+      "Name_UK" => "Inscriptions Period",
+   ),
+   "Event_Inscriptions_Editable_Title" => array
+   (
+      "Name" => "Inscrição Editáveis Até",
+      "Name_ES" => "Inscrición Editables Hasta",
+      "Name_UK" => "Inscription Editable Until",
    ),
    "Events_Closed_Title" => array
    (
@@ -152,6 +164,12 @@ array
       "Name" => "Local do Evento",
       "Name_ES" => "Local del Evento",
       "Name_UK" => "Place of Event",
+   ),
+   "Event_Data_Import_Menu_Title" => array
+   (
+      "Name" => "Importar Dados do Evento",
+      "Name_ES" => "Importar Dados do Evento",
+      "Name_UK" => "Import Data from Event",
    ),
 );
 

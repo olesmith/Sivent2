@@ -50,6 +50,7 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
     }
 
     
+    
     //*
     //* function InscriptionForm, Parameter list: $edit
     //*
@@ -61,7 +62,8 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
         $args=$this->CGI_URI2Hash();
 
         $edit=$this->InscriptionFormEdit($edit);
-        
+
+        #Must run first (update)
         $html=
             $this->Form_Run
             (
@@ -100,8 +102,8 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
         return $this->FrameIt
         (
             $this->InscriptionFriendForm(1,$this->Friend,$this->Inscription).
-            $this->Inscription_Event_Typed_Tables($edit,$this->Friend,$this->Inscription).
             $html.
+            $this->Inscription_Event_Typed_Tables($edit,$this->Friend,$this->Inscription).
             ""
         );
     }

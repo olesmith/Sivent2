@@ -20,6 +20,11 @@ class EventsAssessments extends EventsSubmissions
             $res=TRUE;
         }
 
+        if (!$this->Event_Submissions_Has($item))
+        {
+            $res=False;
+        }
+
         return $res;
     }
 

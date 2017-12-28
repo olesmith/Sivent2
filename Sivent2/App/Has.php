@@ -211,6 +211,18 @@ class App_Has extends App_Head_Table
     }
     
     //*
+    //* function HasAssessments, Parameter list:$event=array()
+    //*
+    //* Checks whether current event has Assessments.
+    //* 
+    //*
+
+    function HasAssessments($event=array())
+    {
+        return $this->EventsObj()->Event_Assessments_Has($event);
+    }
+    
+    //*
     //* function HasCriterias, Parameter list:$event=array()
     //*
     //* Checks whether current event has Submissions.
@@ -349,6 +361,23 @@ class App_Has extends App_Head_Table
             &&
             $this->Coordinator_Access_Has($this->SubmissionsObj()->Coordinator_Type,$event);
     }
+    //*
+    //* sub Coordinator_Assessments_Access_Has, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to .
+    //*
+    //*
+
+    function Coordinator_Assessments_Access_Has($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        
+        return 
+            $this->HasAssessments($event)
+            &&
+            $this->Coordinator_Access_Has($this->SubmissionsObj()->Coordinator_Type,$event);
+    }
+    
     //*
     //* sub Coordinator_Caravans_Access_Has, Parameter list: $event=array()
     //*

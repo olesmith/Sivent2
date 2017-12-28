@@ -79,7 +79,7 @@ class Submissions_Handle_Assessments extends Submissions_Handle_Assessments_Upda
                 $this->StartForm().
                 $this->Html_Table
                 (
-                    $this->AssessorsObj()->GetDataTitles($assessordatas),
+                    $this->AssessorsObj()->MyMod_Data_Titles($assessordatas),
                     $this->Submission_Handle_Assessors_Table($edit,$submission,$assessordatas,$assessors)
                 ).
                 "";

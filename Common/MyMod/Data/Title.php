@@ -5,7 +5,7 @@ trait MyMod_Data_Title
     function MyMod_Data_Titles($datas,$nohtml=0)
     {
         $titles=array();
-        for ($n=0;$n<count($datas);$n++)
+        foreach (array_keys($datas) as $n)
         {
             $titles[$n]=$this->MyMod_Data_Title($datas[$n],$nohtml);
         }
@@ -27,11 +27,6 @@ trait MyMod_Data_Title
         {
             return "";
         }
-        /* elseif (!empty($this->ItemFieldMethods[ $data ])) */
-        /* { */
-        /*     $method=$this->ItemFieldMethods[ $data ]; */
-        /*     return $this->$method(); */
-        /* } */
         elseif (isset($this->ItemDerivedData[ $data ]))
         {
             if ($this->ItemDerivedData[ $data ][ $this->TitleKeyName ]!="")
@@ -84,8 +79,8 @@ trait MyMod_Data_Title
                     {
                         $object=$this->ItemData[ $pridata ][ "SqlObject" ];
                         $title=
-                            $this->GetDataTitle($pridata,$nohtml).", ".
-                            $this->$object->GetDataTitle($secdata,$nohtml);
+                            $this->MyMod_Data_Title($pridata,$nohtml).", ".
+                            $this->$object->MyMod_Data_Title($secdata,$nohtml);
                     }
                 }
             }

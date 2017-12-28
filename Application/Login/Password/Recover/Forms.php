@@ -95,30 +95,43 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
                 $pwd2=$this->GetPOST("Password2");
                 if ($pwd1==$pwd2)
                 {
-                    if ($this->IsAValidPassword($pwd1,$message)>=8)
+                    if ($this->MyApp_Login_Password_Valid_Is($pwd1,$message)>=8)
                     {
-                        $rpwd=$pwd1;
-                        if ($this->AuthHash[ "MD5" ])
-                        {
-                            $rpwd=md5($rpwd);
-                        }
+                        
+                    /*     $rpwd=$pwd1; */
+                    /*     if ($this->AuthHash[ "MD5" ]) */
+                    /*     { */
+                    /*         $rpwd=md5($rpwd); */
+                    /*     } */
 
                         $user[ "NewPassword" ]=$pwd1;
-                        $user[ $this->AuthHash[ "PasswordField" ] ]=$rpwd;
+                        $user[ $this->AuthHash[ "PasswordField" ] ]=
+                            $this->MyApp_Auth_Crypt_Password_Crypt($pwd1);
                         $user[ "RecoverCode" ]=0;
                         $user[ "RecoverMTime" ]=0;
 
-                        $this->MySqlSetItemValues
+                        $this->Sql_Update_Item_Values_Set
                         (
-                           $this->AuthHash[ "Table" ],
                            array
                            (
                               $this->AuthHash[ "PasswordField" ],
                               "RecoverCode",
                               "RecoverMTime"
                            ),
-                           $user
+                           $user,
+                           $this->AuthHash[ "Table" ]
                         );
+                        /* $this->MySqlSetItemValues */
+                        /* ( */
+                        /*    $this->AuthHash[ "Table" ], */
+                        /*    array */
+                        /*    ( */
+                        /*       $this->AuthHash[ "PasswordField" ], */
+                        /*       "RecoverCode", */
+                        /*       "RecoverMTime" */
+                        /*    ), */
+                        /*    $user */
+                        /* ); */
 
                         $this->SendPasswordRecoveredMail($user);
 

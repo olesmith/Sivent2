@@ -4,6 +4,17 @@
 trait Sql_Where
 {
     //*
+    //* function Sql_Times_Condition, Parameter list: $mtime1,$mtime2
+    //*
+    //* SQL where clase for $date.
+    //*
+
+    function Sql_Times_Condition($mtime1,$mtime2)
+    {
+        return " (CTime>='".$mtime1."' AND CTime<'".$mtime2."') ";
+    }
+
+    //*
     //* function Sql_Where_IN, Parameter list: $values
     //*
     //* Formats where clause IN $values component.
@@ -44,6 +55,8 @@ trait Sql_Where
             foreach ($hash as $key => $value)
             {
                 $prekey=$this->Sql_Table_Column_Name_Qualify($pre.$key);
+
+                if ($value=="") { continue; }
                 
                 if (is_array($value))
                 {
@@ -161,5 +174,84 @@ trait Sql_Where
         return "(".join(" OR ",$ors).")";
     }
     
+    //*
+    //* function Sql_Where_From_Hash, Parameter list: $argshash
+    //*
+    //* Creates and SQL query from a hash. Primary key list are
+    //* converted to AND clauses - if values are scalars,
+    //* just a simple key=val - if values are arrays,
+    //* these converts to OR clauses. Fx:
+    //* 
+    //* Key1 => val1,
+    //* Key2 => array(
+    //*  val21,
+    //*  val22
+    //* )
+    //*
+    //* Converts to:
+    //*
+    //* Key1='val1' AND (Key2='val21' OR Key2='val22')
+    //*
+
+    function Sql_Where_From_Hash($argshash)
+    {
+        if (!is_array($argshash))
+        {
+            $argshash=$this->SqlClause2Hash($argshash);
+        }
+
+        $ands=array();
+        foreach ($argshash as $arg => $value)
+        {
+            if (preg_match('/^_/',$arg))
+            {
+                 array_push($ands,$value);
+            }
+            elseif (is_array($value))
+            {
+                $ors=array();
+                foreach ($value as $id => $rvalue)
+                {
+                    array_push
+                    (
+                        $ors,
+                        $this->Sql_Table_Column_Name_Qualify($arg).
+                        "=".
+                        $this->Sql_Table_Column_Value_Qualify($rvalue)
+                    );
+                }
+
+                $ors=join(" OR ",$ors);
+                if (count($value)>1)
+                {
+                    $ors="(".$ors.")";
+                }
+                array_push($ands,$ors);
+            }
+            elseif (!preg_match('/\s*(LIKE|IN)\s/',$value))
+            {
+                array_push
+                (
+                    $ands,
+                    $this->Sql_Table_Column_Name_Qualify($arg).
+                    "=".
+                    $this->Sql_Table_Column_Value_Qualify($value)
+                );
+            }
+            else
+            {
+                array_push
+                (
+                    $ands,
+                    $this->Sql_Table_Column_Name_Qualify($arg).
+                    " ".
+                    $value
+                );
+            }
+        }
+
+        return join(" AND ",$ands);
+    }
+
 }
 ?>

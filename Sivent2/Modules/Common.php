@@ -288,6 +288,60 @@ class ModulesCommon extends EventMod
     {
         return $this->ApplicationObj()->Coordinator_Submissions_Access_Has($event);
     }
+    
+    //*
+    //* sub Current_User_Event_Submissions_Proceedings_May, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Proceedings.
+    //*
+    //*
+
+    function Current_User_Event_Submissions_Proceedings_May($event=array())
+    {
+        return
+            $this->Current_User_Event_Submissions_Proceedings_Has($event)
+            &&
+            $this->ApplicationObj()->Current_User_Event_Submissions_May_Edit($event);
+    }
+    
+    //*
+    //* sub Current_User_Event_Submissions_May_Edit, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Submissions.
+    //*
+    //*
+
+    function Current_User_Event_Submissions_Proceedings_Has($event=array())
+    {
+        $res=False;
+        if (!empty($event[ "Proceedings" ]) && $event[ "Proceedings" ]==2) { $res=True; }
+        
+        return $res;
+    }
+    //*
+    //* sub Current_User_Event_Submissions_May_Edit, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Submissions.
+    //*
+    //*
+
+    function Current_User_Event_Submissions_May_Edit($event=array())
+    {
+        return $this->ApplicationObj()->Current_User_Event_Submissions_May_Edit($event);
+    }
+    
+    //*
+    //* sub Current_User_Event_Submissions_May_Show, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Submissions.
+    //*
+    //*
+
+    function Current_User_Event_Submissions_May_Show($event=array())
+    {
+        return $this->ApplicationObj()->Current_User_Event_Submissions_May_Show($event);
+    }
+    
     //*
     //* sub Coordinator_Caravans_Access_Has, Parameter list: $event=array()
     //*
@@ -484,6 +538,20 @@ class ModulesCommon extends EventMod
         }
 
         return $res;
+    }
+    
+    //*
+    //* function Event_Submissions_Has, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has collaborations.
+    //*
+
+    function Event_PreInscriptions_Has($item=array())
+    {
+        return
+            $this->EventsObj()->Event_Submissions_Has($item)
+            &&
+            $this->EventsObj()->Event_PreInscriptions_Has($item);
     }
 
     //*

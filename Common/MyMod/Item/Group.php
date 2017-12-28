@@ -55,7 +55,7 @@ trait MyMod_Item_Group
                 if ($this->MyMod_Item_Group_Allowed($this->ItemDataSGroups[ $group ]))
                 {
                     if ($edit==1) { $redit=$this->ItemDataSGroups[ $group ][ $profile ]-1; }
-            
+
                     $groups[ $row ][ $group ]=$redit;
                 }
             }
@@ -101,44 +101,35 @@ trait MyMod_Item_Group
     //* Chekcs access to data group.
     //*
 
-    function MyMod_Item_Group_Allowed($groupdef,$item=array())
+    function MyMod_Item_Group_Allowed($groupdef,$item=array(),$values=array(1,2),$profile="",$logintype="")
     {
-        $res=FALSE;
-        if (!empty($groupdef[ $this->LoginType() ]))
-        {
-            $res=TRUE;
-        }
-        elseif (!empty($groupdef[ $this->Profile() ]))
-        {
-            $res=TRUE;
-        }
-
-        if ($res && count($item)>0)
-        {
-            if (!empty($groupdef[ "AccessMethod" ]))
-            {
-                $accessmethods=$groupdef[ "AccessMethod" ];
-                if (!is_array($accessmethods)) { $accessmethods=array($accessmethods); }
-
-                foreach ($accessmethods as $accessmethod)
-                {
-                   if (method_exists($this,$accessmethod))
-                    {
-                        if (!$this->$accessmethod($item)) { return FALSE; }
-                    }
-                    else
-                    {
-                        $this->Debug=1;
-                        $this->AddMsg("Warning: Invalid group def access method: ".
-                                      $accessmethod.", ignored");
-                    }
-                }
-            }
-        }
-
-        return $res;
+        return
+            $this->MyMod_Access_HashAccess
+            (
+                $groupdef,
+                $values,
+                $profile,
+                $logintype
+            );
     }
     
+    //*
+    //* function MyMod_Item_Groups_Allowed, Parameter list: $groupdefs
+    //*
+    //* Returns list of groups acessible to $profile/$logintype.
+    //*
+
+    function MyMod_Item_Groups_Allowed($groupdefs,$item=array(),$values=array(1,2),$profile="",$logintype="")
+    {
+        return
+            $this->MyMod_Access_HashesAccess
+            (
+                $groupdefs,
+                $values,
+                $profile,
+                $logintype
+            );
+    }
 
     //*
     //* Detects if we should edit at least one in $groupdefs.

@@ -200,13 +200,13 @@ class Tables extends Table
     }
 
     //*
-    //* function ItemsTableDataGroup, Parameter list: $title,$edit=0,$group="",$items=array(),$cgiupdatevar = 'Update'
+    //* function MyMod_Data_Group_Table, Parameter list: $title,$edit=0,$group="",$items=array(),$cgiupdatevar = 'Update'
     //*
-    //* Overrides ItemsTableDataGroup from Table. Checks if Group is a Other object group,
+    //* Overrides MyMod_Data_Group_Table from Table. Checks if Group is a Other object group,
     //* if so, calls data group on subobject, otherwise passes on to parent.
     //*
 
-    function ItemsTableDataGroup($title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar = 'Update')
+    function MyMod_Data_Group_Table($title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar = 'Update')
     {
         if ($group=="") { $group=$this->GetActualDataGroup(); }
 
@@ -219,7 +219,7 @@ class Tables extends Table
             if (!empty($this->OtherObjects[ $this->ItemDataGroups[ $group ][ "OtherClass" ] ]))
             {
                 $object=$this->OtherObjects[ $this->ItemDataGroups[ $group ][ "OtherClass" ] ];
-                return $object->ItemsTableDataGroup
+                return $object->MyMod_Data_Group_Table
                 (
                    $title,
                    $edit,
@@ -228,7 +228,7 @@ class Tables extends Table
             }
         }
 
-        return parent::ItemsTableDataGroup
+        return parent::MyMod_Data_Group_Table
         (
            $title,
            $edit,
@@ -242,7 +242,7 @@ class Tables extends Table
     //*
     //* function ItemsTableDataSGroup, Parameter list: $edit,$item,$group,$datas=array()
     //*
-    //* Overrides ItemsTableDataGroup from Table. Checks if Group is a Other object group,
+    //* Overrides MyMod_Data_Group_Table from Table. Checks if Group is a Other object group,
     //* if so, calls data group on subobject, otherwise passes on to parent.
     //*
 

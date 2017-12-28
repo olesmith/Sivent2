@@ -16,9 +16,9 @@ class Collaborators_Table_Row extends Collaborators_Table_Cell
         return
             array_merge
             (
-               $this->CollaborationsObj()->GetDataTitles($rdatas),
+               $this->CollaborationsObj()->MyMod_Data_Titles($rdatas),
                array("Inscrito"),
-               $this->GetDataTitles($datas)
+               $this->MyMod_Data_Titles($datas)
             );
     }
     

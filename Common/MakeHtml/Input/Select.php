@@ -15,7 +15,7 @@ trait Html_Input_Select
        $namefilter="#Name",$titlefilter="",
        $selected=0,$addempty=TRUE,$disabledkey="",
        $selectoptions=array(),$optionsoptions=array(),
-       $maxlen=50
+       $maxlen=100
     )
     {
         $select="\n";

@@ -12,6 +12,7 @@ trait MyMod_HorMenu_Action
 
     function MyMod_HorMenu_Actions($pactions,$cssclass="",$id="",$item=array(),$title="",$caction="")
     {
+        if (empty($caction))  { $caction=$this->MyActions_Detect(); }
         if (empty($item)) { $item=$this->ItemHash; }
 
         $args=$_SERVER[ "QUERY_STRING" ];
@@ -38,8 +39,16 @@ trait MyMod_HorMenu_Action
             $included[ $raction ]=1;
             $included[ $action ]=1;
 
-            //20160911 $href=$this->MyMod_HorMenu_Action($action,$cssclass,$id,$item,$title,$caction);
-            $href=$this->MyMod_HorMenu_Action($raction,$cssclass,$id,$item,$title,$caction);
+            $href=
+                $this->MyMod_HorMenu_Action
+                (
+                    $raction,
+                    $cssclass,
+                    $id,
+                    $item,
+                    $title,
+                    $caction
+                );
             
             if (!empty($href))
             {

@@ -15,7 +15,7 @@ trait MyMod_Handle_Files_Table
             (
                 $this->MyMod_Handle_Files_Subdir_Rows($path),
                 $this->MyMod_Handle_Files_Subdirs_Table($path,$prencells),
-                $this->MyMod_Handle_Files_Table($path,$prencells),
+                $this->MyMod_Handle_Files_Path_Table($path,$prencells)
             );
     }
 
@@ -53,7 +53,7 @@ trait MyMod_Handle_Files_Table
     //* Adds files to $table.
     //*
 
-    function MyMod_Handle_Files_Table($path,$prencells)
+    function MyMod_Handle_Files_Path_Table($path,$prencells)
     {
         $files=$this->DirFiles($path);
         sort($files);

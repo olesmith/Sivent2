@@ -10,7 +10,7 @@ class PreInscriptionsInscriptionRows extends PreInscriptionsInscriptionCells
 
     function PreInscriptions_Inscription_Submission_Titles()
     {
-        $titles=$this->SubmissionsObj()->GetDataTitles($this->PreInscriptions_Submissions_Show_Datas());
+        $titles=$this->SubmissionsObj()->MyMod_Data_Titles($this->PreInscriptions_Submissions_Show_Datas());
         array_push($titles,$this->PreInscriptions_Inscription_Submission_PreInscribe_Cell(0,array()));
         
         return array("CLASS" => 'head',"Row" => $titles);

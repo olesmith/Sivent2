@@ -104,7 +104,7 @@ class Certificates_Table extends Certificates_Friend
     {
         if (empty($datas)) { $datas=$this->Certificates_Table_Datas(); }
         
-        $titles=$this->GetDataTitles($datas);
+        $titles=$this->MyMod_Data_Titles($datas);
 
         return $titles;
     }

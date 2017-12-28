@@ -3,14 +3,14 @@
 global $ClassList;
 array_push($ClassList,"Mail");
 
-if (is_file("../class.phpmailer.php"))
-{
-    include_once("../class.phpmailer.php");
-}
-else
-{
-    include_once("../../class.phpmailer.php");
-}
+/* if (is_file("../class.phpmailer.php")) */
+/* { */
+/*     include_once("../class.phpmailer.php"); */
+/* } */
+/* else */
+/* { */
+/*     include_once("../../class.phpmailer.php"); */
+/* } */
 
 global $MailInfoTitles;
 $MailInfoTitles=array

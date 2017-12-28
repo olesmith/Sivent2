@@ -320,10 +320,17 @@ class Data extends DataPrint
       return $rdatas;
   }
 
-  function GetDataTitle($data,$nohtml=0)
-  {
-      return $this->MyMod_Data_Title($data,$nohtml);
-  }
+  /* function GetDataTitle($data,$nohtml=0) */
+  /* { */
+  /*     return $this->MyMod_Data_Title($data,$nohtml); */
+  /* } */
+
+
+  /* function GetDataTitles($datas,$nohtml=0) */
+  /* { */
+  /*     return $this->MyMod_Data_Titles($datas,$nohtml); */
+  /* } */
+
 
   function DecorateDataTitle($name,$title="",$includecolon=FALSE)
   {
@@ -345,20 +352,13 @@ class Data extends DataPrint
 
   function DecoratedDataTitle($data,$includecolon=FALSE)
   {
-      $title=$this->GetDataTitle($data);
+      $title=$this->MyMod_Data_Title($data);
 
       if ($includecolon) { $title.=":"; }
 
       return $this->DecorateDataTitle($title);
     
   }
-
-
-  function GetDataTitles($datas,$nohtml=0)
-  {
-      return $this->MyMod_Data_Titles($datas,$nohtml);
-  }
-
 
   function DataHash2File($itemdata,$file)
   {

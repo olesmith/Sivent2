@@ -125,6 +125,51 @@ class MyInscriptions_Add extends MyInscriptions_Handle
     }
 
     //*
+    //* function Friend_Inscribe_Do, Parameter list: 
+    //*
+    //* Actually inscribes $friend
+    //*
+
+    function Friend_Inscribe_Do($friend)
+    {
+        $where=
+            array
+            (
+                "Event" => $this->Event("ID"),
+                "Friend" => $friend[ "ID" ],
+            ); 
+
+        $newitem=$where;
+
+        $newitem[ "Unit" ]=
+            $this->EventsObj()->MySqlItemValue
+            (
+                "",
+                "ID",
+                $this->Event("ID"),
+                "Unit"
+            );
+
+        $newitem[ "Name" ]=
+            $this->FriendsObj()->MySqlItemValue
+            (
+                "",
+                "ID",
+                $friend[ "ID" ],
+                "Name"
+            );
+
+        $newitem[ "Certificate" ]=1;
+        $newitem[ "CTime" ]=time();
+        $newitem[ "ATime" ]=time();
+        $newitem[ "MTime" ]=time();
+        $this->MySqlInsertUnique("",$where,$newitem);
+
+        return $newitem;
+    }
+
+    
+    //*
     //* function AddInscribe, Parameter list: 
     //*
     //* Generate inscription inscribe checkbox for $friend.
@@ -229,9 +274,9 @@ class MyInscriptions_Add extends MyInscriptions_Handle
         
         $newitem=array
         (
-           "Name" => $this->GetPOST("Name"),
-           "Email" => $this->GetPOST("Email"),
-           "Password" => $this->GetPOST("Password"),
+           "Name" => $this->CGI_POSTOrGET("Name"),
+           "Email" => $this->CGI_POSTOrGET("Email"),
+           "Password" => $this->CGI_POSTOrGET("Password"),
         );
 
 
@@ -253,7 +298,8 @@ class MyInscriptions_Add extends MyInscriptions_Handle
         );
 
         return
-            $this->FriendsObj()->HandleFriendSelect($newitem,TRUE,$leadingrows,$resulthiddens);
+            $this->FriendsObj()->HandleFriendSelect($newitem,TRUE,$leadingrows,$resulthiddens).
+            "";
     }
 
     

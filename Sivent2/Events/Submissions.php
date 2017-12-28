@@ -33,6 +33,24 @@ class EventsSubmissions extends EventsPayments
 
         return $res;
     }
+    //*
+    //* function Event_PreInscriptions_Has, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has preinscriptions.
+    //*
+
+    function Event_PreInscriptions_Has($item=array())
+    {
+        if (empty($item)) { $item=$this->Event(); }
+
+        $res=FALSE;
+        if (!empty($item[ "PreInscriptions_StartDate" ]) && $item[ "PreInscriptions_EndDate" ]==2)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
 
     //*
     //* function Event_Submissions_Inscriptions_Has, Parameter list: $item=array()
@@ -161,7 +179,7 @@ class EventsSubmissions extends EventsPayments
     function Event_Submissions_Inscriptions_DateSpan($event=array())
     {
         if (empty($event)) { $event=$this->Event(); }
-        
+
         return $this->Date_Span_Interval($event,"Submissions_StartDate","Submissions_EndDate");
     }
     

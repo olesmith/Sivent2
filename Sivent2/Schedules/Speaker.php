@@ -135,7 +135,7 @@ class Schedules_Speaker extends SchedulesSchedules
         return
             $this->Html_Table
             (
-               $this->GetDataTitles($datas),
+               $this->MyMod_Data_Titles($datas),
                $this->SchedulesTable($schedules,$datas)
             );
 

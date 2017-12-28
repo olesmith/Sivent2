@@ -49,7 +49,7 @@ class Items extends ItemsEmails
             $wheres[ $key ]=$value;
         }
 
-        $where=$this->Hash2SqlClause($wheres);
+        $where=$this->Sql_Where_From_Hash($wheres);
 
         if ($this->LoginType!="Public")
         {

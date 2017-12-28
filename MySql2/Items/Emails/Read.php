@@ -34,7 +34,7 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
             $this->SearchItems();
         }
 
-        //Array keeping track of inlcuded ids. Avoids multiple entries.
+        //Array keeping track of included ids. Avoids multiple entries.
         $ids=array();
         $emails=array();
         foreach ($friendkeys as $friendkey)

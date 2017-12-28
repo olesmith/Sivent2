@@ -65,7 +65,7 @@ class MyFriends_Add_Table extends MyFriends_Add_New
 
     function FriendSelectResultTitles()
     {
-        $titles=$this->GetDataTitles($this->FriendSelectDatas);
+        $titles=$this->MyMod_Data_Titles($this->FriendSelectDatas);
         if (!empty($this->SubObject))
         {
             foreach ($this->SubObjectData as $data)
@@ -73,7 +73,7 @@ class MyFriends_Add_Table extends MyFriends_Add_New
                 $cell="";
                 if (!empty($this->SubObject->ItemData[ $data ]))
                 {
-                    $cell=$this->SubObject->GetDataTitle($data);
+                    $cell=$this->SubObject->MyMod_Data_Title($data);
                 }
                 else
                 {
@@ -123,8 +123,8 @@ class MyFriends_Add_Table extends MyFriends_Add_New
                 $this->StartForm("",$method="post",$enctype=0,$options=array(),array("Friend")).
                 "";
             $post=
-                $this->MakeHidden("Name",$this->GetPOST("Name")).
-                $this->MakeHidden("Email",$this->GetPOST("Email"));
+                $this->MakeHidden("Name",$this->CGI_POSTOrGET("Name")).
+                $this->MakeHidden("Email",$this->CGI_POSTOrGET("Email"));
 
             foreach ($resulthiddens as $hidden)
             {
@@ -138,7 +138,6 @@ class MyFriends_Add_Table extends MyFriends_Add_New
                 $this->EndForm().
                 "";
         }
-
 
         return
             $this->H(2,$title).

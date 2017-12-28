@@ -53,10 +53,14 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
+         "Inscription",
          "Title",
-         "Event_Date_Span","Inscription",
-         "StartDate","EndDate","EditDate",
-         "InscribeLink",
+         "Event_Date_Span",
+         "Event_Inscriptions_Date_Span",
+         "Events_Status_Cell",
+         "EditDate",
+         "Statistics",
+         "Inscription",
       ),
       "Admin" => 1,
       "Person" => 0,
@@ -130,6 +134,7 @@ array
           "Submissions","Submissions_Public","Submissions_Inscriptions",
           "Submissions_NAuthors",
           "Submissions_StartDate","Submissions_EndDate",
+          "Proceedings",
           "Certificate_Submission_TimeLoad"
         ),
 

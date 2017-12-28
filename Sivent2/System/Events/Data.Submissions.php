@@ -212,5 +212,4 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
-
 );

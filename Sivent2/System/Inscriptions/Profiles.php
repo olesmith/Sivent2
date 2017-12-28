@@ -82,6 +82,7 @@ array
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Import" => 1,
             "Export" => 1,
          ),
          'Admin' => array
@@ -89,6 +90,7 @@ array
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Import" => 1,
             "Export" => 1,
          ),
       ),

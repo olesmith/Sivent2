@@ -40,6 +40,7 @@ array
             "Assessments" => 1,
             "Details" => 1,
             "GenCert" => 1,
+            "Print" => 1,
          ),
          'Admin' => array
          (
@@ -48,6 +49,7 @@ array
             'Delete' => 1,
             "Details" => 1,
             "GenCert" => 1,
+            "Print" => 1,
          ),
       ),
       'Plural' => array
@@ -65,6 +67,7 @@ array
             "EditList" => 1,
             "Export" => 1,
             "Emails" => 1,
+            "Files" => 1,
             "Zips" => 1,
             "GenCerts" => 1,
          ),
@@ -75,6 +78,7 @@ array
             "EditList" => 1,
             "Export" => 1,
             "Emails" => 1,
+            "Files" => 1,
             "Zips" => 1,
             "GenCerts" => 1,
          ),

@@ -6,6 +6,7 @@ include_once("Items/Row.php");
 include_once("Items/Table.php"); 
 include_once("Items/Menu.php"); 
 include_once("Items/Group.php"); 
+include_once("Items/Post.php"); 
 include_once("Items/Search.php"); 
 include_once("Items/PHP.php"); 
 include_once("Items/Print.php"); 
@@ -18,6 +19,7 @@ trait MyMod_Items
         MyMod_Items_Table,
         MyMod_Items_Menu,
         MyMod_Items_Group,
+        MyMod_Items_Post,
         MyMod_Items_Row,
         MyMod_Items_Ors,
         MyMod_Items_Search,

@@ -18,14 +18,23 @@ array
       "Title_ES" => "Inscrito",
       "Title_UK" => "Inscribed",
    ),
+   "Inscription_Create_Title" => array
+   (
+      "Name" => "Data de Inscrição",
+      "Name_ES" => "Inscrito, Data del Inscrición",
+      "Name_UK" => "Inscription Date",
+      "Title" => "Data de Inscrição",
+      "Title_ES" => "Inscrito, Data del Inscrición",
+      "Title_UK" => "Inscription Date",
+   ),
    "Inscription_Button_Inscribe" => array
    (
-      "Name" => "Inscrever-me",
-      "Name_ES" => "Inscreber-me",
-      "Name_UK" => "Inscribe me",
-      "Title" => "Inscrever-me",
-      "Title_ES" => "Inscreber-me",
-      "Title_UK" => "Inscribe me",
+      "Name" => "Salvar & Inscrever-me",
+      "Name_ES" => "Salvar & Inscreber-me",
+      "Name_UK" => "Save & Inscribe me",
+      "Title" => "Salvar Dados & Inscrever-me",
+      "Title_ES" => "Salvar Dados & Inscreber-me",
+      "Title_UK" => "Save Data & Inscribe me",
    ),
    "Inscription_Button_Inscribed" => array
    (
@@ -47,12 +56,12 @@ array
    ),
    "Friend_Table_Title" => array
    (
-      "Name" => "Cadastro",
-      "Name_ES" => "Registro",
-      "Name_UK" => "Registration",
-      "Title" => "Cadastro",
-      "Title_ES" => "Registro",
-      "Title_UK" => "Registration",
+      "Name" => "Dados do meu Cadastro",
+      "Name_ES" => "Dados do mi Registro",
+      "Name_UK" => "Registration Data",
+      "Title" => "Dados do meu Cadastro",
+      "Title_ES" => "Dados do mi Registro",
+      "Title_UK" => "Registration Data",
    ),
    "Friend_Data_Diag_OK" => array
    (
@@ -293,6 +302,12 @@ array
        "Name" => array("Cadastros","Inscritos","Homologados","Seleccionados","Certificados Liberados","Carga Horária",""),
        "Name_ES" => array("Cadastros","Inscritos","Homologados","Seleccionados","Certificados Liberados","Carga Horária",""),
        "Name_UK" => array("Registrations","Inscribed","Homologated","Selecteds","Certificates Liberated","Time Load",""),
+   ),
+   "Inscriptions_Typed_Tables_Title" => array
+   (
+      "Name" => "Outras Inscrições em Aberta",
+      "Name_ES" => "Outras Inscriciónes em Abierta",
+      "Name_UK" => "Other Open Inscriptions",
    ),
 );
 

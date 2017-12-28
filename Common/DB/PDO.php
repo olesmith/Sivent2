@@ -100,7 +100,7 @@ trait DB_PDO
         
         catch (Exception $e)
         {
-            $this->DoDie($this->ModuleName.', Invalid query:',$query,$this->DB_Link()->errorinfo());
+            $this->DoDie($this->ModuleName.', Invalid query #1:',$query,$this->DB_Link()->errorinfo());
         }
 
         return $result; 
@@ -144,14 +144,16 @@ trait DB_PDO
         
         catch (Exception $e)
         {
+            $this->CallStack_Show();
             echo
-               $this->ModuleName.', Invalid query:<BR>'.
+               $this->ModuleName.', Invalid query #2:<BR>'.
+               $this->BR().$query.$this->BR().$this->BR().
                $this->DB_PDO_Query_Html($query).
                 "";
                 
             $this->DoDie
             (
-               $this->ModuleName.', Invalid query',
+               $this->ModuleName.', Invalid query #2',
                $this->DB_Link()->errorinfo()
             );
         }

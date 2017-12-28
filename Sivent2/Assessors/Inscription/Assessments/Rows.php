@@ -15,11 +15,11 @@ class AssessorsInscriptionAssessmentsRows extends AssessorsInscriptionAssessment
         return
             array_merge
             (
-               $this->CriteriasObj()->GetDataTitles
+               $this->CriteriasObj()->MyMod_Data_Titles
                (
                    $this->Assessor_Inscription_Form_Criterias_Data()
                ),
-               $this->AssessmentsObj()->GetDataTitles
+               $this->AssessmentsObj()->MyMod_Data_Titles
                (
                    $this->Assessor_Inscription_Form_Assessments_Data()
                )

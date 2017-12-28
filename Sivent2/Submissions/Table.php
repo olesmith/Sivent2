@@ -142,7 +142,7 @@ class Submissions_Table extends Submissions_Emails
         return
             $this->Html_Table
             (
-               $this->GetDataTitles($this->Submissions_Table_Data()),
+               $this->MyMod_Data_Titles($this->Submissions_Table_Data()),
                $this->Submissions_Table($edit,$friend,$inscription)
             ).
             "";

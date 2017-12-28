@@ -7,11 +7,14 @@ include_once("Handle/Copy.php");
 include_once("Handle/Delete.php");
 include_once("Handle/Search.php");
 include_once("Handle/Prints.php");
+include_once("Handle/Files.php");
 include_once("Handle/Info.php");
 include_once("Handle/Download.php");
 include_once("Handle/Unlink.php");
 include_once("Handle/Zip.php");
 include_once("Handle/Export.php");
+include_once("Handle/Import.php");
+include_once("Handle/Process.php");
 
 trait MyMod_Handle
 {
@@ -22,11 +25,14 @@ trait MyMod_Handle
         MyMod_Handle_Delete,
         MyMod_Handle_Search,
         MyMod_Handle_Prints,
+        MyMod_Handle_Files,
         MyMod_Handle_Info,
         MyMod_Handle_Zip,
         MyMod_Handle_Download,
         MyMod_Handle_Unlink,
-        MyMod_Handle_Export;
+        MyMod_Handle_Export,
+        MyMod_Handle_Import,
+        MyMod_Handle_Process;
     
     //*
     //* function MyMod_Handle_Item_Read, Parameter list:

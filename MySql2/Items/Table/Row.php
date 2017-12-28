@@ -44,7 +44,7 @@ class ItemsTableRow extends ItemsRead
     }
 
     
-    function ItemsTableRow($edit,$item,$nn,$datas,$subdatas=array(),&$tbl=array(),$even=TRUE)
+    function ItemsTableRow($edit,$item,$nn,$datas,$subdatas,&$tbl,$even=TRUE)
     {
         //Test if we have individual access to Edit $item
         if (!$this->MyAction_Allowed("Edit",$item))

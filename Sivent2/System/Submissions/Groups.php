@@ -6,25 +6,35 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "No","Edit","Copy","Delete","GenCert","Assessments",
+         "No","Edit","Copy","Delete","Print","GenCert","Assessments",
          "Name","Status",
          "Type","Area","Level",
          "Submission_Authors_Cell",
          "Title",
          "File","PreInscriptions","Vacancies",
       ),
-      /* "Data_UK" => array */
-      /* ( */
-      /*    "No","Edit","Copy","Delete","GenCert","Assessments", */
-      /*    "Status", */
-      /*    "Event","Type","Area","Level", */
-      /*    "SubmissionAuthorsCell","Name","Title_UK", */
-      /*    "File","PreInscriptions","Vacancies", */
-      /* ), */
       "Admin" => 1,
       "Person" => 0,
       "Public" => 1,
       "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
+   "Timess" => array
+   (
+      "Name" => "Tempos",
+      "Name_UK" => "Times",
+      "Data" => array
+      (
+         "No","Edit","Copy","Delete","GenCert","Assessments",
+         "Name","Status","CTime","MTime","ATime",
+         "Type","Area","Level",
+         "Submission_Authors_Cell",
+         "Title",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
    ),
     "Authors" => array
@@ -107,16 +117,16 @@ array
       "Data" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Name","Status",
-         "Type","Area","Level","Friend",
+         "Name",
+         "Type","Area","Level","Submission_Authors_Cell",
          "Title","Vacancies",
          "SubmissionNPreInscriptionsCell","SubmissionVacanciesCell",
       ),
       "Data_UK" => array
       (
          "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Name","Status",
-         "Type","Area","Level","Friend",
+         "Name",
+         "Type","Area","Level","Submission_Authors_Cell",
          "Title_UK","Vacancies",
          "SubmissionNPreInscriptionsCell","SubmissionVacanciesCell",
       ),

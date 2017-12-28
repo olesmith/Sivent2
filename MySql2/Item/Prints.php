@@ -11,9 +11,9 @@ class ItemPrints extends ItemTable
         $latexdocno=$this->CGI2LatexDocNo();
 
         $latex=
-            $this->GetLatexHead("Singular",$latexdocno).
+            $this->MyMod_Latex_Head("Singular",$latexdocno).
             $this->LatexItem($item).
-            $this->GetLatexTail("Singular",$latexdocno);
+            $this->MyMod_Latex_Tail("Singular",$latexdocno);
 
         $latex=$this->TrimLatex($latex);
         $latex=$this->Filter($latex,$item);

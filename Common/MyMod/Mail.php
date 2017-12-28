@@ -67,7 +67,7 @@ trait MyMod_Mail
                "\n\n"
             );
 
-        $this->ApplicationObj()->ApplicationSendEmail
+        $this->ApplicationObj()->MyApp_Email_Send
         (
            $user,
            array

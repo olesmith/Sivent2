@@ -78,7 +78,7 @@ class Import extends Sort
     {
         $datas=preg_grep('/\S/',$this->ImportDatas);
         array_unshift($datas,"No");
-        $titles=$this->B($this->GetDataTitles($datas));
+        $titles=$this->B($this->MyMod_Data_Titles($datas));
 
         $this->InitAddDefaults();
 
@@ -109,7 +109,7 @@ class Import extends Sort
     {
         $datas=preg_grep('/\S/',$this->ImportDatas);
         array_unshift($datas,"No");
-        $titles=$this->B($this->GetDataTitles($datas));
+        $titles=$this->B($this->MyMod_Data_Titles($datas));
 
         $table=array($titles);
         foreach ($this->ImportItems as $n => $item)
@@ -172,7 +172,7 @@ class Import extends Sort
         $rrdatas=array();
         foreach ($rdatas as $data)
         {
-            array_push($rrdatas,$this->GetDataTitle($data));
+            array_push($rrdatas,$this->MyMod_Data_Title($data));
         }
 
         array_unshift($rrdatas,"");

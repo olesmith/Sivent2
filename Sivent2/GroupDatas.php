@@ -30,19 +30,9 @@ class GroupDatas extends DBGroups
         return $this->ApplicationObj->SqlEventTableName("GroupDatas",$table);
     }
 
-    //*
-    //* function PreProcessItemData, Parameter list:
-    //*
-    //* Pre process item data; this function is called BEFORE
-    //* any updating DB cols, so place any additonal data here.
-    //*
 
-    function PreProcessItemData()
-    {
-        //Don't remove function, since parent would be called instead.
-    }
-
-     //*
+    
+    //*
     //* function PostProcessItemData, Parameter list:
     //*
     //* Post process item data; this function is called BEFORE

@@ -30,6 +30,43 @@ trait MyMod_Data
 
 
     //*
+    //* function MyMod_Data_Is, Parameter list: $data
+    //*
+    //* Returns true if $data is defined in ItemData.
+    //*
+
+    function MyMod_Data_Is($data)
+    {
+        $res=False;
+        if (!empty($this->ItemData[ $data ]))
+        {
+            $res=True;
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* function MyMod_Datas, Parameter list: $datas
+    //*
+    //* Returns item data in $datas.
+    //*
+
+    function MyMod_Datas($datas)
+    {
+        $rdatas=array();
+        foreach (array_keys($datas) as $id)
+        {
+            if ($this->MyMod_Data_Is($datas[ $id ]))
+            {
+                array_push($rdatas,$datas[ $id ]);
+            }
+        }
+
+        return $rdatas;
+    }
+    
+    //*
     //* function MyMod_Data_Init, Parameter list: $initstructure=FALSE,$readitemgroupsdata=FALSE
     //*
     //* Initializes Item data; updates DB fields
@@ -195,7 +232,7 @@ trait MyMod_Data
            (
               "TitleRow" => TRUE,
               "Class" => 'head',
-              "Row" => $this->GetDataTitles($datas)
+              "Row" => $this->MyMod_Data_Titles($datas)
            ),
         );
     }

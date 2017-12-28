@@ -48,7 +48,7 @@ trait MyMod_Items_Row
                 }
                 elseif (!empty($this->CellMethods[ $data ]))
                 {
-                    $cell=$this->$data($edit,$item,$data);
+                    $cell=$this->Span($this->$data($edit,$item,$data),array("CLASS" => 'data'));
                 }
 
                 array_push($row,$cell);

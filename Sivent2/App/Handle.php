@@ -3,12 +3,12 @@
 class App_Handle extends App_Has
 {
     //*
-    //* function HandleStart, Parameter list: 
+    //* function MyApp_Handle_Start, Parameter list: $echo=TRUE
     //*
-    //* Overrides Application::HandleStart.
+    //* Overrides Application::MyApp_Handle_Start.
     //*
 
-    function HandleStart()
+    function MyApp_Handle_Start($echo=TRUE)
     {
         if ($this->GetCGIVarValue("Action")=="Start")
         {

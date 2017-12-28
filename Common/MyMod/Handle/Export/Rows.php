@@ -9,7 +9,7 @@ trait MyMod_Handle_Export_Rows
 
     function MyMod_Handle_Export_Table_Data_Titles($datas)
     {
-        return $this->GetDataTitles($datas);
+        return $this->MyMod_Data_Titles($datas);
     }
     
     //*

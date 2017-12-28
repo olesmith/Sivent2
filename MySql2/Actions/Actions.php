@@ -164,24 +164,6 @@ array
         "Edits"   => 1,
         "Singular"   => TRUE,
        ),
-       /* "ShowList" => array */
-       /* ( */
-       /*  "Href"     => "", */
-       /*  "HrefArgs" => "", */
-       /*  "Title"    => "Mostrar todo(a)s #ItemsName", */
-       /*  "Title_UK" => "Show all #ItemsName_UK", */
-       /*  "Title_ES"    => "Mostrar todo(a)s #ItemsName_ES", */
-       /*  "Name"     => "Mostrar #ItemsName", */
-       /*  "Name_UK"  => "Show #ItemsName_UK", */
-       /*  "Name_ES"     => "Mostrar #ItemsName_ES", */
-       /*  "Icon"     => "show_dark.png", */
-       /*  "Public"   => 0, */
-       /*  "Person"   => 1, */
-       /*  "Admin"   => 1, */
-       /*  "Handler"   => "MyMod_Handle_Search", */
-       /*  "Edits"   => 0, */
-       /*  "Singular"   => FALSE, */
-       /* ), */
        "EditList" => array
        (
         "Href"     => "",
@@ -200,7 +182,7 @@ array
         "Person"   => 0,
         "Admin"   => 1,
         "Handler"   => "MyMod_Handle_Search",
-        //"AltAction"   => "Search",
+        "AltAction"   => "Search",
         "Edits"   => 1,
         "Edit"   => 1,
         "Singular"   => FALSE,
@@ -281,7 +263,7 @@ array
         "Public"   => 1,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "HandlePrint",
+        "Handler"   => "MyMod_Handle_Print",
         "NoHeads"   => 1,
         "NoInterfaceMenu"   => 1,
         "Edits"   => 0,
@@ -372,11 +354,11 @@ array
         "Href"     => "",
         "HrefArgs" => "",
         "Title"    => "Importar #ItemsName do Arquivo",
-        "Title_UK" => "Import #ItemsName_UK (restore)",
-        "Title_ES"    => "Importar #ItemsName_ES do Archivo",
-        "Name"     => "Importar #ItemsName do Arquivo",
+        "Title_UK" => "Import #ItemsName_UK",
+        "Title_ES"    => "Importar #ItemsName_ES de Ficheiro",
+        "Name"     => "Importar #ItemsName",
         "Name_UK"  => "Import #ItemsName_UK",
-        "Name_ES"     => "Importar #ItemsName_ES do Archivo",
+        "Name_ES"     => "Importar #ItemsName_ES",
         //"Icon"     => "rubik.png",
         "Public"   => 0,
         "Person"   => 1,
@@ -425,16 +407,16 @@ array
         "Href"     => "",
         "HrefArgs" => "",
         "AddIDArg"   => 0,
-        "Title"    => "Processar #ItemsName",
-        "Title_UK" => "Process #ItemsName_UK",
-        "Title_ES"    => "Processar #ItemsName_ES",
+        "Title"    => "Processar Banco de Dados",
+        "Title_UK" => "Process Data Base",
+        "Title_ES"    => "Processar Banco de Dados",
         "Name"     => "Processar",
         "Name_UK"  => "Process",
         "Name_ES"     => "Processar",
         "Public"   => 0,
         "Person"   => 0,
         "Admin"   => 1,
-        "Handler"   => "HandleProcess",
+        "Handler"   => "MyMod_Handle_Process",
         "Singular"   => FALSE,
        ),
        "Info" => array

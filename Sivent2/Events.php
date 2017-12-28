@@ -95,6 +95,7 @@ class Events extends Events_Handle
            "Data.Collaborations.php",
            "Data.Caravans.php",
            "Data.Submissions.php",
+           "Data.Proceedings.php",
            "Data.Assessments.php",
            "Data.PreInscriptions.php"
         );

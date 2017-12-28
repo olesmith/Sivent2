@@ -61,7 +61,20 @@ class PreInscriptionsInscriptionTable extends PreInscriptionsInscriptionRows
                   $this->PreInscriptions_Inscription_Submission_Conflicts_List($this->Submissions[ $sid ]),
                )
             );
-            if ($edit==1) { array_push($table,$buttons); }
+            
+            if ($edit==1)
+            {
+                array_push
+                (
+                    $table,
+                    $buttons,
+                    $this->B
+                    (
+                        "-------------------------------------------------------------------".
+                        "-------------------------------------------------------------------"
+                    )
+                );
+            }
         
         }
 
@@ -151,7 +164,7 @@ class PreInscriptionsInscriptionTable extends PreInscriptionsInscriptionRows
             $this->H(3,$this->MyLanguage_GetMessage("PreInscriptions_Times_Table_Title")).
             $this->Html_Table
             (
-               $this->SchedulesObj()->GetDataTitles($sceddatasshow),
+               $this->SchedulesObj()->MyMod_Data_Titles($sceddatasshow),
                $table
             ).
             "";

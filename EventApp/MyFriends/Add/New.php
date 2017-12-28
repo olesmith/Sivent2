@@ -50,14 +50,36 @@ class MyFriends_Add_New extends MyFriends_Add_Mail
     }
 
     //*
+    //* function Friend_Add_Do, Parameter list: &$newitem
+    //*
+    //* Actually adds friend.
+    //*
+
+    function Friend_Add_Do(&$newitem)
+    {
+        if (empty($newitem[ "Password" ]))
+        {
+            list($usec, $sec) = explode(' ', microtime());
+            $newitem[ "Password" ]=(float) $sec + ((float) $usec * 100000);
+        }
+        
+        $this->SendPasswordMail($newitem);
+
+        $newitem[ "Password" ]=md5($newitem[ "Password" ]);
+        $newitem[ "Status" ]=2;
+        $newitem[ "Profile_Friend" ]=2;
+        $this->MySqlInsertItem("",$newitem);
+    }
+    
+    //*
     //* function FriendSelectAddFriend, Parameter list: &$newitem
     //*
-    //* Actuall adds friend.
+    //* Actually adds friend.
     //*
 
     function FriendSelectAddFriend(&$newitem)
     {
-        if ($this->GetPOST("AddFriend")!=1) { return; }
+        if (empty($newitem[ "Email" ]) || empty($newitem[ "Name" ])) { return; }
 
         $name=$this->Html2Sort($newitem[ "Name" ]);
         $name=$this->Text2Sort($name); 
@@ -80,7 +102,7 @@ class MyFriends_Add_New extends MyFriends_Add_Mail
                 array_push
                 (
                    $msgs,
-                   $this->GetDataTitle($key).": ".
+                   $this->MyMod_Data_Title($key).": ".
                    $this->MyLanguage_GetMessage("Friend_Undefined").
                    ""
                 );

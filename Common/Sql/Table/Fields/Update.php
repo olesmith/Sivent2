@@ -67,9 +67,9 @@ trait Sql_Table_Fields_Update
                 $this->Sql_Table_Field_Enum_Update($data,$datadef,$columninfo,$table);
             }
 
-            $datadef[ "Default" ]=preg_replace('/\s+/'," ",$datadef[ "Default" ]);
+            #$datadef[ "Default" ]=preg_replace('/\s+/'," ",$datadef[ "Default" ]);
 
-            $default=$this->Sql_Table_Column_Info_2_Default($columninfo);
+            $default=preg_replace('/\s+/'," ",$this->Sql_Table_Column_Info_2_Default($columninfo));
             if (
                   $this->Sql_Table_Field_Default_Should($data,$datadef)
                   &&

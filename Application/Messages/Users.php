@@ -7,8 +7,8 @@
        ),
        "SaveUserData" => array
        (
-        "Name" => "Salvar Dados do Usuário",
-        "Name_UK" => "Save User Data",
+        "Name" => "Salvar Dados do Cadastro",
+        "Name_UK" => "Save Registration Data",
        ),
        "ItemName" => array
        (
@@ -307,8 +307,8 @@
        ),
        "DoInscription" => array
        (
-        "Name"    => "Inscrever-me",
-        "Name_UK" => "Inscribe me",
+        "Name"    => "Salvar Dados & Inscrever-me",
+        "Name_UK" => "Save Data & Inscribe me",
        ),
        "DoInscriptionTitle" => array
        (

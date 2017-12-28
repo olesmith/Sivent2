@@ -31,12 +31,6 @@ class MyFriends_Add extends MyFriends_Add_Search
     {
         $where=$this->FriendSelectCGI2Where();
 
-        $unit=$this->GetPOST("Unit");
-        if (preg_match('/^(Coordinator)$/',$this->Profile()))
-        {
-            $unit=$this->ApplicationObj->LoginData[ "Unit" ];
-        }
-
         $friends=array();
         $subtitle="";
         if (!empty($where))
@@ -103,10 +97,10 @@ class MyFriends_Add extends MyFriends_Add_Search
         $html=
             $this->FriendSelectSearchForm($leadingrows).
             "";
-
-        if ($this->GetPOST("AddFriend")==1)
+        #if ($this->GetPOST("AddFriend")==1)
+        if (!empty($newitem[ "Email" ]) && !empty($newitem[ "Name" ]))
         {
-            $html.=
+            $html.="".
                 $this->H
                 (
                     3,
@@ -134,7 +128,7 @@ class MyFriends_Add extends MyFriends_Add_Search
 
         if (!empty($newitem[ "Email" ]))
         {
-            if ($this->ValidEmailAddress($newitem[ "Email" ]))
+            if ($this->MyEmail_Address_Valid($newitem[ "Email" ]))
             {
                 if (!empty($newitem[ "Name" ]))
                 {
@@ -146,11 +140,14 @@ class MyFriends_Add extends MyFriends_Add_Search
                            (
                                $this->GetPOST("Search")==1
                                ||
-                               $this->GetPOST("AddFriend")==1
+                               (
+                                   !empty($newitem[ "Email" ]) && !empty($newitem[ "Name" ])
+                               )
+                               
                            )
                        )
                     {
-                       $html.=
+                        $html.=
                             $this->H
                             (
                                 6,
@@ -163,10 +160,10 @@ class MyFriends_Add extends MyFriends_Add_Search
                 else
                 {
                     $html.=
-                        $this->H
+                        $this->Div
                         (
-                            6,
-                            $this->MyLanguage_GetMessage("Friend_Select_Name_Empty")
+                            $this->MyLanguage_GetMessage("Friend_Select_Name_Empty"),
+                            array("CLASS" => 'errors')
                         ).
                         "";
                 }

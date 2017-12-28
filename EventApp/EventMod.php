@@ -1,9 +1,13 @@
 <?php
 
 include_once("../EventApp/UnitMod.php");
+include_once("EventMod/Import.php");
+
 
 class EventMod extends UnitMod
 {
+    use EventMod_Import;
+    
     var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
     
    //*

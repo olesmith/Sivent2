@@ -283,6 +283,23 @@ class Collaborators extends Collaborators_Statistics
             $this->BR().
             $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
+
+    
+    //* function EventMod_Import_Events_Update_Compulsories, Parameter list: $dest_event,$dest_item
+    //*
+    //* Returns a module specific $hash of compulsory values.
+    //* Supposed to be overriden by specific modules!!!
+    //*
+
+    function EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item)
+    {
+        $dest_item=parent::EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item);
+        
+        $dest_item[ "Certificate" ]=1;
+        $dest_item[ "Code" ]=" ";
+        
+        return $dest_item;
+    }
 }
 
 ?>

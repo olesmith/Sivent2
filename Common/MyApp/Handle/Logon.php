@@ -48,6 +48,18 @@ trait MyApp_Handle_Logon
         $this->DoLogoff();
         $this->DoExit();
     }
+    
+    //*
+    //* function MyApp_Handle_Password_Change, Parameter list: 
+    //*
+    //* Handles password change.
+    //*
+
+    function MyApp_Handle_Password_Change()
+    {
+        $this->MyApp_Login_Password_Change_Form();
+        exit();
+    }
 }
 
 ?>

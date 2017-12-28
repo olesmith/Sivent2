@@ -5,6 +5,7 @@ include_once("Submissions/Emails.php");
 include_once("Submissions/Table.php");
 include_once("Submissions/Export.php");
 include_once("Submissions/Schedule.php");
+include_once("Submissions/Latex.php");
 include_once("Submissions/Certificate.php");
 include_once("Submissions/Author.php");
 include_once("Submissions/Authors.php");
@@ -465,9 +466,13 @@ class Submissions extends Submissions_Handle
                 array_push($submission[ "Friends" ],$fid);
             }
         }
+
+        $datas=$this->Authors_Datas("Author");
+        
+        $this->Sql_Select_Hash_Datas_Read($submission,$datas);
         
         $submission[ "Authors" ]=array();
-        foreach ($this->Authors_Datas("Author") as $key)
+        foreach ($datas as $key)
         {
             if (!empty($submission[ $key ]))
             {

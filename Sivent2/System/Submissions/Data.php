@@ -85,6 +85,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "PermsMethod"  => "Submission_Author_Data_Perms",
+      "Comment_Method"  => "Submission_Author_Email_Register_Link",
       ///"AccessMethod" => "Submission_Authors_May_Show",
    ),
    "Friend" => array
@@ -389,6 +390,24 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
       "Compulsory" => TRUE,
+   ),
+   "Contents" => array
+   (
+      "Name" => "Resumo Expandido",
+      "Name_UK" => "Contents",
+
+      "Sql" => "TEXT",
+
+      "Search" => FALSE,
+      "Size" => "50x10",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+      "Compulsory" => False,
    ),
    "File" => array
    (

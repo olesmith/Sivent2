@@ -21,39 +21,49 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
 
     function InscriptionSGroupsTable($edit,$inscription)
     {
+        if (empty($inscription) && !$this->EventsObj()->Events_Open_Is()) { return ""; }
+        
         if (!empty($this->ItemDataSGroups[ "Payments" ]) && is_array($this->ItemDataSGroups[ "Payments" ]))
         {
             $this->ItemDataSGroups[ "Payments" ][ "Visible" ]=FALSE;
         }
 
+        $button_title="Inscription_Button_Inscribed";
+        if (empty($inscription))
+        {
+            $button_title="Inscription_Button_Inscribe";
+        }
+
         $buttons="";
-        if ($edit==1) { $buttons=$this->Buttons(); }
+        if ($edit==1)
+        {
+            $buttons=$this->Buttons
+            (
+                $this->MyLanguage_GetMessage($button_title)
+            );
+        }
         
         $this->SGroups_NumberItems=FALSE;
         unset($this->ItemDataSGroups[ "Submissions" ]);
+
+        $sgroups=$this->MyMod_Item_SGroups($edit);
+
+        $html="";
+        if (count($sgroups)==1 && count($sgroups[0])==0 && $this->EventsObj()->Events_Open_Is())
+        {
+            $html=$buttons;
+        }
         
         return
+            $html.
             $this->MyMod_Item_Group_Tables_Html
             (
                $edit,
-               $this->MyMod_Item_SGroups($edit),
+               $sgroups,
                $inscription,
                $buttons
             ).
             "";
-        /* return */
-        /*     $this->MyMod_Item_Group_Tables_Form */
-        /*     ( */
-        /*        $edit, */
-        /*        "Update", */
-        /*        $this->MyMod_Item_SGroups($edit), */
-        /*        $inscription, */
-        /*        FALSE,  //mayupdate, done elsewhere */
-        /*        FALSE, //plural */
-        /*        "", */
-        /*        $buttons */
-        /*     ). */
-        /*     ""; */
     }
     
     //*
@@ -126,7 +136,167 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
             );
     }
 
+    //*
+    //* function Inscription_Status_Get, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
+    //*
+    //* Returns $inscription status: inscribed or not.
+    //*
+
+    function Inscription_Status_Get($inscription)
+    {
+        $status="";
+        if (!empty($inscription[ "ID" ]))
+        {
+            $status=$this->MyLanguage_GetMessage("Inscription_Inscribed");
+        }
+        else
+        {
+            $status=$this->MyLanguage_GetMessage("Inscription_Not_Inscribed");
+        }
+
+        return $status;
+    }
     
+    //*
+    //* function Inscription_Status_Row, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
+    //*
+    //* Creates $inscription status row.
+    //*
+
+    function Inscription_Status_Row($edit,$inscription)
+    {
+        return
+            array
+            (
+                $this->B($this->MyLanguage_GetMessage("Friend_Data_Status_Title").":"),
+                $this->Inscription_Status_Get($inscription)
+            );
+    }
+    
+
+    //*
+    //* function Inscription_Event_Status_Row, Parameter list: 
+    //*
+    //* Creates $inscription status row.
+    //*
+
+    function Inscription_Event_Status_Rows($edit,$inscription)
+    {
+        $event=$this->Event();
+        return
+            array
+            (
+                array
+                (
+                    $this->H
+                    (
+                        5,
+                        $this->EventsObj()->MyMod_Data_Fields_Show("Name",$event).
+                        "<P>".
+                        $this->EventsObj()->Event_Date_Span($event)
+                    ),
+                        
+                ),
+                array
+                (
+                    $this->B($this->MyLanguage_GetMessage("Events_Inscriptions_Status_Title").":"),
+                    $this->EventsObj()->Events_Status_Cell($event),
+                ),
+                array
+                (
+                    $this->B($this->EventsObj()->Event_Inscriptions_Date_Span().":"),
+                    $this->EventsObj()->Event_Inscriptions_Date_Span($event),
+                ),
+                array
+                (
+                    $this->B($this->EventsObj()->Event_Inscriptions_Editable_Date().":"),
+                    $this->EventsObj()->Event_Inscriptions_Editable_Date($event),
+                ),
+            );
+    }
+    
+    //* function Inscription_Created_Row, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
+    //*
+    //* Creates $inscription status row.
+    //*
+
+    function Inscription_Status_Created_Row($edit,$inscription)
+    {
+        return
+            array
+            (
+                $this->B($this->MyLanguage_GetMessage("Inscription_Create_Title").":"),
+                $this->MyMod_Data_Fields_Show("CTime",$inscription)
+            );
+    }
+    
+    //*
+    //* function Inscription_Status_Table, Parameter list: $edit,$inscription
+    //* Creates $inscription event table.
+    //*
+
+    function Inscription_Event_Rows($edit,$inscription)
+    {
+        $table=array();
+        $table=array_merge
+        (
+            $table,
+            $this->Inscription_Event_Status_Rows($edit,$inscription)
+        );
+        
+        return $table;
+    }
+ 
+    //*
+    //* function Inscription_Status_Table, Parameter list: $edit,$inscription
+    //* Creates $inscription status table.
+    //*
+
+    function Inscription_Status_Table($edit,$inscription)
+    {
+        $table=array();
+        $table=array_merge
+        (
+            $table,
+            $this->Inscription_Event_Rows($edit,$inscription)
+        );
+
+            
+         array_push
+         (
+             $table,
+             $this->Inscription_Status_Row($edit,$inscription)
+         );
+
+        if (!empty($inscription[ "ID" ]))
+        {
+            array_push
+            (
+                $table,
+                $this->Inscription_Status_Created_Row($edit,$inscription)
+            );
+        }
+        
+        return $table;
+    }
+
+   
+
+    //*
+    //* function Inscription_Status_Form, Parameter list: $edit,$inscription
+    //*
+    //* Creates Inscription status table.
+    //*
+
+    function Inscription_Status_Form($edit,$inscription)
+    {
+        return
+            $this->Html_Table
+            (
+                "",
+                $this->Inscription_Status_Table($edit,$inscription)
+            );
+    }
     //*
     //* function InscriptionTable, Parameter list: $edit,$buttons=FALSE,$inscription=array(),$includeassessments=FALSE
     //*
@@ -142,9 +312,13 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         
         $this->SGroups_NumberItems=FALSE;
 
-        $table=array($this->InscriptionSGroupsTable($edit,$inscription));
+        $table=
+            array
+            (
+                $this->Inscription_Status_Form($edit,$inscription),
+                $this->InscriptionSGroupsTable($edit,$inscription),
+            );
         
-
         if (empty($inscription[ "ID" ]) && $edit==1 && $buttons)
         {
             $title="";
@@ -170,11 +344,14 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         }
         
 
-        array_unshift
-        (
-            $table,
-            $this->Inscription_Event_Info_Row($inscription)
-        );
+        if (!empty($inscription))
+        {
+            array_push
+            (
+                $table,
+                $this->Inscription_Event_Info_Row($inscription)
+            );
+        }
 
         return $table;
     }
@@ -252,9 +429,18 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
         if (!empty($tables))
         {
             return
-                $this->Anchor("TABLE").$this->Anchor("INSCR").
-                $this->Html_Table("",$tables).
-                "";
+                $this->FrameIt
+                (
+                    $this->Anchor("TABLE").$this->Anchor("INSCR").
+                    $this->H
+                    (
+                        4,
+                        $this->GetRealNameKey($this->Event(),"Title").": ".
+                        $this->MyLanguage_GetMessage("Inscriptions_Typed_Tables_Title")
+                    ).
+                    $this->Html_Table("",$tables).
+                    ""
+                );
         }
 
         return "";
@@ -290,31 +476,57 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
 
     function Inscription_Type_Rows($inscription,$type,$link,$eventdatas=array(),$inscrdatas=array())
     {
-        $titles=
-            array_merge
-            (
-               $this->EventsObj()->GetDataTitles($eventdatas),
-               $this->GetDataTitles($inscrdatas),
-               array("")
-            );
-
-        $link=$this->DIV($link,array("CLASS" => 'right'));
-
-        $row=
-            array_merge
-            (
-               $this->EventsObj()->MyMod_Item_Row(0,$this->Event(),$eventdatas),
-               $this->MyMod_Item_Row(0,$inscription,$inscrdatas),
-               array($link)
-            );
-                
         return
             array
             (
-               $this->B($titles),
-               $row
+               $this->B
+               (
+                   array_merge
+                   (
+                       $this->EventsObj()->MyMod_Data_Titles($eventdatas),
+                       $this->MyMod_Data_Titles($inscrdatas),
+                       array("")
+                   )
+               ),
+               array_merge
+               (
+                   $this->EventsObj()->MyMod_Item_Row(0,$this->Event(),$eventdatas),
+                   $this->MyMod_Item_Row(0,$inscription,$inscrdatas),
+                   array
+                   (
+                       $this->DIV($link,array("CLASS" => 'right'))
+                   )
+               )
             );
     }
+    //*
+    //* function InscriptionFriendTable, Parameter list: $edit,$buttontitle,$friend=array(),$inscription=array()
+    //*
+    //* Creates Inscription friend data table. Overrides EventApp version.
+    //*
+
+    function InscriptionFriendTable($edit,$buttontitle,$friend=array(),$inscription=array())
+    {
+        $this->RegDatasObj()->RegDatas_Friend_Datas_Add();
+        $this->RegGroupsObj()->RegGroups_SGroups_Add();
+        
+        return 
+            $this->FriendsObj()->MyMod_Item_Group_Tables_Form
+            (
+                $edit,
+                "Update_Friend",
+                $this->InscriptionFriendGroupDefs($edit),
+                $friend,
+                $mayupdate=TRUE,
+                $plural=True,
+                $precgikey="",
+                 $this->Buttons
+                (
+                    $this->MyLanguage_GetMessage($buttontitle)
+                )
+            );
+   }
+    
 }
 
 ?>

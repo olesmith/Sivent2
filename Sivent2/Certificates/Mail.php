@@ -30,7 +30,7 @@ class Certificates_Mail extends Certificates_Read
         
         $this->CertificatesObj()->Certificate_Set_Mailed($cert);
         
-        $this->ApplicationObj()->ApplicationSendEmail
+        $this->ApplicationObj()->MyApp_Email_Send
         (
            $friend,
            array

@@ -7,6 +7,7 @@ class ItemTable extends ItemRow
     //*
 
     var $ItemEditData=array();
+    var $Item_Data_Edit_Control=array();
 
     //*
     //* function HtmlItemTable, Parameter list: $edit,$datas,$item=array(),$table=array(),$plural=FALSE
@@ -45,7 +46,7 @@ class ItemTable extends ItemRow
     function ItemTable($edit=0,$item=array(),$noid=FALSE,$rdatalist=array(),$tbl=array(),
                        $plural=FALSE,$includename=TRUE,$includecompulsorymsg=TRUE,$precgikey="")
     {
-        if (count($item)>0) {} else { $item=$this->ItemHash; }
+        if (empty($item)) { $item=$this->ItemHash; }
         $item=$this->TestItem($item);
 
         $datalist=array_keys($this->ItemData);
@@ -79,9 +80,30 @@ class ItemTable extends ItemRow
             );
         }
 
+        if (!empty($item[ "ID" ] ) && empty($this->Item_Data_Edit_Control[ $item[ "ID" ] ]))
+        {
+            $this->Item_Data_Edit_Control[ $item[ "ID" ] ]=array();
+        }
+        
         $compulsories=0;
         foreach ($rdatalist as $data)
         {
+            $redit=$edit;
+            if ($edit==1)
+            {
+                if (!empty($item[ "ID" ] ))
+                {
+                    if (empty($this->Item_Data_Edit_Control[ $item[ "ID" ] ][ $data ]))
+                    {
+                        $this->Item_Data_Edit_Control[ $item[ "ID" ] ][ $data ]=True;
+                    }
+                    else
+                    {
+                        $redit=0;
+                    }
+                }
+            }
+        
             $hidden=FALSE;
             if (
                 isset($this->ItemData[ $data ][ "Hidden" ]) &&
@@ -98,7 +120,7 @@ class ItemTable extends ItemRow
                )
             {
                 $row=array();
-                $this->ItemTableRow($edit,$item,$data,$compulsories,$row,$plural,$precgikey);
+                $this->ItemTableRow($redit,$item,$data,$compulsories,$row,$plural,$precgikey);
                 if (count($row)>0) { array_push($tbl,$row); }
             }
             elseif (isset($this->Actions[ $data ]))

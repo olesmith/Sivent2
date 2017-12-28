@@ -30,7 +30,7 @@ class DataPrintCells extends DataPrintCGI
         $titles=array();
         foreach ($this->ColsDef[ "AllowedDatas" ] as $data)
         {
-            $titles[ $this->GetDataTitle($data) ]=$data;
+            $titles[ $this->MyMod_Data_Title($data) ]=$data;
         }
 
         $names=array_keys($titles);
@@ -49,7 +49,7 @@ class DataPrintCells extends DataPrintCGI
         foreach ($datas as $data)
         {
             array_push($names,$data);
-            array_push($titles,$this->GetDataTitle($data));
+            array_push($titles,$this->MyMod_Data_Title($data));
         }
 
         return $this->MakeSelectField

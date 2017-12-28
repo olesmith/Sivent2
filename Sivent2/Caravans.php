@@ -159,6 +159,24 @@ class Caravans extends Caravans_Statistics
             $this->BR().
             $this->FrameIt($this->InscriptionsObj()->DoAdd());
     }
+    
+    //* function EventMod_Import_Events_Update_Compulsories, Parameter list: $dest_event,$dest_item
+    //*
+    //* Returns a module specific $hash of compulsory values.
+    //* Supposed to be overriden by specific modules!!!
+    //*
+
+    function EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item)
+    {
+        $dest_item=parent::EventMod_Import_Events_Update_Compulsories($dest_event,$dest_item);
+        
+        $dest_item[ "NParticipants" ]=0;
+        $dest_item[ "Certificate" ]=1;
+        $dest_item[ "Certificate_CH" ]=$dest_event[ "Caravans_Coord_Timeload" ];
+        $dest_item[ "Code" ]=" ";
+        
+        return $dest_item;
+    }
 }
 
 ?>

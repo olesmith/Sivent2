@@ -11,7 +11,7 @@ class Presences_Register_Registers_Rows extends Presences_Register_Registers_Rea
 
     function Presences_Schedule_Registers_Titles($schedules)
     {
-        $titles=$this->FriendsObj()->GetDataTitles($this->Presences_Friends_Data());
+        $titles=$this->FriendsObj()->MyMod_Data_Titles($this->Presences_Friends_Data());
         $titles1=array();
         foreach (array_keys($titles) as $id) { array_push($titles1,""); }
         $titles2=array();

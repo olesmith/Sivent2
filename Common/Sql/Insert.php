@@ -21,7 +21,7 @@ trait Sql_Insert
                 if ($nocheckcols || $this->Sql_Table_Field_Exists($data,$table))
                 {
                     $query1.=$this->Sql_Table_Column_Name_Qualify($data).", ";
-                    $query2.="'".$value."', ";
+                    $query2.=$this->Sql_Table_Column_Value_Qualify($value).", ";
                 }
             }
         }
@@ -102,10 +102,8 @@ trait Sql_Insert
         }
 
         $this->LastSqlInsert=$this->Sql_Insert_Item_Query($item,$table,$nocheckcols);
-        //$item[ "ID" ]=$this->Sql_Insert_NextID($table);
 
         $result=$this->DB_Query($this->LastSqlInsert);
-
         $item[ "ID" ]=$this->Sql_Insert_LastID($result,$table);
 
         return $result;
@@ -138,5 +136,64 @@ trait Sql_Insert
        
         return FALSE;
     }
+    
+    //*
+    //* function Sql_Insert_Items_Queries, Parameter list: $items,$table="",$nocheckcols=TRUE
+    //*
+    //* Genertates query inserting $items into $table.
+    //* 
+
+    function Sql_Insert_Items_Queries($items,$table="",$nocheckcols=TRUE)
+    {
+        $queries=array();
+        foreach ($items as $item)
+        {
+            array_push
+            (
+                $queries,
+                $this->Sql_Insert_Item_Query($item,$table,$nocheckcols)
+            );
+        }
+
+        return $queries;
+    }
+   //*
+    //* function Sql_Insert_Items_Query, Parameter list: $items,$table="",$nocheckcols=TRUE
+    //*
+    //* Genertates query inserting $items into $table.
+    //* 
+
+    function Sql_Insert_Items_Query($items,$table="",$nocheckcols=TRUE)
+    {
+        $queries=array();
+        foreach ($items as $item)
+        {
+            array_push
+            (
+                $queries,
+                $this->Sql_Insert_Item_Query($item,$table,$nocheckcols)
+            );
+        }
+
+        return join(";\n",$this->Sql_Insert_Items_Queries($items,$table,$nocheckcols));
+    }
+    //*
+    //* function Sql_Insert_Items, Parameter list: $items,$table="",$nocheckcols=TRUE
+    //*
+    //* Inserts $items into $table.
+    //* 
+
+    function Sql_Insert_Items($items,$table="",$nocheckcols=TRUE)
+    {
+        $queries=$this->Sql_Insert_Items_Queries($items,$table="",$nocheckcols);
+        $result=NULL;
+        foreach ($queries as $query)
+        {
+            $result=$this->DB_Query($query);
+        }
+        
+        return $result;
+    }
+    
 }
 ?>

@@ -58,7 +58,7 @@ trait MyMod_Items_Print
         return $this->Latex_PDF
         (
            $this->MyMod_Items_Print_FileName(),
-           $this->GetLatexHead
+           $this->MyMod_Latex_Head
            (
                "Plural",
                $this->CGI2LatexDocNo()

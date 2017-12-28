@@ -6,26 +6,26 @@ class Handlers extends ApplicationLogs
 {
     var $DefaultAction="Start";
 
-    //*
-    //* function HandleStart, Parameter list:
-    //*
-    //* The Start Handler. Should display some basic info.
-    //*
+    /* //\* */
+    /* //\* function HandleStart, Parameter list: */
+    /* //\* */
+    /* //\* The Start Handler. Should display some basic info. */
+    /* //\* */
 
-    function HandleStart()
-    {
-        $this->MyApp_Handle_Start();
-    }
+    /* function HandleStart000() */
+    /* { */
+    /*     $this->MyApp_Handle_Start(); */
+    /* } */
 
-    //*
-    //* Presents change password form and exits.
-    //*
+    /* //\* */
+    /* //\* Presents change password form and exits. */
+    /* //\* */
 
-    function HandleNewPassword()
-    {
-        $this->ChangePasswordForm();
-        exit();
-    }
+    /* function HandleNewPassword() */
+    /* { */
+    /*     $this->MyApp_Login_Password_Change_Form(); */
+    /*     exit(); */
+    /* } */
 
     //*
     //* Handles the edit personal data form.

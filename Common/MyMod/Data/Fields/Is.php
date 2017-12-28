@@ -121,6 +121,137 @@ trait MyMod_Data_Fields_Is
 
         return $res;
     }
+    //*
+    //* Returns true if $data is Hour type.
+    //*
+
+    function MyMod_Data_Field_Is_Hour($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (
+              isset($this->ItemData[ $data ])
+              &&
+              $this->ItemData[ $data ][ "Sql" ]=="INT"
+              &&
+              $this->ItemData[ $data ][ "IsHour" ]
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+    //*
+    //* Returns true if $data is Real type.
+    //*
+
+    function MyMod_Data_Field_Is_Real($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (
+              isset($this->ItemData[ $data ])
+              &&
+              !empty($this->ItemData[ $data ][ "Real" ])
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* Returns true if $data is MD5 type.
+    //*
+
+    function MyMod_Data_Field_Is_MD5($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (!empty($this->ItemData[ $data ]))
+        {
+            if (
+                  !empty($this->ItemData[ $data ][ "Crypt" ])
+                  &&
+                  $this->ItemData[ $data ][ "Crypt" ]=="MD5"
+               )
+            {
+                $res=TRUE;
+            }
+        }
+
+        return $res;
+    }
+    //*
+    //* Returns true if $data is BF (Blow Fish) type.
+    //*
+
+    function MyMod_Data_Field_Is_BlowFish($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (!empty($this->ItemData[ $data ]))
+        {
+            if (
+                  !empty($this->ItemData[ $data ][ "Crypt" ])
+                  &&
+                  $this->ItemData[ $data ][ "Crypt" ]=="BlowFish"
+               )
+            {
+                $res=TRUE;
+            }
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* Returns true if $data is Real type.
+    //*
+
+    function MyMod_Data_Field_Is_Crypted($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (
+              isset($this->ItemData[ $data ])
+              &&
+              !empty($this->ItemData[ $data ][ "Crypt" ])
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* Returns true if $data is Unique type.
+    //*
+
+    function MyMod_Data_Field_Is_Unique($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (
+              isset($this->ItemData[ $data ])
+              &&
+              $this->ItemData[ $data ][ "Unique" ]
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
     
     //*
     //* Returns true if $data is an ENUM.

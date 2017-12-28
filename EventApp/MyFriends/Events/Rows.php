@@ -38,7 +38,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
         (
             $this->Html_Table_Head_Row
             (
-                $this->EventsObj()->GetDataTitles
+                $this->EventsObj()->MyMod_Data_Titles
                 (
                     $this->Friend_Event_Datas()
                 )
@@ -219,7 +219,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
 
         
         $html=
-            $this->H(5,$this->EventsObj()->GetDataTitle("Payments_Type").":").
+            $this->H(5,$this->EventsObj()->MyMod_Data_Title("Payments_Type").":").
             $this->BR().
             $this->EventsObj()->MyMod_Item_Table_Html
             (
@@ -285,7 +285,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
             array_push($datas,"Value_".$type[ "ID" ]);
         }
         
-        $titles=$this->LotsObj()->GetDataTitles($datas);
+        $titles=$this->LotsObj()->MyMod_Data_Titles($datas);
 
         $titles[0]=$this->LotsObj()->MyMod_ItemName()." ".$titles[0];
         

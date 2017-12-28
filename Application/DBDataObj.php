@@ -15,7 +15,7 @@ class DBDataObj extends Table
     function ReadDBGroups($groups,$commonpdatas=array())
     {
         $this->ItemDataGroups();
-        
+
         $skew=array
         (
            "Text" => "Name",
@@ -131,7 +131,7 @@ class DBDataObj extends Table
 
             array_push($this->DatasGroups,$group[ "ID" ]);
         }
-        
+
         $this->ItemDataSGroups=array_merge($this->ItemDataSGroups,$sgroups);
     }
 

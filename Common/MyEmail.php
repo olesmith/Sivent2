@@ -1,18 +1,28 @@
 <?php
 
-include_once("../class.phpmailer.php");
+
+include_once("libphp-phpmailer/class.phpmailer.php");
+include_once("libphp-phpmailer/class.smtp.php");
+include_once("libphp-phpmailer/class.pop3.php");
+
+include_once("MyEmail/Recipients.php");
+include_once("MyEmail/Filters.php");
 
 trait MyEmail 
 {
+    use
+       MyEmail_Recipients,
+       MyEmail_Filters;
+    
     var $Email_PHPMailer=NULL;
 
     //*
-    //* function ValidEmailAddress, Parameter list: $email
+    //* function MyEmail_Address_Valid, Parameter list: $email
     //*
     //* Checks if $email is a valid email address: \S+@\S+.
     //*
 
-    function ValidEmailAddress($email)
+    function MyEmail_Address_Valid($email)
     {
         $email=strtolower($email);
 
@@ -36,18 +46,18 @@ trait MyEmail
     }
 
     //*
-    //* function EmailInitSMTP, Parameter list: $setup
+    //* function MyEmail_Email_SMTP_Init, Parameter list: $setup
     //*
-    //* Sets email headers.
+    //* Inits SMTP conversation
     //*
 
-    function EmailInitSMTP($setup)
+    function MyEmail_Email_SMTP_Init($setup)
     {
         $this->Email_PHPMailer->IsSMTP();
 
         //SMTP Authentication
-        $this->Email_PHPMailer->SMTPAuth=FALSE; 
-        if ($setup[ "Auth" ]==2)
+        $this->Email_PHPMailer->SMTPAuth=FALSE;
+        if (!empty($setup[ "Auth" ]))
         {
             $this->Email_PHPMailer->SMTPAuth=TRUE;  
             $this->Email_PHPMailer->Username = $setup[ "User" ];  
@@ -72,55 +82,17 @@ trait MyEmail
         $this->Email_PHPMailer->Host     = $setup[ "Host" ];
         $this->Email_PHPMailer->Hostname = $setup[ "Host" ];
     }
-
-    //*
-    //* function MailKey2Recipients, Parameter list: $mailhash,$key
-    //*
-    //* Detects recipient $key.s.
-    //*
-
-    function MailKey2Recipients($mailhash,$key)
-    {
-        $tos=array();
-        if (!empty($mailhash[ $key ]))
-        {
-            if (!is_array($mailhash[ $key ]))
-            {
-                $tos=preg_split('/\s*[,;]\s*/',$mailhash[ $key ]);
-            }
-            else
-            {
-                $tos=$mailhash[ $key ];
-            }
-        }
-
-        return $tos;
-    }
-
-
-    //*
-    //* function Mail2Recipients, Parameter list: &$mailhash
-    //*
-    //* Returns hash with To, CC and BCC as lists.
-    //*
-
-    function Mail2Recipients(&$mailhash)
-    {
-        foreach (array("To","CC","BCC") as $key)
-        {
-            $mailhash[ $key ]=$this->MailKey2Recipients($mailhash,$key);
-        }
-    }
+    
 
 
 
     //*
-    //* function SetEmailHeaders, Parameter list: $mailhash
+    //* function MyEmail_Email_Headers_Set, Parameter list: $mailhash
     //*
     //* Sets email headers.
     //*
 
-    function SetEmailHeaders($mailhash)
+    function MyEmail_Email_Headers_Set($mailhash)
     {
         $this->Email_PHPMailer->ContentType="text/html; charset=utf-8";
 
@@ -164,13 +136,13 @@ trait MyEmail
     }
 
     //*
-    //* function SendEmail, Parameter list: $setup,$mailhash,$attachments=array(
+    //* function MyEmail_Email_Send, Parameter list: $setup,$mailhash,$attachments=array(
     //*
-    //* Wraps the mail sending. Uses logon, if configure to.
+    //* Wraps the mail sending.
     //* 
     //*
 
-    function SendEmail($setup,$mailhash,$attachments=array())
+    function MyEmail_Email_Send($setup,$mailhash,$attachments=array())
     {
         if (empty($mailhash[ "To" ]) && empty($mailhash[ "BCC" ]) && empty($mailhash[ "CC" ])) { return FALSE; }
         
@@ -181,15 +153,23 @@ trait MyEmail
 
         $this->Email_PHPMailer = new PHPMailer;
 
-        $this->EmailInitSMTP($setup);
-        $this->SetEmailHeaders($mailhash); 
+        $this->MyEmail_Email_SMTP_Init($setup);
+        $this->MyEmail_Email_Headers_Set($mailhash); 
 
         foreach ($attachments as $id => $attachment)
         {
             $res=$this->Email_PHPMailer->addAttachment($attachment[ "File" ],$attachment[ "Name" ]);
         }
 
-        return $this->Email_PHPMailer->Send();
+        $res=$this->Email_PHPMailer->Send();
+
+        if (!$res)
+        {
+            echo "Mailer Error: " . $this->Email_PHPMailer->ErrorInfo;
+            var_dump($res);
+        }
+        
+        return $res;
     }
     
     //*

@@ -45,7 +45,7 @@ class DataPrint extends DataPrintInclude
         $titles=array();
         foreach ($this->ColsDef[ "AllowedDatas" ] as $data)
         {
-            $titles[ $this->GetDataTitle($data) ]=$data;
+            $titles[ $this->MyMod_Data_Title($data) ]=$data;
         }
 
         $names=array_keys($titles);

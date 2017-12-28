@@ -24,6 +24,18 @@ trait MyApp_Interface
         MyApp_Interface_CSS;
 
     //*
+    //* function AllowedProfiles, Parameter list: 
+    //*
+    //* .
+    //*
+
+    function AllowedProfiles()
+    {
+        return $this->AllowedProfiles;
+    }
+
+    
+    //*
     //* function MyApp_Interface_Init, Parameter list: 
     //*
     //* Initializes applicatiion interface.

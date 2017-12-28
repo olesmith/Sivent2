@@ -82,6 +82,17 @@ trait MyActions_Entry
 
 
     //*
+    //* function MyActions_Entry_Anchor, Parameter list: $data
+    //*
+    //* Returns Anchor associated with action $data..
+    //*
+
+    function MyActions_Entry_Anchor($data)
+    {
+        return $this->Actions($data,"Anchor");
+    }
+    
+    //*
     //* function MyActions_Entry_Gen, Parameter list: $data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array()
     //*
     //* Creates Action Entry.
@@ -91,8 +102,6 @@ trait MyActions_Entry
     {
         if (empty($this->Actions[ $data ][ "Name" ])) { return ""; }
 
-        $anchor=$this->Actions($data,"Anchor");
-
         $action=$this->Href
         (
            $this->MyActions_Entry_URL($data,$item,$rargs,$noargs),
@@ -101,10 +110,10 @@ trait MyActions_Entry
            $this->Actions[ $data ][ "Target" ],
            $class,
            FALSE,array(),
-           $anchor
+           $this->MyActions_Entry_Anchor($data)
         );
 
-        $action=$this->Filter($action,$item);
+        #$action=$this->Filter($action,$item);
 
         return $action;
     }
@@ -124,7 +133,12 @@ trait MyActions_Entry
             return $this->$method($data,$item);
         }
         
-        return $this->GetRealNameKey($this->Actions[ $data ],$this->ActionTitleKey); 
+        return
+            $this->Filter
+            (
+                $this->GetRealNameKey($this->Actions[ $data ],$this->ActionTitleKey),
+                $item
+            ); 
     }
 
     //*
@@ -141,7 +155,12 @@ trait MyActions_Entry
             return $this->$method($data,$item);
         }
 
-        return $this->MyActions_Entry_Icon($data,$noicons,$size=20);
+        return 
+            $this->Filter
+            (
+                $this->MyActions_Entry_Icon($data,$noicons,$size=20),
+                $item
+            );
     }
 
     //*
@@ -284,7 +303,7 @@ trait MyActions_Entry
         }
 
 
-        return $action;
+        return $this->Filter($action,$item);
     }
 
 }

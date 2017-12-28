@@ -11,7 +11,7 @@ class DataPrintTitles extends DataPrintRow
 
     function DataTableTitleRow($numbercol=TRUE)
     {
-        $titles=$this->GetDataTitles
+        $titles=$this->MyMod_Data_Titles
         (
            $this->ColsDef[ "ColDatas" ]
         );

@@ -1,6 +1,6 @@
 array
 (
-   "01_EditEvent" => array
+   "011_EditEvent" => array
    (
        //"AccessMethod" => "Current_User_Event_May_Edit",
       "Admin" => "1",
@@ -19,7 +19,7 @@ array
       "Title_ES" => "Setup",
       "Title_UK" => "Event Setup",
    ),
-   "02_ShowEvent" => array
+   "012_ShowEvent" => array
    (
       "Admin" => "0",
       "Coordinator" => "0",
@@ -30,6 +30,18 @@ array
       "Name_UK" => "About the Event",
       "Person" => "0",
       "Public" => "1",
+   ),
+   "02_Sponsors" => array
+   (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Friend" => "0",
+      "Href" => "?Unit=".$this->Unit("ID")."&ModuleName=Sponsors&Action=Search&Event=#Event",
+      "Name" => "Patrocinadores",
+      "Name_ES" => "Patrocinadores",
+      "Name_UK" => "Sponsors",
+      "Person" => "0",
+      "Public" => "0",
    ),
    "03_Inscriptions" => array
    (

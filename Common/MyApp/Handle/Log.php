@@ -10,8 +10,7 @@ trait MyApp_Handle_Log
 
     function MyApp_Handle_Log()
     {
-        $this->MyApp_Interface_Head();
-        
+        $this->MyApp_Interface_Head();        
         $this->LogsTable();
     }
 

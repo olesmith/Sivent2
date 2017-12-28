@@ -46,12 +46,13 @@ class ItemsEmailsCells extends ItemsEmailsRead
 
     function CCCell($edit)
     {
+        $mailinfo=$this->ApplicationObj()->MyApp_Mail_Info_Get();
         $emails=array
         (
            array
            (
               "ID" => 0,
-              "Email" => $this->MailInfo[ "BCCEmail" ],
+              "Email" => $this->ApplicationObj()->MyApp_Mail_Info_Get( "BCCEmail" ),
               "Name" => "Sistema",
            ),
            $this->LoginData
@@ -120,11 +121,12 @@ class ItemsEmailsCells extends ItemsEmailsRead
             }
 
             $subject=$this->GetRealNameKey( $this->MailTexts[ "Emails" ],$field );
-            $subject=$this->ApplicationObj()->FilterMailField
-            (
-               $subject,
-               $this->MailFilters
-            );
+            $subject=
+                $this->ApplicationObj()->MyEmail_Field_Filter
+                (
+                    $subject,
+                    $this->MailFilters
+                );
         }
 
         return $subject;

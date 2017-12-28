@@ -68,7 +68,7 @@ array
         "Cadastrantes adicionados neste tela, pode obter acesso a sistema,<BR>".
         "usando o link 'Recuperar Senha' no menu esquerda da tela!\n".
         "<P>\n".
-        "Caso a 'Senha de Acesso' é vasil, uma senha aleatória será gerada.\n".
+        "Caso o campo 'Senha de Acesso' é vasil, uma senha aleatória será gerada.\n".
         "<P>\n".
         "O Usuario será notificado deste Cadastro por Email.\n".
         "<P>\n".
@@ -79,7 +79,7 @@ array
         "Users added on this screen, may obtain access to the system,".
         "using the link 'Recover Password' in the left menu!\n".
         "<P>\n".
-        "If an empty Password is given, a random password  will be generated.".
+        "If an empty Password is given, a random one  will be generated.".
         "<P>\n".
         "The user will be notified of this Registration by Email.".
         "<P>\n".

@@ -32,7 +32,7 @@ trait MyApp_Setup_ConfigFiles
         return $rfiles;
     }
 
-   //*
+    //*
     //* function MyApp_Setup_ConfigFiles2Hash, Parameter list: $file,&$hash
     //*
     //* Walks though $this->ConfigPaths, looking for files

@@ -11,6 +11,7 @@ class Submissions_Authors_Rows extends Submissions_Authors_Data
     function Submission_Authors_Row($n,$edit,$item,$plural)
     {
         $datas=$this->Author_Datas_Get($n);
+
         $row=
             $this->MyMod_Item_Row
             (
@@ -34,10 +35,11 @@ class Submissions_Authors_Rows extends Submissions_Authors_Data
     function Submission_Authors_Titles()
     {
         $titles=$this->Author_Datas_Get(1);
-        $titles=$this->GetDataTitles($titles);
+        $titles=$this->MyMod_Data_Titles($titles);
         $this->Html_Table_Head_Row($titles);
-
-        return $titles;
+        array_unshift($titles,"Nº");
+        
+        return $this->B($titles);
     }
     
     //*

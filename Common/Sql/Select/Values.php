@@ -47,16 +47,22 @@ trait Sql_Select_Values
 
     function Sql_Select_NEntries($where="",$table="")
     {
-        $query=$this->Sql_Select_NEntries_Query($where,$table);
+        $tables=$table;
+        if (!is_array($tables)) { $tables=array($tables); }
 
         $res=0;
-        if (!empty($query))
+        foreach ($tables as $table)
         {
-            $result = $this->QueryDB($query);
+            $query=$this->Sql_Select_NEntries_Query($where,$table);
 
-            $res=$this->DB_Fetch_FirstEntry($result);
+            if (!empty($query))
+            {
+                $result = $this->QueryDB($query);
 
-            $this->DB_FreeResult($result);
+                $res+=$this->DB_Fetch_FirstEntry($result);
+
+                $this->DB_FreeResult($result);
+            }
         }
         
         if (empty($res)) { $res=0; }

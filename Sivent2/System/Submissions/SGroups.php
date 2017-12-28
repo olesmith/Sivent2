@@ -27,7 +27,7 @@ array
        "Name_UK" => "Summary",
        "Data" => array
        (
-          "Keywords","Summary","File",
+           "Keywords","Summary","Contents","File",
         ),
 
        "Person" => 0,

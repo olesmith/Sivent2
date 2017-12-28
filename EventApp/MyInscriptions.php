@@ -93,6 +93,7 @@ class MyInscriptions extends MyInscriptions_Certificate
 
     function PreProcessItemDataGroups()
     {
+        $this->Import_Datas=array("Name","Email");
         array_unshift($this->ItemDataGroupPaths,"../EventApp/System/Inscriptions");
     }
 

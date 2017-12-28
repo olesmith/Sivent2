@@ -19,6 +19,7 @@ include_once("MyMod/Modules.php");
 include_once("MyMod/SubModules.php");
 include_once("MyMod/Actions.php");
 include_once("MyMod/Data.php");
+include_once("MyMod/Group.php");
 include_once("MyMod/Item.php");
 include_once("MyMod/Items.php");
 include_once("MyMod/Access.php");
@@ -50,7 +51,7 @@ trait MyMod
     use
         MyMod_Handle,MyMod_HorMenu,
         MyMod_Modules,MyMod_Module,MyMod_SubModules,
-        MyMod_Actions,MyMod_Data,MyMod_Item,
+        MyMod_Actions,MyMod_Data,MyMod_Group,MyMod_Item,
         MyMod_Access,MyMod_Mail,
         MyMod_Items,MyMod_Latex,MyMod_Language,
         MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,MyMod_Messages;

@@ -18,6 +18,24 @@ array
       "Title_ES" => "Básicos",
       "Title_UK" => "Basic",
    ),
+   "Timess" => array
+   (
+      "Admin" => "1",
+      "Coordinator" => "1",
+      "Data" => array("No","Edit","Delete","GenCert","MailCert","Event","Friend","Status","CTime","MTime","ATime","Inscription","Code"),
+      "Friend" => "1",
+      "Name" => "Tempos",
+      "Name_ES" => "Tiempos",
+      "Name_UK" => "Times",
+      "Person" => "0",
+      "Public" => "0",
+      "ShortName" => "Tempos",
+      "ShortName_ES" => "Tiempos",
+      "ShortName_UK" => "Times",
+      "Title" => "Tempos",
+      "Title_ES" => "Tiempos",
+      "Title_UK" => "Times",
+   ),
    "Selection" => array
    (
       "Admin" => "1",

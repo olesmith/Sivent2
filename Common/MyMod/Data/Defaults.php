@@ -28,6 +28,7 @@ trait MyMod_Data_Defaults
             "Size"              => FALSE,
             "Type"              => "",
             "MD5"               => FALSE,
+            "Crypt"             => "",  #MD5, BlowFish
             "Hidden"            => FALSE,
             "Password"          => FALSE,
             "TimeType"          => FALSE,
@@ -72,6 +73,8 @@ trait MyMod_Data_Defaults
 
             "SortAsDate"        => FALSE,
             "TrimCase"          => FALSE,
+            "ToUpper"           => FALSE,
+            "ToLower"           => FALSE,
             "Iconify"           => FALSE,
             "Compulsory"        => FALSE,
             "FieldMethod"       => "",  //args: $data,$item,$edit=0,$rdata=$data
@@ -110,6 +113,7 @@ trait MyMod_Data_Defaults
             "Comment"      => "",
             "Comment_UK"      => "",
             "Comment_ES"      => "",
+            "Comment_Method"      => "",
             
             "AccessMethod" => "", //args: (??$item??)
         );

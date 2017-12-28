@@ -162,7 +162,7 @@ class MyUnits extends MyUnitsEvents
     {
         $updatedatas=$this->MyHash_Keys_Take
         (
-           $this->ApplicationObj()->MailInfo,
+           $this->ApplicationObj()->MyApp_Mail_Info_Get(),
            $this->ApplicationObj()->Unit2MailInfo,
            $item
         );
@@ -389,7 +389,7 @@ class MyUnits extends MyUnitsEvents
             $this->Html_Table
             (
                 "",
-                $this->ItemsTableDataGroup("",$edit,"Basic",$units)
+                $this->MyMod_Data_Group_Table("",$edit,"Basic",$units)
              );
     }
 

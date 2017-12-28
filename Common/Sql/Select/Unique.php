@@ -10,8 +10,10 @@ trait Sql_Select_Unique
     //*
     //* 
 
-    function Sql_Select_Unique_Col_Values_Query($col,$where=array(),$orderby="",$table="")
+    function Sql_Select_Unique_Col_Values_Query($cols,$where=array(),$orderby="",$table="")
     {
+        if (!is_array($cols)) { $cols=array($cols); }
+        
         if (!$this->Sql_Table_Exists($table)) { return ""; }
 
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
@@ -23,12 +25,11 @@ trait Sql_Select_Unique
             $query.=
                 " ON (".
                 $this->Sql_Table_Column_Names_Qualify($orderby).
-                //$this->Sql_Table_Column_Name_Qualify($col).
                 ") ";
         }
 
         $query.=
-            $this->Sql_Table_Column_Name_Qualify($col).
+            $this->Sql_Table_Column_Names_Qualify($cols).
             " FROM ".
             $this->Sql_Table_Name_Qualify($table);
 
@@ -40,7 +41,7 @@ trait Sql_Select_Unique
                 " ORDER BY ".
                 $this->Sql_Table_Column_Names_Qualify($orderby);
         }
-        
+
         return $query;
     }
 
@@ -51,21 +52,47 @@ trait Sql_Select_Unique
     //*
     //* 
 
-    function Sql_Select_Unique_Col_Values($col,$where=array(),$orderby="",$table="")
+    function Sql_Select_Unique_Col_Values($cols,$where=array(),$orderby="",$table="")
     {
-        $query=$this->Sql_Select_Unique_Col_Values_Query($col,$where,$orderby,$table);
+        $singlecol=FALSE;
+        if (!is_array($cols))
+        {
+            $singlecol=TRUE;
+            $cols=array($cols);
+        }
+        
+        $query=$this->Sql_Select_Unique_Col_Values_Query($cols,$where,$orderby,$table);
 
         $values=array();
         if (!empty($query))
         {
-            //25/06/2016!!! Ufffff! $res=$this->DB_Query($query);
             foreach ($this->DB_Query_2Assoc_List($query) as $item)
             {
-                $values[ $item[ $col ] ]=1;
+                $keys=array();
+                foreach ($cols as $col)
+                {
+                    $key="";
+                    if (isset($item[ $col ]))
+                    {
+                        $key=$item[ $col ];
+                    }
+                    
+                    array_push($keys,$key);
+                }
+                
+                #if (empty($item[ $col ])) { continue; }
+                $values[ join("-",$keys) ]=$item;
             }
         }
-        
-        return array_keys($values);
+
+        if ($singlecol)
+        {
+            return array_keys($values);
+        }
+        else
+        {
+            return array_values($values);
+        }
     }
 
      //*

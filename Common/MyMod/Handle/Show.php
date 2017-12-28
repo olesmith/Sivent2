@@ -12,7 +12,7 @@ trait MyMod_Handle_Show
   {
       if ($this->GetGETOrPOST("LatexDoc")>0)
       {
-          $this->HandlePrint();
+          $this->MyMod_Handle_Print();
       }
 
       if (empty($title))

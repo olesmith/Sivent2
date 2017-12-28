@@ -33,7 +33,7 @@ class Submissions_Authors_Groups extends Submissions_Authors_SGroups
         }
 
         
-        $titles=$this->GetDataTitles($predatas);
+        $titles=$this->MyMod_Data_Titles($predatas);
         $titles=$this->Html_Table_Head_Row($titles);
         
         $atitles=
@@ -42,6 +42,13 @@ class Submissions_Authors_Groups extends Submissions_Authors_SGroups
         $n=1;
         foreach (array_keys($this->ItemHashes) as $id)
         {
+            $this->MakeSureWeHaveRead
+            (
+                "",
+                $this->ItemHashes[ $id ],
+                $this->Authors_Datas()
+            );
+           
             $table=
                 array_merge
                 (

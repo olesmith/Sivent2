@@ -47,9 +47,14 @@ trait MyMod_Sort_Items
                 }
 
                 if (
-                    isset($this->ItemData[ $key ][ "NumericalSort" ])
-                    &&
-                    $this->ItemData[ $key ][ "NumericalSort" ]==TRUE)
+                    $key=="ID"
+                    ||
+                    (
+                        isset($this->ItemData[ $key ][ "NumericalSort" ])
+                        &&
+                        $this->ItemData[ $key ][ "NumericalSort" ]==TRUE
+                    )
+                   )
                 {
                     if (
                         isset($this->ItemData[ $key ][ "SortReverse" ])
@@ -57,7 +62,7 @@ trait MyMod_Sort_Items
                         $this->ItemData[ $key ][ "SortReverse" ]==TRUE
                        )
                     {
-                        $rvalue=sprintf("%06d",100000-$hash[ $key ]);
+                        $rvalue=sprintf("%06d",1000000-$hash[ $key ]);
                     }
                     else
                     {

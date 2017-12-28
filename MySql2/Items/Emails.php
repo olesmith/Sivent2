@@ -27,7 +27,7 @@ class ItemsEmails extends ItemsEmailsSend
         {
             $title="";
             if ($friendkey=="ID") { $title=$this->ItemsName; }
-            else                  { $title=$this->GetDataTitle($friendkey); }
+            else                  { $title=$this->MyMod_Data_Title($friendkey); }
 
             array_push($titles,$title);
 

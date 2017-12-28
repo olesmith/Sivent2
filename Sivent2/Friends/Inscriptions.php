@@ -74,8 +74,8 @@ class Friends_Inscriptions extends Friends_Events
                ),
                array_merge
                (
-                  $this->EventsObj()->GetDataTitles($this->Inscriptions_Friend_Table_Event_Data),
-                  $this->InscriptionsObj()->GetDataTitles($this->Inscriptions_Friend_Table_Inscription_Data)
+                  $this->EventsObj()->MyMod_Data_Titles($this->Inscriptions_Friend_Table_Event_Data),
+                  $this->InscriptionsObj()->MyMod_Data_Titles($this->Inscriptions_Friend_Table_Inscription_Data)
                )
             );
     }

@@ -1,21 +1,39 @@
 array
 (
-   "Basic" => array
-   (
-      "Name" => "Básicos",
-      "Name_UK" => "Basic",
-      "Data" => array
-      (
-         "No","Edit","Delete","GenCert","Caravaneers",
-         "Friend","Name","City","Status","NParticipants","Certificate","Certificate_CH",
-         "Code",
-      ),
-      "Admin" => 1,
-      "Person" => 0,
-      "Public" => 0,
-      "Admin" => 1,
-      "Friend"     => 1,
-      "Coordinator" => 1,
+    "Basic" => array
+    (
+        "Name" => "Básicos",
+        "Name_UK" => "Basic",
+        "Data" => array
+        (
+            "No","Edit","Delete","GenCert","Caravaneers",
+            "Friend","Name","City","Status","NParticipants",
+            "Certificate","Certificate_CH","Code",
+        ),
+        "Admin" => 1,
+        "Person" => 0,
+        "Public" => 0,
+        "Admin" => 1,
+        "Friend"     => 1,
+        "Coordinator" => 1,
+    ),
+    "Import" => array
+    (
+        "Name" => "Import",
+        "Name_UK" => "Import",
+        "Data" => array
+        (
+            "No","Edit",
+            "Friend","Name","City","Status","NParticipants",
+            "Certificate","Certificate_CH","Code",
+        ),
+        "Visible" => False,
+        "Admin"       => 1,
+        "Person"      => 0,
+        "Public"      => 0,
+        "Admin"       => 1,
+        "Friend"      => 0,
+        "Coordinator" => 1,
     ),
     /* "Certificates" => array */
     /* ( */

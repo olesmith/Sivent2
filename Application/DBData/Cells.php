@@ -3,13 +3,15 @@
 class DBDataCells extends DBDataPertains
 {
     //*
-    //* function SqlKeyField, Parameter list: $data,$item,$edit,$rdata
+    //* function SqlKeyField, Parameter list: $data,$item,$edit,$rdata=""
     //*
     //* Returns sql key field, appends ok/not ok icon.
     //*
 
-    function SqlKeyField($data,$item,$edit,$rdata)
+    function SqlKeyField($data,$item,$edit,$rdata="")
     {
+        if (empty($rdata)) { $rdata=$data; }
+        
         $icon="";
         $value="";
 
@@ -40,13 +42,15 @@ class DBDataCells extends DBDataPertains
     }
 
     //*
-    //* function SqlDefField, Parameter list: $data,$item,$edit,$rdata
+    //* function SqlDefField, Parameter list: $data,$item,$edit,$rdata=""
     //*
     //* Creates SqlDef field. Adds in table type, for debugging.
     //*
 
-    function SqlDefField($data,$item,$edit,$rdata)
+    function SqlDefField($data,$item,$edit,$rdata="")
     {
+        if (empty($rdata)) { $rdata=$data; }
+        
         if (empty($item[ $data ]))
         {
             $item[ $data ]="";
@@ -75,8 +79,6 @@ class DBDataCells extends DBDataPertains
                     $sqldef=strtolower($item[ "SqlDef" ]);
                     $sqldef=preg_replace('/\)/',"\)",preg_replace('/\(/',"\(",$sqldef));
 
-                    //$sqldef=preg_match('/enum/',"int",$sqldef);
-                    
                     if ($item[ "SqlDef" ]=="FILE")
                     {
                         if (preg_match('/^VARCHAR\(\d+\)\(\d+\)$/i',$type))

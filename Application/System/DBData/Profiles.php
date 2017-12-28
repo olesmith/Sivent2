@@ -49,12 +49,14 @@ array
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Import" => 1,
          ),
          'Admin' => array
          (
             "Add" => 1,
             "Search" => 1,
             "EditList" => 1,
+            "Import" => 1,
          ),
       ),
       'SingularPlural' => array
@@ -67,15 +69,9 @@ array
          ),
          'Coordinator' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
          ),
          'Admin' => array
          (
-            "Add" => 1,
-            "Search" => 1,
-            "EditList" => 1,
          ),
       ),
       'ActionsPlural' => array

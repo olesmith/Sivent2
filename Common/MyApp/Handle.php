@@ -11,17 +11,38 @@ include_once("Handle/Setup.php");
 include_once("Handle/SU.php");
 include_once("Handle/Export.php");
 include_once("Handle/Import.php");
+include_once("Handle/Process.php");
 
 trait MyApp_Handle
 {
     use
-        MyApp_Handle_Start,MyApp_Handle_Logon,
-        MyApp_Handle_Admin,MyApp_Handle_Backup,
-        MyApp_Handle_Log,MyApp_Handle_ModuleSetup,
+        MyApp_Handle_Start,
+        MyApp_Handle_Logon,
+        MyApp_Handle_Admin,
+        MyApp_Handle_Backup,
+        MyApp_Handle_Log,
+        MyApp_Handle_ModuleSetup,
         MyApp_Handle_Help,
-        MyApp_Handle_Setup,MyApp_Handle_SU,
-        MyApp_Handle_Export,MyApp_Handle_Import;
+        MyApp_Handle_Setup,
+        MyApp_Handle_SU,
+        MyApp_Handle_Export,
+        MyApp_Handle_Import,
+        MyApp_Handle_Process;
 
+    //*
+    //* function MyApp_Handle_Action_Default, Parameter list:
+    //*
+    //* Detects action from CGI - or returns App default action.
+    //*
+
+    function MyApp_Handle_Action_Default()
+    {
+        $action=$this->CGI_GET("Action");
+        if (empty($action)) { $action=$this->DefaultAction; }
+
+        return $action;
+    }
+    
     //*
     //* function MyApp_Handle, Parameter list:$args=array()
     //*
@@ -35,8 +56,7 @@ trait MyApp_Handle
     function MyApp_Handle($args=array())
     {
         $this->MyApp_Session_User_InitBySID();
-        $action=$this->GetCGIVarValue("Action");
-        if ($action=="") { $action=$this->DefaultAction; }
+        $action=$this->MyApp_Handle_Action_Default();
 
         $this->ModuleName=$this->CGI_GET("ModuleName");
 

@@ -25,11 +25,23 @@ class Events_Handle extends Events_Statistics
 
     function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
     {
-        echo $this->MyMod_SubActions_Menu();
-
+        echo
+            $this->EventMod_Import_Menu_Horisontal().
+            $this->BR().$this->BR().
+            $this->MyMod_SubActions_Menu().
+            "";
+        
         $this->MyMod_SubActions_Groups_Init();
 
-        return parent::MyMod_Handle_Edit($echo,$formurl,$title,$noupdate);
+        $this->NonGetVars=array("ID");
+        return
+            parent::MyMod_Handle_Edit
+            (
+                $echo,
+                $formurl,
+                $title,
+                $noupdate
+            );
     }
 }
 

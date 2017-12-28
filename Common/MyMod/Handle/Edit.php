@@ -12,7 +12,7 @@ trait MyMod_Handle_Edit
     {
         if ($this->GetGETOrPOST("LatexDoc")>0)
         {
-            $this->HandlePrint();
+            $this->MyMod_Handle_Print();
         }
 
         if (empty($title)) { $title=$this->GetRealNameKey($this->Actions[ "Edit" ]); }

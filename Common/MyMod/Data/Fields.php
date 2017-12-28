@@ -6,12 +6,14 @@ include_once("Fields/Show.php");
 include_once("Fields/Edit.php");
 include_once("Fields/File.php");
 include_once("Fields/Text.php");
+include_once("Fields/Test.php");
 include_once("Fields/Color.php");
 include_once("Fields/Barcode.php");
 include_once("Fields/Module.php");
 include_once("Fields/Enums.php");
 include_once("Fields/Derived.php");
 include_once("Fields/Sql.php");
+include_once("Fields/Crypt.php");
 
 trait MyMod_Data_Fields
 {
@@ -22,11 +24,13 @@ trait MyMod_Data_Fields
         MyMod_Data_Fields_Edit,
         MyMod_Data_Fields_File,
         MyMod_Data_Fields_Text,
+        MyMod_Data_Fields_Test,
         MyMod_Data_Fields_Color,
         MyMod_Data_Fields_Barcode,
         MyMod_Data_Fields_Module,
         MyMod_Data_Fields_Enums,
         MyMod_Data_Fields_Derived,
+        MyMod_Data_Fields_Crypt,
         MyMod_Data_Fields_Sql;
 
     //*
@@ -52,6 +56,7 @@ trait MyMod_Data_Fields
             return $this->MyMod_Data_Field_Info($data);
         }
 
+        $field="";
         if ($edit==1 && $access==2 && isset($this->ItemData[ $data ]))
         {
             if (empty($tabindex) && !empty($this->ItemData[ $data ][ "TabIndex" ]))
@@ -59,7 +64,7 @@ trait MyMod_Data_Fields
                 $tabindex-$this->ItemData[ $data ][ "TabIndex" ];
             }
             
-            return $this->MyMod_Data_Fields_Edit
+            $field=$this->MyMod_Data_Fields_Edit
             (
                $data,
                $item,
@@ -73,16 +78,40 @@ trait MyMod_Data_Fields
         }
         elseif ($access>0)
         {
-            return $this->MyMod_Data_Fields_Show($data,$item,$plural);
+            $field=$this->MyMod_Data_Fields_Show($data,$item,$plural);
         }
         elseif (method_exists($this,$data))
         {
-            return $this->$data($edit,$item,$data);
+            $field=$this->$data($edit,$item,$data);
         }
         else
         {
-            return "Forbidden ".$data." #1";
+            $field="Forbidden ".$data." #1";
         }
+
+
+        if (!empty($this->ItemData[ $data ][ "Comment_Method" ]))
+        {
+            $method=$this->ItemData[ $data ][ "Comment_Method" ];
+            if (method_exists($this,$method))
+            {
+                
+                $field=$field.
+                    $this->$method
+                    (
+                        $this->Min($edit,$access-1),
+                        $data,
+                        $item,
+                        $field
+                    );
+            }
+            else
+            {
+                var_dump("Invalid method: ".$method);
+            }
+        }
+        
+        return $field;
     }
     
     //*
@@ -112,6 +141,26 @@ trait MyMod_Data_Fields
         return join($this->BR(),$cells);
     }
 
+    //*
+    //* function MyMod_Data_Field_CGIName, Parameter list: $data
+    //*
+    //* Detects $data CGIName from ItemData. 
+    //*
+
+    function MyMod_Data_Field_CGIName($data,$plural,$prepost="")
+    {
+        $rdata=$data;
+        if (!empty($this->ItemData[ $data ][ "CGIName" ]) && !$plural)
+        {
+            $rdata=$this->ItemData[ $data ][ "CGIName" ];
+        }
+
+        if ($plural)      { $rdata=$item[ "ID" ]."_".$rdata; }
+        elseif ($prepost) { $rdata=$prepost.$rdata; }
+
+        return $rdata;
+    }
+
 
     //*
     //* function MyMod_Data_Fields_Method, Parameter list: $item,$data
@@ -134,7 +183,7 @@ trait MyMod_Data_Fields
 
         if ($fieldmethod!="" && !method_exists($this,$fieldmethod))
         {
-            $this->DoDie("Invalid FieldMethod",$data, $fieldmethod);
+            $this->DoDie("Invalid FieldMethod",$data, $fieldmethod,"Args: \$edit,\$item,\$data");
         }
 
         return $fieldmethod;

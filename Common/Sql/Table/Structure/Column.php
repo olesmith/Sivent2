@@ -98,13 +98,16 @@ trait Sql_Table_Structure_Column
 
         if (empty($hash))
         {
-            var_dump("Sql_Table_Column_Hash: Internal error: Col ".$table.".".$column." does not exist");
+            #var_dump("Sql_Table_Column_Hash: Internal error: Col ".$table.".".$column." does not exist");
         }
 
         $rhash=array();
-        foreach ($hash as $key => $value)
+        if (is_array($hash))
         {
-            $rhash[ strtolower($key) ]=$value;
+            foreach ($hash as $key => $value)
+            {
+                $rhash[ strtolower($key) ]=$value;
+            }
         }
         
         //print join("<BR>",array_keys($rhash))."<BR><BR>";
@@ -192,12 +195,12 @@ trait Sql_Table_Structure_Column
         $hash=$this->Sql_Table_Column_Hash($column,$table,$keys);
 
         $type="";
-        if ($dialect=="mysql")
+        if ($dialect=="mysql" && isset($hash[ "column_type" ]))
         {
             //20160328 $type=$hash[ "Type" ];
             $type=$hash[ "column_type" ];
         }
-        elseif ($dialect=="pgsql")
+        elseif ($dialect=="pgsql" && isset($hash[ "data_type" ]))
         {
             $type=$hash[ "data_type" ];
         }

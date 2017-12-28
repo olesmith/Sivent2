@@ -100,15 +100,15 @@ trait MyMod_Handle_Search
           $edit=1;
       }
 
+      if ($action=="EditList")
+      {
+          $edit=1;
+      }
+
       $title="";
       if (!empty($this->Actions[ "ShowList" ]))
       {
           $title=$this->GetRealNameKey($this->Actions[ "ShowList" ]);
-      }
-
-      if ($action=="EditList")
-      {
-          $edit=1;
       }
 
       if ($edit==1)
@@ -125,7 +125,7 @@ trait MyMod_Handle_Search
       $table=array();
       if ($output=="html")
       {           
-          $table=$this->ItemsTableDataGroup
+          $table=$this->MyMod_Data_Group_Table
           (
            $title,
            $edit,

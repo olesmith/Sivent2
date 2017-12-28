@@ -38,7 +38,7 @@ trait MyMod_Sort_Titles
     {
         $args=$this->Query2Hash();
 
-        $title=$this->GetDataTitle($data);
+        $title=$this->MyMod_Data_Title($data);
 
         $title=preg_replace('/#ItemName/',$this->MyMod_ItemName(),$title);
         $title=preg_replace('/#ItemsName/',$this->MyMod_ItemName("ItemsName"),$title);

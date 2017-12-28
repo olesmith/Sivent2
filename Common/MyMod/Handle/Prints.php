@@ -52,6 +52,31 @@ trait MyMod_Handle_Prints
     }
     
     //*
+    //* function MyMod_Handle_Print, Parameter list: 
+    //*
+    //* Handles module one object Print.
+    //*
+
+    function MyMod_Handle_Print($item=array())
+    {
+        if (empty($item)) { $item=$this->ItemHash; }
+        $item=$this->TrimLatexItem($item);
+
+        $latexdocno=$this->CGI2LatexDocNo();
+
+        if (!empty($this->LatexData[ "SingularLatexDocs" ][ "Docs" ][ $latexdocno ][ "AltHandler" ]))
+        {
+            $handler=$this->LatexData[ "SingularLatexDocs" ][ "Docs" ][ $latexdocno ][ "AltHandler" ];
+            $this->$handler();
+            exit();
+        }
+
+        if (method_exists($this,"InitPrint")) { $item=$this->InitPrint($item); }
+        
+        $this->MyMod_Item_Print($item);
+    }
+    
+    //*
     //* function MyMod_Handle_Prints, Parameter list: 
     //*
     //* Handles module object Prints.

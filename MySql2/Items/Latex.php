@@ -94,47 +94,47 @@ class ItemsLatex extends Item
         return $this->MyMod_Items_Latex($items);
     }
 
-    //*
-    //* function GetLatexHead, Parameter list: $type,$latexdocno=0
-    //*
-    //* Return latex header (until and including \begin{document}. 
-    //*
+    /* //\* */
+    /* //\* function MyMod_Latex_Head, Parameter list: $type,$latexdocno=0 */
+    /* //\* */
+    /* //\* Return latex header (until and including \begin{document}.  */
+    /* //\* */
 
-    function GetLatexHead($type,$latexdocno=0)
-    {
-        return $this->GetLatexSkel
-        (
-           $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Head" ]
-        );
-    }
+    /* function MyMod_Latex_Head($type,$latexdocno=0) */
+    /* { */
+    /*     return $this->GetLatexSkel */
+    /*     ( */
+    /*        $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Head" ] */
+    /*     ); */
+    /* } */
 
-    //*
-    //* function GetLatexGlue, Parameter list: $type,$latexdocno=0
-    //*
-    //* Return latex header (until and including \begin{document}. 
-    //*
+    /* //\* */
+    /* //\* function GetLatexGlue, Parameter list: $type,$latexdocno=0 */
+    /* //\* */
+    /* //\* Return latex header (until and including \begin{document}.  */
+    /* //\* */
 
-    function GetLatexGlue($type,$latexdocno=0)
-    {
-        return $this->GetLatexSkel
-        (
-           $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Glue" ]
-        );
-    }
+    /* function GetLatexGlue($type,$latexdocno=0) */
+    /* { */
+    /*     return $this->GetLatexSkel */
+    /*     ( */
+    /*        $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Glue" ] */
+    /*     ); */
+    /* } */
 
-    //*
-    //* function GetLatexTail, Parameter list: $type,$latexdocno=0
-    //*
-    //* Return latex header (until and including \begin{document}. 
-    //*
+    /* //\* */
+    /* //\* function GetLatexTail, Parameter list: $type,$latexdocno=0 */
+    /* //\* */
+    /* //\* Return latex header (until and including \begin{document}.  */
+    /* //\* */
 
-    function GetLatexTail($type,$latexdocno=0)
-    {
-        return $this->GetLatexSkel
-        (
-           $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Tail" ]
-        );
-    }
+    /* function GetLatexTail($type,$latexdocno=0) */
+    /* { */
+    /*     return $this->GetLatexSkel */
+    /*     ( */
+    /*        $this->LatexData[ $type."LatexDocs" ][ "Docs" ][ $latexdocno ][ "Tail" ] */
+    /*     ); */
+    /* } */
 
 
     //*
@@ -180,7 +180,7 @@ class ItemsLatex extends Item
             }
             else
             {
-                $titles=$this->GetDataTitles($datas,1);
+                $titles=$this->MyMod_Data_Titles($datas,1);
             }
         }
 

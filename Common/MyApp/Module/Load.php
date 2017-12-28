@@ -35,7 +35,7 @@ trait MyApp_Module_Load
            "Profile"         => $this->Profile,
            "ModuleLevel"     => 1,
            "CompanyHash"     => $this->CompanyHash,
-           "MailInfo"        => $this->MailInfo,
+           "MailInfo"        => $this->ApplicationObj()->MyApp_Mail_Info_Get(),
            "URL_CommonArgs"  => $this->URL_CommonArgs,
            "MySqlActions"    => $this->MySqlActions,
          );

@@ -57,7 +57,7 @@ class LoginLoginChange extends LoginLoginMail
         $items=$this->FriendsObj()->Sql_Select_Hashes(array("Email" => $newemail),array("ID"));
         if (count($items)>0) { return FALSE; }
 
-        return $this->ValidEmailAddress($newemail);
+        return $this->MyEmail_Address_Valid($newemail);
     }
 
 

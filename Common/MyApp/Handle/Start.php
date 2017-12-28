@@ -15,7 +15,6 @@ trait MyApp_Handle_Start
             $this->ResetCookieVars();
         }
 
-        //$this->InitHTML();
         $this->MyApp_Interface_Head();
 
         if ($echo)
@@ -69,13 +68,7 @@ trait MyApp_Handle_Start
         if (empty($this->LoginData))
         {
             $this->MyApp_Login_Form();
-        }
-        elseif (method_exists($this,"HandleStart"))
-        {
-            //$this->HandleStart();
-            return;
-        }
-        
+        }        
     }
 
 }

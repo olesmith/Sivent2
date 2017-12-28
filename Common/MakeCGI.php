@@ -1,6 +1,7 @@
 <?php
 
 include_once("MakeCGI/Cookies.php");
+include_once("MakeCGI/Upload.php");
 
 trait MakeCGI
 {
@@ -8,7 +9,7 @@ trait MakeCGI
     var $CGI_Split_Vars=array();
     var $CGI_SearchVars=array();
 
-    use MakeCGI_Cookies;
+    use MakeCGI_Cookies,MakeCGI_Upload;
 
     //*
     //* sub CGI_Redirect, Parameter list: $uri,$caller=""
@@ -481,9 +482,17 @@ trait MakeCGI
                 return "";
             }
 
-            if (!empty($attrname) && method_exists($this,$obj))
+            if (!empty($attrname))
             {
-                $this->$attrname=$this->$obj()->Sql_Select_Hash(array("ID" => $id));
+                if (method_exists($this,$obj))
+                {
+                    $this->$attrname=$this->$obj()->Sql_Select_Hash(array("ID" => $id));
+                }
+                else
+                {
+                    die("No such ".$attrname." method, ".$obj);
+                    
+                }
             }
         }
 
@@ -494,7 +503,13 @@ trait MakeCGI
         else
         {
             $hash=$this->$attrname;
-            return $hash[ $key ];
+            if (isset($hash[ $key ]))
+            {
+                return $hash[ $key ];
+            }
+            
+            print "Warning! Invalid key ".$key;
+            return NULL;
         }
     }
     

@@ -207,7 +207,7 @@ trait MyApp_Interface_Head
     {
         return
             $this->MyApp_Interface_Application_CSS_Generate().
-            "";
+            "\n";
     }
     
     //*
@@ -223,12 +223,70 @@ trait MyApp_Interface_Head
             $this->HtmlTags
             (
                "SCRIPT",
+               "",
+               array
+               (
+                   "SRC" => 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js',
+               )
+            )."\n\n".
+            $this->HtmlTags
+            (
+               "SCRIPT",
                "function goto(site,title)\n".
                "{\n".
                "   var msg = confirm(title)\n".
                "   if (msg) {window.location.href = site}\n".
                "   else (null)\n".
-               "}"
+               "}\n\n".
+               
+               
+               "$(document).ready(function(){\n".
+               "    $('#select_1').on('click',function(){\n".
+               "        if(this.checked){\n".
+               "            $('.checkbox_1').each(function(){\n".
+               "                this.checked = true;\n".
+               "            });\n".
+               "        }else{\n".
+               "             $('.checkbox_1').each(function(){\n".
+               "                this.checked = false;\n".
+               "            });\n".
+               "        }\n".
+               "    });\n".
+               "    \n".
+               
+               "    $('.checkbox_1').on('click',function(){\n".
+               "        if($('.checkbox_1:checked').length == $('.checkbox').length){\n".
+               "            $('#select_1').prop('checked',true);\n".
+               "        }else{\n".
+               "            $('#select_1').prop('checked',false);\n".
+               "        }\n".
+               "    });\n".
+
+               
+               "    $('#select_2').on('click',function(){\n".
+               "        if(this.checked){\n".
+               "            $('.checkbox_2').each(function(){\n".
+               "                this.checked = true;\n".
+               "            });\n".
+               "        }else{\n".
+               "             $('.checkbox_2').each(function(){\n".
+               "                this.checked = false;\n".
+               "            });\n".
+               "        }\n".
+               "    });\n".
+               "    \n".
+
+               "    $('.checkbox_2').on('click',function(){\n".
+               "        if($('.checkbox_2:checked').length == $('.checkbox').length){\n".
+               "            $('#select_2').prop('checked',true);\n".
+               "        }else{\n".
+               "            $('#select_2').prop('checked',false);\n".
+               "        }\n".
+               "    });\n".
+
+               
+               "});\n".
+               ""
             ).
             "\n";
     }

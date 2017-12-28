@@ -86,7 +86,17 @@ class ItemForms extends Fields
                   $this->GetRealNameKey($this->ItemDataSGroups[ $group ],"Name")
                )
             );
-            $rtbl=$this->ItemTable($edit,$item,0,$rdatas,$rtbl,FALSE,FALSE,FALSE);
+
+            $rtbl=
+                $this->ItemTable
+                (
+                    $edit,
+                    $item,
+                    0,
+                    $rdatas,
+                    $rtbl,
+                    FALSE,FALSE,FALSE
+                );
         }
 
         //Make sure that $data only appears once as input field
@@ -128,7 +138,11 @@ class ItemForms extends Fields
 
     function ItemTableDataSGroup($edit,$item,$group,$datas=array(),$nofilefields=FALSE)
     {
-        return array($this->ItemHtmlTableDataSGroup($edit,$item,$group,$datas,array(),$nofilefields));
+        return
+            array
+            (
+                $this->ItemHtmlTableDataSGroup($edit,$item,$group,$datas,array(),$nofilefields)
+            );
     }
 
 
@@ -320,14 +334,44 @@ class ItemForms extends Fields
                 $id="&ID=".$item[ "ID" ];
             }
 
+            $action=$this->MyActions_Detect();
+            
             if (!$formurl)
             {
                 $formurl="?Action=".$this->MyActions_Detect().$id;
             }
 
+            
+            $suppresscgis=array_merge($this->NonPostVars,$this->NonGetVars);
+            
+            if (!empty($action))
+            {
+                foreach (array("NonGetVars","NonPostVars") as $type)
+                {
+                    $vars=$this->Actions($action,"NonGetVars");
+                    if (!empty($vars))
+                    {
+                        $suppresscgis=array_merge($suppresscgis,$vars);
+                    }
+                }
+            }
+
+            $rcgis=array();
+            foreach ($suppresscgis as $suppresscgi)
+            {
+                $rcgis[ $suppresscgi ]=1;
+            }
+
             $html.=
                 $printtable.
-                $this->StartForm($formurl,"post",$this->HasFileFields).
+                $this->StartForm
+                (
+                    $formurl,
+                    "post",
+                    $this->HasFileFields,
+                    array(),
+                    array_keys($rcgis)
+                ).
                 "";
         }
 
@@ -549,7 +593,7 @@ class ItemForms extends Fields
 
                 $args[ "ID" ]=$this->ItemHash[ "ID" ];
 
-                //Now added, reload as edit, preventing multiple adds
+                //Now added, reload as edit, preventing multiple adds on user pressing F5.
                 header("Location: ?".$this->Hash2Query($args));
                 exit();
             }

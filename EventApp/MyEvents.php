@@ -49,6 +49,7 @@ class MyEvents extends MyEvents_Handle
     function MyEvents_CellMethods_Init()
     {
         $this->CellMethods[ "Event_Date_Span" ]=TRUE;
+        $this->CellMethods[ "Event_Inscriptions_Date_Span" ]=TRUE;
         $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
         $this->CellMethods[ "Event_PreInscriptions_DateSpan" ]=TRUE;
         $this->CellMethods[ "Event_PreInscriptions_Status" ]=TRUE;

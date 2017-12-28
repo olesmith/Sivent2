@@ -2,10 +2,14 @@
 
 include_once("Login/Form.php");
 include_once("Login/Retrieve.php");
+include_once("Login/Password.php");
 
 trait MyApp_Login
 {
-    use MyApp_Login_Form,MyApp_Login_Retrieve;
+    use
+        MyApp_Login_Form,
+        MyApp_Login_Retrieve,
+        MyApp_Login_Password;
     //*
     //* function MyApp_Login_Init, Parameter list: 
     //*

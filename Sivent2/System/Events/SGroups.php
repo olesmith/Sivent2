@@ -28,8 +28,11 @@ array
        "Data" => array
        (
           "Payments","Selection",
-          "Certificates","Certificates_Published","Collaborations","Caravans",
-          "Submissions","Assessments","Schedule_Public","Info",
+          "Certificates","Certificates_Published",
+          "Collaborations","Caravans",
+          "Submissions","Assessments",
+          "Payments",
+          "Schedule_Public","Info",
        ),
 
        "Person" => 0,
@@ -52,8 +55,8 @@ array
           "Payments_Name","Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation",
         ),
 
-       "Person" => 1,
-       "Public" => 0,
+       "Person" => 0,
+       "Public" => 1,
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
@@ -110,6 +113,7 @@ array
           "Submissions_NAuthors",
           "Submissions_StartDate","Submissions_EndDate",
           "Certificates_Submissions_TimeLoad",
+          "Proceedings",
        ),
 
        "Person" => 1,
@@ -136,8 +140,7 @@ array
        "Admin" => 1,
        "Friend"     => 1,
        "Coordinator" => 1,
-       //"GenTableMethod" => "Event_Submissions_Table",
-       "AccessMethod" => "Event_PreInscriptions_Has",
+       //"AccessMethod" => "Event_PreInscriptions_Has",
        "SubAction" => "PreInscriptions",
        "EditAccessMethod" => "Current_User_Event_PreInscriptions_May_Edit",
     ),
@@ -221,6 +224,32 @@ array
        "AccessMethod" => array("Event_Submissions_Has","Event_Certificates_Has"),
        "SubAction" => "Submissions",
        "EditAccessMethod" => "Current_User_Event_Submissions_May_Edit",
+    ),
+    "Proceedings" => array
+    (
+       "Name" => "Anais",
+       "Name_UK" => "Proceedings",
+       "Data" => array
+       (
+          "Proceedings_DocType",
+          "Proceedings_DocType_Options",
+          "Proceedings_Preamble",
+          "Proceedings_Postamble",
+        ),
+
+       "Person" => 0,
+       "Public" => 0,
+       "Admin" => 1,
+       "Friend"     => 0,
+       "Coordinator" => 1,
+       "Single" => 1,
+       "AccessMethod" => array
+       (
+           "Event_Submissions_Has",
+           "Current_User_Event_Submissions_Proceedings_Has",
+           "Current_User_Event_Submissions_Proceedings_May",
+       ),
+       "SubAction" => "Submissions",
     ),
     "Collaborators_Latex" => array
     (

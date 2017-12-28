@@ -45,7 +45,12 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
                $inscription,
                "Submissions",
                $this->Friend_Submissions_Link($friend),
-               array("Submissions","Submissions_StartDate","Submissions_EndDate")
+               array
+               (
+                   "Submissions",
+                   "Submissions_StartDate",
+                   "Submissions_EndDate",
+               )
             );
     }
     
@@ -60,8 +65,6 @@ class InscriptionsTablesSubmissions extends InscriptionsTablesSchedules
         if (!$this->Friend_Submissions_Should($friend))
         { return array(); }
         
-        //06/11/2016 if (!$this->Inscriptions_Submissions_Inscriptions_Open()) { $edit=0; }
-
         $type=$this->InscriptionTablesType($inscription);
         if ($type!="Submissions")
         {

@@ -10,6 +10,18 @@ class InscriptionsAccess extends MyInscriptions
     );
 
     //*
+    //* function HasModuleAccess, Parameter list: $event=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleAccess($event=array())
+    {
+        $res=$this->Current_User_Event_May_Edit();
+        
+        return $res;
+    }
+    //*
     //* function CheckShowAccess, Parameter list: $item
     //*
     //* Checks if $item may be viewed. Admin may -

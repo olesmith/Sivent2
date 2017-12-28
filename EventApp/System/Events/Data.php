@@ -276,4 +276,23 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
+   "Updated_From" => array
+   (
+      "Name" => "Evento Fonte",
+      "Name_UK" => "Event Source",
+
+      "Sql" => "INT",
+      "Size" => 3,
+      "SqlClass" => "Events",
+
+      "Search" => FALSE,
+      "Default"  => "0",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+   ),
 );

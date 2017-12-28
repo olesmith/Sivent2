@@ -116,7 +116,7 @@ trait MyMod_Item_PostProcess
                         $res=rename($item[ $data ],$fname);
                         if (file_exists($fname))
                         {
-            var_dump("moving ".$item[ $data ]."  => ".$fname);
+            #var_dump("moving ".$item[ $data ]."  => ".$fname);
                             $item[ $data ]=$fname;
                             $this->Sql_Update_Item_Value_Set
                             (

@@ -1,5 +1,6 @@
 array
 (
+    
    "ID"           =>  array
    (
       "Sql"   => "INT NOT NULL PRIMARY KEY AUTO_INCREMENT",
@@ -126,7 +127,8 @@ array
       "Size" => "10",
       "Compulsory" => FALSE,
 
-      "MD5" => 1,
+      #"Crypt" => "BlowFish",
+      "Crypt" => "MD5",
       "Password" => 1,
       "Admin" => 2,
       "Person" => 0,
@@ -250,7 +252,22 @@ array
    (
       "Sql" => "VARCHAR(256)",
       "Name"  => "Instituição ou Empresa",
-      "Name_UK"  => "Representing Institution or Company",
+      "Name_UK"  => "Institution or Company",
+      "Size"  => 30,
+
+      "Compulsory" => FALSE,
+
+      "Admin" => 2,
+      "Person" => 0,
+      "Public" => 0,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+    ),
+   "Department"     => array
+   (
+      "Sql" => "VARCHAR(256)",
+      "Name"  => "Departamento",
+      "Name_UK"  => "Department",
       "Size"  => 30,
 
       "Compulsory" => FALSE,
@@ -296,7 +313,7 @@ array
    (
       "Sql" => "VARCHAR(256)",
       "Name"  => "Endereço",
-      "Name_UK"  => "Address",
+      "Name_UK"  => "Home Address",
       "Type"  => "",
       "Size" => "50",
       "Compulsory" => FALSE,

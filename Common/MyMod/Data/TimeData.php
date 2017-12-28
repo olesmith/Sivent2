@@ -7,7 +7,7 @@ trait MyMod_Data_TimeData
     //*
     //* function MyMod_Data_AddTimeData, Parameter list:
     //*
-    //* Returns item  data files in $this->MyMod_Data_Files list.
+    //* Adds CTime, MTime e ATime to ItemData.
     //*
 
     function MyMod_Data_AddTimeData()
@@ -16,11 +16,11 @@ trait MyMod_Data_TimeData
         (
            "NoAdd" => TRUE,
            "Sql"      => "INT",
+           "TimeType" => 1,
 
            "Public"   => 0,
            "Person"   => 1,
            "Admin"   => 1,
-           "TimeType" => 1,
         );
 
         foreach (

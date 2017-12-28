@@ -148,5 +148,33 @@ trait Sql_Select_Hash
         }
     }
     
+    //*
+    //* function Sql_Select_First, Parameter list: $where=array(),$sqldata=array(),$noecho=FALSE,$table=""
+    //*
+    //* Locates first (lowest ID) item in SQL table.
+    //*
+    //* 
+
+    function Sql_Select_First($where=array(),$sqldata=array(),$idfield="ID",$noecho=FALSE,$table="")
+    {
+        $ids=$this->Sql_Select_Hashes($where,array($idfield),$idfield);
+        
+        $item=array();
+        if (count($ids)>0)
+        {
+            $where[ $idfield ]=array_shift($ids);
+            $item=
+                $this->Sql_Select_Hash
+                (
+                    $where,
+                    $sqldata,
+                    $noecho,
+                    $table
+                );
+        }
+
+        return $item;
+    }
+    
 }
 ?>

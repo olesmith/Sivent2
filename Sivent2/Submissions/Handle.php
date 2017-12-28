@@ -25,7 +25,7 @@ class Submissions_Handle extends Submissions_Handle_Assessments
         return 
             $this->Html_Table
             (
-                $this->AssessorsObj()->GetDataTitles($datas),
+                $this->AssessorsObj()->MyMod_Data_Titles($datas),
                 $this->Submission_Assessors_Table
                 (
                     1,

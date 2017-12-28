@@ -42,7 +42,7 @@ class MyFriends_Events extends MyFriends_Events_Table
         $inscribeds=$this->Friend_Events_Read_Inscribed();
         $all=$this->Friend_Events_Read_All();
 
-        $titles=$this->Html_Table_Head_Row($this->EventsObj()->GetDataTitles($this->Friend_Event_Datas()));
+        $titles=$this->Html_Table_Head_Row($this->EventsObj()->MyMod_Data_Titles($this->Friend_Event_Datas()));
 
         $omit=array();
         foreach ($opens as $event)

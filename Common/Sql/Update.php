@@ -12,7 +12,6 @@ trait Sql_Update
     {
         if (is_array($where)) { $where=$this->Hash2SqlWhere($where); }
         if (empty($datas)) { $datas=array_keys($item); }
-        //if (empty($table)) { $table=$this->SqlTableName($table); }
 
         $olditem=$this->Sql_Select_Hash($where,$datas,FALSE,$table);
 
@@ -24,7 +23,7 @@ trait Sql_Update
             $value=$item[ $key ];
             $value=preg_replace('/\'/',"''",$value);
             
-            if ($value!=$olditem[ $key ])
+            if (isset($olditem[ $key ]) && $value!=$olditem[ $key ])
             {
                 $query.=
                     $this->Sql_Table_Column_Name_Qualify($key).
@@ -100,7 +99,7 @@ trait Sql_Update
 
     function Sql_Update_Item_Value_Set($id,$var,$value,$idvar="ID",$table="")
     {
-       $query=$this->Sql_Update_Item_Value_Set_Query($id,$var,$value,$idvar,$table);
+        $query=$this->Sql_Update_Item_Value_Set_Query($id,$var,$value,$idvar,$table);
 
         return $this->DB_Query($query);
     }
@@ -141,9 +140,19 @@ trait Sql_Update
     {
         //if (empty($table)) { $table=$this->SqlTableName($table); }
 
+        $done=array();
+        
         $sets=array();
         foreach ($vars as $vid => $var)
         {
+            if (!empty($done[ $var ])) { continue; }
+            
+            $type=$this->Sql_Table_Column_Type($var);
+            if (preg_match('/^int/',$type) && empty($item[ $var ]))
+            {
+                $item[ $var ]=0;
+            }
+
             $value=preg_replace("/'/","''",$item[ $var ]);
             array_push
             (
@@ -152,6 +161,8 @@ trait Sql_Update
                "=".
                $this->Sql_Table_Column_Value_Qualify($value)
             );
+
+            $done[ $var ]=True;
         }
     
         return

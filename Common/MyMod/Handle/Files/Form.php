@@ -12,6 +12,9 @@ trait MyMod_Handle_Files_Form
     {
         $path=$this->GetPOST("Path");
         if (empty($path)) { $path="Uploads"; }
+
+        $path=$this->MyMod_Data_Upload_Path();
+
         $buttons=$this->MakeButtons
         (
            array
@@ -31,15 +34,14 @@ trait MyMod_Handle_Files_Form
         
         echo
             $this->StartForm().
-            $this->H(1,"Path: ".$this->MakeInput("Path",$path,25)).
-            $this->H(2,"Files in: '".$path."'").
+            $this->H(1,"Files in Path: ".$path).
             $buttons.
             $this->Html_Table
             (
                "",
                $this->PadTable
                (
-                  $this->MyMod_Handle_Files_Form($path)
+               $this->MyMod_Handle_Files_Table($path)
                ),
                array(),
                array(),

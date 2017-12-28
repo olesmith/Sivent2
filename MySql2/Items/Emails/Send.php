@@ -36,9 +36,10 @@ class ItemsEmailsSend extends ItemsEmailsForm
         }
 
 
+        $mailinfo=$this->ApplicationObj->MyApp_Mail_Info_Get();
         foreach (array("FromEmail","FromName") as $data)
         {
-            $mailhash[ $data ]=$this->ApplicationObj->MailInfo[ $data ];
+            $mailhash[ $data ]=$mailinfo[ $data ];
         }
 
         $mailhash[ "ReplyTo" ]=$this->LoginData[ "Email" ];
@@ -72,9 +73,9 @@ class ItemsEmailsSend extends ItemsEmailsForm
                 array_push($bccs,$this->ApplicationObj->LoginData[ "Email" ]);
                 foreach (array("AdmEmail","BCCEmail") as $key)
                 {
-                    if (!empty($this->ApplicationObj->MailInfo[ $key ]))
+                    if (!empty($mailinfo[ $key ]))
                     {
-                        array_push($bccs,$this->ApplicationObj->MailInfo[ $key ]);
+                        array_push($bccs,$mailinfo[ $key ]);
                     }
                 }
 
@@ -83,7 +84,7 @@ class ItemsEmailsSend extends ItemsEmailsForm
                     $mailhash=array
                     (
                        "To" => "",
-                       "FromEmail" => $this->ApplicationObj->MailInfo[ "FromEmail" ],
+                       "FromEmail" => $mailinfo[ "FromEmail" ],
                        "FromName" => $this->ApplicationObj->HtmlSetupHash[ "ApplicationTitle" ],
                        "CC" => array(),
                        "BCC" => join
@@ -97,7 +98,15 @@ class ItemsEmailsSend extends ItemsEmailsForm
                        "AltBody" => $this->GetPOST("Body"),
                     );
 
-                    $res= $this->ApplicationObj->ApplicationSendEmail(array(),$mailhash,array(),$files);
+                    $res=
+                        $this->ApplicationObj->MyApp_Email_Send
+                        (
+                            array(),
+                            $mailhash,
+                            array(),
+                            $files
+                        );
+                    
                     foreach ($files as $file)
                     {
                         if (file_exists($file[ "File" ])) { unlink($file[ "File" ]); }

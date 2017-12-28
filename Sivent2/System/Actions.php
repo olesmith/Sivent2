@@ -28,7 +28,7 @@ array
         "Person"   => 1,
         "Admin"    => 1,
 
-        "Handler"   => "HandleStart",
+        "Handler"   => "MyApp_Handle_Start",
       ),
       "Logon" => array
        (
@@ -68,7 +68,7 @@ array
         "Public"   => 0,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "ChangePasswordForm",
+        "Handler"   => "MyApp_Login_Password_Change_Form",
        ),
        "NewLogin" => array
        (
@@ -871,7 +871,6 @@ array
         "Advisor"    => 0,
         'AccessMethod'    => "Current_User_Event_Collaborations_May_Edit",
      ),
-
 
      
 );

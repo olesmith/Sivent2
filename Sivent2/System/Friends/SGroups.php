@@ -6,7 +6,8 @@ array
        "Name_UK" => "Basic",
        "Data" => array
        (
-           "ID","Email","Name","Cell","Phone","Matricula","Titulation",
+           "ID","Email","Name",
+           "NickName",
            "Photo"
 
        ), 
@@ -16,16 +17,34 @@ array
 
        "Friend" => 1,
        "Coordinator" => 0,
+       "Registration" => 1,
    ),
-   "Personal" => array
+   "Contacts" => array
    (
-       "Name" => "Dados Profissionais",
-       "Name_UK" => "Professional Data",
+       "Name" => "Contatos",
+       "Name_UK" => "Contact",
        "Data" => array
        (
-          "Address",
-          "Institution",
-          "NickName","Curriculum","MiniCurriculum",
+           "Cell","Phone","Url",
+           "Photo"
+
+       ), 
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 0,
+
+       "Friend" => 1,
+       "Coordinator" => 0,
+       "Registration" => 1,
+   ),
+   "Academic" => array
+   (
+       "Name" => "Professional",
+       "Name_UK" => "Professional",
+       "Data" => array
+       (
+          "Titulation","Institution","Department",
+          "Url","Curriculum","MiniCurriculum",
        ), 
        "Admin" => 1,
        "Person" => 0,
@@ -33,5 +52,22 @@ array
 
        "Friend" => 1,
        "Coordinator" => 1,
+       "Registration" => 1,
+    ),
+   "Address" => array
+   (
+       "Name" => "Endereço",
+       "Name_UK" => "Address",
+       "Data" => array
+       (
+          "Address","City","ZIP","Country",
+       ), 
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 0,
+
+       "Friend" => 1,
+       "Coordinator" => 1,
+       "Registration" => 1,
     ),
 );

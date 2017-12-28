@@ -21,7 +21,27 @@ trait MyMod_Handle_Files_Row
     }
 
 
+    //*
+    //* function MyMod_Handle_Files_Subdir_Title_Row, Parameter list: $file,$prencells=0
+    //*
+    //* Creates file row of file system info
+    //*
 
+    function MyMod_Handle_Files_Subdir_Title_Row($file,$prencells=0)
+    {
+        $row=array($this->MultiCell("",$prencells),"","File Name");
+
+        $row=
+            array_merge
+            (
+                $row,
+                $this->MyMod_Handle_File_Info_Title_Row($file)
+            );
+
+        array_push($row,"");
+
+        return $this->B($row);
+    }
  
     //*
     //* function MyMod_Handle_File_Title_Row, Parameter list: $file,$prencells=0
@@ -44,6 +64,7 @@ trait MyMod_Handle_Files_Row
 
         return $this->B($row);
     }
+    
     //*
     //* function MyMod_Handle_File_Row, Parameter list: $file,$prencells=0
     //*

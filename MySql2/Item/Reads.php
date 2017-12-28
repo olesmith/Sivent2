@@ -270,9 +270,12 @@ class ItemReads extends ItemPrints
            if (!isset($_POST[ $rdata ])) { continue; }
            
            $newvalue=$this->GetPOST($rdata);
-           if (!empty($this->ItemData[ $data ][ "MD5" ]) && !empty($newvalue))
+           if (!empty($newvalue))
            {
-               $newvalue=md5($newvalue);
+               if ($this->MyMod_Data_Field_Is_Crypted($data) && !empty($newvalue))
+               {
+                   $newvalue=$this->MyMod_Data_Field_Crypt($data,$newvalue);
+               }
            }
 
            if (!empty($this->ItemData[ $data ][ "IsDate" ]) && !empty($newvalue))

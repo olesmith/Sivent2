@@ -229,6 +229,14 @@ array
         "Coordinator" => 1,
         "AccessMethod" => "CheckEditListAccess",
     ),
+   "Files" => array
+   (
+      "Public"   => 0,
+      "Person"   => 0,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "Admin"    => 1,
+  ),
    "Zips" => array
    (
       "Href"     => "",

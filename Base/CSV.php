@@ -36,7 +36,7 @@ class CSV extends Html
             }
             else
             {
-                $titles=$this->GetDataTitles($datas,1);
+                $titles=$this->MyMod_Data_Titles($datas,1);
             }
         }
 

@@ -50,7 +50,7 @@ trait Sql_Select_Hashes
                 ' ORDER BY '.
                 $this->Sql_Table_Column_Names_Qualify($orderby);
         }
-        
+
         if (!empty($limit))
         {
             $query.=' LIMIT '.$limit;

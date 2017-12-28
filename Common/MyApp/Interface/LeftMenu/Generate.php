@@ -84,7 +84,7 @@ trait MyApp_Interface_LeftMenu_Generate
     //* Generates (returns) the Left menu list.
     //*
 
-    function MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$item=array())
+    function MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$item=array(),$postlist=array())
     {
         $list=array();
         if (isset($submenu[ "Method" ]))
@@ -110,10 +110,10 @@ trait MyApp_Interface_LeftMenu_Generate
                 if (!empty($submenu[ $menuid ][ "Href" ])) { $url=$submenu[ $menuid ][ "Href" ]; }
 
                 
-                if (preg_match('/#/',$url))
-                {
-                    //$url=$this->Filter($url,$_GET);
-                }
+                /* if (preg_match('/#/',$url)) */
+                /* { */
+                /*     //$url=$this->Filter($url,$_GET); */
+                /* } */
 
                 if (!empty($url))
                 {
@@ -172,6 +172,9 @@ trait MyApp_Interface_LeftMenu_Generate
 
         if (empty($list)) { return ""; }
 
+        if (!is_array($list)) { $list=array($list); }
+
+        $list=array_merge($list,$postlist);
 
         return 
            $this->FilterHashes

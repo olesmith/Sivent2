@@ -17,6 +17,7 @@ class MyEventsDataGroups extends MyEventsDatas
 
         echo
             $this->EventDatasInfoTable().
+            $this->EventMod_Import_Menu_Horisontal().
             $this->GroupDatasObj()->EventGroupDatasForm($this->ItemHash).
             "";
 

@@ -6,7 +6,7 @@ array
    'IDField' => 'ID',
    'LoginField' => 'Email',
    'PasswordField' => 'Password',
-   'MD5' => '1',
+   'Crypt' => 'BlowFish',
    'LoginFormTitle' => '',
    'LoginData' => 'Name,Email,Language',
    'SystemOpen' => TRUE,

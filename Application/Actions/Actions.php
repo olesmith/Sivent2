@@ -64,7 +64,7 @@ array
         "Public"   => 0,
         "Person"   => 1,
         "Admin"   => 1,
-        "Handler"   => "ChangePasswordForm",
+        "Handler"   => "MyApp_Login_Password_Change_Form",
        ),
        "NewLogin" => array
        (

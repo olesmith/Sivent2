@@ -24,6 +24,8 @@
           "Events",
           "Datas",
           "GroupDatas",
+          "RegGroups",
+          "RegDatas",
           
           "Permissions",
           

@@ -6,12 +6,12 @@ array
       "Landscape" => FALSE,
       "Docs" =>  array
       (
-         //array
-         //(
-         //   "Name" => "Horários",
-         //   "Name_UK" => "Schedule",
-         //   "AltHandler"  => "PrintSchedule",
-         //)
+         array
+         (
+            "Name" => "Submissões",
+            "Name_UK" => "Submissions",
+            "Glue"      => "Submissions/Item.tex",
+         )
       ),
    ),
    "PluralLatexDocs" => array
@@ -19,19 +19,19 @@ array
       "Landscape" => FALSE,
       "Docs" =>  array
       (
-         array
-         (
-            "Name" => "Lista",
-            "Name_UK" => "Signatures List",
-            //"AltHandler"  => "Inscriptions_List",
-            "Head"      => "Head.tex",
-            "PageHead"  => "Inscriptions/Head.tex",
-            "Glue"      => "Inscriptions/List.tex",
-            "PageTail"  => "Inscriptions/Tail.tex",
-            "Tail"      => "Tail.tex",
+         /* array */
+         /* ( */
+         /*    "Name" => "Lista", */
+         /*    "Name_UK" => "Signatures List", */
+         /*    "AltHandler"  => "Inscriptions_List", */
+         /*    "Head"      => "Head.tex", */
+         /*    "PageHead"  => "Inscriptions/Head.tex", */
+         /*    "Glue"      => "Inscriptions/List.tex", */
+         /*    "PageTail"  => "Inscriptions/Tail.tex", */
+         /*    "Tail"      => "Tail.tex", */
             
-            "ItemsPerPage"  => 40,
-         ),
+         /*    "ItemsPerPage"  => 40, */
+         /* ), */
       ),
    ),
 );

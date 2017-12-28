@@ -150,7 +150,6 @@ trait MyApp
 
         $this->MyApp_SetURL();
 
-
         $this->MyApp_Logging_Init();
         $this->MyApp_LoadAppModules();
    }

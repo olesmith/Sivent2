@@ -67,7 +67,7 @@ array
    (
       "Name" => "Avaliações",
       "Name_UK" => "Assessments",
-      "AccessMethod" => "Coordinator_Submissions_Access_Has",
+      "AccessMethod" => "Coordinator_Assessments_Access_Has",
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,

@@ -50,12 +50,12 @@ class Submissions_Author extends Submissions_Authors_Groups
                         array("Email" => $item[ $emailkey ]),
                         array("ID")
                     );
-            
+
                 $item[ $friendkey ]=$friend[ "ID" ];
                 array_push($updatedatas,$friendkey);
             }
         }
-        
+
         if ($friendid>0)
         {
             $friend=
@@ -64,7 +64,7 @@ class Submissions_Author extends Submissions_Authors_Groups
                     $item[ $friendkey ],
                     $frienddata
                 );
-            
+
             if (empty($item[ $namekey ]) || $item[ $namekey ]!=$friend[ "Name" ])
             {
                 $item[ $namekey ]=$friend[ "Name" ];
@@ -77,10 +77,12 @@ class Submissions_Author extends Submissions_Authors_Groups
                 array_push($updatedatas,$emailkey);
             }
 
+            #Inscribe uninscribed $friend
             if (!$this->EventsObj()->Friend_Inscribed_Is($this->Event(),$friend))
             {
                 $this->InscriptionsObj()->DoInscribe($friend);
-            }            
+            }
+
         }
     }
     
