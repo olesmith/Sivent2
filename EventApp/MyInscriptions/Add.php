@@ -304,12 +304,12 @@ class MyInscriptions_Add extends MyInscriptions_Handle
 
     
     //*
-    //* function HandleAdd, Parameter list: $echo=TRUE
+    //* function MyMod_Handle_Add, Parameter list: $echo=TRUE
     //*
     //* Handle add advisor.
     //*
 
-    function HandleAdd($echo=TRUE)
+    function MyMod_Handle_Add($echo=TRUE)
     {
         $this->PrintDocHeadsAndInterfaceMenu(); 
         echo $this->DoAdd($echo);

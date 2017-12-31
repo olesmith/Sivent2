@@ -69,8 +69,8 @@ class ItemEdits extends ItemForms
 
 
             $item=$this->SetItemTimes($item);
-            $item=$this->ReadItemDerivedData($item);
-            $item=$this->PostProcessItem($item);
+            $item=$this->MyMod_Item_Derived_Data_Read($item);
+            $item=$this->MyMod_Item_PostProcess($item);
 
             $this->ItemHash=$item;
             $this->ApplicationObj->LogMessage("Item Added");
@@ -127,8 +127,8 @@ class ItemEdits extends ItemForms
             unset($item[ "CTime" ]);
             unset($item[ "ATime" ]);
             unset($item[ "MTime" ]);
-            $item=$this->ReadItemDerivedData($item);
-            $item=$this->PostProcessItem($item);
+            $item=$this->MyMod_Item_Derived_Data_Read($item);
+            $item=$this->MyMod_Item_PostProcess($item);
             $this->ApplicationObj->LogMessage("Item Copied");
 
             $this->ItemHash=$item;

@@ -13,7 +13,7 @@ trait MyMod_Handle_Zip
 
     function MyMod_Handle_Zip()
     {
-        $this->MyMod_Handle_Zip_ReadItems();
+        $this->MyMod_Handle_Zip_Items_Read();
         if (TRUE) //$this->CGI_POSTint("ZIP")==1)
         {
             $this->NoPaging=TRUE;
@@ -44,12 +44,12 @@ trait MyMod_Handle_Zip
     }
 
     //*
-    //* function MyMod_Handle_Zip_ReadItems, Parameter list: 
+    //* function MyMod_Handle_Zip_Items_Read, Parameter list: 
     //*
     //* Reads data of items to zip.
     //*
 
-    function MyMod_Handle_Zip_ReadItems()
+    function MyMod_Handle_Zip_Items_Read()
     {
         $id=$this->CGI_GETint("ID");
         if (!empty($id))
@@ -63,7 +63,7 @@ trait MyMod_Handle_Zip
         else
         {
             $this->NoPaging=TRUE;
-            $this->ReadItems("",$this->GetFileFieldDatas(),FALSE,FALSE,0,TRUE);
+            $this->MyMod_Items_Read("",$this->GetFileFieldDatas(),FALSE,FALSE,0,TRUE);
         }
     }
 

@@ -267,7 +267,7 @@ trait ItemsFormDetails
         if (count($updatedatas)>0)
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);
-            $item=$this->PostProcessItem($item);
+            $item=$this->MyMod_Item_PostProcess($item);
         }
 
         return count($updatedatas);

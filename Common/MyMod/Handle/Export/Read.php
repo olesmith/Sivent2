@@ -17,7 +17,7 @@ trait MyMod_Handle_Export_Read
         $rrdatas=array_keys($this->ItemData);
  
         $rdatas=array_keys($this->ItemData);
-        $this->ReadItems("",$rdatas,$nosearches,$nopaging,$includeall);
+        $this->MyMod_Items_Read("",$rdatas,$nosearches,$nopaging,$includeall);
         
         if (!$this-> MyMod_Handle_Export_CGI_No_Enums())
         {

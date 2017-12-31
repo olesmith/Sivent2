@@ -30,25 +30,6 @@ class ItemsPost extends ItemsGroupTable
 
 
     //*
-    //* function PostProcessItems, Parameter list: $ids=array()
-    //*
-    //* Post processes all items, according to $ids. Also updates ATime's.
-    //*
-
-    function PostProcessItems($ids=array())
-    {
-        if (count($ids)==0) { $ids=array_keys($this->ItemHashes); }
-
-        foreach ($ids as $id)
-        {
-            $this->ItemHashes[$id]=$this->SetItemTime("ATime",$this->ItemHashes[$id]);
-            //$this->SetItemTime("ATime",$this->ItemHashes[$id]); //do not store, read next time through
-
-            $this->ItemHashes[$id]=$this->PostProcessItem($this->ItemHashes[$id]);
-       }
-    }
-
-    //*
     //* function PostProcessAllItems, Parameter list: $datas
     //*
     //* Reads and post processes all items.
@@ -60,7 +41,7 @@ class ItemsPost extends ItemsGroupTable
         $this->NoPaging=TRUE;
         $this->IncludeAll=TRUE;
 
-        $this->ReadItems("",array(),TRUE,TRUE,TRUE);
+        $this->MyMod_Items_Read("",array(),TRUE,TRUE,TRUE);
    }
 
     //*
@@ -73,7 +54,7 @@ class ItemsPost extends ItemsGroupTable
     {
         foreach (array_keys($items) as $id)
         {
-            $items[$id]=$this->PostProcessItem($items[$id]);
+            $items[$id]=$this->MyMod_Item_PostProcess($items[$id]);
         }
     }
 

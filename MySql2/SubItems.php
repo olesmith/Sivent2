@@ -147,7 +147,7 @@ class SubItems extends Enums
                     $sqlwhere=$subobject->SqlWhere;
                     $subobject->SqlWhere="ID='".$id."'";
 
-                    $subobject->ReadItem($id,$datas,FALSE,TRUE,FALSE);
+                    $subobject->MyMod_Item_Read($id,$datas,FALSE,TRUE,FALSE);
                     if (count($subobject->ItemHash)==0)
                     {
                         $this->AddMsg

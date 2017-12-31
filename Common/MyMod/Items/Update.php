@@ -164,7 +164,7 @@ trait MyMod_Items_Update
                 {
                     //Unset, so that post pŕocessing will recur
                     unset($this->PostProcessed[ $ritems[$id][ "ID" ] ]);
-                    $ritems[$id]=$this->PostProcessItem($ritems[$id]);
+                    $ritems[$id]=$this->MyMod_Item_PostProcess($ritems[$id]);
                 }
 
                 $n=$ritems[$id][ "N" ];

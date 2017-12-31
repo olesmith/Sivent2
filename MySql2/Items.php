@@ -89,22 +89,6 @@ class Items extends ItemsEmails
         return $texts;
     }
 
-    //*
-    //* function ReadItemsDerivedData, Parameter list: $ids=array()
-    //*
-    //* Reads derived data for each ID in $ids, if empty, reads on all items.
-    //* $ids should index into $this->ItemHashes.
-    //*
-
-    function ReadItemsDerivedData($datas,$ids=array())
-    {
-        if (count($ids)==0) { $ids=array_keys($this->ItemHashes); }
-
-        foreach ($ids as $id)
-        {
-            $this->ItemHashes[$id]=$this->ReadItemDerivedData($this->ItemHashes[$id],$datas);
-        }
-    }
 
     //*
     //* function SkipNonAllowedItems, Parameter list: 

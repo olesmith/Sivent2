@@ -26,7 +26,7 @@ class ItemBackRefs extends ItemLatex
             $where=join(" OR ",$wheres);
 
             //Items referencing our ID
-            $backitems=$obj->ReadItems($where);
+            $backitems=$obj->MyMod_Items_Read($where);
 
             //If any items obtained, create informing table, with variables to correct problem
             if (count($backitems)>0)

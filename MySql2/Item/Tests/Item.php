@@ -16,7 +16,7 @@ class ItemTestsItem extends ItemBackRefs
     {
         if (count($item)==0) { $item=$this->ItemHash; }
 
-        $item=$this->ReadItemDerivedData($item);
+        $item=$this->MyMod_Item_Derived_Data_Read($item);
 
         $messages=array();
         $nerrors=0;

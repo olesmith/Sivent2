@@ -31,11 +31,11 @@ class HandleLatex extends HandlePrints
 
       if ($individual==1)
       {
-          $items=$this->ReadItems($where,array_keys($this->ItemData),FALSE,TRUE);
+          $items=$this->MyMod_Items_Read($where,array_keys($this->ItemData),FALSE,TRUE);
       }
       else
       {
-          $items=$this->ReadItems($where);
+          $items=$this->MyMod_Items_Read($where);
       }
 
       $this->TrimLatexItems();

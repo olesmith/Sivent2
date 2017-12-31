@@ -119,14 +119,14 @@ class Assessors extends Assessors_Statistics
 
     
     //*
-    //* function HandleEdit, Parameter list: 
+    //* function MyMod_Handle_Edit, Parameter list: 
     //*
-    //* Overrides module HandleEdit: adds assessments table..
+    //* Overrides module MyMod_Handle_Edit: adds assessments table..
     //*
     
-    function HandleEdit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false)
+    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false)
     {
-        parent::HandleEdit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false);
+        parent::MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="", $noupdate = false);
 
         echo
             $this->Assessors_Inscription_Assessments_Form(1,$this->ItemHash).

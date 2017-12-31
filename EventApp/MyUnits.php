@@ -447,7 +447,7 @@ class MyUnits extends MyUnitsEvents
     }
 
     //*
-    //* function HandleEditUnit, Parameter list: $item
+    //* function MyMod_Handle_EditUnit, Parameter list: $item
     //*
     //* Handles unit edit for coordinator.
     //*
@@ -466,7 +466,7 @@ class MyUnits extends MyUnitsEvents
 
         if ($this->CheckEditAccess($this->ItemHash))
         {
-            $this->HandleEdit();
+            $this->MyMod_Handle_Edit();
         }
         else { die("No access!"); }
     }

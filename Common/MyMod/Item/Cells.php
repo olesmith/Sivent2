@@ -37,12 +37,9 @@ trait MyMod_Item_Cells
         {
             $cell=$this->MyActions_Entry_OddEven($even,$data,$item);
         }
-        else
+        elseif (!empty($this->CellMethods[ $data ]))
         {
-            if (!empty($this->CellMethods[ $data ]))
-            {
-                $cell=$this->$data($edit,$item,$data);
-            }
+            $cell=$this->$data($edit,$item,$data);
         }
 
         return $cell;
@@ -78,7 +75,7 @@ trait MyMod_Item_Cells
         }
         elseif (!empty($this->CellMethods[ $data ]))
         {
-            $cell=$this->$data();
+            $cell=$this->$data(0,array(),$data);
         }
 
         return $cell;

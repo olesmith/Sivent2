@@ -19,7 +19,7 @@ class ItemsGroupTable extends ItemsTable
             $newitem=$this->UpdateAddRow($cgiprekey,$newitem,$datas,$updatekey);
         }
 
-        $this->ReadItems("",$datas,TRUE,FALSE,2);
+        $this->MyMod_Items_Read("",$datas,TRUE,FALSE,2);
  
         if ($postmethod)
         {

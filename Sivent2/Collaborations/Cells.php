@@ -9,7 +9,7 @@ class Collaborations_Cells extends Collaborations_Access
     //* Returns number of Submissions registered for $inscription.
     //*
 
-    function Collaborations_Collaborators_Noof_Cell($collaboration=array())
+    function Collaborations_Collaborators_Noof_Cell($edit=0,$collaboration=array(),$data="")
     {
         if (empty($collaboration))
         {
@@ -34,12 +34,12 @@ class Collaborations_Cells extends Collaborations_Access
             );        
     }
      //*
-    //* function Collaborations_Collaborators_NHomologated_Cell, Parameter list: $collaboration=array()
+    //* function Collaborations_Collaborators_NHomologated_Cell, Parameter list: $edit,$collaboration=array(),$data=""
     //*
     //* Returns number of Submissions registered for $inscription.
     //*
 
-    function Collaborations_Collaborators_NHomologated_Cell($collaboration=array())
+    function Collaborations_Collaborators_NHomologated_Cell($edit=0,$collaboration=array(),$data="")
     {
         if (empty($collaboration))
         {

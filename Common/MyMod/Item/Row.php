@@ -95,10 +95,9 @@ trait MyMod_Item_Row
                     (
                        $row,
                        $this->B($this->$data().":"),
-                       $this->$data($item)
+                       $this->$data($edit,$item,$data)
                     );
                 }
-                //else { var_dump("No access: $data"); var_dump($this->ItemData($data)); }
             }
         }
 

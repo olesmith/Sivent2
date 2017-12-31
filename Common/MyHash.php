@@ -742,8 +742,13 @@ trait MyHash
         $nomatch=True;
         foreach ($where as $key => $values)
         {
-            $ivalue=$this->Html2Sort($items[ $id ][ $key ]);
-            $ivalue=$this->Text2Sort($items[ $id ][ $key ]);
+            if (!is_array($values))
+            {
+                $values=array($values);
+            }
+            
+            $ivalue=$this->Html2Sort($item[ $key ]);
+            $ivalue=$this->Text2Sort($ivalue);
             if (!preg_grep('/^'.$ivalue.'$/i',$values))
             {
                 $nomatch=False;

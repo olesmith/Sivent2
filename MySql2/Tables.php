@@ -112,7 +112,7 @@ class Tables extends Table
     //*
     //* function ItemReadOtherData, Parameter list: $item
     //*
-    //* Override read item from Table. Call parent::ReadItem,
+    //* Override read item from Table. Call parent::MyMod_Item_Read,
     //* then check if ID exists in other table. If not, create
     //* it!
     //* Checked existence, read the item.
@@ -156,23 +156,23 @@ class Tables extends Table
                 }
             }
 
-            $object->ItemHash=$object->PostProcessItem($otheritem);
+            $object->ItemHash=$object->MyMod_Item_PostProcess($otheritem);
         }
     }
 
 
     //*
-    //* function ReadItem, Parameter list: $id,$datas=array(),$noderiveds=FALSE
+    //* function MyMod_Item_Read, Parameter list: $id,$datas=array(),$noderiveds=FALSE
     //*
-    //* Override read item from Table. Call parent::ReadItem,
+    //* Override read item from Table. Call parent::MyMod_Item_Read,
     //* then check if ID exists in other table. If not, create
     //* it!
     //* Checked existence, read the item.
     //*
 
-    function ReadItem($id,$datas=array(),$noderiveds=FALSE,$updatesitemhashes=TRUE)
+    function MyMod_Item_Read($id,$datas=array(),$noderiveds=FALSE,$updatesitemhashes=TRUE)
     {
-        $item=parent::ReadItem($id,$datas,$noderiveds,$updatesitemhashes);
+        $item=parent::MyMod_Item_Read($id,$datas,$noderiveds,$updatesitemhashes);
         $this->ItemReadOtherData($item);
 
         return $item;
@@ -180,15 +180,15 @@ class Tables extends Table
 
 
     //*
-    //* function ReadItems, Parameter list: $where="",$datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=1
+    //* function MyMod_Items_Read, Parameter list: $where="",$datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=1
     //*
-    //* Override read items from Table. Call parent::ReadItems,
+    //* Override read items from Table. Call parent::MyMod_Items_Read,
     //* Then calls routine above to read other tables data.
     //*
 
-    function ReadItems($where="",$datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=1)
+    function MyMod_Items_Read($where="",$datas=array(),$nosearches=FALSE,$nopaging=FALSE,$includeall=1)
     {
-        parent::ReadItems($where,$datas,$nosearches,$nopaging,$includeall);
+        parent::MyMod_Items_Read($where,$datas,$nosearches,$nopaging,$includeall);
         foreach ($this->ItemHashes as $id => $item)
         {
             $this->ItemReadOtherData($item);

@@ -61,7 +61,7 @@ trait MyMod_Data_Title
         }
         elseif (method_exists($this,$data) && !empty( $this->CellMethods[ $data ]))
         {
-            $title=$this->$data();
+            $title=$this->$data(0,array(),$data);
 
             if (is_array($title)) { $title=""; }
         }
@@ -85,8 +85,6 @@ trait MyMod_Data_Title
                 }
             }
         }
-
-        //if ($title=="") { $title=$data; }
 
         return $title;
     }

@@ -92,7 +92,7 @@ trait Sql_Insert
 
     function Sql_Insert_Item(&$item,$table="",$nocheckcols=FALSE)
     {
-        if ($table!="__Table__")
+        if (!preg_match('/^__(Table|Index)__$/',$table))
         {
             $time=time();
             foreach (array("ATime","CTime","MTime") as $key)

@@ -332,7 +332,7 @@ trait ItemsFormAdd
         if ($add)
         {
             $this->MySqlInsertItem("",$newitem);
-            $newitem=$this->PostProcessItem($newitem);
+            $newitem=$this->MyMod_Item_PostProcess($newitem);
 
             $this->ItemsForm_ItemAdded=TRUE;
             array_push($this->Args[ "Items" ],$newitem);

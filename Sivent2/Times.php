@@ -188,12 +188,12 @@ class Times extends TimesAccess
     }
     
      //*
-    //* function HandleAdd, Parameter list: $echo=TRUE
+    //* function MyMod_Handle_Add, Parameter list: $echo=TRUE
     //*
-    //* Overrides HandleAdd. Sets suitable default for date.
+    //* Overrides MyMod_Handle_Add. Sets suitable default for date.
     //*
 
-    function HandleAdd($echo=TRUE)
+    function MyMod_Handle_Add($echo=TRUE)
     {
         $dates=$this->DatesObj()->GetCurrentDates("ID","Name");
 
@@ -202,7 +202,7 @@ class Times extends TimesAccess
             $this->AddDefaults[ "Date" ]=array_pop($dates);
         }
 
-        parent::HandleAdd($echo);
+        parent::MyMod_Handle_Add($echo);
     }
     
      //*

@@ -32,7 +32,7 @@ class MyFriends_Groups extends MyFriends_Events
     function HandleFriendGroups()
     {
         $edit=1;
-        $this->ReadItem($this->GetGET("ID"));
+        $this->MyMod_Item_Read($this->GetGET("ID"));
 
         if ($edit==1 && $this->GetPOST($this->UpdateGroupHidden)==1)
         {

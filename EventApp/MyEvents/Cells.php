@@ -3,12 +3,12 @@
 class MyEventsCells extends MyEventsFriend
 {
     //*
-    //* function Event_Date_Span, Parameter list: $item=array()
+    //* function Event_Date_Span_Cell, Parameter list: $edit=0,$item=array(),$data=""
     //*
     //* Generates and returns event date span.
     //*
 
-    function Event_Date_Span($item=array())
+    function Event_Date_Span_Cell($edit=0,$item=array(),$data="")
     {
         if (empty($item)) { return $this->MyLanguage_GetMessage("Event_DateSpan_Title"); }
         
@@ -23,12 +23,23 @@ class MyEventsCells extends MyEventsFriend
     }
     
     //*
-    //* function Event_Inscriptions_Date_Span, Parameter list: $item=array()
+    //* function Event_Date_Span, Parameter list: $item=array()
     //*
     //* Generates and returns event date span.
     //*
 
-    function Event_Inscriptions_Date_Span($item=array())
+    function Event_Date_Span($item=array())
+    {
+        return $this->Event_Date_Span_Cell($edit,$item,$data);
+    }
+    
+    //*
+    //* function Event_Inscriptions_Date_Span_Cell, Parameter list: $edit=0,$item=array(),$data=""
+    //*
+    //* Generates and returns event date span.
+    //*
+
+    function Event_Inscriptions_Date_Span_Cell($edit=0,$item=array(),$data="")
     {
         if (empty($item)) { return $this->MyLanguage_GetMessage("Event_Inscriptions_DateSpan_Title"); }
         
@@ -41,6 +52,18 @@ class MyEventsCells extends MyEventsFriend
 
         return $cell;
     }
+    
+    //*
+    //* function Event_Inscriptions_Date_Span, Parameter list: $item=array()
+    //*
+    //* Generates and returns event date span.
+    //*
+
+    function Event_Inscriptions_Date_Span_Cell($item=array())
+    {
+        return $this->Event_Date_Span($edit,$item,$data);
+    }
+
     
     //*
     //* function Event_Inscriptions_Date_Span, Parameter list: $item=array()

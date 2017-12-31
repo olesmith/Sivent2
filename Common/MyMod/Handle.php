@@ -58,7 +58,7 @@ trait MyMod_Handle
         {
             if (empty($this->ItemHash))
             {
-                $this->ReadItem($id);
+                $this->MyMod_Item_Read($id);
             }
 
             if (empty($this->ItemHash))

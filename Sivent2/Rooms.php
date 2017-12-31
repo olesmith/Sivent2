@@ -183,12 +183,12 @@ class Rooms extends RoomsAccess
     }
         
      //*
-    //* function HandleAdd, Parameter list: $echo=TRUE
+    //* function MyMod_Handle_Add, Parameter list: $echo=TRUE
     //*
-    //* Overrides HandleAdd. Sets suitable default for date.
+    //* Overrides MyMod_Handle_Add. Sets suitable default for date.
     //*
 
-    function HandleAdd($echo=TRUE)
+    function MyMod_Handle_Add($echo=TRUE)
     {
         $places=$this->PlacesObj()->GetCurrentPlaces("ID","Name");
 
@@ -197,7 +197,7 @@ class Rooms extends RoomsAccess
             $this->AddDefaults[ "Place" ]=array_pop($places);
         }
 
-        parent::HandleAdd($echo);
+        parent::MyMod_Handle_Add($echo);
     }
 }
 

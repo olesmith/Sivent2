@@ -82,7 +82,7 @@ class Collaborators_Table_Update extends Collaborators_Table_Read
         
         $this->Sql_Insert_Unique($where,$collaborator);
         
-        return $this->PostProcessItem($this->Sql_Select_Hash($where));
+        return $this->MyMod_Item_PostProcess($this->Sql_Select_Hash($where));
     }
 }
 

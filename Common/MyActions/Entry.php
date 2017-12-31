@@ -220,6 +220,11 @@ trait MyActions_Entry
         
         $args=$this->CGI_URI2Hash("");
         $args=$this->Hidden2Hash($args);
+        if (!empty($this->ModuleName))
+        {
+            $args[ "ModuleName" ]=$this->ModuleName();
+        }
+        $args[ "Action" ]=$data;
 
         unset($args[ "ID" ]);
         foreach (
@@ -250,11 +255,6 @@ trait MyActions_Entry
             unset($args[ $var ]);
         }
 
-        if (!empty($this->ModuleName))
-        {
-            $args[ "ModuleName" ]=$this->ModuleName();
-        }
-        $args[ "Action" ]=$data;
 
         foreach ($rargs as $key => $value) { $args[ $key ]=$value; }
 

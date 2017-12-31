@@ -20,7 +20,7 @@ trait MyMod_Item_Group_Update
 
         $this->Sql_Update_Item($item,array("ID" => $item[ "ID" ]),$updatedatas);
         
-        $item=$this->PostProcessItem($item);
+        $item=$this->MyMod_Item_PostProcess($item);
     }
 }
 

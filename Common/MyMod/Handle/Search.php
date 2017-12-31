@@ -84,11 +84,11 @@ trait MyMod_Handle_Search
       {
           if ($where=="")
           {
-              $this->ReadItems("",$datas,$searchvarstable);
+              $this->MyMod_Items_Read("",$datas,$searchvarstable);
           }
           else
           {
-              $this->ReadItems($where,$datas,FALSE,FALSE);
+              $this->MyMod_Items_Read($where,$datas,FALSE,FALSE);
           }
       }
 

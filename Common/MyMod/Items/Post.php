@@ -16,7 +16,7 @@ trait MyMod_Items_Post
         foreach (array_keys($items) as $id)
         {
             $items[$id]=$this->SetItemTime("ATime",$items[$id]);
-            $items[$id]=$this->PostProcessItem($items[$id]);
+            $items[$id]=$this->MyMod_Item_PostProcess($items[$id]);
         }
 
         return $items;

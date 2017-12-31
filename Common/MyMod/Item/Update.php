@@ -154,7 +154,7 @@ trait MyMod_Item_Update
             );
 
             
-            $item=$this->ReadItemDerivedData($item);
+            $item=$this->MyMod_Item_Derived_Data_Read($item);
             $item=$this->SetItemTime("MTime",$item);
             $item=$this->SetItemTime("ATime",$item);
 
@@ -199,7 +199,7 @@ trait MyMod_Item_Update
 
         if ($this->FormWasUpdated && $postprocess)
         {
-            $item=$this->PostProcessItem($item);
+            $item=$this->MyMod_Item_PostProcess($item);
         }
 
         return $item;

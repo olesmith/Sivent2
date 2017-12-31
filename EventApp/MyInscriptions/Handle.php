@@ -63,7 +63,7 @@ class MyInscriptions_Handle extends MyInscriptions_Receit
 
     function HandleReceits()
     {
-        $this->ReadItems(array(),array_keys($this->ItemData));
+        $this->MyMod_Items_Read(array(),array_keys($this->ItemData));
         
         $latex=
             $this->GetLatexSkel("Head.tex").

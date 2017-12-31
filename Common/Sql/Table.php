@@ -4,7 +4,10 @@ include_once("Table/Exists.php");
 include_once("Table/Drop.php");
 include_once("Table/Create.php");
 include_once("Table/Rename.php");
+#Maintains the last updated table
 include_once("Table/Info.php");
+#Maintains indices
+include_once("Table/Index.php");
 include_once("Table/Structure.php");
 include_once("Table/Fields.php");
 include_once("Table/Names.php");
@@ -18,6 +21,7 @@ trait Sql_Table
         Sql_Table_Create,
         Sql_Table_Rename,
         Sql_Table_Info,
+        Sql_Table_Index,
         Sql_Table_Structure,
         Sql_Table_Fields,
         Sql_Table_Names,

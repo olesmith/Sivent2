@@ -105,7 +105,7 @@ trait MyMod_Handle_Prints
            $this->Sort=$sort;
        }
 
-       $this->ReadItems($where,$datas,FALSE,TRUE); //searching, but no paging
+       $this->MyMod_Items_Read($where,$datas,FALSE,TRUE); //searching, but no paging
 
        $this->TrimLatexItems();
 

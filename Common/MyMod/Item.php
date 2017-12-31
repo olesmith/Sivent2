@@ -143,9 +143,11 @@ trait MyMod_Item
 
     function MyMod_Item_Name_Get($item=array(),$datas=array())
     {
+        if (empty($datas)) { $datas=array($this->ItemNamer); }
+        
         if (!is_array($item) && preg_match('/^\d+$/',$item))
         {
-            $item=$this->ReadItem($item,$datas);
+            $item=$this->MyMod_Item_Read($item,$datas);
         }
         elseif (count($item)==0)
         {

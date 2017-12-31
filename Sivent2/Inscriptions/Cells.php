@@ -7,12 +7,12 @@ class InscriptionsCells extends InscriptionsRead
 {
 
     //*
-    //* function Inscription_Collaborators_Noof_Cell, Parameter list: $inscription=array()
+    //* function Inscription_Collaborators_Noof_Cell, Parameter list: $edit=0,$inscription=array(),$data=""
     //*
     //* Returns number of collaborators registered for $inscription.
     //*
 
-    function Inscription_Collaborators_Noof_Cell($inscription=array())
+    function Inscription_Collaborators_Noof_Cell($edit=0,$inscription=array(),$data="")
     {
         if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Collaborators_Cell_Noof_Title"); }
         
@@ -29,12 +29,12 @@ class InscriptionsCells extends InscriptionsRead
     }
     
     //*
-    //* function Inscription_Caravaneers_Noof_Cell, Parameter list: $inscription=array()
+    //* function Inscription_Caravaneers_Noof_Cell, Parameter list: $edit=0,$inscription=array(),$data=""
     //*
     //* Returns number of Caravaneers registered for $inscription.
     //*
 
-    function Inscription_Caravaneers_Noof_Cell($inscription=array())
+    function Inscription_Caravaneers_Noof_Cell($edit=0,$inscription=array(),$data="")
     {
         if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Caravaneers_Cell_Noof_Title"); }
         
@@ -51,12 +51,12 @@ class InscriptionsCells extends InscriptionsRead
     }
     
     //*
-    //* function Inscription_Submissions_Noof_Cell, Parameter list: $inscription=array()
+    //* function Inscription_Submissions_Noof_Cell, Parameter list: $edit=0,$inscription=array(),$data=""
     //*
     //* Returns number of Submissions registered for $inscription.
     //*
 
-    function Inscription_Submissions_Noof_Cell($inscription=array())
+    function Inscription_Submissions_Noof_Cell($edit=0,$inscription=array(),$data="")
     {
         if (empty($inscription)) { return $this->MyLanguage_GetMessage("Inscriptions_Submissions_Cell_Noof_Title"); }
         

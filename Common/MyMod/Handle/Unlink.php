@@ -16,7 +16,7 @@ trait MyMod_Handle_Unlink
 
        if ($access>=2 && $this->ItemData[ $data ][ "Sql" ]=="FILE")
        {
-           if ($id!="") { $this->ReadItem($id,array($data)); }
+           if ($id!="") { $this->MyMod_Item_Read($id,array($data)); }
 
            $file=$this->ItemHash[ $data ];
          
