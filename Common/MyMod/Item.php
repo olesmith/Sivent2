@@ -187,7 +187,14 @@ trait MyMod_Item
                     }
                     else
                     {
-                        $name=$item[ $this->ItemNamer ];
+                        if (!empty($item[ $this->ItemNamer ]))
+                        {
+                            $name=$item[ $this->ItemNamer ];
+                        }
+                        elseif (!empty($item[ "Name" ]))
+                        {
+                            $name=$item[ "Name" ];
+                        }
                     }
                 }
             }

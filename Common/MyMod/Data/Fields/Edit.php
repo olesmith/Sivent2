@@ -25,7 +25,6 @@ trait MyMod_Data_Fields_Edit
         
         //Save and then disable tabindex
         $rtabindex=$tabindex;
-        //$tabindex="";
         if (empty($tabindex) && !empty($this->ItemData[ $data ][ "TabIndex" ]))
         {
             $tabindex=$this->ItemData[ $data ][ "TabIndex" ];
@@ -34,99 +33,107 @@ trait MyMod_Data_Fields_Edit
         $options=array();
         if (!empty($tabindex)) { $options[ "TABINDEX" ]=$tabindex; }
 
-        if ($callmethod && $fieldmethod=$this->MyMod_Data_Fields_Method($item,$data))
+        if
+            (
+                $callmethod
+                &&
+                $fieldmethod=$this->MyMod_Data_Fields_Method($item,$data)
+            )
         {
            $value=$this->$fieldmethod($data,$item,1,$rdata);
         }
-        elseif ($this->ItemData[ $data ][ "Type" ]=="TEXT")
+        /* elseif ($this->ItemData[ $data ][ "Type" ]=="TEXT") ////Heim????? 08/01/2017 */
+        /* { */
+        /*     return ""; */
+        /* } */
+        elseif ($this->MyMod_Data_Field_Is_Color($data))
         {
-            return "";
+            //Color fields
+            $value=$this->MyMod_Data_Fields_Color_Field($data,$item,1,$rdata);
         }
-        elseif ($this->ItemData[ $data ][ "IsColor" ])
+        elseif ($this->MyMod_Data_Field_Is_Derived($data))
         {
-           $value=$this->MyMod_Data_Fields_Color_Field($data,$item,1,$rdata);
-        }
-        elseif (!empty($this->ItemData[ $data ][ "Derived" ]))
-        {
+            //Derived data
             $value=$item[ $data ];
         }
-        elseif ($this->ItemData[ $data ][ "Sql" ]=="ENUM")
+        elseif ($this->MyMod_Data_Field_Is_Enum($data))
         {
-            $value=$this->CreateDataSelectField
-            (
-               $data,
-               $item,
-               $value,
-               0,
-               $this->ItemData[ $data ][ "SelectCheckBoxes" ],
-               "",
-               $tabindex,
-               $rdata,
-               $options
-            );
-        }
-        elseif (
-                  $sql=="TEXT"
-                  ||
-                  (
-                     !empty($this->ItemData[ $data ][ "Size" ])
-                     &&
-                     preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
-                  )
-               )
-        {
-            $value=$this->MyMod_Data_Fields_Text_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
-        }
-       elseif ($this->MyMod_Data_Fields_Module_Class($data))
-        {
-            $value=$this->MyMod_Data_Fields_Module_Edit($data,$item,$value,$rtabindex,$plural,$options,$rdata);
-        }
-        elseif (preg_match('/^FILE$/',$this->ItemData[ $data ][ "Sql" ]))
-        {
+            //Enums
             $value=
-                $this->MakeFileField
+                $this->MyMod_Data_Field_Enum_Edit
                 (
-                   $rdata,
-                   array
-                   (
-                    "SIZE" => $this->ItemData[ $data ][ "Size" ],
-                    "Title" => $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data)
-                   )
-                ).
-                $this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,1);
+                    $data,
+                    $item,
+                    $value,
+                    0,
+                    $this->ItemData[ $data ][ "SelectCheckBoxes" ],
+                    "",
+                    $tabindex,
+                    $rdata,
+                    $options
+                );
         }
-        elseif ($this->ItemData[ $data ][ "Password" ])
+        elseif ($this->MyMod_Data_Field_Is_Text($data))
         {
-            $value=$this->MakePasswordField($rdata,$value);
+            //TEXTAREAS: Text and Varchar
+            $value=
+                $this->MyMod_Data_Fields_Text_Edit
+                (
+                    $data,
+                    $item,
+                    $value,
+                    $rtabindex,
+                    $plural,
+                    $options,
+                    $rdata
+                );
         }
-        elseif ($this->ItemData[ $data ][ "IsDate" ])
+        elseif ($this->MyMod_Data_Field_Is_Module($data))
         {
-            $value=$this->CreateDateField($rdata,$item,$value);
+            //ID in another module table
+            $value=
+                $this->MyMod_Data_Fields_Module_Edit
+                (
+                    $data,
+                    $item,
+                    $value,
+                    $rtabindex,
+                    $plural,
+                    $options,
+                    $rdata
+                );
+        }
+        elseif ($this->MyMod_Data_Field_Is_File($data))
+        {
+            //File fields
+            $value=
+                $this->MyMod_Data_Field_File_Edit
+                (
+                    $data,
+                    $item,
+                    $value,
+                    $tabindex,
+                    $plural,
+                    $links,
+                    $callmethod,
+                    $rdata
+                );
+        }
+        elseif ($this->MyMod_Data_Field_Is_Password($data))
+        {
+            $value=$this->MyMod_Data_Field_Password_Edit($data,$value,$rdata);
+        }
+        elseif ($this->MyMod_Data_Field_Is_Date($data))
+        {
+            $value=$this->MyMod_Data_Field_Date_Edit($rdata,$item,$value);
         }
         elseif ($this->ItemData[ $data ][ "IsHour" ])
         {
-            $value=$this->CreateHourSelectFields($rdata,$item,$value);
+            $value=$this->MyMod_Data_Field_Hour_Edit($rdata,$item,$value);
         }
         else
         {
-            $size=25;
-            if ($this->ItemData[ $data ][ "Size" ]) { $size=$this->ItemData[ $data ][ "Size" ]; }
-            if ($plural && !empty($this->ItemData[ $data ][ "TableSize" ]))
-            {
-                $size=$this->ItemData[ $data ][ "TableSize" ];
-            }
-
-            if (!empty($this->ItemData[ $data ][ "Format" ]))
-            {
-                $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
-            }
-
-            if (!empty($this->ItemData[ $data ][ "AutoComplete" ]))
-            {
-                $options=array("AUTOCOMPLETE" => $this->ItemData[ $data ][ "AutoComplete" ]);
-            }
-            
-            $value=$this->MakeInput($rdata,$value,$size,$options);
+            $value=$this->MyMod_Data_Field_Input_Edit($data,$value,$rdata,$plural,$options);
         }
 
 
@@ -153,7 +160,12 @@ trait MyMod_Data_Fields_Edit
            $value.=$this->MyMod_Data_Field_Comment($data,1);
         }
 
-        if (!empty($this->ItemData[ $data ][ "CGIName" ]) && !$plural)
+        if
+            (
+                !empty($this->ItemData[ $data ][ "CGIName" ])
+                &&
+                !$plural
+            )
         {
             $regex="\sNAME='$data";
             if (preg_match('/'.$regex.'/',$value))
@@ -165,7 +177,36 @@ trait MyMod_Data_Fields_Edit
         
         return $value;
     }
+   //*
+    //* Create default type field: input text.
+    //*
 
+    function MyMod_Data_Field_Input_Edit($data,$value,$rdata,$plural,$options)
+    {
+        $size=25;
+        if ($this->ItemData[ $data ][ "Size" ])
+        {
+            $size=$this->ItemData[ $data ][ "Size" ];
+        }
+        
+        if ($plural && !empty($this->ItemData[ $data ][ "TableSize" ]))
+        {
+            $size=$this->ItemData[ $data ][ "TableSize" ];
+        }
+
+        if (!empty($this->ItemData[ $data ][ "Format" ]))
+        {
+            $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
+        }
+
+        if (!empty($this->ItemData[ $data ][ "AutoComplete" ]))
+        {
+            $options=array("AUTOCOMPLETE" => $this->ItemData[ $data ][ "AutoComplete" ]);
+        }
+            
+        return $this->MakeInput($rdata,$value,$size,$options);
+    }
+    
 
    //*
     //* Returns comment to add to field

@@ -114,7 +114,7 @@ class InscriptionsTablesCollaborations extends InscriptionsTablesAssessments
             (
                $this->Inscription_Collaborations_Table_Edit($edit),
                $inscription,
-               $this->GetGroupDatas($group,TRUE)
+               $this->MyMod_Data_Group_Datas_Get($group,TRUE)
             ).
             $this->Friend_Collaborations_Table_Show($edit,$friend,$inscription).
             "";

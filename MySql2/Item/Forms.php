@@ -2,7 +2,6 @@
 
 class ItemForms extends Fields
 {
-
     var $AddDatas=array();
     var $ShowTimes=FALSE;
     var $SinglePrintables=FALSE;
@@ -34,7 +33,7 @@ class ItemForms extends Fields
         }
         elseif ($group!="All")
         {
-            $rdatas=$this->GetGroupDatas($group,TRUE); //use single data groups
+            $rdatas=$this->MyMod_Data_Group_Datas_Get($group,TRUE); //use single data groups
 
             if (empty($rdatas)) { return array(); }
         }
@@ -161,10 +160,8 @@ class ItemForms extends Fields
         if ($this->GetPOST($cgiupdatevar)==1 && $edit==1 && !$noupdate)
         {
             $item=$this->TestItem($item);
-            $item=$this->UpdateItem($item);
+            $item=$this->MyMod_Item_Update_CGI($item);
         }
-
-        //$this->ApplicationObj->LogMessage("EditForm",$item[ "ID" ].": ".$this->MyMod_Item_Name_Get($item));
 
         $tbl=array();
         $hiddens=array();

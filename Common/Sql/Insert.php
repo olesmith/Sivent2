@@ -133,6 +133,7 @@ trait Sql_Insert
 
             return TRUE;
         }
+        else { $item=$ritem; }
        
         return FALSE;
     }

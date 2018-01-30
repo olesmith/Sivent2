@@ -2,7 +2,41 @@
 
 trait MyHash
 {
-    
+    //*
+    //* function MyHash_Show, Parameter list: $item
+    //*
+    //* Returns $item $datas keys.
+    //*
+
+    function MyHash_Show($item)
+    {
+        $text=array();
+        foreach ($item as $key => $value)
+        {
+            if (is_array($value)) { $value=join(", ",$value); }
+            
+            array_push($text,$key.": ".$value);
+        }
+
+        return $text;
+    }
+     
+    //*
+    //* function MyHash_List_Unique, Parameter list: $item,$datas
+    //*
+    //* Returns $item $datas keys.
+    //*
+
+    function MyHash_List_Unique($list)
+    {
+        $values=array();
+        foreach ($list as $item)
+        {
+            $values[ $item ]=True;
+        }
+
+        return array_keys($values);
+    }
     //*
     //* function MyHash_Values_Get, Parameter list: $item,$datas
     //*
@@ -581,36 +615,6 @@ trait MyHash
         return $plist;
     }
     
-    /* //\* */
-    /* //\* function MyHashes_Search, Parameter list: $list,$where */
-    /* //\* */
-    /* //\* Returns list of items in $list, conforming to $where. */
-    /* //\* */
-
-    /* function MyHashes_Search($list,$where) */
-    /* { */
-    /*     $rlist=array(); */
-    /*     foreach ($list as $id => $item) */
-    /*     { */
-    /*         $add=TRUE; */
-    /*         foreach ($where as $key => $value) */
-    /*         { */
-    /*             if ($item[ $key ]!=$where[ $key ]) */
-    /*             { */
-    /*                 $add=FALSE; */
-    /*                 break; */
-    /*             } */
-    /*         } */
-
-    /*         if ($add) */
-    /*         { */
-    /*             array_push($rlist,$item); */
-    /*         } */
-    /*     } */
-
-    /*     return $rlist; */
-    /* } */
-
     
     //*
     //* function MyHashes_Files_Show, Parameter list: $hashes
@@ -718,7 +722,7 @@ trait MyHash
             }
             
         }
-
+        
         $ritems=array();
         foreach (array_keys($items) as $id)
         {
@@ -739,44 +743,67 @@ trait MyHash
 
     function MyHash_Match($item,$where)
     {
-        $nomatch=True;
+        $match=True;
+        $unmatchkey="";
         foreach ($where as $key => $values)
         {
-            if (!is_array($values))
+            if (is_int($values))
             {
-                $values=array($values);
+                if (!empty($item[ $key ]))
+                {
+                    $ivalue=intval($item[ $key ]);
+                    if ($ivalue!=$values)
+                    {
+                        $match=False;
+                    }
+                }
             }
-            
-            $ivalue=$this->Html2Sort($item[ $key ]);
-            $ivalue=$this->Text2Sort($ivalue);
-            if (!preg_grep('/^'.$ivalue.'$/i',$values))
+            else
             {
-                $nomatch=False;
+                if (!is_array($values))
+                {
+                    $values=array($values);
+                }
+
+                if (!empty($item[ $key ]))
+                {
+                    $ivalue=
+                        preg_replace
+                        (
+                            '/\//',
+                            '',
+                            $this->Text2Sort
+                            (
+                                $this->Html2Sort($item[ $key ])
+                            )
+                        );
+
+                    $match=False;
+                    foreach ($values as $rkey => $rvalue)
+                    {
+                        if (preg_match('/'.$rvalue.'/i',$ivalue))
+                        {
+                            $match=True;
+                            break;
+                        }
+                    }                
+                }
+                else
+                {
+                    $match=False;
+                    break;
+                }
+            }
+
+            if (!$match)
+            {
+                $unmatchkey=$key;
+                break;
             }
         }
 
-        return $nomatch;
+        return $match;
     }
-    
-    /* //\* */
-    /* //\* function MyHash_Values_Get, Parameter list: $item,$where */
-    /* //\* */
-    /* //\* Chekcs whether all key values in $where matches same key in $item. */
-    /* //\* */
-
-    /* function MyHash_Match000($item,$where) */
-    /* { */
-    /*     $res=True; */
-    /*     foreach ($where as $key => $value) */
-    /*     { */
-    /*         if ($item[ $key ]!=$value) */
-    /*         { */
-    /*             $res=False; */
-    /*         } */
-    /*     } */
-
-    /*     return $res; */
-    /* } */
 }
 
 ?>

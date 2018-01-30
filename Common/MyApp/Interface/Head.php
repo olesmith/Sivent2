@@ -70,7 +70,7 @@ trait MyApp_Interface_Head
     {
         if ($this->Module)
         {
-            $this->Module->AddSearchVars2Cookies();
+            $this->Module->MyMod_Search_CGI_Vars_2_Cookies();
             foreach ($this->Module->CookieVars as $cid => $cookievar)
             {
                 array_push($this->CookieVars,$cookievar);

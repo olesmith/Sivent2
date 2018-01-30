@@ -109,7 +109,7 @@ class MyInscriptions_Inscription_Inscribe extends MyInscriptions_Inscription_Con
 
         $this->AddOrUpdate("",$where,$this->Inscription);
         
-        $this->UpdateItem
+        $this->MyMod_Item_Update_CGI
         (
            $this->Inscription,
            $this->MyMod_Data_Field_File_Datas()

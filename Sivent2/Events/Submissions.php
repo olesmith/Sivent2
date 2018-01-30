@@ -160,7 +160,7 @@ class EventsSubmissions extends EventsPayments
         $datas=array();
         if ($this->Event_Submissions_Has($item))
         {
-            $datas=$this->GetGroupDatas($group,TRUE);
+            $datas=$this->MyMod_Data_Group_Datas_Get($group,TRUE);
         }
         else
         {

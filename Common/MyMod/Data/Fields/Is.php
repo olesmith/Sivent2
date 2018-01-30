@@ -165,6 +165,58 @@ trait MyMod_Data_Fields_Is
     }
     
     //*
+    //* Returns true if $data is Password type.
+    //*
+
+    function MyMod_Data_Field_Is_Password($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (
+              isset($this->ItemData[ $data ])
+              &&
+              !empty($this->ItemData[ $data ][ "Password" ])
+           )
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* function MyMod_Data_Field_Is_Module, Parameter list: $data
+    //*
+    //* Returns slq class name to apply - or null.
+    //*
+
+    function MyMod_Data_Field_Is_Module($data)
+    {
+        return $this->ItemData[ $data ][ "SqlClass" ];
+    }
+    
+    //*
+    //* function MyMod_Data_Field_Is_Color, Parameter list: $data
+    //*
+    //* Returns slq class name to apply - or null.
+    //*
+
+    function MyMod_Data_Field_Is_Color($data)
+    {
+        $res=FALSE;
+        if (!empty($this->ItemData[ $data ]))
+        {
+            if (!empty($this->ItemData[ $data ][ "IsColor" ]))
+            {
+                $res=True;
+            }
+        }
+        
+        return $res;
+    }
+    
+    //*
     //* Returns true if $data is MD5 type.
     //*
 
@@ -278,7 +330,43 @@ trait MyMod_Data_Fields_Is
         return $res;
     }
 
-      //*
+    //*
+    //* Returns true if $data is an TEXTAREA field: Text and Varchar.
+    //*
+
+    function MyMod_Data_Field_Is_Text($data)
+    {
+        $this->ItemData($data);
+
+        $res=FALSE;
+        if (isset($this->ItemData[ $data ]))
+        {
+            if
+                (
+                    !empty($this->ItemData[ $data ][ "Sql" ])
+                    &&
+                    preg_match('/TEXT/',$this->ItemData[ $data ][ "Sql" ])
+                )
+            {
+                $res=TRUE;
+            }
+            elseif
+                (
+                    preg_match('/VARCHAR/',$this->ItemData[ $data ][ "Sql" ])
+                    &&
+                    !empty($this->ItemData[ $data ][ "Size" ])
+                    &&
+                    preg_match('/\d+x\d+/',$this->ItemData[ $data ][ "Size" ])
+                )
+            {
+                $res=TRUE;
+            }
+        }
+        
+        return $res;
+    }
+
+    //*
     //* Returns true if $data is an DERIVED.
     //*
 

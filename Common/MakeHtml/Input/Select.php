@@ -19,22 +19,24 @@ trait Html_Input_Select
     )
     {
         $select="\n";
-        if ($addempty) { $select.=$this->Html_EmptyOptionField($optionsoptions)."\n"; }
+        if ($addempty) { $select.=$this->Html_Option_Field_Empty($optionsoptions)."\n"; }
         foreach ($items as $item)
         {
-            $select.=$this->Html_OptionField
-            (
-               $item,
-               $valuekey,
-               $namefilter,
-               $titlefilter,
-               $disabledkey,
-               $selected,
-               $optionsoptions,
-               $maxlen
-            );
+            
+            $select.=
+                $this->Html_Option_Field
+                (
+                    $item,
+                    $valuekey,
+                    $namefilter,
+                    $titlefilter,
+                    $disabledkey,
+                    $selected,
+                    $optionsoptions,
+                    $maxlen
+                );
 
-            if ($selected==$item[ $valuekey ])
+            if ($this->Html_Option_Field_Selected_Is($item,$valuekey,$selected))
             {
                 if (!empty($titlefilter))
                 {
@@ -45,16 +47,49 @@ trait Html_Input_Select
         }
 
         $selectoptions[ "NAME" ]=$fieldname;
-        return $this->Html_Tags("SELECT",$select,$selectoptions);
+        return
+            $this->Html_Tags
+            (
+                "SELECT",
+                $select,
+                $selectoptions
+            );
     }
 
     //*
-    //* sub Html_OptionField, Parameter list: 
+    //* sub Html_Option_Field_Selected_Is, Parameter list: 
     //*
     //* Creates select option from item.
     //*
 
-    function Html_OptionField($item,$valuekey,$namefilter,$titlefilter,$disabledkey,$selected,$options=array(),$maxlen=30)
+    function Html_Option_Field_Selected_Is($item,$valuekey,$selected)
+    {
+        $isselected=False;
+        if (is_array($selected))
+        {
+            if (preg_grep('/^'.$item[ $valuekey ].'$/',$selected))
+            {
+                $isselected=True;
+            }
+        }
+        else
+        {
+            if ($selected==$item[ $valuekey ])
+            {
+                $isselected=True;
+            }
+        }
+
+        return $isselected;
+    }
+    
+    //*
+    //* sub Html_Option_Field, Parameter list: 
+    //*
+    //* Creates select option from item.
+    //*
+
+    function Html_Option_Field($item,$valuekey,$namefilter,$titlefilter,$disabledkey,$selected,$options=array(),$maxlen=30)
     {
         $options[ "VALUE" ]=$item[ $valuekey ];
         
@@ -69,8 +104,8 @@ trait Html_Input_Select
             $options[ "DISABLED" ]="";
             $options[ "CLASS" ]="disabled";
         }
-
-        if ($selected==$item[ $valuekey ])
+        
+        if ($this->Html_Option_Field_Selected_Is($item,$valuekey,$selected))
         {
             $options[ "SELECTED" ]="";
             $options[ "CLASS" ]="selected";
@@ -85,7 +120,7 @@ trait Html_Input_Select
         
         if (!empty($titlefilter))
         {
-            $title.=" ".$this->MyHash_Filter($titlefilter,$item);
+            $title=" ".$this->MyHash_Filter($titlefilter,$item);
         }
         
         $title.=" (".$item[ $valuekey ].")";
@@ -118,12 +153,12 @@ trait Html_Input_Select
 
 
     //*
-    //* sub Html_EmptyOptionField, Parameter list: $options=array(),$emptytext=""
+    //* sub Html_Option_Field_Empty, Parameter list: $options=array(),$emptytext=""
     //*
     //* Creates select option from iitem.
     //*
 
-    function Html_EmptyOptionField($options=array(),$emptytext="<<-- Selecione -->>")
+    function Html_Option_Field_Empty($options=array(),$emptytext="<<-- Selecione -->>")
     {
         $options[ "VALUE" ]=" 0";
         return $this->Html_Tags("OPTION",$emptytext,$options);
@@ -136,25 +171,26 @@ trait Html_Input_Select
     //* HTML select input field from list of items.
     //*
 
-    function Html_Select_Hashes2Field(
-       $fieldname,$items,
-       $selected=0,
-       $namekey="Name",$titlekey="Title",$idkey="ID",
-       $selectoptions=array(),$optionsoptions=array(),
-       $emptytext=""
-    )
+    function Html_Select_Hashes2Field
+        (
+            $fieldname,$items,
+            $selected=0,
+            $namekey="Name",$titlekey="Title",$idkey="ID",
+            $selectoptions=array(),$optionsoptions=array(),
+            $emptytext=""
+        )
     {
         $optionsoptions[ "VALUE" ]=" 0";
-        $select=
-            "\n".
-            "   ".
-            $this->Html_Tags
+        $selects=
+            array
             (
-               "OPTION",
-               $emptytext,
-               $optionsoptions
-            ).
-            "\n";
+                $this->Html_Tags
+                (
+                    "OPTION",
+                    $emptytext,
+                    $optionsoptions
+                )
+            );
 
         foreach ($items as $rid => $item)
         {
@@ -165,6 +201,7 @@ trait Html_Input_Select
             if ($id==$selected)
             {
                 $roptionsoptions[ "SELECTED" ]="";
+                $roptionsoptions[ "CLASS" ]="selected";
                 $selectoptions[ "TITLE" ]=$this->Html_Option_Title($titlekey,$item);
             }
 
@@ -178,20 +215,29 @@ trait Html_Input_Select
                 $roptionsoptions[ "CLASS" ]= "disabled";
             }
 
-           $select.=
-                "   ".
+            array_push
+            (
+                $selects,
                 $this->Html_Tags
                 (
                    "OPTION",
                    $item[ $namekey ],
                    $roptionsoptions
-                ).
-                "\n";
+                )
+            );
         }
         
         $selectoptions[ "NAME" ]=$fieldname;
 
-        return "\n".$this->Html_Tags("SELECT",$select,$selectoptions)."\n";
+        return
+            "\n".
+            $this->Html_Tags
+            (
+                "SELECT",
+                join("\n",$selects),
+                $selectoptions
+            ).
+            "\n";
     }
     
     //*
@@ -201,15 +247,15 @@ trait Html_Input_Select
     //*
 
     function Html_Select_Multi_Field
-    (
-       $items,$fieldname,$valuekey="ID",
-       $namefilter="#Name",$titlefilter="",
-       $selecteds=array(),$addempty=TRUE,$disabledkey="",
-       $selectoptions=array(),$optionsoptions=array()
-    )
+        (
+            $items,$fieldname,$valuekey="ID",
+            $namefilter="#Name",$titlefilter="",
+            $selecteds=array(),$addempty=TRUE,$disabledkey="",
+            $selectoptions=array(),$optionsoptions=array()
+        )
     {
         $select="";
-        if ($addempty) { $select.=$this->Html_EmptyOptionField($optionsoptions); }
+        if ($addempty) { $select.=$this->Html_Option_Field_Empty($optionsoptions); }
         foreach ($items as $item)
         {
             $selected="";
@@ -222,16 +268,17 @@ trait Html_Input_Select
                 }
             }
 
-            $select.=$this->Html_OptionField
-            (
-               $item,
-               $valuekey,
-               $namefilter,
-               $titlefilter,
-               $disabledkey,
-               $selected,
-               $optionsoptions
-            );
+            $select.=
+                $this->Html_Option_Field
+                (
+                    $item,
+                    $valuekey,
+                    $namefilter,
+                    $titlefilter,
+                    $disabledkey,
+                    $selected,
+                    $optionsoptions
+                );
         }
 
         if (!preg_match('/\[\]/',$fieldname)) { $fieldname.="[]"; }

@@ -22,6 +22,8 @@ include_once("MyMod/Data.php");
 include_once("MyMod/Group.php");
 include_once("MyMod/Item.php");
 include_once("MyMod/Items.php");
+include_once("MyMod/Search.php");
+include_once("MyMod/Paging.php");
 include_once("MyMod/Access.php");
 include_once("MyMod/Profiles.php");
 include_once("MyMod/Setup.php");
@@ -53,9 +55,12 @@ trait MyMod
         MyMod_Modules,MyMod_Module,MyMod_SubModules,
         MyMod_Actions,MyMod_Data,MyMod_Group,MyMod_Item,
         MyMod_Access,MyMod_Mail,
-        MyMod_Items,MyMod_Latex,MyMod_Language,
+        MyMod_Items,MyMod_Search,MyMod_Paging,
+        MyMod_Latex,MyMod_Language,
         MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,MyMod_Messages;
 
+    var $Application="";
+    
     //From Mysql2/Items.php
     var $ItemHashes=array();
     var $ActionButtons=FALSE;

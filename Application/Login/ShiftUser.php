@@ -42,7 +42,7 @@ class LoginShiftUser extends LoginLogin
             $peoplewhere[ "__Profiles" ]=join(" AND ",$ors);
         }
 
-        return $this->UsersObj()->GetRealWhereClause($peoplewhere);
+        return $this->UsersObj()->MyMod_Items_Where_Clause_Real($peoplewhere);
     }
 
     //*

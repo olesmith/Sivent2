@@ -13,7 +13,14 @@ class App_Override extends App_Handle
         $this->UnitsObj()->Sql_Table_Structure_Update();
         
         $online=$this->Unit("Online");
-        if ($online==2 && $this->Profile()!="Admin")
+        if
+            (
+                $online==2
+                &&
+                $this->Profile()!="Admin"
+                &&
+                $this->CGI_GET("Action")!="Download"
+            )
         {
             $this->MyApp_Interface_Head();
 
@@ -64,10 +71,16 @@ class App_Override extends App_Handle
 
     function MyApp_Interface_Tail_Center()
     {
-       return
-            $this->SponsorsObj()->ShowSponsors(2).
-            parent::MyApp_Interface_Tail_Center().
-            "";
+        $html="";
+        
+        if ( TRUE) //!empty($this->CGI_GETint("Unit")) )
+        {
+            $html.=$this->SponsorsObj()->ShowSponsors(2);
+        }
+        
+        $html.=parent::MyApp_Interface_Tail_Center();
+
+        return $html;
     }
     
     //*
@@ -78,10 +91,14 @@ class App_Override extends App_Handle
 
     function MyApp_Interface_Messages_Status()
     {
-        return
-            parent::MyApp_Interface_Messages_Status().
-            $this->SponsorsObj()->ShowSponsors(3).
-            "";
+        $html=parent::MyApp_Interface_Messages_Status();
+
+        if ( !empty($this->CGI_GETint("Unit")) )
+        {
+            $html.=$this->SponsorsObj()->ShowSponsors(3);
+        }
+
+        return $html;
     }
     
     //*

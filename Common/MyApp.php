@@ -111,7 +111,25 @@ trait MyApp
         $this->MyApp_Init($args);
     }
 
-     //*
+    //*
+    //* function MyApp_Icon_IMG, Parameter list: $icon
+    //*
+    //* Generates icon as a complete html image.
+    //*
+
+    function MyApp_Icon_IMG($icon,$size=20)
+    {
+        return
+            $this->IMG
+            (
+                $this->Icons."/".$icon,
+                $icon,
+                $size,
+                $size
+            );        
+    }
+
+    //*
     //* function MyApp_Init, Parameter list: 
     //*
     //* Application initializer.
@@ -241,6 +259,42 @@ trait MyApp
         $this->MyApp_Handle($args);
     }
 
+    //*
+    //* function MyApp_Application_Name, Parameter list: 
+    //*
+    //* Returns key from HtmlSetupHash.
+    //*
+
+    function MyApp_Application_Name()
+    {
+        return $this->HtmlSetupHash[ "ApplicationName"  ];
+    }
+
+    //*
+    //* function MyApp_Application_Version, Parameter list: 
+    //*
+    //* Returns key from HtmlSetupHash.
+    //*
+
+    function MyApp_Application_Version()
+    {
+        return $this->HtmlSetupHash[ "ApplicationVersion"  ];
+    }
+
+    //*
+    //* function MyApp_Application_Title, Parameter list: 
+    //*
+    //* Returns key from HtmlSetupHash.
+    //*
+
+    function MyApp_Application_Title()
+    {
+        return
+            $this->MyApp_Application_Name().
+            " ".
+            $this->MyApp_Application_Version().
+            "";
+    }
 
     //*
     //* function MyApp_Run, Parameter list: $args

@@ -117,5 +117,29 @@ trait MakeHtml_Input
     }
 
 
+    //*
+    //* sub Html_File, Parameter list: $name,$value,$options=array()
+    //*
+    //* HTML file input field.
+    //*
+
+    function Html_File($name,$options=array())
+    {
+        return $this->Html_Input("file",$name,"",$options);
+    }
+
+    //*
+    //* sub Html_Password, Parameter list: $name,$value,$size=8,$options=array()
+    //*
+    //* HTML password input field.
+    //*
+
+    function Html_Password($name,$value,$size=8,$options=array(),$maxsize=0)
+    {
+        if ($size>0)    { $options[ "SIZE" ]=$size; }
+        if ($maxsize>0) { $options[ "MAXSIZE" ]=$maxsize; }
+
+        return $this->Html_Input("password",$name,$value,$options);
+    }
 }
 ?>

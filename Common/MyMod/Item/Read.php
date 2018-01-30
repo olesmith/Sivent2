@@ -62,7 +62,7 @@ trait MyMod_Item_Read
         $where=$id;
         if (!is_array($where))
         {
-            $where=$this->GetRealWhereClause(array($this->IDWhereVar => $id));
+            $where=$this->MyMod_Items_Where_Clause_Real(array($this->IDWhereVar => $id));
         }
 
         $this->ItemHash=$this->SelectUniqueHash($this->SqlTableName(),$where,FALSE,$rdatas);

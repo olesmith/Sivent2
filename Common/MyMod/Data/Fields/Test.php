@@ -21,7 +21,7 @@ trait MyMod_Data_Fields_Test
         }
 
 
-        $rdata=$this->MyMod_Data_Field_CGIName($data,$plural,$prepost);
+        $rdata=$this->MyMod_Data_Field_CGIName($item,$data,$plural,$prepost);
 
         $newvalue="";
         if ($this->MyMod_Data_Field_Is_Date($data))

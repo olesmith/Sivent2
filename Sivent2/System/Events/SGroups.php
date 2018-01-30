@@ -18,7 +18,7 @@ array
       "Admin" => 1,
       "Friend"     => 1,
       "Coordinator" => 1,
-      "Single" => FALSE,
+      "Single" => FALSE, //????
       "EditAccessMethod" => "Current_User_Event_May_Edit",
     ),
     "Components" => array
@@ -308,5 +308,98 @@ array
        "SubAction" => "Assessments",
        "AccessMethod" => "Event_Assessments_Has",
        "EditAccessMethod" => "Current_User_Event_Submissions_May_Edit",
+    ),
+   
+   "Conf_Basic" => array
+   (
+      "Name" => "Dados Básicos",
+      "Name_UK" => "Basic Data",
+
+      "Data" => array
+      (
+         "Status","Date","Visible",
+         "Initials","Name","Title",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => False,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Conf_Place" => array
+   (
+      "Name" => "Local do Evento",
+      "Name_UK" => "Event ",
+
+      "Data" => array
+      (
+         "Place","Place_Address","Place_Site",
+         "Site",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => False,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Conf_Occurs" => array
+   (
+      "Name" => "Datas do Evento",
+      "Name_UK" => "Event Dates",
+
+      "Data" => array
+      (
+         "EventStart","EventEnd",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => False,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Conf_Inscriptions" => array
+   (
+      "Name" => "Datas das Inscrições",
+      "Name_UK" => "Dates of Inscriptions",
+
+      "Data" => array
+      (
+         "StartDate","EndDate",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => False,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Conf_Admin" => array
+   (
+      "Name" => "Admin",
+      "Name_UK" => "Admin",
+
+      "Data" => array
+      (
+          "Visible","Sivent2URL"
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Visible" => False,
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
     ),
 );

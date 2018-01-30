@@ -43,6 +43,7 @@ class ItemPrints extends ItemTable
         }
 
         unset($item[ "ID" ]);
+        
         return $item;
     }
 }

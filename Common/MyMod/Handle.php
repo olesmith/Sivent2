@@ -1,6 +1,7 @@
 <?php
 
 include_once("Handle/Help.php");
+include_once("Handle/Add.php");
 include_once("Handle/Show.php");
 include_once("Handle/Edit.php");
 include_once("Handle/Copy.php");
@@ -18,7 +19,9 @@ include_once("Handle/Process.php");
 
 trait MyMod_Handle
 {
-    use MyMod_Handle_Help,
+    use
+        MyMod_Handle_Help,
+        MyMod_Handle_Add,
         MyMod_Handle_Show,
         MyMod_Handle_Edit,
         MyMod_Handle_Copy,
@@ -90,13 +93,13 @@ trait MyMod_Handle
 
         //Load actions if necessary
         $this->Actions();
-        $this->MyMod_Handle_Item_Read();
         
         if (!empty($this->Actions[ $action ]))
         {
             $item=array();
             if (!empty($this->Actions[ $action ][ "Singular" ]))
             {
+                $this->MyMod_Handle_Item_Read();
                 $item=$this->ItemHash;
             }
             

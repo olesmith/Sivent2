@@ -16,6 +16,42 @@ trait MyMod_Data_Fields_File
         MyMod_Data_Fields_File_Correct;
     
     //*
+    //* function MyMod_Data_Field_File_Edit, Parameter list: $data,$item,$value,$tabindex,$plural,$links,$callmethod,$rdata 
+    //*
+    //* Creates file edit field.
+    //*
+
+    function MyMod_Data_Field_File_Edit($data,$item,$value,$tabindex,$plural,$links,$callmethod,$rdata)
+    {
+        $options=
+            array
+            (
+                "SIZE" => $this->ItemData[ $data ][ "Size" ],
+                "TITLE" => $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data)
+            );
+
+        if (!empty($tabindex))
+        {
+            $options[ "TABINDEX" ]=$tabindex;
+        }
+
+        return
+            $this->Html_File
+            (
+                $rdata,
+                $options                
+            ).
+            $this->MyMod_Data_Fields_File_Decorator
+            (
+                $data,
+                $item,
+                $plural,
+                1
+            );
+        
+    }
+    
+    //*
     //* function MyMod_Data_Fields_File_Contents_Save, Parameter list: &$item,$file,$filefield
     //*
     //* Saves properly formatted version of file contents.

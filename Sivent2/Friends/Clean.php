@@ -17,7 +17,7 @@ class Friends_Clean extends MyFriends
         $this->SearchVars=array();
         $this->ItemData[ "CTime" ][ "Search" ]=1;
 
-        $group=$this->GetActualDataGroup();
+        $group=$this->MyMod_Data_Group_Actual_Get();
 
         array_push($this->ItemDataGroups[ $group ][ "Data" ],"CleanCell");
         $this->MyMod_Handle_Search("",TRUE,1,$group,array(),"","","Remover","Resetar");

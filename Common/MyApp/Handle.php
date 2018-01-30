@@ -139,7 +139,7 @@ trait MyApp_Handle
                 }
             }
 
-            $this->Module->InitSearch();
+            /* $this->Module->InitSearch(); */
 
             $this->Module->LoginType=$this->LoginType;
 
@@ -153,7 +153,7 @@ trait MyApp_Handle
 
 
             $this->Module->Handle=TRUE; //bug - SetCookieVars changes Handle??
-            $this->Module->AddSearchVars2Cookies();
+            $this->Module->MyMod_Search_CGI_Vars_2_Cookies();
             $this->Module->SetCookieVars();
             $this->Module->MyMod_Handle();
         }

@@ -226,7 +226,7 @@ class Speakers extends Speakers_Emails
         $this->MyMod_Handle_Show();
         $item=$this->ItemHash;
         
-        $datas=$this->SchedulesObj()->GetGroupDatas("Basic");
+        $datas=$this->SchedulesObj()->MyMod_Data_Group_Datas_Get("Basic");
 
         $schedules=$this->SchedulesObj()->Speaker2Schedules($item,array());
 

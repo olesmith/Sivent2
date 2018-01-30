@@ -1,6 +1,6 @@
 <?php
 
-class Sort extends Search
+class Sort extends Items
 {
 }
 

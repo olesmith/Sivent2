@@ -10,7 +10,7 @@ class Collaborators_Table_Row extends Collaborators_Table_Cell
 
     function Collaborators_Table_Collaborations_Titles()
     {
-        $rdatas=$this->CollaborationsObj()->GetGroupDatas("Inscription");
+        $rdatas=$this->CollaborationsObj()->MyMod_Data_Group_Datas_Get("Inscription");
         $datas=array("Homologated","TimeLoad");
 
         return

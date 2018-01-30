@@ -41,7 +41,7 @@ trait Sql_Table_Index
                   "Person" => 1,
                   "Admin"  => 1,
                ),
-               "SQL" => array
+               "Sql_Table" => array
                (
                   "Name"   => "SQL Table",
                   "Sql"    => "VARCHAR(256)",
@@ -136,7 +136,7 @@ trait Sql_Table_Index
         return
             array
             (
-                "SQL"    => $sqltable,
+                "Sql_Table"    => $sqltable,
                 "Module" => $this->ModuleName,
                 "Item"   => $item[ "ID" ],
             );
@@ -224,21 +224,8 @@ trait Sql_Table_Index
     function Sql_Table_Index_Set($item)
     {        
         $item_table=$this->SqlTableName();
+        
         $this->Sql_Table_Index_Item_Stamp($item_table,$item);
-
-        /* $where[ "Name" ]=$table; */
-        /* $hash[ "Name" ]=$table; */
-
-        /* if (!empty($hash[ "Name" ])) */
-        /* { */
-        /*     $hash= */
-        /*         $this->Sql_Unique_Item_Update */
-        /*         ( */
-        /*            $where, */
-        /*            $hash, */
-        /*            $infotable=$this->Sql_Table_Index_Table_Name() */
-        /*         ); */
-        /* } */
 
         return $item;
     }

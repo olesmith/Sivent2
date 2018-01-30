@@ -11,17 +11,5 @@ class ItemUpdate extends ItemTests
     {
         return $this->MyMod_Data_Trigger_Function($data);
     }
-
-
-    //*
-    //* Updates item in DB.
-    //*
-
-    function UpdateItem($item=array(),$datas=array(),$prepost="",$postprocess=TRUE)
-    {
-        return $this->MyMod_Item_Update_CGI($item,$datas,$prepost,$postprocess);
-    }
-
-
 }
 ?>

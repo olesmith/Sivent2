@@ -12,7 +12,7 @@ trait ItemForm_Update
     {
         if (!empty($this->Args[ "Item" ]))
         {
-            $this->Args[ "Item" ]=$this->UpdateItem
+            $this->Args[ "Item" ]=$this->MyMod_Item_Update_CGI
             (
                $this->Args[ "Item" ],
                $this->ItemForm_SGroupsDatas(1,TRUE)

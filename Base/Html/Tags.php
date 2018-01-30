@@ -16,6 +16,15 @@ class HtmlTags extends HtmlCSS
 
     function HtmlTag($tag,$contents="",$options=array())
     {
+        if (!empty($contents[ "Text" ]))
+        {
+            $contents=$contents[ "Text" ];
+            if (!empty($contents[ "Options" ]))
+            {
+                $options=array_merge($options,$contents[ "Options" ]);
+            }
+        }
+        
         if (is_array($contents))
         {
             $contents=join("\n",$contents);

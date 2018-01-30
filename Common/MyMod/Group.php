@@ -1,33 +1,57 @@
 <?php
 
+include_once("Group/Cells.php");
+include_once("Group/Titles.php");
+include_once("Group/Row.php");
+include_once("Group/Rows.php");
+include_once("Group/Table.php");
+include_once("Group/SumVars.php");
+include_once("Group/Html.php");
+include_once("Group/Form.php");
+
+
 trait MyMod_Group
 {
-
+    use
+        MyMod_Group_Cells,
+        MyMod_Group_Titles,
+        MyMod_Group_Row,
+        MyMod_Group_Rows,
+        MyMod_Group_Table,
+        MyMod_Group_SumVars,
+        MyMod_Group_HTML,
+        MyMod_Group_Form;
+    
+    
     //*
-    //* function , Parameter list: $title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar="Update"
+    //* function MyMod_Data_Group_Table, Parameter list: $title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar="Update"
     //*
-    //* Creates data group table, group $group. If $group=="", calls GetActualDataGroup to detect it.
+    //* Creates data group table, group $group. If $group=="", calls MyMod_Data_Group_Actual_Get to detect it.
     //* $title, $edit and $items are transferred calling ItemTable.
     //*
 
     function MyMod_Data_Group_Table($title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar="Update")
     {
         if (empty($items)) { $items=$this->ItemHashes; }
+        $this->Singular=False;
 
         if (empty($this->Actions))
         {
             $this->InitActions();
         }
-
-        if ($group=="") { $group=$this->GetActualDataGroup(); }
+        
+        $this->ItemData("ID");
+        $this->MyMod_Data_Groups_Initialize();
+        
+        if ($group=="") { $group=$this->MyMod_Data_Group_Actual_Get(); }
+        
         if (!empty($this->ItemDataGroups[ $group ][ "PreMethod" ]))
         {
             $method=$this->ItemDataGroups[ $group ][ "PreMethod" ];
             $this->$method();
         }
 
-        $datas=$this->GetGroupDatas($group);
-
+        $datas=$this->MyMod_Data_Group_Datas_Get($group);
         if (!empty($this->ItemDataGroups[ $group ][ "GenTableMethod" ]))
         {
             $method=$this->ItemDataGroups[ $group ][ "GenTableMethod" ];
@@ -44,9 +68,9 @@ trait MyMod_Group
 
         if (!empty($this->ItemDataGroups[ $group ][ "GenTableRowMethod" ]))
         {
-            $this->ItemTableRowMethod=$this->ItemDataGroups[ $group ][ "GenTableRowMethod" ];
-                
+            $this->ItemTableRowsMethod=$this->ItemDataGroups[ $group ][ "GenTableRowMethod" ];  
         }
+        
         $countdef=array();
         if (
               isset($this->ItemDataGroups[ $group ][ "SubTable" ])
@@ -58,11 +82,6 @@ trait MyMod_Group
         }
 
 
-        if (count($titles)==0)
-        {
-            $titles=$datas;
-        }
-
         if (!empty($this->ItemDataGroups[ $group ][ "PreProcessor" ]))
         {
             $method=$this->ItemDataGroups[ $group ][ "PreProcessor" ];
@@ -73,30 +92,21 @@ trait MyMod_Group
                 $this->$method($items[ $id ]);
             }
         }
-
-        if (
-            isset($this->ItemDataGroups[ $group ][ "NoTitleRow" ])
-            &&
-            $this->ItemDataGroups[ $group ][ "NoTitleRow" ]
-           )
-        {
-            $titles=array();
-        }
         
         if (!empty($this->ItemDataGroups[ $group ][ "SumVars" ]))
         {
             $this->SumVars=array("");
         }
-
+        
         return
-            $this->ItemsTable
+            $this->MyMod_Group_Datas_Table
             (
                 $title,
                 $edit,
                 $datas,
                 $items,
                 $countdef,
-                $titles,
+                $this->MyMod_Data_Group_Titles($group,$datas,$titles),
                 TRUE,
                 $cgiupdatevar
             );

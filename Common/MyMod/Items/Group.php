@@ -11,7 +11,7 @@ trait MyMod_Items_Group
     {
         if (empty($group)) { $group="Basic"; }
 
-        return $this->GetGroupDatas($group,FALSE);
+        return $this->MyMod_Data_Group_Datas_Get($group,FALSE);
     }
     
     //*

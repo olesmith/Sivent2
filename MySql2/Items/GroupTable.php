@@ -1,6 +1,6 @@
 <?php
 
-class ItemsGroupTable extends ItemsTable
+class ItemsGroupTable extends ItemsRead
 {
     //*
     //* function ItemsTableDataGroupWithAddRow, Parameter list: 

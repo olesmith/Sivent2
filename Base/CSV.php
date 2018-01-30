@@ -27,8 +27,8 @@ class CSV extends Html
         if (count($items)==0)     { $items=$this->ItemHashes; }
         if (count($datas)==0)
         {
-            $group=$this->GetActualDataGroup();
-            $datas=$this->GetGroupDatas($group);
+            $group=$this->MyMod_Data_Group_Actual_Get();
+            $datas=$this->MyMod_Data_Group_Datas_Get($group);
             if (is_array($this->ItemDataGroups[ $group ][ "TitleData"]))
             {
                 $titles=$this->ItemDataGroups[ $group ][ "TitleData"];

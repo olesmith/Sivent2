@@ -15,7 +15,7 @@ include_once("SubItems.php");
 include_once("Fields.php");
 include_once("Item.php");
 include_once("Items.php");
-include_once("Search.php");
+#include_once("Paging.php");
 include_once("Sort.php");
 include_once("Import.php");
 include_once("Export.php");
@@ -51,7 +51,6 @@ class Table extends TableLanguage
     //var $HtmlStatusMessages=array();
     var $HtmlStatus=array();
     var $DefaultAction="Search";
-    var $AddSearchVarsToDataList=FALSE;
 
     
     var $IDGETVar=FALSE;

@@ -91,7 +91,11 @@ class Import extends Sort
                 $ritem[ $data ]=$value;
             }
 
-            $this->ItemsTableRow(0,$item,$n+1,$datas,array(),$table);
+            array_push
+            (
+                $table,
+                $this->MyMod_Group_Row_Item(0,$item,$n+1,$datas)
+            );
         }
 
         print
@@ -115,7 +119,11 @@ class Import extends Sort
         foreach ($this->ImportItems as $n => $item)
         {
             $item[ "ID" ]=$n+1;
-            $this->ItemsTableRow(1,$item,$n+1,$datas,array(),$table);
+            array_push
+            (
+                $table,
+                $this->MyMod_Group_Row_Item(1,$item,$n+1,$datas)
+            );
         }
 
         print

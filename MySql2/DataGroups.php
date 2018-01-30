@@ -135,23 +135,6 @@ class DataGroups extends HashesData
         return $this->ModuleName."_Page";
     }
 
-    //*
-    //* Return object data group var, that is:
-    //* ItemDataSGroups if Singular, elsewise ItemDataGroups
-    //*
-
-    function GetDataGroups($single=FALSE)
-    {
-        $this->MyMod_Data_Groups_Initialize();
-        if (($this->Singular || $single) && count($this->ItemDataSGroups)>0)
-        {
-            return $this->ItemDataSGroups;
-        }
-        else
-        {
-            return $this->ItemDataGroups;
-        }
-    }
 
     //*
     //* Return object data group names var
@@ -169,194 +152,44 @@ class DataGroups extends HashesData
         }
     }
 
-    //*
-    //* Return object data group common data var
-    //*
+    /* //\* */
+    /* //\* Return object data group common data var */
+    /* //\* */
 
-    function GetDataGroupsCommon()
-    {
-        if ($this->Singular)
-        {
-            if (isset($this->ItemDataSGroupsCommon[ $this->LoginType ]))
-            {
-                return $this->ItemDataSGroupsCommon[ $this->LoginType ];
-            }
-            elseif (isset($this->ItemSDataSGroupsCommon[ $this->Profile ]))
-            {
-                return $this->ItemDataSGroupsCommon[ $this->Profile ];
-            }
-        }
-        else
-        {
-            if (isset($this->ItemDataGroupsCommon[ $this->LoginType ]))
-            {
-                return $this->ItemDataGroupsCommon[ $this->LoginType ];
-            }
-            elseif (isset($this->ItemDataGroupsCommon[ $this->Profile ]))
-            {
-                return $this->ItemDataGroupsCommon[ $this->Profile ];
-            }
-        }
+    /* function GetDataGroupsCommon() */
+    /* { */
+    /*     if ($this->Singular) */
+    /*     { */
+    /*         if (isset($this->ItemDataSGroupsCommon[ $this->LoginType ])) */
+    /*         { */
+    /*             return $this->ItemDataSGroupsCommon[ $this->LoginType ]; */
+    /*         } */
+    /*         elseif (isset($this->ItemSDataSGroupsCommon[ $this->Profile ])) */
+    /*         { */
+    /*             return $this->ItemDataSGroupsCommon[ $this->Profile ]; */
+    /*         } */
+    /*     } */
+    /*     else */
+    /*     { */
+    /*         if (isset($this->ItemDataGroupsCommon[ $this->LoginType ])) */
+    /*         { */
+    /*             return $this->ItemDataGroupsCommon[ $this->LoginType ]; */
+    /*         } */
+    /*         elseif (isset($this->ItemDataGroupsCommon[ $this->Profile ])) */
+    /*         { */
+    /*             return $this->ItemDataGroupsCommon[ $this->Profile ]; */
+    /*         } */
+    /*     } */
 
-        return array();
-    }
+    /*     return array(); */
+    /* } */
 
-    //*
-    //* Return current Data Group
-    //*
-
-    function GetActualDataGroup()
-    {
-        $this->PostInitItems();
-
-        if ($this->CurrentDataGroup!="")
-        {
-            $group=$this->CurrentDataGroup;
-        }
-        else
-        {
-            $group=$this->GetCGIVarValue($this->GroupDataCGIVar());
-        }
-
-        $groups=$this->GetDataGroups();
-        if (!preg_grep('/^'.$group.'$/',array_keys($groups)))
-        {
-            $group="";
-        }
-
-        if  (
-               $group==""
-               ||
-               !$this->MyMod_Item_Group_Allowed($groups[ $group ])
-            )
-        {
-            //No group found (or group found was not allowed)
-            //Localize first allowed data group
-            foreach ($groups as $rgroup => $groupdef)
-            {
-                if ($this->MyMod_Item_Group_Allowed($groups[ $rgroup ]))
-                {
-                    $group=$rgroup;
-                    break;
-                }
-            }
-        }
-
-        return $group;
-    }
-
-
-    //*
-    //* Return data to display in Data Group
-    //*
-
-    function GetGroupDatas($group,$single=FALSE)
-    {
-        if ($group=="") { return array(); }
-
-        $groups=$this->GetDataGroups($single);
-        
-        $groupscommon=array();
-        if (!$single) { $groupscommon=$this->GetDataGroupsCommon(); }
-
-        $rdatas=array();
-        if (count($groupscommon)>0)
-        {
-            foreach ($groupscommon as $id => $data)
-            {
-                array_push($rdatas,$data);
-            }
-        }
-
-        if (!isset($groups[ $group ]) || !is_array($groups[ $group ]))
-        {
-            echo $this->ModuleName." Warning: Group $group undefined";
-            $this->AddMsg("Warning: Group $group undefined");
-            return array();
-        }
-
-        $datas=$this->GetRealNameKey($groups[ $group ],"Data");
-
-        //if (!isset($groups[ $group ][ "Data" ]) || !is_array($groups[ $group ][ "Data" ]))
-        if (empty($datas) || !is_array($datas))
-        {
-            //echo $this->ModuleName." Warning: Group ".$groups[ $group ][ "Name" ]." has no data defined";
-            $this->AddMsg("Warning: Group $group has no data defined");
-            return array();
-        }
-
-        $rgroups=array();
-        foreach (array("Actions","ShowData","Data") as $type)
-        {
-            $datas=$this->GetRealNameKey($groups[ $group ],$type);
-            
-            if (!empty($datas) && is_array($datas))
-            {
-                $rgroups=array_merge($rgroups,$datas);
-            }
-        }
-
-        foreach ($rgroups as $id => $data)
-        {
-            if (!is_array($data)) { $data=array($data); }
-
-            foreach ($data as $rdata)
-            {
-                if (isset($this->ItemData[ $rdata ]))
-                {
-                    if (!$single && preg_grep('/^'.$rdata.'$/',$this->MyMod_Language_Data))
-                    {
-                        $rdata.=$this->MyLanguage_GetLanguageKey();
-                    }
-                    
-                    if ($this->MyMod_Access_HashAccess($this->ItemData[ $rdata ],array(1,2)))
-                    {
-                        array_push($rdatas,$rdata);
-                    }
-                }
-                elseif (isset($this->Actions[ $rdata ]))
-                {
-                    $action=$data;
-                    if ($this->MyAction_Allowed($rdata))
-                    {
-                        array_push($rdatas,$rdata);
-                    }
-                    else
-                    {
-                        if (!empty($this->Actions[ $rdata ][ "AltAction" ]))
-                        {
-                            $altaction=$this->Actions[ $rdata ][ "AltAction" ];
-                            if ($this->MyAction_Allowed($altaction))
-                            {
-                                array_push($rdatas,$altaction);
-                            }
-                        }
-                    }
-                }
-                elseif (method_exists($this,$rdata))
-                {
-                    array_push($rdatas,$rdata);
-                }
-                elseif (
-                          $rdata=="No"
-                          ||
-                          preg_match('/^newline/',$rdata)
-                          ||
-                          preg_match('/^text\_/',$rdata)
-                       )
-                {
-                    array_push($rdatas,$rdata);
-                }
-            }
-        }
-        
-        return $rdatas;
-    }
+    
 
     function GetGroupReadData($group)
     {
-        $datas=$this->GetGroupDatas($group);
-        $groups=$this->GetDataGroups();
+        $datas=$this->MyMod_Data_Group_Datas_Get($group);
+        $groups=$this->MyMod_Data_Group_Defs_Get();
 
         //Datas that we need to have read (for some reason)
         foreach ($this->ExtraData as $n => $data)
@@ -391,11 +224,11 @@ class DataGroups extends HashesData
     }
 
 
-    function GetActualDataGroupDatas()
-    {
-        $group=$this->GetActualDataGroup();
-        return $this->GetGroupReadData($group);
-    }
+    /* function GetActualDataGroupDatas() */
+    /* { */
+    /*     $group=$this->MyMod_Data_Group_Actual_Get(); */
+    /*     return $this->GetGroupReadData($group); */
+    /* } */
 
 
     function GetDefaultDataGroup()
@@ -423,15 +256,13 @@ class DataGroups extends HashesData
             }
         }
 
-        $datas=$this->GetGroupDatas($groupname);
+        $datas=$this->MyMod_Data_Group_Datas_Get($groupname);
 
         return $datas;
     }
 
     function ItemGroupURL($groupname)
     {
-        $groups=$this->GetDataGroups();
-
         $hash=array("Action" => $this->MyActions_Detect());
 
         
@@ -439,11 +270,6 @@ class DataGroups extends HashesData
         if ($this->GetGETOrPOST("ID")>0)
         {
             $hash[ "ID" ]=$this->GetGETOrPOST("ID");
-        }
-
-        if ($this->GetGETOrPOST("EditList")>0)
-        {
-            //$hash[ "EditList" ]=1;
         }
 
         $link="?".$this->Hash2Query($hash);
@@ -454,7 +280,7 @@ class DataGroups extends HashesData
 
     function ItemGroupHidden($groupname="")
     {
-        if (empty($groupname)) { $groupname=$this->GetActualDataGroup(); }
+        if (empty($groupname)) { $groupname=$this->MyMod_Data_Group_Actual_Get(); }
 
         return $this->MakeHidden($this->GroupDataCGIVar(),$groupname);
     }
@@ -487,7 +313,7 @@ class DataGroups extends HashesData
         $values=array();
         $names=array();
         $titles=array();
-        foreach ($this->GetDataGroups() as $groupid => $group)
+        foreach ($this->MyMod_Data_Group_Defs_Get() as $groupid => $group)
         {
             //Check if group allowed
             if ($this->MyMod_Item_Group_Allowed($group) && $this->GetRealNameKey($group,"Name")!="")
@@ -508,7 +334,7 @@ class DataGroups extends HashesData
                $this->ModuleName."_GroupName",
                $values,
                $names,
-               $this->GetActualDataGroup(),//$this->GetCGIVarValue($this->ModuleName."_GroupName"),
+               $this->MyMod_Data_Group_Actual_Get(),//$this->GetCGIVarValue($this->ModuleName."_GroupName"),
                array(),//disableds
                $titles,
                $this->MyLanguage_GetMessage("DataGroupsTitle","Title")

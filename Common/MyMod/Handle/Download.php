@@ -21,18 +21,28 @@ trait MyMod_Handle_Download
            $file=$this->ItemHash[ $data ];
            if (empty($file))
            {
-               $file=$this->MySqlItemValue("","ID",$this->ItemHash[ "ID" ],$data."_OrigName");
+               $file=
+                   $this->Sql_Select_Hash_Value
+                   (
+                       $this->ItemHash[ "ID" ],
+                       $data."_OrigName"
+                   );
            }
           
            $origname=$file;
            if (empty($this->ItemHash[$data."_OrigName"]))
            {
-               $origname=$this->MySqlItemValue("","ID",$this->ItemHash[ "ID" ],$data."_OrigName");
+               $origname=
+                   $this->Sql_Select_Hash_Value
+                   (
+                       $this->ItemHash[ "ID" ],
+                       $data."_OrigName"
+                   );
            }
 
            if (empty($file) || !file_exists($file))
            {
-               echo "No such file: '".$file."'";
+               echo "MyMod_Handle_Download: No such file: '".$file."'";
                exit();
            }
           

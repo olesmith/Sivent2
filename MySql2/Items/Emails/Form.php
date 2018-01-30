@@ -11,7 +11,7 @@ class ItemsEmailsForm extends ItemsEmailsTable
     function EmailsSearchForm($fixedvars=array())
     {
         return 
-            $this->SearchVarsTable
+            $this->MyMod_Search_Form
             (
                array("Paging","DataGroups"),
                "",
@@ -84,8 +84,16 @@ class ItemsEmailsForm extends ItemsEmailsTable
         if ($edit==1)
         {
             $html.=
-                join("",$this->SearchVarsAsHiddens()).
-                $this->MakeHidden($this->ModuleName."_IncludeAll",$this->CGI2IncludeAll()).
+                join
+                (
+                    "",
+                    $this->MyMod_Search_Hiddens_Fields()
+                ).
+                $this->MakeHidden
+                (
+                    $this->ModuleName."_IncludeAll",
+                    $this->MyMod_Search_CGI_Include_All_Value()
+                ).
                 $this->MakeHidden("Send",1).
                 $this->EndForm().
                 "";

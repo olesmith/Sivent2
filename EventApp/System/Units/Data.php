@@ -35,7 +35,7 @@ array
       "Search" => "1",
 
       "Size" => "30x1",
-      "Sql" => "TEXT",
+      "Sql" => "VARCHAR(256)",
    ),
    "Status" => array
    (

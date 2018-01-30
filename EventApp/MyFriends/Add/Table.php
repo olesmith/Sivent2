@@ -14,7 +14,7 @@ class MyFriends_Add_Table extends MyFriends_Add_New
     function FriendSelectResultTable($edit,$friends)
     {
         $table=
-               $this->ItemsTable
+               $this->MyMod_Group_Datas_Table
                (
                   "",
                   0,

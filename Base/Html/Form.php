@@ -84,7 +84,7 @@ class HtmlForm extends HtmlInput
             //Supress search var value as forms GET args
             foreach ($this->MyMod_Items_Search_Vars() as $data)
             {
-                $rdata=$this->GetSearchVarCGIName($data);
+                $rdata=$this->MyMod_Search_CGI_Name($data);
                 unset($args[ $rdata  ]);
             }
         }

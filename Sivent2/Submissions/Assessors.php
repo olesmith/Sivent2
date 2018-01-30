@@ -72,7 +72,7 @@ class Submissions_Assessors extends Submissions_Authors
         $this->AssessorsObj()->Actions();
         
         $this->AssessorsObj()->ItemData[ "Friend" ][ "EditFieldMethod" ]="Assessor_Field";       
-        $datas=$this->GetGroupDatas("Assessments");
+        $datas=$this->MyMod_Data_Group_Datas_Get("Assessments");
 
         $profile=$this->Profile();
         

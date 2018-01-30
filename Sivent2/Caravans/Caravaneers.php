@@ -10,7 +10,7 @@ class Caravans_Caravaneers extends Caravans_Emails
 
     function Caravan_Info_Data()
     {
-        $datas=$this->GetGroupDatas("Basic");
+        $datas=$this->MyMod_Data_Group_Datas_Get("Basic");
         if ($this->LatexMode())
         {
             $datas=$this->MyMod_Datas_Actions_Remove($datas);
@@ -27,7 +27,7 @@ class Caravans_Caravaneers extends Caravans_Emails
 
     function Caravan_Update_Data()
     {
-         return $this->GetGroupDatas("Basic");
+         return $this->MyMod_Data_Group_Datas_Get("Basic");
 
          return
             array

@@ -17,18 +17,18 @@ class Caravaneers_Table_Data extends Caravaneers_Access
             $cred=$this->CGI_GET("Cred");
             if ($cred==1)
             {
-                $datas=$this->GetGroupDatas("Latex_Cred");
+                $datas=$this->MyMod_Data_Group_Datas_Get("Latex_Cred");
             }
             else
             {
-                $datas=$this->GetGroupDatas("Latex");
+                $datas=$this->MyMod_Data_Group_Datas_Get("Latex");
             }
 
             $datas=$this->MyMod_Datas_Actions_Remove($datas);
         }
         else
         {
-            $datas=$this->GetGroupDatas("Inscription");
+            $datas=$this->MyMod_Data_Group_Datas_Get("Inscription");
         }
 
         return $datas;

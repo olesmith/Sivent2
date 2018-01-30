@@ -17,7 +17,7 @@ trait MyMod_Handle_Export_Form
             $this->ApplicationObj->MyApp_Interface_Head();
             $this->MyMod_HorMenu_Echo();
 
-            $this->PostSearchTableText=
+            $this->MyMod_Search_Post_Text=
                 $this->BR().
                 $this->Anchor("_EXPORT").
                 $this->FrameIt
@@ -44,7 +44,7 @@ trait MyMod_Handle_Export_Form
             $action=$this->MyActions_Detect();
        
             echo 
-                $this->SearchVarsTable
+                $this->MyMod_Search_Form
                 (
                     array("DataGroups"),
                     "",

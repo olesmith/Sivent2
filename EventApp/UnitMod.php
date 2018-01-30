@@ -82,12 +82,36 @@ class UnitMod extends DBDataObj
         $res=$this->ApplicationObj()->CGI_GET2Hash("Unit","UnitsObj",$key,"Unit",FALSE);
 
         $action=$this->CGI_GET("Action");
-        if (empty($this->ApplicationObj()->Unit) && $action!="Start")
+        if (empty($this->ApplicationObj()->Unit)) # && $action!="Start")
         {
-            echo
-                "No such unit: ".$this->CGI_GETint("Unit");
+            $units=
+                $this->UnitsObj()->Sql_Select_Hashes
+                (
+                    array(),array()
+                );
 
+            if (empty($units))
+            {
+                echo
+                    "No Units defined in table ".$this->UnitsObj()->SqlTableName();
+                exit();
+            }
+
+            $unit=array_shift($units);
+            $args="?Unit=".$unit[ "ID" ];
+            $this->ApplicationObj()->Application_No_Tail=True;
+            
+            header( 'Location: ?Unit='.$unit[ "ID" ]);
             exit(1);
+        }
+
+        #Check if we should redirect to unit specific server
+        if (!empty($this->ApplicationObj()->Unit[ "Sivent2URL" ]))
+        {
+            $this->ApplicationObj()->Application_No_Tail=True;
+            
+            header( 'Location: '.$this->ApplicationObj()->Unit[ "Sivent2URL" ]);
+            exit(1);            
         }
         
         return $res;

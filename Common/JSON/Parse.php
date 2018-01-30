@@ -27,9 +27,23 @@ trait JSON_Parse
                                 {
                                     if (is_array($json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ]))
                                     {
-                                        #More levels??
-                                        var_dump("deeper???");
-                                        var_dump($json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ]);
+                                        foreach (array_keys($json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ]) as $rrrrkey)
+                                        {
+                                            if (is_array($json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ][ $rrrrkey ]))
+                                            {
+                                                #More levels??
+                                                var_dump("deeper???");
+                                                var_dump($json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ][ $rrrrkey ]);
+                                            }
+                                            else
+                                            {
+                                                $keys=array($key,$rkey,$rrkey,$rrrkey,$rrrrkey);
+                                                $keys=preg_grep('/^0?$/',$keys,PREG_GREP_INVERT);
+                                        
+                                                $reskey=join("_",$keys);
+                                                $item[ $reskey ]=$json[ $key ][ $rkey ][ $rrkey ][ $rrrkey ][ $rrrrkey ];
+                                            }
+                                        }
                                     }
                                     else
                                     {

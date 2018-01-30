@@ -6,7 +6,7 @@ array
       "Name_ES" => "Selecione Evento",
       "Name_UK" => "Select Event",
       "Title" => "Selecione Evento",
-      "Title_ES" => "Selecione Evento2",
+      "Title_ES" => "Selecione Evento",
       "Title_UK" => "Select Event",
    ),
    "Inscriptions_Receit_Title" => array

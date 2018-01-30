@@ -1,7 +1,6 @@
 <?php
 
 
-//include_once("Data/Groups.php");
 
 trait MyMod_Data_Groups_Time
 {
@@ -26,7 +25,7 @@ trait MyMod_Data_Groups_Time
 
         $hash=array
         (
-           "Name"    => "Tempos",
+           "Name"    => "Temporais",
            "Name_UK" => "Timestamps",
            "Data"    => $timevardata,
            "Admin"   => 1,

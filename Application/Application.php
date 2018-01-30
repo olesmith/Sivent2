@@ -88,6 +88,9 @@ class Application extends ApplicationCGIVars
        ),
     );
 
+    var $Application_No_Tail=False;
+    
+
     function Application($args=array())
     {
         $this->MyApp_Load($args);
@@ -101,6 +104,8 @@ class Application extends ApplicationCGIVars
 
     function __destruct()
     {
+        if ($this->Application_No_Tail) { return; }
+        
         if (!empty($this->Module) && method_exists($this->Module,"SendMails"))
         {
             $this->Module->SendMails();

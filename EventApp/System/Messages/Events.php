@@ -47,7 +47,7 @@ array
    ),
    "Event_DateSpan_Title" => array
    (
-      "Name" => "Período do Evento2",
+      "Name" => "Período do Evento",
       "Name_ES" => "Período do Evento",
       "Name_UK" => "Event Period",
       "Title" => "Período do Evento",

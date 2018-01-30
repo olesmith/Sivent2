@@ -76,7 +76,7 @@ class InscriptionsTablesCaravans extends InscriptionsTablesCollaborations
             (
                $edit,
                $caravan,
-               $this->CaravansObj()->GetGroupDatas("Basic",TRUE)
+               $this->CaravansObj()->MyMod_Data_Group_Datas_Get("Basic",TRUE)
              );
 
         array_push

@@ -306,7 +306,7 @@ array
         "NoHeads"   => 1,
         "NoInterfaceMenu"   => 1,
         "Edits"   => 0,
-        "Singular"   => FALSE,
+        "Singular"   => True,
        ),
        "Unlink" => array
        (

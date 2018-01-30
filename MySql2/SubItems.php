@@ -152,7 +152,7 @@ class SubItems extends Enums
                     {
                         $this->AddMsg
                         (
-                         //$subobject->GetRealWhereClause("ID='".$id."'").
+                         //$subobject->MyMod_Items_Where_Clause_Real("ID='".$id."'").
                            ", Empty object ID=$id, '$data' in ".
                            $this->ModuleName
                         );
@@ -246,7 +246,7 @@ class SubItems extends Enums
             (
                "",
                "ID",
-               $subobject->GetRealWhereClause($subobject->SqlWhere,$data),
+               $subobject->MyMod_Items_Where_Clause_Real($subobject->SqlWhere,$data),
                $groupby,
                $orderby
             );
@@ -351,7 +351,7 @@ class SubItems extends Enums
             $this->ReadSubItem($data,$id);
 
             $name=$this->SubItemName($data,$id);
-            $name=$this->TrimSearchValue($name);
+            $name=$this->MyMod_Search_CGI_Value_Trim($name);
 
             if (preg_match('/'.$search.'/',$name))
             {
@@ -404,7 +404,7 @@ class SubItems extends Enums
             $this->ReadSubItem($data,$id);
 
             $name=$this->SubItemValue($data,$id);
-            $name=$this->TrimSearchValue($name);
+            $name=$this->MyMod_Search_CGI_Value_Trim($name);
 
             if (preg_match('/'.$search.'/',$name))
             {
@@ -428,7 +428,7 @@ class SubItems extends Enums
         $itemdata=$this->GetSubObjectItemData($data);
         if ($searchfield)
         {
-            $where=$this->GetRealWhereClause();
+            $where=$this->MyMod_Items_Where_Clause_Real();
             $cols=array($data);
             if (!empty($this->ItemData[ $data ][ "SearchCols" ]))
             {

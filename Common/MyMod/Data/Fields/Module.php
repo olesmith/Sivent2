@@ -4,17 +4,6 @@
 trait MyMod_Data_Fields_Module
 {
     //*
-    //* function MyMod_Data_Fields_Module_Class, Parameter list: $data
-    //*
-    //* Returns slq class name to apply - or null.
-    //*
-
-    function MyMod_Data_Fields_Module_Class($data)
-    {
-        return $this->ItemData[ $data ][ "SqlClass" ];
-    }
-
-    //*
     //* function MyMod_Data_Fields_Module_Filter, Parameter list: $data,$title=FALSE
     //*
     //* Returns slq object to apply - or null.
@@ -25,14 +14,19 @@ trait MyMod_Data_Fields_Module
         $key="SqlFilter";
         if ($title) { $key="SqlTitleFilter"; }
 
-         $filter="";
+        $filter="";
         if (!empty($this->ItemData[ $data ][ $key ]))
         {
             $filter=$this->ItemData[ $data ][ $key ];
         }
         else
         {
-            $filter=$this->SubModulesVars($this->MyMod_Data_Fields_Module_Class($data),$key);
+            $filter=
+                $this->SubModulesVars
+                (
+                    $this->MyMod_Data_Field_Is_Module($data),
+                    $key
+                );
         }
 
         return $filter;
@@ -52,7 +46,7 @@ trait MyMod_Data_Fields_Module
         }
         else
         {
-            $class=$this->MyMod_Data_Fields_Module_Class($data);
+            $class=$this->MyMod_Data_Field_Is_Module($data);
             $datas=$this->SubModulesVars($class,"SqlDerivedData");
         }
 
@@ -83,15 +77,33 @@ trait MyMod_Data_Fields_Module
         {
             $where=$this->ItemData[ $data ][ "SqlWhere".$this->LoginType() ];
         }
+        else
+        {
+            $module=$this->ItemData[ $data ][ "SqlClass" ]."Obj";
+            if (method_exists($this->$module(),"SqlWhere"))
+            {
+                $where=
+                    $this->$module()->SqlWhere
+                    (
+                        array("ID" => $item[ $data ])
+                    );
+            }
+        }
 
         if (is_array($where))
         {
             $where=$this->Hash2SqlWhere($where);
         }
 
-        $where=$this->FilterHash($where,$this->LoginData);
-        $where=$this->FilterHash($where,$item);
-        $where=$this->ApplicationObj->FilterObject($where);
+        return
+            $this->ApplicationObj->FilterObject
+            (
+                $this->FilterHash
+                (
+                    $this->FilterHash($where,$this->LoginData),
+                    $item
+                )
+            );
 
         return $where;
     }
@@ -104,7 +116,11 @@ trait MyMod_Data_Fields_Module
 
     function MyMod_Data_Fields_Module_Name($data)
     {
-        return $this->ApplicationObj()->MyApp_Module_GetObject($this->MyMod_Data_Fields_Module_Class($data))->ModuleName;
+        return
+            $this->ApplicationObj()->MyApp_Module_GetObject
+            (
+                $this->MyMod_Data_Field_Is_Module($data)
+            )->ModuleName;
     }
 
 
@@ -116,7 +132,11 @@ trait MyMod_Data_Fields_Module
 
     function MyMod_Data_Fields_Module_2Object($data)
     {
-        return $this->ApplicationObj()->MyApp_Module_GetObject($this->MyMod_Data_Fields_Module_Class($data));
+        return
+            $this->ApplicationObj()->MyApp_Module_GetObject
+            (
+                $this->MyMod_Data_Field_Is_Module($data)
+            );
     }
 
     //*
@@ -261,7 +281,7 @@ trait MyMod_Data_Fields_Module
            $options=
                 $this->MyMod_Data_Fields_Module_SubItems_Read($data,$item,$ids);
 
-          
+           #var_dump($options);
 
            $soptions=array();
            foreach ($options as $option)
@@ -308,7 +328,6 @@ trait MyMod_Data_Fields_Module
         foreach (array_keys($subitems) as $id)
         {
             $subitems[ $id ]=$this->Module2Object($data)->ApplyAllEnums($subitems[ $id ]);
-
             $rid=$subitems[ $id ][ "ID" ];
             
             $options[ $rid ]=array
@@ -320,7 +339,11 @@ trait MyMod_Data_Fields_Module
                         
             if (!empty($titlefilter))
             {
-                $options[ $rid ][ "Title" ]=$this->Filter($titlefilter,$subitems[ $id ]);
+                $title=$this->Filter($titlefilter,$subitems[ $id ]);
+                if (!empty($title))
+                {
+                    $options[ $rid ][ "Title" ]=$title;
+                }
             }
         }
 

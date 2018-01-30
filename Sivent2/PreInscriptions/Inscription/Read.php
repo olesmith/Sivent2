@@ -10,7 +10,7 @@ class PreInscriptionsInscriptionRead extends PreInscriptionsSubmissions
 
     function PreInscriptions_Submissions_Read_Datas()
     {
-        $datas=$this->SubmissionsObj()->GetGroupDatas("PreInscriptions");
+        $datas=$this->SubmissionsObj()->MyMod_Data_Group_Datas_Get("PreInscriptions");
         $datas[0]="ID";
 
         return $datas;

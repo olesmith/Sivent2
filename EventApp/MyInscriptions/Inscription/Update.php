@@ -20,7 +20,7 @@ class MyInscriptions_Inscription_Update extends MyInscriptions_Inscription_Table
 
         if (!empty($this->Inscription[ "ID" ]))
         {
-            $this->Inscription=$this->UpdateItem
+            $this->Inscription=$this->MyMod_Item_Update_CGI
             (
                $this->Inscription,
                $this->InscriptionSGroupsDatas(1,TRUE)

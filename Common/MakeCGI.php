@@ -142,6 +142,54 @@ trait MakeCGI
     }
 
     //*
+    //* sub CGI_GetPOSTs, Parameter list: $name
+    //*
+    //* $_POST $name key as a list.
+    //*
+
+    function CGI_POSTs($name)
+    {
+        $values=$this->CGI_POST($name);
+        if (!is_array($values)) { $values=array($values); }
+        
+        $rvalues=array();
+        foreach ($values as $value)
+        {
+            $value=$this->CGI_TreatValue($value);
+            if (!empty($value))
+            {
+                array_push($rvalues,$value);
+            }
+        }
+
+        return $rvalues;
+    }
+    
+    //*
+    //* sub CGI_GetPOSTints, Parameter list: $name
+    //*
+    //* $_POST $name key as an list of ints.
+    //*
+
+    function CGI_POSTints($name)
+    {
+        $values=$this->CGI_POST($name);
+        if (!is_array($values)) { $values=array($values); }
+        
+        $rvalues=array();
+        foreach ($values as $value)
+        {
+            $value=$this->CGI_Treatint($value);
+            if (!empty($value))
+            {
+                array_push($rvalues,$value);
+            }
+        }
+
+        return $rvalues;
+    }
+
+    //*
     //* sub CGI_GetPOSTint, Parameter list: $name
     //*
     //* $_POST $name key as an int.

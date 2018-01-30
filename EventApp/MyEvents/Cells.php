@@ -30,7 +30,7 @@ class MyEventsCells extends MyEventsFriend
 
     function Event_Date_Span($item=array())
     {
-        return $this->Event_Date_Span_Cell($edit,$item,$data);
+        return $this->Event_Date_Span_Cell(0,$item);
     }
     
     //*
@@ -59,9 +59,9 @@ class MyEventsCells extends MyEventsFriend
     //* Generates and returns event date span.
     //*
 
-    function Event_Inscriptions_Date_Span_Cell($item=array())
+    function Event_Inscriptions_Date_Span($item=array())
     {
-        return $this->Event_Date_Span($edit,$item,$data);
+        return $this->Event_Date_Span_Cell(0,$item);
     }
 
     

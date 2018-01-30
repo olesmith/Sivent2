@@ -521,8 +521,8 @@ class Data extends DataPrint
     {
         if (count($datas)==0)
         {
-            $group=$this->GetActualDataGroup();
-            $datas=$this->GetGroupDatas($group);
+            $group=$this->MyMod_Data_Group_Actual_Get();
+            $datas=$this->MyMod_Data_Group_Datas_Get($group);
 
             if (
                 isset($this->ItemDataGroups[ $group ])
@@ -550,7 +550,7 @@ class Data extends DataPrint
 
         if (!$nosearches)
         {
-            $datas=$this->AddSearchVarsToDataList($datas);
+            $datas=$this->MyMod_Search_Vars_Add_2_List($datas);
         }
 
         $datas=$this->MyMod_Sort_Vars2Data($datas);

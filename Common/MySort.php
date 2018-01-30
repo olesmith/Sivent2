@@ -4,6 +4,8 @@ trait MySort
 {
     function Sort_List($list,$sorts=array(),$reverse=FALSE)
     {
+        if (empty($list)) { return array(); }
+        
         if (!is_array($sorts) || empty($sorts))
         {
             $sorts=preg_split('/\s*,\s*/',$sorts);

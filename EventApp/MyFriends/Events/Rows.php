@@ -11,7 +11,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
 
     function Friend_Event_Datas()
     {
-        return $this->EventsObj()->GetGroupDatas("Short");
+        return $this->EventsObj()->MyMod_Data_Group_Datas_Get("Short");
     }
 
     //*
@@ -22,7 +22,7 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
 
     function Friend_Event_Datas_N()
     {
-        return count($this->EventsObj()->GetGroupDatas("Short"));
+        return count($this->EventsObj()->MyMod_Data_Group_Datas_Get("Short"));
     }
 
     

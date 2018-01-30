@@ -2,7 +2,6 @@
 
 include_once("Items/Latex.php");
 include_once("Items/Read.php");
-include_once("Items/Table.php");
 include_once("Items/GroupTable.php");
 include_once("Items/Post.php");
 include_once("Items/Update.php");
@@ -25,39 +24,6 @@ class Items extends ItemsEmails
     }
 
 
-
-    //*
-    //* function GetRealWhereClause, Parameter list: $where="",$data=""
-    //*
-    //* Returns the real where clause, that is $this->SqlWhere properly
-    //* prepended.
-    //*
-
-    function GetRealWhereClause($where="",$data="")
-    {
-        if (is_array($where)) { $wheres=$where; }
-        else                  { $wheres=$this->SqlClause2Hash($where); }
-
-        $rwheres=$this->SqlWhere;
-        if (!is_array($this->SqlWhere))
-        {
-            $rwheres=$this->SqlClause2Hash($this->SqlWhere);
-        }
-
-        foreach ($rwheres as $key => $value)
-        {
-            $wheres[ $key ]=$value;
-        }
-
-        $where=$this->Sql_Where_From_Hash($wheres);
-
-        if ($this->LoginType!="Public")
-        {
-            $where=preg_replace('/#Login/',$this->LoginData[ "ID" ],$where);
-        }
-
-        return $where;
-    }
 
 
     //*

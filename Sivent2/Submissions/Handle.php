@@ -20,7 +20,7 @@ class Submissions_Handle extends Submissions_Handle_Assessments
         $this->AssessorsObj()->ItemDataGroups("Assessments");
         $this->AssessorsObj()->Actions("Show");
 
-        $datas=$this->AssessorsObj()->GetGroupDatas("Assessments");
+        $datas=$this->AssessorsObj()->MyMod_Data_Group_Datas_Get("Assessments");
         
         return 
             $this->Html_Table

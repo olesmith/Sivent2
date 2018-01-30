@@ -38,7 +38,7 @@ class Collaborators_Table_Table extends Collaborators_Table_Update
         
         $collaborations=$this->Collaborators_Table_Collaborations_Read($inscriptionsonly);
         
-        //$rdatas=$this->CollaborationsObj()->GetGroupDatas("Inscription");
+        //$rdatas=$this->CollaborationsObj()->MyMod_Data_Group_Datas_Get("Inscription");
         //$datas=array("Homologated","TimeLoad","Certificate");
         //$empties=array("-","-");
 
@@ -62,7 +62,7 @@ class Collaborators_Table_Table extends Collaborators_Table_Update
                    $edit,
                    $n++,
                    $collaboration,
-                   $this->CollaborationsObj()->GetGroupDatas("Inscription"),
+                   $this->CollaborationsObj()->MyMod_Data_Group_Datas_Get("Inscription"),
                    $collaborator,
                    array("Homologated","TimeLoad","Certificate"),
                    array("-","-")

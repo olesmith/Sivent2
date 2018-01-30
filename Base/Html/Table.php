@@ -72,15 +72,21 @@ class HtmlTable extends HtmlList
     //* Generates a multi cell.
     //*
 
-    function MultiCell($text,$colspan,$align="c",$options=array())
+    function MultiCell($text,$colspan,$align="c",$options=array(),$bold=True)
     {
+        if ($bold) { $text=$this->B($text); }
+            
         if (!$this->LatexMode())
         {
             $options[ "COLSPAN" ]=$colspan;
 
             return array
             (
-               "Text" => $this->ALIGN($this->B($text),$align),
+               "Text" => $this->ALIGN
+               (
+                   $text,
+                   $align
+               ),
                "Options" => $options,
             );
         }
@@ -100,7 +106,7 @@ class HtmlTable extends HtmlList
 
             return array
             (
-               "Text"    => $this->B($text),
+               "Text"    => $text,
                "Options" => $roptions,
             );
         }
@@ -472,10 +478,10 @@ function HTMLTable($titles,$rows,$tableoptions=array(),$background=TRUE,$tdclass
             $cell=$cell[ "Text" ];
         }
 
-        if ($this->BoldColSpans && !empty($options[ "COLSPAN" ]))
-        {
-            $this->AddCSSClass("Bold",$options);
-        }
+        /* if ($this->BoldColSpans && !empty($options[ "COLSPAN" ])) */
+        /* { */
+        /*     $this->AddCSSClass("Bold",$options); */
+        /* } */
 
         return
             "      ".

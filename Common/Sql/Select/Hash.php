@@ -22,6 +22,30 @@ trait Sql_Select_Hash
 
     
     //*
+    //* function Sql_Select_Exists, Parameter list: $where,$sqldata=array(),$noecho=FALSE,$table=""
+    //*
+    //* Returns True, if table contains entries conforming to $where.
+    //*
+    //* 
+
+    function Sql_Select_Exists($where,$table="")
+    {
+        $item=
+            $this->Sql_Select_Hash
+            (
+                $where,
+                array("ID"),
+                False,
+                $table
+            );
+
+        $res=False;
+        if (!empty($item[ "ID" ])) { $res=True; }
+
+        return $res;        
+    }
+    
+    //*
     //* function Sql_Select_Hash, Parameter list: $where,$sqldata=array(),$noecho=FALSE,$table=""
     //*
     //* Perform a select query on Table $table in the current DB.

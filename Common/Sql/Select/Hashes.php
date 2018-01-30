@@ -87,7 +87,7 @@ trait Sql_Select_Hashes
     
     
     //*
-    //* function Sql_Select_Hashes, Parameter list: $where,$fieldnames,$orderby="",$postprocess=FALSE,$table="",$limit=""
+    //* function Sql_Select_Hashes, Parameter list:
     //*
     //* Perform a select query on Table $table in the current DB.
     //* Returns each match as a hash of the field names in
@@ -250,5 +250,29 @@ trait Sql_Select_Hashes
     {
         return (!$this->Sql_Select_Hashes_Has($where,$table));
     }
-}
+    
+    //*
+    //* function Sql_Select_Hashes_Value, Parameter list: $where,$field,$orderby="",$table=""
+    //*
+    //* Reads $field value for $where.
+    //*
+    //* 
+
+    function Sql_Select_Hashes_Value($where,$field,$orderby="",$table="")
+    {        
+        return
+            $this->MyHash_HashesList_Values
+            (
+                $this->Sql_Select_Hashes
+                (
+                    $where,
+                    array($field),
+                    $orderby,
+                    $table
+                ),
+                $field
+            );
+    }
+    
+ }
 ?>

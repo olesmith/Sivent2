@@ -121,7 +121,7 @@ class EventsCaravans extends EventsCollaborations
         $datas=array();
         if ($this->Event_Caravans_Has($item))
         {
-            $datas=$this->GetGroupDatas($group,TRUE);
+            $datas=$this->MyMod_Data_Group_Datas_Get($group,TRUE);
         }
         else
         {

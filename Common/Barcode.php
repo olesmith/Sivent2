@@ -1,5 +1,7 @@
 <?php
 
+
+
 trait Barcode
 {
     //*     Based on BarCode by David S. Tufts code.
@@ -314,8 +316,16 @@ trait Barcode
             $image=$this->Barcode_Image_Gen($text,$file,$code_type,$size,$orientation);
         
             // Draw barcode to file 
-            imagepng($image,$file);
+            $res=imagepng($image,$file);
             imagedestroy($image);
+
+            if (!$res)
+            {
+                print "Content-Type: text/html\n\n";
+                print "Unable to create file '$file'<BR>\n";
+                system("ls -ld ".$this->BarcodeDir);
+                exit(1);
+            }
         }
     }
     
@@ -441,10 +451,12 @@ class BarImage
 
         $img=$this->BarCode_Code2File($code);
 
+
         if (!file_exists($img))
         {
             $this->Barcode_Image_Write($code,$this->BarCode_File(array("Code" => $code)));
         }
+
         $imgdate=filemtime($img);
 
         header
@@ -460,7 +472,6 @@ class BarImage
         echo join("",file($img));
     }
 }
-
 
 if (!empty($_GET[ "Code" ]) && preg_match('/Barcode/',$_SERVER['SCRIPT_NAME']))
 {

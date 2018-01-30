@@ -89,7 +89,7 @@ class MyFriends_Friend extends MyFriends_Add
         {
             if (empty($datas)) { $datas=$this->EventsObj()->EventFriendData(); }
 
-            $friend=$this->UpdateItem($friend,$datas);
+            $friend=$this->MyMod_Item_Update_CGI($friend,$datas);
         }
     }
     //*

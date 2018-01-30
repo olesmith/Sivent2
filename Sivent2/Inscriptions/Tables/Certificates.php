@@ -70,7 +70,7 @@ class InscriptionsTablesCertificates extends InscriptionsTablesCaravans
         $itable="";
         if (!empty($inscription))
         {
-            $rdatas=$this->GetGroupDatas($group,TRUE);
+            $rdatas=$this->MyMod_Data_Group_Datas_Get($group,TRUE);
 
             if (empty($inscription[ "Certificate" ]) || $inscription[ "Certificate" ]!=2)
             {

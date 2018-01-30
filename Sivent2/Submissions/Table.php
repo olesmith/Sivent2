@@ -52,7 +52,7 @@ class Submissions_Table extends Submissions_Emails
 
     function Submissions_Table_Data()
     {
-        return $this->GetGroupDatas("Submission",FALSE);
+        return $this->MyMod_Data_Group_Datas_Get("Submission",FALSE);
     }
     
    

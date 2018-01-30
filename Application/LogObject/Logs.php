@@ -242,7 +242,7 @@ class ModuleLogs extends ModulesCommon
         $where=array();
         foreach ($this->CascadingSearchVars[ $data ][ "Where" ] as $key)
         {
-            $value=$this->GetSearchVarCGIValue($key);
+            $value=$this->MyMod_Search_CGI_Value($key);
             if (!empty($value))
             {
                 $where[ $key ]=$value;
@@ -307,7 +307,7 @@ class ModuleLogs extends ModulesCommon
 
 
         //Take default, if detectable
-        $cgivalue=$this->GetSearchVarCGIValue($data);
+        $cgivalue=$this->MyMod_Search_CGI_Value($data);
         if (empty($cgivalue) && !empty($this->CascadingSearchVars[ $data ][ "Default" ]))
         {
             $cgivalue=$this->CascadingSearchVars[ $data ][ "Default" ];
@@ -318,12 +318,12 @@ class ModuleLogs extends ModulesCommon
         {
             foreach ($this->CascadingSearchVars[ $data ][ "RemoveVars" ] as $var)
             {
-                $this->RemoveSearchVar($var);
+                $this->MyMod_Search_Var_Remove($var);
             }
 
             foreach ($this->CascadingSearchVars[ $data ][ "AddVars" ] as $var)
             {
-                $this->AddSearchVar($var);
+                $this->MyMod_Search_Var_Add($var);
             }
         }
 
@@ -334,7 +334,7 @@ class ModuleLogs extends ModulesCommon
 
         return $this->MakeSelectField
         (
-           $this->GetSearchVarCGIName($rdata),
+           $this->MyMod_Search_CGI_Name($rdata),
            $values,
            $rvalues,
            $cgivalue
@@ -442,8 +442,8 @@ class ModuleLogs extends ModulesCommon
 
     function LogDateSearchWhere()
     {
-        $date=$this->GetSearchVarCGIValue("Date");
-        $month=$this->GetSearchVarCGIValue("Month");
+        $date=$this->MyMod_Search_CGI_Value("Date");
+        $month=$this->MyMod_Search_CGI_Value("Month");
         if (!empty($date))
         {
             return array("Date" => $date);

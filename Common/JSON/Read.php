@@ -20,7 +20,112 @@ trait JSON_Read
 
         return 0;
     }
+    
+    ##! JSON_Read_Item_Values
+    ##! 
+    ##! Reads JSON items and extracts $field values.
+    ##!
+        
+    function JSON_Read_Item_Values($module,$field,$where=array(),$postwhere=array())
+    {
+        //Fields to read
+        $fields=array($field => True);
 
+        //Add fields in postwhere
+        foreach (array_keys($postwhere) as $key)
+        {
+            $fields[ $key ]=True;
+        }
+
+        return
+            $this->MyHash_HashesList_Values
+            (
+                $this->JSON_Read_Items
+                (
+                    $module,
+                    array_keys($fields),
+                    $where,
+                   $postwhere
+                ),
+                $field
+            );
+    }
+    
+    ##! JSON_Items_Search_Post
+    ##! 
+    ##! Detects $json_items matching $postwhere.
+    ##! Chekcs for previously seen items, in order
+    ##! to stop paging, when repeated items has been met.
+    ##!
+        
+    function JSON_Items_Search_Post($postwhere,&$json_items,&$ids,$done)
+    {
+        foreach ($json_items as $no => $json_item)
+        {
+            $json_id=$json_item[ $this->JSON_ID_Field() ];
+            if (empty($ids[ $json_id ]))
+            {
+                #var_dump($this->MyHash_Match($json_item,$postwhere));
+                //Not seen yet
+                if (!$this->MyHash_Match($json_item,$postwhere))
+                {
+                    unset($json_items[ $no ]);
+                }
+
+                //Mark as seen
+                $ids[ $json_id ]=True;
+            }
+            else
+            {
+                //Seen, repeated page
+                $done=True;
+                break;
+            }
+        }
+
+        return $done;
+    }
+    
+    ##! JSON_Read_Items_Page
+    ##! 
+    ##! Queries and parses one page of items.
+    ##!
+        
+    function JSON_Read_Items_Page($module,$datas,$where,$offset)
+    {
+        $app=$this->JSON_App();
+        
+        $where[ 'offset' ]=$offset;        
+        $json=
+            $this->JSON_Query_Execute
+            (
+                $this->JSON_Query_Pack
+                (
+                    $this->JSON_Query_Module_Datas($module,$datas,$offset,$where)
+                )
+            );
+            
+        if
+            (
+               empty($json[ "data" ])
+               ||
+               empty($json[ "data" ][ $app ])
+               ||
+               empty($json[ "data" ][ $app ][ $module ])
+            )
+        {
+            $this->ApplicationObj()->AddHtmlStatusMessage("JSON_Read_Items: output error");
+            $query=
+                $this->JSON_Query_Pack
+                (
+                    $this->JSON_Query_Module_Datas($module,$datas,$offset,$where)
+                );
+            print join($this->BR(),$query);
+            return Null;
+        }
+
+        return $this->JSON_Items_Parse($json[ "data" ][ $app ][ $module ]);
+    }
     
     ##! JSON_Read_Items
     ##! 
@@ -36,71 +141,82 @@ trait JSON_Read
         $npages=1;
         $json_items=array();
         $ids=array();
-        
+
+        $read_nitems=0;
+        $post_nitems=0;
+
         $done=False;
-        $app=$this->JSON_App();
+
+        $table=array();
         while (!$done)
         {
-            $where[ 'offset' ]=$offset;
-            
-            $json=
-                $this->JSON_Query_Pack
-                (
-                    $this->JSON_Query_Module_Datas($module,$datas,$offset,$where)
-                );
+            $json_items_page=$this->JSON_Read_Items_Page($module,$datas,$where,$offset);
 
-            #print $this->JSON_Show($json);
-            
-            $json=$this->JSON_Query_Execute($json);
-            
-            if (
-               empty($json[ "data" ])
-               ||
-               empty($json[ "data" ][ $app ])
-               ||
-               empty($json[ "data" ][ $app ][ $module ])
-            )
+            if (is_array($json_items_page))
             {
-                print "JSON_Read_Items: output error:<BR>";
-                var_dump($json[ "data" ][ $app ][ $module ]);
-                #exit();
-                return Null;
-            }
+                #If we didn't get exactly $this->JSON_Limit items: done
+                $nitems=count($json_items_page);
+                if ($nitems!=$this->JSON_Limit) { $done=True; }
 
-            $nitems=0;
-            $ritems=0;
-            foreach ($this->JSON_Items_Parse($json[ "data" ][ $app ][ $module ]) as $no => $json_item)
+                $read_nitems+=$nitems;
+                $row=
+                    array
+                    (
+                        $npages++,
+                        $nitems
+                    );
+                
+                $done=
+                    $this->JSON_Items_Search_Post
+                    (
+                        $postwhere,
+                        $json_items_page,
+                        $ids,
+                        $done
+                    );
+               
+                array_push($row,count($json_items_page));
+                $post_nitems+=count($json_items_page);
+
+                $json_items=
+                    array_merge
+                    (
+                        $json_items,
+                        $json_items_page
+                    );
+
+
+                $offset+=$this->JSON_Limit;
+                
+                array_push($table,$row);
+            }
+            else
             {
-                $json_id=$json_item[ $this->JSON_ID_Field() ];
-                if (empty($ids[ $json_id ]))
-                {
-                    if ($this->MyHashes_Search($json_item,$postwhere))
-                    {
-                        array_push($json_items,$json_item);
-                        $ritems++;
-                    }
-                    
-                    $ids[ $json_id ]=True;
-                    $nitems++;
-                }
-                else
-                {
-                    $done=True;
-                    break;
-                }
+                $done=True;
             }
-
-            #We didn't get exactly $this->JSON_Limit items: done
-            if ($nitems!=$this->JSON_Limit) { $done=True; }
-
-            var_dump($nitems. " ".$this->ModuleName.", limit: ".$this->JSON_Limit." count ".$ritems);
-
-            $offset+=$this->JSON_Limit;
-            $npages++;
-
-            if ($npages>5) { break; }
-            
         }
+
+        array_push
+        (
+            $table,
+            array
+            (
+                $this->B($this->ApplicationObj()->Sigma),
+                $read_nitems,
+                $post_nitems
+            )
+        );
+        
+        $this->ApplicationObj()->AddHtmlStatusMessage
+        (
+            $this->ModuleName.": ".
+            $this->Html_Table
+            (
+                array("Page","Read","Post"),
+                $table
+            ).
+            ""
+        );
 
         return $this->MyHashes_Search($json_items,$postwhere);
     }
@@ -128,6 +244,7 @@ trait JSON_Read
         
             #Should be unique, take first anyway.
             $item=array();
+            $found=0;
             if (count($items)>=1)
             {
                 foreach (array_keys($items) as $id)
@@ -135,13 +252,21 @@ trait JSON_Read
                     if ($items[ $id ][ $this->JSON_ID_Field() ]==$sigaa_id)
                     {
                         $item=$items[ $id ];
+                        $found++;
                     }
                 }
             }
 
-            if (count($items)>1)
+            if (empty($item))
+            {
+                $this->ApplicationObj()->AddHtmlStatusMessage("Warning! SIGAA item '".$sigaa_id."' not found!!!");
+                #var_dump($items);
+            }
+            
+            if ($found>1)
             {
                 $this->ApplicationObj()->AddHtmlStatusMessage("Warning! Non-unique SIGAA item!!!");
+                #var_dump($items);
             }
  
             $this->JSON_Items[ $sigaa_id ]=$item;
@@ -149,6 +274,7 @@ trait JSON_Read
         
         return $this->JSON_Items[ $sigaa_id ];
     }
+    
     
 }
 ?>

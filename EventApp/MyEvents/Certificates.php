@@ -51,7 +51,7 @@ class MyEvents_Certificates extends MyEvents_Certificate
 
     function Event_Certificate_Table($edit,$event,$group)
     {
-        $rdatas=$this->GetGroupDatas($group);
+        $rdatas=$this->MyMod_Data_Group_Datas_Get($group);
 
         if ($event[ "Certificates" ]!=2)
         {

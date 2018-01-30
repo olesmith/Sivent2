@@ -103,7 +103,7 @@ class EventsCollaborations extends EventsCreate
         $datas=array();
         if ($this->Event_Collaborations_Has($item))
         {
-            $datas=$this->GetGroupDatas($group);
+            $datas=$this->MyMod_Data_Group_Datas_Get($group);
         }
         else
         {

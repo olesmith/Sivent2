@@ -39,7 +39,7 @@ trait MyMod_Item_Update
         return $this->MyMod_Item_Update_CGI
         (
            $item,
-           $this->GetGroupDatas($group,TRUE),
+           $this->MyMod_Data_Group_Datas_Get($group,TRUE),
            $prepost,
            $postprocess
         );
@@ -161,7 +161,13 @@ trait MyMod_Item_Update
             $rdatanames=array();
             foreach ($updatedatas as $rdata)
             {
-                array_push($rdatanames,$this->MyMod_Data_Title($rdata));
+                array_push
+                (
+                    $rdatanames,
+                    $this->MyMod_Data_Title($rdata).
+                    " => ".
+                    "'".$this->MyMod_Data_Fields_Show($rdata,$item)."'"
+                );
             }
 
             $this->ApplicationObj()->AddHtmlStatusMessage

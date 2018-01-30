@@ -42,15 +42,15 @@ trait MyMod_Items_Read
 
         $this->NoPaging=$nopaging;
 
-        $rsearchvars=$this->MyMod_Items_Search_Vars_Get();
+        $rsearchvars=$this->MyMod_Search_Vars_Hash();
         
         if ($this->IncludeAll) { $includeall=2; }
 
         if ($includeall==0)
         {
-            if (!$this->MyMod_Items_Search_Vars_Defined())
+            if (!$this->MyMod_Search_CGI_Vars_Defined_Has())
             {
-                $includeall=$this->CGI2IncludeAll();
+                $includeall=$this->MyMod_Search_CGI_Include_All_Value();
             }
         }
 
@@ -64,7 +64,7 @@ trait MyMod_Items_Read
         $this->ItemHashes=array();
         if (!empty($rwhere) || count($rsearchvars)>0 || $includeall==2 || !empty($this->OnlyReadIDs))
         {
-            $rwhere=$this->GetRealWhereClause($rwhere);
+            $rwhere=$this->MyMod_Items_Where_Clause_Real($rwhere);
             if (empty($rwhere)) { $rwhere=array(); }
 
             if ($this->OnlyReadIDs)
@@ -114,7 +114,7 @@ trait MyMod_Items_Read
        //Search items
         if (!$nosearches && $includeall!=2)
         {
-           $this->SearchItems();
+            $this->MyMod_Search_Items();
         }
 
         $this->NumberOfItems=count($this->ItemHashes);
@@ -126,7 +126,7 @@ trait MyMod_Items_Read
 
         if (!$nopaging)
         {
-            $this->InitPaging();
+            $this->MyMod_Paging_Init();
 
             $this->ItemHashes=array_splice
             (

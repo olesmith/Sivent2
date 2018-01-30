@@ -223,11 +223,11 @@ trait MyMod_Data_Fields_Show
             $value=$this->Filter($value,$item);
             $value=$this->FilterObject($value);
         }
-        elseif ($this->MyMod_Data_Fields_Module_Class($data))
+        elseif ($this->MyMod_Data_Field_Is_Module($data))
         {
             $value=$this->MyMod_Data_Fields_Module_Show($data,$item,$value,$plural);
         }
-        elseif ($this->ItemData[ $data ][ "Sql" ]=="ENUM")
+        elseif ($this->MyMod_Data_Field_Is_Enum($data))
         {
             $value=$this->GetEnumValue($data,$item);
 
@@ -245,11 +245,11 @@ trait MyMod_Data_Fields_Show
                 $value=$this->TextColor($color,$value);
             }
         }
-        elseif (!empty($this->ItemData[ $data ][ "IsDate" ]))
+        elseif ($this->MyMod_Data_Field_Is_Date($data))
         {
             $value=$this->CreateDateShowField($data,$item,$value);
         }
-        elseif (!empty($this->ItemData[ $data ][ "IsHour" ]))
+        elseif ($this->MyMod_Data_Field_Is_Hour($data))
         {
             $value=$this->CreateHourShowField($data,$item,$value);
         }

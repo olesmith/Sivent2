@@ -62,7 +62,7 @@ class PreInscriptionsInscriptionForm extends PreInscriptionsInscriptionUpdate
             return $this->H(2,$this->MyLanguage_GetMessage("Items_None_Found"));
         }
 
-        $sdatas=$this->SubmissionsObj()->GetGroupDatas("PreInscriptions");
+        $sdatas=$this->SubmissionsObj()->MyMod_Data_Group_Datas_Get("PreInscriptions");
 
         //$timeids=$this->PreInscriptions_Submissions_Read_Times();
         $this->PreInscriptions_Submissions_Read_Times();

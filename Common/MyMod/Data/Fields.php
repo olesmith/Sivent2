@@ -5,6 +5,9 @@ include_once("Fields/Is.php");
 include_once("Fields/Show.php");
 include_once("Fields/Edit.php");
 include_once("Fields/File.php");
+include_once("Fields/Password.php");
+include_once("Fields/Hour.php");
+include_once("Fields/Date.php");
 include_once("Fields/Text.php");
 include_once("Fields/Test.php");
 include_once("Fields/Color.php");
@@ -23,6 +26,9 @@ trait MyMod_Data_Fields
         MyMod_Data_Fields_Show,
         MyMod_Data_Fields_Edit,
         MyMod_Data_Fields_File,
+        MyMod_Data_Fields_Password,
+        MyMod_Data_Fields_Hour,
+        MyMod_Data_Fields_Date,
         MyMod_Data_Fields_Text,
         MyMod_Data_Fields_Test,
         MyMod_Data_Fields_Color,
@@ -147,7 +153,7 @@ trait MyMod_Data_Fields
     //* Detects $data CGIName from ItemData. 
     //*
 
-    function MyMod_Data_Field_CGIName($data,$plural,$prepost="")
+    function MyMod_Data_Field_CGIName($item,$data,$plural,$prepost="")
     {
         $rdata=$data;
         if (!empty($this->ItemData[ $data ][ "CGIName" ]) && !$plural)

@@ -19,7 +19,14 @@ trait MyActions_Entry
         }
 
         $action=$this->Actions($data);
-        if (!empty($data) && !empty($action) && is_array($action))
+        if
+            (
+                !empty($data)
+                &&
+                !empty($action)
+                &&
+                is_array($action)
+            )
         {
             if ($this->MyAction_Allowed($data,$item))
             {
@@ -113,7 +120,6 @@ trait MyActions_Entry
            $this->MyActions_Entry_Anchor($data)
         );
 
-        #$action=$this->Filter($action,$item);
 
         return $action;
     }
@@ -190,13 +196,7 @@ trait MyActions_Entry
          }
          else
          {
-             $icon=$this->IMG
-             (
-                $this->Icons."/".$icon,
-                $icon,
-                $size,
-                $size
-             );
+             $icon=$this->ApplicationObj()->MyApp_Icon_IMG($icon,$size);
          }
 
          return $icon;

@@ -68,7 +68,7 @@ class EventsAssessments extends EventsSubmissions
         $datas=array();
         if ($this->Event_Assessments_Has($item))
         {
-            $datas=$this->GetGroupDatas($group);
+            $datas=$this->MyMod_Data_Group_Datas_Get($group);
         }
         else
         {

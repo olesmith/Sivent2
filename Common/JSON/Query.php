@@ -56,8 +56,8 @@ trait JSON_Query
         
     function JSON_Query_Execute($json)
     {
-        print
-            $this->JSON_Show($json);
+        /* print */
+        /*     $this->JSON_Show($json); */
 
         return
             json_decode
@@ -131,7 +131,7 @@ trait JSON_Query
         {
             $where="(".join(", ",$wheres).")";
         }
-        
+
         return
             array_merge
             (
@@ -149,6 +149,7 @@ trait JSON_Query
     
     function JSON_Query_Module_Datas($module,$datas,$offset=0,$where=array(),$indent="")
     {
+        #var_dump("JSON_Query_Module_Datas",$module,$where);
         $json=array();
         foreach ($datas as $data)
         {

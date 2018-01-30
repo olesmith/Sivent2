@@ -250,7 +250,7 @@ function HtmlDateInputValue($name,$search=FALSE,$default=TRUE)
 {
     if ($search)
     {
-        $name=$this->GetSearchVarCGIName($name);
+        $name=$this->MyMod_Search_CGI_Name($name);
     }
 
     $date=$this->GetCGIVarValue($name);

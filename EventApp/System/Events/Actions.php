@@ -160,7 +160,7 @@ array
       "Icon"     => "history_light.png",
 
       "Singular"   => FALSE,
-      "Handler"   => "HandleOpenEvents",
+      "Handler"   => "MyEvents_Handle_Open",
    ),
    "Inscribe" => array
    (
@@ -237,5 +237,26 @@ array
       "Singular"   => TRUE,
       "Handler"   => "",
       "Icon"   => "students_light.png",
+   ),
+   "Conf" => array
+   (
+      "Href"     => "",
+      "HrefArgs" => "?ModuleName=Events&Action=Conf",
+      
+      "Name"     => "Configurações",
+      "Name_UK"   => "Configurations",
+      "Title"    => "Configuraçõesdo Evento",
+      "Title_UK" => "Event Configurations",
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"       => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+
+      #"Icon"     => "history_light.png",
+
+      "Singular"   => FALSE,
+      "Handler"   => "MyEvents_Handle_Conf",
    ),
 );

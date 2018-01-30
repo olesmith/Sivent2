@@ -6,23 +6,14 @@ trait MyMod_Data_Fields_Sql
     //* Returns sql where clause associated with $data.
     //*
 
-    function MyMod_Data_Fields_Sql_Where($data)
+    function MyMod_Data_Fields_Sql_Where($data,$value)
     {
         $where=array();
-        if (!empty($this->ItemData[ $data ][ "SqlWhere" ]))
+        if (!empty($this->SqlWhere[ $data ]))
         {
-            $where=$this->ItemData[ $data ][ "SqlWhere" ];
+            $where[ $data ]=$this->SqlWhere[ $data ];
         }
-        elseif (!empty($this->ItemData[ $data ][ "SqlWhere".$this->Profile ]))
-        {
-            $where=$this->ItemData[ $data ][ "SqlWhere".$this->Profile ];
-        }
-        elseif (!empty($this->ItemData[ $data ][ "SqlWhere".$this->LoginType ]))
-        {
-            $where=$this->ItemData[ $data ][ "SqlWhere".$this->LoginType ];
-        }
-
-        return $this->SqlWhere;
+        return $where;
     }
 
     //*
@@ -44,27 +35,21 @@ trait MyMod_Data_Fields_Sql
         }
 
         //Where clause in module sql table
-        $where=$this->Module2Object($data)->MyMod_Data_Fields_Sql_Where($data);
+        $where=$this->MyMod_Data_Fields_Sql_Where($data,$value);
 
         if (!is_array($where)) { $where=$this->Hash2SqlWhere($where); }
 
         //Get values present in table.
-        $colvalues=$this->MySqlUniqueColValues
+        $colvalues=$this->Sql_Select_Unique_Col_Values
         (
-           "",
            $data,
-           $this->MyMod_Data_Fields_Sql_Where($data)
+           $where
         );
-
-         //if (empty($colvalues)) { return "-"; }
+        $colvalues=preg_grep('/^\d+$/',$colvalues);
         
         if (!empty($colvalues))
         {
-            $in=$this->Sql_Where_IN($colvalues);
-            if (!empty($in))
-            {
-                $where[ "ID" ]=$in;
-            }
+            $where[ "ID" ]=$colvalues;
         }
 
         $datas=$this->MyMod_Data_Fields_Module_Datas($data);
@@ -95,7 +80,7 @@ trait MyMod_Data_Fields_Sql
                     preg_replace
                     (
                        '/#'.$searchvar.'/',
-                       $this->GetSearchVarCGIValue($searchvar),
+                       $this->MyMod_Search_CGI_Value($searchvar),
                        $sqltable
                     );
             }
@@ -111,6 +96,25 @@ trait MyMod_Data_Fields_Sql
         else
         {
              $class=$this->ItemData[ $data ][ "SqlClass" ];
+             if (
+                   !empty($this->ItemData[ $data ][ "SqlClass" ])
+                   &&
+                   method_exists($this->Module2Object($data),"SqlWhere")
+                )
+             {
+                 if (!is_array($where))
+                 {
+                     $where=$this->SqlClause2Hash($where);
+                 }
+
+                 $where=
+                     array_merge
+                     (
+                         $where,
+                         $this->Module2Object($data)->SqlWhere(array($data => $value))
+                     );
+             }
+
              $hashes=
                 $this->Module2Object($data)->Sql_Select_Hashes
                 (
@@ -122,7 +126,7 @@ trait MyMod_Data_Fields_Sql
 
         $rvalue=$this->Html_Select_Hashes2Field
         (
-           $this->GetSearchVarCGIName($data),
+           $this->MyMod_Search_CGI_Name($data),
            $this->MyMod_Data_Fields_Module_SubItems_2Options
            (
               $data,
@@ -133,7 +137,12 @@ trait MyMod_Data_Fields_Sql
 
         if ($this->ItemData[ $data ][ "SqlTextSearch" ] && ($value=="" || $value==0))
         {
-            $rvalue=array($value,$this->TextSearchField($data));
+            $rvalue=
+                array
+                (
+                    $value,
+                    $this->MyMod_Search_Field_Text($data)
+                );
         }
         else
         {

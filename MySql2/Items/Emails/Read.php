@@ -26,12 +26,12 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
         (
            "",
            $where,
-           array_merge($friendkeys,array_keys($this->MyMod_Items_Search_Vars_Get()))
+           array_merge($friendkeys,array_keys($this->MyMod_Search_Vars_Hash()))
         );
 
-        if ($this->CGI2IncludeAll()!=2)
+        if ($this->MyMod_Search_CGI_Include_All_Value()!=2)
         {
-            $this->SearchItems();
+            $this->MyMod_Search_Items();
         }
 
         //Array keeping track of included ids. Avoids multiple entries.

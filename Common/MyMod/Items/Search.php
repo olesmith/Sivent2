@@ -6,30 +6,6 @@ trait MyMod_Items_Search
     protected $SearchVars=array();
 
     //*
-    //* function MyMod_Items_Search_Vars_Defined, Parameter list: 
-    //*
-    //* Determines, whether module CGI has search vars defined.
-    //*
-
-    function MyMod_Items_Search_Vars_Defined()
-    {
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
-        {
-            if ($this->MyMod_Data_Access($data)>=1)
-            {
-                $rdata=$this->GetSearchVarCGIName($data);
-                $value=$this->GetSearchVarCGIValue($data);
-                $value=preg_replace('/\s+/',"",$value);
-                if (!empty($value))
-                {
-                    return TRUE;
-                }
-            }
-        }
-
-        return FALSE;
-    }
-    //*
     //* function MyMod_Items_Search_Vars, Parameter list: $datas=array()
     //*
     //* Detect search vars from ItemData.
@@ -56,46 +32,6 @@ trait MyMod_Items_Search
         return $this->SearchVars;
     }
     
-    //*
-    //* function MyMod_Items_Search_Vars_Get, Parameter list: $datas=array()
-    //*
-    //* Returns list of allowed and defined search vars.
-    //* If one or more search vars are defined, sets $this->IncludeAll
-    //* to 0, in order NOT to read all items.
-    //*
-
-    function MyMod_Items_Search_Vars_Get($datas=array())
-    {
-        if (empty($datas)) { $datas=$this->MyMod_Items_Search_Vars(); }
-
-        $searchvars=array();
-        foreach ($datas as $data)
-        {
-            if ($this->MyMod_Data_Access($data)>=1)
-            {
-                $rdata=$this->GetSearchVarCGIName($data);
-                $value=$this->GetSearchVarCGIValue($data);
-                if (is_array($value))
-                {
-                    if (count($value)>0)
-                    {
-                        $searchvars[ $data ]=$value;
-                    }
-                }
-                elseif (!empty($value) && $value!=" 0")
-                {
-                    $searchvars[ $data ]=$value;
-                }
-            }
-        }
-
-        if (count($searchvars)>0)
-        {
-            $this->IncludeAll=0;
-        }
-
-        return $searchvars;
-    }
 
     
     //*
@@ -108,7 +44,7 @@ trait MyMod_Items_Search
     {
         if ($this->NoSearches) { $nosearches=$this->NoSearches; }
 
-        if ($this->MyMod_Items_Search_Vars_Defined()) { $nosearches=FALSE; }
+        if ($this->MyMod_Search_CGI_Vars_Defined_Has()) { $nosearches=FALSE; }
         
         $searchwhere="";
         if (!$nosearches && $includeall!=2)
@@ -135,7 +71,7 @@ trait MyMod_Items_Search
 
     function MyMod_Items_Search_Vars_Where($searchvars=array())
     {
-        $values=$this->GetPreSearchVars();
+        $values=$this->MyMod_Search_Vars_Pre_Where();
         if (count($searchvars)==0)
         {
             $searchvars=array_keys($values);
@@ -154,6 +90,8 @@ trait MyMod_Items_Search
 
             $wheres[ $rdata ]=$where;
         }
+
+        
 
         return $wheres;
     }
@@ -341,29 +279,6 @@ trait MyMod_Items_Search
         return $where;
     }
     
-    //*
-    //* function MyMod_Items_Search_IncludeAll_Field, Parameter list: 
-    //*
-    //* Creates the search form include all toggle.
-    //*
-
-    function MyMod_Items_Search_IncludeAll_Field()
-    {
-        if ($this->MyMod_Items_Search_Vars_Defined())
-        {
-            return $this->B($this->MyLanguage_GetMessage("IncludeAll_Inactive_Message"));
-        }
-        
-        return
-            $this->MakeRadioSet //($name,$values,$titles,$selected=-1)
-            (
-               $this->ModuleName."_IncludeAll",
-               array(1,2),
-               $this->MyLanguage_GetMessage("NoYes"),
-               $this->CGI2IncludeAll()
-            ).
-            "";
-    }
- }
+}
 
 ?>

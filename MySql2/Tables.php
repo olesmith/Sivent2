@@ -208,7 +208,7 @@ class Tables extends Table
 
     function MyMod_Data_Group_Table($title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar = 'Update')
     {
-        if ($group=="") { $group=$this->GetActualDataGroup(); }
+        if ($group=="") { $group=$this->MyMod_Data_Group_Actual_Get(); }
 
         if (
               $this->ItemDataGroups[ $group ][ "OtherClass" ]
@@ -248,7 +248,7 @@ class Tables extends Table
 
     function ItemTableDataSGroup($edit,$item,$group,$datas=array())
     {
-        if ($group=="") { $group=$this->GetActualDataGroup(); }
+        if ($group=="") { $group=$this->MyMod_Data_Group_Actual_Get(); }
 
         if (
               $this->ItemDataSGroups[ $group ][ "OtherClass" ]
@@ -275,17 +275,17 @@ class Tables extends Table
     }
 
     //*
-    //* function UpdateItem, Parameter list: $item=array(),$datas=array(),$prepost=""
+    //* function MyMod_Item_Update_CGI, Parameter list: $item=array(),$datas=array(),$prepost=""
     //*
-    //* Overrides UpdateItem from Table.
+    //* Overrides MyMod_Item_Update_CGI from Table.
     //*
 
-    function UpdateItem($item=array(),$datas=array(),$prepost="")
+    function MyMod_Item_Update_CGI($item=array(),$datas=array(),$prepost="")
     {
-        $item=parent::UpdateItem($item,$datas,$prepost);
+        $item=parent::MyMod_Item_Update_CGI($item,$datas,$prepost);
         foreach ($this->OtherObjects as $object)
         {
-            $object->ItemHash=$object->UpdateItem($object->ItemHash);
+            $object->ItemHash=$object->MyMod_Item_Update_CGI($object->ItemHash);
         }
 
         return $item;

@@ -3,12 +3,12 @@
 trait MyMod_Handle_Search
 {
     //*
-    //* function MyMod_Handle_Search, Parameter list: 
+    //* function MyMod_Handle_Search_Generate, Parameter list: 
     //*
     //* Handles module object Search.
     //*
 
-   function MyMod_Handle_Search($where="",$searchvarstable=TRUE,$edit=0,$group="",$omitvars=array(),$action="",$module="",$savebuttonname="",$resetbottonname="")
+   function MyMod_Handle_Search_Generate($where="",$searchvarstable=TRUE,$edit=0,$group="",$omitvars=array(),$action="",$module="",$savebuttonname="",$resetbottonname="")
   {
       $this->Singular=FALSE;
       $this->Plural=TRUE;
@@ -18,7 +18,7 @@ trait MyMod_Handle_Search
           $this->MyMod_Handle_Prints($where);
       }
 
-      $output=$this->GetGETOrPOST("Output");
+      $output=$this->CGI_GETOrPOST("Output");
       $outputs=array
       (
          "0" => "html",
@@ -38,10 +38,10 @@ trait MyMod_Handle_Search
 
       if (empty($group))
       {
-          $group=$this->GetActualDataGroup();
+          $group=$this->MyMod_Data_Group_Actual_Get();
       }
 
-      $datas=$this->GetGroupDatas($group);
+      $datas=$this->MyMod_Data_Group_Datas_Get($group);
       if (!empty($group))
       {
           if (empty($where) && isset($this->ItemDataGroups[ $group ][ "SqlWhere" ]))
@@ -66,15 +66,16 @@ trait MyMod_Handle_Search
           }
       }
 
-      
 
+      $print="";
+      
       $this->MyMod_Sort_Detect($group);
       if ($output=="html")
       {
           if ($searchvarstable)
           {
-              echo 
-                  $this->SearchVarsTable($omitvars,"",$action,array(),array(),$module).
+              $print.= 
+                  $this->MyMod_Search_Form($omitvars,"",$action,array(),array(),$module).
                   $this->BR();
           }
       }
@@ -95,7 +96,7 @@ trait MyMod_Handle_Search
       if (count($this->ItemHashes)>0) { $hasitems=TRUE; }
 
       $action=$this->MyActions_Detect();
-      if ($this->CGI2Edit()==2)
+      if ($this->MyMod_Search_CGI_Edit_Value()==2)
       {
           $edit=1;
       }
@@ -116,22 +117,17 @@ trait MyMod_Handle_Search
           $title=$this->GetRealNameKey($this->Actions[ "EditList" ]);
       }
 
-      $tdatas=$datas;
-      if (isset($this->ItemDataGroups[ $group ][ "TitleData" ]))
-      {
-          $tdatas=$this->ItemDataGroups[ $group ][ "TitleData" ];
-      }
-
       $table=array();
       if ($output=="html")
       {           
-          $table=$this->MyMod_Data_Group_Table
-          (
-           $title,
-           $edit,
-           $group,
-           array()
-          );
+          $table=
+              $this->MyMod_Data_Group_Table
+              (
+                  $title,
+                  $edit,
+                  $group,
+                  array()
+              );
       }
       elseif ($output=="pdf")
       {
@@ -146,20 +142,21 @@ trait MyMod_Handle_Search
           $table=$this->ItemsCSVTable();
       }
 
-      $searchvars=$this->MyMod_Items_Search_Vars_Get($datas);
-      if ($this->AddSearchVarsToDataList)
+      $searchvars=$this->MyMod_Search_Vars_Hash($datas);
+      if ($this->MyMod_Search_Vars_Add_2_List)
       {
-          $datas=$this->AddSearchVarsToDataList($datas);
+          $datas=$this->MyMod_Search_Vars_Add_2_List($datas);
       }
 
+      
       if ($hasitems && $output=="html")
       {
-          echo 
-              $this->PagingHorisontalMenu();
+          $print.= 
+              $this->MyMod_Paging_Menu_Horisontal();
 
           if (!empty($this->ItemDataGroups[ $group ][ "Name" ]))
           {
-              echo
+              $print.= 
                   $this->H
                   (
                      3,
@@ -171,7 +168,7 @@ trait MyMod_Handle_Search
 
       if ($hasitems && $edit && $output=="html")
       {
-          echo
+          $print.= 
               $this->Anchor("EditListForm").
               $this->StartForm
               (
@@ -196,11 +193,11 @@ trait MyMod_Handle_Search
 
           if (!is_array($table))
           {
-              echo $table;
+              $print.=  $table;
           }
           else
           {
-              echo
+              $print.= 
                   $this->Html_Table
                   (
                      "",
@@ -215,18 +212,43 @@ trait MyMod_Handle_Search
 
       if ($hasitems && $edit && $output=="html")
       {
-          echo 
+          $print.= 
               $this->MakeHiddenFields(TRUE).//include tabmovesdown hidden var
               $this->ItemGroupHidden($group).
               $this->ItemEditListHidden($edit).
               $this->ItemPageHidden($edit).
-              join("\n",$this->SearchVarsAsHiddens()).
+              join("\n",$this->MyMod_Search_Hiddens_Fields()).
               $this->MakeHidden("Update",1).
               $this->MakeHidden("EditList",1).
               $this->MakeHidden("__MTime__",time()).
               $this->Buttons($savebuttonname,$resetbottonname).
               $this->EndForm();
       }
+
+      return $print;
+  } 
+    //*
+    //* function MyMod_Handle_Search, Parameter list: 
+    //*
+    //* Handles module object Search.
+    //*
+
+   function MyMod_Handle_Search($where="",$searchvarstable=TRUE,$edit=0,$group="",$omitvars=array(),$action="",$module="",$savebuttonname="",$resetbottonname="")
+  {
+      echo
+          $this->MyMod_Handle_Search_Generate
+          (
+              $where,
+              $searchvarstable,
+              $edit,
+              $group,
+              $omitvars,
+              $action,
+              $module,
+              $savebuttonname,
+              $resetbottonname
+          ).
+          "";
   } 
 }
 
