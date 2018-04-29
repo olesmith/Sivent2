@@ -95,13 +95,18 @@ trait MyMod_Data_Fields_Sql
         }
         else
         {
-             $class=$this->ItemData[ $data ][ "SqlClass" ];
-             if (
+            if (!empty($where[ $data ]))
+            {
+                #$where[ "ID" ]=$where[ $data ];
+                unset($where[ $data ]);
+            }
+            $class=$this->ItemData[ $data ][ "SqlClass" ];
+            if (
                    !empty($this->ItemData[ $data ][ "SqlClass" ])
                    &&
                    method_exists($this->Module2Object($data),"SqlWhere")
                 )
-             {
+            {
                  if (!is_array($where))
                  {
                      $where=$this->SqlClause2Hash($where);

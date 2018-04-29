@@ -13,7 +13,7 @@ trait MyApp_Login_Password
         $res=TRUE;
         if (strlen($password)<8)
         {
-            $message=$this->GetMessage($this->LoginMessages,"Error_PasswordNotAccepted");
+            $message="Error_PasswordNotAccepted";
             $res=FALSE;
         }
 

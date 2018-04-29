@@ -34,9 +34,9 @@ class AssessmentsAccess extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-         $res=$this->HasModuleAccess();
+        $res=$this->HasModuleAccess();
 
-         return $res;
+        return $res;
     }
     
     //*

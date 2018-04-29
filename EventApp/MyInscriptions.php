@@ -179,6 +179,33 @@ class MyInscriptions extends MyInscriptions_Certificate
             array_push($updatedatas,"Name");
         }
 
+        $this->Sql_Select_Hash_Datas_Read
+        (
+            $item,
+            array_merge
+            (
+                $this->MyMod_Item_Groups_Compulsory_Data($this->InscriptionSGroups(0),True),
+                array("Status","Completed")
+            )
+        );
+        
+        if ($item[ "Status" ]==1 || !$this->Inscription_Complete($item))
+        {
+            if (empty($item[ "Complete" ]) || $item[ "Complete" ]!=1)
+            {
+                $item[ "Complete" ]=1;
+                array_push($updatedatas,"Complete");
+            }
+        }
+        else
+        {
+            if (empty($item[ "Complete" ]) || $item[ "Complete" ]!=2)
+            {
+                $item[ "Complete" ]=2;
+                array_push($updatedatas,"Complete");
+            }
+        }
+
         if (count($updatedatas)>0)
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);

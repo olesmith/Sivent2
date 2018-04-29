@@ -24,7 +24,7 @@ class DBDataUpdate extends DBDataQuest
             {
                 if (!$this->DBDataObj()->Sql_Table_Field_Exists($newvalue))
                 {
-                    $this->DBDataObj()-Sql_Table_Column_Rename($value,$newvalue);
+                    $this->DBDataObj()->Sql_Table_Column_Rename($value,$newvalue);
                     
                     $item[ $data ]=$newvalue;
 
@@ -37,7 +37,7 @@ class DBDataUpdate extends DBDataQuest
                             $rvalue=$value."_".$key;
                             $rnewvalue=$newvalue."_".$key;
                             
-                            $this->DBDataObj()-Sql_Table_Column_Rename($rvalue,$rnewvalue);
+                            $this->DBDataObj()->Sql_Table_Column_Rename($rvalue,$rnewvalue);
                         }
                     }
                 }

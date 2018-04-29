@@ -97,13 +97,6 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
                 {
                     if ($this->MyApp_Login_Password_Valid_Is($pwd1,$message)>=8)
                     {
-                        
-                    /*     $rpwd=$pwd1; */
-                    /*     if ($this->AuthHash[ "MD5" ]) */
-                    /*     { */
-                    /*         $rpwd=md5($rpwd); */
-                    /*     } */
-
                         $user[ "NewPassword" ]=$pwd1;
                         $user[ $this->AuthHash[ "PasswordField" ] ]=
                             $this->MyApp_Auth_Crypt_Password_Crypt($pwd1);

@@ -334,6 +334,22 @@ function HTMLTable($titles,$rows,$tableoptions=array(),$background=TRUE,$tdclass
     }
     
     //*
+    //* function Html_Table_Head_Rows, Parameter list: $rows
+    //*
+    //* Returns a table head row, hashing rows; 
+    //*
+
+    function Html_Table_Head_Rows($rows)
+    {
+        foreach (array_keys($rows) as $id)
+        {
+            $rows[ $id ]=$this->Html_Table_Head_Row($rows[ $id ]);
+        }
+        
+        return $rows;
+    }
+    
+    //*
     //* function Html_Table, Parameter list: $titles,$rows,$options=array()
     //*
     //* Generates a HTML table.

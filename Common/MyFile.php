@@ -203,6 +203,201 @@ trait MyFile
             return $this->MyFile_Write($file,$text,'w');
         }
     }
+
+    
+    //**
+    //** function MyFiles_Title_Row, Parameter list: 
+    //**
+    //** Creates file table title row (list).
+    //** 
+    //**
+
+    function MyFiles_Title_Row()
+    {
+        return
+            array
+            (
+                "File",
+                "Size (bytes)",
+                "Created",
+                "Modified",
+                "Owner",
+                "Group",
+                "Permissions",
+                "Select File",
+            );
+    }
+    //**
+    //** function MyFiles_Title_Rows, Parameter list: 
+    //**
+    //** Creates file table title rows (matrix).
+    //** 
+    //**
+
+    function MyFiles_Title_Rows()
+    {
+        return
+            array
+            (
+                $this->MyFiles_Title_Row(),
+            );
+    }
+    
+    //**
+    //** function MyFile_CheckBox, Parameter list: $file
+    //**
+    //** Creates checkbox for file
+    //** 
+    //**
+
+    function MyFile_CheckBox($file)
+    {
+        return
+            $this->Html_Input_CheckBox_Field
+            (
+                preg_replace('/\//',"_",$file),
+                1,
+                False,
+                False,
+                $options=array
+                (
+                    "CLASS" => "checkbox_1",
+                )
+            );
+    }
+
+    
+    //**
+    //** function MyFile_Date_Time, Parameter list: 
+    //**
+    //** Formats date
+    //** 
+    //**
+
+    function MyFile_Date_Time($date)
+    {
+        return date("d/m/Y H:i:s",$date);
+    }
+
+    
+    //**
+    //** function MyFile_Row, Parameter list: $file
+    //**
+    //** Creates row of file info.
+    //** 
+    //**
+
+    function MyFile_Row($file)
+    {
+        $userinfo=posix_getpwuid(fileowner($file));
+        $groupinfo=posix_getgrgid(filegroup($file));
+
+        return
+            array
+            (
+                basename($file),
+                filesize($file),
+                $this->MyFile_Date_Time(filectime($file)),
+                $this->MyFile_Date_Time(filemtime($file)),
+                $userinfo[ "name" ],
+                $groupinfo[ "name" ],
+                substr(sprintf('%o', fileperms($file)), -4),
+                $this->MyFile_CheckBox($file),
+            );
+    }
+
+    //**
+    //** function MyFile_Rows, Parameter list: $file
+    //**
+    //** Creates rows of file info.
+    //** 
+    //**
+
+    function MyFile_Rows($file)
+    {
+        return
+            array
+            (
+                $this->MyFile_Row($file),
+            );
+    }
+    
+    //**
+    //** function MyFiles_Rows, Parameter list: $files
+    //**
+    //** Creates table of files info as matrix.
+    //** 
+    //**
+
+    function MyFiles_Rows($files,$table=array())
+    {        
+        foreach ($files as $file)
+        {
+            $table=
+                array_merge
+                (
+                    $table,
+                    $this->MyFile_Rows($file)
+                );
+        }
+
+        return $table;
+    }
+    
+    //**
+    //** function MyFiles_Table, Parameter list: $files
+    //**
+    //** Creates table of file info.
+    //** 
+    //**
+
+    function MyFiles_Table($files,$table=array())
+    {
+        if (empty($files))
+        {
+            return array();
+        }
+        
+        $table=
+            array_merge
+            (
+                $table,
+                $this->Html_Table_Head_Rows
+                (
+                    $this->MyFiles_Title_Rows()
+                )
+            );
+        
+        foreach ($files as $file)
+        {
+            $table=
+                array_merge
+                (
+                    $table,
+                    $this->MyFile_Rows($file)
+                );
+        }
+
+        return $table;
+    }
+
+    //**
+    //** function MyFiles_Table, Parameter list: $files
+    //**
+    //** Creates table of file info.
+    //** 
+    //**
+
+    function MyFiles_HTML($files,$table=array())
+    {
+        return
+            $this->HTML_Table
+            (
+                $this->MyFiles_Title_Rows(),
+                $this->MyFiles_Table($files,$table)
+            );
+    }
+
 }
 
 ?>

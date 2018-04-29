@@ -9,9 +9,9 @@ class SqlMessages extends Latex
     var $BackTraceLevel=1; 
     var $Debug=0;
 
-    function Messages()
-    {
-    }
+    /* function Messages() */
+    /* { */
+    /* } */
 
     function InitMessages($list)
     {

@@ -38,10 +38,30 @@ class DBGroups extends DBGroupsForm
 
     function PreProcessItemData()
     {
-        array_push($this->ActionPaths,"../Application/System/DBGroups");
         array_push($this->ItemDataPaths,"../Application/System/DBGroups");
-        array_push($this->ItemDataGroupPaths,"../Application/System/DBGroups");
         $this->Sql_Table_Column_Rename("Candidate","Friend");
+    }
+    //*
+    //* function PreProcessItemDataGroups, Parameter list:
+    //*
+    //* 
+    //*
+
+    function PreProcessItemDataGroups()
+    {
+        array_push($this->ItemDataGroupPaths,"../Application/System/DBGroups");
+    }
+    
+    //*
+    //* function PreProcessItemData, Parameter list:
+    //*
+    //* Pre process item data; this function is called BEFORE
+    //* any updating DB cols, so place any additonal data here.
+    //*
+
+    function PreActions()
+    {
+        array_push($this->ActionPaths,"../Application/System/DBData");
     }
     
     //*

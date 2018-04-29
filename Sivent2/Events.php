@@ -33,7 +33,10 @@ class Events extends Events_Handle
         $this->AlwaysReadData=
             array
             (
-                "Unit","Name","EventStart","Certificates","Collaborations","Collaborations",
+                "Unit","Name",
+                "StartDate","EndDate",
+                "EventStart","EventStart",
+                "Certificates","Collaborations","Collaborations",
                 "Certificates_Latex_Sep_Vertical","Certificates_Latex_Sep_Horisontal"
             );
 

@@ -663,7 +663,7 @@ class MyUnits extends MyUnitsEvents
         $args[ "Action" ]=$data;
         $args[ "Unit" ]=$item[ "ID" ];
          
-        $server=$item[ "Sivent2URL" ];
+        $server=$item[ "SystemURL" ];
         
         return
             $server.

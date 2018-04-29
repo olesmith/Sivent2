@@ -106,11 +106,11 @@ class UnitMod extends DBDataObj
         }
 
         #Check if we should redirect to unit specific server
-        if (!empty($this->ApplicationObj()->Unit[ "Sivent2URL" ]))
+        if (!empty($this->ApplicationObj()->Unit[ "SystemURL" ]))
         {
             $this->ApplicationObj()->Application_No_Tail=True;
             
-            header( 'Location: '.$this->ApplicationObj()->Unit[ "Sivent2URL" ]);
+            header( 'Location: '.$this->ApplicationObj()->Unit[ "SystemURL" ]);
             exit(1);            
         }
         

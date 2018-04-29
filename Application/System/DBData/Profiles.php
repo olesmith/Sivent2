@@ -7,7 +7,7 @@ array
       "Admin" => 1,
       "Friend"     => 0,
       "Coordinator" => 1,
-      "Assessor"  => 1,
+      "Assessor"  => 0,
    ),
    'Actions' => array
    (

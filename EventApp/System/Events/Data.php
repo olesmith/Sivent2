@@ -217,7 +217,7 @@ array
       
       "Compulsory" => 0,
       "Extensions" => "pdf",
-      "Icon" => "pdf.png",
+      "Icon" => "print_light.png",
       "Iconify" => TRUE, 
    ),
    "Site" => array

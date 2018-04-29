@@ -10,7 +10,15 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
 
     function InscriptionHtmlTable($edit,$buttons=FALSE,$inscription,$title="",$includeassessments=FALSE)
     {
-        $table=$this->InscriptionTable($edit,$buttons,$inscription,$includeassessments);
+        $table=
+            $this->InscriptionTable
+            (
+                $edit,
+                $buttons,
+                $inscription,
+                $includeassessments
+            );
+
         if (!empty($title)) { array_unshift($table,$title); }
 
         return $this->Html_Table("",$table);
@@ -31,8 +39,9 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
                "",
                $this->EventsObj()->MyMod_Item_Group_Tables
                (
-                  $this->InscriptionEventTableSGroups,
-                  $this->ApplicationObj->Event()
+                   0,
+                   $this->InscriptionEventTableSGroups,
+                   $this->ApplicationObj->Event()
                )
             )
         ).
@@ -57,7 +66,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
                     "UpdateCGIVar" => "Update_Friend",
                     "Item"          => $friend,
                     "Datas"         => $this->InscriptionFriendTableData(),
-                    "TablePostRows" => array($this->InscriptionMessageRow()),
+                    "TablePostRows" =>  $this->InscriptionMessageRows(),
                     "Action"        => "?".$this->CGI_Hash2URI($this->CGI_URI2Hash()),
                     "EndButtons"   => $this->Buttons
                     (
@@ -127,6 +136,22 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
     }
     
     //*
+    //* function Inscription_Complete, Parameter list: $inscription
+    //*
+    //* Detect whether all data has been completed.
+    //*
+
+    function Inscription_Complete($inscription)
+    {
+        $compdatas=$this->Inscription_Compulsory_Undef($inscription,True);
+
+        $res=False;
+        if (count($compdatas)==0) { $res=True; }
+
+        return $res;
+    }
+    
+    //*
     //* function Inscription_Diag_Message, Parameter list: $inscription
     //*
     //* Creates Inscription pure dig message.
@@ -137,10 +162,8 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
         $lkey="Friend_Data_Diag_";
 
         $singular=TRUE;
-        $compdatas=$this->Inscription_Compulsory_Undef($inscription,$singular);
-
         $rkey=$lkey."OK";
-        if (count($compdatas)>0)
+        if (!$this->Inscription_Complete($inscription)>0)
         {
             $rkey=$lkey."Error";
         }
@@ -204,7 +227,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
 
         return
             $message.
-            $this->InscriptionReceitLink($inscription);
+            "";
     }
     
     
@@ -216,11 +239,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
 
     function InscriptionReceitLink($inscription)
     {
-        return
-            $this->Center
-            (
-                $this->MyActions_Entry("Receit",$inscription)
-            );
+        return $this->MyActions_Entry("Receit",$inscription,0,"warning");
     }
 
     //*
@@ -239,6 +258,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
         return
             $this->MyMod_Item_Group_Tables
             (
+                $edit,
                 $this->InscriptionSGroups($edit),
                 $inscription,
                 $buttons

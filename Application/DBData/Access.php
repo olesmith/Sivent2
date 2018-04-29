@@ -65,7 +65,7 @@ class DBDataAccess extends ModulesCommon
         {
             $res=TRUE;
         }
- 
+
         return $res;
     }
 
@@ -89,12 +89,14 @@ class DBDataAccess extends ModulesCommon
             $res=TRUE;
             if ($this->DBDataObj()->Sql_Table_Exists())
             {
+                if (empty($item)) { return True; }
+                
                 if ($this->DBDataObj()->Sql_Table_Field_Exists($item[ "SqlKey" ]))
                 {
-                    if ($this->DBDataObj()->MySqlNEntries()>0)
-                    {
-                        $res=FALSE;
-                    }
+                    #if ($this->DBDataObj()->MySqlNEntries()>0)
+                    #{
+                    #    $res=FALSE;
+                    #}
                 }
             }
         }

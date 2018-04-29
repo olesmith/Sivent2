@@ -44,9 +44,13 @@ trait MyMod_Sort_Titles
         $title=preg_replace('/#ItemsName/',$this->MyMod_ItemName("ItemsName"),$title);
 
         $options=array();
-        if (!empty($this->ItemData[ $data ][ "Title" ]))
+        if (!empty($this->ItemData[ $data ]) && !empty($this->ItemData[ $data ][ "Title" ]))
         {
-            $options[ "TITLE" ]=$title;
+            $rtitle=$this->GetRealNameKey($this->ItemData[ $data ],"Title");
+            if (!empty($rtitle))
+            {
+                $options[ "TITLE" ]=$rtitle;
+            }
         }
 
         $title=$this->MyMod_Sort_Title_Get($title,$options,$latex);

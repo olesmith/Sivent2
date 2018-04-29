@@ -277,7 +277,8 @@ trait MyMod_Search_Field
               False, //plural,
               "", //links
               0,//callmethod,
-              $data
+              $data,
+              True
            )
         );
 

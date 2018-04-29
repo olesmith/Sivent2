@@ -97,7 +97,7 @@ trait MyMod_Group
         {
             $this->SumVars=array("");
         }
-        
+
         return
             $this->MyMod_Group_Datas_Table
             (

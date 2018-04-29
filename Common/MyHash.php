@@ -3,6 +3,27 @@
 trait MyHash
 {
     //*
+    //* function MyHashes_Compare, Parameter list: $hash1,$hash2,$keys
+    //*
+    //* Compare $keys in $hash1 and $hash2.
+    //*
+
+    function MyHashes_Compare($hash1,$hash2,$keys)
+    {
+        $res=True;
+        foreach ($keys as $key)
+        {
+            if ($hash1[$key ]!=$hash2[ $key ])
+            {
+                $res=False;
+                break;
+            }
+        }
+
+        return $res;
+    }
+    
+    //*
     //* function MyHash_Show, Parameter list: $item
     //*
     //* Returns $item $datas keys.

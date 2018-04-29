@@ -47,6 +47,21 @@ array
       "Coordinator" => 1,
       //"Assessor"  => 1,
    ),
+   "CSS" => array
+   (
+      "Name" => "CSS",
+      "Data" => array
+      (
+          "CSS",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      //"Friend"     => 1,
+      "Coordinator" => 1,
+      //"Assessor"  => 1,
+    ),
    "INPUT" => array
    (
       "Name" => "INPUT (Text)",

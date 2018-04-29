@@ -48,7 +48,7 @@ array
    ),
    "CSS" => array
    (
-      "Name" => "HTML",
+      "Name" => "CSS",
       "Data" => array
       (
           "CSS",

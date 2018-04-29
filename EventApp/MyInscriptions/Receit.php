@@ -4,6 +4,23 @@
 class MyInscriptions_Receit extends MyInscriptions_Inscription
 {
     //*
+    //* function Receit_Friend_File_Disclaimer, Parameter list:
+    //*
+    //* Generates Receit friend file disclaimer message for friend referenced by $inscription.
+    //*
+
+    function Receit_Friend_File_Disclaimer($inscription)
+    {
+        return
+            "\\begin{center}\\fbox{\\begin{minipage}[c]{12cm}\n".
+            "\\begin{center}\\textit{\n".
+         
+            $this->MyLanguage_GetMessage("Inscriptions_Receit_File_Integrity_Disclaimer")."\n".
+            "}\\end{center}\n".
+            "\\end{minipage}}\\end{center}}\n";
+    }
+    
+    //*
     //* function Receit_Friend_Table, Parameter list:
     //*
     //* Generates Receit friend table for friend referenced by $inscription.
@@ -64,11 +81,12 @@ class MyInscriptions_Receit extends MyInscriptions_Inscription
                 $this->Inscription_Diag_Message($inscription)
             )
         );
-       
+
         return
             $this->H(1,$this->MyLanguage_GetMessage("Inscriptions_Receit_Title")).
             $this->Latex_Table("",$ftable).
             $this->H(2,$this->MyLanguage_GetMessage("Inscriptions_Receit_Datas_Title")).
+            $this->Receit_Friend_File_Disclaimer($inscription).
             $this->MyMod_Item_Groups_Tables_Latex
             (
                 $this->InscriptionSGroups(0),

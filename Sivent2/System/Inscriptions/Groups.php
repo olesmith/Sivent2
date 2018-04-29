@@ -62,7 +62,14 @@ array
       "Admin" => "1",
       "Assessor" => "0",
       "Coordinator" => "1",
-      "Data" => array("No","Edit","Delete","Event","Friend","Status","Selected","Certificate","Certificate_CH","Inscription_Certificate_Generated_Cell","GenCert","Inscription_Certificate_Mailed_Cell","MailCert","Code"),
+      "Data" => array
+      (
+          "No","Edit","Delete","Event","Friend","Status","Selected",
+          "Certificate","Certificate_CH","Inscription_Certificate_Generated_Cell",
+          "GenCert",
+          "Inscription_Certificate_Mailed_Cell","MailCert",
+          "Code"
+      ),
       "Edit_Admin" => "1",
       "Edit_Coordinator" => "1",
       "Friend" => "1",

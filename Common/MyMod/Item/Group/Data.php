@@ -9,14 +9,23 @@ trait MyMod_Item_Group_Data
 
     function MyMod_Item_Group_Data($group,$singular=FALSE)
     {
+        $datas=array();
         if ($singular)
         {
-            return $this->ItemDataSGroups[ $group ][ "Data" ];
+            if (!empty($this->ItemDataSGroups[ $group ]))
+            {
+                $datas=$this->ItemDataSGroups[ $group ][ "Data" ];
+            }
         }
         else
         {
-            return $this->ItemDataGroups[ $group ][ "Data" ];
+            if (!empty($this->ItemDataGroups[ $group ]))
+            {
+                $datas=$this->ItemDataGroups[ $group ][ "Data" ];
+            }
         }
+
+        return $datas;
     }
     
     //*

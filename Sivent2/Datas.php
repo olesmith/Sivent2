@@ -13,7 +13,7 @@ class Datas extends DBData
     function Datas($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("SortOrder","Name");
+        $this->AlwaysReadData=array("SortOrder","Name","SqlKey");
         $this->Sort=array("DataGroup","SortOrder","Name");
 
     }

@@ -523,6 +523,40 @@ class EventApp extends MyEventApp_Mail
     {
         return $this->EventsObj()->Event_DateSpan($event);
     }
-}
+    
+    //*
+    //* function MyApp_Globals_Upload_Paths, Parameter list: 
+    //*
+    //* Overrides MyApp_Globals_Upload_Paths.
+    //* Returns list of upload paths for system. Should consider current profile.
+    //*
+
+    function MyApp_Globals_Upload_Paths($module="")
+    {
+        $modules=array();
+        if (preg_match('/^(Admin)/',$this->Profile()))
+        {
+            $paths=array("Uploads/".$this->Unit("ID"));
+        }
+        elseif (preg_match('/^(Coordinator)$/',$this->Profile()))
+        {
+            array_push($modules,"Events","Inscriptions","Sponsors");
+
+            $paths=array();
+            foreach ($modules as $module)
+            {
+                $module.="Obj";
+                array_push
+                (
+                    $paths,
+                    $this->$module()->MyMod_Data_Upload_Path()
+                );    
+            }
+        }
+
+        sort($paths);
+        return $paths;
+    }
+ }
 
 ?>

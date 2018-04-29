@@ -35,12 +35,24 @@ trait MyMod_Data_Fields_File_Decorator_Download
         if (isset($item[ $data ])) { $value=$item[ $data ]; }
 
         $icon="";
-        if (!empty($value))
+        if (!empty($this->ItemData[ $data ][ "Icon" ]))
+        {
+            $icon=$this->IMG
+            (
+                "icons/".$this->ItemData[ $data ][ "Icon" ],
+                "teste",
+                20,20
+            );
+        }      
+        elseif (!empty($this->ItemData[ $data ][ "Iconify" ]))
+        {
+            $icon=$this->MyMod_Item_Action_Icon($data,$item);
+        }      
+        elseif (!empty($value))
         {
             $icon=$value;
             if (file_exists($icon))
             {
-                //$icon=$this->MyMod_Data_Icon($data);
                 $icon=
                     $this->IMG
                     (
@@ -54,10 +66,6 @@ trait MyMod_Data_Fields_File_Decorator_Download
                 $icon=$item [ $data."_OrigName" ];
             }
         }
-        elseif (!empty($this->ItemData[ $data ][ "Iconify" ]))
-        {
-            $icon=$this->MyMod_Item_Action_Icon($data,$item);
-        }      
         else
         {
             $icon=$rvalue;

@@ -9,7 +9,7 @@ include_once("MyHash.php");
 include_once("../Common/Accessor.php");
 include_once("MyActions.php");
 include_once("Sql.php");
-include_once("DB.php");
+include_once("MyDB.php");
 include_once("CallStack.php");
 
 include_once("MyMod/Handle.php");
@@ -47,7 +47,7 @@ trait MyMod
         Accessor,
         MyActions,
         Sql,
-        DB,
+        MyDB,
         CallStack;
 
     use

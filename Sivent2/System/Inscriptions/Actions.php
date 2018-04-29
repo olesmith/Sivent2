@@ -89,7 +89,8 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
-      //"AccessMethod"    => "CheckCertificateAccess",
+      "Singular"    => True,
+      "AccessMethod"    => "CheckCertificateAccess",
    ),
    "MailCert" => array
    (
@@ -179,9 +180,6 @@ array
       "Name"     => "Caravana do Participante",
       "Name_UK"   => "Participant's Caravan",
       
-      //"Handler"   => "Inscription_Handle_Certificates_Generate",
-      //"Icon"   => "print_dark.png",
-
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,

@@ -4,6 +4,26 @@
 trait MyMod_Item_Group_Table
 {
     //*
+    //* Returns datas for item data group.
+    //*
+
+    function MyMod_Item_Group_Table_Datas($group)
+    {
+        if (!empty($this->ItemDataSGroups[ $group ][ "TableDataMethod" ]))
+        {
+            $method=$this->ItemDataSGroups[ $group ][ "TableDataMethod" ];
+
+            $datas=$this->$method($group);
+        }
+        else
+        {
+            $datas=$this->ItemDataSGroups[ $group ][ "Data" ];
+        }
+        
+        return $datas;
+    }
+    
+    //*
     //* Returns title for item data group.
     //*
 
@@ -38,7 +58,7 @@ trait MyMod_Item_Group_Table
                $edit,
                $item,
                TRUE,
-               $this->ItemDataSGroups[ $group ][ "Data" ],
+               $this->MyMod_Item_Group_Table_Datas($edit,$item,$group),
                array(),
                $plural,
                FALSE,

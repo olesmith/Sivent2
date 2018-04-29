@@ -3,6 +3,29 @@
 class App_Override extends App_Handle
 {
     //*
+    //* function MyApp_Interface_Application_Script, Parameter list:$args=array()
+    //*
+    //* Overrides the main handler.
+    //*
+
+    function MyApp_Interface_Application_Script($args=array())
+    {
+        return
+            parent::MyApp_Interface_Application_Script($args).
+            $this->HtmlTags
+            (
+               "SCRIPT",
+               "",
+               array
+               (
+                   "TYPE" => 'text/javascript',
+                    "SRC"  => 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js',
+               )
+            ).
+            "";
+    }
+    
+    //*
     //* function MyApp_Handle, Parameter list:$args=array()
     //*
     //* Overrides the main handler.
@@ -93,7 +116,8 @@ class App_Override extends App_Handle
     {
         $html=parent::MyApp_Interface_Messages_Status();
 
-        if ( !empty($this->CGI_GETint("Unit")) )
+        $unit=$this->CGI_GETint("Unit");
+        if ( !empty($unit) )
         {
             $html.=$this->SponsorsObj()->ShowSponsors(3);
         }

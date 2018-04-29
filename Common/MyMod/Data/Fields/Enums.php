@@ -16,12 +16,6 @@ trait MyMod_Data_Fields_Enums
         $options=array();
         if (!empty($tabindex) ) { $options[ "TABINDEX" ]=$tabindex; }
 
-        /* if (!empty($this->ItemData[ $data ][ "SqlClass" ])) */
-        /* { */
-        /*     return */
-        /*         $this->CreateSubItemSelectField($data,$item,$value,$ignoredefault); */
-        /* } */
-
         if ($value=="" && isset($item[ $data ])) { $value=$item[ $data ]; }
 
         //Put select items in alphabetic order

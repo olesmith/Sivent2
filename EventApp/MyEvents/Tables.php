@@ -10,7 +10,7 @@ class MyEventsTables extends MyEventsTablesEvents
     //* Generates events table matrix.
     //*
 
-    function Events_By_Years($events,$key="EventStart")
+    function Events_By_Years($events,$key="StartDate")
     {
         $revents=array();
         foreach ($events as $event)

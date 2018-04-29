@@ -135,8 +135,8 @@ array
       "HrefArgs" => "?ModuleName=Inscriptions&Action=Receit&Latex=1&ID=#ID&Event=".$this->Event("ID"),
       "Title"    => "Gerar Recibo da Inscrição (PDF)",
       "Title_UK" => "Generate Inscription Receit (PDF)",
-      "Name"     => "Recibo da Inscrição",
-      "Name_UK"   => "Inscription Receit",
+      "Name"     => "Gerar Recibo da Inscrição (PDF)",
+      "Name_UK"   => "Generate Inscription Receit (PDF)",
 
       "Public"   => 0,
       "Person"   => 0,
@@ -147,7 +147,7 @@ array
 
       "Singular"   => TRUE,
       "Handler"   => "HandleReceit",
-      "AccessMethod"   => "CheckEditAccess",
+      "AccessMethod"   => "CheckReceitAccess",
    ),
    "Receits" => array
    (

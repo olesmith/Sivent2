@@ -112,6 +112,30 @@ class MyInscriptions_Access extends ModulesCommon
         
         return $res;
     }
+    
+    //*
+    //* function CheckReceitAccess, Parameter list: $item=array()
+    //*
+    //* Checks if $item receit may be printed. Admin may -
+    //* and Person, if LoginData[ "ID" ]==$item[ "ID" ].
+    //* Activated in  System::Friends::Profiles.
+    //*
+
+    function CheckReceitAccess($item=array())
+    {
+        $profile=$this->Profile();
+        if ($profile=="Public") { return False; }
+        
+        if (empty($item)) { return TRUE; }
+ 
+        $res=$this->Current_User_Event_Coordinator_Is();
+        if (!$res && $profile=="Friend")
+        {
+            $res=$this->Inscription_Complete($item);
+        }
+        
+        return $res;
+    }
 }
 
 ?>

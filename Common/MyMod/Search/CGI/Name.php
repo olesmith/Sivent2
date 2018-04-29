@@ -120,6 +120,8 @@ trait MyMod_Search_CGI_Name
               preg_match('/^0?$/',$value)
               &&
               $this->CheckHashKeySet($this->ItemData[ $data ],"SearchDefault")
+              &&
+              !empty($this->ItemData[ $data ][ "SearchDefault" ])
            )
         {
             $value=$this->ItemData[ $data ][ "SearchDefault" ];

@@ -59,11 +59,11 @@ trait MyMod_Item_Read
 
         if (empty($id)) { $id=$this->GetCGIVarValue("ID"); }
 
-        $where=$id;
-        if (!is_array($where))
-        {
+        /* $where=$id; */
+        /* if (!is_array($where)) */
+        /* { */
             $where=$this->MyMod_Items_Where_Clause_Real(array($this->IDWhereVar => $id));
-        }
+        /* } */
 
         $this->ItemHash=$this->SelectUniqueHash($this->SqlTableName(),$where,FALSE,$rdatas);
 

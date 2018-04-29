@@ -20,10 +20,10 @@ class Sponsors extends MySponsors
         $this->IncludeAllDefault=TRUE;
 
         $unit=$this->Unit("ID");
-        $event=$this->Event("ID");
+        $event=$this->CGI_GETint("Event");
         
         $this->SqlWhere[ "Unit" ]=$unit;
-       if (!empty($event))
+        if (!empty($event))
         {
             $this->SqlWhere[ "Event" ]=$event;
             

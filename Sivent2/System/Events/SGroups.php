@@ -27,11 +27,11 @@ array
        "Name_UK" => "Components",
        "Data" => array
        (
-          "Payments","Selection",
+          "Payments",
+          "Selection",
           "Certificates","Certificates_Published",
           "Collaborations","Caravans",
           "Submissions","Assessments",
-          "Payments",
           "Schedule_Public","Info",
        ),
 
@@ -41,7 +41,6 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
        "EditAccessMethod" => "Current_User_Event_May_Edit",
-       //"GenTableMethod" => "Event_Collaborations_Table",
     ),
     "Payments" => array
     (
@@ -50,9 +49,9 @@ array
        "Data" => array
        (
           "Payments",
+          "Payments_Type",
+          "Payments_Institution","Payments_Name","Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation",
           "Payments_Info","Payments_URL",
-          "Payments_Type","Payments_Institution",
-          "Payments_Name","Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation",
         ),
 
        "Person" => 0,
@@ -62,7 +61,8 @@ array
        "Coordinator" => 1,
        "AccessMethod" => "Event_Payments_Has",
        "SubAction" => "Payments",
-       "EditAccessMethod" => "Current_User_Event_Payments_May_Edit",
+       "EditAccessMethod" => array("Current_User_Event_May_Edit",),
+       "TableDataMethod" => "Event_Payments_Datas",
     ),
     "Collaborations" => array
     (
@@ -391,7 +391,7 @@ array
 
       "Data" => array
       (
-          "Visible","Sivent2URL"
+          "Visible","SystemURL"
       ),
       "Admin" => 1,
       "Person" => 0,

@@ -244,16 +244,18 @@ class DBDataObj extends Table
 
     function DBDataFileDatas()
     {
-        $fdatas=array("No","Edit","Delete","Zips","CTime","Friend","Homologated","Result","Selected");
-
-        $count=count($fdatas)-1;
-
-        array_push($fdatas,"text_Documentos","text_Arquivos");
+        $fdatas=
+            array
+            (
+                "No","Edit","Delete","Zips",
+                "CTime",
+                "Friend","Status","Complete",
+                "Homologated","Result","Selected");
         foreach ($this->DatasData as $data)
         {
             if ($this->MyMod_Data_Field_Is_File($data))
             {
-                array_push($fdatas,"newline(".$count.")","text_".$data.":",$data);
+                array_push($fdatas,$data);
             }
         }
 

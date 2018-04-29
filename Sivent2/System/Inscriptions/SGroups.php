@@ -12,9 +12,9 @@ array
       "Person" => 0,
       "Public" => 1,
       "Admin" => 1,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 1,
       "Single" => 0,
-      "Visible" => 0,
+      "Visible" => 1,
    ),
 );

@@ -16,14 +16,16 @@ trait MyMod_Item_Group_Tables
             foreach ($groupdef as $group => $gedit)
             {
                 $gredit=$this->Max($gedit,$redit);
-                
-                $res=$this->MyMod_Item_Group_Allowed
-                (
-                   $this->ItemDataSGroups[ $group ],
-                   $item
-                );
 
-                
+                $res=False;
+                if (!empty($this->ItemDataSGroups[ $group ]))
+                {
+                    $res=$this->MyMod_Item_Group_Allowed
+                    (
+                        $this->ItemDataSGroups[ $group ],
+                        $item
+                    );
+                }                
 
                 if ($res)
                 {

@@ -57,7 +57,11 @@ class MyEventsTablesEventsOpen extends MyEventsInfo
             $this->Html_Table
             (
                 "",
-                $this->EventsTable()
+                $this->Events_Table
+                (
+                    0,
+                    $this->ApplicationObj()->Events
+                )
             );
     }
 }

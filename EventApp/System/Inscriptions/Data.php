@@ -115,7 +115,7 @@ array
       "Name_UK" => "Status",
       "Person" => "0",
       "Public" => "1",
-      "Search" => "",
+      "Search" => True,
       "ShortName" => "Status",
       "ShortName_ES" => "Status",
       "ShortName_UK" => "Status",
@@ -125,6 +125,30 @@ array
       "Title_UK" => "Status",
       "Values" => array("Não Inscrito","Inscrito"),
       "Values_UK" => array("Not Inscribed","Inscribed"),
+   ),
+   "Complete" => array
+   (
+      "Admin" => "1",
+      "Assessor" => "0",
+      "Coordinator" => "1",
+      "Default" => "1",
+      "Friend" => "1",
+      "Name" => "Dados Completos",
+      "Name_ES" => "Dados Completos",
+      "Name_UK" => "Data Complete",
+      "Person" => "0",
+      "Public" => "1",
+      "Search" => True,
+      "ShortName" => "Completa",
+      "ShortName_ES" => "Completa",
+      "ShortName_UK" => "Complete",
+      "Sql" => "ENUM",
+      "Title" => "Dados Completos",
+      "Title_ES" => "Dados Completos",
+      "Title_UK" => "Data Complete",
+      
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
    ),
    "Homologated" => array
    (
@@ -192,7 +216,7 @@ array
       "Title_UK" => "Selected",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
-      "SelectCheckBoxes" => "3",
+      #"SelectCheckBoxes" => "3",
    ),
    "Comment" => array
    (

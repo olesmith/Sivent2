@@ -19,6 +19,7 @@ class DBGroupsAccess extends ModulesCommon
 
     function CheckShowAccess($item)
     {
+        if (empty($item)) { return TRUE; }
         $res=FALSE;
         if (preg_match('/^Candidate$/',$this->ApplicationObj->Profile))
         {
@@ -60,6 +61,7 @@ class DBGroupsAccess extends ModulesCommon
 
     function CheckEditAccess($item)
     {
+        if (empty($item)) { return TRUE; }
         $res=FALSE;
         if (preg_match('/^Coordinator$/',$this->ApplicationObj->Profile))
         {
@@ -82,6 +84,7 @@ class DBGroupsAccess extends ModulesCommon
 
     function CheckDeleteAccess($item)
     {
+        if (empty($item)) { return TRUE; }
         $res=FALSE;
 
         if (
@@ -90,8 +93,13 @@ class DBGroupsAccess extends ModulesCommon
               preg_match('/^(Coordinator|Admin)$/',$this->ApplicationObj->Profile)
            )
         {
-            $n=0;//$this->DatasObj()->MySqlNEntries("",array("Group" => $item[ "ID" ]));
-            $res=TRUE;
+            if (empty($item)) { return True; }
+            
+            $n=$this->DatasObj()->MySqlNEntries("",array("DataGroup" => $item[ "ID" ]));
+            if ($n==0)
+            {
+                $res=TRUE;
+            }
         }
  
         return $res;

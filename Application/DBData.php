@@ -10,6 +10,20 @@ include_once("DBData/Form.php");
 class DBData extends DBDataForm
 {
     //*
+    //* function Datas, Parameter list: $args=array()
+    //*
+    //* Constructor.
+    //*
+
+    function DBData($args=array())
+    {
+        $this->Hash2Object($args);
+        $this->AlwaysReadData=array("SortOrder","Name","SqlKey");
+        $this->Sort=array("DataGroup","SortOrder","Name");
+
+    }
+
+    //*
     //* function SqlTableName, Parameter list: $table=""
     //*
     //* Overrides SqlTableName, prepending period id.
@@ -42,10 +56,21 @@ class DBData extends DBDataForm
 
     function PreProcessItemData()
     {
-        array_push($this->ActionPaths,"../Application/System/DBData");
         array_push($this->ItemDataPaths,"../Application/System/DBData");
         array_push($this->ItemDataGroupPaths,"../Application/System/DBData");
         $this->Sql_Table_Column_Rename("Candidate","Friend");
+    }
+    
+    //*
+    //* function PreProcessItemData, Parameter list:
+    //*
+    //* Pre process item data; this function is called BEFORE
+    //* any updating DB cols, so place any additonal data here.
+    //*
+
+    function PreActions()
+    {
+        array_push($this->ActionPaths,"../Application/System/DBData");
     }
     
     //*
@@ -65,6 +90,7 @@ class DBData extends DBDataForm
 
         $this->ItemData[ "Pertains" ][ "Values" ]=$pertainsnames;
     }
+    
 
     //*
     //* function PostInit, Parameter list:

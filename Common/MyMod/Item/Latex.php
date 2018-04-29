@@ -46,35 +46,35 @@ trait MyMod_Item_Latex
         $nitems=0;
 
         //See if we need to check access on individual objects
-            if ($accessmethod!="")
+        if ($accessmethod!="")
+        {
+            if (method_exists($this,$accessmethod))
             {
-                if (method_exists($this,$accessmethod))
+                if (!$this->$accessmethod($item))
                 {
-                    if (!$this->$accessmethod($item))
-                    {
-                        continue;
-                    }
+                    return;
                 }
             }
+        }
 
-            $item=$this->ApplyAllEnums($item,TRUE);
-            $item=$this->TrimLatexItem($item);
+        $item=$this->ApplyAllEnums($item,TRUE);
+        $item=$this->TrimLatexItem($item);
 
-            $nitems++;
-            $item[ "No" ]=sprintf("%03d",$nitems);
+        $nitems++;
+        $item[ "No" ]=sprintf("%03d",$nitems);
             
-            $rlatex="";
-            if (isset($item[ "LatexPre" ]))
-            {
-                $rlatex.=$item[ "LatexPre" ];
-            }
-            $rlatex.=$glue;
+        $rlatex="";
+        if (isset($item[ "LatexPre" ]))
+        {
+            $rlatex.=$item[ "LatexPre" ];
+        }
+        $rlatex.=$glue;
 
-            $rlatex=$this->FilterHash($rlatex,$item);
+        $rlatex=$this->FilterHash($rlatex,$item);
 
-            $rlatex=$this->FilterObject($rlatex);
+        $rlatex=$this->FilterObject($rlatex);
 
-            $latex.=$rlatex;
+        $latex.=$rlatex;
 
         if ($nitems==0) { $latex="Empty Document..."; }
 

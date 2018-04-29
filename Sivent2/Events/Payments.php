@@ -20,6 +20,57 @@ class EventsPayments extends EventsCaravans
 
         return $res;
     }
+    
+    //*
+    //* function Event_Payments_Table, Parameter list: $group
+    //*
+    //* Generates Event Payments Group table
+    //*
+
+    function Event_Payments_Datas($group,$item=array())
+    {
+        if (empty($item)) { $item=$this->ItemHash; }
+        
+        $commondata=
+            array
+            (
+                "Payments_Info",
+                "Payments_URL",
+                "Payments_Type",
+            );
+
+
+        $datas=array();
+        if ($item[ "Payments_Type" ]==1)
+        {
+            $datas=
+                array
+                (
+                    "Payments_Login",
+                    "Payments_Agency",                    
+                    "Payments_Name",
+                    "Payments_Operation",
+                    "Payments_Account",
+                    "Payments_Variation",
+                );
+        }
+        elseif ($item[ "Payments_Type" ]==2)
+        {
+            $datas=
+                array
+                (
+                    "Payments_PagSeguro_Login",
+                    "Payments_PagSeguro_Code",
+                );
+        }
+
+        return
+            array_merge
+            (
+                $commondata,
+                $datas
+            );
+    }
 }
 
 ?>

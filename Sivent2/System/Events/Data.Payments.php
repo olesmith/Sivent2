@@ -25,8 +25,16 @@ array
       "Name" => "Forma de Pagamento",
       "Name_UK" => "Way of Payment",
       "Sql" => "ENUM",
-      "Values" => array("Depôsito Bancária"),
-      "Values_UK" => array("Bank Deposit"),
+      "Values" => array
+      (
+          "Depôsito Bancária",
+          "PagSeguro",
+      ),
+      "Values_UK" => array
+      (
+          "Bank Deposit",
+          "PagSeguro",
+      ),
       "Default"  => "1",
 
       "Public"   => 1,
@@ -145,10 +153,40 @@ array
    
    "Payments_Variation" => array
    (
-       "Name" => "Variação",
+      "Name" => "Variação",
       "Name_UK" => "Variation",
       "Sql" => "VARCHAR(64)",
       "Size"  => "3",
+
+      "Public"   => 1,
+      "Person"   => 1,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 1,
+      "Search"  => FALSE,
+   ),
+   "Payments_PagSeguro_Login" => array
+   (
+      "Name" => "Usuário PagSeguro",
+      "Name_UK" => "User PagSeguro",
+      "Sql" => "VARCHAR(64)",
+      "Size"  => "35",
+
+      "Public"   => 1,
+      "Person"   => 1,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 1,
+      "Search"  => FALSE,
+   ),
+   "Payments_PagSeguro_Code" => array
+   (
+      "Name" => "Token PagSeguro",
+      "Name_UK" => "Token PagSeguro",
+      "Sql" => "VARCHAR(64)",
+      "Size"  => "35",
 
       "Public"   => 1,
       "Person"   => 1,

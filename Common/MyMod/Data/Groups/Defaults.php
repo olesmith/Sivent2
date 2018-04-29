@@ -221,6 +221,23 @@ trait MyMod_Data_Groups_Defaults
     {
         if (empty($group)) { return array(); }
 
+        if ($single)
+        {
+            if (!empty($this->ItemDataSGroups[ $group ][ "TableDataMethod" ]))
+            {
+                $method=$this->ItemDataSGroups[ $group ][ "TableDataMethod" ];
+                return $this->$method($group);
+            }
+        }
+        else
+        {
+            if (!empty($this->ItemDataGroups[ $group ][ "TableDataMethod" ]))
+            {
+                $method=$this->ItemDataGroups[ $group ][ "TableDataMethod" ];
+                return $this->$method($group);
+            }
+        }
+        
         $groupdefs=$this->MyMod_Data_Group_Defs_Get($single);
 
         $groupdef=$this->MyMod_Data_Group_Def_Get($group,$single);

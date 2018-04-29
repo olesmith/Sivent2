@@ -33,5 +33,11 @@ array
       "Name_ES" => "Dados del Inscrición",
       "Name_UK" => "Inscription Data",
    ),
+   "Inscriptions_Receit_File_Integrity_Disclaimer" => array
+   (
+      "Name" => "É de responsabilidade do candidato verificar se os arquivos que foram submetidos estão corretos e não se encontram corrompidos.\\\\Para este fim, utilizar os ícones à direita dos campos de carregamento dos mesmos.",
+      "Name_ES" => "É de la responsabilidade del candidato verificar se los archivos que foran submetidos estan correctos e não se encuentram corrompidos.\\\\Para este finalidade, utilizar los ícones à la direcha de los campos de carregamiento de los mismos.",
+      "Name_UK" => "It is the responsibility of the candidate to verify that the integrity of the uploaded files.\\\\To this end, use the icons adjacent to the upload fields.",
+   ),
 );
 

@@ -19,20 +19,20 @@ array
       "Title_ES" => "ID",
       "Title_UK" => "ID",
    ),
-   "Sivent2URL" => array
+   "SystemURL" => array
    (
       "Admin" => "2",
       "Assessor" => "1",
       "Coordinator" => "1",
       "Friend" => "1",
       
-      "Name" => "URL do SiVent2",
-      "Name_ES" => "URL del Sivent2",
-      "Name_UK" => "Sivent2 URL",
+      "Name" => "URL do App",
+      "Name_ES" => "URL del App",
+      "Name_UK" => "App URL",
       
-      "Person" => "1",
-      "Public" => "1",
-      "Search" => "1",
+      "Person" => 1,
+      "Public" => 1,
+      "Search" => False,
 
       "Size" => "30x1",
       "Sql" => "VARCHAR(256)",

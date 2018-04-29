@@ -186,7 +186,7 @@ class MyEventsCells extends MyEventsFriend
         if (empty($event)) { return $this->Language_Message("Events_Inscriptions_Cell_Noof_Title"); }
         
         $ninscribed="-";
-        if ($this->InscriptionsObj()->Sql_Table_Exists($sqltable))
+        if ($this->InscriptionsObj()->Sql_Table_Exists())
         {
             $ninscribed=$this->InscriptionsObj()->Sql_Select_NHashes
             (

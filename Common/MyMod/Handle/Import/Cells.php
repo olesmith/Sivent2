@@ -28,14 +28,25 @@ trait MyMod_Handle_Import_Cells
         {
             $cginame=$item[ "No" ]."_Register";
             
-            return $this->Html_Input_CheckBox_Field($cginame,1,FALSE,$disabled=FALSE,$options=array("TABINDEX" => 1));
+            return
+                $this->Html_Input_CheckBox_Field
+                (
+                    $cginame,
+                    1,
+                    FALSE,
+                    $disabled=FALSE,
+                    $options=array
+                    (
+                        "TABINDEX" => 1,
+                    )
+                );
         }
 
         $item[ "Registered" ]=TRUE;
         return
             $this->FriendsObj()->MyActions_Entry("Edit",$item[ "Friend_Hash" ]).
             "";
-        return $this->IMG($this->Icons."/ok.png","Registered",20,0,array("TITLE" => "Registered"));
+        #return $this->IMG($this->Icons."/ok.png","Registered",20,0,array("TITLE" => "Registered"));
     }
     
     //*

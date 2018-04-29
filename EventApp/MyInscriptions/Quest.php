@@ -3,6 +3,33 @@
 class MyInscriptions_Quest extends MyInscriptions_Zip
 {
     //*
+    //* function EventQuestGroupDatasCommon, Parameter list:
+    //*
+    //* Returns  common data to show for group.
+    //*
+
+    function EventQuestGroupDatasCommon()
+    {
+        $event=$this->Event();
+        
+        $datas=array("No","Edit","Friend","Email");
+        if ($this->EventsObj()->Event_Certificates_Has($event))
+        {
+            array_push
+            (
+                $datas,
+                array
+                (
+                    "Certificate","Certificate_CH","Inscription_Certificate_Generated_Cell",
+                    "GenCert",
+                )
+            );
+        }
+
+        return $datas;
+    }
+    
+    //*
     //* function AddEventQuestDataGroups, Parameter list:
     //*
     //* Reads item data defs from Quest - and adds to $this->ItemData..
@@ -28,7 +55,7 @@ class MyInscriptions_Quest extends MyInscriptions_Zip
              array(),
              array("SortOrder","ID")
            ),
-           array("No","Edit","Friend","Email")
+           $this->EventQuestGroupDatasCommon()
         );
     }
 

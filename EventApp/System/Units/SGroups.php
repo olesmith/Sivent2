@@ -8,7 +8,7 @@ array
       (
          "Status","Online",
          "Initials","Name","Title","Initials",
-         "Sivent2URL",
+         "SystemURL",
       ),
       "Admin" => 1,
       "Person" => 0,
