@@ -12,11 +12,11 @@ include_once("App/Has.php");
 include_once("App/Handle.php");
 include_once("App/Override.php");
 
-require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
+#require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+#\PagSeguro\Library::initialize();
+#\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+#\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 
 //For modules.
