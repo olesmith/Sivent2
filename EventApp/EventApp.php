@@ -43,13 +43,13 @@ class EventApp extends MyEventApp_Mail
     var $Unit2MailInfo=array
     (
        "Auth","Secure","Port","Host","User","Password",
-       "FromEmail","FromName","ReplyTo","BCCEmail",
+       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
     );
     
     var $Event2MailInfo=array
     (
        "Auth","Secure","Port","Host","User","Password",
-       "FromEmail","FromName","ReplyTo","BCCEmail",
+       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
     );
     
     var $Pertains=1; //Questionary: 1, Asssessment: 2

@@ -79,7 +79,7 @@ class Fields extends FieldFields
 
     function SystemLink($url,$text,$title="",$dest="",$options=array())
     {
-        $rurl=$this->ScriptQueryHash();
+        $rurl=$this->CGI_Script_Query_Hash();
         foreach ($url as $key => $value)
         {
             $rurl[ $key ]=$value;
@@ -92,7 +92,7 @@ class Fields extends FieldFields
 
         return $this->Href
         (
-           "?".$this->Hash2Query($rurl),
+           "?".$this->CGI_Hash2Query($rurl),
            $text,
            $title,
            $options[  "TARGET" ],

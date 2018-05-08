@@ -151,7 +151,7 @@ trait MyLatex
         {
             if ($printpdf)
             {
-                $this->SendDocHeader("pdf",$pdffilename);
+                $this->MyMod_Doc_Header_Send("pdf",$pdffilename);
                 echo join("",$this->MyReadFile($path."/".$pdffilename));
 
                 if ($copypdfto)

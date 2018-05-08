@@ -2,6 +2,7 @@
 
 include_once("MakeCGI/Cookies.php");
 include_once("MakeCGI/Upload.php");
+include_once("MakeCGI/Script.php");
 
 trait MakeCGI
 {
@@ -9,8 +10,44 @@ trait MakeCGI
     var $CGI_Split_Vars=array();
     var $CGI_SearchVars=array();
 
-    use MakeCGI_Cookies,MakeCGI_Upload;
+    use
+        MakeCGI_Cookies,
+        MakeCGI_Upload,
+        MakeCGI_Script;
 
+    function CGI_Server_Name()
+    {
+        return $_SERVER[ "SERVER_NAME" ];
+    }
+
+
+
+    function CGI_Query_String()
+    {
+        //Retrive query hash
+        $argshash=$this->CGI_Query2Hash();
+        if (is_array($args))
+        {
+            //Overwrite specified value
+            foreach ($args as $arg => $value)
+            {
+                $argshash[ $arg ]=$value;
+            }
+        }
+        elseif ($args!="")
+        {
+            $argshash=$this->CGI_Query2Hash($args);
+        }
+
+        //Retransform in query
+        $qs=$this->CGI_Hash2Query($argshash);
+
+        //Add ? if necessary
+        if (preg_match('/\S/',$qs)) { $qs="?".$qs; }
+
+        return $qs;
+    }
+    
     //*
     //* sub CGI_Redirect, Parameter list: $uri,$caller=""
     //*

@@ -19,6 +19,26 @@ trait MyMod_Mail
         return $text;
     }
 
+    //*
+    //* function MyMod_Mail_Type_Get, Parameter list: $type,$user
+    //*
+    //* Returns mail subject and body.
+    //*
+
+    function MyMod_Mail_Type_Get($type,$language)
+    {
+        $where=
+            $this->UnitsObj()->UnitWhere
+            (
+               array
+               (
+                  "Name" => $type,
+                  "Language" => $language,
+               )
+            );
+
+        return $this->MailTypesObj()->Sql_Select_Hash($where);
+    }
     
     //*
     //* function MyMod_Mail_Typed_Send, Parameter list: $type,$user,$item,$hrefs=array()
@@ -37,19 +57,8 @@ trait MyMod_Mail
 
         $language=$this->ApplicationObj()->GetLanguage();
 
-        $where=
-            $this->UnitsObj()->UnitWhere
-            (
-               array
-               (
-                  "Name" => $type,
-                  "Language" => $language,
-               )
-            );
-
-        $mail=$this->MailTypesObj()->Sql_Select_Hash($where);
-                
-
+        $mail=$this->MyMod_Mail_Type_Get($type,$language);
+        
         $subject=
             $this->MyMod_Mail_Text_Filter
             (

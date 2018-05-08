@@ -155,7 +155,7 @@ class ItemLatex extends ItemPostProcess
 
     function GenerateLatexHorMenu($item=array())
     {
-        $hash=$this->Query2Hash();
+        $hash=$this->CGI_Query2Hash();
 
         $hash[ "Action" ]="Search";
         $key="PluralLatexDocs";
@@ -181,7 +181,7 @@ class ItemLatex extends ItemPostProcess
                    $hrefs,
                    $this->Href
                    (
-                      "?".$this->Hash2Query($hash),
+                      "?".$this->CGI_Hash2Query($hash),
                       $latexdoc[ "Name" ],
                       "",
                       "",

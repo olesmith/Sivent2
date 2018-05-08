@@ -31,11 +31,11 @@ class MyFriends_Add_Mail extends MyFriends_Groups
            $this->Unit(),
            array
            (
-              "LoginLink" => $this->ScriptExec
+              "LoginLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($args)
               ),
-              "RecoverLoginLink" => $this->ScriptExec
+              "RecoverLoginLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($rargs)
               ),

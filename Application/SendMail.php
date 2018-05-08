@@ -17,6 +17,14 @@ class SendMail extends LeftMenu
         $msg=$this->DIV($this->EmailStatusMessage,array("CLASS" => 'error'));
         if ($this->EmailStatus)
         {
+            foreach (array("To","CC","BCC","ReplyTo") as $key)
+            {
+                if (!is_array($mailhash[ $key ]))
+                {
+                    $mailhash[ $key ]=array($mailhash[ $key ]);
+                }
+            }
+            
             $table=array();
             if (!empty( $mailhash[ "Subject" ]))
             {
@@ -25,7 +33,10 @@ class SendMail extends LeftMenu
                    $table,
                    array
                    (
-                      $this->B("Assunto:"),
+                      $this->B
+                      (
+                          $this->MyLanguage_GetMessage("SendMail_Subject").": "
+                      ),
                       $mailhash[ "Subject" ],
                    )
                 );
@@ -37,7 +48,10 @@ class SendMail extends LeftMenu
                    $table,
                    array
                    (
-                      $this->B("Para:"),
+                      $this->B
+                      (
+                          $this->MyLanguage_GetMessage("SendMail_To").": "
+                      ),
                       join(";",$mailhash[ "To" ]),
                    )
                 );
@@ -50,7 +64,10 @@ class SendMail extends LeftMenu
                    $table,
                    array
                    (
-                      $this->B("CC:"),
+                      $this->B
+                      (
+                          $this->MyLanguage_GetMessage("SendMail_CC").": "
+                      ),
                       join(";",$mailhash[ "CC" ]),
                    )
                 );
@@ -64,7 +81,10 @@ class SendMail extends LeftMenu
                    $table,
                    array
                    (
-                      $this->B("CCO:"),
+                      $this->B
+                      (
+                          $this->MyLanguage_GetMessage("SendMail_BCC").": "
+                      ),
                       join(";",$mailhash[ "BCC" ]),
                     )
                 );
@@ -78,81 +98,29 @@ class SendMail extends LeftMenu
                    $table,
                    array
                    (
-                      $this->B("Anexo ".$n++.":"),
+                      $this->B
+                      (
+                          $this->MyLanguage_GetMessage("SendMail_Attachment")." ".
+                          $n++.":"
+                      ),
                       $attachment[ "Name" ],
                     )
                 );
             }
             $msg=
-                $this->DIV("Mensagem Enviado com Êxito.",array("CLASS" => 'error')).
+                $this->DIV
+                (
+                    $this->MyLanguage_GetMessage("SendMail_Sent"),
+                    array
+                    (
+                        "CLASS" => 'error',
+                    )
+                ).
                 $this->Html_Table("",$table);
         }
 
         return $msg;
     }
-    
-    /* //\* */
-    /* //\* function FilterMailField, Parameter list: $field */
-    /* //\* */
-    /* //\* Filters mail field text over global vars. */
-    /* //\* */
-
-    /* function FilterMailField($field,$filters=array()) */
-    /* { */
-    /*     $filters=array_merge */
-    /*     ( */
-    /*        $filters, */
-    /*        array */
-    /*        ( */
-    /*            $this->ApplicationObj()->MyApp_Mail_Info_Get(), */
-    /*           $this->HtmlSetupHash, */
-    /*           $this->CompanyHash */
-    /*        ) */
-    /*     ); */
-
-    /*     if (method_exists($this,"Unit")) */
-    /*     { */
-    /*         $unit=$this->Unit(); */
-    /*         $runit=array(); */
-    /*         foreach ($unit as $key => $value) */
-    /*         { */
-    /*             $runit[ "Unit_".$key ]=$value; */
-    /*         } */
-    /*         array_push($filters,$runit); */
-    /*     } */
-
-    /*     $field=$this->FilterHashes */
-    /*     ( */
-    /*        $this->Html2Text($field), */
-    /*        $filters */
-    /*     ); */
-
-    /*     return $field; */
-    /* } */
-
-    /* //\* */
-    /* //\* function ApplicationSendEmail, Parameter list: $user,$mailhash,$filters=array(),$attachments=array() */
-    /* //\* */
-    /* //\* Sends email calling Email::SendEmail. */
-    /* //\* Add trailer msg and inserts MailInfo vars into $mailhash. */
-    /* //\* */
-
-    /* function  ApplicationSendEmail($user,$mailhash,$filters=array(),$attachments=array()) */
-    /* { */
-    /*     return $this->MyApp_Email_Send($user,$mailhash,$filters,$attachments); */
-    /* } */
- 
-    /* //\* */
-    /* //\* function MailInfo, Parameter list:  */
-    /* //\* */
-    /* //\* Returns mail info, that is, content of $this->MailInfo. */
-    /* //\* Supposed to be overwritten by and ApplicationObj. */
-    /* //\* */
-
-    /* function MailInfo() */
-    /* { */
-    /*     return $this->MailInfo; */
-    /* } */
 }
 
 

@@ -14,7 +14,7 @@ trait MyApp_Interface_LeftMenu_Generate
         $html="";
 
         $this->CompanyHash[ "Language" ]=$this->GetLanguage();
-        $this->CompanyHash[ "Path" ]=$this->ScriptPath();
+        $this->CompanyHash[ "Path" ]=$this->CGI_Script_Path();
 
         foreach ($this->MyApp_Interface_LeftMenu_Read() as $submenuname => $submenu)
         {

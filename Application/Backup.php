@@ -171,9 +171,9 @@ class Backup extends ModPerms
 
         $filename=$this->DBHash[ "DB" ].".".$this->LTimeStamp2DateSort().".sql";
 
-        $this->SendDocHeader("sql",$filename);
+        $this->MyMod_Doc_Header_Send("sql",$filename);
 
-        print $text;
+        echo $text;
     }
 
 

@@ -66,7 +66,7 @@ trait MyMod_Group_Form
                $prelinks,
                $this->Href
                (
-                  "?".$this->Hash2Query($args)."#".$nameref,
+                  "?".$this->CGI_Hash2Query($args)."#".$nameref,
                   $firstname,
                   "Prim. ".$title." ".$names[ $first ]
                )
@@ -82,7 +82,7 @@ trait MyMod_Group_Form
                $prevtext,
                $this->Href
                (
-                  "?".$this->Hash2Query($args)."#".$nameref,
+                  "?".$this->CGI_Hash2Query($args)."#".$nameref,
                   $prevname,
                   "Prev. ".$title." ".$names[ $prev ]
                )
@@ -99,7 +99,7 @@ trait MyMod_Group_Form
                $this->Href
                (
                   "?".
-                  $this->Hash2Query($args)."#".$nameref,
+                  $this->CGI_Hash2Query($args)."#".$nameref,
                   $nextname,
                   "Prox. ".$title." ".$names[ $next ]
                ),
@@ -115,7 +115,7 @@ trait MyMod_Group_Form
                $postlinks,
                $this->Href
                (
-                  "?".$this->Hash2Query($args)."#".$nameref,
+                  "?".$this->CGI_Hash2Query($args)."#".$nameref,
                   $lastname,
                   "Ult. ".$title." ".$names[ $last ]
                )
@@ -127,7 +127,7 @@ trait MyMod_Group_Form
             (
                '/&'.$argsfield.'=\d+/',
                "",
-               $this->StartForm("?".$this->Hash2Query($args))
+               $this->StartForm("?".$this->CGI_Hash2Query($args))
             )."\n".
             $this->Anchor($nameref,"Selecionar ".$title.":")."\n".
             "[ "."\n".

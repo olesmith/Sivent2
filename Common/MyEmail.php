@@ -3,7 +3,7 @@
 
 include_once("libphp-phpmailer/class.phpmailer.php");
 include_once("libphp-phpmailer/class.smtp.php");
-include_once("libphp-phpmailer/class.pop3.php");
+#include_once("libphp-phpmailer/class.pop3.php");
 
 include_once("MyEmail/Recipients.php");
 include_once("MyEmail/Filters.php");
@@ -100,7 +100,14 @@ trait MyEmail
    
         $this->Email_PHPMailer->From=$mailhash[ "FromEmail" ];  
         $this->Email_PHPMailer->FromName=$mailhash[ "FromName" ];  
-   
+
+        foreach (array("To","CC","BCC","ReplyTo",) as $key )
+        {
+            if (!is_array($mailhash[ $key ]))
+            {
+                $mailhash[ $key ]=array($mailhash[ $key ]);
+            }
+        }
         foreach ($mailhash[ "To" ] as $id => $to)
         {
             if (empty($to)) { continue; }
@@ -119,9 +126,9 @@ trait MyEmail
             $this->Email_PHPMailer->AddBCC($to);
         }
 
-        if (!empty($mailhash[ "ReplyTo" ])) 
+        foreach ($mailhash[ "BCC" ] as $id => $rto)
         {
-            $this->Email_PHPMailer->addReplyTo($mailhash[ "ReplyTo" ]);
+           $this->Email_PHPMailer->addReplyTo($rto);
         }
 
         $this->Email_PHPMailer->Body=$mailhash[ "Body" ];

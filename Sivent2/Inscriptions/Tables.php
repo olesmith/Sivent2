@@ -119,6 +119,68 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     }
 
     //*
+    //* function Inscription_Payment_Cell, Parameter list: $group
+    //*
+    //* Generates Inscription Payments Group table data.
+    //*
+
+    function Inscription_Payment_Cell($group,$item=array())
+    {
+        return "Inscription_Payment_Type_Cell";
+    }
+    
+    //*
+    //* function Inscription_Payments_Table, Parameter list: $group
+    //*
+    //* Generates Inscription Payments Group table data.
+    //*
+
+    function Inscription_Payments_Datas($group,$item=array())
+    {
+        if (empty($item)) { $item=$this->ItemHash; }
+        
+        $commondata=
+            array
+            (
+                "Type",
+                "Lot",
+                "Has_Paid",
+                "Value_Nominal",
+                "Value_Paid" ,"Date_Paid"
+            );
+
+
+        $event=$this->Event();
+        
+        $datas=array();
+        if ($event[ "Payments_Type" ]==1)
+        {
+            $datas=
+                array
+                (
+                    "Receit_Paid",
+                );
+        }
+        elseif ($event[ "Payments_Type" ]==2)
+        {
+            $datas=
+                array
+                (
+                    "PagSeguro_Code",
+                );
+        }
+
+        $datas=
+            array_merge
+            (
+                $commondata,
+                $datas
+            );
+
+        return $this->FindAllowedData($edit=0,$datas);
+    }
+
+//*
     //* function Inscription_Event_Payments_Row, Parameter list:
     //*
     //* Creates Inscription edit table as matrix.
@@ -128,11 +190,23 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
     {
         $this->ItemDataSGroups[ "Payments" ][ "Visible" ]=FALSE;
 
+        $table=$this->MyMod_Item_Group_Table(1,"Payments",$inscription);
+
+        array_push
+        (
+            $table,
+            array
+            (
+                "Forma de pagamento",
+                "fff"
+            )
+        );
+
         return
             array
             (
+                $this->Html_Table().
                 $this->FriendsObj()->Friend_Event_Payments_Cell($this->Event()),
-                $this->MyMod_Item_Group_Table_HTML(1,"Payments",$inscription)
             );
     }
 
@@ -333,13 +407,17 @@ class InscriptionsTables extends InscriptionsTablesPreInscriptions
             
             array_push($table,$this->Button("submit",$title));
         }
+        
         if ($this->EventsObj()->Event_Payments_Has())
         {
-            array_unshift
+            array_push
             (
                 $table,
                 $this->Inscription_Event_Payments_Row($inscription),
-                $this->Buttons()
+                $this->Buttons
+                (
+                    $this->MyLanguage_GetMessage("Inscription_Button_Inscribed")
+                )
             );
         }
         

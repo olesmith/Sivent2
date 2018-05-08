@@ -14,7 +14,7 @@ array
         "Coordinator"   => 1,
         "Teacher"   => 1,
         "Handler"   => "MyApp_Handle_Help",
-        "AccessMethod"   => "MyApp_Handle_HasHelp",
+        "AccessMethod"   => "MyApp_Handle_Help_Has",
       ),
       "Start" => array
       (
@@ -277,7 +277,7 @@ array
         "Public"   => 1,
         "Person"   => 0,
         "Admin"   => 0,
-        "Handler"   => "HandleRecover",
+        "Handler"   => "Login_Password_Recover_Handle",
        ),
        "Sessions" => array
        (

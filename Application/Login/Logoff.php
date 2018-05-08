@@ -33,9 +33,9 @@ class LoginLogoff extends LoginForm
         $this->LoginType="Public";
         $this->Profile="Public";
 
-        $args=$this->Query2Hash();
-        $args=$this->Hidden2Hash($args);
-        $query=$this->Hash2Query($args);
+        $args=$this->CGI_Query2Hash();
+        $args=$this->CGI_Hidden2Hash($args);
+        $query=$this->CGI_Hash2Query($args);
 
         $this->AddCommonArgs2Hash($args);
         $args[ "Action" ]="Start";

@@ -15,7 +15,7 @@ trait MyApp_CGI
         if (!$this->HeadersSend)
         {
             //Now added, reload as edit, preventing multiple adds
-            header("Location: ?".$this->Hash2Query($args));
+            header("Location: ?".$this->CGI_Hash2Query($args));
 
             exit();
         }

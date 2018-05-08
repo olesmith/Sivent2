@@ -124,4 +124,17 @@ array
       "Coordinator" => 2,
       "Extensions" => array("pdf","jpg","jpeg","png"),
    ),
+   "PagSeguro_Code" => array
+   (
+      "Name" => "Code (PagSeguro)",
+      "Name_UK" => "Code (PagSeguro)",
+
+      "Sql" => "VARCHAR(256)",
+
+      "Public"   => 0,
+      "Person"   => 0,
+      "Admin"    => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
 );

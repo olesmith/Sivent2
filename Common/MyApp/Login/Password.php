@@ -144,7 +144,7 @@ trait MyApp_Login_Password
                $this->MyApp_Login_Password_Change_Table()
             ).
             $this->MakeHidden("Update",1).
-            $this->MakeHiddenFields().
+            $this->CGI_MakeHiddenFields().
             $this->Buttons().
             $this->EndForm();
 

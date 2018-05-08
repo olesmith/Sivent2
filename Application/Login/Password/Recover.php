@@ -43,12 +43,12 @@ class LoginPasswordRecover extends LoginPasswordRecoverMail
 
 
     //*
-    //* function StartPasswordRecovery, Parameter list: 
+    //* function Login_Password_Recovery_Start, Parameter list: 
     //*
     //* Creates recovery entry and sends mail.
     //*
 
-    function StartPasswordRecovery()
+    function Login_Password_Recovery_Start()
     {
         $user=$this->SelectUniqueHash
         (
@@ -67,50 +67,79 @@ class LoginPasswordRecover extends LoginPasswordRecoverMail
            )
         {
             $this->AddRecoverEntry($user);
-            $this->SendRecoverPasswordMail($user);
+            $this->Login_Password_Mail_Recover($user);
         }
 
         echo 
             $this->H(3,$this->GetMessage($this->LoginMessages,"Recover_Password_Mail_Message"));
     }
 
-
     //*
-    //* function HandleRecover, Parameter list:
+    //* function Login_Password_Recover_Has_Login, Parameter list:
     //*
     //* Handles reset password procedure.
     //*
 
-    function HandleRecover()
+    function Login_Password_Recover_Has_Login()
+    {
+        $login=$this->CGI_GETOrPOST("Login");
+        if (!empty($login) && preg_match('/^\S+\@\S+$/',$login))
+        {
+            return True;
+        }
+
+        return False;
+    }
+
+    //*
+    //* function Login_Password_Recover_Has_Code, Parameter list:
+    //*
+    //* Handles reset password procedure.
+    //*
+
+    function Login_Password_Recover_Has_Code()
+    {
+        $code=$this->CGI_GETOrPOST("Code");
+        if (!empty($code) && preg_match('/^\S+\@\S+$/',$code))
+        {
+            return True;;
+        }
+
+        return False;
+    }
+    
+    //*
+    //* function Login_Password_Recover_Handle, Parameter list:
+    //*
+    //* Handles reset password procedure.
+    //*
+
+    function Login_Password_Recover_Handle()
     {
         $this->MyApp_Interface_Head();
 
         if (
-            ($this->GetPOST("Update")!=1)
+            ($this->CGI_GETOrPOSTint("Update")!=1)
             ||
-            $this->GetPOST("Recover_Login")==""
+            $this->CGI_GETOrPOST("Recover_Login")==""
            )
         {
             if (
-                $this->GetGETOrPOST("Login")!=""
+                $this->Login_Password_Recover_Has_Login()
                 &&
-                preg_match('/^\S+\@\S+$/',$this->GetGETOrPOST("Login"))
-                &&
-                $this->GetGETOrPOST("Code")!=""
-                &&
-                preg_match('/^\d+$/',$this->GetGETOrPOST("Code"))
+                $this->Login_Password_Recover_Has_Code()
                )
             {
-                $this->FinalRecoverPasswordForm();
+                $this->Login_Password_Recovery_Form_Final();
             }
             else
             {
-                $this->InitRecoverPasswordForm();
+                $this->Login_Password_Recovery_Form_Init();
             }
         }
         else
         {
-            $this->StartPasswordRecovery();
+            $this->Login_Password_Recovery_Start();
         }
 
         exit();

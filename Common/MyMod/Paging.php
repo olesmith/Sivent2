@@ -32,12 +32,12 @@ trait MyMod_Paging
 
     function MyMod_Paging_Init($hash=array())
     {
-        $query=$this->ScriptQueryHash();
+        $query=$this->CGI_Script_Query_Hash();
         unset($query[ "Page" ]);
 
         $query=$this->MyMod_Search_CGI_Hash_Get($query);
 
-        $this->PageURL=$this->ScriptExec($this->Hash2Query($query));
+        $this->PageURL=$this->CGI_Script_Exec($this->CGI_Hash2Query($query));
  
         $this->NumberOfItems=count($this->ItemHashes);
         foreach (array_keys($this->ItemHashes) as $id)

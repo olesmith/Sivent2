@@ -96,8 +96,8 @@ trait MyApp_Handle_Export
             $this->StartForm().
             $this->Html_Table
             (
-               array("Module","Table","No of Items","Include"),
-               $table
+                array("Module","Table","No of Items","Include"),
+                $table
             ).
             $this->EndForm();
     }
@@ -122,8 +122,13 @@ trait MyApp_Handle_Export
                         "   '".$sqltable."' => \n".
                         $this->$obj()->MyMod_Items_Export
                         (
-                         $this->$obj()->Sql_Select_Hashes(array(),array(),"ID"),
-                           $sqltable
+                            $this->$obj()->Sql_Select_Hashes
+                            (
+                                array(),
+                                array(),
+                                "ID"
+                            ),
+                            $sqltable
                         );
                 }
             }
@@ -131,11 +136,8 @@ trait MyApp_Handle_Export
 
         $text.=");\n";
                
-        //echo
-        //    $this->SendDocHeader("txt","Sids.php").
-        //    preg_replace('/\n/',"<BR>",$text);exit();
         echo
-            $this->SendDocHeader("txt","Sids.php").
+            $this->MyMod_Doc_Header_Send("txt","Sids.php").
             $text;
     }
 

@@ -22,7 +22,7 @@ trait MyMod_Data_Fields_Barcode
                    //array("SIZE" => $this->ItemData[ $data ][ "Size" ])
                 );
         }
-        else
+        elseif (!empty($item[ "Code" ]))
         {
             $img=$this->BarCode_Generate($item);
         
@@ -36,6 +36,8 @@ trait MyMod_Data_Fields_Barcode
                 ).
                 "";
         }
+
+        return "";
     }
 }
 

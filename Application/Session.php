@@ -125,10 +125,10 @@ class Session extends Login
                 header
                 (
                    "Location: https://".$this->ServerName()."/".
-                   $this->ScriptPath()."/".
-                   $this->ScriptName().
-                   $this->ScriptPathInfo()."?".
-                   $this->QueryString()
+                   $this->CGI_Script_Path()."/".
+                   $this->CGI_Script_Name().
+                   $this->CGI_Script_Path_Info()."?".
+                   $this->CGI_Query_String()
                 );
 
                 exit();

@@ -101,7 +101,7 @@ class Html extends HtmlForm
             //Take Extra Path Information into consideration,
             //since relative links changes using this feature
             //One up (../)  per / in path info
-            $pathinfos=$this->GetExtraPathInfos();
+            $pathinfos=$this->CGI_Script_Extra_Path_Infos();
             for ($n=0;$n<count($pathinfos);$n++)
             {
                 $spath="../".$spath;

@@ -8,7 +8,7 @@ array
        (
            "Type","Lot","Has_Paid",
            "Value_Nominal","Receit_Paid",
-           "Value_Paid" ,"Date_Paid",
+           "Value_Paid" ,"Date_Paid"
          ),
 
        "Person" => 0,
@@ -17,5 +17,6 @@ array
        "Friend"     => 2,
        "Coordinator" => 1,
        "Visible" => 1,
+       "TableDataMethod" => "Inscription_Payments_Datas",
      ),
 );

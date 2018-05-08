@@ -33,7 +33,7 @@ trait MakeCGI_Cookies
             return FALSE;
         }
 
-        setcookie($name,$value,$expire,$this->ScriptPath());
+        setcookie($name,$value,$expire,$this->CGI_Script_Path());
         $_COOKIE[ $name ]=$value;
 
         return $value;
@@ -200,7 +200,7 @@ trait MakeCGI_Cookies
         {
             if (!$this->ApplicationObj()->HeadersSend)
             {
-                setcookie($name,$value,$expire,$this->ScriptPath());
+                setcookie($name,$value,$expire,$this->CGI_Script_Path());
                 $_COOKIE[ $name ]=$value;
 
                 $this->CookiesSet[ $name ]=$value;

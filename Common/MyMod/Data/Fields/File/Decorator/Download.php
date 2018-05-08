@@ -131,7 +131,7 @@ trait MyMod_Data_Fields_File_Decorator_Download
     function MyMod_Data_Fields_File_Decorator_Download_Href($item,$data)
     {
         $args=$this->CGI_URI2Hash();
-        $args=$this->Hidden2Hash($args);
+        $args=$this->CGI_Hidden2Hash($args);
         $this->AddCommonArgs2Hash($args);
 
         $args[ "ModuleName" ]=$this->ModuleName;
@@ -139,7 +139,7 @@ trait MyMod_Data_Fields_File_Decorator_Download
         $args[ "ID" ]=$item[ "ID" ];
         $args[ "Data" ]=$data;
 
-        return "?".$this->Hash2Query($args);        
+        return "?".$this->CGI_Hash2Query($args);        
     }
 }
 

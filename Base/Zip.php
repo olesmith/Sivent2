@@ -115,7 +115,7 @@ class Zip extends OptionsTable
 
     function SendZip($zipname)
     {
-        $this->SendDocHeader("zip",$zipname);
+        $this->MyMod_Doc_Header_Send("zip",$zipname);
         echo file_get_contents($zipname);
         exit();
     }
@@ -166,7 +166,7 @@ class Zip extends OptionsTable
             $zip->close();
             $contents=$this->MyReadFile($outfile);
 
-            $this->SendDocHeader("zip",$outname);
+            $this->MyMod_Doc_Header_Send("zip",$outname);
             echo join("",$this->MyReadFile($outfile));
 
             unlink($outfile);

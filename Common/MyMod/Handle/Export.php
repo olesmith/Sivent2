@@ -106,7 +106,7 @@ trait MyMod_Handle_Export
             $csv.=join($sep,$row)."\n";
         }
 
-        $this->SendDocHeader("csv",$outdoc.".csv","utf-8");
+        $this->MyMod_Doc_Header_Send("csv",$outdoc.".csv","utf-8");
         echo html_entity_decode($csv);
     }
 
@@ -116,7 +116,7 @@ trait MyMod_Handle_Export
 
     function MyMod_Handle_Export_Latex($outdoc,$datas)
     {
-        $this->SendDocHeader("tex",$outdoc.".tex","utf-8");
+        $this->MyMod_Doc_Header_Send("tex",$outdoc.".tex","utf-8");
         echo
             html_entity_decode
             (
@@ -214,7 +214,7 @@ trait MyMod_Handle_Export
 
         $sql[ count($sql)-1 ]=preg_replace('/,$/',";",$sql[ count($sql)-1 ]);
 
-        $this->SendDocHeader("sql",$outdoc.".sql","utf-8");
+        $this->MyMod_Doc_Header_Send("sql",$outdoc.".sql","utf-8");
 
         echo html_entity_decode(join("\n",$sql));
     }

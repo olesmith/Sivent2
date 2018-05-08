@@ -173,12 +173,12 @@ array
       "Sql" => "VARCHAR(64)",
       "Size"  => "35",
 
-      "Public"   => 1,
-      "Person"   => 1,
+      "Public"   => 0,
+      "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 2,
-      "Assessor"  => 1,
+      "Assessor"  => 0,
       "Search"  => FALSE,
    ),
    "Payments_PagSeguro_Code" => array
@@ -188,12 +188,12 @@ array
       "Sql" => "VARCHAR(64)",
       "Size"  => "35",
 
-      "Public"   => 1,
-      "Person"   => 1,
+      "Public"   => 0,
+      "Person"   => 0,
       "Admin"    => 2,
-      "Friend"     => 1,
+      "Friend"     => 0,
       "Coordinator" => 2,
-      "Assessor"  => 1,
+      "Assessor"  => 0,
       "Search"  => FALSE,
    ),
  );

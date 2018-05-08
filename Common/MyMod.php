@@ -179,6 +179,65 @@ trait MyMod
         return $this->MyMod_ItemName("ItemsName");
     }
 
+    //*
+    //* function MyMod_ItemsName, Parameter list: 
+    //*
+    //* Sends the doc header.
+    //*
+
+    function MyMod_Doc_Header_Send($contenttype,$filename="",$charset="",$expiresin=0,$filemtime=0)
+    {
+        $contenttypes=array
+            (
+                "txt"  => "text/plain",
+                "html" => "text/html",
+                "sql"  => "text/plain",
+                "csv"  => "application/vnd.ms-excel",
+                "tex"  => "application/x-latex",
+                "pdf"  => "application/pdf",
+                "odt"  => "application/vnd.oasis.opendocument.text",
+                "ods"  => "application/vnd.oasis.opendocument.spreadsheet",
+                "doc"  => "application/vnd.msword",
+                "xls"  => "application/vnd.ms-excel",
+                "zip"  => "application/zip",
+                "jpg"  => "image/jpeg",
+                "png"  => "image/png",
+            );
+
+        if (!empty($contenttypes[ $contenttype ]))
+        {
+            $contenttype=$contenttypes[ $contenttype ];
+        }
+
+        if ($contenttype=="") { $contenttype="text/plain"; }
+
+        if ($charset=="" && isset($this->HtmlSetupHash[ "CharSet"  ]))
+        {
+            $charset=$this->HtmlSetupHash[ "CharSet"  ];
+        }
+        else { $charset="utf=8"; }
+
+        header('Content-type: '.$contenttype.'; charset='.$charset);
+
+        if (!empty($filename))
+        {
+            header
+            (
+                'Content-Disposition: attachment;'.
+                'filename="'.$filename.'"; charset='.$charset
+            );             
+        }
+      
+        if (!empty($expiresin))
+        {
+            $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + $expiresin);
+          
+            header('Cache-Control: public, max-age='.$expires);
+            header('Expires: '.$expires);
+            header('Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime));
+        }
+
+    }
 }
 
 ?>

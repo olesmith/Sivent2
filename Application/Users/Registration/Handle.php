@@ -67,7 +67,7 @@ class UsersRegistrationHandle extends UsersRegistrationHandlers
 
         if ($this->GetGET("Action")=="Recover")
         {
-            $res=$this->HandleRecover($loptions,$lloptions);
+            $res=$this->Login_Password_Recover_Handle($loptions,$lloptions);
         }
 
         echo $this->SystemTrailingTable($poptions);

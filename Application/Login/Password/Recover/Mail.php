@@ -3,12 +3,12 @@
 class LoginPasswordRecoverMail extends LoginPasswordRecoverForms
 {
     //*
-    //* function SendRecoverPasswordMail, Parameter list: $user
+    //* function Login_Password_Mail_Recover, Parameter list: $user
     //*
     //* Sends email as a response to a password reset request.
     //*
 
-    function  SendRecoverPasswordMail($user)
+    function  Login_Password_Mail_Recover($user)
     {
         $args=$this->CGI_URI2Hash();
         $args[ "Action" ]="Recover";
@@ -22,7 +22,7 @@ class LoginPasswordRecoverMail extends LoginPasswordRecoverForms
            $this->Unit(),
            array
            (
-              "RecoverLink" => $this->ScriptExec
+              "RecoverLink" => $this->CGI_Script_Exec
               (
                  $this->CGI_Hash2URI($args)
               ),
@@ -31,12 +31,12 @@ class LoginPasswordRecoverMail extends LoginPasswordRecoverForms
     }
 
     //*
-    //* function SendPasswordRecoveredMail, Parameter list: $user
+    //* function Login_Password_Mail_Recovered, Parameter list: $user
     //*
     //* Sends email informing that password has been changed.
     //*
 
-    function  SendPasswordRecoveredMail($user)
+    function  Login_Password_Mail_Recovered($user)
     {
         $args=$this->CGI_URI2Hash();
         $args[ "Action" ]="Login";
@@ -48,7 +48,7 @@ class LoginPasswordRecoverMail extends LoginPasswordRecoverForms
            $this->Unit(),
            array
            (
-              "LoginLink" => $this->ScriptExec
+              "LoginLink" => $this->CGI_Script_Exec
               (
                  $this->CGI_Hash2URI($args)
               ),

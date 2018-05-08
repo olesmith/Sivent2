@@ -228,7 +228,7 @@ class Items extends ItemsEmails
 
     function MakeCheckAllLinks()
     {
-        $href=$this->ThisScriptExec();
+        $href=$this->ThisCGI_Script_Exec();
         $href=preg_replace('/&CheckAll=-?[01]/',"",$href);
 
         return

@@ -44,7 +44,7 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
     function MyMod_Data_Fields_File_Decorator_Unlink_Href($item,$data)
     {
         $args=$this->CGI_URI2Hash();
-        $args=$this->Hidden2Hash($args);
+        $args=$this->CGI_Hidden2Hash($args);
         $this->AddCommonArgs2Hash($args);
 
         $args[ "ModuleName" ]=$this->ModuleName;
@@ -55,7 +55,7 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
         return
             $this->MyActions_Entry_Alert
             (
-                "?".$this->Hash2Query($args),
+                "?".$this->CGI_Hash2Query($args),
                 $this->MyLanguage_GetMessage("Upload_Remove_Confirm")."?"
             );
     }

@@ -24,7 +24,7 @@ class LoginLoginChange extends LoginLoginMail
             $this->StartForm("?Action=NewLogin").
             $this->ChangeLoginTable($newemail,$code).
             $this->MakeHidden("Update",1).
-            $this->MakeHiddenFields().
+            $this->CGI_MakeHiddenFields().
             $this->Button("submit","Enviar").
             $this->EndForm();
 

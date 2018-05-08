@@ -103,7 +103,7 @@ class ItemRow extends ItemEdits
         $rdata="";
         if ($plural) { $rdata=$item[ "ID" ]."_".$data; }
         if ($precgikey) { $rdata=$precgikey.$rdata; }
-            
+
         if ($access>=1)
         {
             $value="";

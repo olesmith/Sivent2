@@ -349,7 +349,7 @@ class ItemsLatex extends Item
 
         if ($printlatex)
         {
-            $this->SendDocHeader("tex",$texfile);
+            $this->MyMod_Doc_Header_Send("tex",$texfile);
             print $latex;
         }
         else

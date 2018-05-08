@@ -12,11 +12,11 @@ include_once("App/Has.php");
 include_once("App/Handle.php");
 include_once("App/Override.php");
 
-#require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
+require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
 
-#\PagSeguro\Library::initialize();
-#\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-#\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+\PagSeguro\Library::initialize();
+\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 
 //For modules.
@@ -103,7 +103,7 @@ class Sivent2 extends App_Override
         $event=$this->CGI_GETint("Event");
         if (!empty($event))
         {
-            $args=$this->Query2Hash($this->URL_CommonArgs);           
+            $args=$this->CGI_Query2Hash($this->URL_CommonArgs);           
             $args[ "Event" ]=$event;
 
            $add="Event=".$event;

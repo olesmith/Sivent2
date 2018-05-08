@@ -9,13 +9,14 @@ trait MyMod_Item_Group_Table
 
     function MyMod_Item_Group_Table_Datas($group)
     {
+        $datas=array();
         if (!empty($this->ItemDataSGroups[ $group ][ "TableDataMethod" ]))
         {
             $method=$this->ItemDataSGroups[ $group ][ "TableDataMethod" ];
 
             $datas=$this->$method($group);
         }
-        else
+        elseif (!empty($this->ItemDataSGroups[ $group ][ "Data" ]))
         {
             $datas=$this->ItemDataSGroups[ $group ][ "Data" ];
         }
@@ -52,13 +53,14 @@ trait MyMod_Item_Group_Table
 
     function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="",$title="")
     {
+        var_dump($this->MyMod_Item_Group_Table_Datas($group));
         $table=
             $this->ItemTable
             (
                $edit,
                $item,
                TRUE,
-               $this->MyMod_Item_Group_Table_Datas($edit,$item,$group),
+               $this->MyMod_Item_Group_Table_Datas($group),
                array(),
                $plural,
                FALSE,
@@ -158,8 +160,8 @@ trait MyMod_Item_Group_Table
                   $options,
                   array(),
                   array(),
-                  TRUE,
-                  TRUE
+                  False,
+                  False
                );
         }
 

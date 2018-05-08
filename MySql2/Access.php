@@ -147,7 +147,7 @@ class Access extends MySql
         $savelink=$this->SaveLink;
         $savelink=preg_replace('/\.php[^\?]*/',".php".$pathinfo,$savelink);
 
-        header( 'Location: '.$this->ScriptPath()."/".$savelink);
+        header( 'Location: '.$this->CGI_Script_Path()."/".$savelink);
         exit();
   }
 
@@ -180,7 +180,7 @@ class Access extends MySql
 
       $pathinfo=$this->GenExtraPathInfo();
       $newlink=preg_replace('/\.php[^\?]*/',".php".$pathinfo,$newlink);
-      $newlink=$this->ScriptPath()."/".$newlink;
+      $newlink=$this->CGI_Script_Path()."/".$newlink;
 
       //header( 'Location: '.$newlink);
       print "Action $raction not allowed - ciooo...";

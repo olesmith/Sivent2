@@ -13,7 +13,15 @@ trait MyMod_Item_Table
             $this->Html_Table
             (
                "",
-               $this->MyMod_Item_Table($edit,$item,$datas,$plural,$includename,$includecompulsorymsg),
+               $this->MyMod_Item_Table
+               (
+                   $edit,
+                   $item,
+                   $datas,
+                   $plural,
+                   $includename,
+                   $includecompulsorymsg
+               ),
                $toptions,$troptions,$tdoptions
             ).
             "";

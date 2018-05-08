@@ -36,7 +36,7 @@ trait MyMod_Sort_Titles
 
     function MyMod_Sort_Title_Cell($data,$sortlinks=TRUE,$latex=FALSE)
     {
-        $args=$this->Query2Hash();
+        $args=$this->CGI_Query2Hash();
 
         $title=$this->MyMod_Data_Title($data);
 
@@ -87,7 +87,7 @@ trait MyMod_Sort_Titles
                 " ".
                 $this->GetRealNameKey($this->ItemData[ $data ]);
 
-            $query="?".$this->Hash2Query($args);
+            $query="?".$this->CGI_Hash2Query($args);
 
             $title.=" ".$this->Href($query,$img,$stitle,"",'datatitleimg');
         }
@@ -118,7 +118,7 @@ trait MyMod_Sort_Titles
                   "CLASS" => 'datatitlelink'
                )
             )."\n";
-            $query="?".$this->Hash2Query($args);
+            $query="?".$this->CGI_Hash2Query($args);
             $title.=$this->Href($query,$img,"Colocar em Ordem ".$text,"12",'datatitleimg');
 
             unset($args[ $this->ModuleName."_Reverse" ]);

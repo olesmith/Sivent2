@@ -179,7 +179,7 @@ trait MyMod_Data_Fields_Show
             else
             {
                 $file=$this->ItemData[ $data ][ "Iconify" ];
-                $extrapath_pathcorrection=$this->ExtraPathPathCorrection();
+                $extrapath_pathcorrection=$this->CGI_Script_Extra_Path_Correction();
                 if ($extrapath_pathcorrection!="")
                 {
                     $file=$extrapath_pathcorrection."/".$file;

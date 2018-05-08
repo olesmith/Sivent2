@@ -10,19 +10,24 @@ class App_Override extends App_Handle
 
     function MyApp_Interface_Application_Script($args=array())
     {
-        return
-            parent::MyApp_Interface_Application_Script($args).
-            $this->HtmlTags
-            (
-               "SCRIPT",
-               "",
-               array
-               (
-                   "TYPE" => 'text/javascript',
-                    "SRC"  => 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js',
-               )
-            ).
-            "";
+        $script=parent::MyApp_Interface_Application_Script($args);
+        $event=$this->Event();
+        if (!empty($event) && $event[ "Payments_Type" ]==2)
+        {
+            $script.=
+                $this->HtmlTags
+                (
+                    "SCRIPT",
+                    "",
+                    array
+                    (
+                        "TYPE" => 'text/javascript',
+                        "SRC"  => 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js',
+                    )
+                );
+        }
+
+        return $script;
     }
     
     //*

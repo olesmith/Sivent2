@@ -3,14 +3,14 @@
 class LoginPasswordRecoverForms extends LoginPasswordChange
 {
     //*
-    //* function InitRecoverPasswordForm, Parameter list: $logindata
+    //* function Login_Password_Recovery_Form_Init, Parameter list: $logindata
     //*
     //* Creates solicitation of reset pássword form.
     //*
 
-    function InitRecoverPasswordForm()
+    function Login_Password_Recovery_Form_Init()
     {
-        $login=$this->GetPOST("Recover_Login");
+        $login=$this->CGI_GET("Recover_Login");
         if (empty($login)) { $login=$this->GetGET("Login"); }
 
         echo 
@@ -42,7 +42,7 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
     }
 
     //*
-    //* function FinalRecoverPasswordForm, Parameter list:
+    //* function Login_Password_Recovery_Form_Final, Parameter list:
     //*
     //* Final recover password dialogue. Tests if Login and Code are given,
     //* and if they are, prints the newpassword and repeat password fields.
@@ -50,7 +50,7 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
     //* the access code.
     //*
 
-    function FinalRecoverPasswordForm()
+    function Login_Password_Recovery_Form_Final()
     {
         $changed=FALSE;
         $message="";
@@ -114,19 +114,8 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
                            $user,
                            $this->AuthHash[ "Table" ]
                         );
-                        /* $this->MySqlSetItemValues */
-                        /* ( */
-                        /*    $this->AuthHash[ "Table" ], */
-                        /*    array */
-                        /*    ( */
-                        /*       $this->AuthHash[ "PasswordField" ], */
-                        /*       "RecoverCode", */
-                        /*       "RecoverMTime" */
-                        /*    ), */
-                        /*    $user */
-                        /* ); */
-
-                        $this->SendPasswordRecoveredMail($user);
+ 
+                        $this->Login_Password_Mail_Recovered($user);
 
                         print $this->H
                         (
@@ -178,7 +167,7 @@ class LoginPasswordRecoverForms extends LoginPasswordChange
             $this->MakeHidden("Unit",$unit).
             $this->MakeHidden("Code",$this->GetGETOrPOST("Code")).
             $this->MakeHidden("Update",1).
-            $this->MakeHiddenFields().
+            $this->CGI_MakeHiddenFields().
             $this->Buttons().
             $this->EndForm();
 

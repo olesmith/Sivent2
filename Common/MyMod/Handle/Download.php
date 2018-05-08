@@ -60,7 +60,7 @@ trait MyMod_Handle_Download
            $ext=strtolower($ext);
            array_push($comps,$ext);
           
-           $this->SendDocHeader
+           $this->MyMod_Doc_Header_Send
            (
                $ext,
                preg_replace('/^\./',"",basename(join(".",$comps))),

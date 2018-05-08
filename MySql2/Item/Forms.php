@@ -578,9 +578,9 @@ class ItemForms extends Fields
             $res=$this->Add($msg);
             if ($res)
             {
-                $args=$this->Query2Hash();
-                $args=$this->Hidden2Hash($args);
-                $query=$this->Hash2Query($args);
+                $args=$this->CGI_Query2Hash();
+                $args=$this->CGI_Hidden2Hash($args);
+                $query=$this->CGI_Hash2Query($args);
 
                 $action=$this->MyActions_Detect();
 
@@ -591,7 +591,7 @@ class ItemForms extends Fields
                 $args[ "ID" ]=$this->ItemHash[ "ID" ];
 
                 //Now added, reload as edit, preventing multiple adds on user pressing F5.
-                header("Location: ?".$this->Hash2Query($args));
+                header("Location: ?".$this->CGI_Hash2Query($args));
                 exit();
             }
         }
@@ -631,16 +631,6 @@ class ItemForms extends Fields
         $this->Singular=TRUE;
         $this->NoFieldComments=TRUE;
 
-        /* $id=$this->CGI_GETint("ID"); */
-        /* if (!empty($id)) */
-        /* { */
-        /*     $this->ItemHash=$this->Sql_Select_Hash(array("ID" => $id)); */
-        /*     if (empty($this->ItemHash)) */
-        /*     { */
-        /*         $this->DoDie("No such item ".$id); */
-        /*     } */
-        /* } */
-
         $item=$this->ItemHash;
         $this->InitAddDefaults();
 
@@ -651,9 +641,9 @@ class ItemForms extends Fields
             $res=$this->Copy();
             if ($res)
             {
-                $args=$this->Query2Hash();
-                $args=$this->Hidden2Hash($args);
-                $query=$this->Hash2Query($args);
+                $args=$this->CGI_Query2Hash();
+                $args=$this->CGI_Hidden2Hash($args);
+                $query=$this->CGI_Hash2Query($args);
 
                 $action=$this->MyActions_Detect();
 
@@ -675,7 +665,7 @@ class ItemForms extends Fields
                 $this->ApplicationObj->LogMessage("Copy","Item Added");
                 
                 //Now added, reload as edit, preventing multiple adds, the user reloading the page.
-                header("Location: ?".$this->Hash2Query($args));
+                header("Location: ?".$this->CGI_Hash2Query($args));
                 exit();
             }
             else

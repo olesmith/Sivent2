@@ -65,7 +65,7 @@ class Tables extends Table
 
         //Make some Actions point to base class module
 
-        $query=$this->ScriptQueryHash();
+        $query=$this->CGI_Script_Query_Hash();
         $query[ "ModuleName" ]=$this->ModuleName;
         $query[ "ID" ]="#ID";
         $object->InitActions();
@@ -77,7 +77,7 @@ class Tables extends Table
                 $object->Actions[ $action ]=$this->Actions[ $action ];
 
                 $query[ "Action" ]=$action;
-                $object->Actions[ $action ][ "Href" ]="?".$this->Hash2Query($query);
+                $object->Actions[ $action ][ "Href" ]="?".$this->CGI_Hash2Query($query);
             }
         }
 

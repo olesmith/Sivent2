@@ -34,8 +34,8 @@ trait MyEmail_Filters
 
         return $this->FilterHashes
         (
-           $this->Html2Text($field),
-           $filters
+            $this->Html2Text($field),
+            $filters
         );
     }
     

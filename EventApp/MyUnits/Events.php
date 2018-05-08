@@ -11,7 +11,15 @@ class MyUnitsEvents extends MyUnitsMailsTypes
 
     function Event_IDs_Get()
     {
-        return $this->EventsObj()->Sql_Select_Unique_Col_Values("ID",array("Unit" => $this->Unit("ID")));
+        return
+            $this->EventsObj()->Sql_Select_Unique_Col_Values
+            (
+                "ID",
+                array
+                (
+                    "Unit" => $this->Unit("ID"),
+                )
+            );
     }
 }
 

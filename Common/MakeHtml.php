@@ -6,6 +6,8 @@ include_once("MakeOptions.php");
 include_once("MakeHtml/Input.php");
 include_once("MakeHtml/Form.php");
 include_once("MakeHtml/Tags.php");
+include_once("MakeHtml/CSS.php");
+include_once("MakeHtml/Table.php");
 
 trait MakeHtml
 {
@@ -13,7 +15,9 @@ trait MakeHtml
         MakeOptions,MakeCGI,
         MakeHtml_Tags,
         MakeHtml_Form,
-        MakeHtml_Input;
+        MakeHtml_Input,
+        MakeHtml_CSS,
+        MakeHtml_Table;
 
     //*
     //* sub Html_Tag, Parameter list: $tag,$options=array(),$contents="

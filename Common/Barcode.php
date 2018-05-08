@@ -337,8 +337,12 @@ trait Barcode
 
     function BarCode_Get($item)
     {
-        $code=$item[ "Code" ];
-        return $item[ "Code" ];
+        $code="11";
+        if (!empty($item[ "Code" ]))
+        {
+            $code=$item[ "Code" ];
+        }
+        return $code;
     }
     
     //*
@@ -361,7 +365,13 @@ trait Barcode
 
     function BarCode_File($item)
     {
-        return $this->BarCode_Code2File($item[ "Code" ]);
+        $code="1";
+        if (!empty($item[ "Code" ]))
+        {
+            return $this->BarCode_Code2File($item[ "Code" ]);
+        }
+
+        return $code;
     }
     
     //*
@@ -376,8 +386,11 @@ trait Barcode
         {
             mkdir($this->BarcodeDir);
         }
-        
-        $this->Barcode_Image_Write($item[ "Code" ],$this->BarCode_File($item));
+
+        if (!empty($item[ "Code" ]))
+        {
+            $this->Barcode_Image_Write($item[ "Code" ],$this->BarCode_File($item));
+        }
         
         return $this->BarCode_File($item);
     }

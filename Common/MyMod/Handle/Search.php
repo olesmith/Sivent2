@@ -213,7 +213,7 @@ trait MyMod_Handle_Search
       if ($hasitems && $edit && $output=="html")
       {
           $print.= 
-              $this->MakeHiddenFields(TRUE).//include tabmovesdown hidden var
+              $this->CGI_MakeHiddenFields(TRUE).//include tabmovesdown hidden var
               $this->ItemGroupHidden($group).
               $this->ItemEditListHidden($edit).
               $this->ItemPageHidden($edit).

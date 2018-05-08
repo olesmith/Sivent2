@@ -224,14 +224,14 @@ class Table extends TableLanguage
         $rargs=array();
         $rargs[ "ModuleName" ]=$this->ModuleName;
 
-        $args=$this->Query2Hash($argstring,$rargs);
+        $args=$this->CGI_Query2Hash($argstring,$rargs);
 
         if (!empty($href) && !preg_match('/\?/',$href))
         {            
             $args[ "Action" ]=$href;
         }
         
-        return parent::StartForm("?".$this->Hash2Query($args),$method,$enctype,$options,$suppresscgis);
+        return parent::StartForm("?".$this->CGI_Hash2Query($args),$method,$enctype,$options,$suppresscgis);
     }
 
     //*
@@ -250,11 +250,12 @@ class Table extends TableLanguage
 
         $rargs=array();
         //$rargs[ "ModuleName" ]=$this->ModuleName;
-        $args=$this->Query2Hash($argstring,$rargs);
+        $args=$this->CGI_Query2Hash($argstring,$rargs);
 
         return parent::Href
         (
-           $script."?".$this->Hash2Query($args),
+           $script."?".
+           $this->CGI_Hash2Query($args),
            $name,$title,$target,$class,$noqueryargs,$options,$anchor
         );
     }

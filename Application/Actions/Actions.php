@@ -272,7 +272,7 @@ array
         "Public"   => 1,
         "Person"   => 0,
         "Admin"   => 0,
-        "Handler"   => "HandleRecover",
+        "Handler"   => "Login_Password_Recover_Handle",
        ),
        "Sessions" => array
        (

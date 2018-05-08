@@ -235,7 +235,7 @@ class Submissions_Authors extends Submissions_Author
             
             $args=$this->UnitEventWhere($args);
 
-            $url=$this->Hash2Query($args);
+            $url=$this->CGI_Hash2Query($args);
 
             $title="Register";
             if ($edit==0)
@@ -248,7 +248,7 @@ class Submissions_Authors extends Submissions_Author
                 $field.
                 $this->Href
                 (
-                    "?".$this->Hash2Query($args),
+                    "?".$this->CGI_Hash2Query($args),
                     $title,
                     "Inscrição Avulso",
                     "Register"

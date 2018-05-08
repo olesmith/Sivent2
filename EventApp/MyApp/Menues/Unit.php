@@ -98,7 +98,7 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
 
     function HtmlUnitMenu($menufile="LeftMenu.php")
     {
-        $args=$this->ScriptQueryHash();
+        $args=$this->CGI_Script_Query_Hash();
         if ($this->Unit) { $args[ "Unit" ]=$this->Unit[ "ID" ]; }
         $args[ "ModuleName" ]="";
         $args[ "Action" ]="Search";
@@ -133,7 +133,7 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
                       $unit[ "Name" ],
                       array
                       (
-                         "HREF" => "?".$this->Hash2Query($rargs),
+                         "HREF" => "?".$this->CGI_Hash2Query($rargs),
                          "TITLE" => "Ano de ".$unit[ "Name" ],
                       )
                    )

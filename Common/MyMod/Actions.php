@@ -39,14 +39,20 @@ trait MyMod_Actions
         $args[ "Action" ]="Download";
         $args[ "ID" ]= $item[ "ID" ];
         $args[ "Data" ]=$data;
-                        
-        return
-            $this->IMG
-            (
-                "icons/".$this->Actions[ $data ][ "Icon" ],
-                $data,
-                20,20
-            );
+
+        $img=$data;
+        if (!empty($this->Actions[ $data ][ "Icon" ]))
+        {
+            $img=
+                $this->IMG
+                (
+                    "icons/".$this->Actions[ $data ][ "Icon" ],
+                    $data,
+                    20,20
+                );
+        }
+
+        return $img;
     }
     
 }

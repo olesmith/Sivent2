@@ -14,7 +14,7 @@ trait MyApp_Interface_LeftMenu_Language
     {
         $rlang=$this->GetLanguage();
 
-        $args=$this->Query2Hash();
+        $args=$this->CGI_Query2Hash();
 
         $html="";
         foreach ($this->Languages as $lang => $langdef)
@@ -24,7 +24,7 @@ trait MyApp_Interface_LeftMenu_Language
                 $img=$this->IMG($this->Icons."/".$langdef[ "Icon" ],$langdef[ "Name" ],50,75);
 
                 $args[ "Lang" ]=$lang;
-                $query=$this->Hash2Query($args);
+                $query=$this->CGI_Hash2Query($args);
 
                 $html.=$this->Center($this->Href("?".$query,$img,$langdef[ "Name" ]));
             }

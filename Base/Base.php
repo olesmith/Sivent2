@@ -650,7 +650,7 @@ class Base extends Filters
 
             imagestring($handle,$fontsize,5,0,$text,$txt_color);
 
-            $extrapath_pathcorrection=$this->ExtraPathPathCorrection();
+            $extrapath_pathcorrection=$this->CGI_Script_Extra_Path_Correction();
             $tmpfile="tmp/".$file;
             imagepng ($handle,$tmpfile);
 

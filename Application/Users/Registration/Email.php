@@ -38,15 +38,15 @@ class UsersRegistrationEmail extends Profiles
            $this->Unit(),
            array
            (
-              "ConfirmLink" => $this->ScriptExec
+              "ConfirmLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($args)
               ),
-              "ConfirmLinkForm" => $this->ScriptExec
+              "ConfirmLinkForm" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($rargs)
               ),
-              "ResendCodeLink" => $this->ScriptExec
+              "ResendCodeLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($rrargs)
               ),
@@ -79,11 +79,11 @@ class UsersRegistrationEmail extends Profiles
            $this->Unit(),
            array
            (
-              "LoginLink" => $this->ScriptExec
+              "LoginLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($args)
               ),
-              "RecoverPasswordLink" => $this->ScriptExec
+              "RecoverPasswordLink" => $this->CGI_Script_Exec
               (
                   $this->CGI_Hash2URI($rargs)
               ),

@@ -128,15 +128,15 @@ class LoginShiftUser extends LoginLogin
             array_push($this->ConstantCookieVars,"SID");
             $this->ResetCookieVars();
 
-            $args=$this->Query2Hash();
-            $args=$this->Hidden2Hash($args);
-            $query=$this->Hash2Query($args);
+            $args=$this->CGI_Query2Hash();
+            $args=$this->CGI_Hidden2Hash($args);
+            $query=$this->CGI_Hash2Query($args);
 
             $this->AddCommonArgs2Hash($args);
             $args[ "Action" ]="Start";
 
             //Now added, reload as edit, preventing multiple adds
-            header("Location: ?".$this->Hash2Query($args));
+            header("Location: ?".$this->CGI_Hash2Query($args));
             exit();
         }
     }

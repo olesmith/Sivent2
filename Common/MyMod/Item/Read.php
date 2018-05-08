@@ -59,11 +59,14 @@ trait MyMod_Item_Read
 
         if (empty($id)) { $id=$this->GetCGIVarValue("ID"); }
 
-        /* $where=$id; */
-        /* if (!is_array($where)) */
-        /* { */
-            $where=$this->MyMod_Items_Where_Clause_Real(array($this->IDWhereVar => $id));
-        /* } */
+        $where=
+            $this->MyMod_Items_Where_Clause_Real
+            (
+                array
+                (
+                    $this->IDWhereVar => $id,
+                )
+            );
 
         $this->ItemHash=$this->SelectUniqueHash($this->SqlTableName(),$where,FALSE,$rdatas);
 
@@ -200,18 +203,19 @@ trait MyMod_Item_Read
                         
                         $this->AddMsg
                        (
-                        $this->ModuleName.", ID ".$item[ "ID" ].", ".$name.": ".
-                        "Error lendo ($data) '".
-                        $this->ItemData[ $data ][ "Name" ]."' ID=".
-                        $derivedid." em tabela ".$derivedtable
+                           $this->ModuleName.", ID ".$item[ "ID" ].", ".$name.": ".
+                           "Error reading ($data) '".
+                           $this->ItemData[ $data ][ "Name" ]."' ID=".
+                           $derivedid." em tabela ".$derivedtable
                        );
 
                         if ($this->LoginType=="Admin")
                         {
                             $url=
-                                $this->ScriptPath()."/".
-                                $this->ScriptName()."?".
-                                $this->LoginQueryString."&Action=Edit&ID=".$item[ "ID" ];
+                                $this->CGI_Script_Path()."/".
+                                $this->CGI_Script_Name()."?".
+                                $this->LoginQueryString.
+                                "&Action=Edit&ID=".$item[ "ID" ];
 
                             $this->AddMsg
                             (

@@ -83,16 +83,16 @@ class ItemBackRefs extends ItemLatex
 
                 if ($ncorrections>0)
                 {
-                    print "<H3 align='center'>".$this->ItemName.": ".$name."</H3>";
-                    print "<H3 align='center'>Esta ".$this->ItemName." est&aacute; sendo referenciado ".
+                    echo "<H3 align='center'>".$this->ItemName.": ".$name."</H3>";
+                    echo "<H3 align='center'>Esta ".$this->ItemName." est&aacute; sendo referenciado ".
                         "pelas ".count($backitems)." ".$obj->ItemsName." relacionadas abaixo.<BR>".
                           "Por favor, corrige as seguintes depend&ecirc;ndias antes de deletar!</H3>";
 
-                    $qstring=$this->QueryString();
+                    $qstring=$this->CGI_Query_String();
                     $qstring=preg_replace('/&Discipline=\d+&/',"",$qstring);
                     $script=$qstring;
 
-                    print $this->StartForm($script).
+                    echo $this->StartForm($script).
                           "<CENTER>".
                           $this->Buttons().
                           join("<BR>",$list).

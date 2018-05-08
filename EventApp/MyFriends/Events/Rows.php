@@ -199,7 +199,33 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
         return $row;
     }
 
-   //*
+    //*
+    //* function Friend_Event_Payments_Info, Parameter list:
+    //*
+    //* Creates event payments info text.
+    //*
+
+    function Friend_Event_Payments_Info($event)
+    {
+        $html="";
+        if (!empty($event[ "Payments_URL" ]))
+        {
+            $html.=
+                $this->MyLanguage_GetMessage("Event_Payments_Info_URL_Title").":".
+                $this->A
+                (
+                    $event[ "Payments_URL" ],
+                    $event[ "Payments_URL" ],
+                    array("TARGET" => "_blank")
+                ).
+                $this->BR().$this->BR().
+                "";
+        }
+
+        $html.=$event[ "Payments_Info" ];
+    }
+    
+    //*
     //* function Friend_Event_Payments_Cell, Parameter list:
     //*
     //* Creates event payments cell.
@@ -219,43 +245,25 @@ class MyFriends_Events_Rows extends MyFriends_Events_Read
 
         
         $html=
-            $this->H(5,$this->EventsObj()->MyMod_Data_Title("Payments_Type").":").
-            $this->BR().
-            $this->EventsObj()->MyMod_Item_Table_Html
+            /* $this->H(5,$this->EventsObj()->MyMod_Data_Title("Payments_Type").":"). */
+            /* $this->BR(). */
+            /* $this->EventsObj()->MyMod_Item_Table_Html */
+            /* ( */
+            /*     0, */
+            /*     $event, */
+            /*     $this->EventsObj()->Event_Payments_Datas("",$event) */
+            /* ). */
+            /* $this->BR(). */
+            $this->H
             (
-                0,
-                $event,
-                array
-                (
-                    "Payments_Institution",
-                    "Payments_Name",
-                    "Payments_Agency",
-                    "Payments_Operation",
-                    "Payments_Account",
-                    "Payments_Variation",
-                )
+                5,
+                $this->MyLanguage_GetMessage("Event_Payments_Info_Table_Title").
+                ":"
             ).
-            $this->BR().
-            $this->H(5,$this->MyLanguage_GetMessage("Event_Payments_Info_Table_Title").":").
             $this->Friend_Event_Payments_Values($event).
             $this->BR().
+            $this->Friend_Event_Payments_Info($event).
             "";
-
-        if (!empty($event[ "Payments_URL" ]))
-        {
-            $html.=
-                $this->MyLanguage_GetMessage("Event_Payments_Info_URL_Title").":".
-                $this->A
-                (
-                    $event[ "Payments_URL" ],
-                    $event[ "Payments_URL" ],
-                    array("TARGET" => "_blank")
-                ).
-                $this->BR().$this->BR().
-                "";
-        }
-
-        $html.=$event[ "Payments_Info" ];
             
         return $html;
         

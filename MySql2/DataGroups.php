@@ -272,7 +272,7 @@ class DataGroups extends HashesData
             $hash[ "ID" ]=$this->GetGETOrPOST("ID");
         }
 
-        $link="?".$this->Hash2Query($hash);
+        $link="?".$this->CGI_Hash2Query($hash);
 
         return $link;
     }

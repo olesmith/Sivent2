@@ -1,7 +1,5 @@
 <?php
 
-//include_once("Actions/Defaults.php");
-
 trait MyActions_Entry
 {
     //*
@@ -219,7 +217,7 @@ trait MyActions_Entry
         }
         
         $args=$this->CGI_URI2Hash("");
-        $args=$this->Hidden2Hash($args);
+        $args=$this->CGI_Hidden2Hash($args);
         if (!empty($this->ModuleName))
         {
             $args[ "ModuleName" ]=$this->ModuleName();
@@ -280,7 +278,7 @@ trait MyActions_Entry
 
         $action=
             $href."?".
-            $this->Hash2Query($args);
+            $this->CGI_Hash2Query($args);
 
         if ($id!="" && $id>0) { $action=preg_replace('/#ID/',$id,$action); }
         else                  { $action=preg_replace('/\&?ID=#ID/',"",$action); }

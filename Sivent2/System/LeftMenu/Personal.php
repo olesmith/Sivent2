@@ -128,4 +128,20 @@
       "Title_ES" => "Minha Entidad",
       "Title_UK" => "Edit  Entity Data",
    ),
+   "91_Help" => array
+   (
+      "Admin" => 1,
+      "Assessor" => 1,
+      "Coordinator" => 1,
+      "Friend" => 1,
+      "Href" => "?Unit=".$this->Unit("ID")."&Action=Help",
+      "Name" => "Ajuda",
+      "Name_ES" => "Ayuda",
+      "Name_UK" => "Help",
+      "Person" => 1,
+      "Public" => 1,
+      "Title" => "Ajuda",
+      "Title_ES" => "Ayuda",
+      "Title_UK" => "Help",
+   ),
 

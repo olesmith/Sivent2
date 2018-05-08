@@ -10,11 +10,7 @@ include_once("Lists.php");
 
 class CGI extends Lists
 {
-    #var $URL="";
     var $HiddenVars=array();
-    #var $CookieVars=array();
-    #var $GlobalGCVars=array();
-    #var $CookieTTL=0;
 
     var $URL_Args_Separator="&";
 
@@ -25,7 +21,7 @@ class CGI extends Lists
 
     function ReadExtraPathInfo()
     {
-        $pathinfos=$this->GetExtraPathInfos();
+        $pathinfos=$this->CGI_Script_Extra_Path_Infos();
         foreach ($this->ExtraPathVars as $id => $var)
         {
             if (count($pathinfos)>0)
@@ -46,27 +42,27 @@ class CGI extends Lists
         }
     }
 
-    function ExtraPathPathCorrection()
-    {
-        $comps=preg_split('/\//',$this->GetExtraPathInfo());
+    /* function ExtraPathPathCorrection() */
+    /* { */
+    /*     $comps=preg_split('/\//',$this->GetExtraPathInfo()); */
 
-        $pathinfos=array();
-        foreach ($comps as $id => $val)
-        {
-            if ($val!="")
-            {
-                array_push($pathinfos,"..");
-            }
-        }
+    /*     $pathinfos=array(); */
+    /*     foreach ($comps as $id => $val) */
+    /*     { */
+    /*         if ($val!="") */
+    /*         { */
+    /*             array_push($pathinfos,".."); */
+    /*         } */
+    /*     } */
 
-        $pc="";
-        if (count($pathinfos)>0)
-        {
-            $pc=join("/",$pathinfos);
-        }
+    /*     $pc=""; */
+    /*     if (count($pathinfos)>0) */
+    /*     { */
+    /*         $pc=join("/",$pathinfos); */
+    /*     } */
 
-        return $pc;
-    }
+    /*     return $pc; */
+    /* } */
 
     function FilterExtraPathVars($text)
     {
@@ -139,233 +135,13 @@ class CGI extends Lists
         }
     }
 
-    function GetExtraPathInfo()
-    {
-        $pathinfo="";
-        if (isset($_SERVER['PATH_INFO']))
-        {
-            $pathinfo=$_SERVER['PATH_INFO'];
-        }
-        return $pathinfo;
-    }
-
-    function GetExtraPathInfos()
-    {
-        $pathinfo=$this->GetExtraPathInfo();
-        $pathinfo=preg_replace('/^\//',"",$pathinfo);
-
-        if ($pathinfo!="")
-        {
-            return preg_split('/\//',$pathinfo);
-        }
-        else
-        {
-            return array();
-        }
-    }
-
-    function ExtraPathInfoCorrection()
-    {
-        $pathinfos=$this->GetExtraPathInfos();
-
-        if (count($pathinfos)>0)
-        {
-            $rpaths=array();
-            foreach ($pathinfos as $id => $data)
-            {
-                array_push($rpaths,"..");
-            }
-
-            return join("/",$rpaths)."/";
-        }
-        else
-        {
-            return "";
-        }
-    }
-
-  function SetURL()
-  {
-      $this->URL="http";
-      if (isset($_SERVER[ "HTTPS" ]))
-      {
-          $this->URL.="s";
-      }
-
-      $this->URL.="://".$this->ServerName().$this->ScriptPath()."/".$this->ScriptName();
-      $this->URL=preg_replace('/\/?index.php/',"",$this->URL);
-
-      return $this->URL;
-  }
-
-  function ServerName()
-  {
-    return $_SERVER[ "SERVER_NAME" ];
-  }
-
-  function ScriptPath()
-  {
-    $scriptname=$_SERVER[ "SCRIPT_NAME" ];
-    $comps=preg_split('/\//',$scriptname);
-    $name=array_pop($comps);
-
-    return join("/",$comps);
-  }
-
-  function ScriptPathInfo()
-  {
-    $scriptname=$_SERVER[ "REQUEST_URI" ];
-    $comps=preg_split('/\?/',$scriptname);
-
-    $info=array_shift($comps);
-    if (preg_match('/\.php\/(\S+)$/',$info,$comps))
-    {
-        $info="/".$comps[1];
-    }
-    else
-    {
-        $info="";
-    }
-
-    return $info;
-  }
-
-  function ScriptName()
-  {
-    $scriptname=$_SERVER[ "SCRIPT_NAME" ];
-    $comps=preg_split('/\//',$scriptname);
-    $name=array_pop($comps);
-
-    return $name;;
-  }
-
-
-  function ScriptQuery()
-  {
-    $scriptname=$_SERVER[ "REQUEST_URI" ];
-    $comps=preg_split('/\?/',$scriptname);
-    $name=array_pop($comps);
-
-    return $name;
-  }
-
-
-  function ScriptQueryHash($hash=array())
-  {
-      $args=$this->Query2Hash($this->ScriptQuery());
-      foreach ($hash as $key => $value) { $args[ $key ]=$value; }
-
-      return $args;
-  }
-
-
-  function ScriptProtocol()
-  {
-      $protocol="http";
-      if (isset($_SERVER[ "HTTPS" ]))
-      {
-          $protocol.="s";
-      }
-
-      return $protocol;
-  }
-
-
-  function ScriptExec($query="",$scriptname="")
-  {
-      if ($scriptname=="") { $scriptname=$this->ScriptName(); }
-
-      $exec=
-          $this->ScriptProtocol()."://".
-          $this->ServerName().
-          $this->ScriptPath().
-          "/".
-          $scriptname.
-          $this->ScriptPathInfo();
-
-      if ($query!="") { $exec.="?".$query; }
-
-      $exec=preg_replace('/\s+/',"",$exec);
-      return $exec;
-  }
-
-  function ThisScriptExec()
-  {
-      return preg_replace
-      (
-         '/index.php/',
-         "",
-         $this->ScriptExec($this->ScriptQuery())
-      );
-  }
-
-  function SendDocHeader($contenttype,$filename="",$charset="",$expiresin=0,$filemtime=0)
-  {
-      /* $contenttype="txt"; */
-      $contenttypes=array
-      (
-         "txt"  => "text/plain",
-         "html" => "text/html",
-         "sql"  => "text/plain",
-         "csv"  => "application/vnd.ms-excel",
-         "tex"  => "application/x-latex",
-         "pdf"  => "application/pdf",
-         "odt"  => "application/vnd.oasis.opendocument.text",
-         "ods"  => "application/vnd.oasis.opendocument.spreadsheet",
-         "doc"  => "application/vnd.msword",
-         "xls"  => "application/vnd.ms-excel",
-         "zip"  => "application/zip",
-         "jpg"  => "image/jpeg",
-         "png"  => "image/png",
-      );
-
-      if (!empty($contenttypes[ $contenttype ]))
-      {
-          $contenttype=$contenttypes[ $contenttype ];
-      }
-
-      if ($contenttype=="") { $contenttype="text/plain"; }
-
-      if ($charset=="" && isset($this->HtmlSetupHash[ "CharSet"  ]))
-      {
-          $charset=$this->HtmlSetupHash[ "CharSet"  ];
-      }
-      else { $charset="utf=8"; }
-
-      header('Content-type: '.$contenttype.'; charset='.$charset);
-
-      if (!empty($filename))
-      {
-          header
-          (
-             'Content-Disposition: attachment;'.
-             'filename="'.$filename.'"; charset='.$charset
-          );             
-      }
-      
-      if (!empty($expiresin))
-      {
-          $expires=gmdate('D, d M Y H:i:s \G\M\T', time() + $expiresin);
-          
-          header('Cache-Control: public, max-age='.$expires);
-          header('Expires: '.$expires);
-          header('Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime));
-
-          /* echo              'Cache-Control: public, max-age='.$expires.';\n'. */
-          /*    'Expires: '.$expires.';\n'. */
-          /*     'Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime).';\n'; */
-
-      }
-
-      /* exit(); */
-  }
 
 
 
-  function MakeHiddenFields($tabmovesdown=FALSE)
-  {
-      return $this->CGI_MakeHiddenFields($tabmovesdown);
-  }
+  /* function MakeHiddenFields($tabmovesdown=FALSE) */
+  /* { */
+  /*     return $this->CGI_MakeHiddenFields($tabmovesdown); */
+  /* } */
 
   function MakeHiddenQuery()
   {
@@ -383,61 +159,6 @@ class CGI extends Lists
       return join($this->URL_Args_Separator,$fields);
   }
 
-  function Hidden2Hash($hash=array())
-  {
-      return $this->CGI_Hidden2Hash($hash);
-      if (is_array($this->HiddenVars))
-      {
-          foreach ($this->HiddenVars as $var)
-          {
-              if (isset($_POST[ $var ]) && $_POST[ $var ]!="")
-              {
-                  $hash[ $var ]=$value;
-              }
-          }
-      }
-
-      return $hash;
-  }
-
-
-  function Query2Hash($qs="",$argshash=array())
-  {
-      return $this->CGI_Query2Hash($qs,$argshash);
-  }
-
-  function Hash2Query($argshash)
-  {
-      return $this->CGI_Hash2Query($argshash);
-  }
-
-  
-
-  function QueryString($args=array())
-  {
-      //Retrive query hash
-      $argshash=$this->Query2Hash();
-      if (is_array($args))
-      {
-          //Overwrite specified value
-          foreach ($args as $arg => $value)
-          {
-              $argshash[ $arg ]=$value;
-          }
-      }
-      elseif ($args!="")
-      {
-          $argshash=$this->Query2Hash($args);
-      }
-
-      //Retransform in query
-      $qs=$this->Hash2Query($argshash);
-
-      //Add ? if necessary
-      if (preg_match('/\S/',$qs)) { $qs="?".$qs; }
-
-      return $qs;
-  }
 
     //*
     //* sub TreatCGIValue, Parameter list: $value

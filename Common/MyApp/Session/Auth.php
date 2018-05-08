@@ -167,7 +167,7 @@ trait MyApp_Session_Auth
         {
             $crypt_value=$this->MyApp_Auth_Crypt_Password_BlowFish($value);
         }
-        
+
         return $crypt_value;
     }
     
@@ -203,14 +203,16 @@ trait MyApp_Session_Auth
 
                 if ($md5_password==$stored_password)
                 {
-                     $logindata=$this->MyApp_Login_Retrieve_Data($this->CGI_POST("Login"));
+                    $logindata=$this->MyApp_Login_Retrieve_Data($this->CGI_POST("Login"));
                     
                     #MD5 password match and is not blowfish style, authenticate and update password.
+
+                    $password=$this->MyApp_Auth_Crypt_Password_Crypt($given_password);
                     $this->Sql_Update_Item_Value_Set
                     (
                         $logindata[ "ID" ],
                         $this->AuthHash[ "PasswordField" ],
-                        $this->MyApp_Auth_Crypt_Password_Crypt($given_password),
+                        $password,
                         $this->AuthHash[ "IDField" ],
                         $this->SqlTableName($this->AuthHash[ "Table" ])
                     );

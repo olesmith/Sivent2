@@ -64,12 +64,14 @@ class EventsPayments extends EventsCaravans
                 );
         }
 
-        return
+        $datas=
             array_merge
             (
                 $commondata,
                 $datas
             );
+
+        return $this->FindAllowedData($edit=0,$datas);
     }
 }
 

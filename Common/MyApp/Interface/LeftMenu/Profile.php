@@ -43,7 +43,7 @@ trait MyApp_Interface_LeftMenu_Profile
                    $this->MyApp_Interface_LeftMenu_Bullet("+").
                    $this->Href
                    (
-                      "?".$this->Hash2Query($args),
+                      "?".$this->CGI_Hash2Query($args),
                       $pname,
                       "Virar ".$pname,
                       "",

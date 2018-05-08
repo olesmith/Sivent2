@@ -4,7 +4,7 @@ global $NForms,$NFields;
 $NForms=0;
 $NFields=0;
 
-class HtmlTags extends HtmlCSS
+class HtmlTags extends Log
 {
     var $Icons="icons/";
     //*

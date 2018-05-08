@@ -98,7 +98,7 @@ trait Cookies
         if ($expire=="") { $expire=time()+$this->CookieTTL; }
         if ($value!="" && isset($this->$value)) { $value=$this->$value; }
 
-        setcookie($name,$value,$expire,$this->ScriptPath());
+        setcookie($name,$value,$expire,$this->CGI_Script_Path());
         $_COOKIE[ $name ]=$value;
 
         $this->CookiesSet[ $name ]=$value;

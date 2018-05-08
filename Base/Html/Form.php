@@ -1,6 +1,6 @@
 <?php
 
-include_once("CSS.php");
+#include_once("CSS.php");
 include_once("Tags.php");
 include_once("List.php");
 include_once("Table.php");
@@ -25,7 +25,7 @@ class HtmlForm extends HtmlInput
     {
         if ($this->URL_CommonArgs)
         {
-            $args=$this->Query2Hash($this->URL_CommonArgs,$args);
+            $args=$this->CGI_Query2Hash($this->URL_CommonArgs,$args);
         }
     }
 

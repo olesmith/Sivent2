@@ -13,6 +13,37 @@ trait MyApp_Mail
         if ($this->Mail)
         {
             $this->MailInfo=$this->ReadPHPArray($this->MailSetup);
+            $unit=$this->Unit();
+            if (!empty($unit[ "ID" ]))
+            {
+                foreach ($this->Unit2MailInfo as $key)
+                {
+                    if (empty($this->MailInfo[ $key ])) { $this->MailInfo[ $key ]=""; }
+                    
+                    if (!empty($unit[ $key ]))
+                    {
+                        $this->MailInfo[ $key ]=$unit[ $key ];
+                    }
+                }
+            }
+            $event=array();
+            if ($this->CGI_GETint("Event")>0)
+            {
+                $event=$this->Event();
+            }
+
+            if (!empty($event[ "ID" ]))
+            {
+                foreach ($this->Event2MailInfo as $key)
+                {
+                    if (empty($this->MailInfo[ $key ])) { $this->MailInfo[ $key ]=""; }
+                    
+                    if (!empty($event[ $key ]))
+                    {
+                        $this->MailInfo[ $key ]=$event[ $key ];
+                    }
+                }
+            }
         }
     }
 
@@ -41,7 +72,7 @@ trait MyApp_Mail
                 return $key;
             }
         }
-        
+
         return $this->MailInfo;
     }
 
@@ -67,9 +98,23 @@ trait MyApp_Mail
         }
 
         $mailinfo=$this->ApplicationObj()->MyApp_Mail_Info_Get();
-        foreach (array("FromEmail","FromName") as $data)
+        foreach (
+            array
+            (
+                "Auth" => "Auth",
+                "Secure" => "Secure",
+                "Port" => "Port",
+                "Host" => "Host",
+                "User" => "User",
+                "Password" => "Password",
+                "ReplyTo" => "ReplyTo",
+                "CCEmail" => "CC",
+                "BCCEmail" => "BCC",
+                "FromEmail" => "FromEmail",
+                "FromName" => "FromName",
+            ) as $data => $key)
         {
-            $mailhash[ $data ]=$mailinfo[ $data ];
+            $mailhash[ $key ]=$mailinfo[ $data ];
         }
         
         $mailhash[ "Body" ].=
@@ -119,6 +164,14 @@ trait MyApp_Mail
 
         if (!empty($this->DBHash[ "MailDebug" ]))
         {
+            foreach (array("To","CC","BCC","ReplyTo") as $key)
+            {
+                if (!is_array($mailhash[ $key ]))
+                {
+                    $mailhash[ $key ]=array($mailhash[ $key ]);
+                }
+            }
+            
             echo 
                 "Fake sending...<BR>".
                 "To: ".
@@ -129,6 +182,9 @@ trait MyApp_Mail
                 "<BR>".
                 "BCC: ".
                 join(",<BR>",$mailhash[ "BCC" ]).
+                "<BR>".
+                "ReplyTo: ".
+                join(",<BR>",$mailhash[ "ReplyTo" ]).
                 "<BR>".
                 "Subject: ".$mailhash[ "Subject" ].
                 "<BR>".

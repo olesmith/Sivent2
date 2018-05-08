@@ -96,7 +96,7 @@ class CSV extends Html
             $text.=join(";",$row)."\n";
         }
         
-        $this->SendDocHeader("csv",$this->ModuleName.".".$this->MTime2FName().".csv","utf-8");
+        $this->MyMod_Doc_Header_Send("csv",$this->ModuleName.".".$this->MTime2FName().".csv","utf-8");
         echo $text;
         exit();
     }

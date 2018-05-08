@@ -70,7 +70,7 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
 
     function HtmlEventsMenu()
     {
-        $args=$this->ScriptQueryHash();
+        $args=$this->CGI_Script_Query_Hash();
         unset($args[ "Type" ]);
  
         $uid=$this->Unit("ID");
@@ -166,7 +166,7 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
                $name,
                array
                (
-                  "HREF" => "?".$this->Hash2Query($args)."#Top",
+                  "HREF" => "?".$this->CGI_Hash2Query($args)."#Top",
                   "TITLE" => $event[ "Name" ],
                )
              );

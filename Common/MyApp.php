@@ -312,10 +312,10 @@ trait MyApp
 
         $this->MyApp_URL.=
             "://".
-            $this->ServerName().
-            $this->ScriptPath().
+            $this->CGI_Server_Name().
+            $this->CGI_Script_Path().
             "/".
-            $this->ScriptName();
+            $this->CGI_Script_Name();
         
         $this->MyApp_URL=preg_replace('/\/?index.php/',"",$this->URL);
 

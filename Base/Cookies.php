@@ -176,7 +176,7 @@ class Cookies extends Latex
         {
             if (!$this->ApplicationObj()->HeadersSend)
             {
-                setcookie($name,$value,$expire,$this->ScriptPath());
+                setcookie($name,$value,$expire,$this->CGI_Script_Path());
                 $_COOKIE[ $name ]=$value;
 
                 $this->CookiesSet[ $name ]=$value;

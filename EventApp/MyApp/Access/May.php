@@ -15,6 +15,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
        "Presences"       => 7,
        "Payments"        => 8,
        "Sponsors"        => 9,
+       "Mail"            => 10,
     );
 
     //*
@@ -26,7 +27,13 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
 
     function Coordinator_Type($type)
     {
-        return $this->Coordinator_Types[ $type ];
+        $type=0;
+        if (!empty($this->Coordinator_Types[ $type ]))
+        {
+            $type= $this->Coordinator_Types[ $type ];
+        }
+        
+        return $type;
     }
 
         

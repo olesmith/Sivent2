@@ -12,17 +12,17 @@ array
    (
       "Name" => "Sivent2 é uma versão nova do antigo SiVent.<P>\n".
       "Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: ".
-      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "<A HREF='https://sys.mat.ufg.br/sivent/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
       "<CENTER>Cadastros do sistema antigo NÃO foram transferidos.</CENTER>\n".
       "<H2>Todos precisam recadastrar-se no Sivent2.</H2>",
       "Name_ES" => "Sivent2 es un versión nuevo del antigo SiVent.<P>\n".
       "Certificados emitidos pelo sistema antigo, continuam disponíveis acessando: ".
-      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "<A HREF='https://sys.mat.ufg.br/sivent/SiVent/Friends.php/#Unit?Lang=ES'>SiVent</A>.<P>\n".
       "<CENTER>Registros do sistema antigo NO foram transferidos.</CENTER>\n".
       "<H2>Todos necessitan recadastrar-se no Sivent2.</H2>",
       "Name_UK" => "Sivent2 is a new version  of the old SiVent.<P>\n".
-      "Certificados emitted  by the old sistema, contines available acessing: ".
-      "<A HREF='https://projetos.extras.ufg.br/cadpos/SiVent/Friends.php/#Unit'>SiVent</A>.<P>\n".
+      "Certificados emitted  by the old sistema, are still available acessing: ".
+      "<A HREF='https://sys.mat.ufg.br/sivent/SiVent/Friends.php/#Unit?Lang=UK'>SiVent</A>.<P>\n".
       "<CENTER>Registrations in the old system has NOT been transfered.</CENTER>\n".
       "<H2>All users needs to reregister in Sivent2.</H2>",
    ),
