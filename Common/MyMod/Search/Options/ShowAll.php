@@ -17,12 +17,12 @@ trait MyMod_Search_Options_ShowAll
             $row=
                 array
                 (
-                    $this->B
+                    $this->Htmls_DIV
                     (
-                        $this->GetMessage($this->MyMod_Search_Messages,"ShowAll").":"
+                        $this->GetMessage($this->MyMod_Search_Messages,"ShowAll").":",
+                        array("CLASS" => 'searchtitle')
                     ),
-                    $this->MyMod_Search_CGI_Include_All_Radio_Field().
-                    ""
+                    $this->MyMod_Search_CGI_Include_All_Radio_Field()
                 );
         }
 

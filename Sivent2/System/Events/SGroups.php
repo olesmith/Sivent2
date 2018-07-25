@@ -21,7 +21,119 @@ array
       "Single" => FALSE, //????
       "EditAccessMethod" => "Current_User_Event_May_Edit",
     ),
-    "Components" => array
+   "Common" => array
+   (
+       #Leading table to be shown in Inscription Form
+      "Name" => "Evento",
+      "Name_UK" => "Event",
+
+      "Data" => array
+      (
+         "Status","Visible",
+         "Initials","Name","Title","Site",
+         "AnnouncementLink","Announcement",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Single" => FALSE, //????
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Place" => array
+   (
+      "Name" => "Local do Evento",
+      "Name_UK" => "Event Venue",
+
+      "Data" => array
+      (
+         "Place","Place_Address","Place_Site",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Single" => FALSE, //????
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Dates" => array
+   (
+      "Name" => "Datas do Evento",
+      "Name_UK" => "Event Dates",
+
+      "Data" => array
+      (
+          "Date","EventStart","EventEnd",
+          "Inscriptions_Public",
+          "StartDate","EndDate","EditDate",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Admin" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+      "Single" => FALSE, //????
+      "EditAccessMethod" => "Current_User_Event_May_Edit",
+    ),
+   "Icons" => array
+   (
+      "Name" => "Ícones, LaTex",
+      "Name_UK" => "Icons, LaTex",
+
+      "Data" => array
+      (
+         "LatexIcon1","LatexIcon2"
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 0,
+      "Admin" => 1,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "SubAction" => "Icons",
+    ),
+   "Banner" => array
+   (
+      "Name" => "Banner do Evento",
+      "Name_UK" => "Event Banner",
+
+      "Data" => array
+      (
+         "HtmlIcon1",
+         "HtmlIcon1_Width","HtmlIcon1_Height",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 0,
+      "Admin" => 1,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "SubAction" => "Icons",
+    ),
+   "Logo" => array
+   (
+      "Name" => "Logo do Event",
+      "Name_UK" => "Event Logo",
+
+      "Data" => array
+      (
+         "HtmlIcon2",
+         "HtmlIcon2_Width","HtmlIcon2_Height",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 0,
+      "Admin" => 1,
+      "Friend"     => 0,
+      "Coordinator" => 1,
+      "SubAction" => "Icons",
+    ),
+     "Components" => array
     (
        "Name" => "Componentes",
        "Name_UK" => "Components",
@@ -49,8 +161,8 @@ array
        "Data" => array
        (
           "Payments",
-          "Payments_Type",
-          "Payments_Institution","Payments_Name","Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation",
+          "Payments_Deposit",
+          "Payments_PagSeguro",
           "Payments_Info","Payments_URL",
         ),
 
@@ -62,7 +174,48 @@ array
        "AccessMethod" => "Event_Payments_Has",
        "SubAction" => "Payments",
        "EditAccessMethod" => array("Current_User_Event_May_Edit",),
-       "TableDataMethod" => "Event_Payments_Datas",
+    ),
+    "Payments_Deposit" => array
+    (
+       "Name" => "Depósito",
+       "Name_UK" => "Deposito",
+       "Data" => array
+       (
+          "Payments_Deposit",
+          "Payments_Institution","Payments_Name",
+          "Payments_Agency","Payments_Operation","Payments_Account","Payments_Variation"
+        ),
+
+       "Person" => 0,
+       "Public" => 1,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       "AccessMethod" => "Event_Payments_Has",
+       "SubAction" => "Payments",
+       "EditAccessMethod" => array("Current_User_Event_May_Edit",),
+       #"TableDataMethod" => "Event_Payments_Datas",
+    ),
+    "Payments_PagSeguro" => array
+    (
+       "Name" => "PagSeguro",
+       "Name_UK" => "PagSeguro",
+       "Data" => array
+       (
+          "Payments_PagSeguro",
+          "Payments_PagSeguro_Login",
+          "Payments_PagSeguro_Code"
+        ),
+
+       "Person" => 0,
+       "Public" => 1,
+       "Admin" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
+       "AccessMethod" => "Event_Payments_Has",
+       "SubAction" => "Payments",
+       "EditAccessMethod" => array("Current_User_Event_May_Edit",),
+       #"TableDataMethod" => "Event_Payments_Datas",
     ),
     "Collaborations" => array
     (
@@ -109,11 +262,12 @@ array
        "Name_UK" => "Submission of Activities",
        "Data" => array
        (
-          "Submissions","Submissions_Public","Submissions_Inscriptions",
+          "Submissions","Submissions_Inscriptions",
           "Submissions_NAuthors",
           "Submissions_StartDate","Submissions_EndDate",
           "Certificates_Submissions_TimeLoad",
-          "Proceedings",
+          "Contents","Proceedings",
+          "Submissions_Public",
        ),
 
        "Person" => 1,
@@ -298,7 +452,7 @@ array
        "Data" => array
        (
           "Assessments","Assessments_StartDate","Assessments_EndDate",
-        ),
+       ),
 
        "Person" => 1,
        "Public" => 0,

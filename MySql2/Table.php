@@ -143,24 +143,6 @@ class Table extends TableLanguage
         return $this->FilterItemNames($value);
     }
 
-    //*
-    //* function ApplicationWindowTitle, Parameter list: 
-    //*
-    //* Returns module specific part of the application window title. 
-    //* Supposed to be overwritten!
-    //*
-
-    function ApplicationWindowTitle()
-    {
-        $title=$this->ItemsName;
-        if (!empty($this->Action) && !empty($this->Actions[ $this->Action ]))
-        {
-            $title.=" ".$this->Actions[ $this->Action ][ "Name" ];
-        }
-
-        return $title."-&gt;";
-    }
-
 
     //*
     //* function VerifyPRN, Parameter list: $item

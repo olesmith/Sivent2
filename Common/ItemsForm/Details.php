@@ -59,13 +59,13 @@ trait ItemsFormDetails
     }
     
      //*
-    //* function ItemsForm_Details_Anchor, Parameter list: 
+    //* function ItemsForm_Details_ID, Parameter list: 
     //*
     //* Returns anchor for use by item form and item anchor.
     //* 
     //*
 
-    function ItemsForm_Details_Anchor()
+    function ItemsForm_Details_ID()
     {
         $anchor="TOP";
         if (!empty($this->Args[ "Anchor" ]))
@@ -94,7 +94,7 @@ trait ItemsFormDetails
            
            "Detalhes",
            "","",FALSE,array(),
-           $this->ItemsForm_Details_Anchor()
+           $this->ItemsForm_Details_ID()
         );
     }
     
@@ -230,10 +230,14 @@ trait ItemsFormDetails
         
         $rows[0][0]=
             " ".
-            "<A NAME=\"".
-            $this->ItemsForm_Details_Anchor().
-            "\"></A>\n".
-            $this->B(sprintf("%02d",$n)).
+            $this->B
+            (
+                sprintf("%02d",$n),
+                array
+                (
+                    "ID" => $this->ItemsForm_Details_ID(),
+                )
+            ).
             " ".
             $this->ItemsForm_Un_Details_Href($item).
             "";

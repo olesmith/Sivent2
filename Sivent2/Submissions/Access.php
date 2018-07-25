@@ -22,6 +22,7 @@ class Submissions_Access extends ModulesCommon
         return $res;
     }
 
+    
      //*
     //* function CheckShowAccess, Parameter list: $item=array()
     //*

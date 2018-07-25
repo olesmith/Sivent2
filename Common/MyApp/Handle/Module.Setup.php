@@ -116,7 +116,7 @@ trait MyApp_Handle_ModuleSetup
         $moduleaccesses=array();
         foreach (array_keys($this->ModuleDependencies) as $module)
         {
-            $access=$this->ReadPHPArray($this->MyMod_Setup_ProfilesDataFile($module));
+            $access=$this->ReadPHPArray($this->MyMod_Setup_Profiles_File($module));
 
             $access=$access[ "Access" ];
 
@@ -129,7 +129,7 @@ trait MyApp_Handle_ModuleSetup
 
         if (isset($this->DBHash[ "Mod" ]) && $this->DBHash[ "Mod" ])
         {
-            $file=$this->MyMod_Setup_ProfilesDataFile();
+            $file=$this->MyMod_Setup_Profiles_File();
             $this->WritePHPArray($file,$moduleaccesses);
 
             print $this->H(4,"System Accesses written to ".$file);

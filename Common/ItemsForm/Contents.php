@@ -37,8 +37,12 @@ trait ItemsFormContents
     function ItemsForm_Contents()
     {
         return
-            $this->H(2,$this->Args[ "FormTitle" ]).
-            $this->Anchor("TOP").
+            $this->H
+            (
+                2,
+                $this->Args[ "FormTitle" ],
+                array("ID" => "TOP")
+            ).
             $this->ItemsForm_DataGroupsMenu().
             $this->BR().
             $this->Table_Html($this->Args).

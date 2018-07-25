@@ -157,7 +157,15 @@ trait MyMod_Data_Fields_Edit
 
         if (!$plural)
         {
-           $value.=$this->MyMod_Data_Field_Comment($data,1);
+            $comment=$this->MyMod_Data_Field_Comment($data,1);
+            if (is_array($value))
+            {
+                array_push($value,$comment);
+            }
+            else
+            {
+                $value.=$this->MyMod_Data_Field_Comment($data,1);
+            }
         }
 
         if
@@ -177,6 +185,7 @@ trait MyMod_Data_Fields_Edit
         
         return $value;
     }
+    
    //*
     //* Create default type field: input text.
     //*
@@ -202,6 +211,26 @@ trait MyMod_Data_Fields_Edit
         if (!empty($this->ItemData[ $data ][ "AutoComplete" ]))
         {
             $options=array("AUTOCOMPLETE" => $this->ItemData[ $data ][ "AutoComplete" ]);
+        }
+
+        if
+            (
+                !$plural
+                &&
+                $this->ItemData[ $data ][ "Size_Dynamic" ]
+                &&
+                preg_match('/VARCHAR/i',$this->ItemData[ $data ][ "Sql" ])
+                &&
+                !empty($value)
+            )
+        {
+            $value=$this->Html2Sort($value);
+            $size=strlen($value);
+        }
+
+        if ($size>$this->ItemData[ $data ][ "Size_Max" ])
+        {
+             $size=$this->ItemData[ $data ][ "Size_Max" ];
         }
             
         return $this->MakeInput($rdata,$value,$size,$options);

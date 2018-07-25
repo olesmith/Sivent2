@@ -67,16 +67,29 @@ trait MyMod_Handle_Search
       }
 
 
-      $print="";
+      $print=array();
       
       $this->MyMod_Sort_Detect($group);
       if ($output=="html")
       {
           if ($searchvarstable)
           {
-              $print.= 
-                  $this->MyMod_Search_Form($omitvars,"",$action,array(),array(),$module).
-                  $this->BR();
+              array_push
+              (
+                  $print,
+                  $this->Htmls_Text
+                  (
+                      $this->MyMod_Search_Form_List
+                      (
+                          array
+                          (
+                              "OmitVars" => $omitvars,
+                              "Action" => $this->CGI_GET("Action"),
+                              "Module" => $module,
+                          )
+                      )
+                  )
+              );
           }
       }
 
@@ -89,7 +102,7 @@ trait MyMod_Handle_Search
           }
           else
           {
-              $this->MyMod_Items_Read($where,$datas,FALSE,FALSE);
+              $this->MyMod_Items_Read($where,$datas,FALSE,$this->NoPaging);
           }
       }
 
@@ -105,7 +118,192 @@ trait MyMod_Handle_Search
       {
           $edit=1;
       }
+      
+      $searchvars=$this->MyMod_Search_Vars_Hash($datas);
+      if ($this->MyMod_Search_Vars_Add_2_List)
+      {
+          $datas=$this->MyMod_Search_Vars_Add_2_List($datas);
+      }
 
+      
+      if ($hasitems && $output=="html")
+      {
+          array_push
+          (
+              $print,
+              $this->MyMod_Paging_Menu_Horisontal()
+          );
+
+          if (!empty($this->ItemDataGroups[ $group ][ "Name" ]))
+          {
+              array_push
+              (
+                  $print,
+                  $this->Htmls_H
+                  (
+                     2,
+                     $this->FilterItemNames
+                     (
+                         $this->GetMessage($this->ItemDataMessages,"PluralTableTitle")
+                     ).": ".
+                     $this->GetRealNameKey($this->ItemDataGroups[ $group ])
+                   )
+              );
+          }
+      }
+      
+      
+      $table=
+          $this->MyMod_Handle_Search_Items_Table
+          (
+              $output,
+              $edit,
+              $this->MyMod_Handle_Search_Table_Title($edit),
+              $group
+          );
+      
+      if ($output!="html")
+      {
+          return $table;
+      }
+
+      if ($edit==1)
+      {
+          array_push($table,$this->Buttons($savebuttonname,$resetbottonname));
+      }
+
+      if ($hasitems)
+      {
+          array_push
+          (
+              $print,
+              $this->Htmls_Form
+              (
+                  $edit,
+                  "Search_Items",
+                  "?ModuleName=".$this->GetGET("ModuleName")."&Action=".$this->MyActions_Detect(),
+                  $this->Htmls_Table
+                  (
+                      "",
+                      $table,
+                      array(),
+                      array(),
+                      array(),
+                      True,True
+                  ),
+                  $args=array
+                  (
+                      "Hiddens" => $this->MyMod_Handle_Search_Hiddens_Hash($edit),
+                  ),
+                  $options=array("ID" => "EditListForm")
+              )
+          );
+      }
+      
+      return $print;
+   }
+      
+   //*
+   //* function MyMod_Handle_Search, Parameter list: 
+   //*
+   //* Handles module object Search.
+   //*
+
+   function MyMod_Handle_Search($where="",$searchvarstable=TRUE,$edit=0,$group="",$omitvars=array(),$action="",$module="",$savebuttonname="",$resetbottonname="")
+   {
+      echo
+          $this->Htmls_Text
+          (
+              $this->MyMod_Handle_Search_Generate
+              (
+                  $where,
+                  $searchvarstable,
+                  $edit,
+                  $group,
+                  $omitvars,
+                  $action,
+                  $module,
+                  $savebuttonname,
+                  $resetbottonname
+              )
+          );
+   } 
+   //*
+   //* function MyMod_Handle_Search_Items_Table, Parameter list: 
+   //*
+   //* Generates the paged item list table.
+   //*
+
+   function MyMod_Handle_Search_Items_Table($output,$edit,$title,$group)
+   {
+       $table=array();
+       if ($output=="html")
+       {           
+           $table=
+               $this->MyMod_Data_Group_Table
+               (
+                   $title,
+                   $edit,
+                   $group,
+                   array()
+               );
+
+           if (!empty($this->ItemDataGroups[ $group ][ "TitleGenMethod" ]))
+           {
+               $method=$this->ItemDataGroups[ $group ][ "TitleGenMethod" ];
+               array_unshift($table,array($this->$method()));
+           }
+       }
+       elseif ($output=="pdf")
+       {
+           $table=$this->ItemsLatexTable();
+       }
+       elseif ($output=="tex")
+       {
+           $table=$this->ItemsLatexTable(TRUE);
+       }
+       elseif ($output=="csv")
+       {
+               $table=$this->ItemsCSVTable();
+       }
+
+       if (empty($table)) { $table=array(); }
+       
+       return $table;
+    }   
+    //*
+    //* function MyMod_Handle_Search_Hiddens_Hash, Parameter list: 
+    //*
+    //* Returns hiddens to include in result table form.
+    //*
+
+   function MyMod_Handle_Search_Hiddens_Hash($edit)
+   {
+       return
+           array_merge
+           (
+               array
+               (
+                   "Update"    => 1,
+                   "EditList"  => $edit,
+                   "__MTime__" => time(),
+                   $this->GroupDataCGIVar() => $this->MyMod_Data_Group_Actual_Get(),
+                   $this->GroupDataEditListVar() => $edit+1,
+                   #$this->GroupDataPageVar() => $this->CGI_GETOrPOST($this->GroupDataPageVar()),
+               ),
+               $this->MyMod_Search_Hiddens_Hash(),
+               $this->CGI_Hiddens_Hash()
+           );
+   }
+   
+   //*
+   //* function MyMod_Handle_Search_Table_Title, Parameter list: $edit
+   //*
+   //* Returns search table title.
+   //*
+
+   function MyMod_Handle_Search_Table_Title($edit)
+   {
       $title="";
       if (!empty($this->Actions[ "ShowList" ]))
       {
@@ -117,139 +315,9 @@ trait MyMod_Handle_Search
           $title=$this->GetRealNameKey($this->Actions[ "EditList" ]);
       }
 
-      $table=array();
-      if ($output=="html")
-      {           
-          $table=
-              $this->MyMod_Data_Group_Table
-              (
-                  $title,
-                  $edit,
-                  $group,
-                  array()
-              );
-      }
-      elseif ($output=="pdf")
-      {
-          $table=$this->ItemsLatexTable();
-      }
-      elseif ($output=="tex")
-      {
-          $table=$this->ItemsLatexTable(TRUE);
-      }
-      elseif ($output=="csv")
-      {
-          $table=$this->ItemsCSVTable();
-      }
+      return $title;
+   }
 
-      $searchvars=$this->MyMod_Search_Vars_Hash($datas);
-      if ($this->MyMod_Search_Vars_Add_2_List)
-      {
-          $datas=$this->MyMod_Search_Vars_Add_2_List($datas);
-      }
-
-      
-      if ($hasitems && $output=="html")
-      {
-          $print.= 
-              $this->MyMod_Paging_Menu_Horisontal();
-
-          if (!empty($this->ItemDataGroups[ $group ][ "Name" ]))
-          {
-              $print.= 
-                  $this->H
-                  (
-                     3,
-                     $this->FilterItemNames($this->GetMessage($this->ItemDataMessages,"PluralTableTitle")).": ".
-                     $this->GetRealNameKey($this->ItemDataGroups[ $group ])
-                   );
-          }
-      }
-
-      if ($hasitems && $edit && $output=="html")
-      {
-          $print.= 
-              $this->Anchor("EditListForm").
-              $this->StartForm
-              (
-                  "?ModuleName=".$this->GetGET("ModuleName")."&Action=".$this->MyActions_Detect(),
-                  $method="post",$fileupload=FALSE,$options=array("Anchor" => "EditListForm")
-              ).
-              $this->MakeHidden("Update",1).
-              $this->Buttons($savebuttonname,$resetbottonname);
-      }
-      
-      if (empty($table)) { $table=array(); }
-
-      
-
-      if ($output=="html")
-      {
-          if (!empty($this->ItemDataGroups[ $group ][ "TitleGenMethod" ]))
-          {
-              $method=$this->ItemDataGroups[ $group ][ "TitleGenMethod" ];
-              array_unshift($table,array($this->$method()));
-          }
-
-          if (!is_array($table))
-          {
-              $print.=  $table;
-          }
-          else
-          {
-              $print.= 
-                  $this->Html_Table
-                  (
-                     "",
-                     $table,
-                     array("ALIGN" => 'center'),
-                     array(),
-                     array()
-                  );
-          }
-      }
-
-
-      if ($hasitems && $edit && $output=="html")
-      {
-          $print.= 
-              $this->CGI_MakeHiddenFields(TRUE).//include tabmovesdown hidden var
-              $this->ItemGroupHidden($group).
-              $this->ItemEditListHidden($edit).
-              $this->ItemPageHidden($edit).
-              join("\n",$this->MyMod_Search_Hiddens_Fields()).
-              $this->MakeHidden("Update",1).
-              $this->MakeHidden("EditList",1).
-              $this->MakeHidden("__MTime__",time()).
-              $this->Buttons($savebuttonname,$resetbottonname).
-              $this->EndForm();
-      }
-
-      return $print;
-  } 
-    //*
-    //* function MyMod_Handle_Search, Parameter list: 
-    //*
-    //* Handles module object Search.
-    //*
-
-   function MyMod_Handle_Search($where="",$searchvarstable=TRUE,$edit=0,$group="",$omitvars=array(),$action="",$module="",$savebuttonname="",$resetbottonname="")
-  {
-      echo
-          $this->MyMod_Handle_Search_Generate
-          (
-              $where,
-              $searchvarstable,
-              $edit,
-              $group,
-              $omitvars,
-              $action,
-              $module,
-              $savebuttonname,
-              $resetbottonname
-          ).
-          "";
-  } 
 }
 
 ?>

@@ -118,7 +118,7 @@ array
       "Name"     => "Emails",
       "Name_UK"   => "Emails",
       "Handler"   => "HandleEmails",
-      "Icon"   => "copy_light.png",
+      "Icon"   => "fas fa-envelope-square",
 
       "Public"   => 0,
       "Person"   => 0,

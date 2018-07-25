@@ -81,38 +81,38 @@ trait MyMod_Setup
 
     function MyMod_Setup_File($file)
     {
-        return $this->MyMod_Setup_Path()."/".$file;
+        return join("/",array($this->MyMod_Setup_Path(),$file));
     }
 
     //*
-    //* function MyMod_Setup_ItemDataFile, Parameter list: 
+    //* function MyMod_Setup_Item_Data_File, Parameter list: 
     //*
     //* Returns SetupDataPath.
     //*
 
-    function MyMod_Setup_ItemDataFile()
+    function MyMod_Setup_Item_Data_File()
     {
         return $this->MyMod_Setup_File($this->MyMod_Setup_ItemData_File);
     }
 
     //*
-    //* function MyMod_Setup_LatexDataFile, Parameter list:
+    //* function MyMod_Setup_Latex_File, Parameter list:
     //*
     //* Returns name of LatexData file specific to $this->ModuleName
     //*
 
-    function MyMod_Setup_LatexDataFile()
+    function MyMod_Setup_Latex_File()
     {
         return $this->MyMod_Setup_File($this->MyMod_Setup_Latex_File);
     }
 
     //*
-    //* function MyMod_Setup_ActionsDataFile, Parameter list: 
+    //* function MyMod_Setup_Actions_File, Parameter list: 
     //*
-    //* Returns name of Actions file specific to $this->ModuleName
+    //* Returns name of Actions file specific to $this->ModuleName.
     //*
 
-    function MyMod_Setup_ActionsDataFile()
+    function MyMod_Setup_Actions_File()
     {
         return $this->MyMod_Setup_File($this->MyMod_Setup_Actions_File);
     }
@@ -123,7 +123,7 @@ trait MyMod_Setup
     //* Returns name of file with Permissions and Accesses to Modules. 
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
         return $this->MyMod_Setup_File($this->MyMod_Setup_Profiles_File);
     }
@@ -134,7 +134,7 @@ trait MyMod_Setup
     //* Returns name of file with Left Menu. 
     //*
 
-    function MyMod_Setup_LeftMenuDataFile()
+    function MyMod_Setup_LeftMenu_File()
     {
         return $this->MyMod_Setup_File($this->MyMod_Setup_LeftMenu_File);
     }

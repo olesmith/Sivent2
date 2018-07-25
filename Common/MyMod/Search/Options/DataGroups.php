@@ -20,7 +20,11 @@ trait MyMod_Search_Options_DataGroups
                 array_push
                 ( 
                    $row,
-                   $this->B($this->MyLanguage_GetMessage("DataGroupsTitle").":"),
+                   $this->Htmls_DIV
+                   (
+                       $this->MyLanguage_GetMessage("DataGroupsTitle").":",
+                       array("CLASS" => 'searchtitle')
+                   ),
                    $field
                 );
             }

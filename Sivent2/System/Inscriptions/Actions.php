@@ -1,6 +1,6 @@
 array
 (
-      'Import' => array
+     'Import' => array
       (
          'Public' => 1,
          'Person' => 0,
@@ -82,7 +82,7 @@ array
       "Name_UK"   => "Certificate(s)",
       
       "Handler"   => "Inscription_Handle_Certificate_Generate",
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-certificate",
 
       "Public"   => 0,
       "Person"   => 0,
@@ -102,7 +102,7 @@ array
       "Name_UK"   => "Send Certificate",
       
       "Handler"   => "Inscription_Handle_Certificate_Mail_Send",
-      "Icon"   => "copy_dark.png",
+      "Icon"   => "fas fa-envelope-square",
       "Target"   => "_blank",
 
       "Public"   => 0,
@@ -122,7 +122,7 @@ array
       "Name_UK"   => "Certificates, all Participants",
       
       "Handler"   => "Inscription_Handle_Certificates_Generate",
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-file-pdf",
 
       "Public"   => 0,
       "Person"   => 0,

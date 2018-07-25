@@ -9,7 +9,7 @@ array
       (
          "Status",
          //"Friend","Name",
-         "Title","Title_UK","Title_ES",
+         "Title",
          "Type","Area","Level","Certificate","Certificate_TimeLoad","Result",
          "PreInscriptions","Vacancies",
       ),
@@ -27,7 +27,7 @@ array
        "Name_UK" => "Summary",
        "Data" => array
        (
-           "Keywords","Summary","Contents","File",
+           "Keywords","Summary","Contents","File","Proceedings",
         ),
 
        "Person" => 0,
@@ -52,21 +52,6 @@ array
        "Friend"     => 1,
        "Coordinator" => 1,
     ),
-    "Certificates" => array
-    (
-       "Name" => "Certificados",
-       "Name_UK" => "Certificates",
-       "Data" => array
-       (
-          "Certificate","Certificate_TimeLoad",
-        ),
-       
-       "Admin" => 1,
-       "Person" => 0,
-       "Public" => 1,
-       "Friend"     => 1,
-       "Coordinator" => 1,
-    ),
     "Authors" => array
     (
        "Name" => "Autores",
@@ -82,5 +67,20 @@ array
        "Coordinator" => 1,
        "GenTableMethod" => "Submission_Authors_SGroup_Gen",
        "Single" => TRUE,
+    ),
+    "Certificates" => array
+    (
+       "Name" => "Certificados",
+       "Name_UK" => "Certificates",
+       "Data" => array
+       (
+          "Certificate","Certificate_TimeLoad",
+        ),
+       
+       "Admin" => 1,
+       "Person" => 0,
+       "Public" => 1,
+       "Friend"     => 1,
+       "Coordinator" => 1,
     ),
 );

@@ -14,7 +14,7 @@ trait MyMod_Search_CGI_Cookies
         $cookies=preg_grep('/^ModuleName$/',$this->ApplicationObj->CookieVars,PREG_GREP_INVERT);
         $cookievals=$this->ApplicationObj->CookieValues;
 
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
+        foreach ($this->MyMod_Search_Vars() as $data)
         {
             if (
                   $this->ItemData[ $data ][ "Sql" ]=="ENUM"

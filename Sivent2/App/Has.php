@@ -147,101 +147,88 @@ class App_Has extends App_Head_Table
         return $this->FriendsObj()->Friend_Schedules_Has($friend);
     }
     
-    //*
-    //* function Friend_Schedules_Should, Parameter list: $friend=array()
-    //*
-    //* Detects if current event has any Schedules.
-    //*
-
-    function Friend__Should00000000000000000000($friend=array())
-    {
-        return $this->FriendsObj()->Friend_Schedules_Should($friend);
-    }
-    
-
-
 
     
     //*
-    //* function HasPayments, Parameter list:$event=array()
+    //* function Event_Payments_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Payments.
     //* 
     //*
 
-    function HasPayments($event=array())
+    function Event_Payments_Has($event=array())
     {
         return $this->EventsObj()->Event_Payments_Has($event);
     }
     
     //*
-    //* function HasCollaborations, Parameter list:$event=array()
+    //* function Event_Collaborations_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has collaborations.
     //* 
     //*
 
-    function HasCollaborations($event=array())
+    function Event_Collaborations_Has($event=array())
     {
         return $this->EventsObj()->Event_Collaborations_Has($event);
     }
     
     //*
-    //* function HasCaravans, Parameter list:$event=array()
+    //* function Event_Caravans_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Caravans.
     //* 
     //*
 
-    function HasCaravans($event=array())
+    function Event_Caravans_Has($event=array())
     {
         return $this->EventsObj()->Event_Caravans_Has($event);
     }
     
     //*
-    //* function HasSubmissions, Parameter list:$event=array()
+    //* function Event_Submissions_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Submissions.
     //* 
     //*
 
-    function HasSubmissions($event=array())
+    function Event_Submissions_Has($event=array())
     {
         return $this->EventsObj()->Event_Submissions_Has($event);
     }
     
     //*
-    //* function HasAssessments, Parameter list:$event=array()
+    //* function Event_Assessments_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Assessments.
     //* 
     //*
 
-    function HasAssessments($event=array())
+    function Event_Assessments_Has($event=array())
     {
         return $this->EventsObj()->Event_Assessments_Has($event);
     }
     
     //*
-    //* function HasCriterias, Parameter list:$event=array()
+    //* function Event_Criterias_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Submissions.
     //* 
     //*
 
-    function HasCriterias($event=array())
+    function Event_Criterias_Has($event=array())
     {
-        return $this->HasSubmissions($event);
+        return $this->Event_Criterias_Has($event);
     }
     
     //*
-    //* function SubmissionsPublic, Parameter list:$event=array()
+    //* function Event_Submissions_Public, Parameter list:$event=array()
     //*
     //* Checks whether current event has public Submissions.
     //* 
     //*
 
-    function SubmissionsPublic($event=array())
+    function Event_Submissions_Public($event=array())
     {
         if (preg_match('/^(Admin|Coordinator)$/',$this->Profile())) { return TRUE; }
         if (preg_match('/^(Friend)$/',$this->Profile()))
@@ -264,25 +251,25 @@ class App_Has extends App_Head_Table
     }
     
     //*
-    //* function HasCertificates, Parameter list:$event=array()
+    //* function Event_Certificates_Has, Parameter list:$event=array()
     //*
     //* Checks whether current event has Certificates.
     //* 
     //*
 
-    function HasCertificates($event=array())
+    function Event_Certificates_Has($event=array())
     {
         return $this->EventsObj()->Event_Certificates_Has($event);
     }
     
     //*
-    //* function SchedulePublic, Parameter list:$event=array()
+    //* function Event_Schedule_Public, Parameter list:$event=array()
     //*
     //* Checks whether current event has a published Schedule.
     //* 
     //*
 
-    function SchedulePublic($event=array())
+    function Event_Schedule_Public($event=array())
     {
         return $this->EventsObj()->Event_Schedule_Public($event);
     }
@@ -321,9 +308,9 @@ class App_Has extends App_Head_Table
     function Coordinator_Collaborations_Access_Has($event=array())
     {
         if (empty($event)) { $event=$this->Event(); }
-        
+
         return
-            $this->HasCollaborations($event)
+            $this->Event_Collaborations_Has($event)
             &&
             $this->Coordinator_Access_Has($this->CollaborationsObj()->Coordinator_Type,$event);
     }
@@ -340,7 +327,7 @@ class App_Has extends App_Head_Table
         if (empty($event)) { $event=$this->Event(); }
         
         return
-            $this->HasPayments($event)
+            $this->Event_Payments_Has($event)
             &&
             $this->Coordinator_Access_Has(8,$event);
     }
@@ -357,7 +344,7 @@ class App_Has extends App_Head_Table
         if (empty($event)) { $event=$this->Event(); }
         
         return 
-            $this->HasSubmissions($event)
+            $this->Event_Submissions_Has($event)
             &&
             $this->Coordinator_Access_Has($this->SubmissionsObj()->Coordinator_Type,$event);
     }
@@ -373,7 +360,7 @@ class App_Has extends App_Head_Table
         if (empty($event)) { $event=$this->Event(); }
         
         return 
-            $this->HasAssessments($event)
+            $this->Event_Assessments_Has($event)
             &&
             $this->Coordinator_Access_Has($this->SubmissionsObj()->Coordinator_Type,$event);
     }
@@ -390,7 +377,7 @@ class App_Has extends App_Head_Table
         if (empty($event)) { $event=$this->Event(); }
         
         return 
-            $this->HasCaravans($event)
+            $this->Event_Caravans_Has($event)
             &&
             $this->Coordinator_Access_Has($this->CaravansObj()->Coordinator_Type,$event);
     }

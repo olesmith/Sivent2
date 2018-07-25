@@ -57,7 +57,7 @@ trait MyMod_Search_Table
                    $tbl,
                    array
                    (
-                    $this->MakeHidden($extravar[ "Name" ],$val)
+                       $this->MakeHidden($extravar[ "Name" ],$val)
                    )
                 );
             }
@@ -91,15 +91,23 @@ trait MyMod_Search_Table
 
     function MyMod_Search_Table_Buttons_Row($buttons)
     {
+        array_unshift
+        (
+            $buttons,
+            $this->Html_Input_Button_Make
+            (
+                "submit",
+                $this->MyMod_Search_Table_Button_Title()
+            )
+        );
         return
             array
             (
-                $this->Html_Input_Button_Make
+                $this->Htmls_DIV
                 (
-                    "submit",
-                    $this->MyMod_Search_Table_Button_Title()
-                ).
-                join("",$buttons)
+                    $buttons,
+                    array("CLASS" => 'center')
+                )
            );        
     }
     
@@ -137,13 +145,11 @@ trait MyMod_Search_Table
         return
             array
             (
-                $this->Center
+                $this->H
                 (
-                    $this->SPAN
-                    (
-                        $this->MyMod_Search_Table_Title($title),
-                        array("CLASS" => 'searchtabletitle')
-                    )
+                    1,
+                    $this->MyMod_Search_Table_Title($title),
+                    array("CLASS" => 'searchtabletitle')
                 )
             );
     }
@@ -213,20 +219,29 @@ trait MyMod_Search_Table
 
     function MyMod_Search_Table_Matrix($omitvars=array(),$title="",$action="",$addvars=array(),$fixedvalues=array(),$tabmovesdown="",$buttons=array())
     {
-
         return
             array_merge
             (
                 $this->MyMod_Search_Table_Title_Row($title),
                 $this->MyMod_Search_Table_Fields_Table($fixedvalues,$omitvars),
-                $this->MyMod_Search_Options_Rows($omitvars),
-                $this->MyMod_Search_Table_Extra_Vars_Rows($addvars),
-                array_merge
+                array
                 (
-                    $this->MyMod_Search_Options_Tab_Moves_Down_Row(),
-                    $this->MyMod_Search_Table_Buttons_Row($buttons)
-                )
-        );
+                    array
+                    (
+                        $this->Htmls_Table
+                        (
+                            "",
+                            array_merge
+                            (
+                                $this->MyMod_Search_Options_Rows($omitvars),
+                                $this->MyMod_Search_Table_Extra_Vars_Rows($addvars),
+                                $this->MyMod_Search_Options_Tab_Moves_Down_Row()
+                            )
+                        ),
+                    )
+                ),
+                array($this->MyMod_Search_Table_Buttons_Row($buttons))
+            );
     }
 }
 

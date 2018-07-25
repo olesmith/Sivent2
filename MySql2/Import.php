@@ -80,13 +80,13 @@ class Import extends Sort
         array_unshift($datas,"No");
         $titles=$this->B($this->MyMod_Data_Titles($datas));
 
-        $this->InitAddDefaults();
+        $this->MyMod_Data_Add_Default_Init();
 
         $table=array($titles);
         foreach ($this->ImportItems as $n => $item)
         {
             $ritem=$item;
-            foreach ($this->InitAddDefaults as $data => $value)
+            foreach ($this->AddDefaults as $data => $value)
             {
                 $ritem[ $data ]=$value;
             }

@@ -48,11 +48,24 @@ class MyEvents extends MyEvents_Handle
 
     function MyEvents_CellMethods_Init()
     {
-        $this->CellMethods[ "Event_Date_Span_Cell" ]=TRUE;
-        $this->CellMethods[ "Event_Inscriptions_Date_Span_Cell" ]=TRUE;
-        $this->CellMethods[ "NoOfInscriptionsCell" ]=TRUE;
-        $this->CellMethods[ "Event_PreInscriptions_DateSpan" ]=TRUE;
-        $this->CellMethods[ "Event_PreInscriptions_Status" ]=TRUE;
+        $this->CellMethods=
+            array_merge
+            (
+                array
+                (
+                    "Event_Date_Span_Cell" => TRUE,
+                    "Event_Inscriptions_Date_Span_Cell" => TRUE,
+                    "NoOfInscriptionsCell" => TRUE,
+                    "Event_PreInscriptions_DateSpan" => TRUE,
+                    "Event_PreInscriptions_Status" => TRUE,
+                    "Events_Status_Cell"  => TRUE,
+                    "Event_Title_Show"  => TRUE,
+                    "Event_Period_Show"  => TRUE,
+                    "Event_Place_Show"  => TRUE,
+                    "Event_Inscriptions_Period_Show" => True,
+                    "Event_Inscription_Action" => True,
+                )
+            );
     }
 
 
@@ -69,15 +82,15 @@ class MyEvents extends MyEvents_Handle
     }
 
     //*
-    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //* function MyMod_Setup_Profiles_File, Parameter list:
     //*
     //* Returns name of file with Permissions and Accesses to Modules.
     //* Overrides trait!
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
-        return "../EventApp/System/Events/Profiles.php";
+        return join("/",array("..","EventApp","System","Events","Profiles.php"));
     }
     
     //*
@@ -385,6 +398,28 @@ class MyEvents extends MyEvents_Handle
         if (empty($event)) { $event=$this->Event(); }
         
         return $this->Date_Span_Interval($event,"EventStart","EventEnd");
+    }
+    
+    //*
+    //* function Event_Place, Parameter list: $edit
+    //*
+    //* Returns event place cell.
+    //*
+
+    function Event_Place($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+
+        $comps=array();
+        foreach (array("Place",) as $key)
+        {
+            if (!empty($event[ $key ]))
+            {
+                array_push($comps,$event[ $key ]);
+            }
+        }
+        
+        return join(" - ",$comps);
     }
     
     //*

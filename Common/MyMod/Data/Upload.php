@@ -30,16 +30,11 @@ trait MyMod_Data_Upload
             }
 
             $path.=$comps[$n];
+       }
+        
+        $this->Dir_Create_AllPaths($path);
+        $this->MyFile_Touch($path."/index.php");
 
-            if (!is_dir($path))
-            {
-                var_dump("Creating: ".$path);
-                mkdir($path);
-            }
-            
-        }
-
-        touch($path."/index.php");
         return $path;
     }
 

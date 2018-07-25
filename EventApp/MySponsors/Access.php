@@ -1,7 +1,7 @@
 <?php
 
 
-class MySponsorsAccess extends ModulesCommon
+class MySponsors_Access extends ModulesCommon
 {
     //*
     //* function CheckShowAccess, Parameter list: $item=array()

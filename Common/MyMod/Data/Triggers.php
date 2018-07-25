@@ -50,7 +50,7 @@ trait MyMod_Data_Triggers
             }
             else
             {
-                die("Warning: ($data) TriggerFunction: $method(\$item,\$data,\$newvalue): \$item undefined");
+                die("Warning: ($data) TriggerFunction: $method(\$item,\$data,\$newvalue): undefined");
             }
         }
         

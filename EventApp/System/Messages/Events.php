@@ -54,6 +54,12 @@ array
       "Title_ES" => "Período do Evento",
       "Title_UK" => "Event Period",
    ),
+   "Event_Status_Title" => array
+   (
+      "Name" => "Status",
+      "Name_ES" => "Status",
+      "Name_UK" => "Status",
+   ),
    "Event_Inscriptions_DateSpan_Title" => array
    (
       "Name" => "Período de Inscrições",

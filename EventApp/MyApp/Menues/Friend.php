@@ -38,13 +38,18 @@ class MyEventApp_Menues_Friend extends MyEventApp_Menues_Event
         if (!file_exists($menufile)) { return ""; }
         
         return
-            "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-            $this->InscriptionsObj()->MyMod_ItemName().
-            $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
+            array
             (
-                $this->HtmlFriendMenuDef(),
-                $friend
-            ).
-            "";
+                $this->MyApp_Interface_LeftMenu_Bullet("-"),
+                $this->InscriptionsObj()->MyMod_ItemName(),
+                array
+                (
+                    $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
+                    (
+                        $this->HtmlFriendMenuDef(),
+                        $friend
+                    ),
+                )
+            );
     }
 }

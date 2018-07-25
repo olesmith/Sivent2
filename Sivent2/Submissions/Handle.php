@@ -76,60 +76,69 @@ class Submissions_Handle extends Submissions_Handle_Assessments
     {
         if (empty($submission)) { $submission=$this->ItemHash; }
 
-        $text=
-            $this->Span
+        echo $this->Htmls_Text
+        (
+            array
             (
-               $this->MyMod_Data_Field(0,$submission,"Type").":",
-               array("CLASS" => "submissiontext")
-            ).
-            $this->BR().
-            $this->Div
-            (
-               $this->Span
-               (
-                   $this->GetRealNameKey($submission,"Name"),
-                   array("CLASS" => "submissionkey")
-               ).
-               $this->GetRealNameKey($submission,"Title"),
-               array("CLASS" => "submissiontitle")
-            ).
-            $this->BR().
-            $this->Span
-            (
-               $this->MyLanguage_GetMessage("Submissions_Authors_Title").":",
-               array("CLASS" => "submissiontext")
-            ).
-            $this->BR().
-            $this->Div
-            (
-                join(";".$this->BR(),$this->Submission_Authors($submission)),
-                array("CLASS" => "submissionauthors")
-            ).
-            $this->BR().
-            $this->FrameIt
-            (
-               $this->MyMod_Item_Table_Html
-               (
-                  0,
-                  $submission,
-                  array("Status","Name","Area","Type","Level","Keywords","Summary","File"),
-                  array("CLASS" => 'submissioninfotable'),
-                  array("CLASS" => 'submissioninfotable'),
-                  array("CLASS" => 'submissioninfotable')
-               ).
-               $this->HR().
-               $this->Submission_Schedules($submission).
-               $this->BR().
-               $this->Div
-               (
-                   $this->H(4,$this->MyLanguage_GetMessage("Submissions_Authors_Details_Title")).
-                   $this->Submission_Authors_Info_Tables($submission),
-                   array("CLASS" => "submissionauthors")
-               )
-           ).
-            "";
-
-        echo $this->FrameIt($text,array("WIDTH" => '80%'));
+                $this->Htmls_SPAN
+                (
+                    $this->MyMod_Data_Field_Text(0,$submission,"Type").":",
+                    array("CLASS" => "submissiontext")
+                ),
+                $this->BR(),
+                $this->Htmls_DIV
+                (
+                    array
+                    (
+                        $this->Htmls_SPAN
+                        (
+                            $this->GetRealNameKey($submission,"Name"),
+                            array("CLASS" => "submissionkey")
+                        ),
+                        $this->GetRealNameKey($submission,"Title")
+                    ),
+                    array("CLASS" => "submissiontitle")
+                ),
+                $this->BR(),
+                $this->Htmls_SPAN
+                (
+                    $this->MyLanguage_GetMessage("Submissions_Authors_Title"),
+                    array("CLASS" => "submissiontext")
+                ),
+                $this->BR(),
+                $this->Htmls_DIV
+                (
+                    join(";".$this->BR(),$this->Submission_Authors($submission)),
+                    array("CLASS" => "submissionauthors")
+                ),
+                $this->BR(),
+                $this->Htmls_DIV
+                (
+                    array
+                    (
+                        $this->MyMod_Item_Table_Html
+                        (
+                            0,
+                            $submission,
+                            array("Status","Name","Area","Type","Level","Keywords","Summary","File"),
+                            array("CLASS" => 'submissioninfotable'),
+                            array("CLASS" => 'submissioninfotable'),
+                            array("CLASS" => 'submissioninfotable')
+                        ),
+                        $this->HR(),
+                        $this->Submission_Schedules($submission).
+                        $this->BR(),
+                        $this->Htmls_DIV
+                        (
+                            $this->H(4,$this->MyLanguage_GetMessage("Submissions_Authors_Details_Title")).
+                            $this->Submission_Authors_Info_Tables($submission),
+                            array("CLASS" => "submissionauthors")
+                        )
+                    ),
+                    array("CLASS" => 'submissioninfotable')
+                ),
+            )
+        );
     }
 }
 

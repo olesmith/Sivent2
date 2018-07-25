@@ -20,20 +20,45 @@ array
       "Assessor"  => 1,
       "Search"  => FALSE,
    ),
-   "Payments_Type" => array
+   /* "Payments_Type" => array */
+   /* ( */
+   /*    "Name" => "Forma de Pagamento", */
+   /*    "Name_UK" => "Way of Payment", */
+   /*    "Sql" => "ENUM", */
+   /*    "Values" => array */
+   /*    ( */
+   /*        "Depôsito Bancária", */
+   /*        "PagSeguro", */
+   /*    ), */
+   /*    "Values_UK" => array */
+   /*    ( */
+   /*        "Bank Deposit", */
+   /*        "PagSeguro", */
+   /*    ), */
+   /*    "Default"  => "1", */
+
+   /*    "Public"   => 1, */
+   /*    "Person"   => 1, */
+   /*    "Admin"    => 2, */
+   /*    "Friend"     => 1, */
+   /*    "Coordinator" => 2, */
+   /*    "Assessor"  => 1, */
+   /*    "Search"  => FALSE, */
+   /* ), */
+   "Payments_Deposit" => array
    (
-      "Name" => "Forma de Pagamento",
-      "Name_UK" => "Way of Payment",
+      "Name" => "Depósito",
+      "Name_UK" => "Deposit",
       "Sql" => "ENUM",
       "Values" => array
       (
-          "Depôsito Bancária",
-          "PagSeguro",
+          "Não",
+          "Sim",
       ),
       "Values_UK" => array
       (
-          "Bank Deposit",
-          "PagSeguro",
+          "No",
+          "Yes",
       ),
       "Default"  => "1",
 
@@ -157,6 +182,33 @@ array
       "Name_UK" => "Variation",
       "Sql" => "VARCHAR(64)",
       "Size"  => "3",
+
+      "Public"   => 1,
+      "Person"   => 1,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "Assessor"  => 1,
+      "Search"  => FALSE,
+   ),
+
+   
+   "Payments_PagSeguro" => array
+   (
+      "Name" => "PagSeguro",
+      "Name_UK" => "PagSeguro",
+      "Sql" => "ENUM",
+      "Values" => array
+      (
+          "Não",
+          "Sim",
+      ),
+      "Values_UK" => array
+      (
+          "No",
+          "Yes",
+      ),
+      "Default"  => "1",
 
       "Public"   => 1,
       "Person"   => 1,

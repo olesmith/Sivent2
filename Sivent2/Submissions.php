@@ -94,6 +94,39 @@ class Submissions extends Submissions_Handle
     }
     
     //*
+    //* function PostProcessItemDataGroups, Parameter list:
+    //*
+    //* Debugging Title_UK
+    //*
+
+    function PreProcessItemDataGroups00()
+    {
+        var_dump("pre",array_keys($this->ItemData));
+    }
+    
+    //*
+    //* function PostProcessItemDataGroups, Parameter list:
+    //*
+    //* Debugging Title_UK
+    //*
+
+    function PostProcessItemDataGroups00()
+    {
+        var_dump("post",array_keys($this->ItemData));
+    }
+    
+    //*
+    //* function PostInit, Parameter list:
+    //*
+    //* Runs right after module has finished initializing.
+    //*
+
+    function PostInit00()
+    {
+        var_dump(array_keys($this->ItemData));
+    }
+
+    //*
     //* function PostProcessItemData, Parameter list:
     //*
     //* Post process item data; this function is called BEFORE
@@ -112,10 +145,11 @@ class Submissions extends Submissions_Handle
             $this->Authors_Datas("Friend")
         );
         
-        $this->Actions();
+        #$this->Actions();
+        #var_dump(1,array_keys($this->ItemData));
     }
 
-
+    
 
     //*
     //* function PostProcess, Parameter list: $item
@@ -140,7 +174,12 @@ class Submissions extends Submissions_Handle
                $this->MyMod_Item_Language_Data_Defaults($item,"Title")
             );
         
-        if (!empty($item[ "Title" ]) && empty( $item[ "Title_UK" ]))
+        if
+            (
+                !empty($item[ "Title" ])
+                &&
+                empty( $item[ "Title_UK" ])
+            )
         {
             $item[ "Title_UK" ]=$item[ "Title" ];
             array_push($updatedatas,"Title_UK");
@@ -219,12 +258,12 @@ class Submissions extends Submissions_Handle
 
     
     //*
-    //* Overrides InitAddDefaults.
+    //* Overrides MyMod_Data_Add_Default_Init.
     //* Updates Friend to AddDefaults and AddFixedValues,
     //* then calls parent.
     //*
 
-    function InitAddDefaults($hash=array())
+    function MyMod_Data_Add_Default_Init($hash=array())
     {
         if (preg_match('/^(Friend)$/',$this->Profile()))
         {
@@ -240,7 +279,7 @@ class Submissions extends Submissions_Handle
             $this->AddDefaults[ "Friend" ]=$this->CGI_GETint("Friend");
         }
         
-        return parent::InitAddDefaults($hash);
+        return parent::MyMod_Data_Add_Default_Init($hash);
     }
     
     //*
@@ -536,12 +575,12 @@ class Submissions extends Submissions_Handle
     }
     
     //*
-    //* function AddForm_PreText, Parameter list:
+    //* function MyMod_Handle_Add_Form_Text_Pre, Parameter list:
     //*
     //* Pretext function. Shows add inscriptions form.
     //*
 
-    function AddForm_PreText()
+    function MyMod_Handle_Add_Form_Text_Pre()
     {
         if (!preg_match("(Coordinator|Admin)",$this->Profile()))
         {
@@ -549,6 +588,23 @@ class Submissions extends Submissions_Handle
         }
         return
             $this->FrameIt($this->InscriptionsObj()->DoAdd());
+    }
+    
+    //*
+    //* function Sumbissions_Search_May, Parameter list:
+    //*
+    //* Pretext function. Shows add inscriptions form.
+    //*
+
+    function Submissions_Search_Details_Data_May($data)
+    {
+        $res=False;
+        if (preg_match("(Coordinator|Admin)",$this->Profile()))
+        {
+            $res=True;;
+        }
+        
+        return $res;
     }   
 }
 ?>

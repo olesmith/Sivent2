@@ -1,0 +1,34 @@
+array
+(
+   "MailTrailer_PT" => array
+   (
+      "Name" => "",
+      "Name_ES" => "",
+      "Name_UK" => "",
+   ),
+   "MailTrailer" => array
+   (
+      "Name" => "",
+      "Name_ES" => "",
+      "Name_UK" => "",
+   ),
+   "MailOKMessage" => array
+   (
+      "Name" => "Email enviado com êxito para: '#to', por favor conferir seu email",
+      "Name_ES" => "Email enviado com êxito para: '#to', por favor conferir seu email",
+      "Name_UK" => "Email successfully send to: '#to', please check your mailbox",
+      "Title" => "Email enviado com êxito para: '#to', por favor conferir seu email",
+      "Title_ES" => "Email enviado com êxito para: '#to', por favor conferir seu email",
+      "Title_UK" => "Email successfully send to: '#to', please check your mailbox",
+   ),
+   "MailErrorMessage" => array
+   (
+      "Name" => "Erro enviando email para:",
+      "Name_ES" => "Erro enviando email para:",
+      "Name_UK" => "There was an error sending email to:",
+      "Title" => "Erro enviando email para:",
+      "Title_ES" => "Erro enviando email para:",
+      "Title_UK" => "There was an error sending email to:",
+   ),
+);
+

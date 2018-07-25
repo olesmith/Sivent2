@@ -19,10 +19,14 @@ trait MyMod_Handle_Export_Form
 
             $this->MyMod_Search_Post_Text=
                 $this->BR().
-                $this->Anchor("_EXPORT").
                 $this->FrameIt
                 (
-                    $this->H(2,"Exportar Dados de ".$this->ItemsName).
+                    $this->H
+                    (
+                        2,
+                        "Exportar Dados de ".$this->ItemsName,
+                        array("ID" => "_EXPORT")
+                    ).
                     $this->HTMLTable
                     (
                         array("","Dado à incluir","Sortear"),

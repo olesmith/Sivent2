@@ -24,10 +24,10 @@ trait MyMod_Item_Row
                 );
             }
 
-            array_push
+            $row=array_merge
             (
                $row,
-               join($this->BR(),$cells)
+               $cells
             );
         }
 
@@ -71,7 +71,7 @@ trait MyMod_Item_Row
                           array("CLASS" => 'title'),
                           FALSE
                        ),
-                       $this->MyMod_Item_Data_Cell
+                       $this->MyMod_Item_Table_Row_Data_Cell
                        (
                           $redit,
                           $item,
@@ -102,6 +102,28 @@ trait MyMod_Item_Row
         }
 
         return $row;
+    }
+    //*
+    //* Creates item table datas row.
+    //* Plural default,as we generate $date => $value row.
+    //*
+
+    function MyMod_Item_Table_Row_Data_Cell($edit,$item,$data,$plural=TRUE)
+    {
+        if ($this->MyMod_Data_Languaged_Is($data))
+        {
+            return
+                $this->MyMod_Group_Row_Item_Languaged_Data_Field($edit,$item,$data,$even=False);
+        }
+        
+        return
+            $this->MyMod_Item_Data_Cell
+            (
+                $edit,
+                $item,
+                $data,
+                $plural
+            );
     }
 }
 

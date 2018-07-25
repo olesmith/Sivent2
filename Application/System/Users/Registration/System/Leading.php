@@ -12,14 +12,14 @@
                   (
                      array
                      (
-                        "Cadastro Inicial: ".$this->MyActions_Entry("Register"),
-                        "Confirmar Cadastro: ".$this->MyActions_Entry("Confirm"),
+                         "Cadastro Inicial: ".$this->Htmls_Text($this->MyActions_Entry("Register")),
+                         "Confirmar Cadastro: ".$this->Htmls_Text($this->MyActions_Entry("Confirm")),
                         "Efetuar Login no sistema: ".
                         preg_replace
                         (
                            '/ModuleName=Friends&/',
                            "",
-                           $this->MyActions_Entry("Logon")
+                           $this->Htmls_Text($this->MyActions_Entry("Logon"))
                         ),
                         "Inscrever-se em eventos  gerenciado pelo #ApplicationName..."
                       ),

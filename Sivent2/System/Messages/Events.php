@@ -1,5 +1,11 @@
 array
 (
+   "Activate" => array
+   (
+      "Name" => "Ativar",
+      "Name_ES" => "Ativar",
+      "Name_UK" => "Activate",
+   ),
    "Sivent_Inscribe_Message" => array
    (
       "Name" => "Primeira vez por aqui? Você precisa ser cadastrado para inscrever-se nos eventos.\n".

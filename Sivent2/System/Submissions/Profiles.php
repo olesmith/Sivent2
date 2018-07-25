@@ -60,6 +60,9 @@ array
          'Person' => array
          (
          ),
+         'Friend' => array
+         (
+         ),
          'Coordinator' => array
          (
             "Add" => 1,
@@ -94,7 +97,7 @@ array
          "Friend" => array
          (
             "Add" => 1,
-            //"Search" => 1,
+            "Search" => 1,
             "Inscription" => 1,
          ),
          'Assessor' => array

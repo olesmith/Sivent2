@@ -142,7 +142,7 @@ class Schedules extends Schedules_Handle
     //* Generates Areas CSS.
     //*
 
-    function Module_CSS()
+    function Module_CSS_InLine()
     {
         $where=$this->UnitEventWhere();
 

@@ -178,15 +178,20 @@ trait MyTime
     //* Format $mtime.
     //*
 
-    function TimeStamp2Text($mtime="",$sep=" ")
+    function TimeStamp2Text($mtime="",$sep=" ",$weekday=True)
     {
         $timeinfo=$this->MyTime_Info($mtime);
 
         if (empty($timeinfo)) { return "--"; }
 
+        $text="";
+        if ($weekday)
+        {
+            $text.=$timeinfo[ "WeekDay" ].$sep;
+        }
+
         return
-            $timeinfo[ "WeekDay" ].
-            $sep.
+            $text.
             join
             (
                "/",

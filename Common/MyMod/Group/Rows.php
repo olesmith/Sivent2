@@ -33,7 +33,18 @@ trait MyMod_Group_Rows
 
                 foreach ($subdatas as $data)
                 {
-                    $value=$this->MakeField($edit,$item,$data.$i,TRUE);//TRUE for plural
+                    /* $value=$this->MakeField($edit,$item,$data.$i,TRUE);//TRUE for plural */
+                    $value=
+                        $this->MyMod_Data_Field
+                        (
+                            $edit,
+                            $item,
+                            $data,
+                            $plural=True,
+                            $tabindex="",
+                            $rdata=$data.$i
+                        );
+                    
                     array_push($crow,$value);
                 }
 

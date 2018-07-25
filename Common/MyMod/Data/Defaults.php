@@ -24,8 +24,12 @@ trait MyMod_Data_Defaults
             "Unique"            => FALSE,
             "Compound"          => "",
 
-            "CGIName"           => "",
             "Size"              => FALSE,
+            "Size_Max"          => 75,
+            "Size_Dynamic"      => True,
+            
+            "CGIName"           => "",
+            
             "Type"              => "",
             "MD5"               => FALSE,
             "Crypt"             => "",  #MD5, BlowFish
@@ -116,6 +120,7 @@ trait MyMod_Data_Defaults
             "Comment_Method"      => "",
             
             "AccessMethod" => "", //args: (??$item??)
+            "SearchAccessMethod" => "", //args: (??$item??)
         );
 
     }
@@ -158,6 +163,55 @@ trait MyMod_Data_Defaults
         $this->MyMod_Profiles_AddDefaultKeys($data);
     }
 
- }
+    //*
+    //* function MyMod_Data_Add_Default_Init, Parameter list: $hash=array()
+    //*
+    //* Puts some default values into the AddDefaults array.
+    //* Creator is set to LoginID.
+    //*
+
+    function MyMod_Data_Add_Default_Init($hash=array())
+    {
+        foreach ($hash as $data => $value)
+        {
+            $this->AddDefaults[ $data ]=$value;
+        }
+        foreach ($this->AddFixedValues as $data => $value)
+        {
+            $this->AddDefaults[ $data ]=$value;
+        }
+
+
+        if ($this->LoginType!="Admin" && isset($this->ItemData[ $this->CreatorField ]))
+        {
+            $this->AddDefaults[ $this->CreatorField ]=$this->LoginData[ "ID" ];
+            $this->AddDefaults[ $this->CreatorField."_Value" ]=$this->LoginData[ "Name" ];
+        }
+
+        foreach (array_keys($this->ItemData) as $data)
+        {
+            if (
+                isset($this->ItemData[ $data ][ "Default" ])
+                &&
+                !isset($this->AddDefaults[ $data ]))
+            {
+                $this->AddDefaults[ $data ]=$this->ItemData[ $data ][ "Default" ];
+            }
+
+            if (
+                isset($this->ItemData[ $data ][ "NoAdd" ])
+                &&
+                $this->ItemData[ $data ][ "NoAdd" ]
+                &&
+                !$this->ItemData[ $data ][ "Compulsory" ]
+               )
+            {
+                unset($this->AddDefaults[ $data ]);
+                $this->ItemData[ $data ][ $this->Profile ]=0;
+            }
+        }
+    }
+
+}
 
 ?>

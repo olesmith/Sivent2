@@ -59,9 +59,11 @@ class MyEvents_Certificates extends MyEvents_Certificate
         }
 
         return
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->MyMod_Item_Table_Html($edit,$event,$rdatas).
-            "";
+            array
+            (
+                $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])),
+                $this->MyMod_Item_Table_Html($edit,$event,$rdatas),
+            );
     }
 }
 

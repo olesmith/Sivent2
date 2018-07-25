@@ -177,6 +177,7 @@ trait MyMod_Handle
             $this->DoExit();
         }
 
+        
         $handler=$this->Actions[ $action ][ "Handler" ];
         if ($handler=="")
         {
@@ -197,6 +198,9 @@ trait MyMod_Handle
             $this->DoExit();
         }
 
+        $this->ApplicationObj()->MyApp_Module=$this->ModuleName;
+        $this->ApplicationObj()->MyApp_Handler=$handler;
+
         $this->MyMod_Handle_DocHeads();
 
         $this->ItemHash=$item;
@@ -204,8 +208,7 @@ trait MyMod_Handle
         {
             $this->PreHandle();
         }
-
-        //this->ApplicationObj->PrintHelpLink();
+        
         $this->$handler();
 
         if (method_exists($this,"PostHandle"))
@@ -261,8 +264,6 @@ trait MyMod_Handle
                   $singular=FALSE;
                   if (isset($this->Actions[ $action ][ "Singular" ])) { $singular=!$this->Actions[ $action ][ "Singular" ]; }
                   $this->MyMod_HorMenu_Echo($singular);
-                 
-                  echo "<A NAME=\"TOP\"></A>\n";
               }
           }
 

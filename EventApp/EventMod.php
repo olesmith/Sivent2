@@ -2,11 +2,12 @@
 
 include_once("../EventApp/UnitMod.php");
 include_once("EventMod/Import.php");
+include_once("EventMod/May.php");
 
 
 class EventMod extends UnitMod
 {
-    use EventMod_Import;
+    use EventMod_Import,EventMod_May;
     
     var $Uploads_Item2GGI=array("Event","Unit"); //Uploads, reverse path order
     
@@ -87,6 +88,7 @@ class EventMod extends UnitMod
 
     function Date_Span_Position($item,$key1,$key2,$date=0)
     {
+        #today
         if (empty($date)) { $date=$this->MyTime_2Sort(); }
         
         $res=1;
@@ -97,6 +99,28 @@ class EventMod extends UnitMod
         elseif ($date>$date1 && $date>$date2) { $res=2; }
 
         return $res;
+    }
+
+    //*
+    //* function , Parameter list: $date1,$date2,$date=0
+    //*
+    //* Returns:
+    //* 0 if $date is smaller than both dates.
+    //* 1 if $date inbetween dates
+    //* 2 if $date greater that both dates.
+    //*
+
+    function Date_Span_Position_Status_Message($message_keys,$item,$key1,$key2,$date=0)
+    {
+        $res=$this->Date_Span_Position($item,$key1,$key2,$date);
+
+        $msg="";
+        if (!empty($message_keys[ $res ]))
+        {
+            $msg=$message_keys[ $res ];
+        }
+
+        return $msg;
     }
 
     //*
@@ -177,6 +201,17 @@ class EventMod extends UnitMod
     function Event_DateSpan($event=array())
     {
         return $this->EventsObj()->Event_DateSpan($event);
+    }
+
+    //*
+    //* function Event_Place, Parameter list: $edit
+    //*
+    //* Returns event place.
+    //*
+
+    function Event_Place($event=array())
+    {
+        return $this->EventsObj()->Event_Place($event);
     }
 
     //*

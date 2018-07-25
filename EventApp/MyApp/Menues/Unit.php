@@ -56,25 +56,32 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
 
     function MyEvent_App_Menues_Unit_Menues($unit)
     {
+        #Include only once
         $title=$unit[ "Name" ];
 
-        $menu="";
+        $menu=array();
         foreach ($this->MyEvent_App_Menues_Unit_Files() as $file)
         {
             $submenu=$this->ReadPHPArray($file);
             if (!empty($submenu))
             {
-                $menu.=
-                    "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-                    $title.
-                    $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$unit).
-                    "";
+                array_push
+                (
+                    $menu,
+                    
+                    $this->MyApp_Interface_LeftMenu_Bullet("-"),
+                    
+                    $title,
+                    $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$unit)
+                );
+                
+                #Empty
                 $title="";
             }
                 
         }
 
-        return preg_replace('/#Unit/',$unit[ "ID" ],$menu);
+        return $menu;
     }
     
     //*
@@ -85,9 +92,7 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
 
     function MyEvent_App_Menues_Unit_Menu($unit)
     {
-        return
-            $this->MyEvent_App_Menues_Unit_Menues($unit).
-            "";
+        return $this->MyEvent_App_Menues_Unit_Menues($unit);
     }
     
     //*
@@ -126,16 +131,20 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
                 array_push
                 (
                    $links,
-                   $this->MyApp_Interface_LeftMenu_Bullet("+").
-                   $this->HtmlTags
+                   array
                    (
-                      "A",
-                      $unit[ "Name" ],
-                      array
-                      (
-                         "HREF" => "?".$this->CGI_Hash2Query($rargs),
-                         "TITLE" => "Ano de ".$unit[ "Name" ],
-                      )
+                       $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                       $this->Htmls_Tag
+                       (
+                           "A",
+                           $unit[ "Name" ],
+                           array
+                           (
+                               "HREF" => "?".$this->CGI_Hash2Query($rargs),
+                               "TITLE" => "Ano de ".$unit[ "Name" ],
+                               "CLASS" => 'leftmenulinks'
+                           )
+                       )
                    )
                 );
             }

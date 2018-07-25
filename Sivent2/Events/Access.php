@@ -51,6 +51,6 @@ class EventsAccess extends MyEvents
 
         return $res;
     }
- }
+}
 
 ?>

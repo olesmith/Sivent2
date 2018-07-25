@@ -49,22 +49,32 @@ trait MyMod_Access
                 }
             }
         }
+        
         if ($res)
         {
-            if (!empty($hash[ "AccessMethod" ]))
+            $key="AccessMethod";
+            if (!empty($hash[ $key ]))
             {
-                if (!is_array($hash[ "AccessMethod" ]))
+                if (!is_array($hash[ $key ]))
                 {
-                    $hash[ "AccessMethod" ]=array($hash[ "AccessMethod" ]);
+                    $hash[ $key ]=array($hash[ $key ]);
                 }
 
-                foreach ($hash[ "AccessMethod" ] as $method)
+                foreach ($hash[ $key ] as $method)
                 {
-                    $res=$res && $this->$method();
+                    if (method_exists($this,$method))
+                     {
+                        $res=$res && $this->$method();
+                     }
+                     else
+                     {
+                         $this->Debug=1;
+                         $this->AddMsg("MyMod_Access_HashAccess: Invalid sgroup def access method: ".$method.", ignored");
+                     }
                 }
             }
         }
-
+        
         return $res;
     }
 

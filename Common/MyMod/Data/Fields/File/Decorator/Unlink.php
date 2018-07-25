@@ -12,13 +12,7 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
 
     function MyMod_Data_Fields_File_Decorator_Unlink_Icon($item,$data)
     {
-        $icon="";
-        if (!empty($this->Actions[ "Unlink" ][ "Icon" ]))
-        {
-            $icon="icons/".$this->Actions[ "Unlink" ][ "Icon" ];
-        }
-
-        return $this->MyMod_Item_Action_Icon("Unlink",$item);; 
+        return $this->MyActions_Entry_Icon("Unlink");
     }
      
     //* FileDownloadTitle
@@ -26,14 +20,10 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
     //* Creates title entry for file download.
     //*
 
-    function MyMod_Data_Fields_File_Decorator_Unlink_Title($edit,$item,$data)
+    function MyMod_Data_Fields_File_Decorator_Unlink_Title($item,$data)
     {
-        $title=
-            $item[ $data."_OrigName" ].
-            " Remover: ".
-            "";
-
-        return preg_replace('/<BR>/',"\n",$title);
+        return
+            $this->MyMod_Data_Fields_File_Decorator_Title($item,$data,"Field_File_Delete_Title");
     }
      
     //* FileDownloadRemove Link
@@ -79,7 +69,7 @@ trait MyMod_Data_Fields_File_Decorator_Unlink
                 array
                 (
                     "CLASS" => "uploadmsg",
-                    "TITLE" => $this->MyMod_Data_Fields_File_Decorator_Unlink_Title($edit,$item,$data,$value),
+                    "TITLE" => $this->MyMod_Data_Fields_File_Decorator_Unlink_Title($item,$data),
                 )
             ).
             "";

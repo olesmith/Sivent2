@@ -583,6 +583,14 @@ class Data extends DataPrint
                     array_push($rdatas,$data);
                 }
             }
+
+            if (!empty($this->ItemData[ $data ][ "Languaged" ]))
+            {
+                foreach ($this->MyMod_Languaged_Data_Get($data) as $langdata)
+                {
+                    array_push($rdatas,$langdata);          
+                }
+            }
         }
 
         $this->DatasRead=$rdatas;

@@ -10,7 +10,7 @@ class AssessorsInscriptionAssessmentsCells extends AssessorsInscriptionAssessmen
     //* Creates row with $inscription $assessor, friend and submissiondata.
     //*
 
-    function Assessor_Inscription_Assessment_Link($assessor)
+    function Assessor_Inscription_Assessment_Link($assessor,$id)
     {
         $value=$this->CGI_GETint("Assessor");
 
@@ -36,7 +36,10 @@ class AssessorsInscriptionAssessmentsCells extends AssessorsInscriptionAssessmen
                $target="",
                $class="",
                $noqueryargs=FALSE,
-               $options=array(),
+               $options=array
+               (
+                   "ID" => $id,
+               ),
                $anchor="ASSESS_".$assessor[ "ID" ]
             );
     }

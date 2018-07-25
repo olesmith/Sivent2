@@ -23,75 +23,15 @@ class Sponsors extends MySponsors
         $event=$this->CGI_GETint("Event");
         
         $this->SqlWhere[ "Unit" ]=$unit;
-        if (!empty($event))
+        if (!empty($event) && !preg_match('/^Admin$/',$this->Profile()))
         {
             $this->SqlWhere[ "Event" ]=$event;
             
         }
-        #$this->NonGetVars=array("Event","CreateTable");
     }
 
 
-   /*  //\* */
-   /*  //\* function PreActions, Parameter list: */
-   /*  //\* */
-   /*  //\*  */
-   /*  //\* */
-
-   /*  function PreActions() */
-   /*  { */
-   /*      parent::PreActions(); */
-   /*  } */
-
-
-   /*  //\* */
-   /*  //\* function PostActions, Parameter list: */
-   /*  //\* */
-   /*  //\*  */
-   /*  //\* */
-
-   /*  function PostActions() */
-   /*  { */
-   /*      parent::PostActions(); */
-   /*  } */
-
-    
-   /*  //\* */
-   /*  //\* function PreProcessItemDataGroups, Parameter list: */
-   /*  //\* */
-   /*  //\*  */
-   /*  //\* */
-
-   /*  function PreProcessItemDataGroups() */
-   /*  { */
-   /*      parent::PreProcessItemDataGroups(); */
-   /*  } */
-
-   /*  //\* */
-   /*  //\* function PostProcessItemDataGroups, Parameter list: */
-   /*  //\* */
-   /*  //\*  */
-   /*  //\* */
-
-   /*  function PostProcessItemDataGroups() */
-   /*  { */
-   /*       parent::PostProcessItemDataGroups(); */
-   /* } */
-
-   /*  //\* */
-   /*  //\* function PreProcessItemData, Parameter list: */
-   /*  //\* */
-   /*  //\* Pre process item data; this function is called BEFORE */
-   /*  //\* any updating DB cols, so place any additonal data here. */
-   /*  //\* */
-
-   /*  function PreProcessItemData() */
-   /*  { */
-   /*      parent::PreProcessItemData(); */
-   /*  } */
-    
-   
-    //*
+     //*
     //* function PostProcessItemData, Parameter list:
     //*
     //* Post process item data; this function is called BEFORE
@@ -104,19 +44,6 @@ class Sponsors extends MySponsors
         $this->PostProcessUnitData();
         $this->PostProcessEventData();
     }
-
-    
-    
-   /*  //\* */
-   /*  //\* function PostInit, Parameter list: */
-   /*  //\* */
-   /*  //\* Runs right after module has finished initializing. */
-   /*  //\* */
-
-   /*  function PostInit() */
-   /*  { */
-   /*      parent::PostInit(); */
-   /*  } */
 
     //*
     //* function PostProcess, Parameter list: $item

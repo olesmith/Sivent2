@@ -12,10 +12,8 @@ class EventsCells extends EventsAccess
     {
         if (empty($event)) { return $this->MyMod_ItemName(); }
 
-        $name=$this->MyMod_Data_Fields_Show("Name",$event);
-        
         return
-            $this->Span
+            $this->Htmls_SPAN
             (
                 $this->MyMod_Data_Fields_Show("Name",$event),
                 array
@@ -64,18 +62,16 @@ class EventsCells extends EventsAccess
         $site="";
         if (!empty($event[ "Place_Site" ]))
         {
-            $site=
-                $this->BR().
-                $this->MyMod_Data_Fields_Show("Place_Site",$event).
-                "";
+            $site=$this->MyMod_Data_Fields_Show("Place_Site",$event);
         }
         
         return
-            $event[ "Place" ].
-            $this->BR().
-            $event[ "Place_Address" ].
-            $site.
-            "";
+            array
+            (
+                $event[ "Place" ],
+                $event[ "Place_Address" ],
+                $site
+            );
     }
     
     //*

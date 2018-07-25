@@ -4,52 +4,17 @@
 trait MyMod_Search_Field
 {
     //*
-    //* function MyMod_Search_Field_Method_Call, Parameter list: $data
+    //* function MyMod_Search_Field_Make, Parameter list: $data,$fixedvalues,$rval=""
     //*
-    //* Call search filed method.
+    //* Creates search var input field.
     //*
 
-    function MyMod_Search_Field_Method_Call($data,$fixedvalue,$rval="")
+    function MyMod_Search_Field_Make($data,$fixedvalues,$rval="")
     {
-        if ( !empty($this->ItemData[ $var ][ "SearchFieldMethod" ]) )
-        {
-            $method=$this->ItemData[ $var ][ "SearchFieldMethod" ];
-
-            if (method_exists($this,$method))
-            {
-                $rval=$this->$method($var,$fixedvalue);
-            }
-            else
-            {
-                $this->AddHtmlStatusMessage($this->ModuleName.": Empty SearchFieldMethod");
-            }
-        }
-        else
-        {
-            $this->AddHtmlStatusMessage($this->ModuleName.": Empty SearchFieldMethod");
-        }
-
-        return $rval;
+        return
+            $this->MyMod_Search_Field_Value($data,$fixedvalues,$rval);
     }
-    
-    //*
-    //* function MyMod_Search_Field_Title, Parameter list: $data
-    //*
-    //* Creates search var row title cell.
-    //*
 
-    function MyMod_Search_Field_Title($data)
-    {
-        $name=$this->GetRealNameKey($this->ItemData[ $data ],"SearchName");
-
-        if ($name=="")
-        {
-            $name=$this->GetRealNameKey($this->ItemData[ $data ],"Name");
-        }
-
-        return $name;
-    }
-    
     //*
     //* function MyMod_Search_Field_Value, Parameter list: $data,$fixedvalues,$rval=""
     //*
@@ -108,28 +73,58 @@ trait MyMod_Search_Field
             $value=$this->MyMod_Search_Field_Default($data,$rdata,$rval);
         }
 
+
         return $value;
     }
     
     //*
-    //* function MyMod_Search_Field_Make, Parameter list: $data,$fixedvalues,$rval=""
+    //* function MyMod_Search_Field_Method_Call, Parameter list: $data
     //*
-    //* Creates search var input field.
+    //* Call search field method.
     //*
 
-    function MyMod_Search_Field_Make($data,$fixedvalues,$rval="")
+    function MyMod_Search_Field_Method_Call($data,$fixedvalue,$rval="")
     {
-        return
-            $this->Div
-            (
-                $this->MyMod_Search_Field_Value($data,$fixedvalues,$rval),
-                array
-                (
-                    "ALIGN" => 'left',
-                )
-            );
-    }
+        if ( !empty($this->ItemData[ $var ][ "SearchFieldMethod" ]) )
+        {
+            $method=$this->ItemData[ $var ][ "SearchFieldMethod" ];
 
+            if (method_exists($this,$method))
+            {
+                $rval=$this->$method($var,$fixedvalue);
+            }
+            else
+            {
+                $this->AddHtmlStatusMessage($this->ModuleName.": Empty SearchFieldMethod");
+            }
+        }
+        else
+        {
+            $this->AddHtmlStatusMessage($this->ModuleName.": Empty SearchFieldMethod");
+        }
+
+        return $rval;
+    }
+    
+    //*
+    //* function MyMod_Search_Field_Title, Parameter list: $data
+    //*
+    //* Creates search var row title cell.
+    //*
+
+    function MyMod_Search_Field_Title($data)
+    {
+        $name=$this->GetRealNameKey($this->ItemData[ $data ],"SearchName");
+
+        if ($name=="")
+        {
+            $name=$this->GetRealNameKey($this->ItemData[ $data ],"Name");
+        }
+
+        return $name;
+    }
+    
+    
     
     //*
     //* function MyMod_Search_Field_Default, Parameter list: $data,$rdata,$rval
@@ -185,10 +180,10 @@ trait MyMod_Search_Field
         return
             $this->MakeSelectField
             (
-             $rdata,
-             array(0,1,2,3,4,5),
-             array("","Uma Hora","Uma Dia","Uma Semana","Um Mês","Um Ano"),
-             $rval
+                $rdata,
+                array(0,1,2,3,4,5),
+                array("","Uma Hora","Uma Dia","Uma Semana","Um Mês","Um Ano"),
+                $rval
             ).
             " Atrás".
             "";
@@ -264,10 +259,24 @@ trait MyMod_Search_Field
             $this->ItemData[ $data ][ "NoSort" ]=$this->ItemData[ $data ][ "NoSelectSort" ];
         }
 
-        $value=preg_replace
-        (
-           '/NAME=[\'"]'.$data.'(_\d+)?[\'"]/i',
-           "NAME='".$rdata."\\1'",
+        /* $value=preg_replace */
+        /* ( */
+        /*    '/NAME=[\'"]'.$data.'(_\d+)?[\'"]/i', */
+        /*    "NAME='".$rdata."\\1'", */
+        /*    $this->MyMod_Data_Field_Enum_Edit */
+        /*    ( */
+        /*       $data, */
+        /*       $item, */
+        /*       $rval, */
+        /*       0,//tabindex */
+        /*       False, //plural, */
+        /*       "", //links */
+        /*       0,//callmethod, */
+        /*       $data, */
+        /*       True */
+        /*    ) */
+        /* ); */
+        $value=
            $this->MyMod_Data_Field_Enum_Edit
            (
               $data,
@@ -277,10 +286,9 @@ trait MyMod_Search_Field
               False, //plural,
               "", //links
               0,//callmethod,
-              $data,
+              $rdata,
               True
-           )
-        );
+           );
 
         //Restore ItemData NoSort
         $this->ItemData[ $data ][ "NoSort" ]=$tmp;

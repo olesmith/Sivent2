@@ -32,7 +32,11 @@ array
    "Name" => array
    (
       "Name" => "Nome",
+      "Name_UK" => "Name",
+      "Name_ES" => "Nombre",
       "Title" => "Nome do Evento",
+      "Title_UK" => "Event Name",
+      "Title_ES" => "Nombre del Evento",
 
       "Size" => "20",
       "Sql" => "VARCHAR(256)",
@@ -43,27 +47,19 @@ array
       "Coordinator" => 2,
       
       "Search"  => TRUE,
+      "Search_Joined" => array("Title","Initials"),
       "Compulsory"  => TRUE,
-   ),
-   "Name_UK" => array
-   (
-      "Name" => "Name",
-      "Title" => "Event Name",
-      "Size" => "20",
-      "Sql" => "VARCHAR(256)",
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend" => 1,
-      "Coordinator" => 2,
-      
-      "Search"  => TRUE,
-      "Compulsory"  => FALSE,
    ),
    "Title" => array
    (
       "Name" => "Título",
+      "Name_UK" => "Title",
+      "Name_ES" => "Título",
+      
       "Title" => "Título do Evento",
+      "Title_UK" => "Event Title",
+      "Title_ES" => "Título del Evento",
+      
       "Size" => "50",
       "Sql" => "VARCHAR(255)",
       "Public" => 1,
@@ -72,23 +68,8 @@ array
       "Friend" => 1,
       "Coordinator" => 2,
       
-      "Search"  => TRUE,
+      "Search"  => False,
       "Compulsory"  => TRUE,
-   ),
-   "Title_UK" => array
-   (
-      "Name" => "Title",
-      "Title" => "Event Title",
-      "Size" => "50",
-      "Sql" => "VARCHAR(255)",
-      "Public" => 1,
-      "Person" => 0,
-      "Admin" => 2,
-      "Friend" => 1,
-      "Coordinator" => 2,
-      
-      "Search"  => TRUE,
-      "Compulsory"  => FALSE,
    ),
    "Date" => array
    (
@@ -217,7 +198,7 @@ array
       
       "Compulsory" => 0,
       "Extensions" => "pdf",
-      "Icon" => "print_light.png",
+      "Icon" => "fas fa-file-pdf",
       "Iconify" => TRUE, 
    ),
    "Site" => array
@@ -230,6 +211,7 @@ array
       "Sql" => "VARCHAR(256)",
 
       "Search" => FALSE,
+      "Size" => 35,
 
       "Public"   => 1,
       "Person"   => 0,
@@ -295,4 +277,5 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
    ),
+
 );

@@ -16,6 +16,15 @@ trait MyMod_Data_Fields_File
         MyMod_Data_Fields_File_Correct;
     
     //*
+    //* 
+    //*
+
+    function MyMod_Data_Value_Image_Is($item,$data)
+    {
+        return $this->MyMod_Data_Image_Value_Is($item[ $data ]);
+    }
+    
+    //*
     //* function MyMod_Data_Field_File_Edit, Parameter list: $data,$item,$value,$tabindex,$plural,$links,$callmethod,$rdata 
     //*
     //* Creates file edit field.
@@ -36,17 +45,20 @@ trait MyMod_Data_Fields_File
         }
 
         return
-            $this->Html_File
+            array
             (
-                $rdata,
-                $options                
-            ).
-            $this->MyMod_Data_Fields_File_Decorator
-            (
-                $data,
-                $item,
-                $plural,
-                1
+                $this->Html_File
+                (
+                    $rdata,
+                    $options                
+                ),
+                $this->MyMod_Data_Fields_File_Decorator
+                (
+                    $data,
+                    $item,
+                    $plural,
+                    1
+                )
             );
         
     }
@@ -148,6 +160,51 @@ trait MyMod_Data_Fields_File
             );
     }
 
-}
+    //* FileDownloadLink
+    //* 
+    //* Detects data as image height key. Checks if ItemData "Height" is set.
+    //* If value is number, maintain, elsewise interpret as value of $key in $item.
+    //* Default 20.
+    //*
 
+    function MyMod_Data_Fields_File_IMG_Height($item,$data,$key="Height",$value=20)
+    {
+        $key=$this->ItemData($data,$key);
+
+        if (preg_match('/^[0-9\.]+/',$key))
+        {
+            $value=$key;
+        }
+        elseif (!empty($item[ $key ]))
+        {
+            $value=$item[ $key ];
+        }
+        
+        return $value;
+    }
+    
+    //* FileDownloadLink
+    //* 
+    //* Creates links for file download.
+    //*
+
+    function MyMod_Data_Fields_File_IMG($item,$data)
+    {
+        $value="";
+        if (isset($item[ $data ])) { $value=$item[ $data ]; }
+        
+        $args=$this->CGI_Query2Hash();
+        $args[ "Action" ]="Download";
+        $args[ "Data" ]=$data;
+        
+        return
+            $this->IMG
+            (
+                "?".$this->CGI_Hash2Query($args),
+                basename($value),
+                $this->MyMod_Data_Fields_File_IMG_Height($item,$data,"Height"),
+                $this->MyMod_Data_Fields_File_IMG_Height($item,$data,"Width")
+            );
+  }
+}
 ?>

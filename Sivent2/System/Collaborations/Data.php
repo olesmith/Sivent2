@@ -51,24 +51,6 @@ array
    (
       "Name" => "Título",
       "Title" => "Título",
-      "Name_UK" => "Title (PT)",
-      "Title_UK" => "Title (PT)",
-
-      "Size" => "35",
-      "Sql" => "VARCHAR(256)",
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend" => 1,
-      "Coordinator" => 2,
-      
-      "Search"  => TRUE,
-      "Compulsory"  => TRUE,
-   ),
-   "Name_UK" => array
-   (
-      "Name" => "Título (UK)",
-      "Title" => "Título (UK)",
       "Name_UK" => "Title",
       "Title_UK" => "Title",
 
@@ -80,8 +62,9 @@ array
       "Friend" => 1,
       "Coordinator" => 2,
       
+      "Languaged"  => TRUE,
       "Search"  => TRUE,
-      "Compulsory"  => FALSE,
+      "Compulsory"  => TRUE,
    ),
    "TimeLoad" => array
    (
@@ -104,37 +87,20 @@ array
    ),
    "CertText" => array
    (
-      "Name" => "Texto (Cert)",
-      "Title" => "Texto (Certificado)",
-      "Name_UK" => "Text (Cert)",
-      "Title_UK" => "Text (Certificate)",
+      "Name" => "Texto, Cert",
+      "Title" => "Texto, Certificado",
+      "Name_UK" => "Text, Cert",
+      "Title_UK" => "Text, Certificate",
 
       "Size" => "15",
       "Sql" => "VARCHAR(256)",
-      "Public"   => 1,
+      "Public"   => 0,
       "Person"   => 0,
       "Admin"    => 2,
       "Friend" => 1,
       "Coordinator" => 2,
       
-      "Search"  => FALSE,
-      "Compulsory"  => FALSE,
-   ),
-   "CertText_UK" => array
-   (
-      "Name" => "Texto/UK (Cert)",
-      "Title" => "Texto/UK (Certificado)",
-      "Name_UK" => "Text/UK (Cert)",
-      "Title_UK" => "Text/UK (Certificate)",
-
-      "Size" => "15",
-      "Sql" => "VARCHAR(256)",
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend" => 1,
-      "Coordinator" => 2,
-      
+      "Languaged"  => TRUE,
       "Search"  => FALSE,
       "Compulsory"  => FALSE,
    ),

@@ -7,10 +7,11 @@ array
       "Data" => array
       (
          "No","Edit","Delete",
-         "Unit","Event","Name","Name_UK","TimeLoad","Inscriptions",
-         "CertText","CertText_UK",
+         "Name",//"Name_UK",
+         "TimeLoad","Inscriptions",
+         "CertText",//"CertText_UK",
          "Collaborations_Collaborators_Noof_Cell",
-         "Collaborations_Collaborators_NHomologated_Cell"
+         "Collaborations_Collaborators_NHomologated_Cell",
       ),
       "Admin" => 1,
       "Person" => 0,

@@ -57,7 +57,7 @@ function MakeInput($name,$value="",$size=10,$options=array())
     $options[ "VALUE" ]=$value;
     $options[ "SIZE" ]=$size;
 
-    return "<INPUT".$this->Hash2Options($options).">\n";
+    return "<INPUT".$this->Hash2Options($options).">";
 }
 
 //*
@@ -82,7 +82,7 @@ function MakePassword($name,$value,$size=8,$maxsize=0,$options=array())
         $options[ "MAXSIZE" ]=$maxsize;
     }
 
-    return "<INPUT".$this->Hash2Options($options).">\n";
+    return "<INPUT".$this->Hash2Options($options).">";
 }
 
 
@@ -105,7 +105,7 @@ function MakeHidden($name,$value="",$options=array())
     $options[ "NAME" ]=$name;
     $options[ "VALUE" ]=$value;
 
-    return "<INPUT".$this->Hash2Options($options).">\n";
+    return "<INPUT".$this->Hash2Options($options).">";
 }
 
 //*
@@ -154,7 +154,7 @@ function MakeFileField($name,$options=array())
         $options[ "SIZE" ]=25;
     }
 
-    return "<INPUT TYPE='FILE' NAME='".$name."'".$this->Hash2Options($options).">\n";
+    return "<INPUT TYPE='FILE' NAME='".$name."'".$this->Hash2Options($options).">";
 }
 
 //*
@@ -197,7 +197,7 @@ function MakeTextArea($name,$rows,$cols,$value,$wrap="physical",$options=array()
     {
         $html.=$value."\n";
     }
-    $html.="</TEXTAREA>\n";
+    $html.="</TEXTAREA>";
 
     return $html;
 }

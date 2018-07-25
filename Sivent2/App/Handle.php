@@ -19,17 +19,16 @@ class App_Handle extends App_Has
         $this->EventsObj()->ItemDataGroups();
         $this->EventsObj()->Actions();
 
-        $this->MyApp_Interface_Head();
-
-        if ($this->Profile=="Friend")
+        $profile=$this->Profile();
+        if (preg_match('/^(Friend)$/',$profile))
         {
             $this->HandleFriend();
         }
-        elseif ($this->Profile=="Coordinator")
+        elseif (preg_match('/^(Coordinator|Admin)$/',$profile))
         {
             $this->HandleCoordinator();
         }
-        elseif ($this->Profile=="Public")
+        elseif (preg_match('/^(Public)$/',$profile))
         {
             $this->HandlePublic();
         }
@@ -50,6 +49,18 @@ class App_Handle extends App_Has
 
     function HandleCoordinator()
     {
+        $event=$this->Event("ID");
+        if (!empty($event))
+        {
+            $args=$this->CGI_URI2Hash();
+            $args[ "ModuleName" ]="Events";
+            $args[ "Action" ]="Config";
+            $this->CGI_Redirect($args);
+            exit();
+        }
+        
+        $this->MyApp_Interface_Head();
+
         echo
             $this->H(1,$this->MyLanguage_GetMessage("Events_Table_Title")).
             $this->EventsObj()->MyMod_Items_Group_Table_Html
@@ -68,6 +79,18 @@ class App_Handle extends App_Has
 
     function HandleFriend()
     {
+        $event=$this->Event("ID");
+        if (!empty($event))
+        {
+            $args=$this->CGI_URI2Hash();
+            $args[ "ModuleName" ]="Inscriptions";
+            $args[ "Action" ]="Inscribe";
+            $this->CGI_Redirect($args);
+            exit();
+        }
+        
+        $this->MyApp_Interface_Head();
+
         $this->FriendsObj()->Sql_Table_Structure_Update();
         $this->CertificatesObj()->Sql_Table_Structure_Update();
         $friend=$this->LoginData();
@@ -86,9 +109,6 @@ class App_Handle extends App_Has
                 exit();
             }
         }
-
-
-        
         
         $this->FriendsObj()->Friend_Events_Handle($friend);
     }
@@ -101,6 +121,8 @@ class App_Handle extends App_Has
 
     function HandlePublic()
     {
+        $this->MyApp_Interface_Head();
+
         $this->MyApp_Login_Form();
 
         $this->EventsObj()->ShowEvents();

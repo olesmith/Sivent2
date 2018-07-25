@@ -12,8 +12,8 @@
                      (
                         "Verify your Spam Mailbox!!",
                         "If you find messages sent by the system in your there, please identify these as 'Non Spam'.",
-                        $this->MyActions_Entry("Confirm"),
-                        $this->MyActions_Entry("ResendConfirm"),
+                        $this->Htmls_Text($this->MyActions_Entry("Confirm")),
+                        $this->Htmls_Text($this->MyActions_Entry("ResendConfirm")),
                      )
                   ).
                   "",

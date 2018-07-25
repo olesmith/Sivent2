@@ -23,6 +23,17 @@ trait MyMod_Group_Titles
         {
             $titles=array();
         }
+        
+        if ($this->MyMod_Language_Data_Tabled())
+        {
+            foreach (array_keys($titles) as $tid)
+            {
+                if ($this->MyMod_Data_Languaged_Is($titles[ $tid ]))
+                {
+                    $titles[ $tid ].=$this->MyLanguage_GetLanguageKey();
+                }
+            }
+        }
 
         return $titles;
     }

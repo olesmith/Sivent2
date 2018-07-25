@@ -4,7 +4,7 @@
                array
                (
                   "Se você já recebeu seu Código de Confirmação, acesse ".
-                  $this->MyActions_Entry("Confirm",array()).
+                  $this->Htmls_Text($this->MyActions_Entry("Confirm",array())).
                   " para efetuar a confirmação.\n".
                   "Se você não recebeu o email com o Código de Confirmação: ".
                   $this->HtmlList
@@ -16,8 +16,5 @@
                         "por favor, marque como 'Não Spam', para receber futuros emails enviado pelo sistema.",
                      )
                   )
-                  ,
                )
-            ).
-             //"<P></P>".
-            "";
+            );

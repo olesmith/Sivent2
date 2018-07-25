@@ -17,7 +17,7 @@ trait MyMod_Data_Title
     function MyMod_Data_Title($data,$nohtml=0)
     {
         if (is_array($data)) { $data=array_shift($data); }
-      
+
         $title="";
         if ($data=="No")
         {
@@ -59,11 +59,19 @@ trait MyMod_Data_Title
                 $title=$this->GetRealNameKey($this->Actions[ $data ],$this->TitleKeyName);
             }
         }
-        elseif (method_exists($this,$data) && !empty( $this->CellMethods[ $data ]))
+        elseif (method_exists($this,$data))// && !empty( $this->CellMethods[ $data ]))
         {
-            $title=$this->$data(0,array(),$data);
-
-            if (is_array($title)) { $title=""; }
+            if (empty( $this->CellMethods[ $data ]))
+            {
+                $msg=$this->ModuleName." ".$data." is method, but not in CellMethods!";
+                print $msg;
+                $this->ApplicationObj()->AddHtmlStatusMessage($msg);
+            }
+            else
+            {
+                $title=$this->$data(0,array(),$data);
+                if (is_array($title)) { $title=""; }
+            }
         }
         else
         {

@@ -8,7 +8,7 @@ trait MyActions_Entry
     //* Creates Action Entry.
     //*
 
-    function MyActions_Entry($data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array(),$alt=FALSE)
+    function MyActions_Entry($data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array(),$alt=FALSE,$icon="")
     {
         $size=20;
         if ($this->IconsPath=="")
@@ -28,7 +28,7 @@ trait MyActions_Entry
         {
             if ($this->MyAction_Allowed($data,$item))
             {
-                return $this->MyActions_Entry_Gen($data,$item,$noicons,$class,$rargs,$noargs);
+                return $this->MyActions_Entry_Gen($data,$item,$noicons,$class,$rargs,$noargs,$icon);
             }
             elseif (isset($this->Actions[ $data ][ "AltAction" ]))
             {
@@ -56,33 +56,49 @@ trait MyActions_Entry
 
     function MyActions_Entry_OddEven($even,$data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array())
     {
+        $this->Actions();
+
+        $icon=$data;
         if (!empty($this->Actions[ $data ][ "Icon" ]))
         {
-            if ($even)
+            $icon=$this->Actions[ $data ][ "Icon" ];
+            if ($this->MyMod_Data_Image_Value_Is($icon))
             {
-                $this->Actions[ $data ][ "Icon" ]=
-                    preg_replace
-                    (
-                       '/light.png$/',
-                       "dark.png",
-                       $this->Actions[ $data ][ "Icon" ]
-                    );
+                if ($even)
+                {
+                    $icon=preg_replace('/light.png$/',"dark.png",$icon);
+                }
+                else
+                {
+                    $icon=preg_replace('/dark.png$/',"light.png",$icon);
+                }
             }
-            else
+            elseif (preg_match('/^(fa[srlb])/',$icon,$matches))
             {
-                $this->Actions[ $data ][ "Icon" ]=
-                    preg_replace
-                    (
-                       '/dark.png/',
-                       "light.png",
-                       $this->Actions[ $data ][ "Icon" ]
-                     );
+                if ($even)
+                {
+                    if (!empty($this->Actions[ $data ][ "Icon_Even" ]))
+                    {
+                        $icon=$this->Actions[ $data ][ "Icon_Even" ];
+                    }
+                }
             }
+
+            $icon=
+                $this->MyActions_Entry
+                (
+                    $data,
+                    $item,
+                    $noicons,
+                    $this->MyMod_EvenOdd_Class($even),
+                    $rargs,
+                    $noargs,
+                    $alt=False,
+                    $icon
+                );
         }
         
-        
-        
-        return $this->MyActions_Entry($data,$item,$noicons,$class,$rargs,$noargs);
+        return $icon;
     }
 
 
@@ -98,24 +114,27 @@ trait MyActions_Entry
     }
     
     //*
-    //* function MyActions_Entry_Gen, Parameter list: $data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array()
+    //* function MyActions_Entry_Gen, Parameter list: $data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array(),$icon=""
     //*
     //* Creates Action Entry.
     //*
 
-    function MyActions_Entry_Gen($data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array())
+    function MyActions_Entry_Gen($data,$item=array(),$noicons=0,$class="",$rargs=array(),$noargs=array(),$icon="")
     {
         if (empty($this->Actions[ $data ][ "Name" ])) { return ""; }
-
-        $action=$this->Href
+        $action=$this->Htmls_HRef
         (
            $this->MyActions_Entry_URL($data,$item,$rargs,$noargs),
-           $this->MyActions_Entry_Name($data,$noicons,$item),
+           $this->MyActions_Entry_Name($data,$noicons,$item,$icon),
            $this->MyActions_Entry_Title($data,$item),
-           $this->Actions[ $data ][ "Target" ],
            $class,
-           FALSE,array(),
-           $this->MyActions_Entry_Anchor($data)
+
+           $args=array
+           (
+               "Target" => $this->Actions[ $data ][ "Target" ],
+               "Anchor" => $this->MyActions_Entry_Anchor($data),
+           ),
+           $options=array()
         );
 
 
@@ -146,12 +165,12 @@ trait MyActions_Entry
     }
 
     //*
-    //* function MyActions_Entry_Name, Parameter list: $data,$noicons=0,$item=array()
+    //* function MyActions_Entry_Name, Parameter list: $data,$noicons=0,$item=array(),$icon="",$class=""
     //*
     //* Generates only action name (content
     //*
 
-    function MyActions_Entry_Name($data,$noicons=0,$item=array())
+    function MyActions_Entry_Name($data,$noicons=0,$item=array(),$icon="")
     {
         if (!empty($this->Actions[ $data ][ "NameMethod" ]))
         {
@@ -162,7 +181,7 @@ trait MyActions_Entry
         return 
             $this->Filter
             (
-                $this->MyActions_Entry_Icon($data,$noicons,$size=20),
+                $this->MyActions_Entry_Icon($data,$noicons,$size=20,$icon),
                 $item
             );
     }
@@ -179,25 +198,39 @@ trait MyActions_Entry
     }
     
     //*
-    //* function MyActions_Entry_Icon, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array()
+    //* function MyActions_Entry_Icon, Parameter list: $data,$item=array(),$rargs=array(),$noargs=array(),$icon=""
     //*
     //* Generates only action icon.
     //*
 
-    function MyActions_Entry_Icon($data,$noicons=0,$size=20)
+    function MyActions_Entry_Icon($data,$noicons=0,$size=20,$icon="")
     {
-         $icon=$this->Actions[ $data ][ "Icon" ];
+        if (empty($icon))
+        {
+            $icon=$this->Actions[ $data ][ "Icon" ];
+        }
 
-         if ($noicons==1 || empty($icon))
-         {
-             $icon=$this->GetRealNameKey($this->Actions[ $data ],$this->ActionNameKey); 
-         }
-         else
-         {
-             $icon=$this->ApplicationObj()->MyApp_Icon_IMG($icon,$size);
-         }
+        if ($noicons==1 || empty($icon))
+        {
+            $icon=$this->GetRealNameKey($this->Actions[ $data ],$this->ActionNameKey); 
+        }
+        else
+        {
+            if ($this->MyMod_Data_Image_Value_Is($icon))
+            {
+                $icon=$this->ApplicationObj()->MyApp_Icon_IMG($icon,$size);
+            }
+            else
+            {
+                $icon=
+                    $this->MyMod_Interface_Icon
+                    (
+                        $this->MyMod_Interface_Icon_Size($icon,2)
+                    );
+            }
+        }
 
-         return $icon;
+        return $icon;
     }
     
     //*
@@ -260,7 +293,7 @@ trait MyActions_Entry
         {
             $args=$this->CGI_URI2Hash($this->Actions[ $data ][ "HrefArgs" ],$args);
         }
-
+        
         $id="";
         if (isset($item[ "ID" ])) { $id=$item[ "ID" ]; }
         else                      { $id=$this->CGI_GETOrPOSTint("ID"); }
@@ -296,10 +329,8 @@ trait MyActions_Entry
         if (!empty($this->Actions[ $data ][ "Confirm" ]))
         {
             $title=$this->GetRealNameKey($this->Actions[ $data ],"ConfirmTitle");
-            
             $action=$this->MyActions_Entry_Alert($action,$title);
         }
-
 
         return $this->Filter($action,$item);
     }

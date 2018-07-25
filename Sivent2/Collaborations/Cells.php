@@ -30,7 +30,7 @@ class Collaborations_Cells extends Collaborations_Access
             $this->Div
             (
                $ninscribed,
-               array("CLASS" => 'right')
+               array("CLASS" => 'center')
             );        
     }
      //*
@@ -61,7 +61,7 @@ class Collaborations_Cells extends Collaborations_Access
             $this->Div
             (
                $ninscribed,
-               array("CLASS" => 'right')
+               array("CLASS" => 'center')
             );        
     }
 }

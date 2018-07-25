@@ -40,14 +40,16 @@ trait MyApp_Interface_LeftMenu_Profile
                 array_push
                 (
                    $links,
-                   $this->MyApp_Interface_LeftMenu_Bullet("+").
-                   $this->Href
+                   array
                    (
-                      "?".$this->CGI_Hash2Query($args),
-                      $pname,
-                      "Virar ".$pname,
-                      "",
-                      "leftmenulinks"
+                       $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                       $this->Htmls_Href
+                       (
+                           "?".$this->CGI_Hash2Query($args),
+                           $pname,
+                           "Virar ".$pname,
+                           "leftmenulinks"
+                       ),
                    )
                 );
             }

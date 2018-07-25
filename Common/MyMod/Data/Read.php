@@ -31,6 +31,8 @@ trait MyMod_Data_Read
             }
         }
 
+        $this->MyMod_Languaged_Datas_Add();
+        
         //Allows defining more data, before we update module sql structure.
         if (method_exists($this,"PostProcessItemData"))
         {

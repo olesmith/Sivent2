@@ -49,17 +49,19 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
     {
         $name=$event[ "Name" ];
         if (!empty($event[ "Initials" ])) { $name=$event[ "Initials" ]; }
-                
+
         return
-            "&nbsp;".$this->MyApp_Interface_LeftMenu_Bullet("-").
-            $name.
-            $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
+            array
             (
-                $this->HtmlEventsMenuDef(),
-                $event
-            ).
-            $this->HtmlFriendEventMenu($event,$this->LoginData()).
-            ""; 
+                $this->MyApp_Interface_LeftMenu_Bullet("-").
+                $name,
+                $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
+                (
+                    $this->HtmlEventsMenuDef(),
+                    $event
+                ),
+                $this->HtmlFriendEventMenu($event,$this->LoginData())
+            ); 
     }
     
     //*
@@ -108,11 +110,12 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
                 
                 $link=$this->HtmlEventsSubMenu($event);
             }
-
-            $link=preg_replace('/#Event/',$event[ "ID" ],$link);
-            $link=preg_replace('/#Unit/',$args[ "Unit" ],$link);
             
-            array_push($links,$link.$this->BR());
+            array_push
+            (
+                $links,
+                $link
+            );
         }
 
         return $links;
@@ -130,12 +133,11 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
         $args[ "Unit" ]=$event[ "Unit" ];
         $args[ "Event" ]=$event[ "ID" ];
         unset($args[ "Type" ]);
- 
 
         $args[ "Action" ]="Show";
         if (preg_match('/^(Admin|Coordinator)$/',$this->Profile()))
         {
-            $args[ "Action" ]="Edit";
+            $args[ "Action" ]="Config";
             $args[ "ModuleName" ]="Events";
         }
         elseif (preg_match('/^(Friend)$/',$this->Profile()))
@@ -152,23 +154,24 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
                 $args[ "ModuleName" ]="Inscriptions";
             }
         }
-        
-        //$args[ "ID" ]=$event[ "ID" ];
 
         $name=$event[ "Name" ];
         if (!empty($event[ "Initials" ])) { $name=$event[ "Initials" ]; }
-        
-        return 
-            $this->MyApp_Interface_LeftMenu_Bullet("+").
-            $this->HtmlTags
+
+        return
+            array_merge
             (
-               "A",
-               $name,
-               array
-               (
-                  "HREF" => "?".$this->CGI_Hash2Query($args)."#Top",
-                  "TITLE" => $event[ "Name" ],
-               )
-             );
+                array
+                (
+                    $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                ),
+                $this->Htmls_HRef
+                (
+                    "?".$this->CGI_Hash2Query($args),
+                    $name,
+                    $event[ "Name" ],
+                    'leftmenulinks'
+                )
+            );
     }
 }

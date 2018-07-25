@@ -4,6 +4,23 @@
 trait MyMod_Sort_Titles
 {
     //*
+    //* function MyMod_Sort_Title_Get, Parameter list: $data
+    //*
+    //* Returns array of sort titles.
+    //*
+
+    function MyMod_Sort_Title_Get($data,$options=array(),$latex=FALSE)
+    {
+        $title=$this->MyMod_Data_Title($data);
+        if ($latex)
+        {
+            return "\\textbf{".$title."}\n";
+        }
+        
+        return $title;
+    }
+    
+    //*
     //* function MyMod_Sort_Title_Cells, Parameter list: $datas,$sortlinks=TRUE,$latex=FALSE
     //*
     //* Returns array of sort titles.
@@ -36,121 +53,58 @@ trait MyMod_Sort_Titles
 
     function MyMod_Sort_Title_Cell($data,$sortlinks=TRUE,$latex=FALSE)
     {
-        $args=$this->CGI_Query2Hash();
-
-        $title=$this->MyMod_Data_Title($data);
-
-        $title=preg_replace('/#ItemName/',$this->MyMod_ItemName(),$title);
-        $title=preg_replace('/#ItemsName/',$this->MyMod_ItemName("ItemsName"),$title);
-
-        $options=array();
-        if (!empty($this->ItemData[ $data ]) && !empty($this->ItemData[ $data ][ "Title" ]))
-        {
-            $rtitle=$this->GetRealNameKey($this->ItemData[ $data ],"Title");
-            if (!empty($rtitle))
-            {
-                $options[ "TITLE" ]=$rtitle;
-            }
-        }
-
-        $title=$this->MyMod_Sort_Title_Get($title,$options,$latex);
-
+        $title=$this->MyMod_Sort_Title_Get($data);
         if (
-              $data=="No"
-              ||
-              !$this->HashKeySetAndTRUE($this->ItemData,$data)
-              ||
-              $this->HashKeySetAndTRUE($this->ItemData[ $data ],"NoSort")
+              $data!="No"
+              &&
+              $this->HashKeySetAndTRUE($this->ItemData,$data)
+              &&
+              !$this->HashKeySetAndTRUE($this->ItemData[ $data ],"NoSort")
+              &&
+              $sortlinks
+              &&
+              !$latex
             )
         {
-            return $title;
-        }
-
-        $sort=$this->MyMod_Sort_Get();
-        if (!$sortlinks || $latex) {}
-        elseif ($sort!=$data)
-        {
-            $args[ $this->ModuleName."_Sort" ]=$data;
-
-            $img=$this->IMG
-            (
-               $this->Icons."/nosort.png",
-               $this->Language_Message("Reverse"),
-               0,0,
-               array
-               (
-                  "CLASS" => 'datatitleimg'
-               )
-            )."\n";
-            $stitle=
-                $this->Language_Message("OrderBy").
-                " ".
-                $this->GetRealNameKey($this->ItemData[ $data ]);
-
-            $query="?".$this->CGI_Hash2Query($args);
-
-            $title.=" ".$this->Href($query,$img,$stitle,"",'datatitleimg');
-        }
-        else
-        {
-            $args[ $this->ModuleName."_Sort" ]=$sort;
-
-            $text="Normal";
-            if ($this->MyMod_Sort_Reverse_Get()==1)
+            $options=array();
+            if (!empty($this->ItemData[ $data ]) && !empty($this->ItemData[ $data ][ "Title" ]))
             {
-                $args[ $this->ModuleName."_Reverse" ]=0;
-                $img="/sortup.png";
+                $rtitle=$this->GetRealNameKey($this->ItemData[ $data ],"Title");
+                if (!empty($rtitle))
+                {
+                    $options[ "TITLE" ]=$rtitle;
+                }
+            }
+
+            $sort=$this->MyMod_Sort_Get();
+            $sorticon="";
+            if ($sort!=$data)
+            {
+                $sorticon=$this->MyMod_Sort_Icon_Unsorted($data);
             }
             else
             {
-                $args[ $this->ModuleName."_Reverse" ]=1;
-                $img="/sortdown.png";
-                $text="Reversa";                  
+                if ($this->MyMod_Sort_Reverse_Get()!=1)
+                {
+                    $sorticon=$this->MyMod_Sort_Icon_Reversed($data);
+                }
+                else
+                {
+                    $sorticon=$this->MyMod_Sort_Icon($data);
+                }
+                
             }
-
-            $img=$this->IMG
-            (
-               $this->Icons.$img,
-               "Reversar",
-               0,0,
-               array
-               (
-                  "CLASS" => 'datatitlelink'
-               )
-            )."\n";
-            $query="?".$this->CGI_Hash2Query($args);
-            $title.=$this->Href($query,$img,"Colocar em Ordem ".$text,"12",'datatitleimg');
-
-            unset($args[ $this->ModuleName."_Reverse" ]);
+            $title=
+                array
+                (
+                    array($title),
+                    $sorticon,
+                );
         }
 
         return $title;
     }
 
-    //*
-    //* function MyMod_Sort_Title_Get, Parameter list: $title,$options=array(),$latex=FALSE
-    //*
-    //* Returns sort title, as SPAN element. $opt's are added as options.
-    //* If latex is on, simply bold faces.
-    //*
-
-    function MyMod_Sort_Title_Get($title,$options=array(),$latex=FALSE)
-    {
-        if ($latex)
-        {
-            return "\\textbf{".$title."}\n";
-        }
-        else
-        {
-            if (!is_array($options))
-            {
-                $options=$this->Options2Hash($options);
-            }
-
-            $options[ "CLASS" ]='datatitlelink';
-            return $this->HtmlTags("SPAN",$title,$options)."\n";
-        }
-    }
     
 }
 

@@ -124,24 +124,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
       "Assessor"  => 0,
-   ),
-   "Status" => array
-   (
-      "Name" => "Status",
-      "Name_UK" => "Status",
-
-      "Sql" => "ENUM",
-
-      "Search" => TRUE,
-      "Values" => array("Aguardando Avaliação","Deferido","Indeferido"),
-      "Values_UK" => array("Awaiting Assessment","Selected","Refused"),
-      "Default"  => 1,
-
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend"     => 1,
-      "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "Title" => array
    (
@@ -161,6 +144,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "Languaged"  => True,
    ),
    "Type" => array
    (
@@ -181,6 +165,26 @@ array
       "Admin"    => 2,
       "Friend"     => 2,
       "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
+   ),
+   "Status" => array
+   (
+      "Name" => "Status",
+      "Name_UK" => "Status",
+
+      "Sql" => "ENUM",
+
+      "Search" => TRUE,
+      "Values" => array("Aguardando Avaliação","Deferido","Indeferido"),
+      "Values_UK" => array("Awaiting Assessment","Selected","Refused"),
+      "Default"  => 1,
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 1,
+      "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "PreInscriptions" => array
    (
@@ -202,6 +206,7 @@ array
       "Admin"    => 2,
       "Friend"     => 1,
       "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "Vacancies" => array
    (
@@ -225,7 +230,7 @@ array
    ),
    "Area" => array
    (
-      "Name" => "Trilha",
+      "Name" => "Àrea de Interesse",
       "Name_UK" => "Area of Interest",
 
       "Sql" => "INT",
@@ -240,6 +245,7 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
       "Compulsory" => FALSE,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "Level" => array
    (
@@ -260,6 +266,7 @@ array
       "Admin"    => 2,
       "Friend"     => 2,
       "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    
    "Need_Projector" => array
@@ -280,6 +287,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
   "Need_Computer" => array
    (
@@ -299,6 +307,7 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
   "Need_Other" => array
    (
@@ -315,6 +324,7 @@ array
       "Admin"    => 2,
       "Friend"     => 2,
       "Coordinator" => 2,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "Certificate" => array
    (
@@ -334,6 +344,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
       "SelectCheckBoxes"  => 3,
+      "SearchAccessMethod" => "Submissions_Search_Details_Data_May",
    ),
    "Certificate_TimeLoad" => array
    (
@@ -408,16 +419,17 @@ array
       "Coordinator" => 2,
       "Assessor"  => 0,
       "Compulsory" => False,
+      "AccessMethod" => "Event_Contents_Has",
    ),
    "File" => array
    (
-      "Name" => "Arquivo Disponibilizado",
-      "Name_UK" => "File",
+      "Name" => "Slides da Palestra",
+      "Name_UK" => "Slides of the Talk",
 
       "Sql" => "FILE",
 
       "Search" => FALSE,
-      "Extensions" => array("pdf","odt","doc","docx","zip","tar","tgz"),
+      "Extensions" => array("pdf","odt","doc","docx","ppt","zip","tar","tgz"),
 
       "Public"   => 1,
       "Person"   => 0,
@@ -425,6 +437,24 @@ array
       "Friend"     => 2,
       "Coordinator" => 2,
       "Assessor"  => 0,
+   ),
+   "Proceedings" => array
+   (
+      "Name" => "Submissão para Anais",
+      "Name_UK" => "Submission for Proceedings",
+
+      "Sql" => "FILE",
+
+      "Search" => FALSE,
+      "Extensions" => array("tex","zip","tar","tgz"),
+
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend"     => 2,
+      "Coordinator" => 2,
+      "Assessor"  => 0,
+      "AccessMethod" => "Event_Proceedings_Has",
    ),
    "Code" => array
    (

@@ -73,6 +73,8 @@ trait MyMod_Data_Groups_Add
                 $this->ItemDataGroups[ $group ][ $key ]=$value;
             }
         }
+        
+        $this->ItemDataGroups[ $group ][ "__Key__" ]=$group;
     }
 
     //*
@@ -94,6 +96,8 @@ trait MyMod_Data_Groups_Add
                 $this->ItemDataSGroups[ $group ][ $key ]=$value;
             }
         }
+        
+        $this->ItemDataSGroups[ $group ][ "__Key__" ]=$group;
     }
 
 

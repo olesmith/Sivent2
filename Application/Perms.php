@@ -1,7 +1,7 @@
 <?php
 
 
-class Perms extends TInterface
+class Perms extends Help
 {
     //*
     //* function SetModulePermsSqlWhere, Parameter list: $module,$object

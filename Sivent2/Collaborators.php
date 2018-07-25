@@ -2,7 +2,7 @@
 
 include_once("Collaborators/Access.php");
 include_once("Collaborators/Emails.php");
-include_once("Collaborators/Table.php");
+include_once("Collaborators/Friend.php");
 include_once("Collaborators/Certificate.php");
 include_once("Collaborators/Statistics.php");
 
@@ -44,7 +44,7 @@ class Collaborators extends Collaborators_Statistics
     function Collaborators($args=array())
     {
         $this->Hash2Object($args);
-        $this->AlwaysReadData=array("Name","TimeLoad");
+        $this->AlwaysReadData=array("Name","TimeLoad","Unit","Event","Collaboration");
         $this->Sort=array("Name");
         $this->IncludeAllDefault=TRUE;
 
@@ -267,12 +267,12 @@ class Collaborators extends Collaborators_Statistics
 
     
     //*
-    //* function AddForm_PostText, Parameter list:
+    //* function MyMod_Handle_Add_Form_Text_Post, Parameter list:
     //*
     //* Pretext function. Shows add inscriptions form.
     //*
 
-    function AddForm_PostText()
+    function MyMod_Handle_Add_Form_Text_Post()
     {
         if (!preg_match("(Coordinator|Admin)",$this->Profile()))
         {

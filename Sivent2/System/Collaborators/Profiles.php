@@ -9,9 +9,6 @@ array
       "Coordinator" => 1,
       "Assessor"  => 1,
    ),
-   'Actions' => array
-   (
-   ),
    'Menues' => array
    (
       'Singular' => array

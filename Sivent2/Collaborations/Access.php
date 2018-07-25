@@ -17,8 +17,24 @@ class Collaborations_Access extends ModulesCommon
 
     function HasModuleAccess($event=array())
     {
+        /* //$res=$this->ApplicationObj()->Current_User_Event_Collaborations_May_Edit($event); */
+        /* $res=$this->ApplicationObj()->Coordinator_Collaborations_Access_Has($event); */
+
+        /* return $res; */
+        return $this->EventsObj()->Event_Collaborations_Has($event);
+    }
+    //* function HasModuleEditAccess, Parameter list: $event=array()
+    //*
+    //* Determines if we have access to module.
+    //*
+
+    function HasModuleEditAccess($event=array())
+    {
         //$res=$this->ApplicationObj()->Current_User_Event_Collaborations_May_Edit($event);
-        $res=$this->ApplicationObj()->Coordinator_Collaborations_Access_Has($event);
+        $res=
+            $this->HasModuleAccess($event)
+            &&
+            $this->ApplicationObj()->Coordinator_Collaborations_Access_Has($event);
 
         return $res;
     }
@@ -66,7 +82,7 @@ class Collaborations_Access extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
 
-        $res=$this->HasModuleAccess();
+        $res=$this->HasModuleEditAccess();
 
         return $res;
     }
@@ -81,7 +97,7 @@ class Collaborations_Access extends ModulesCommon
 
     function CheckEditListAccess($item=array())
     {
-        $res=$this->HasModuleAccess();
+        $res=$this->HasModuleEditAccess();
 
         return $res;
     }
@@ -97,7 +113,7 @@ class Collaborations_Access extends ModulesCommon
     {
         if (empty($item)) { return TRUE; }
         
-        $res=$this->HasModuleAccess();
+        $res=$this->HasModuleEditAccess();
         //$res=$this->ApplicationObj()->Current_User_Event_Collaborations_May_Edit($this->Event());
 
         if (

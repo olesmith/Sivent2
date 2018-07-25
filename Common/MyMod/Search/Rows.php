@@ -11,31 +11,32 @@ trait MyMod_Search_Rows
 
     function MyMod_Search_Row_Generate($data,$fixedvalues,$rval="")
     {
-        $input=$this->MyMod_Search_Field_Make($data,$fixedvalues,$rval="");
-
-        $row=
+        return
             array
             (
-                array
+                $this->Htmls_DIV
                 (
-                          "Text" => $this->MyMod_Search_Field_Title($data).":",
-                          "Class" => 'searchtitle',
+                    array
+                    (
+                        $this->MyMod_Search_Field_Title($data).":",
+                    ),
+                    array
+                    (
+                        "CLASS" => 'searchtitle',
+                    )
+                ),
+                $this->Htmls_DIV
+                (
+                    array
+                    (
+                        $this->MyMod_Search_Field_Make($data,$fixedvalues,$rval),
+                    ),
+                    array
+                    (
+                        "CLASS" => 'searchdata',
+                    )
                 ),
             );
-
-        if (!is_array($input))
-        {
-            $input=array($input);
-        }
-
-        $row=
-            array_merge
-            (
-                $row,
-                $input
-            );
-
-        return $row;
     }
 
     
@@ -47,26 +48,21 @@ trait MyMod_Search_Rows
 
     function MyMod_Search_Rows_Generate($data,$fixedvalues,$omitvars,$rval="")
     {
-        /* if (!empty($this->ItemData[ $data ][ "Search_Depends" ])) */
-        /* { */
-        /*     $depends=$this->ItemData[ $data ][ "Search_Depends" ]; */
-        /*     if (!empty($this->ItemData[ $depends ])) */
-        /*     { */
-        /*         $dependssearchvalue=$this->GetSearchVarCGIValue($depends); */
-        /*         if (empty($dependssearchvalue)) */
-        /*         { */
-        /*             continue; */
-        /*         } */
-        /*     } */
-        /* } */
-
-            
         //Search may have been disabled, since call to InitSearchVars - so check again
         $rows=array();
-        if (empty($this->ItemData[ $data ][ "Search" ])) { return $rows; }
-        if (!empty($this->ItemData[ $data ][ "NoSearchRow" ]))   { return $rows; }
-
-        if (!$this->MyMod_Data_Field_Is_Search($data)) { return $rows; }
+        if
+            (
+                empty($this->ItemData[ $data ][ "Search" ])
+                ||
+                !empty($this->ItemData[ $data ][ "NoSearchRow" ])
+                ||
+                !$this->MyMod_Search_Var_Access($data)
+                ||
+                !$this->MyMod_Data_Field_Is_Search($data)
+            )
+        {
+            return $rows;
+        }
 
         $rvar=$data;
         if ($this->CheckHashKeyValue($this->ItemData[ $data ],"Compound",1))

@@ -1,8 +1,8 @@
 <?php
 
 
-global $HtmlMessages; //global and common for all classes
-$HtmlMessages=array();
+/* global $HtmlMessages; //global and common for all classes */
+/* $HtmlMessages=array(); */
 
 class SqlMessages extends Latex
 {

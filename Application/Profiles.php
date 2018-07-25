@@ -33,29 +33,6 @@ class Profiles extends Perms
         return $datas;
     }
     
-    //*
-    //* function ShiftUserUnallowedProfiles, Parameter list:
-    //*
-    //* Find profiles, that we are NOT allowd to shift to.
-    //*
-
-    function ShiftUserUnallowedProfiles()
-    {
-        $trust=$this->ApplicationObj()->Profiles[ $this->Profile() ][ "Trust" ];
-
-        $profiles=array();
-        foreach (array_keys($this->Profiles()) as $profile)
-        {
-            if ($profile=="Public") { continue; }
-            
-            if ($trust<=$this->ApplicationObj()->Profiles[ $profile ][ "Trust" ])
-            {
-                array_push($profiles,$profile);
-            }
-        }
-        
-        return $profiles;
-    }
 }
 
 ?>

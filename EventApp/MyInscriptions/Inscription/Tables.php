@@ -57,7 +57,7 @@ class MyInscriptions_Inscription_Tables extends MyInscriptions_Inscription_SGrou
 
     function InscriptionFriendTable($edit,$button_title,$friend=array(),$inscription=array())
     {
-        return 
+        return
             $this->FriendsObj()->MyMod_Item_Table_Form
             (
                 array

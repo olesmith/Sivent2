@@ -13,24 +13,32 @@ class UsersRegistrationForms extends UsersRegistrationTables
     function RegistrationForm($options,$formoptions)
     {
         return
-            $this->FrameIt
+            $this->Htmls_Text
             (
-                $this->H
+                array
                 (
-                   4,
-                   $this->MyMod_Language_Message("RegistrationForm_Title","Name")
-                ).
-                $this->StartForm().
-                $this->RegistrationTable($formoptions).
-                $this->MakeHidden("Register",1).
-                $this->Buttons().
-                $this->EndForm(),
-                array("WIDTH" => '80%')
-            ).
-            "<P></P>".
-            $this->RegistrationTrailingTable($options).
-            "<BR>".
-            "";
+                    $this->Htmls_Frame
+                    (
+                        array
+                        (
+                            $this->H
+                            (
+                                4,
+                                $this->MyMod_Language_Message("RegistrationForm_Title","Name")
+                            ).
+                            $this->StartForm(),
+                            $this->RegistrationTable($formoptions),
+                            $this->MakeHidden("Register",1),
+                            $this->Buttons(),
+                            $this->EndForm(),
+                        ),
+                        array("WIDTH" => '80%')
+                    ),
+                    "<P></P>".
+                    $this->RegistrationTrailingTable($options),
+                    "<BR>",
+                )
+            );
 
     }
 
@@ -44,22 +52,30 @@ class UsersRegistrationForms extends UsersRegistrationTables
     function ResendConfirmRegistrationForm($options,$formoptions)
     {
         return
-            $this->FrameIt
+            $this->Htmls_Text
             (
-                $this->H
+                array
                 (
-                   4,
-                   $this->MyMod_Language_Message("ResendConfirmRegistrationForm_Title","Name")
-                ).
-               $this->StartForm().
-               $this->ResendConfirmRegistrationTable($formoptions).
-               $this->MakeHidden("Resend",1).
-               $this->Buttons().
-               $this->EndForm()
-            ).
-            "<P></P>".
-            $this->ResendConfirmationLinks($options).
-            "";
+                    $this->Htmls_Frame
+                    (
+                        array
+                        (
+                            $this->H
+                            (
+                                4,
+                                $this->MyMod_Language_Message("ResendConfirmRegistrationForm_Title","Name")
+                            ),
+                            $this->StartForm(),
+                            $this->ResendConfirmRegistrationTable($formoptions),
+                            $this->MakeHidden("Resend",1),
+                            $this->Buttons(),
+                            $this->EndForm()
+                        )
+                    ),
+                    "<P></P>",
+                    $this->ResendConfirmationLinks($options)
+                )
+            );
 
     }
 
@@ -72,23 +88,30 @@ class UsersRegistrationForms extends UsersRegistrationTables
     function ConfirmRegistrationForm($options,$formoptions)
     {
         return
-            $this->FrameIt
+            $this->Htmls_Text
             (
-                $this->H
+                array
                 (
-                   4,
-                   $this->MyMod_Language_Message("ConfirmRegistrationForm_Title","Name")
-                ).
-                $this->StartForm().
-                $this->ConfirmRegistrationTable($formoptions).
-                $this->MakeHidden("Confirm",1).
-                $this->Buttons().
-                $this->EndForm()
-            ).
-            "<P></P>".
-            $this->ConfirmationTrailingTable($options).
-            "";
-
+                    $this->Htmls_Frame
+                    (
+                        array
+                        (
+                            $this->H
+                            (
+                                4,
+                                $this->MyMod_Language_Message("ConfirmRegistrationForm_Title","Name")
+                            ),
+                            $this->StartForm(),
+                            $this->ConfirmRegistrationTable($formoptions),
+                            $this->MakeHidden("Confirm",1),
+                            $this->Buttons(),
+                            $this->EndForm()
+                        )
+                    ),
+                    "<P></P>",
+                    $this->ConfirmationTrailingTable($options),
+                )
+            );
     }
 
     //* function LogioForm, Parameter list: $options,$formoptions
@@ -99,19 +122,26 @@ class UsersRegistrationForms extends UsersRegistrationTables
     function LogonForm($options,$formoptions)
     {
         return
-            $this->FrameIt
+            $this->Htmls_Text
             (
-                $this->H(4,"Logon: Digite Email e Senha").
-                $this->StartForm("","post",0,array(),array("ModuleName")).
-                $this->LogonTable($formoptions).
-                $this->MakeHidden("Logon",1).
-                $this->Buttons().
-                $this->EndForm()
-            ).
-            "<P></P>>".
-            $this->LogonTrailingTable($options).
-            "";
-
+                array
+                (
+                    $this->Htmls_Frame
+                    (
+                        array
+                        (
+                            $this->H(4,"Logon: Digite Email e Senha"),
+                            $this->StartForm("","post",0,array(),array("ModuleName")),
+                            $this->LogonTable($formoptions),
+                            $this->MakeHidden("Logon",1),
+                            $this->Buttons(),
+                            $this->EndForm()
+                        )
+                    ),
+                    "<P></P>>",
+                    $this->LogonTrailingTable($options)
+                )
+            );
     }
 
 
@@ -123,19 +153,27 @@ class UsersRegistrationForms extends UsersRegistrationTables
     function RecoverForm($options,$formoptions)
     {
         return
-            $this->FrameIt
+            $this->Htmls_Text
             (
-                $this->H(4,"Recuperar Senha: Digite Email").
-                //$this->StartForm("","post",0,array(),array("ModuleName")).
-                $this->StartForm().
-                $this->RecoverTable($formoptions).
-                $this->MakeHidden("Logon",1).
-                $this->Buttons().
-                $this->EndForm()
-            ).
-            "<P></P>".
-            $this->LogonTrailingTable($options).
-            "";
+                array
+                (
+                    $this->Htmls_Frame
+                    (
+                        array
+                        (
+                            $this->H(4,"Recuperar Senha: Digite Email"),
+                            //$this->StartForm("","post",0,array(),array("ModuleName")),
+                            $this->StartForm(),
+                            $this->RecoverTable($formoptions).
+                            $this->MakeHidden("Logon",1),
+                            $this->Buttons(),
+                            $this->EndForm()
+                        )
+                    ),
+                    "<P></P>",
+                    $this->LogonTrailingTable($options)
+                )
+            );
 
     }
 }

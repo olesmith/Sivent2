@@ -23,11 +23,12 @@ array
       (
          'Public' => 0,
          'Person' => 0,
-         "Admin" => 0,
+         "Admin" => 1,
          "Friend"     => 0,
-         "Coordinator" => 0,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckEditAccess",
       ),
-      'Show' => array
+     'Show' => array
       (
          "HrefArgs" => "?ModuleName=Inscriptions&Event=".$this->Event("ID")."&Action=Edit&ID=#ID",
          'Public' => 1,

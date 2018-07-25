@@ -4,7 +4,16 @@ array
    (
       "Admin" => "1",
       "Coordinator" => "1",
-      "Data" => array("No","Edit","Delete","GenCert","MailCert","Event","Friend","Status","Inscription","Code"),
+      "Data" => array
+      (
+          "No","Show","Edit","Copy","Delete",
+          "Print",
+          #"Latex",
+          #"Add","Search","EditList","PrintList","LatexList","Import","Export","Files","Process",
+          #"Profiles","Info",
+          "GenCert","MailCert",
+          "Event","Friend","Status","Inscription","Code"
+      ),
       "Friend" => "1",
       "Name" => "Básicos",
       "Name_ES" => "Básicos",

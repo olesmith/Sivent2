@@ -12,7 +12,7 @@ array
       'Search' => array
       (
          'Public' => 1,
-         'Person' => 0,
+         'Person' => 1,
          "Admin" => 1,
          "Friend"     => 1,
          "Coordinator" => 1,
@@ -63,23 +63,6 @@ array
          "Coordinator" => 1,
          "AccessMethod"  => "CheckDeleteAccess",
       ),
-     "Collaborators" => array
-     (
-        "Href"     => "",
-        "HrefArgs" => "?ModuleName=Collaborators&Action=Search&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Colaboradores",
-        "Title_UK" => "Manage Collaborators",
-        "Name"     => "Colaboradores",
-        "Name_UK"     => "Collaborators",
-
-        "Public"   => 0,
-        "Person"   => 0,
-        "Admin"    => 1,
-        "Friend"   => 0,
-        "Coordinator"   => 1,
-        "Advisor"    => 0,
-        "AccessMethod"    => "Event_Collaborations_Has",
-      ),
       "Import" => array
       (
           "Href"     => "",
@@ -87,9 +70,9 @@ array
           "Title"    => "Importar #ItemsName de outro Evento",
           "Title_UK" => "Import #ItemsName_UK from other Event",
           "Title_ES"    => "Importar #ItemsName_ES de outro Evento",
-          "Name"     => "Importar #ItemsName",
-          "Name_UK"  => "Import #ItemsName_UK",
-          "Name_ES"     => "Importar #ItemsName_ES",
+          "Name"     => "Importar",
+          "Name_UK"  => "Import",
+          "Name_ES"     => "Importar",
           //"Icon"     => "rubik.png",
           "Public"   => 0,
           "Person"   => 0,

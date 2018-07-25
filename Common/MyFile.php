@@ -6,6 +6,18 @@ trait MyFile
     var $Files_Logging=0;
     
     //**
+    //** function MyFile_Exists, Parameter list: $file
+    //**
+    //** Returns true if file exists, false otherwise.
+    //** 
+    //**
+
+    function MyFile_Exists($file)
+    {
+        return file_exists($file);
+    }
+
+    //**
     //** function MyFile_Read, Parameter list: $file,$regex=""
     //**
     //** Reads file $file, returns array with lines read.
@@ -14,6 +26,12 @@ trait MyFile
 
     function MyFile_Read($file,$regex="")
     {
+        if (!$this->MyFile_Exists($file))
+        {
+            var_dump("MyFile_Read: File ".$file." noninexistent");
+            return array();
+        }
+        
         $lines=file($file);
 
         if (!empty($regex))
@@ -22,6 +40,53 @@ trait MyFile
         }
 
         return $lines;
+    }
+
+    //**
+    //** function MyFiles_Read, Parameter list: $files,$regex=""
+    //**
+    //** Reads file $file, returns array with lines read.
+    //** 
+    //**
+
+    function MyFiles_Read($files,$regex="")
+    {
+        $text="";
+        foreach ($files as $file)
+        {
+            if (is_file($file))
+            {
+                $text.=join("",$this->MyReadFile($file,$regex));
+            }
+        }
+
+        return $text;
+    }
+
+    //**
+    //** function MyFiles_Read, Parameter list: $files,$regex=""
+    //**
+    //** Reads file $file, returns array with lines read.
+    //** 
+    //**
+
+    function MyFiles_Read_Lines($files,$regex="")
+    {
+        $lines=array();
+        foreach ($files as $file)
+        {
+            if (is_file($file))
+            {
+                $lines=array_merge($lines,file($file));
+            }
+        }
+
+        foreach (array_keys($lines) as $id)
+        {
+            $lines[ $id ]=preg_replace('/\n$/',"",$lines[ $id ]);
+        }
+        
+        return preg_grep('/\S/',$lines);
     }
 
 
@@ -40,7 +105,7 @@ trait MyFile
         }
 
         $text=$this->MyFile_Read($file);
-        $text=preg_grep('/\S/',$text);
+        #$text=preg_grep('/\S/',$text);
         $text=preg_grep('/<\?php/',$text,PREG_GREP_INVERT);
         $text=preg_grep('/\?>/',$text,PREG_GREP_INVERT);
         $text=preg_grep('/(<<<<<|>>>>>|======)/',$text,PREG_GREP_INVERT);
@@ -66,6 +131,7 @@ trait MyFile
             }
         }
 
+
         $text=preg_replace('/<\?php/',"",$text);
         $text=preg_replace('/\?>/',"",$text);
 
@@ -75,16 +141,28 @@ trait MyFile
               !preg_grep('/\$hash/',$text)
            )
         {
-            array_unshift($text,"array","(");
+            array_unshift($text,"array","(\n");
             array_push($text,");");
             $this->Files_Incomplete[ $file ]=TRUE;
         }
-        
+
         if (!eval('$hash='.join("",$text).";\nreturn 1;"))
         {
             $text=preg_replace('/\n/',"<BR>",$text);
+            for ($n=0;$n<count($text);$n++)
+            {
+                $text[ $n ]=
+                    sprintf("Line %03d: ",$n).
+                    $text[ $n ];
+            }
+        
 
-            echo "Error from eval of file: ".$file."<BR>".join("",$text);
+            echo
+                "Error from eval of file: ".$file.
+                $this->BR().
+                $this->MyFile_Date_Time(filectime($file)).
+                $this->BR().
+                join("",preg_replace('/\s/',"&nbsp;",$text));
             exit();
             //$this->DoDie("Error from eval of file:",$file,$this->ModuleName,$text);
         }
@@ -194,7 +272,7 @@ trait MyFile
 
     function MyFile_Append($file,$text)
     {
-        if (file_exists($file))
+        if ($this->MyFile_Exists($file))
         {
             return $this->MyFile_Write($file,$text,'a');
         }
@@ -203,7 +281,7 @@ trait MyFile
             return $this->MyFile_Write($file,$text,'w');
         }
     }
-
+    
     
     //**
     //** function MyFiles_Title_Row, Parameter list: 
@@ -257,7 +335,7 @@ trait MyFile
             (
                 preg_replace('/\//',"_",$file),
                 1,
-                False,
+                True,  #should be false, when select all is funcional again
                 False,
                 $options=array
                 (
@@ -398,6 +476,76 @@ trait MyFile
             );
     }
 
+    //**
+    //** function MyFile_Writeable, Parameter list: $file
+    //**
+    //** +Returns true if $file is writeable.
+    //** 
+    //**
+
+    function MyFile_Writeable($file)
+    {
+        return is_writeable($file);
+    }
+    
+    //**
+    //** function MyFile_Readable, Parameter list: $file
+    //**
+    //** +Returns true if $file is writeable.
+    //** 
+    //**
+
+    function MyFile_Readable($file)
+    {
+        return is_readable($file);
+    }
+    
+    
+    //**
+    //** function MyFile_Touch, Parameter list: $file
+    //**
+    //** Creates dir, if createable.
+    //** 
+    //**
+
+    function MyFile_Touch($file,$tell=False)
+    {
+        if (!$this->MyFile_Exists($file))
+        {
+            $path=dirname($file);
+            if (!$this->MyFile_Exists($path))
+            {
+                $this->Dir_Create_AllPaths($path);
+            }
+            
+            if ($this->MyFile_Writeable($path))
+            {
+                $res=touch($file);
+                if ($tell)
+                {
+                    var_dump
+                    (
+                        "File ".$file." created: ".$res
+                    );
+                }
+            }
+            else
+            {
+                if ($tell)
+                {
+                    var_dump
+                    (
+                        "File ".$file." exists, but is unwritable",
+                        "Please run: touch ".$file
+                    );
+                }
+                
+                return -1;
+            }
+        }
+        
+        return 0;
+    }
 }
 
 ?>

@@ -20,8 +20,8 @@ array
    'CCEmail' => 'sipe.ime.ufg@gmail.com',
    'FromName' => 'SiVent2, Sistema de Gestão de Eventos, IME/UFG',
    'Domain' => 'mat.ufg.br',
-   'HtmlIcon1' => 'icons/ufg.png',
-   'HtmlIcon2' => 'icons/ufg.png',
+   'HtmlIcon1' => 'icons/ufg.svg',
+   'HtmlIcon2' => 'icons/ufg.svg',
    'LatexIcon1' => 'icons/ufg.png',
    'LatexIcon2' => 'icons/ufg.png',
 );

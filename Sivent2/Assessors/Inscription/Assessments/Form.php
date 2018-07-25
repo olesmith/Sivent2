@@ -26,6 +26,17 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
         return array("Value","Weighted");
     }
 
+    //*
+    //* function Assessors_Inscription_Form_Assessments__Data, Parameter list: 
+    //*
+    //* Returns criterias data to display.
+    //*
+
+    function Assessor_Inscription_Form_Assessed_ID($assessor)
+    {
+        return "ASSESSED_".$assessor[ "ID" ];
+    }
+
     
     //*
     //* function Assessors_Inscription_Assessments_Form, Parameter list: $edit,$assessor
@@ -44,7 +55,17 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
         $start=$end="";
         if ($edit==1)
         {
-            $start=$this->StartForm("","post",FALSE,array("Anchor" => "ASSESSED_".$assessor[ "ID" ]));
+            $start=
+                $this->StartForm
+                (
+                    "",
+                    "post",
+                    FALSE,
+                    array
+                    (
+                        "Anchor" => $this->Assessor_Inscription_Form_Assessed_ID($assessor),
+                    )
+                );
             $end=
                 $this->MakeHidden("Save",1).
                 $this->EndForm();
@@ -57,10 +78,17 @@ class AssessorsInscriptionAssessmentsForm extends AssessorsInscriptionAssessment
         
 
         return
-            $this->Anchor("ASSESSED_".$assessor[ "ID" ]).
             $this->FrameIt
             (
-               $this->H(2,$this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Title")).
+               $this->H
+               (
+                   2,
+                   $this->MyLanguage_GetMessage("Assessments_Inscriptions_Assessment_Title"),
+                   array
+                   (
+                       "ID" => $this->Assessor_Inscription_Form_Assessed_ID($assessor)
+                   )
+               ).
                $start.
                $this->Html_Table
                (

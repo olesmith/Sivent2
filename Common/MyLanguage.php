@@ -17,6 +17,19 @@ trait MyLanguage
     var $Messages=array();
 
     //*
+    //* function MyLanguage_Name, Parameter list: 
+    //*
+    //* Initilializes language from CGI (GET or COOKIE) and sets language cookie.
+    //*
+
+    function MyLanguage_Name($language="")
+    {
+        $language=$this->MyLanguage_Key2Lang($language);
+
+        return $this->ApplicationObj()->Languages[ $language ][ "Name" ];
+    }
+    
+    //*
     //* function MyLanguage_Init, Parameter list: 
     //*
     //* Initilializes language from CGI (GET or COOKIE) and sets language cookie.
@@ -57,6 +70,13 @@ trait MyLanguage
         );
 
         $language=$this->MyLanguage_Detect();;
+
+        $langs=array_keys($this->ApplicationObj()->Languages);
+        if (!preg_match('/^'.join("|",$langs).'$/',$language))
+        {
+            $language="PT";
+        }
+
         $this->ApplicationObj()->Language=$language;
         $this->MakeCGI_Cookie_Set("Lang",$this->ApplicationObj()->Language);
 
@@ -372,7 +392,5 @@ trait MyLanguage
 
         return $itemgroups;
     }
-    
-
 }
 ?>

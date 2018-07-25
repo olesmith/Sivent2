@@ -119,7 +119,7 @@ array
       "Friend" => 1,
       "Coordinator" => 2,
       "TabIndex" => 30,
-      "SelectCheckBoxes"  => 3,
+      //"SelectCheckBoxes"  => 3,
 
       "Search"  => TRUE,
       "Compulsory"  => FALSE,
@@ -154,7 +154,7 @@ array
       "Values_UK" => array("No","Yes"),
       "Default"  => 1,
       "TabIndex" => 40,
-      "SelectCheckBoxes"  => 3,
+      //"SelectCheckBoxes"  => 3,
 
       "Public"   => 1,
       "Person"   => 0,

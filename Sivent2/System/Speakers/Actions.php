@@ -75,7 +75,7 @@ array
          "Coordinator" => 1,
          "AccessMethod"  => "CheckShowAccess",
 
-         "Icon"    => "time_light.png",
+         "Icon"    => "fas fa-clock",
          "Singular"    => TRUE,
       ),
     "Emails" => array

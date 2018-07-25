@@ -4,7 +4,7 @@
                array
                (
                   "If you have already received your Confirmation Code, access ".
-                  $this->MyActions_Entry("Confirm",array()).
+                  $this->Htmls_Text($this->MyActions_Entry("Confirm",array())).
                   " in order to confirm your registrationo.\n".
                   "If you have not received your Confirmation Code: ".
                   $this->HtmlList

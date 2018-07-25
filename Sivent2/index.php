@@ -12,11 +12,11 @@ include_once("App/Has.php");
 include_once("App/Handle.php");
 include_once("App/Override.php");
 
-require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
+#require_once("../pagseguro/pagseguro-php-sdk-master/vendor/autoload.php");
 
-\PagSeguro\Library::initialize();
-\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
-\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
+#\PagSeguro\Library::initialize();
+#\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+#\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
 
 
 //For modules.
@@ -37,6 +37,9 @@ class Sivent2 extends App_Override
             "Caravans",
             "Types","Lots"
         );
+    
+    #HTML5
+    var $MyApp_Interface_Head_DocType='<!DOCTYPE HTML>';
     
     var $IDGETVar="";
     var $Pertains=1; //Questionary: 1, 
@@ -60,19 +63,6 @@ class Sivent2 extends App_Override
           "Table_Method" => "ShowInscriptionQuest",
        ),
     );
-
-    
-    /* var $AppProfiles=array */
-    /* ( */
-    /*    //Order in Profiles menu */
-    /*    "Sivent2" => array */
-    /*    ( */
-    /*       "Public", */
-    /*       "Coordinator", */
-    /*       "Friend", */
-    /*       "Admin", */
-    /*    ), */
-    /* ); */
     
     var $UserProfiles=array
     (
@@ -111,9 +101,20 @@ class Sivent2 extends App_Override
            
            $this->URL_CommonArgs.=$add;
         }
-   }
+
+        $this->App_CSS_Add();
+    }
     
-    
+    //*
+    //* function App_CSS_Add, Parameter list: 
+    //*
+    //* Adds app specific css to $this->MyApp_Interface_Head_CSS_OnLine.
+    //*
+
+    function App_CSS_Add()
+    {
+        array_push($this->MyApp_Interface_Head_CSS_OnLine,"CSS/sivent2.css");
+    }
 }
 
 $application=new Sivent2

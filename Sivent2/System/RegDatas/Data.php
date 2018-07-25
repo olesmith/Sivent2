@@ -58,9 +58,9 @@ array
       "Sql" => "VARCHAR(256)",
       "Public"   => 1,
       "Person"   => 0,
-      "Admin"    => 2,
+      "Admin"    => 1,
       "Friend" => 1,
-      "Coordinator" => 2,
+      "Coordinator" => 1,
       
       "Search"  => TRUE,
       "Compulsory"  => TRUE,

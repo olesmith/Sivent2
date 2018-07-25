@@ -76,7 +76,7 @@ array
          "Name_UK"   => "Visualize",
       
          "Handler"   => "Event_Handle_Certificate_Generate",
-         "Icon"   => "print_dark.png",
+         "Icon"   => "fas fa-certificate",
 
          "Public"   => 0,
          "Person"   => 0,
@@ -173,7 +173,27 @@ array
         "Name_ES" => "Estatisticas",
         "Name_UK" => "Statistics",
         "Title" => "Estatisticas do Evento",
-        "Title_ES" => "Estatisticas do Evento",
+        "Title_ES" => "Estatisticas del Evento",
         "Title_UK" => "Event Statistics",
+      ),
+     "Config" => array
+     (
+        "Handler"     => "Event_Config_Handle",
+        "Href"     => "",
+        "HrefArgs" => "?ModuleName=Events&Action=Config&Event=#ID",
+
+        "Public"   => 0,
+        "Person"   => 1,
+        "Admin"    => 1,
+        "Friend"   => 0,
+        "Coordinator"   => 1,
+        "Advisor"    => 0,
+        "Name" => "Configuração",
+        "Name_ES" => "Configuración",
+        "Name_UK" => "Configuration",
+        "Title" => "Configuração do Evento",
+        "Title_ES" => "Configuración del Evento",
+        "Title_UK" => "Event Configuration",
+        "Singular" => True,
       ),
 );

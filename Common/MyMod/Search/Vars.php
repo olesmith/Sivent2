@@ -4,6 +4,55 @@
 trait MyMod_Search_Vars
 {
     //*
+    //* function MyMod_Search_Var_Access, Parameter list: $data
+    //*
+    //* Detect whether we may search on var. Checks for access method.
+    //*
+
+    function MyMod_Search_Var_Access($data)
+    {
+        $res=True;
+        if (!empty($this->ItemData[ $data ][ "SearchAccessMethod" ]))
+        {
+            $method=$this->ItemData[ $data ][ "SearchAccessMethod" ];
+            $res=$this->$method($data);
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* function MyMod_Search_Vars, Parameter list: $datas=array()
+    //*
+    //* Detect search vars from ItemData.
+    //*
+
+    function MyMod_Search_Vars($datas=array())
+    {
+        if (empty($this->ModuleName)) { return $this->SearchVars; }
+        if (empty($this->SearchVars))
+        {
+            $this->SearchVars=array();
+
+            if (empty($datas)) { $datas=array_keys($this->ItemData()); }
+
+            foreach ($datas as $data)
+            {
+                if ($this->MyMod_Data_Field_Is_Search($data))
+                {
+                    if ($this-> MyMod_Search_Var_Access($data))
+                    {
+                        array_push($this->SearchVars,$data);
+                    }
+                }
+            }
+        }
+
+        return $this->SearchVars;
+    }
+    
+
+    //*
     //* function MyMod_Search_Var_Add, Parameter list: $data
     //*
     //* Marks $data as search var.
@@ -74,8 +123,9 @@ trait MyMod_Search_Vars
     function MyMod_Search_Vars_Pre_Where()
     {
         $searchvars=array();
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
+        foreach ($this->MyMod_Search_Vars() as $data)
         {
+            $wheres=array();
             if ($this->MyMod_Data_Access($data)>=1)
             {
                 $rdata=$this->MyMod_Search_CGI_Name($data);
@@ -83,11 +133,33 @@ trait MyMod_Search_Vars
 
                 if (!empty($value))
                 {
-                    $searchvars[ $data ]=$this->MyMod_Items_Search_Var_Where($data,$value);
-                    if (empty($searchvars[ $data ])) { unset($searchvars[ $data ]); }
-                    
+                    $where=$this->MyMod_Search_Var_Where($data,$value);
+                    if (!empty($where))
+                    {
+                        array_push($wheres,$where);
+                    }
+
+                    $searchjoined=$this->ItemData($data,"Search_Joined");
+
+                    if (is_array($searchjoined))
+                    {
+                        foreach ($searchjoined as $rdata)
+                        {
+                            if (!empty($this->ItemData[ $rdata ]))
+                            {
+                                array_push
+                                (
+                                    $wheres,
+                                    $this->MyMod_Search_Var_Where($data,$value,$rdata)
+                                );
+                            }
+                        }
+                    }
+
+                    $searchvars[ $data ]="(".join(" OR ",$wheres).")";
                 }
             }
+                    
         }
 
         return $searchvars;
@@ -105,7 +177,7 @@ trait MyMod_Search_Vars
     function MyMod_Search_Vars_Post_Where()
     {
         $searchvars=array();
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
+        foreach ($this->MyMod_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -131,7 +203,7 @@ trait MyMod_Search_Vars
                 }
             }
         }
-  
+
         return $searchvars;
     }
 }

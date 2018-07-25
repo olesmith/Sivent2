@@ -2,8 +2,110 @@
 
 trait MyMod_Group_Table
 {
-    
     var $ItemTableRowsMethod="MyMod_Group_Rows_Item";
+    
+    //*
+    //* function MyMod_Data_Group_Table_Data_Get, Parameter list: $group
+    //*
+    //* Detects datas from $group.
+    //*
+
+    function MyMod_Data_Group_Table_Data_Get($group)
+    {
+        if (empty($group)) { $group=$this->MyMod_Data_Group_Actual_Get(); }
+
+        return $this->MyMod_Data_Group_Datas_Get($group);
+    }
+
+    
+    //*
+    //* function MyMod_Data_Group_Table, Parameter list: $title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar="Update"
+    //*
+    //* Creates data group table, group $group. If $group=="", calls MyMod_Data_Group_Actual_Get to detect it.
+    //* $title, $edit and $items are transferred calling ItemTable.
+    //*
+
+    function MyMod_Data_Group_Table($title,$edit=0,$group="",$items=array(),$titles=array(),$cgiupdatevar="Update")
+    {
+        if (empty($items)) { $items=$this->ItemHashes; }
+        $this->Singular=False;
+
+        if (empty($this->Actions))
+        {
+            $this->InitActions();
+        }
+
+        $this->ItemData("ID");
+        $this->MyMod_Data_Groups_Initialize();
+        
+        if (empty($group)) { $group=$this->MyMod_Data_Group_Actual_Get(); }
+        
+        if (!empty($this->ItemDataGroups[ $group ][ "PreMethod" ]))
+        {
+            $method=$this->ItemDataGroups[ $group ][ "PreMethod" ];
+            $this->$method();
+        }
+
+        $datas=$this->MyMod_Data_Group_Table_Data_Get($group);
+        if (!empty($this->ItemDataGroups[ $group ][ "GenTableMethod" ]))
+        {
+            $method=$this->ItemDataGroups[ $group ][ "GenTableMethod" ];
+            if (method_exists($this,$method))
+            {
+                return $this->$method($edit);
+            }
+            else
+            {
+                print "MyMod_Data_Group_Table: No such method: $method(\$edit)";
+                exit();
+            }
+        }
+
+        if (!empty($this->ItemDataGroups[ $group ][ "GenTableRowMethod" ]))
+        {
+            $this->ItemTableRowsMethod=$this->ItemDataGroups[ $group ][ "GenTableRowMethod" ];  
+        }
+        
+        $countdef=array();
+        if (
+              isset($this->ItemDataGroups[ $group ][ "SubTable" ])
+              &&
+              is_array($this->ItemDataGroups[ $group ][ "SubTable" ])
+           )
+        {
+            $countdef=$this->ItemDataGroups[ $group ][ "SubTable" ];
+        }
+
+
+        if (!empty($this->ItemDataGroups[ $group ][ "PreProcessor" ]))
+        {
+            $method=$this->ItemDataGroups[ $group ][ "PreProcessor" ];
+            if (count($items)==0) { $items=$this->ItemHashes; }
+
+            foreach ($items as $id => $item)
+            {
+                $this->$method($items[ $id ]);
+            }
+        }
+        
+        if (!empty($this->ItemDataGroups[ $group ][ "SumVars" ]))
+        {
+            $this->SumVars=array("");
+        }
+
+        return
+            $this->MyMod_Group_Datas_Table
+            (
+                $title,
+                $edit,
+                $datas,
+                $items,
+                $countdef,
+                $this->MyMod_Data_Group_Titles($group,$datas,$titles),
+                TRUE,
+                $cgiupdatevar
+            );
+    }
 
     
     //*
@@ -15,7 +117,7 @@ trait MyMod_Group_Table
     //* $titles should be deprecated!!! Title row is inserted in Table class.
     //* 
 
-    function MyMod_Group_Datas_Table($title="",$edit=0,$datas=array(),$items=array(),$countdef=array(),$titles=array(),$sumvars=TRUE,$cgiupdatevar="Update")
+    function MyMod_Group_Datas_Table($title="",$edit=0,$datas=array(),$items=array(),$countdef=array(),$titles=array(),$sumvars=TRUE,$cgiupdatevar="Update",$nstart=1)
     {
         if (count($items)==0)     { $items=$this->ItemHashes; }
         if (count($datas)==0)     { $datas=$this->GetDefaultDataGroup(); }
@@ -28,7 +130,14 @@ trait MyMod_Group_Table
 
         $datas=$this->MyMod_Group_Datas_Get($datas); 
 
-        if (!empty($cgiupdatevar) && $this->CGI_POSTint($cgiupdatevar)==1)
+        if
+            (
+                $edit==1
+                &&
+                !empty($cgiupdatevar)
+                &&
+                $this->CGI_POSTint($cgiupdatevar)==1
+            )
         {
             $items=$this->MyMod_Items_Update($items,$datas);
         }
@@ -42,8 +151,6 @@ trait MyMod_Group_Table
         {
             $showall=TRUE;
         }
-
-        $nn=$this->FirstItemNo+1;
 
         $actions=array();
         if (is_array($this->ItemActions)) { $actions=$this->ItemActions; }
@@ -75,13 +182,14 @@ trait MyMod_Group_Table
 
         $n=1;
         $nitems=count(array_keys($items));
-        
+
         $tbl=array();
-        $even=True;
+        $even=False;
         $last=False;
         foreach (array_keys($items) as $id)
         {
             if ($n==$nitems) { $last=True; }
+
             $tbl=
                 array_merge
                 (
@@ -90,13 +198,14 @@ trait MyMod_Group_Table
                     (
                         $edit,
                         $items[ $id ],
-                        $n++,
+                        $n+$this->FirstItemNo,
                         $datas,
                         $subdatas,
                         $even,
                         $last
                     )
                 );
+            $n++;
 
             $even=!$even;
         }
@@ -109,9 +218,14 @@ trait MyMod_Group_Table
                array
                (
                   "Class" => 'head',
-                  "Row" => $this->MyMod_Sort_Title_Cells($titles)
+                  "Row" => $this->MyMod_Sort_Title_Cells($titles),
                )
             );
+        }
+        
+        if (!empty($title))
+        {
+            array_unshift($tbl,array($title));
         }
 
         if (count($this->SumVars)>0)
@@ -163,7 +277,7 @@ trait MyMod_Group_Table
     }    
 
     //*
-    //* function MyMod_Group_Table_Title_Row, Parameter list: ($datas)
+    //* function MyMod_Group_Datas_Title_Row, Parameter list: ($datas)
     //*
     //* 
     //* 
@@ -171,12 +285,9 @@ trait MyMod_Group_Table
     function MyMod_Group_Datas_Title_Row($datas)
     {
         return
-            $this->Html_Table_Head_Row($this->MyMod_Data_Titles($datas));
-        
-            array
+            $this->Html_Table_Head_Row
             (
-                "Class" => 'head',
-                "Row" => $this->MyMod_Data_Titles($datas)
+                $this->MyMod_Data_Titles($datas)
             );
     }
 }

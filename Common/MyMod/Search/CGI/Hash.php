@@ -11,7 +11,7 @@ trait MyMod_Search_CGI_Hash
 
     function MyMod_Search_CGI_Hash_Get($hash=array())
     {
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
+        foreach ($this->MyMod_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -36,35 +36,6 @@ trait MyMod_Search_CGI_Hash
         }
 
         return $hash;
-    }
-
-    
-    //*
-    //* function MyMod_Search_CGI_Hash_2_URL, Parameter list: 
-    //*
-    //* Creates URL according to search vars defined.
-    //*
-
-    function MyMod_Search_CGI_Hash_2_URL_000()
-    {
-        $args=array();
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
-        {
-            if ($this->MyMod_Data_Access($data)>=1)
-            {
-                $value=$this->MyMod_Search_CGI_Value($data);
-                if ($value!="" && (!preg_match('/^0$/',$value)))
-                {
-                    array_push
-                    (
-                        $args,
-                        $this->MyMod_Search_CGI_Name($data)."=".$value
-                    );
-                }
-            }
-        }
-
-        return join("&",$args);
     }
 }
 

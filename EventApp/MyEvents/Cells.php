@@ -61,7 +61,7 @@ class MyEventsCells extends MyEventsFriend
 
     function Event_Inscriptions_Date_Span($item=array())
     {
-        return $this->Event_Date_Span_Cell(0,$item);
+        return $this->Event_Inscriptions_Date_Span_Cell(0,$item);
     }
 
     
@@ -211,7 +211,14 @@ class MyEventsCells extends MyEventsFriend
         $today=$this->MyTime_2Sort();
 
         $res=FALSE;
-        if ($event[ "StartDate" ]<=$today && $event[ "EndDate" ]>=$today)
+        if
+            (
+                !empty($event)
+                &&
+                $event[ "StartDate" ]<=$today
+                &&
+                $event[ "EndDate" ]>=$today
+            )
         {
             $res=TRUE;
         }
@@ -232,7 +239,7 @@ class MyEventsCells extends MyEventsFriend
         $today=$this->MyTime_2Sort();
 
         $res=FALSE;
-        if ($event[ "StartDate" ]>$today)
+        if (!empty($event) && $event[ "StartDate" ]>$today)
         {
             $res=TRUE;
         }
@@ -262,13 +269,15 @@ class MyEventsCells extends MyEventsFriend
 
     
     //*
-    //* function Events_Status_Cell, Parameter list: $event=array()
+    //* function Events_Status_Cell, Parameter list: $edit=0,$event=array(),$data=""
     //*
     //* Returns open/closed/premature status cell message.
     //*
 
-    function Events_Status_Cell($event=array())
+    function Events_Status_Cell($edit=0,$event=array(),$data="")
     {
+        if (empty($event)) { return $this->MyLanguage_GetMessage("Event_Status_Title"); }
+        
         if (empty($event)) { $event=$this->Event(); }
         
         $msg="Events_Inscriptions_Cell_Status_Closed";

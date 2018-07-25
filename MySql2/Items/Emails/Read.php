@@ -20,7 +20,7 @@ class ItemsEmailsRead extends ItemsEmailsAttachments
             $emails[ $friendkey ]=array();
         }
         
-        $where=array_merge($this->MyMod_Items_Search_Where(),$rwhere);
+        $where=array_merge($this->MyMod_Search_Where(),$rwhere);
 
         $this->ItemHashes=$this->SelectHashesFromTable
         (

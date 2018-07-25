@@ -39,7 +39,7 @@ trait MyDir
     //** 
     //** 
 
-    function Dir_Create($path)
+    function Dir_Create0000000000($path)
     {
         $res=TRUE;
         if (!file_exists($path))
@@ -51,6 +51,47 @@ trait MyDir
     }
 
 
+    //**
+    //** function Dir_Create, Parameter list: $path
+    //**
+    //** Creates dir, if createable.
+    //** 
+    //**
+
+    function Dir_Create($path,$tell=False)
+    {
+        if (!$this->MyFile_Exists($path))
+        {
+            $parentpath=dirname($path);
+            if ($this->MyFile_Writeable($parentpath))
+            {
+                $res=mkdir($path);
+                if ($tell)
+                {
+                    var_dump
+                    (
+                        "Path ".$path." created: ".$res
+                    );
+                }
+
+                return $res;
+            }
+            elseif ($tell)
+            {
+                var_dump
+                (
+                    "Path ".$parentpath." exists, but is unwritable",
+                    "Please run: mkdir ".$path,
+                    $this->MyFile_Writeable($path)
+                );
+            }
+
+            return -1;
+        }
+        
+        return 0;
+    }
+    
     //**
     //** function Dir_Create_AllPaths, Parameter list: 
     //**
@@ -74,7 +115,7 @@ trait MyDir
 
             if (!is_dir($path))
             {
-                mkdir($path);
+                $this->Dir_Create($path);
             }
             
         }

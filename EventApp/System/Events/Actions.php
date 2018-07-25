@@ -24,6 +24,15 @@ array
          "Coordinator" => 1,
          "AccessMethod" => "CheckShowAccess",
       ),
+      'Print' => array
+      (
+         'Public' => 1,
+         'Person' => 0,
+         "Admin" => 1,
+         "Friend"     => 1,
+         "Coordinator" => 1,
+         "AccessMethod" => "CheckShowAccess",
+      ),
       'Edit' => array
       (
          'Public' => 0,
@@ -93,7 +102,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
 
-      "Icon"     => "show_light.png",
+      "Icon"     => "fas fa-search-plus",
 
       "Singular"   => TRUE,
       "AccessMethod"   => "CheckShowAccess",
@@ -113,7 +122,7 @@ array
       "Friend"     => 0,
       "Coordinator" => 1,
 
-      "Icon"     => "history_light.png",
+      "Icon"     => "fab fa-wpforms",
 
       "Singular"   => TRUE,
       "Handler"   => "HandleEventDatas",
@@ -134,7 +143,7 @@ array
       "Friend"     => 0,
       "Coordinator" => 1,
 
-      "Icon"     => "absences_light.png",
+      "Icon"     => "fab fa-wpforms",
 
       "Singular"   => TRUE,
       "Handler"   => "HandleEventDataGroups",
@@ -157,7 +166,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
 
-      "Icon"     => "history_light.png",
+      "Icon"     => "fas fa-comments",
 
       "Singular"   => FALSE,
       "Handler"   => "MyEvents_Handle_Open",
@@ -179,6 +188,7 @@ array
 
       "Singular"   => TRUE,
       "AccessMethod"   => "MayInscribe",
+      "Access_No_Warnings"   => True,
       "Handler"   => "",
    ),
    "Inscription" => array
@@ -217,7 +227,7 @@ array
 
       "Singular"   => TRUE,
       "Handler"   => "",
-      "Icon"   => "students_light.png",
+      "Icon"   => "fas fa-users",
    ),
    "Inscriptions_Add" => array
    (
@@ -236,7 +246,7 @@ array
 
       "Singular"   => TRUE,
       "Handler"   => "",
-      "Icon"   => "students_light.png",
+      "Icon"   => "fas fa-user-plus",
    ),
    "Conf" => array
    (
@@ -254,7 +264,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 2,
 
-      #"Icon"     => "history_light.png",
+      "Icon"     => "fas fa-screwdriver",
 
       "Singular"   => FALSE,
       "Handler"   => "MyEvents_Handle_Conf",

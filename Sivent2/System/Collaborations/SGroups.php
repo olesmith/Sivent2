@@ -6,8 +6,12 @@ array
       "Name_UK" => "Basic",
       "Data" => array
       (
-         "Unit","Event","Name","Name_UK","TimeLoad","CertText",
+         "Unit","Event",
+         "Name","TimeLoad","Inscriptions",
+         "CertText",
          "CTime","MTime",
+         "Collaborations_Collaborators_Noof_Cell",
+         "Collaborations_Collaborators_NHomologated_Cell",
       ),
       "Admin" => 1,
       "Person" => 0,

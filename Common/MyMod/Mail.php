@@ -28,13 +28,11 @@ trait MyMod_Mail
     function MyMod_Mail_Type_Get($type,$language)
     {
         $where=
-            $this->UnitsObj()->UnitWhere
+            array
             (
-               array
-               (
-                  "Name" => $type,
-                  "Language" => $language,
-               )
+                "Name" => $type,
+                "Language" => $language,
+                "Unit" => 1,
             );
 
         return $this->MailTypesObj()->Sql_Select_Hash($where);

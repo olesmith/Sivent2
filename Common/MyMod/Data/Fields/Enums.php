@@ -126,7 +126,9 @@ trait MyMod_Data_Fields_Enums
         elseif ($checkbox==2)
         {
              $options[ "ALIGN" ]='left';
-             $value=$this->MakeRadioSet($rdata,$values,$names,$value,$tabindex);
+             $value=
+                 #$this->MakeRadioSet($rdata,$values,$names,$value,$tabindex);
+                 $this->Htmls_Radios($rdata,$values,$names,$value,$tabindex);
         }
         elseif ($checkbox==3)
         {
@@ -137,22 +139,23 @@ trait MyMod_Data_Fields_Enums
         }
         else
         {
-            $value=$this->MakeSelectField
-            (
-               $rdata,
-               $values,
-               $names,
-               $value,
-               array(),
-               array(),
-               $fieldtitle="",
-               0,
-               FALSE,
-               FALSE,
-               NULL,
-               $options
-            );
-        }
+            $value=
+                $this->Htmls_Select
+                (
+                    $rdata,$values,$names,$value,
+                    array
+                    (
+                        "Disableds" => array(),
+                        "Titles" => array(),
+                        "Title" => "",
+                        "MaxLen" => 0,
+                        "ExcludeDisableds" => False,
+                        "Multiple" => False,
+                        "OnChange" => NULL,
+                    ),
+                    $options
+                );
+         }
 
         return $value;
     }

@@ -10,6 +10,20 @@ trait MyMod_Data_Fields_File_Decorator_Download
 
     function MyMod_Data_Fields_File_Decorator_Download_Link($edit,$item,$data,$value)
     {
+        if ($edit==0 && $this->MyMod_Data_Value_Image_Is($item,$data))
+        {
+            return
+                $this->Htmls_SPAN
+                (
+                    $this->MyMod_Data_Fields_File_IMG($item,$data),
+                    array
+                    (
+                        "CLASS" => "uploadmsg",
+                        "TITLE" => $this->MyMod_Data_Fields_File_Decorator_Download_Title($item,$data),
+                    )
+                );
+        }
+        
         return
             $this->A
             (
@@ -18,7 +32,7 @@ trait MyMod_Data_Fields_File_Decorator_Download
                 array
                 (
                     "CLASS" => "uploadmsg",
-                    "TITLE" => $this->MyMod_Data_Fields_File_Decorator_Download_Title($edit,$item,$data,$value),
+                    "TITLE" => $this->MyMod_Data_Fields_File_Decorator_Download_Title($item,$data),
                 )
             ).
             "";
@@ -31,29 +45,37 @@ trait MyMod_Data_Fields_File_Decorator_Download
 
     function MyMod_Data_Fields_File_Decorator_Download_Icon($item,$data)
     {
-        $value="";
-        if (isset($item[ $data ])) { $value=$item[ $data ]; }
+        $value=$file="";
+        if (isset($item[ $data ])) { $file=$item[ $data ]; }
+        if (isset($item[ $data."_OrigName" ])) { $value=$item[ $data."_OrigName" ]; }
 
         $icon="";
-        if (!empty($this->ItemData[ $data ][ "Icon" ]))
-        {
-            $icon=$this->IMG
+        if
             (
-                "icons/".$this->ItemData[ $data ][ "Icon" ],
-                "teste",
-                20,20
-            );
+                !empty($this->ItemData[ $data ][ "Icon" ])
+                &&
+                $this->MyMod_Data_Image_Value_Is($value)
+            )
+        {
+            $icon=
+                $this->IMG
+                (
+                    "icons/".$this->ItemData[ $data ][ "Icon" ],
+                    basename($value),
+                    20,20
+                ).
+                "";
         }      
         elseif (!empty($this->ItemData[ $data ][ "Iconify" ]))
         {
-            $icon=$this->MyMod_Item_Action_Icon($data,$item);
+            $icon=$this->MyActions_Entry_Icon("Download");
         }      
         elseif (!empty($value))
         {
             $icon=$value;
-            if (file_exists($icon))
+            if (file_exists($file))
             {
-                $icon=
+               $icon=
                     $this->IMG
                     (
                         $this->MyMod_Data_Fields_File_Decorator_Download_Href($item,$data),
@@ -94,35 +116,21 @@ trait MyMod_Data_Fields_File_Decorator_Download
             $filetime=filemtime($value);
         }
 
-        return $this->TimeStamp2Text($filetime,FALSE);
+        return $this->TimeStamp2Text($filetime," ",False);
     }
     
-    //* FileDownloadTitle
+    //* MyMod_Data_Fields_File_Decorator_Download_Title
     //* 
     //* Creates title entry for file download.
     //*
 
-    function MyMod_Data_Fields_File_Decorator_Download_Title($edit,$item,$data)
+    function MyMod_Data_Fields_File_Decorator_Download_Title($item,$data)
     {
-        $title=
-            $item[ $data."_OrigName" ].". ".
-            $this->MyLanguage_GetMessage("Uploaded")." : ".
-            $this->MyMod_Data_Fields_File_Decorator_Download_TimeStamp($item,$data).
-            " (".
-            $this->MyMod_Data_Fields_File_Decorator_SizeInfo($item,$data).
-            ")";
-
-        if ($edit==1)
-        {
-            $title.=
-                " ".
-                $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data).
-                "";
-        }
-
-        return preg_replace('/<BR>/',"\n",$title);
+        return
+            $this->MyMod_Data_Fields_File_Decorator_Title($item,$data,"Field_File_Verify_Title");
     }
-    
+
+        
     //* FileDownloadHref
     //* 
     //* Creates links for file download.

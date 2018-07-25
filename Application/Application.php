@@ -12,7 +12,6 @@ include_once("Modules.php");
 include_once("Setup.php");
 include_once("Messages.php");
 include_once("Help.php");
-include_once("TInterface.php");
 include_once("Perms.php");
 include_once("Profiles.php");
 include_once("../Application/Users.php");
@@ -110,8 +109,11 @@ class Application extends ApplicationCGIVars
         {
             $this->Module->SendMails();
         }
-        $this->MyApp_Interface_Doc_Tail();
-        $this->MyApp_Interface_Tail();
+
+        if ($this->DocHeadSend==1)
+        {
+            $this->MyApp_Interface_Tail();
+        }
     }
 
     //*

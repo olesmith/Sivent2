@@ -9,7 +9,7 @@ class HtmlList extends HtmlTags
     //* 
     //*
 
-    function HTMLList($list,$ul="UL",$options=array(),$lioptions=array())
+    function HtmlList($list,$ul="UL",$options=array(),$lioptions=array())
     {
         if (count($list)==0) { return ""; }
 

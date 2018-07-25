@@ -36,15 +36,15 @@ class DBData extends DBDataForm
     }
 
     //*
-    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //* function MyMod_Setup_Profiles_File, Parameter list:
     //*
     //* Returns name of file with Permissions and Accesses to Modules.
     //* Overrides trait!
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
-        return "../Application/System/DBData/Profiles.php";
+        return join("/",array("..","Application","System","DBData","Profiles.php"));
     }
     
     //*

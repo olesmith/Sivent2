@@ -27,7 +27,16 @@ trait MyMod_Data_Fields_File_Decorator
 
         $this->MakeSureWeHaveRead("",$item,array($data."_Time",$data."_OrigName"));
 
-        $rvalue="";
+        $values=array();
+        if ($edit==1)
+        {
+            array_push
+            (
+                $values,
+                $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data)
+            );
+        }
+        
         if (!empty($value))
         {
             $filetime="";
@@ -40,69 +49,18 @@ trait MyMod_Data_Fields_File_Decorator
                 $filetime=filemtime($value);
             }
 
-            $rvalue=$value;
-            if (!empty($item[ $data."_OrigName" ]))
-            {
-                $rvalue=$item[ $data."_OrigName" ];
-            }
-            
             if (!empty($filetime))
             {
-                if (empty($rvalue))
-                {
-                    $item[ $data."_OrigName" ]=$item[ $data ];
-                    $this->MySqlSetItemValues
-                    (
-                       $this->SqlTableName(),
-                       array($data."_OrigName"),
-                       $item
-                    );
-                }
-                
-               
-                $rvalue=
-                    " ".
-                    $this->MyMod_Data_Fields_File_Decorator_Download_Link($edit,$item,$data,$value).
-                    "";
-            }
-        }
-        elseif (!empty($item[ "ID" ]))
-        {
-            //Try to correct if appears as uploaded...
-            //Should be deprecated!
-            $val=strlen($this->Sql_Select_Hash_Value($item[ "ID" ],$data."_Contents"));
-
-            if ($val>0)
-            {
-                $destfile=$this->MyMod_Data_Upload_FileName_Get($data,$item,"pdf");
-
-                $item[ $data."_OrigName" ]=$destfile;
-                $item[ $data."_Size" ]=$val;
-                $item[ $data ]=$destfile;
-
-                $this->MySqlSetItemValues
+                array_push
                 (
-                   $this->SqlTableName(),
-                   array($data,$data."_OrigName",$data."_Size"),
-                   $item
+                    $values,
+                    $this->MyMod_Data_Fields_File_Decorator_Unlink_Link($edit,$item,$data,$value),
+                    $this->MyMod_Data_Fields_File_Decorator_Download_Link($edit,$item,$data,$value)
                 );
-
             }
         }
-
-        if ($edit==1)
-        {
-            $rvalue.=
-                " ".
-                $this->MyMod_Data_Fields_File_Extensions_Permitted_Text($data).
-                "";
-        }
-
-        return
-            $rvalue.
-            " ".
-            $this->MyMod_Data_Fields_File_Decorator_Unlink_Link($edit,$item,$data,$value).
-            "\n";
+        
+        return $values;
     }
     
     
@@ -117,7 +75,6 @@ trait MyMod_Data_Fields_File_Decorator
         {
             $value=$item[ $data ];
             $origname=$this->Sql_Select_Hash_Value($item[ "ID" ],$data."_OrigName","ID");
-
             
             $rvalue=$value;
             if (!empty($origname))
@@ -157,6 +114,53 @@ trait MyMod_Data_Fields_File_Decorator
 
         return $filesize." bytes";
     }
+    
+    //* MyMod_Data_Fields_File_Image_Dimensions
+    //* 
+    //* If we have an image, try to detect image dimensions info.
+    //*
+
+    function MyMod_Data_Fields_File_Image_Dimensions($item,$data)
+    {
+        $info="";
+        if ($this->MyMod_Data_Value_Image_Is($item,$data))
+        {
+            $info="-";
+            if (file_exists($item[ $data ]))
+            {
+                $imginfo=getimagesize($item[ $data ]);
+                if (count($imginfo)>2)
+                {
+                    $info=$imginfo[ 0 ]."x".$imginfo[ 1 ];
+                }
+            }
+        }
+
+        return $info;
+    }
+    
+    //* MyMod_Data_Fields_File_Decorator_Title
+    //* 
+    //* Creates title entry for file download.
+    //*
+
+    function MyMod_Data_Fields_File_Decorator_Title($item,$data,$msgkey)
+    {
+        return
+            join
+            (
+                "\n",
+                array
+                (
+                    $this->MyLanguage_GetMessage($msgkey).": ".$item[ $data ],
+                    $this->MyLanguage_GetMessage("File_Original").": ".$item[ $data."_OrigName" ],
+                    "Time: ".$this->MyMod_Data_Fields_File_Decorator_Download_TimeStamp($item,$data),
+                    "Size: ".$this->MyMod_Data_Fields_File_Decorator_SizeInfo($item,$data),
+                    "Dimensions: ".$this->MyMod_Data_Fields_File_Image_Dimensions($item,$data)
+                )
+            );
+    }
+
 }
 
 ?>

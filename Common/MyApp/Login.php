@@ -1,5 +1,7 @@
 <?php
 
+include_once("Login/Headers.php");
+include_once("Login/Table.php");
 include_once("Login/Form.php");
 include_once("Login/Retrieve.php");
 include_once("Login/Password.php");
@@ -7,6 +9,8 @@ include_once("Login/Password.php");
 trait MyApp_Login
 {
     use
+        MyApp_Login_Headers,
+        MyApp_Login_Table,
         MyApp_Login_Form,
         MyApp_Login_Retrieve,
         MyApp_Login_Password;

@@ -72,7 +72,7 @@ trait MyApp_Module_Load
 
         $this->Module->MyMod_Profiles_Init();
         
-        if (file_exists($this->Module->MyMod_Setup_ItemDataFile($module)))
+        if (file_exists($this->Module->MyMod_Setup_Item_Data_File($module)))
         {
             $this->Module->MyMod_Data_Init($initdbtable,TRUE); //TRUE to update DB cols
         }
@@ -82,7 +82,7 @@ trait MyApp_Module_Load
             $this->Module->MyActions_Init();
         }
 
-        if (file_exists($this->MyMod_Setup_LatexDataFile()))
+        if (file_exists($this->MyMod_Setup_Latex_File()))
         {
             $this->Module->InitLatexData();
         }

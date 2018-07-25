@@ -109,7 +109,7 @@ array
         "Handler"   => "Submission_Handle_Certificate_Generate",
         "AccessMethod"  => "CheckCertAccess",
 
-        "Icon"   => "print_dark.png",
+        "Icon"   => "fas fa-certificate",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -130,7 +130,7 @@ array
         "AccessMethod"  => "CheckCertAccess",
         "Target"   => "_blank",
 
-        "Icon"   => "copy_dark.png",
+        "Icon"   => "fas fa-envelope-square",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -148,7 +148,7 @@ array
       
         "Handler"   => "Submission_Handle_Certificates_Generate",
 
-        "Icon"   => "print_dark.png",
+        "Icon"   => "fas fa-file-pdf",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -208,7 +208,7 @@ array
         "Handler"    => "Submission_Handle_Assessments",
         "AccessMethod"    => "Event_Assessments_Has",
         "Singular"      => TRUE,
-        "Icon"      => "absences_light.png",
+        "Icon"      => "fas fa-glasses",
     ),
     "Emails" => array
     (

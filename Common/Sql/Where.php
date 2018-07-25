@@ -4,6 +4,23 @@
 trait Sql_Where
 {
     //*
+    //* function Sql_Where_Ors, Parameter list: 
+    //*
+    //* SQL where clase for $date.
+    //*
+
+    function Sql_Where_Ors($ors)
+    {
+        $where=join(" OR ",$ors);
+        if (count($ors)>1)
+        {
+            $where="(".$where.")";
+        }
+
+        return $where;
+    }
+
+    //*
     //* function Sql_Times_Condition, Parameter list: $mtime1,$mtime2
     //*
     //* SQL where clase for $date.

@@ -240,12 +240,12 @@ class Speakers extends Speakers_Emails
     //* Overrides MySql2::AddForm.
     //*
 
-    function AddForm($title,$addedtitle,$echo=TRUE)
+    function MyMod_Handle_Add_Form($title,$addedtitle,$echo=TRUE)
     {
         echo
             $this->FriendsObj()->MyFriend_Add_Form();
         
-        parent::AddForm($title,$addedtitle,$echo);
+        parent::MyMod_Handle_Add_Form($title,$addedtitle,$echo);
     }
 }
 

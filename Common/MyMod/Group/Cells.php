@@ -14,7 +14,7 @@ trait MyMod_Group_Cells
         {
             $value=$item[ $data ];
         }
-        
+
         if (preg_match('/^text\_/',$data))
         {
             $value=preg_replace('/^text\_/',"",$data);
@@ -22,31 +22,15 @@ trait MyMod_Group_Cells
         }
         elseif (!isset($this->ItemData[ $data ]) && isset($this->Actions[ $data ]))
         {
-            if ($even)
-            {
-                $this->Actions[ $data ][ "Icon" ]=
-                    preg_replace
-                    (
-                        '/_light./',
-                        "_dark.",
-                        $this->Actions[ $data ][ "Icon" ]
-                    );
-            }
-            else
-            {
-                $this->Actions[ $data ][ "Icon" ]=
-                    preg_replace
-                    (
-                        '/_dark./',
-                        "_light.",
-                        $this->Actions[ $data ][ "Icon" ]
-                    );
-            }
-
-            $value=$this->MyActions_Entry($data,$item);
+            $value=$this->MyActions_Entry_OddEven($even,$data,$item);
             if (!empty($this->Actions[ $data ][ "Icon" ]))
             {
-                $value=$this->Center($value);
+                $value=
+                    $this->Htmls_DIV
+                    (
+                        array($value),
+                        array("CLASS" => 'center')
+                    );
             }
         }
         elseif
@@ -68,7 +52,13 @@ trait MyMod_Group_Cells
         }
         elseif (method_exists($this,$data))
         {
-            $value=$this->Span($this->$data($item,$edit),array("CLASS" => 'data'));
+            $value=
+                $this->Span
+                (
+                    //$this->$data($item,$edit),
+                    $this->$data($edit,$item,$data),
+                    array("CLASS" => 'data')
+                );
         }
         else
         {
@@ -91,9 +81,7 @@ trait MyMod_Group_Cells
             $value.=$this->Font($item[ $data."_Message" ],array("CLASS" => 'errors'));
         }
 
-        $value=$this->MyMod_Group_Cell_Align($data,$value);
-
-        return $value;
+        return $this->MyMod_Group_Cell_Align($data,$value);
     }
     
      //*
@@ -107,10 +95,10 @@ trait MyMod_Group_Cells
         if (!empty($align))
         {
             $value=
-                array
+                $this->Htmls_DIV
                 (
-                   "Text" => $value,
-                   "Options" => array("CLASS" => $align),
+                    array($value),
+                    array("CLASS" => $align)
                 );
         }
 

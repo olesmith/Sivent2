@@ -1,9 +1,17 @@
 <?php
 
+include_once("Head/Styles.php");
+include_once("Head/Scripts.php");
+include_once("Head/Metas.php");
+include_once("Head/Links.php");
 
 trait MyApp_Interface_Head
 {
-    //use MyApp_Interface_Head_Thanks;
+    use
+        MyApp_Interface_Head_Styles,
+        MyApp_Interface_Head_Scripts,
+        MyApp_Interface_Head_Metas,
+        MyApp_Interface_Head_Links;
 
     //*
     //* sub MyApp_Interface_Head, Parameter list:
@@ -17,281 +25,71 @@ trait MyApp_Interface_Head
     function MyApp_Interface_Head()
     {
         echo
-            $this->MyApp_Interface_Header().
-            $this->MyApp_Interface_Doc_Head().
-            "";
+            $this->Htmls_Text
+            (
+                array_merge
+                (
+                    $this->MyApp_Interface_Header(),
+                    $this->MyApp_Interface_Body_Start()
+                )
+            );
 
-        if (method_exists($this,"HtmlDocHead"))
-        {
-            $this->HtmlDocHead();
-        }
-    }
-
-
-    //*
-    //* sub MyApp_Interface_Header_Send, Parameter list:
-    //*
-    //* Sends the HTML header .
-    //*
-    //*
-
-    function MyApp_Interface_Header_HTTP()
-    {
-        if ($this->HeadersSend!=0) { return; }
-        
-        header('Content-type: text/html;charset='.$this->HtmlSetupHash[ "CharSet"  ]);
-        $this->HTML=TRUE;
-
-        $this->HeadersSend=1;  
-    }
-    
-    //*
-    //* sub MyApp_Interface_Comment, Parameter list:
-    //*
-    //* Sends 'before HTML tag' comment.
-    //*
-    //*
-
-    function MyApp_Interface_Comment()
-    {
-        return
-            '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'.
-            "\n";
-    }
-    
-    //*
-    //* sub MyApp_Interface_Cookies, Parameter list:
-    //*
-    //* Returns before HTM tage comment.
-    //*
-    //*
-
-    function MyApp_Interface_Cookies()
-    {
-        if ($this->Module)
-        {
-            $this->Module->MyMod_Search_CGI_Vars_2_Cookies();
-            foreach ($this->Module->CookieVars as $cid => $cookievar)
-            {
-                array_push($this->CookieVars,$cookievar);
-            }
-        }
+            
+        $this->Htmls_Indent_Inc($this->Body_Increment);
         
     }
-    
-    
+
     //*
-    //* sub MyApp_Interface_, Parameter list:
+    //* sub MyApp_Interface_HEAD_Tag, Parameter list:
     //*
-    //* Returns interface header <TITLE>...</TITLE> section.
+    //* HEAD tag with contents.
     //*
     //*
 
-    function MyApp_Interface_Application_Title()
+    function MyApp_Interface_HEAD_Tag()
     {
         return
-            $this->HtmlTags("TITLE",$this->ApplicationWindowTitle())."\n";
+            array_merge
+            (
+                $this->Htmls_Comment_Section
+                (
+                    "HTML HEAD section",
+                    $this->Htmls_Tag
+                    (
+                        "HEAD",
+                        array
+                        (
+                            $this->MyApp_Interface_METAs(),
+                            $this->MyApp_Interface_Title(),
+                            $this->MyApp_Interface_LINKs(),
+                            $this->MyApp_Interface_STYLEs(),
+                            $this->MyApp_Interface_SCRIPTs()
+                        )
+                    )
+                )
+            );
     }
+
     
     //*
-    //* sub MyApp_Interface_, Parameter list:
+    //* sub MyApp_Interface_HTML_Tag, Parameter list:
     //*
-    //* Returns interface header short cut icon entry.
+    //* HTML tag with contents.
     //*
     //*
 
-    function MyApp_Interface_Application_ShortCut_Icon()
-    {
-        return 
-            $this->HtmlTag
-            (
-               "LINK",
-               "",
-               array
-               (
-                  "REL"  => 'shortcut icon',
-                  "HREF" => "icons/favicon.ico",
-                  "TYPE" => "image/x-icon",
-               )
-            ).
-            "\n".
-            $this->HtmlTag
-            (
-               "LINK",
-               "",
-               array
-               (
-                  "REL"  => 'icon',
-                  "HREF" => "icons/favicon.ico",
-                  "TYPE" => "image/x-icon",
-               )
-            ).
-            "\n";
-    }
-    
-    //*
-    //* sub MyApp_Interface_Application_METAs, Parameter list:
-    //*
-    //* Returns interface header META section
-    //*
-    //*
-
-    function MyApp_Interface_Application_METAs()
+    function MyApp_Interface_HTML_Tag()
     {
         return
-            $this->HtmlTag
+            $this->Htmls_Tag_Start
             (
-               "META",
-               "",
-               array
-               (
-                  "HTTP-EQUIV" => 'Content-type',
-                  "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
-               )
-             ).
-             "\n".
-             $this->HtmlTag
-             (
-                "META",
-                "",
+                "HTML",
                 array
                 (
-                   "NAME"    => 'Autor',
-                   "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
+                    $this->MyApp_Interface_HEAD_Tag(),
                 )
-             ).
-             "\n";
-    }
-    //*
-    //* sub MyApp_Interface_Application_LINKs, Parameter list:
-    //*
-    //* Returns interface header LINKs.
-    //*
-    //*
-
-    function MyApp_Interface_Application_LINKs()
-    {
-        return
-            $this->HtmlTag
-            (
-               "META",
-               "",
-               array
-               (
-                  "HTTP-EQUIV" => 'Content-type',
-                  "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
-               )
-             ).
-             "\n".
-             $this->HtmlTag
-             (
-                "META",
-                "",
-                array
-                (
-                   "NAME"    => 'Autor',
-                   "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
-                )
-             ).
-             "\n";
-    }
-    
-    //*
-    //* sub MyApp_Interface_Application_Styles, Parameter list:
-    //*
-    //* Returns interface header style section
-    //*
-    //*
-
-    function MyApp_Interface_Application_Styles()
-    {
-        return
-            $this->MyApp_Interface_Application_CSS_Generate().
-            "\n";
-    }
-    
-    //*
-    //* sub MyApp_Interface_Application_Script, Parameter list:
-    //*
-    //* Returns interface header script section
-    //*
-    //*
-
-    function MyApp_Interface_Application_Script()
-    {
-        return
-            $this->HtmlTags
-            (
-               "SCRIPT",
-               "",
-               array
-               (
-                   #"SRC" => 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js',
-                   "SRC" => 'CSS/jquery.min.js',
-               )
-            )."\n\n".
-            $this->HtmlTags
-            (
-               "SCRIPT",
-               "function goto(site,title)\n".
-               "{\n".
-               "   var msg = confirm(title)\n".
-               "   if (msg) {window.location.href = site}\n".
-               "   else (null)\n".
-               "}\n\n".
-               
-               
-               "$(document).ready(function(){\n".
-               "    $('#select_1').on('click',function(){\n".
-               "        if(this.checked){\n".
-               "            $('.checkbox_1').each(function(){\n".
-               "                this.checked = true;\n".
-               "            });\n".
-               "        }else{\n".
-               "             $('.checkbox_1').each(function(){\n".
-               "                this.checked = false;\n".
-               "            });\n".
-               "        }\n".
-               "    });\n".
-               "    \n".
-               
-               "    $('.checkbox_1').on('click',function(){\n".
-               "        if($('.checkbox_1:checked').length == $('.checkbox').length){\n".
-               "            $('#select_1').prop('checked',true);\n".
-               "        }else{\n".
-               "            $('#select_1').prop('checked',false);\n".
-               "        }\n".
-               "    });\n".
-
-               
-               "    $('#select_2').on('click',function(){\n".
-               "        if(this.checked){\n".
-               "            $('.checkbox_2').each(function(){\n".
-               "                this.checked = true;\n".
-               "            });\n".
-               "        }else{\n".
-               "             $('.checkbox_2').each(function(){\n".
-               "                this.checked = false;\n".
-               "            });\n".
-               "        }\n".
-               "    });\n".
-               "    \n".
-
-               "    $('.checkbox_2').on('click',function(){\n".
-               "        if($('.checkbox_2:checked').length == $('.checkbox').length){\n".
-               "            $('#select_2').prop('checked',true);\n".
-               "        }else{\n".
-               "            $('#select_2').prop('checked',false);\n".
-               "        }\n".
-               "    });\n".
-
-               
-               "});\n".
-               ""
-            ).
-            "\n";
-    }
-    
+            );
+     }
     
     //*
     //* sub MyApp_Interface_Header, Parameter list:
@@ -302,48 +100,113 @@ trait MyApp_Interface_Head
 
     function MyApp_Interface_Header()
     {
-        //Printed right away.
-        $this->MyApp_Interface_Header_HTTP();
-        
-        $this->MyApp_Interface_Cookies();
-        
-        return
-            $this->MyApp_Interface_Comment().
-            "<HTML>\n".
-            $this->HtmlTags
-            (
-               "HEAD",
-               "\n".
-               $this->MyApp_Interface_Application_CSS_LINKs().
-               $this->MyApp_Interface_Application_Title().
-               $this->MyApp_Interface_Application_ShortCut_Icon().
-               $this->MyApp_Interface_Application_METAs().
-               $this->MyApp_Interface_Application_Styles().
-               $this->MyApp_Interface_Application_Script().
-              "\n"
-            ).
-            $this->HtmlTag
-            (
-               "BODY",
-               "",
-               array
-               (
-                  " " => $this->HtmlSetupHash[ "BodyArgs"  ],
-               )
-            )."\n".
-            "    ".
-            $this->HtmlTag
-            (
-               "DIV",
-               "",
-               array
-               (
-                  "ALIGN" => "center",
-               )
-            )."\n".
-            "";   
-    }
+        //Printed promptly!
+        $this->MyApp_Interface_Headers_Send();
 
+        return
+            array_merge
+            (
+                $this->MyApp_Interface_DocType(),
+                $this->MyApp_Interface_HTML_Tag()
+            );
+    }
+    
+    
+    //*
+    //* sub MyApp_Interface_DocType, Parameter list:
+    //*
+    //* Sends 'before HTML tag' doc type.
+    //*
+    //*
+
+    function MyApp_Interface_DocType()
+    {
+        return
+            array
+            (
+                $this->MyApp_Interface_Head_DocType
+            );
+    }
+    
+    
+    //*
+    //* sub MyApp_Interface_, Parameter list:
+    //*
+    //* Returns interface header <TITLE>...</TITLE> section.
+    //*
+    //*
+
+    function MyApp_Interface_Title()
+    {
+        return
+            array
+            (
+                $this->HtmlTags("TITLE",$this->MyApp_Interface_HEAD_TITLE())
+            );
+    }
+    
+   
+
+    //*
+    //* sub MyApp_Interface_HEAD_Title, Parameter list:
+    //*
+    //* Returns title to include as HTML TITLE.
+    //*
+    //*
+
+    function MyApp_Interface_HEAD_Title()
+    {
+        $id=$this->GetGET("ID");
+
+        $vals=array();
+        if ($this->Module)
+        {
+            if ($id!="" && $id>0)
+            {
+                array_push($vals,$this->Module->ItemName);
+            }
+            else
+            {
+                array_push($vals,$this->Module->ItemsName);
+            }
+        }
+
+        foreach ($this->ExtraPathVars as $id => $var)
+        {
+            if ($this->$var!="")
+            {
+                array_push($vals,$this->$var);
+            }
+        }
+
+        $title=$this->HtmlSetupHash[ "WindowTitle" ]."::";
+        $action=$this->MyActions_Detect();
+        if ($this->Module)
+        {
+            if (!empty($action) && isset($this->Module->Actions[ $action ]))
+            {
+                $action=$this->GetRealNameKey($this->Module->Actions[ $action ],"Name");
+
+                $action=preg_replace('/#ItemsName/',$this->Module->ItemsName,$action);
+                $action=preg_replace('/#ItemName/',$this->Module->ItemsName,$action);
+                $id=$this->GetGET("ID");
+                if ($id!="" && $id>0)
+                {
+                    $name=$this->Module->MyMod_Item_Name_Get($this->Module->ItemHash);
+                    array_push($vals,$name);
+                }
+            }
+        }
+        else
+        {
+            array_push($vals,$action);
+        }
+
+        return 
+            $title.
+            join("::",$vals).
+            "";
+    }
 }
 
 ?>

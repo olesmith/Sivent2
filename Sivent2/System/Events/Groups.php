@@ -9,7 +9,6 @@ array
          "No",
          "Edit",
          "Delete",
-         //"Datas","GroupDatas",
          "Date","Title","Site","Place","Place_Address","Place_Site",
          "EventStart","EventEnd",
          "Visible","Status","Inscriptions_Public","Payments",
@@ -30,6 +29,8 @@ array
       "Data" => array
       (
          "No",
+         "Edit",
+         "Delete",
          "Details",
          "Date","Event_Title_Show","Site",
          "Event_Period_Show",

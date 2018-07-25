@@ -5,6 +5,8 @@ include_once("Group/CGI.php");
 include_once("Group/Table.php");
 include_once("Group/Tables.php");
 include_once("Group/Update.php");
+include_once("Group/Html.php");
+include_once("Group/Latex.php");
 include_once("Group/Form.php");
 
 trait MyMod_Item_Group
@@ -17,6 +19,8 @@ trait MyMod_Item_Group
         MyMod_Item_Group_Table,
         MyMod_Item_Group_Tables,
         MyMod_Item_Group_Update,
+        MyMod_Item_Group_Html,
+        MyMod_Item_Group_Latex,
         MyMod_Item_Group_Form;
 
     
@@ -64,38 +68,6 @@ trait MyMod_Item_Group
         return $groups;
     }
     
-    //*
-    //* Chekcs edit to data group.
-    //*
-
-    function MyMod_Item_Group_Editable($groupdef,$item=array())
-    {
-        $res=$this->MyMod_Item_Group_Allowed($groupdef,$item);
-        if ($res && count($item)>0)
-        {
-            if (!empty($groupdef[ "EditAccessMethod" ]))
-            {
-                $accessmethods=$groupdef[ "EditAccessMethod" ];
-                if (!is_array($accessmethods)) { $accessmethods=array($accessmethods); }
-
-                foreach ($accessmethods as $accessmethod)
-                {
-                   if (method_exists($this,$accessmethod))
-                    {
-                        if (!$this->$accessmethod($item)) { return FALSE; }
-                    }
-                    else
-                    {
-                        $this->Debug=1;
-                        $this->AddMsg("Warning: Invalid group def access method: ".
-                                      $accessmethod.", ignored");
-                    }
-                }
-            }
-        }
-                
-        return $res;
-    }
     
     //*
     //* Chekcs access to data group.
@@ -103,6 +75,11 @@ trait MyMod_Item_Group
 
     function MyMod_Item_Group_Allowed($groupdef,$item=array(),$values=array(1,2),$profile="",$logintype="")
     {
+        if (!is_array($groupdef))
+        {
+            $groupdef=$this->ItemDataSGroups($groupdef);
+        }
+        
         return
             $this->MyMod_Access_HashAccess
             (

@@ -40,12 +40,12 @@ trait MyMod_Data_Fields
         MyMod_Data_Fields_Sql;
 
     //*
-    //* function MyMod_Data_Field, Parameter list: $edit,$item,$data,$plural=FALSE,$tabindex="",$rdata=""
+    //* function MyMod_Data_Field, Parameter list: $edit,$item,$data,$plural=FALSE,$tabindex="",$rdata="",$even=TRUE
     //*
     //* Generates data field.
     //*
 
-    function MyMod_Data_Field($edit,$item,$data,$plural=FALSE,$tabindex="",$rdata="")
+    function MyMod_Data_Field($edit,$item,$data,$plural=FALSE,$tabindex="",$rdata="",$even=TRUE)
     {
         $access=$this->MyMod_Data_Access($data,$item);
         
@@ -70,30 +70,61 @@ trait MyMod_Data_Fields
                 $tabindex-$this->ItemData[ $data ][ "TabIndex" ];
             }
             
-            $field=$this->MyMod_Data_Fields_Edit
-            (
-               $data,
-               $item,
-               $value,
-               $tabindex,
-               $plural,
-               TRUE,
-               TRUE,
-               $rdata
-            );
+            $field=
+                $this->MyMod_Data_Fields_Edit
+                (
+                    $data,
+                    $item,
+                    $value,
+                    $tabindex,
+                    $plural,
+                    TRUE,
+                    TRUE,
+                    $rdata
+                );
         }
         elseif ($access>0)
         {
-            $field=$this->MyMod_Data_Fields_Show($data,$item,$plural);
+            $field=
+                $this->MyMod_Data_Fields_Show
+                (
+                    $data,
+                    $item,
+                    $plural
+                );
+        }
+        elseif (isset($this->Actions[ $data ]))
+        {
+            if ($this->MyAction_Allowed($data,$item))
+            {
+                $field=
+                    $this->MyActions_Entry_Gen
+                    (
+                        $data,
+                        $item,
+                        $noicons=0,
+                        $this->MyMod_EvenOdd_Class($even),
+                        $rargs=array(),
+                        $noargs=array(),
+                        $icon=""
+                    );
+            }
+            /* elseif ($this->MyMod_Profile_Trust()>5 && !$this->ItemData($data,"Access_No_Warnings")) */
+            /* { */
+            /*     $field="MyMod_Data_Field: Action Forbidden ".$data; */
+            /* } */
         }
         elseif (method_exists($this,$data))
         {
-            $field=$this->$data($edit,$item,$data);
+            if (!empty($this->CellMethods[ $data ]))
+            {
+                $field=$this->$data($edit,$item,$data);
+            }
         }
-        else
-        {
-            $field="Forbidden ".$data." #1";
-        }
+        /* else */
+        /* { */
+        /*     $field="MyMod_Data_Field: Entry Forbidden ".$data; */
+        /* } */
 
 
         if (!empty($this->ItemData[ $data ][ "Comment_Method" ]))
@@ -102,7 +133,7 @@ trait MyMod_Data_Fields
             if (method_exists($this,$method))
             {
                 
-                $field=$field.
+                $field=
                     $this->$method
                     (
                         $this->Min($edit,$access-1),
@@ -113,7 +144,7 @@ trait MyMod_Data_Fields
             }
             else
             {
-                var_dump("Invalid method: ".$method);
+                var_dump("Invalid item data ".$data." comment method (Comment_Method): ".$method);
             }
         }
         
@@ -126,25 +157,32 @@ trait MyMod_Data_Fields
     //* Generates data field.
     //*
 
-    function MyMod_Data_Fields($edit,$item,$datas,$plural=FALSE,$tabindex="",$rdatas="")
+    function MyMod_Data_Fields($edit,$item,$datas,$plural=FALSE,$tabindex="",$rdatas="",$even=TRUE)
     {
-        if (!is_array($datas))  { $datas=array($datas); }
+        if (!is_array($datas))
+        {
+            $datas=array($datas);
+        }
+
         if (!is_array($rdatas)) { $rdatas=array($rdatas); }
         
         $cells=array();
+        $count=1;
         foreach ($datas as $data)
         {
             $rdata=array_shift($rdatas);
-            $cell=$this->MyMod_Data_Field($edit,$item,$data,$plural,$tabindex,$rdata);
+            $cell=$this->MyMod_Data_Field($edit,$item,$data,$plural,$tabindex,$rdata,$even);
 
-            array_push
-            (
-               $cells,
-               $cell
-            );
+            array_push($cells,$cell);
+            if ($count<count($datas))
+            {
+                array_push($cells,$this->BR());
+            }
         }
 
-        return join($this->BR(),$cells);
+        if (count($cells)==1) { $cells=array_pop($cells); }
+        
+        return $cells;
     }
 
     //*
@@ -230,6 +268,17 @@ trait MyMod_Data_Fields
 
         return $img;
     }
+    //*
+    //* function MyMod_Data_Field_Text, Parameter list: $edit,$item,$data,$plural=FALSE,$tabindex="",$rdata=""
+    //*
+    //* Generates data field as text (not array). Joins what comes back from MyMod_Data_Field.
+    //*
+
+    function MyMod_Data_Field_Text($edit,$item,$data,$plural=FALSE,$tabindex="",$rdata="")
+    {
+        return join(" ",$this->MyMod_Data_Field($edit,$item,$data,$plural,$tabindex,$rdata));
+    }
+    
 }
 
 ?>

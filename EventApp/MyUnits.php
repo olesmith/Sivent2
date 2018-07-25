@@ -38,15 +38,15 @@ class MyUnits extends MyUnitsEvents
    }
 
     //*
-    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //* function MyMod_Setup_Profiles_File, Parameter list:
     //*
     //* Returns name of file with Permissions and Accesses to Modules.
     //* Overrides trait!
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
-        return "../EventApp/System/Units/Profiles.php";
+        return join("/",array("..","EventApp","System","Units","Profiles.php"));
     }
     
     //*
@@ -57,7 +57,7 @@ class MyUnits extends MyUnitsEvents
 
     function PreActions()
     {
-        array_push($this->ActionPaths,"../EventApp/System/Units");
+        array_push($this->ActionPaths,join("/",array("..","EventApp","System","Units")));
     }
 
     //*

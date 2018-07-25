@@ -47,7 +47,7 @@ class ModPerms extends SubModules
                $this->Href("?Action=ModPerms&Module=".$module,$module)
             );
 
-            $pfile=$this->MyMod_Setup_ProfilesDataFile($module);
+            $pfile=$this->MyMod_Setup_Profiles_File($module);
 
             $pfile=$this->ReadPHPArray($pfile);
             $rprofiles=array();

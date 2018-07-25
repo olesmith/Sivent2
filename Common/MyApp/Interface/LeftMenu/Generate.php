@@ -11,22 +11,38 @@ trait MyApp_Interface_LeftMenu_Generate
 
     function MyApp_Interface_LeftMenu_Generate()
     {
-        $html="";
-
         $this->CompanyHash[ "Language" ]=$this->GetLanguage();
         $this->CompanyHash[ "Path" ]=$this->CGI_Script_Path();
 
+        $html=array();
         foreach ($this->MyApp_Interface_LeftMenu_Read() as $submenuname => $submenu)
         {
-            $html.=
-                $this->MyApp_Interface_LeftMenu_Generate_SubMenu($submenu);
+            array_push
+            (
+                $html,
+                $this->MyApp_Interface_LeftMenu_Generate_SubMenu($submenu)
+            );
 
         }
-
-        return $html;
+        
+        return $this->Htmls_Tag("NAV",$html);
     }
 
+    
+    //*
+    //* function MyApp_Interface_LeftMenu_SubMenu_Name, Parameter list: $submenu
+    //*
+    //* Generates (returns) full submenu entry, incl. title.
+    //*
 
+    function MyApp_Interface_LeftMenu_SubMenu_Name($submenu)
+    {
+        $name=$this->GetRealNameKey($submenu,"Name");
+        if (empty($name)) { $name=$this->GetRealNameKey($submenu,"Title"); }
+
+        return $name;        
+    }
+    
     //*
     //* function MyApp_Interface_LeftMenu_Generate_SubMenu, Parameter list: $submenu
     //*
@@ -35,36 +51,33 @@ trait MyApp_Interface_LeftMenu_Generate
 
     function MyApp_Interface_LeftMenu_Generate_SubMenu($submenu)
     {
-       $html="";
-       if (!is_array($submenu))
-       {
-           $html.=$submenu;
-       }
-       else
-       {
-           if (!$this->MyMod_Access_HashAccess($submenu,1))
-           {
-               return $html;
-           }
-           $menu=$this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu);
-
-           if (empty($menu)) { return ""; }
-
-           if (is_array($menu)) { $menu=join("",$menu); }
-
-           $name=$this->GetRealNameKey($submenu,"Name");
-           if (empty($name)) { $name=$this->GetRealNameKey($submenu,"Title"); }
+        $html=array();
+        if (is_array($submenu))
+        {
+            if ($this->MyMod_Access_HashAccess($submenu,1))
+            {
+                $menu=$this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu);
+                if (empty($menu)) { return array(); }
            
-           $html.=
-               $this->DIV
-               (
-                  $name,
-                  array("CLASS" => 'leftmenutitle')
-               ).
-               $menu;
-       }
+                $html=array_merge
+                (
+                    $html,
+                    $this->Htmls_DIV
+                    (
+                        $this->MyApp_Interface_LeftMenu_SubMenu_Name($submenu),
+                        array("CLASS" => 'leftmenutitle')
+                    )
+                );
+                
+                $html=array_merge($html,$menu);
+            }
+        }
+        else
+        {
+            array_push($html,$submenu);
+        }
 
-       return $html;
+        return $html;
     }
 
     //*
@@ -73,9 +86,12 @@ trait MyApp_Interface_LeftMenu_Generate
     //* Generates (returns) the Left menu list.
     //*
 
-    function MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenuitem)
+    function MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenu,$menuid)
     {
-        return $this->MyMod_Access_HashAccess($submenuitem,1);
+        return
+            is_array($submenu[ $menuid ])
+            &&
+            $this->MyMod_Access_HashAccess($submenu[ $menuid ],1);
     }
     
     //*
@@ -91,6 +107,7 @@ trait MyApp_Interface_LeftMenu_Generate
         {
             $method=$submenu[ "Method" ];
             $list=$this->$method();
+            if (!is_array($list)) { $list=array($list); }
         }
         else
         {
@@ -99,100 +116,109 @@ trait MyApp_Interface_LeftMenu_Generate
 
             foreach ($menuids as $menuid)
             {
-                if (
-                      !is_array($submenu[ $menuid ])
-                      ||
-                      !$this->MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenu[ $menuid ])
-                   )
-                { continue; }
-
-                $url="";
-                if (!empty($submenu[ $menuid ][ "Href" ])) { $url=$submenu[ $menuid ][ "Href" ]; }
-
-                
-                /* if (preg_match('/#/',$url)) */
-                /* { */
-                /*     //$url=$this->Filter($url,$_GET); */
-                /* } */
-
-                if (!empty($url))
-                {
-                    $anchor="HorMenu";
-                    if (isset($submenu[ $menuid ][ "Anchor" ]))
-                    {
-                        $anchor=$submenu[ $menuid ][ "Anchor" ];
-                    }
-                    
-                    $noqueryargs=FALSE;
-                    if (isset($submenu[ $menuid ][ "OmitArgs" ]))
-                    {
-                        $noqueryargs=$submenu[ $menuid ][ "OmitArgs" ];
-                    }
-                    
-                    $url=
-                        $this->MyApp_Interface_LeftMenu_Bullet("+").
-                        $this->Href
+                if ($this->MyApp_Interface_LeftMenu_Generate_SubMenu_Access_Has($submenu,$menuid))
+                { 
+                    array_push
+                    (
+                        $list,
+                        $this->MyApp_Interface_LeftMenu_Generate_SubMenu_Item
                         (
-                           $url,
-                           $this->GetRealNameKey($submenu[ $menuid ],"Name"),
-                           $this->GetRealNameKey($submenu[ $menuid ],"Title"),
-                           $this->GetRealNameKey($submenu[ $menuid ],"Target"),
-                           "leftmenulinks",
-                           FALSE,
-                           array(),
-                           $anchor
-                        );
-                    
-                    if (isset($submenu[ $menuid ][ "OmitArgs" ]))
-                    {
-                        foreach ($submenu[ $menuid ][ "OmitArgs" ] as $arg)
-                        {
-                            $url=preg_replace('/'.$arg.'=\d+&?/',"",$url);
-                        }
-                    }
-                 }
-                else
-                {
-                    $url=
-                        $this->MyApp_Interface_LeftMenu_Bullet("*").
-                        $this->Span
-                        (
-                           $this->GetRealNameKey($submenu[ $menuid ],"Name"),
-                           array
-                           (
-                              "TITLE" => $this->GetRealNameKey($submenu[ $menuid ],"Title"),
-                           )
-                        ).
-                        "";
+                            $submenu[ $menuid ],
+                            $item
+                        )
+                    );
                 }
-
-                array_push($list,$url);
             }
         }
 
-        if (empty($list)) { return ""; }
+        if (empty($list)) { return array(); }
 
-        if (!is_array($list)) { $list=array($list); }
 
-        $list=array_merge($list,$postlist);
-
-        return 
-           $this->FilterHashes
-           (
-              $this->HTMLList
-              (
-                 $list,
-                 "UL",
-                 array
-                 (
+        return
+           $this->Htmls_List
+            (
+                array_merge($list,$postlist),
+                array
+                (
                     "CLASS" => 'leftmenulist',
-                 )
-              ),
-              array($item,$this->LoginData,$this->CompanyHash),
-              TRUE
-           );        
+                )
+            );
     }
 
+    //*
+    //* function MyApp_Interface_LeftMenu_Generate_SubMenu_Item, Parameter list:
+    //*
+    //* Generates (returns) the Left menu list.
+    //*
+
+    function MyApp_Interface_LeftMenu_Generate_SubMenu_Item($submenuitem,$item=array())
+    {
+
+        $url="";
+        if (!empty($submenuitem[ "Href" ])) { $url=$submenuitem[ "Href" ]; }
+
+        if (!empty($url))
+        {
+            $anchor="HorMenu";
+            if (isset($submenuitem[ "Anchor" ]))
+            {
+                $anchor=$submenuitem[ "Anchor" ];
+            }
+                    
+            $noqueryargs=FALSE;
+            if (isset($submenuitem[ "OmitArgs" ]))
+            {
+                $noqueryargs=$submenuitem[ "OmitArgs" ];
+            }
+                    
+            if (isset($submenuitem[ "OmitArgs" ]))
+            {
+                foreach ($submenuitem[ "OmitArgs" ] as $arg)
+                {
+                    $url=preg_replace('/'.$arg.'=[^\&]*&?/',"",$url);
+                }
+            }
+
+            $url=
+                array
+                (
+                    $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                    $this->Htmls_HRef
+                    (
+                        $this->FilterHash($url,$item),
+                        $this->GetRealNameKey($submenuitem,"Name"),
+                        $this->GetRealNameKey($submenuitem,"Title"),
+                        "leftmenulinks",
+                        array
+                        (
+                            "Target" => $this->GetRealNameKey($submenuitem,"Target"),
+                            "Anchor" => $anchor,
+                        )
+                    ),
+                );
+                    
+        }
+        else
+        {
+            $url=
+                array
+                (
+                    $this->MyApp_Interface_LeftMenu_Bullet("*").
+                    $this->Span
+                    (
+                        $this->GetRealNameKey($submenuitem,"Name"),
+                        array
+                        (
+                            "TITLE" => $this->GetRealNameKey($submenuitem,"Title"),
+                        )
+                    ),
+                );
+        }
+
+        return $url;
+    }
+
+    
     //*
     //* function MyApp_Interface_LeftMenu_Generate_Items_Menu, Parameter list: $obj,$menumethod,$items,$activeid,$href,$name,$title,$class="leftmenulinks",$add="+",$sub="-"
     //*
@@ -220,7 +246,7 @@ trait MyApp_Interface_LeftMenu_Generate
             if ($item[ "ID" ]==$activeid)
             {
                 $text=
-                    "&nbsp;".$sub." ".
+                    "&nbsp;".$sub."111 ".
                     $rhref.
                     ":".
                     $this->BR().
@@ -229,7 +255,7 @@ trait MyApp_Interface_LeftMenu_Generate
             else
             {
                 $text=
-                    $add."  ".
+                    $add."222  ".
                     $rhref;
             }
 

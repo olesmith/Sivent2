@@ -10,27 +10,22 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
 
     function InscriptionContents($edit,$buttons=TRUE)
     {
-        $this->InscriptionsObj()->Sql_Table_Structure_Update_Force=TRUE; //force update
+        $this->Sql_Table_Structure_Update_Force=TRUE; //force update
         $this->Sql_Table_Structure_Update();
-        $method=$this->TableMethod();
-
+        ##$method=$this->TableMethod();
+        
         return
-            $this->Anchor("TOP").
-            $this->FrameIt
+            $this->Htmls_Table
             (
-               $this->$method
-               (
-                  "",
-                  $this->InscriptionTable
-                  (
-                     $edit,
-                     $buttons,
-                     $this->Inscription,
-                     TRUE
-                  )
-               )
-            ).
-            "";
+                "",
+                $this->InscriptionTable
+                (
+                    $this->InscriptionFormEdit($edit),
+                    $buttons,
+                    $this->Inscription,
+                    TRUE
+                )
+            );
     }
 
     //*
@@ -64,12 +59,12 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
         $edit=$this->InscriptionFormEdit($edit);
 
         #Must run first (update)
-        $html=
+        $html= "111".
             $this->Form_Run
             (
                array
                (
-                  "Name"       => "Name-me...",
+                  "Name"       => "InscriptionForm",
 
                   "Action"     => $this->CGI_Hash2URI($this->CGI_URI2Hash()),
 
@@ -97,7 +92,7 @@ class MyInscriptions_Inscription_Contents extends MyInscriptions_Inscription_Upd
                   "UpdateCGIValue" => 1,
                )
             ).
-            "";
+            "2222";
 
         return $this->FrameIt
         (

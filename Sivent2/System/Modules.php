@@ -29,7 +29,7 @@
       "SqlClass" => "Friends",
       "SqlDerivedData" => array("Name","Email"),
       "SqlFile" => "Friends.php",
-      "SqlFilter" => "#Name",
+      "SqlFilter" => "#Name (#Email)",
       "SqlFilter_Public" => "#Name",
       "SqlHref" => "1",
       "SqlObject" => "FriendsObject",

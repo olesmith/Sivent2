@@ -178,7 +178,7 @@ array
       "Handler"   => "Caravan_Handle_Certificate_Generate",
       "AccessMethod"  => "CheckCertAccess",
 
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-certificate",
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
@@ -197,7 +197,7 @@ array
        
       "Handler"   => "Caravans_Handle_Certificates_Generate",
 
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-file-pdf",
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
@@ -211,9 +211,9 @@ array
         "Title"    => "Importar #ItemsName de outro Evento",
         "Title_UK" => "Import #ItemsName_UK from other Event",
         "Title_ES"    => "Importar #ItemsName_ES de outro Evento",
-        "Name"     => "Importar #ItemsName",
-        "Name_UK"  => "Import #ItemsName_UK",
-        "Name_ES"     => "Importar #ItemsName_ES",
+        "Name"     => "Importar",
+        "Name_UK"  => "Import",
+        "Name_ES"     => "Importar",
         //"Icon"     => "rubik.png",
         "Public"   => 0,
         "Person"   => 0,

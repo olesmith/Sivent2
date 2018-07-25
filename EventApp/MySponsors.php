@@ -1,9 +1,10 @@
 <?php
 
 include_once("MySponsors/Access.php");
+include_once("MySponsors/Table.php");
 
 
-class MySponsors extends MySponsorsAccess
+class MySponsors extends MySponsors_Table
 {
     //*
     //* function Units, Parameter list: $args=array()
@@ -17,6 +18,8 @@ class MySponsors extends MySponsorsAccess
         $this->AlwaysReadData=array();
         $this->Sort=array("Name");
         $this->NonGetVars=array("Event","CreateTable");
+
+        $this->AddDefaults[ "Event" ]=$this->Event("ID");
     }
 
     //*
@@ -153,154 +156,6 @@ class MySponsors extends MySponsorsAccess
         }
         
         return $item;
-    }
-    
-    //*
-    //* function UnitSponsors, Parameter list: $location
-    //*
-    //* Returns list of sponsers off the Unit (Event 0).
-    //*
-
-    function UnitSponsors($location)
-    {
-        $unit=$this->Unit("ID");
-        $where=array
-        (
-           "Unit" => $unit,
-           "Event" => 0,
-           "Place" => $location,
-        );
-
-        return $this->Sql_Select_Hashes($where);
-    }
-    
-    //*
-    //* function EventSponsors, Parameter list: $event=array()
-    //*
-    //* Returns list of sponsers off Event.
-    //*
-
-    function EventSponsors($location,$event=array())
-    {
-        if (empty($event)) { $event=$this->Event(); }
-        $unit=$this->Unit("ID");
-
-        if (empty($event)) { return array(); }
-        
-        $where=array
-        (
-           "Unit" => $unit,
-           "Event" => $event[ "ID" ],
-           "Place" => $location,
-        );
-
-        return $this->Sql_Select_Hashes($where);
-    }
-    
-    //*
-    //* function SponsorsCell, Parameter list: $sponsor,$sponsertitleclass
-    //*
-    //* Produces a row for $sponsor.
-    //*
-
-    function SponsorsCell($sponsor)
-    {
-        $args=array
-        (
-           "Unit"       => $this->Unit("ID"),
-           "ModuleName" => "Sponsors",
-           "ID"         => $sponsor[ "ID" ],
-           "Action"     => "Download",
-           "Data"       => "Logo",
-        );
-        $cell=
-            //$this->Div($sponsor[ "Initials" ].":",array("CLASS" => 'sponsortitle')).
-            $this->A
-            (
-               $sponsor[ "URL" ],
-               $this->IMG
-               (
-                  "?".$this->CGI_Hash2URI($args),
-                  $sponsor[ "Text" ],
-                  $sponsor[ "Height" ],
-                  $sponsor[ "Width" ],
-                  array
-                  (
-                     "TITLE" => $sponsor[ "Name" ].": ".$sponsor[ "Text" ],
-                     "BORDER" => "0",
-                  )
-                ),
-               array("TARGET" => '_blank',"CLASS" => 'sponsorlink')
-            );
-
-        return "\n".$cell;
-    }
-   
-    //*
-    //* function SponsorsTable, Parameter list: $sponsors,$vertical
-    //*
-    //* Produces a list of Ssponsors.
-    //*
-
-    function SponsorsTable($sponsors,$vertical)
-    {
-        $table=array();
-        foreach ($sponsors as $sponsor)
-        {
-            $cell=$this->SponsorsCell($sponsor);
-            if ($vertical)
-            {
-                $cell=array($cell);
-            }
-
-            array_push($table,$cell);
-        }
-
-        return $table;
-    }
-
-    //*
-    //* function ShowSponsors, Parameter list: $location,$event=array()
-    //*
-    //* Produces a list of sponsors.
-    //*
-
-    function ShowSponsors($location,$event=array())
-    {
-        $vertical=TRUE;
-        if ($location==2) { $vertical=FALSE; }
-        
-        $table=array_merge
-        (
-           $this->SponsorsTable
-           (
-              $this->UnitSponsors($location),
-              $vertical
-           ),
-           $this->SponsorsTable
-           (
-              $this->EventSponsors($location,$event),
-              $vertical
-           )
-        );
-
-        if (empty($table)) { return ""; }
-
-        return
-            $this->Div
-            (
-               $this->MyLanguage_GetMessage("Sponsors_Table_Title"),
-               array("CLASS" => 'sponsorstitle')
-            ).
-            $this->Html_Table
-            (
-               "",
-               $table,
-               array("CLASS" => 'sponsorstable',"ALIGN" => 'center'),
-               array("CLASS" => 'sponsorstable'),
-               array("CLASS" => 'sponsorstable'),
-               FALSE,FALSE
-            );
     }
 }
 

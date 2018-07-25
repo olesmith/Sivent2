@@ -1,5 +1,8 @@
 <?php
 
+global $HtmlMessages; //global and common for all classes
+$HtmlMessages=array();
+    
 
 trait MyApp_Interface_Messages
 {
@@ -143,6 +146,47 @@ trait MyApp_Interface_Messages
 
         return "";
     }
+
+    
+    //*
+    //* sub MyApp_Interface_Messages_System, Parameter list:
+    //*
+    //* Prints table of gathered System messages.
+    //*
+    //*
+
+    function MyApp_Interface_Messages_System()
+    {
+        global $HtmlMessages;
+        $text=array("No messages"); 
+        if (count($HtmlMessages)>0)
+        {
+            $table=array();
+            for ($n=0;$n<count($HtmlMessages);$n++)
+            {
+                array_push($table,array($n+1,$HtmlMessages[ $n ]));
+            }
+
+            $text=
+                $this->Htmls_Tag
+                (
+                    "DIV",
+                    array
+                    (
+                        $this->H(4,"Mensagens gerado durante a execu&ccedil;&atilde;o:"),
+                        $this->HTMLs_Table("",$table)
+                    ),
+                    array
+                    (
+                        "CLASS" => 'messages'
+                    )
+                );
+        }
+
+        return $text;
+    }
+
+    
 }
 
 ?>

@@ -343,6 +343,18 @@ class ModulesCommon extends EventMod
     }
     
     //*
+    //* sub Current_User_Event_Schedule_May_Show, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Submissions.
+    //*
+    //*
+
+    function Current_User_Event_Schedule_May_Show($event=array())
+    {
+        return $this->ApplicationObj()->Current_User_Event_Schedule_May_Show($event);
+    }
+    
+    //*
     //* sub Coordinator_Caravans_Access_Has, Parameter list: $event=array()
     //*
     //* Checks whether coordinator (current login) has access to Caravans.
@@ -517,6 +529,7 @@ class ModulesCommon extends EventMod
 
     function Event_Collaborations_Has($item=array())
     {
+        var_dump($this->EventsObj()->Event_Collaborations_Has(),$this->EventsObj()->Event_Collaborations_May());
         return
             $this->EventsObj()->Event_Collaborations_Has()
             &&
@@ -564,6 +577,39 @@ class ModulesCommon extends EventMod
     {
         $res=FALSE;
         if ($this->Event("Assessments")==2)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+
+     //*
+    //* function Event_Contents_Has, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has activity Contents (Expanded Resume).
+    //*
+
+    function Event_Contents_Has($item=array())
+    {
+        $res=FALSE;
+        if ($this->Event("Contents")==2)
+        {
+            $res=TRUE;
+        }
+
+        return $res;
+    }
+     //*
+    //* function Event_Proceedings_Has, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has proceedings.
+    //*
+
+    function Event_Proceedings_Has($item=array())
+    {
+        $res=FALSE;
+        if ($this->Event("Contents")==2)
         {
             $res=TRUE;
         }

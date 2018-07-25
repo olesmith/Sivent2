@@ -126,6 +126,61 @@ class MyEventsAccess extends ModulesCommon
     }
     
     //*
+    //* function Event_Inscriptions_Show_Should, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has Caravans.
+    //*
+
+    function Event_Inscriptions_Show_Should($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        if (empty($event)) { return FALSE; }
+
+        $res=$this->Event_Inscriptions_Public_Is($event);
+        if ($res)
+        {
+            $today=$this->MyTime_2Sort();
+            if
+                (
+                    $today<$event[ "StartDate" ]
+               )
+            {
+                $res=FALSE;
+            }
+        }
+
+        return $res;
+    }
+    
+    //*
+    //* function Event_Inscriptions_Show_Should, Parameter list: $item=array()
+    //*
+    //* Returns TRUE if event has Caravans.
+    //*
+
+    function Event_Inscriptions_Edit_May($event=array())
+    {
+        if (empty($event)) { $event=$this->Event(); }
+        if (empty($event)) { return FALSE; }
+
+        $res=$this->Event_Inscriptions_Public_Is($event);
+        if ($res)
+        {
+            $today=$this->MyTime_2Sort();
+            if (
+                  $today<$event[ "StartDate" ]
+                  ||
+                  $today>$event[ "EditDate" ]
+               )
+            {
+                $res=FALSE;
+            }
+        }
+
+        return $res;
+    }
+     
+    //*
     //* function MayInscribe, Parameter list: $event=array()
     //*
     //* Checks if $friend may be inscribed, that is:

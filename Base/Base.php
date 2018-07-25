@@ -626,6 +626,7 @@ class Base extends Filters
             $backcolor=array(255,255,255);
         }
 
+        #$this->ApplicationObj()->MyApp_GoHome();
 
         $hgt=imagefontheight($fontsize);
         $wdt=imagefontwidth($fontsize)*strlen($text);
@@ -652,6 +653,7 @@ class Base extends Filters
 
             $extrapath_pathcorrection=$this->CGI_Script_Extra_Path_Correction();
             $tmpfile="tmp/".$file;
+            
             imagepng ($handle,$tmpfile);
 
             if ($extrapath_pathcorrection!="")

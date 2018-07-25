@@ -8,7 +8,11 @@ array
       (
          "No","Edit","Delete",
          "Unit","Event",
-         "Initials","Name","Level","Value","URL","Text","Logo","Place","Height","Width",
+         "Initials","Name","Level",
+         "Value",
+         "URL","Text",
+         "Logo","Height","Width",
+         #"Place",
       ),
       "Admin" => 1,
       "Person" => 0,

@@ -3,6 +3,27 @@
 class MyEventApp_Mail extends MyEventApp_Menues
 {
     //*
+    //* function MyMod_Mail_Type_Get, Parameter list: $type,$user
+    //*
+    //* Returns mail subject and body.
+    //*
+
+    function MyMod_Mail_Type_Get($type,$language)
+    {
+        $where=
+            $this->UnitsObj()->UnitWhere
+            (
+               array
+               (
+                  "Name" => $type,
+                  "Language" => $language,
+               )
+            );
+
+        return $this->MailTypesObj()->Sql_Select_Hash($where);
+    }
+    
+    //*
     //* function MyApp_Mail_Info_Unit, Parameter list: $unit,&$mailinfo
     //*
     //* Adds $unit email options to mailinfo.

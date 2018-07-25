@@ -113,7 +113,6 @@ trait MakeHtml_Input
            $html,
            $options
         );
-        return $html;
     }
 
 

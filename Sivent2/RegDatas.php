@@ -258,7 +258,7 @@ class RegDatas extends RegDatasAccess
     function MyMod_Handle_Search($where = '', $searchvarstable = true, $edit = 0, $group = '', $omitvars = array(), $action = '', $module = '', $savebuttonname = '', $resetbottonname = '')
     {
         $this->RegDatas_Friend_Datas_Add();
-                
+        $this->NoPaging=True;
         parent::MyMod_Handle_Search
         (
             $where,

@@ -105,7 +105,15 @@ class UsersRegistrationHandle extends UsersRegistrationHandlers
             if (!empty($method)) { $html.=$this->$method($options,$formoptions); }
         }
 
-        if (!empty($html)) { $html=$this->FrameIt($html,$options)."<P></P>"; }
+        if (!empty($html))
+        {
+            $html=
+                $this->Htmls_Text
+                (
+                    $this->Htmls_Frame($html,$options),
+                    "<P></P>"
+                );
+        }
         echo $html;
 
         return $res;

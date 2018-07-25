@@ -9,7 +9,7 @@ class Modules extends Backup
     var $ModuleName="";
     var $ModuleFile="";
     var $Module=NULL;
-    var $Modules=array();
+    #var $Modules=array();
     var $MySqlActions=TRUE;
     var $DefaultAction="Search";
 

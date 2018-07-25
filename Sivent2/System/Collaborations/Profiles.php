@@ -18,6 +18,7 @@ array
       (
          'Public' => array
          (
+            "Search" => 1,
             "Show" => 1,
          ),
          'Person' => array
@@ -25,6 +26,7 @@ array
          ),
          "Friend" => array
          (
+            "Search" => 1,
             "Show" => 1,
          ),
          'Assessor' => array
@@ -47,7 +49,7 @@ array
          'Public' => array
          (
          ),
-         'Person' => array
+         'Friend' => array
          (
          ),
          'Coordinator' => array
@@ -77,6 +79,7 @@ array
          ),
          "Friend" => array
          (
+            "Search" => 1,
          ),
          'Assessor' => array
          (
@@ -92,12 +95,16 @@ array
       (
          'Public' => array
          (
+            "Event" => 1,
+            "Collaborators" => 1,
          ),
          'Person' => array
          (
          ),
          "Friend" => array
          (
+            "Event" => 1,
+            "Collaborators" => 1,
          ),
          'Assessor' => array
          (

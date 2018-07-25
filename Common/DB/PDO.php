@@ -21,7 +21,12 @@ trait DB_PDO
                     "host=".$dbhash[ "Host" ].";".
                     "dbname=".$dbhash[ "DB" ].";",
                     $dbhash[ "User" ],
-                    $dbhash[ "Password" ]
+                    $dbhash[ "Password" ],
+                    ###Timeout!!
+                    array(
+                        PDO::ATTR_TIMEOUT => "5)",
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                    )
                );
         }
 

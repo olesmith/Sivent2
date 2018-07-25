@@ -825,6 +825,19 @@ trait MyHash
 
         return $match;
     }
+    
+    //*
+    //* function MyHash_Default, Parameter list: $hash,$key,$default=""
+    //*
+    //* Returns $hash $key value or $default.
+    //*
+
+    function MyHash_Default($hash,$key,$default="")
+    {
+        if (isset($hash[ $key ])) { $default=$hash[ $key ]; }
+
+        return $default;
+    }
 }
 
 ?>

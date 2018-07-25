@@ -17,6 +17,7 @@ include_once("Events/Certificates.php");
 include_once("Events/Certificate.php");
 include_once("Events/SubActions.php");
 include_once("Events/Statistics.php");
+include_once("Events/Config.php");
 include_once("Events/Handle.php");
 
 class Events extends Events_Handle
@@ -52,19 +53,21 @@ class Events extends Events_Handle
         $this->CellMethods[ "Event_Inscriptions_Period_Show" ]=TRUE;
         $this->CellMethods[ "Event_Place_Show" ]=TRUE;
         $this->CellMethods[ "Event_Inscription_Action" ]=TRUE;
+        
+        $this->MyMod_Add_Reload_Action="Config";
 
         $this->MyEvents_CellMethods_Init();
     }
 
 
     //*
-    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //* function MyMod_Setup_Profiles_File, Parameter list:
     //*
     //* Returns name of file with Permissions and Accesses to Modules.
     //* Overrides trait!
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
         return "System/Events/Profiles.php";
     }
@@ -133,6 +136,17 @@ class Events extends Events_Handle
 
         $this->Coordinator_Type=1;
     }
+    //*
+    //* function PostProcessItemDataGroups, Parameter list:
+    //*
+    //* Post process item data; this function is called BEFORE
+    //* any updating DB cols, so place any additonal data here.
+    //*
+
+    function PostProcessItemDataGroups()
+    {
+        parent::PostProcessItemDataGroups();
+    }
 
     //*
     //* function PostInit, Parameter list:
@@ -162,6 +176,9 @@ class Events extends Events_Handle
         if (!isset($item[ "ID" ]) || $item[ "ID" ]==0) { return $item; }
 
         $updatedatas=$this->Event_Caravans_Dates_Take($item);
+        $updatedatas=$this->Event_Submissions_Inscriptions_Dates_Take($item);
+        $updatedatas=$this->Event_Collaborations_Inscriptions_Dates_Take($item);
+        
         if (!empty($updatedatas))
         {
             $this->Sql_Update_Item_Values_Set($updatedatas,$item);

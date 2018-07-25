@@ -45,6 +45,9 @@ trait MyApp
     var $MyApp_URL="";
     var $MyApp_Latex_Filters=array();
 
+    var $MyApp_Module="";
+    var $MyApp_Handler="";
+    
     var $MyApp_Defaults=array
     (
         "IsMain" => TRUE,
@@ -58,7 +61,7 @@ trait MyApp
 
         "SessionTable" => "Sessions",
         "MayCreateSessionTable" => FALSE,
-        "MaxLoginAttempts" => 5,
+        "MaxLoginAttempts" => 10,
 
         "SetupPath" => "System",
         "SetupFile" => "Setup.php",
@@ -99,6 +102,74 @@ trait MyApp
         "CGIVars" => array(),
     );
 
+    var $Unit2MailInfo=array
+    (
+       "Auth","Secure","Port","Host","User","Password",
+       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
+    );
+    
+    var $Event2MailInfo=array
+    (
+       "Auth","Secure","Port","Host","User","Password",
+       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
+    );
+
+    ##From Mysql2_TInterface
+    var $CSSFile="../MySql2/wooid.css";
+    var $HtmlSetupHash,$CompanyHash; 
+    var $Modules=array();
+    var $PreTextMethod="";
+    var $InterfacePeriods=array();
+    var $NoTail=1;
+    var $HeadersSend=0;
+    var $DocHeadSend=0;
+    var $HeadSend=0;
+    var $HTML=FALSE;
+    var $TInterfaceDataMessages="TInterface.php";
+
+
+    var $MyApp_Interface_Head_DocType=
+        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+
+    var $MyApp_Interface_Head_Scripts_OnLine=
+        array
+        (
+            #'https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js',
+            'CSS/jquery.min.js',
+            'CSS/App.js',
+        );
+
+    var $MyApp_Interface_Head_Scripts_InLine=
+        array
+        (
+        );
+    
+    var $MyApp_Interface_Head_Links=
+        array(
+            array
+            (
+                "REL" => 'stylesheet',
+                "HREF" => 'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+                "INTEGRITY" => 'sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp',
+                "CROSSORIGIN" => 'anonymous',
+            ),
+        );
+    
+    var $MyApp_Interface_Head_CSS_OnLine=
+        array
+        (
+           "CSS/HTMLs.css","CSS/Envs.css",
+           "CSS/App.css",
+           "CSS/Application.css",
+           "CSS/Left.Menu.css","CSS/Hor.Menu.css",
+           "CSS/Odd.Even.css","CSS/Modules.css",
+        );
+
+    var $MyApp_Interface_Head_CSS_InLine=
+        array
+        (
+        );
+    
 
     //*
     //* function MyApp_Load, Parameter list: $args=array()
@@ -109,24 +180,6 @@ trait MyApp
     function MyApp_Load($args)
     {
         $this->MyApp_Init($args);
-    }
-
-    //*
-    //* function MyApp_Icon_IMG, Parameter list: $icon
-    //*
-    //* Generates icon as a complete html image.
-    //*
-
-    function MyApp_Icon_IMG($icon,$size=20)
-    {
-        return
-            $this->IMG
-            (
-                $this->Icons."/".$icon,
-                $icon,
-                $size,
-                $size
-            );        
     }
 
     //*
@@ -322,6 +375,27 @@ trait MyApp
         return $this->MyApp_URL;
     }
 
+    //*
+    //* function MyApp_GoHome, Parameter list: $args
+    //*
+    //* Resets current working directory to app path.
+    //*
+
+    function MyApp_GoHome()
+    {
+        chdir(dirname($_SERVER[ "SCRIPT_FILENAME" ]));
+    }
+    
+    //*
+    //* function MyApp_Common_URIs, Parameter list: $args
+    //*
+    //* The URI's to add for all links.
+    //*
+
+    function MyApp_Common_URIs()
+    {
+        return array();
+    }
 }
 
 ?>

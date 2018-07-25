@@ -100,7 +100,6 @@ class UnitMod extends DBDataObj
             $unit=array_shift($units);
             $args="?Unit=".$unit[ "ID" ];
             $this->ApplicationObj()->Application_No_Tail=True;
-            
             header( 'Location: ?Unit='.$unit[ "ID" ]);
             exit(1);
         }
@@ -108,10 +107,17 @@ class UnitMod extends DBDataObj
         #Check if we should redirect to unit specific server
         if (!empty($this->ApplicationObj()->Unit[ "SystemURL" ]))
         {
-            $this->ApplicationObj()->Application_No_Tail=True;
+            if (empty($this->DBHash[ "Redirect" ]))
+            {
+                $this->ApplicationObj()->Application_No_Tail=True;
             
-            header( 'Location: '.$this->ApplicationObj()->Unit[ "SystemURL" ]);
-            exit(1);            
+                header( 'Location: '.$this->ApplicationObj()->Unit[ "SystemURL" ]);
+                exit(1);
+            }
+            else
+            {
+                echo "Redirect omitted by setup: ".$this->ApplicationObj()->Unit[ "SystemURL" ];
+            }
         }
         
         return $res;

@@ -1,6 +1,6 @@
 <?php
 
-class Events_Handle extends Events_Statistics
+class Events_Handle extends Events_Config
 {
     //*
     //* function MyMod_Handle_Show, Parameter list: $title
@@ -8,7 +8,7 @@ class Events_Handle extends Events_Statistics
     //* Overrides module object Show handler.
     //*
 
-    function MyMod_Handle_Show($title="")
+    function MyMod_Handle_Show0000($title="")
     {
         echo $this->MyMod_SubActions_Menu();
 
@@ -23,7 +23,7 @@ class Events_Handle extends Events_Statistics
     //* Overrides module object Edit handler.
     //*
 
-    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
+    function MyMod_Handle_Edit0000($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
     {
         echo
             $this->EventMod_Import_Menu_Horisontal().

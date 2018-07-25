@@ -3,6 +3,48 @@
 class EventsCollaborations extends EventsCreate
 {
     //*
+    //* function Event_Collaborations_Inscriptions_Dates_Take, Parameter list: &$item
+    //*
+    //* Postprocesses collaborations event dates,
+    //*
+
+    function Event_Collaborations_Inscriptions_Dates_Take(&$item)
+    {
+        $modulekey="Collaborations";
+        $this->Sql_Select_Hash_Datas_Read
+        (
+            $item,
+            array
+            (
+                $modulekey."_Inscriptions",
+                $modulekey."_StartDate",$modulekey."_EndDate",
+                "StartDate"
+            )
+        );
+        
+        $updatedatas=array();
+        if ($item[ $modulekey."_Inscriptions" ]==2)
+        {
+            $dates=
+                array
+                (
+                    "StartDate" => $this->MyTime_2Sort(),
+                    "EndDate" => $item[ "EventStart" ],
+                );
+
+            foreach (array("StartDate","EndDate") as $key)
+            {
+                if (empty($item[ $modulekey."_".$key ]))
+                {
+                    $item[ $modulekey."_".$key ]=$dates[ $key ];
+                    array_push($updatedatas,$modulekey."_".$key);
+                }
+            }
+        }
+
+        return $updatedatas;
+    }
+    //*
     //* function Event_Collaborations_Has, Parameter list: $item=array()
     //*
     //* Returns TRUE if event has collaborations.
@@ -14,7 +56,7 @@ class EventsCollaborations extends EventsCreate
         if (empty($item)) { return FALSE; }
 
         $res=FALSE;
-        if (!empty($item[ "Assessments" ]) && $item[ "Collaborations" ]==2)
+        if ($item[ "Collaborations" ]==2)
         {
             $res=TRUE;
         }
@@ -30,11 +72,7 @@ class EventsCollaborations extends EventsCreate
 
     function Event_Collaborations_May($item=array())
     {
-        $res=
-            $this->Event_Collaborations_Has($item)
-            &&
-            $this->CollaborationsObj()->HasModuleAccess()
-            ;
+        $res=$this->EventsObj()->Event_Collaborations_Has($item);
 
         return $res;
     }

@@ -3,6 +3,39 @@
 class EventsSubmissions extends EventsPayments
 {
     //*
+    //* function Event_Submissions_Inscriptions_Dates_Take, Parameter list: &$item
+    //*
+    //* Returns Caravans_Min or default.
+    //*
+
+    function Event_Submissions_Inscriptions_Dates_Take(&$item)
+    {
+        $this->Sql_Select_Hash_Datas_Read($item,array("Submissions_Inscriptions","Submissions_StartDate","Submissions_EndDate","StartDate"));
+        
+        $updatedatas=array();
+        if ($item[ "Submissions_Inscriptions" ]==2)
+        {
+            $dates=
+                array
+                (
+                    "StartDate" => $this->MyTime_2Sort(),
+                    "EndDate" => $item[ "EventStart" ],
+                );
+
+            foreach (array("StartDate","EndDate") as $key)
+            {
+                if (empty($item[ "Submissions_".$key ]))
+                {
+                    $item[ "Submissions_".$key ]=$dates[ $key ];
+                    array_push($updatedatas,"Submissions_".$key);
+                }
+            }
+        }
+
+        return $updatedatas;
+    }
+    
+    //*
     //* function Event_Submissions_NAuthors, Parameter list: $item=array()
     //*
     //* Returns number of authors per event.
@@ -204,15 +237,21 @@ class EventsSubmissions extends EventsPayments
 
     function Event_Submissions_Table($edit,$item,$group)
     {
-        return 
-            $this->H(3,$this->GetRealNameKey($this->ItemDataSGroups[ $group ])).
-            $this->MyMod_Item_Table_Html
+        return
+            array
             (
-               $edit,
-               $item,
-               $this->Event_Submissions_GroupDatas($item,$group)
-            ).
-            "";
+                $this->H
+                (
+                    3,
+                    $this->GetRealNameKey($this->ItemDataSGroups[ $group ])
+                ),
+                $this->MyMod_Item_Table_Html
+                (
+                    $edit,
+                    $item,
+                    $this->Event_Submissions_GroupDatas($item,$group)
+                )
+            );
     }
 }
 

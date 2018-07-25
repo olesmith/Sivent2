@@ -2,237 +2,95 @@
 
 class HtmlHref extends HtmlTable
 {
-    var $URL_CommonArgs=NULL;
-//*
-//* function HRef, Parameter list: $href,$name,$title,$target,$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu"
-//*
-//* Creates a href.
-//* 
-//*
+    //*
+    //* function HRef, Parameter list: $href,$name,$title,$target,$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu"
+    //*
+    //* Creates a href.
+    //* 
+    //*
 
     function HRef($href,$name="",$title="",$target="",$class="",$noqueryargs=FALSE,$options=array(),$anchor="HorMenu")
-{
-    $orighref=$href;
-    $path="";
-    
-    if ($this->LatexMode()) { return $name; }
-    $comps=preg_split('/\?/',$href);
-
-    $href="";
-    $args="";
-    if (count($comps)>0)
     {
-        $href=$comps[0];
-        $path=$comps[0];
-        if (count($comps)>1)
-        {
-            $args=$comps[1];
-        }
+        return 
+            $this->Htmls_Text
+            (
+                $this->Htmls_HRef
+                (
+                    $href,
+                    $name,
+                    $title,
+                    $class,
+                    $args=array
+                    (
+                        "Target"      => $target,
+                        "NoQueryArgs" => $noqueryargs,
+                        "Anchor"      => $anchor,
+                    ),
+                    $options
+                )
+            );
+   }
+
+    //*
+    //* function HRefList, Parameter list: $links,$titles
+    //*
+    //* HRefs a list of links.
+    //* 
+    //*
+
+    function HRefList($links,$titles,$btitles=array(),$class="menuitem",$inactiveclass="menuinactive",$current="")
+    {
+        return 
+            $this->Htmls_Text
+            (
+                $this->Htmls_HRef_Menu
+                (
+                    "method_HRefList",
+                    $links,
+                    $titles,
+                    $args=array
+                    (
+                        "Class"         => $class,
+                        "ClassInactive" => $inactiveclass,
+                        "Current"       => $current,
+                    ),
+                    $btitles
+                )
+            );
     }
 
-    $hash=array();
-    if (!$noqueryargs) { $hash=$this->CGI_Query2Hash($args); }
+    //*
+    //* function HRefMenu, Parameter list: $links,$titles
+    //*
+    //* Returns menu with HRefs (ie links).
+    //* 
+    //*
 
-    if (count($hash)>0)
-    {
-        $hiddenargs=$this->MakeHiddenArgs($hash);
-    }
-    else
-    {
-        $hiddenargs=$args;
-    }
-
-    if ($this->URL_CommonArgs)
-    {
-         $hiddenargs=$this->URL_CommonArgs."&".$hiddenargs;
-    }
-
-    if ($hiddenargs!="")
-    {
-         $href.="?".$hiddenargs;
-    }
-
-    if ($name=="")
-    {
-        $name=$href;
-    }
-
-    if ($this->CGI_Args_Sep!="&")
-    {
-        $href=preg_replace('/'.$this->CGI_Args_Sep.'/',"&",$href);
-        $href=preg_replace('/&/',$this->CGI_Args_Sep,$href);
-    }
-
-    $args=$this->CGI_URI2Hash($href);
-    $href="?".$this->CGI_Hash2URI($args);
-    
-    $href=preg_replace('/index.php/',"",$href);
-
-    if (!empty($anchor))
-    {
-        $href.="#".$anchor;
-    }
-    if (preg_match('/javascript/i',$orighref))
-    {
-        $href=$orighref."?')";
-    }
-
-
-    $options[ "HREF" ]=$path.$href;
-    if ($title!="")  { $options[ "TITLE" ] =$title; }
-    if ($target!="") { $options[ "TARGET" ]=$target; }
-    if ($class!="")  { $options[ "CLASS" ]=$class; }
-
-    return "<A".$this->Hash2Options($options).">".$name."</A>";
-}
-
-//*
-//* function HRefList, Parameter list: $links,$titles
-//*
-//* HRefs a list of links.
-//* 
-//*
-
-function HRefList($links,$titles,$btitles=array(),$class="menuitem",$inactiveclass="menuinactive",$current="")
-{
-    if (empty($btitles)) { $btitles=$titles; }
-
-    $rlinks=array();
-    for ($n=0;$n<count($links);$n++)
-    {
-        if (! preg_match("/\S/",$titles[$n]) ) { $titles[$n]=$links[$n]; }
-        $rlinks[$n]=$titles[$n];
-        if (!empty($links[$n]))
-        {
-            if ($current!=$titles[$n])
-            {
-                $rlinks[$n]=$this->HRef($links[$n],$titles[$n],$btitles[$n],"",$class);
-            }
-            else
-            {
-                $rlinks[$n]=$this->SPAN($btitles[$n],array("CLASS" => $inactiveclass));
-            }
-        }
-    }
-
-    return $rlinks;
-}
-
-//*
-//* function HRefMenu, Parameter list: $links,$titles
-//*
-//* Returns menu with HRefs (ie links).
-//* 
-//*
-
-function HRefMenu($title,$links,$titles=array(),$btitles=array(),$nperline=8,
+    function HRefMenu($title,$links,$titles=array(),$btitles=array(),$nperline=8,
                   $class="ptablemenu",$inactiveclass="inactivemenuitem",$titleclass="menutitle",
                   $current="")
-{
-    if (is_array($titles) && count($titles)>0)
-    {
-        $hrefs=$this->HRefList($links,$titles,$btitles,$class,$inactiveclass,$current);
-    }
-    else
-    {
-        $hrefs=$links;
-    }
-
-    $hhrefs=array();
-    $rhrefs=array();
-    for ($n=0;$n<count($hrefs);$n++)
-    {
-        if ($nperline>0 && ($n%$nperline)==($nperline-1))
-        {
-            $list=$rhrefs;
-            array_push($list,$hrefs[$n]);
-            array_push($hhrefs,$list);
-
-            $rhrefs=array();
-        }
-        else
-        {
-            array_push($rhrefs,$hrefs[$n]."\n");                
-        }
-    }
-
-    if (count($rhrefs)>0)
-    {
-        array_push($hhrefs,$rhrefs);
-    }
-
-    $hrefs=array();
-    foreach ($hhrefs as $id => $rhrefs)
-    {
-        array_push($hrefs,join(" | ",$rhrefs) );
-    }
-
-    if (count($hrefs)>=1)
-    {
-        $hrefs=join(" ]<BR>[ ",$hrefs);
-
-        if ($title!="")
-        {
-            $title=$this->SPAN($title,array("CLASS" => $titleclass));
-        }
-
-        return $this->CENTER
-        (
-           $title."\n[".$hrefs."]\n"
-        );
-    }
-
-    return "";
-}
-
-//*
-//* function HRefMenu, Parameter list: $links,$titles
-//*
-//* Returns menu with HRefs (ie links).
-//* 
-//*
-
-function HRefVerticalMenu($title,$links,$titles=array(),$btitles=array(),$class="")
-{
-    if (is_array($titles) && count($titles)>0)
-    {
-        $hrefs=$this->HRefList($links,$titles,$btitles,$class);
-    }
-    else
-    {
-        $hrefs=$links;
-    }
-
-    if (count($hrefs)>=1)
     {
         return
-            $this->B($title)."\n".
-            "<BR>\n".
-            $this->HtmlList($hrefs).
-            "";
+            $this->Htmls_Text
+            (
+                $this->Htmls_HRef_Menu
+                (
+                    "method_HRefList",
+                    $title,
+                    $links,
+                    $titles,
+                    $args=array
+                    (
+                        "NPerLine"      => $nperline,
+                        "Class"         => $class,
+                        "ClassInactive" => $inactiveclass,
+                        "Title"         => $titleclass,
+                        "Current"       => $current,
+                    ),
+                    $btitles
+                )
+            );
     }
-
-    return "";
-}
-
-
-//*
-//* function Anchor, Parameter list: $name,$text=""
-//*
-//* Returns ancher A.
-//* 
-//*
-
-function Anchor($name,$text="")
-{
-    $anchor="";
-    if (!$this->LatexMode())
-    {
-        $anchor="<A NAME=".$name."></A>".$this->B($text);
-    }
-    
-    return $anchor;
-}
 }
 
 

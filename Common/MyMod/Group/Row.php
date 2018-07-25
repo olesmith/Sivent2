@@ -17,13 +17,14 @@ trait MyMod_Group_Row
         {
             $edit=0;
         }
- 
+
         $item[ "_RID_" ]="";
         if (isset($item[ "ID" ])) { $item[ "_RID_" ]=sprintf("%03d",$item[ "ID" ]); }
         $nn=sprintf("%03d",$nn);
 
         $tabindex=1;
         $row=array();
+        $value="";
         foreach ($datas as $data)
         {
             if (empty($data))
@@ -32,7 +33,16 @@ trait MyMod_Group_Row
             }
             elseif ($data=="No")
             {
-                $value=$this->B($nn);
+                $value=
+                    $this->Htmls_SPAN
+                    (
+                        $nn,
+                        array
+                        (
+                            "ID" => $this->ModuleName."_".$item[ "ID" ],
+                            "CLASS" => 'Bold',
+                        )
+                    );
             }
             elseif (preg_match('/newline\((\d+)\)/',$data,$matches))
             {
@@ -62,24 +72,103 @@ trait MyMod_Group_Row
             }
             else
             {
-                $value=$this->MyMod_Group_Cell_Data($edit,$item,$data,$value,$even,$tabindex);
+                if ($this->MyMod_Data_Languaged_Is($data))
+                {
+                    $value=
+                        $this->MyMod_Group_Row_Item_Languaged_Data_Field
+                        (
+                            $edit,
+                            $item,
+                            $data,
+                            $even
+                        );
+                }
+                else
+                {
+                    $value=
+                        $this->MyMod_Data_Fields
+                        (
+                            $edit,
+                            $item,
+                            $data,
+                            $plural=True,
+                            $tabindex="",
+                            $rdata="",
+                            $even
+                        );
+                }
             }
             
-            array_push($row,$value);
+            array_push($row,array($value));
 
             $tabindex++;
         }
 
-        if (count($row)>0 && isset($item[ "ID" ]) && !$this->LatexMode)
-        {
-            if (!is_array($row[0]))
-            {
-                $row[0].=$this->HtmlTags("A","",array("NAME" => "#".$this->ModuleName."_".$item[ "ID" ]));
-            }
-        }
-
         return $row;
     }
+    
+    //*
+    //* function MyMod_Group_Row_Item_Languaged_Data_Table, Parameter list: ($edit,$item,$nn,$datas,$even=TRUE)
+    //*
+    //* Generates languaged field as a table.
+    //* 
+    
+    function MyMod_Group_Row_Item_Languaged_Data_Field($edit,$item,$data,$even=True)
+    {
+        if ($this->MyMod_Language_Data_Tabled())
+        {
+            return
+                $this->MyMod_Data_Fields
+                (
+                    $edit,
+                    $item,
+                    $data.$this->MyLanguage_GetLanguageKey(),
+                    $plural=True
+                );
+        }
+        
+        $table=array();
+        foreach ($this->LanguageKeys() as $language_key)
+        {
+            array_push
+            (
+                $table,
+                array
+                (
+                    $this->B
+                    (
+                        $this->MyLanguage_Name($language_key).":"
+                    ),
+                    $this->MyMod_Data_Fields
+                    (
+                        $edit,
+                        $item,
+                        $data.$language_key,
+                        $plural=True
+                    )
+                )
+            );
+        }
+
+        return
+            $this->Htmls_Table
+            (
+                "",
+                $table,
+                array
+                (
+                    "CLASS" => 'left',
+                ),
+                array
+                (
+                    "CLASS" => $this->MyMod_EvenOdd_Class($even),
+                ),
+                array
+                (
+                ),
+                False,False
+            );
+     }
 }
 
 ?>

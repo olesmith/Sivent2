@@ -92,6 +92,12 @@ trait Sql_Insert
 
     function Sql_Insert_Item(&$item,$table="",$nocheckcols=FALSE)
     {
+        if ($this->ModuleName=="Permissions")
+            {
+        var_dump("Insert:",$item,$tmp);
+        exit();
+            }
+        
         if (!preg_match('/^__(Table|Index)__$/',$table))
         {
             $time=time();

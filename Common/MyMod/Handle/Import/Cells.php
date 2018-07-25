@@ -43,10 +43,7 @@ trait MyMod_Handle_Import_Cells
         }
 
         $item[ "Registered" ]=TRUE;
-        return
-            $this->FriendsObj()->MyActions_Entry("Edit",$item[ "Friend_Hash" ]).
-            "";
-        #return $this->IMG($this->Icons."/ok.png","Registered",20,0,array("TITLE" => "Registered"));
+        return $this->FriendsObj()->MyActions_Entry("Edit",$item[ "Friend_Hash" ]);
     }
     
     //*

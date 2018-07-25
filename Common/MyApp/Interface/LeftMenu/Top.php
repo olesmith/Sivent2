@@ -12,16 +12,29 @@ trait MyApp_Interface_LeftMenu_Top
     function MyApp_Interface_LeftMenu_Top_Welcome()
     {
         return
-            $this->DIV
+            array
             (
-               $this->MyLanguage_GetMessage("LMWelcomeMessage").": ".
-               $this->HtmlSetupHash[ "ApplicationName"  ].
-               ", Ver. ".
-               $this->HtmlSetupHash[ "ApplicationVersion"  ].
-               "<BR>".
-               $this->TimeStamp2Text(),
-
-               array("CLASS" => "userinfotable")
+                $this->Htmls_DIV
+                (
+                    array
+                    (
+                        $this->MyLanguage_GetMessage("LMWelcomeMessage").": ",
+                    ),
+                    array("CLASS" => "welcomemessage")
+                ),
+                $this->Htmls_DIV
+                (
+                    array
+                    (
+                        preg_replace
+                        (
+                            '/\s*:\s*/',
+                            $this->BR(),
+                            $this->HtmlSetupHash[ "ApplicationName"  ]
+                        ),
+                    ),
+                    array("CLASS" => "userinfotable")
+                )
             );
     }
 
@@ -38,39 +51,41 @@ trait MyApp_Interface_LeftMenu_Top
             $file=$this->LoginData[ "ID" ].".png";
             $name=$this->IconText($file,$this->LoginData[ "Email" ]);
 
-
-            $table=array
-            (
-               array
-               (
-                  "Login: ",
-                  $this->LoginData[ "Email" ].
-                  " (".$this->LoginData[ "ID" ].")"
-               ),
-               array
-               (
-                  "Alias: ",
-                  $this->LoginData[ "Name" ]
-               ),
-               array
-               (
-                  "Perfil:",
-                  $this->MyApp_Profile_Name()
-               ),
-            );
-
             return
-                $this->BR().
-                $this->HtmlTable("",$table,array(),TRUE,"userinfotable").
-                "";
+                $this->Htmls_Table
+                (
+                    "",
+                    array
+                    (
+                        array
+                        (
+                            "Login: ",
+                            $this->LoginData[ "Email" ].
+                            " (".$this->LoginData[ "ID" ].")"
+                        ),
+                        array
+                        (
+                            "Alias: ",
+                            $this->LoginData[ "Name" ]
+                        ),
+                        array
+                        (
+                            "Perfil:",
+                            $this->MyApp_Profile_Name()
+                        ),
+                    ),
+                    array("CLASS" => 'userinfotable')
+                );
 
         }
         else
         {
-            return 
-                $this->MyLanguage_GetMessage("LMAnonymousAccessMessage").
-                $this->BR().
-                "";
+            return
+                $this->Htmls_DIV
+                (
+                    $this->MyLanguage_GetMessage("LMAnonymousAccessMessage"),
+                    array("CLASS" => 'anonymous')
+                );
         }
     }
 
@@ -82,16 +97,28 @@ trait MyApp_Interface_LeftMenu_Top
 
     function MyApp_Interface_LeftMenu_Top_ReadOnlyMessage()
     {
-        $html="";
+        $html=array();
         if (is_array($this->LoginData) && $this->LoginData[ "Name" ]!="")
         {
             if ($this->ReadOnly && $this->LoginType!="Public")
             {
-                $html=$this->H(5,"Somente Leitura!");
+                array_push
+                (
+                    $html,
+                    $this->H
+                    (
+                        5,
+                        $this->MyLanguage_GetMessage("LM_Read_Only_Notice")
+                    )
+                );
             }
             else
             {
-                $html=$this->BR();
+                array_push
+                (
+                    $html,
+                    $this->BR()
+                );
             }
         }
 
@@ -107,15 +134,65 @@ trait MyApp_Interface_LeftMenu_Top
 
     function MyApp_Interface_LeftMenu_Top_AdminInfo()
     {
-        $html="";
+        $html=array();
         if ($this->LoginType=="Admin")
         {
-            $html.=$this->DIV
+            array_push
             (
-               " >> Admin << ",
-               array("CLASS" => 'adminnotice')
-            ).
-            "<BR>";
+                $html,
+                $this->DIV
+                (
+                    $this->MyLanguage_GetMessage("LM_Admin_Notice"),
+                    array("CLASS" => 'adminnotice')
+                ),
+                $this->BR()
+            );
+        }
+
+        return $html;
+    }
+    //*
+    //* function MyApp_Interface_LeftMenu_Period, Parameter list:
+    //*
+    //* Creates period message. Should be moved to overriden function in sids apps.
+    //*
+
+    function MyApp_Interface_LeftMenu_Top_Period()
+    {
+        //Should be included in overriding header, somewhere in SiDS.
+        $html=array();
+        if (!empty($this->Period))
+        {
+            $title=$this->Period[ "Name" ];
+            if (!empty($this->Period[ "Title" ])) { $title=$this->Period[ "Title" ]; }
+            
+            $per="";
+            if (is_array($this->Period))
+            {
+                $per=$title;
+            }
+            else
+            {
+                $per=$this->Period;
+            }
+
+            $per=
+                $this->MyLanguage_GetMessage("LM_Period_Title").
+                " ".
+                $per;
+            
+            array_push
+            (
+                $html,
+                $this->DIV
+                (
+                    $per,
+                    array
+                    (
+                        "CLASS" => "periodtitle",
+                    )
+                )
+            );
         }
 
         return $html;

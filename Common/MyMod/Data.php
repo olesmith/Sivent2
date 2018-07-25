@@ -198,6 +198,21 @@ trait MyMod_Data
         return $res;
     }
 
+    //*
+    //* Returns true if $data is Languaged.
+    //*
+
+    function MyMod_Data_Languaged_Is($data)
+    {
+        $res=False;
+        if (!empty($this->ItemData[ $data ][ "Languaged" ]))
+        {
+            $res=True;
+        }
+
+        return $res;
+    }
+
     
     //*
     //* Returns true if $data is Compulsory.
@@ -301,6 +316,46 @@ trait MyMod_Data
          return $icon;
     }
     
+    //*
+    //* 
+    //*
+
+    function MyMod_Data_Compulsory_Message()
+    {
+        return $this->Center
+        (
+           "&gt;&gt; ".
+           $this->GetMessage($this->ItemDataMessages,"CompulsoryMessage").
+           " &lt;&lt;",
+           array("CLASS" => 'datatitlelink')
+        );
+    }
+   
+    //*
+    //* 
+    //*
+
+    function MyMod_Data_Image_Types_Regex()
+    {
+        return '/.(png|jpe?g|gif|svg)$/i';
+    }
+    
+    //*
+    //* 
+    //*
+
+    function MyMod_Data_Image_Value_Is($value)
+    {
+        $regex=$this->MyMod_Data_Image_Types_Regex();
+
+        $res=False;
+        if (preg_match($regex,$value))
+        {
+            $res=False;
+        }
+
+        return $res;        
+    }
 }
 
 ?>

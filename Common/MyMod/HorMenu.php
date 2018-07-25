@@ -33,7 +33,22 @@ trait MyMod_HorMenu
             $this->PreInterfaceMenu(!$singular,$id);
         }
 
-        echo $this->MyMod_HorMenu_Gen(!$singular,$id);
+        echo
+            $this->Htmls_Text
+            (
+                array
+                (
+                    $this->Htmls_DIV
+                    (
+                        $this->MyMod_HorMenu_Gen(!$singular,$id),
+                        array
+                        (
+                            "ID" => "HorMenu",
+                            "CLASS" => "center tablemenu",
+                        )
+                    )
+                )
+            );
         
         if (method_exists($this,"PostInterfaceMenu"))
         {
@@ -48,21 +63,29 @@ trait MyMod_HorMenu
     }
 
     //*
-    //* function MyMod_HorMenu_Gern, Parameter list: $plural=FALSE,$id=""
+    //* function MyMod_HorMenu_Gen, Parameter list: $plural=FALSE,$id=""
     //*
-    //* Prints horisontal menu of Singular and Plural actions.
+    //* Returns horisontal menu of Singular and Plural actions.
     //*
 
     function MyMod_HorMenu_Gen($plural=FALSE,$id="")
     {
-        return
-            $this->Anchor("HorMenu").
-            $this->ApplicationObj()->MyApp_Module_Group_Menu_Horisontal($this).
-            join
+        return array
+        (
+            $this->Htmls_Comment_Section
             (
-               "",
-               $this->MyMod_HorMenu_Menues(!$plural,$id)
-            );
+                "Horisontal Menu",
+                $this->Htmls_Tag
+                (
+                    "NAV",
+                    array_merge
+                    (
+                        $this->ApplicationObj()->MyApp_Module_Group_Menu_Horisontal($this),
+                        $this->MyMod_HorMenu_Menues(!$plural,$id)
+                    )
+                )
+            )
+        );
     }
 
 

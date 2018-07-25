@@ -74,14 +74,13 @@ trait MyMod_Search_CGI_IncludeAll
         }
         
         return
-            $this->MakeRadioSet //($name,$values,$titles,$selected=-1)
+            $this->Htmls_Radios //($name,$values,$titles,$selected=-1)
             (
                $this->ModuleName."_IncludeAll",
                array(1,2),
                $this->MyLanguage_GetMessage("NoYes"),
                $this->MyMod_Search_CGI_Include_All_Value()
-            ).
-            "";
+            );
     }
 }
 

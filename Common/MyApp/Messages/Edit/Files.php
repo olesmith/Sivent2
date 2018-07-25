@@ -138,8 +138,12 @@ trait MyApp_Messages_Edit_Files
         $table=
             $this->Html_Form
             (
-               $this->Anchor($file).
-               $this->H(2,$title." ".$file).
+               $this->H
+               (
+                   2,
+                   $title." ".$file,
+                   array("ID" => $file)
+               ).
                $this->Html_Table
                (
                   $this->MyApp_Messages_Edit_File_Title_Row($path,$file),

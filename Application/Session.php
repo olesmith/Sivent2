@@ -4,7 +4,7 @@ class Session extends Login
 {
     var $SessionsTable="Sessions";
     var $MayCreateSessionTable=FALSE;
-    var $MaxLoginAttempts=5;
+    var $MaxLoginAttempts=10;
     var $BadLogonRegistered=0;
     var $NoInitSession=0;
     var $SessionData=array();

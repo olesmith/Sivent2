@@ -24,6 +24,7 @@ class RegGroups extends RegGroupsAccess
         $this->IncludeAllDefault=TRUE;
         $this->Sort=array("Name");
 
+        $this->CellMethods[ "RegGroup_Info_Field" ]=True;
         $this->Coordinator_Type=5;
     }
 
@@ -148,8 +149,17 @@ class RegGroups extends RegGroupsAccess
 
     function RegGroup_Data_Get($item)
     {
-        $sgroup=$item[ "GroupKey" ];
-        return $this->FriendsObj()->ItemDataSGroups[ $sgroup ][ "Data" ];
+        $datas=array();
+        if (is_array($item) && !empty($item[ "GroupKey" ])) 
+        {
+            $sgroup=$item[ "GroupKey" ];
+            if (!empty($sgroup) && !empty($this->FriendsObj()->ItemDataSGroups[ $sgroup ]))
+            {
+                $datas=$this->FriendsObj()->ItemDataSGroups[ $sgroup ][ "Data" ];
+            }
+        }
+        
+        return $datas;
     }
     //*
     //* function RegGroup_Info_Field, Parameter list:
@@ -157,9 +167,11 @@ class RegGroups extends RegGroupsAccess
     //* Generate key field as select.
     //*
 
-    function RegGroup_Info_Field($item,$edit)
+    function RegGroup_Info_Field($edit,$item,$data)
     {
         $datas=$this->RegGroup_Data_Get($item);
+        if (empty($datas)) { return ""; }
+        
         foreach (array_keys($datas) as $id)
         {
             if (empty($this->FriendsObj()->ItemData[ $datas[ $id ] ]))

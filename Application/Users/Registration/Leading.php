@@ -24,7 +24,7 @@ class UsersRegistrationLeading extends UsersRegistrationTrailing
             {
                 $rfile=$path."/".$file;
             }
-            
+
             if (file_exists($rfile))
             {
                 return
@@ -211,7 +211,7 @@ class UsersRegistrationLeading extends UsersRegistrationTrailing
                    "",
                    array
                    (
-                      $this->HtmlList
+                      $this->Htmls_List
                       (
                          array
                          (

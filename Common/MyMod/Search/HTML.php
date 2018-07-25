@@ -35,7 +35,7 @@ trait MyMod_Search_HTML
 
         $this->Singular=FALSE;
         $this->Plural=TRUE;
-        $this->MyMod_Search_Table_Written=FALSE;
+        $this->MyMod_Search_Table_Written=False;
         
         $table=
             $this->MyMod_Search_Table_Matrix
@@ -48,27 +48,25 @@ trait MyMod_Search_HTML
                 $tabmovesdown,
                 $buttons
             );
-        $this->MyMod_Search_Table_Written;
+        
+        $this->MyMod_Search_Table_Written=True;
 
 
         return
-            $this->FrameIt
-            (
-               $this->Html_Table
-               (
-                  "",
-                  $table,
-                  array
-                  (
-                     "ALIGN" => 'center',
-                     "CLASS" => 'searchtable'
-                  ),
-                  array(),
-                  array(),
-                  TRUE
-               )
-            ).
-            "";
+                $this->Htmls_Table
+                (
+                    "",
+                    $table,
+                    array
+                    (
+                        "ALIGN" => 'center',
+                        "CLASS" => 'searchtable'
+                    ),
+                    array(),
+                    array(),
+                    False #evenodd
+                )
+            ;
     }
 
 }

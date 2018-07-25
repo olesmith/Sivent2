@@ -158,12 +158,12 @@ class Assessors extends Assessors_Statistics
     }
     
     //*
-    //* function AddForm_PostText, Parameter list:
+    //* function MyMod_Handle_Add_Form_Text_Post, Parameter list:
     //*
     //* Pretext function. Shows add inscriptions form.
     //*
 
-    function AddForm_PostText()
+    function MyMod_Handle_Add_Form_Text_Post()
     {
         return
             $this->BR().

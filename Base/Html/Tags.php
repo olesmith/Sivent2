@@ -14,7 +14,7 @@ class HtmlTags extends Log
     //*
     //*
 
-    function HtmlTag($tag,$contents="",$options=array())
+    function HtmlTag($tag,$contents="",$options=array(),$closing="")
     {
         if (!empty($contents[ "Text" ]))
         {
@@ -32,7 +32,7 @@ class HtmlTags extends Log
 
         return 
             "<".strtoupper($tag).
-            $this->Hash2Options($options).">".
+            $this->Hash2Options($options).$closing.">".
             $contents;
     }
     //*
@@ -124,6 +124,14 @@ class HtmlTags extends Log
         $optionstring="";
         foreach ($options as $option => $value)
         {
+            if (preg_match('/^Title$/i',$option))
+            {
+                if (is_array($value))
+                {
+                    $value=join("\n",$value);
+                }
+            }
+            
             if (preg_match('/^\s+$/',$option))
             {
                 $optionstring.=$value;

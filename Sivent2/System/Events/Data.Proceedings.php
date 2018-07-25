@@ -1,9 +1,34 @@
 array
 (     
+   "Contents" => array
+   (
+      "Name" => "Resumo Expandido",
+      "Name_UK" => "Expanded Abstract",
+      "SelectCheckBoxes"  => 2,
+
+      "Sql" => "ENUM",
+      "Values" => array("Não","Sim"),
+      "Values_UK" => array("No","Yes"),
+      
+      "Public"   => 1,
+      "Person"   => 0,
+      "Admin"    => 2,
+      "Friend" => 1,
+      "Coordinator" => 2,
+      
+      "Default" => 1,
+      "Compulsory" => FALSE,
+      "Search" => FALSE,
+      "Compulsory"  => False,
+   ),
    "Proceedings" => array
    (
-      "Name" => "Anais",
-      "Name_UK" => "Proceedings",
+      "Name" => "Arquivo para Publicação",
+      "Name_UK" => "File to Publish",
+      
+      "Title" => "Upload de Arquivo para Publicação",
+      "Title_UK" => "Upload, File to Publish",
+      
       "SelectCheckBoxes"  => 2,
 
       "Sql" => "ENUM",

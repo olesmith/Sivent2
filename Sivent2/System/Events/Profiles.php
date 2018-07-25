@@ -132,6 +132,7 @@ array
          ),
         'Coordinator' => array
          (
+            "Config" => 1,
             "Inscriptions" => 1,
             "Inscriptions_Add" => 1,
             "Collaborations" => 1,
@@ -140,6 +141,7 @@ array
          ),
          'Admin' => array
          (
+            "Config" => 1,
             "Inscriptions" => 1,
             "Inscriptions_Add" => 1,
             "Collaborations" => 1,

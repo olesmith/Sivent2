@@ -56,11 +56,21 @@ trait MyMod_HorMenu_Action
             }
         }
 
-        if (empty($hrefs)) { return ""; }
+        if (empty($hrefs)) { return array(); }
         
-        return 
-            preg_replace('/#ID/',$id,$this->HRefMenu($title,$hrefs)).
-            $this->BR();
+        return
+            $this->Htmls_DIV
+            (
+                array
+                (
+                    $this->Htmls_HRef_Menu($cssclass,$title,$hrefs)
+                ),
+                array
+                (
+                    "ID" => $cssclass,
+                    "CLASS" => 'hormenu',
+                )
+            );
     }
 
     //*
@@ -108,13 +118,17 @@ trait MyMod_HorMenu_Action
             }
             else
             {
-                $itemname=$this->MyMod_Item_Name_Get();
+                $name="";
+                if (!empty($item))
+                {
+                    $this->MyMod_Item_Name_Get();
 
-                $name=$this->GetRealNameKey($this->Actions[ $action ],"Name");
-                $name=preg_replace('/#ID/',$id,$name);
-                $name=preg_replace('/#ItemName(_\S\S)?/',$this->MyMod_ItemName(),$name);
-                $name=preg_replace('/#ItemsName(_\S\S)/',$this->MyMod_ItemName("ItemsName"),$name);
-
+                    $name=$this->GetRealNameKey($this->Actions[ $action ],"Name");
+                    $name=preg_replace('/#ID/',$id,$name);
+                    $name=preg_replace('/#ItemName(_\S\S)?/',$this->MyMod_ItemName(),$name);
+                    $name=preg_replace('/#ItemsName(_\S\S)/',$this->MyMod_ItemName("ItemsName"),$name);
+                }
+                
                 $href=$this->SPAN($name,array("CLASS" => 'inactivemenuitem'));
             }
         }

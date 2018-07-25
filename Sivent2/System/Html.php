@@ -27,7 +27,7 @@ array
    
    'BodyArgs' => ' ',
    'ApplicationIcon' => 'icons/owl.svg',
-   'TailIcon_Left'   => 'icons/sade_owl.png',
-   'TailIcon_Right'  => 'icons/sade_owl.png',
+   'TailIcon_Left'   => 'icons/owl.svg',
+   'TailIcon_Right'  => 'icons/owl.svg',
    'SupportEmail' => 'sivent2@ufg.br',
 );

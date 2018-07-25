@@ -68,81 +68,98 @@ class HtmlSelect extends HtmlRadioButton
 
 function MakeSelectField($name,$values,$valuenames,$selected="",$disableds=array(),$titles=array(),$title="",$maxlen=0,$noincludedisableds=FALSE,$multiple=FALSE,$onchange=NULL,$options=array())
 {
-    $selectedok=FALSE;
+    return
+        $this->Htmls_Select
+        (
+            $name,$values,$valuenames,$selected,
+            array
+            (
+                "Disableds" => $disableds,
+                "Titles" => $titles,
+                "Title" => $title,
+                "MaxLen" => $maxlen,
+                "ExcludeDisableds" => $noincludedisableds,
+                "Multiple" => $multiple,
+                "OnChange" => $onchange,
+            ),
+            $options
+        );
+    
+    /* $selectedok=FALSE; */
 
-    $options[ "NAME" ]=$name;
-    if (!empty($onchange)) { $options[ "ONCHANGE" ]=$onchange; }
-    if (!empty($title))    { $options[ "TITLE" ]=$title; }
-    if ($multiple)         { $options[ "MULTIPLE" ]=""; }
+    /* $options[ "NAME" ]=$name; */
+    /* if (!empty($onchange)) { $options[ "ONCHANGE" ]=$onchange; } */
+    /* if (!empty($title))    { $options[ "TITLE" ]=$title; } */
+    /* if ($multiple)         { $options[ "MULTIPLE" ]=""; } */
 
-    $select="";
-    foreach ($values as $n => $value)
-    {
-        $valuename=$valuenames[$n];
-        $selectopt=array();
-        if (
-              count($values)==1
-              ||
-              $this->TestIfSelected($value,$values,$n,$selected)
-           )
-        {
-            $selectopt[ "SELECTED" ]="";
-            $selectedok=TRUE;
-        }
+    /* $select=""; */
+    /* foreach ($values as $n => $value) */
+    /* { */
+    /*     $valuename=$valuenames[$n]; */
+    /*     $selectopt=array(); */
+    /*     if ( */
+    /*           count($values)==1 */
+    /*           || */
+    /*           $this->TestIfSelected($value,$values,$n,$selected) */
+    /*        ) */
+    /*     { */
+    /*         $selectopt[ "SELECTED" ]=""; */
+    /*         $selectedok=TRUE; */
+    /*     } */
 
-        $class="";
-        $disabled=FALSE;
-        if (
-            !empty($disableds[$n])
-            ||
-            preg_match('/^disabled$/',$values[$n]))
-        {
-            $selectopt[ "DISABLED" ]="";
-            $values[ $n]="";
-            $class="disabled";
-            $disabled=TRUE;
-         }
+    /*     $class=""; */
+    /*     $disabled=FALSE; */
+    /*     if ( */
+    /*         !empty($disableds[$n]) */
+    /*         || */
+    /*         preg_match('/^disabled$/',$values[$n])) */
+    /*     { */
+    /*         $selectopt[ "DISABLED" ]=""; */
+    /*         $values[ $n]=""; */
+    /*         $class="disabled"; */
+    /*         $disabled=TRUE; */
+    /*      } */
 
-        if (isset($titles[ $n ])) { $selectopt[ "TITLE" ]=$titles[ $n ]; }
+    /*     if (isset($titles[ $n ])) { $selectopt[ "TITLE" ]=$titles[ $n ]; } */
 
-        $valuename=html_entity_decode($valuename,ENT_QUOTES,"UTF-8");
-        if ($maxlen>0 && strlen($valuename)>$maxlen)
-        {
-            $valuename=substr($valuename,0,$maxlen);
-        }
+    /*     $valuename=html_entity_decode($valuename,ENT_QUOTES,"UTF-8"); */
+    /*     if ($maxlen>0 && strlen($valuename)>$maxlen) */
+    /*     { */
+    /*         $valuename=substr($valuename,0,$maxlen); */
+    /*     } */
 
-        if (!$noincludedisableds || !$disabled)
-        {
-            if (!empty($class))
-            {
-                $selectopt[ "CLASS" ]=$class; 
-            }
+    /*     if (!$noincludedisableds || !$disabled) */
+    /*     { */
+    /*         if (!empty($class)) */
+    /*         { */
+    /*             $selectopt[ "CLASS" ]=$class;  */
+    /*         } */
 
-            $selectopt[ "VALUE" ]=$values[$n]; 
-            $select.=
-                "   ".
-                $this->HtmlTags
-                (
-                   "OPTION",
-                   $valuename,
-                   $selectopt
-                )."\n";
+    /*         $selectopt[ "VALUE" ]=$values[$n];  */
+    /*         $select.= */
+    /*             "   ". */
+    /*             $this->HtmlTags */
+    /*             ( */
+    /*                "OPTION", */
+    /*                $valuename, */
+    /*                $selectopt */
+    /*             )."\n"; */
 
-            if ($this->Debug>=2)
-            {
-                $select.=" [".$values[$n]."]\n";
-            }
-        }
-    }
+    /*         if ($this->Debug>=2) */
+    /*         { */
+    /*             $select.=" [".$values[$n]."]\n"; */
+    /*         } */
+    /*     } */
+    /* } */
 
-    $select=$this->HtmlTags("SELECT","\n".$select,$options)."\n";
+    /* $select=$this->HtmlTags("SELECT","\n".$select,$options)."\n"; */
 
-    if (!$selectedok && !empty($selected) && !is_array($selected))
-    {
-        $this->AddMsg("Warning MakeSelectField: $name, Value: '$selected' undefined");
-    }
+    /* if (!$selectedok && !empty($selected) && !is_array($selected)) */
+    /* { */
+    /*     $this->AddMsg("Warning MakeSelectField: $name, Value: '$selected' undefined"); */
+    /* } */
 
-    return "\n".$select;
+    /* return "\n".$select; */
 }
 
 }

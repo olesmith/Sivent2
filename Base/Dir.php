@@ -50,34 +50,34 @@ class Dir extends File
     }
 
 
-    //**
-    //** function , Parameter list: 
-    //**
-    //** 
-    //** 
+    /* //\** */
+    /* //\** function , Parameter list:  */
+    /* //\** */
+    /* //\**  */
+    /* //\**  */
 
-    function CreateDirAllPaths($path)
-    {
-        $comps=preg_split('/\/+/',$path);
+    /* function CreateDirAllPaths($path) */
+    /* { */
+    /*     $comps=preg_split('/\/+/',$path); */
 
 
-        $path="";
-        for ($n=0;$n<count($comps);$n++)
-        {
-            if ($path!="")
-            {
-                $path.="/";
-            }
+    /*     $path=""; */
+    /*     for ($n=0;$n<count($comps);$n++) */
+    /*     { */
+    /*         if ($path!="") */
+    /*         { */
+    /*             $path.="/"; */
+    /*         } */
 
-            $path.=$comps[$n];
+    /*         $path.=$comps[$n]; */
 
-            if (!is_dir($path))
-            {
-                mkdir($path);
-            }
+    /*         if (!is_dir($path)) */
+    /*         { */
+    /*             mkdir($path); */
+    /*         } */
             
-        }
-    }
+    /*     } */
+    /* } */
 
     //**
     //** function , Parameter list: 

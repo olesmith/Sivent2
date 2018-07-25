@@ -58,7 +58,7 @@ trait MyMod_Items_Read
         $rdatas=$this->FindDatasToRead($datas,$nosearches);
 
         //Figure out where clause
-        $rwhere=$this->MyMod_Items_Search_Where($where,$datas,$nosearches,$includeall);
+        $rwhere=$this->MyMod_Search_Where($where,$datas,$nosearches,$includeall);
 
         //Read
         $this->ItemHashes=array();

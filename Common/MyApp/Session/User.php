@@ -38,10 +38,10 @@ trait MyApp_Session_User
             else
             {
                 $this->MyApp_Session_SID_Delete($sid);
-                $msg=$this->MyLanguage_GetMessage("Expired");
-                $this->MyApp_Login_Form($msg);
-
-                //$this->DoDie("Unable to verify SID",$sid);
+                $this->MyApp_Login_Form
+                (
+                    $this->MyLanguage_GetMessage("Expired")
+                );
             }
 
             return TRUE;

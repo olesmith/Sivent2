@@ -182,8 +182,19 @@ trait MyMod_Globals
     //*
     //*
 
-    function Profiles()
+    function Profiles($profile="",$key="")
     {
+        if (!empty($profile))
+        {
+            if (!empty($key))
+            {
+                return $this->ApplicationObj()->Profiles[ $profile ][ $key ];
+            }
+
+            return $this->ApplicationObj()->Profiles[ $profile ];
+            
+        }
+        
         return $this->ApplicationObj()->Profiles;
     }
 

@@ -38,6 +38,19 @@ trait MyMod_Data_Fields_Show
         {
             $this->DoDie("No such ItemData defined",$this->ModuleName,$data,$this->ItemData);
         }
+ 
+        if (!empty($this->ItemData[ $data ][ "Format" ]))
+        {
+            $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
+        }
+       
+        if (!empty($this->ItemData[ $data ][ "HRefIt" ]))
+        {
+            if (!empty($value) && !preg_match('/^(https?):/i',$value))
+            {
+                $value="http://".$value;
+            }
+        }
         
         if (preg_match('/^(VAR)?CHAR/',$this->ItemData[ $data ][ "Sql" ]))
         {
@@ -119,9 +132,8 @@ trait MyMod_Data_Fields_Show
             $value="";
             if (isset($item[ $data ])) { $value=$item[ $data ]; }
 
-            $rvalue=
-                $this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,0);
-            $value=$rvalue;
+            $value=$this->MyMod_Data_Fields_File_Decorator($data,$item,$plural,0);
+            #$value=$rvalue;
         }
         elseif ($this->ItemData[ $data ][ "IsColor" ])
         {
@@ -164,6 +176,7 @@ trait MyMod_Data_Fields_Show
             }
             elseif ($this->ItemData[ $data ][ "Iconify" ])
             {
+                #Email, for instance, are generated as a png in tmp dir
                 $file=$item[ "ID" ]."_".$data.".png";
                 if (!empty($item[ $data ]))
                 {
@@ -288,42 +301,25 @@ trait MyMod_Data_Fields_Show
                 }
             }
         }
-
-
-        if (!empty($this->ItemData[ $data ][ "Format" ]))
-        {
-            $value=sprintf($this->ItemData[ $data ][ "Format" ],$value);
-        }
         
         if (!$plural)
         {
-            $value.=$this->MyMod_Data_Field_Comment($data,0);
-        }
-
-        if (preg_match('/^0\s?$/',$value)) { $value=""; }
-
-        if (!empty($this->ItemData[ $data ][ "HRefIt" ]))
-        {
-            if (!empty($value) && !preg_match('/^(https?):/i',$value))
-            {
-                $value="http://".$value;
-            }
             $value=
-                $this->Html_Tags
+                array
                 (
-                    "A",
                     $value,
-                    array
-                    (
-                        "HREF" => $value,
-                        "TARGET" => '_blank',
-                    )
+                    $this->MyMod_Data_Field_Comment($data,0)
                 );
         }
         
         if (!empty($this->ItemData[ $data ][ "Align" ]))
         {
-            $value=$this->Div($value,array("ALIGN" => $this->ItemData[ $data ][ "Align" ]));
+            $value=
+                $this->Htmls_DIV
+                (
+                    $value,
+                    array("ALIGN" => $this->ItemData[ $data ][ "Align" ])
+                );
         }
         
         return $value;

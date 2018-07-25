@@ -22,7 +22,12 @@ trait MyMod_Data_Fields_Sql
 
     function MyMod_Data_Fields_Sql_Search_Select($data,$rdata,$value)
     {
-        if ($this->ItemData[ $data ][ "GETSearchVarName" ])
+        if
+            (
+                $this->ItemData[ $data ][ "GETSearchVarName" ]
+                &&
+                !preg_match('/^Admin$/',$this->Profile())
+            )
         {
             $getvalue=$this->CGI_GETint($this->ItemData[ $data ][ "GETSearchVarName" ]);
             if (!empty($getvalue))

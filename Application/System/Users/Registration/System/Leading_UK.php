@@ -12,14 +12,14 @@
                   (
                      array
                      (
-                        "Initial Registration: ".$this->MyActions_Entry("Register"),
-                        "Confirm Registration: ".$this->MyActions_Entry("Confirm"),
+                         "Initial Registration: ".$this->Htmls_Text($this->MyActions_Entry("Register")),
+                         "Confirm Registration: ".$this->Htmls_Text($this->MyActions_Entry("Confirm")),
                         "Login: ".
                         preg_replace
                         (
                            '/ModuleName=Friends&/',
                            "",
-                           $this->MyActions_Entry("Logon")
+                           $this->Htmls_Text($this->MyActions_Entry("Logon"))
                         ),
                         "Inscribe to inscriptions manage by #ApplicationName..."
                       ),

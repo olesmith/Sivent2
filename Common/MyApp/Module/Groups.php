@@ -47,7 +47,7 @@ trait MyApp_Module_Groups
     {
         $actions=$this->MyApp_Module_Group_Actions_Allowed($moduleobj);
 
-        $menu="";
+        $menu=array();
         if (count($actions)>0)
         {
             $menu=$this->MyMod_HorMenu_Actions($actions);

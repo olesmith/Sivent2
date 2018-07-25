@@ -16,7 +16,7 @@ trait MyApp_Interface_LeftMenu_Language
 
         $args=$this->CGI_Query2Hash();
 
-        $html="";
+        $html=array();
         foreach ($this->Languages as $lang => $langdef)
         {
             if ($rlang!=$lang)
@@ -26,11 +26,20 @@ trait MyApp_Interface_LeftMenu_Language
                 $args[ "Lang" ]=$lang;
                 $query=$this->CGI_Hash2Query($args);
 
-                $html.=$this->Center($this->Href("?".$query,$img,$langdef[ "Name" ]));
+                array_push
+                (
+                    $html,
+                    $this->Htmls_HRef
+                    (
+                        "?".$query,
+                        $img,
+                        $langdef[ "Name" ]
+                    )
+                );
             }
         }
 
-        return array($html);
+        return $html;
     }
 }
 

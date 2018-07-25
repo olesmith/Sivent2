@@ -39,29 +39,8 @@ class HtmlTable extends HtmlList
     {
         if (!$this->LatexMode())
         {
-            $options[ "ALIGN" ]='center';
-            $options[ "FRAME" ]='border';
-            if (is_array($content))
-            {
-                return $this->Html_Table("",$content,$options,$troptions,$tdoptions);
-            }
-            
-            $content=$this->HtmlTags
-            (
-               "TABLE",
-               $this->HtmlTags
-               (
-                  "TR",
-                  $this->HtmlTags
-                  (
-                     "TD",
-                     $content,
-                     $tdoptions
-                  ),
-                  $troptions
-               ),
-               $options
-            );
+            return
+                $this->Htmls_Frame($content,$options,$troptions,$tdoptions);
         }
 
         return $content;
@@ -80,13 +59,14 @@ class HtmlTable extends HtmlList
         {
             $options[ "COLSPAN" ]=$colspan;
 
+            if (preg_match('/\S/',$align))
+            {
+                $text=$this->ALIGN($text,$align);
+            }
+            
             return array
             (
-               "Text" => $this->ALIGN
-               (
-                   $text,
-                   $align
-               ),
+               "Text" => $text,
                "Options" => $options,
             );
         }

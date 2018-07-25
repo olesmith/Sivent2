@@ -1,5 +1,61 @@
 array
 (
+   "Submissions_Table_Title" => array
+   (
+      "Name" => "Propostas Submetidas:",
+      "Name_ES" => "Propuesta Submetidas:",
+      "Name_UK" => "Submitted Proposals:",
+   ),
+   "Submissions_None_Message" => array
+   (
+      "Name" => "Nenhum Trabalho Submetido.",
+      "Name_ES" => "Sin Tabajos Submetoidos. ",
+      "Name_UK" => "No Proposals Submitted.",
+   ),
+   "Submissions_Inscriptions_Message" => array
+   (
+      "Name" => "Este evento tem Submissão de Trabalhos:",
+      "Name_ES" => "Este evento tiene Submissión de Trabajos:",
+      "Name_UK" => "This events accepts Submission of Proposals:",
+   ),
+   "Submissions_Inscriptions_Period_Message" => array
+   (
+      "Name" => "Período das Inscrições",
+      "Name_ES" => "Periodo de las Inscriciónes",
+      "Name_UK" => "Inscription Period",
+   ),
+   "Submissions_Inscriptions_New_Link_Title" => array
+   (
+      "Name" => "Submeter uma Proposta",
+      "Name_ES" => "Submeter uma Proposta",
+      "Name_UK" => "Submit Proposal",
+   ),
+   "Submissions_Inscriptions_Public_Message" => array
+   (
+      "Name" => "Para Submeter Proposta, por favor, Logar no Sistema ou Cadastrar-se.",
+      "Name_ES" => "Para Submeter Proposta, por favor, Logar no Sistema ou Cadastrar-se.",
+      "Name_UK" => "To Submit a Proposal, please logon or register.",
+   ),
+
+   "Submissions_Inscriptions_Waiting_Message" => array
+   (
+      "Name" => "Submissões Aguardando",
+      "Name_ES" => "Submissiónes Aguardando",
+      "Name_UK" => "Submissions Awaiting",
+   ),
+   "Submissions_Inscriptions_Open_Message" => array
+   (
+       "Name" => "Submissões abertas, por favor, Logar no Sistema ou Cadastrar-se.",
+      "Name_ES" => "Submissiónes abertas, por favor, Logar no Sistema ou Cadastrar-se",
+      "Name_UK" => "Submissions Open, please Logon to the System or Register.",
+   ),
+   "Submissions_Inscriptions_Closed_Message" => array
+   (
+      "Name" => "Submissões Encerradas",
+      "Name_ES" => "Submissiónes Encerradas",
+      "Name_UK" => "Submissions Closed",
+   ),
+   
    "Submissions_Inscribe_Link" => array
    (
       "Name" => "Propor ou Editar Atividades",

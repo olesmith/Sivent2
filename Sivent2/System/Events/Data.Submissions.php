@@ -60,6 +60,7 @@ array
       "Compulsory" => FALSE,
       "Search" => FALSE,
       "Compulsory"  => TRUE,
+      "SelectCheckBoxes"  => 2,
    ),
    "Submissions_StartDate" => array
    (
@@ -101,8 +102,8 @@ array
    ),
    "Submissions_Public" => array
    (
-      "Name" => "Atividades Públicos",
-      "Name_UK" => "Activities Public",
+      "Name" => "Atividades Públicadas",
+      "Name_UK" => "Activities Published",
       
       "Sql" => "ENUM",
       "Values" => array("Não","Sim"),
@@ -118,6 +119,7 @@ array
       "Compulsory" => FALSE,
       "Search" => FALSE,
       "Compulsory"  => TRUE,
+      "SelectCheckBoxes"  => 2,
    ),
    "Certificates_Submissions_Latex" => array
    (

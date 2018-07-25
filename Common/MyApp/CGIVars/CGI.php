@@ -17,7 +17,7 @@ trait MyApp_CGIVars_CGI
         $destination=$def[ "GlobalKey" ];
 
         $sqltable=$this->$object($def[ "InitSqlTable" ])->SqlTableName();
-        if ($this->Sql_Table_Exists($sqltable))
+        if ($this->Sql_Table_Exists($sqltable) && !empty($value))
         {
             $this->$destination=$this->$object($def[ "InitSqlTable" ])->Sql_Select_Hash
             (
@@ -43,7 +43,6 @@ trait MyApp_CGIVars_CGI
             $this->MyApp_CGIVar_CGI_Post_Method($cgivar,$def,$this->$destination);
             $this->MyApp_CGIVar_CGI_Post_Reads($cgivar,$def,$this->$destination);
         }
-        
     }
 
     //*

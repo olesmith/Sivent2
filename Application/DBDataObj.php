@@ -207,8 +207,14 @@ class DBDataObj extends Table
             //File
             if ($quest[ "Type" ]==3)
             {
-                $this->ItemData[ $data ][ "Icon" ]=TRUE;
-                if (empty($quest[ "Extensions" ])) { $this->ItemData[ $data ][ "Extensions" ]=array("pdf"); }
+                $this->ItemData[ $data ][ "Icon" ]="download_light.svg";
+                $extensions=array("pdf");
+                if (!empty($quest[ "Extensions" ]))
+                {
+                    $extensions=$quest[ "Extensions" ];
+                }
+                
+                $this->ItemData[ $data ][ "Extensions" ]=$extensions;
             }
             
             //Info

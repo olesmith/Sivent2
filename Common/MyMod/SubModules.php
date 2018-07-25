@@ -25,6 +25,9 @@ trait MyMod_SubModules
             return $object;
         }
 
+        #Why have we cd'ed???
+        $this->ApplicationObj()->MyApp_GoHome();
+
         $this->MyMod_SubModules_Loaded[ $submodule ]=1;
 
         //Already loaded, just return, unless data  structure init force

@@ -21,6 +21,7 @@ class EventsCaravans extends EventsCollaborations
                 if (empty($item[ "Caravans_".$key ]))
                 {
                     $item[ "Caravans_".$key ]=$today;
+                    array_push($updatedatas,"Caravans_".$key);
                 }
             }
         }

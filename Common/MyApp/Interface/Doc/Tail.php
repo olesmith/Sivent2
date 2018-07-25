@@ -25,22 +25,27 @@ trait MyApp_Interface_Doc_Tail
 
     function MyApp_Interface_Doc_Tail()
     {
-        if ($this->NoTail>0) { return; }
+        return "";
+        /* if ($this->NoTail>0) { return; } */
 
-        echo            
-            "      </TD>".
-            $this->Html_Tags
-            (
-               "TD",
-               $this->MyApp_Interface_ExecTime().
-               $this->MyApp_Interface_Messages().
-               $this->MyApp_Interface_Tail_Support_Info().
-               $this->MyApp_Interface_Tail_Sponsors(),
-                array("ALIGN" => 'top')
-            ).
-            "   </TR>".
-            $this->MyApp_Interface_Post_Row().
-            "   <TR>";
+        /* echo             */
+        /*     "      </TD>". */
+        /*     $this->Html_Tags */
+        /*     ( */
+        /*         "TD", */
+        /*         $this->HtmlTags */
+        /*         ( */
+        /*             "ASIDE", */
+        /*             $this->MyApp_Interface_ExecTime(). */
+        /*             $this->MyApp_Interface_Messages(). */
+        /*             $this->MyApp_Interface_Tail_Support_Info(). */
+        /*             $this->MyApp_Interface_Tail_Sponsors() */
+        /*         ), */
+        /*         array("ALIGN" => 'top') */
+        /*     ). */
+        /*     "   </TR>". */
+        /*     $this->MyApp_Interface_Post_Row(). */
+        /*     "   <TR>"; */
     }
     
 }

@@ -171,27 +171,29 @@ array
       "Compulsory" => FALSE,
       "Extensions" => array("png","jpg"),
       "Iconify" => TRUE,
+      "Height" => "Height",
+      "Width" => "Width",
    ),
-   "Place" => array
-   (
-      "Name" => "Posição",
-      "Name_UK" => "Position",
+   /* "Place" => array */
+   /* ( */
+   /*    "Name" => "Posição", */
+   /*    "Name_UK" => "Position", */
 
-      "Sql" => "ENUM",
-      "Values" => array("Esquerdo","Centro","Direito"),
-      "Values_UK" => array("Left","Center","Right"),
+   /*    "Sql" => "ENUM", */
+   /*    "Values" => array("Esquerda","Centralizada","Direita"), */
+   /*    "Values_UK" => array("Left","Center","Right"), */
 
-      "Search" => FALSE,
-      "Default" => 1,
+   /*    "Search" => FALSE, */
+   /*    "Default" => 1, */
 
-      "Public"   => 1,
-      "Person"   => 0,
-      "Admin"    => 2,
-      "Friend" => 1,
-      "Coordinator" => 2,
+   /*    "Public"   => 1, */
+   /*    "Person"   => 0, */
+   /*    "Admin"    => 2, */
+   /*    "Friend" => 1, */
+   /*    "Coordinator" => 2, */
       
-      "Compulsory" => TRUE,
-   ),
+   /*    "Compulsory" => TRUE, */
+   /* ), */
    "Height" => array
    (
       "Name" => "Altura (pixels)",

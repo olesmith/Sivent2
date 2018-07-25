@@ -3,18 +3,20 @@
 class App_Override extends App_Handle
 {
     //*
-    //* function MyApp_Interface_Application_Script, Parameter list:$args=array()
+    //* function MyApp_Interface_SCRIPTs, Parameter list:$args=array()
     //*
     //* Overrides the main handler.
     //*
 
-    function MyApp_Interface_Application_Script($args=array())
+    function MyApp_Interface_SCRIPTs($args=array())
     {
-        $script=parent::MyApp_Interface_Application_Script($args);
+        $scripts=parent::MyApp_Interface_SCRIPTs($args);
         $event=$this->Event();
         if (!empty($event) && $event[ "Payments_Type" ]==2)
         {
-            $script.=
+            array_push
+            (
+                $scripts,
                 $this->HtmlTags
                 (
                     "SCRIPT",
@@ -24,10 +26,62 @@ class App_Override extends App_Handle
                         "TYPE" => 'text/javascript',
                         "SRC"  => 'https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js',
                     )
-                );
+                )
+            );
         }
 
-        return $script;
+        return $scripts;
+    }
+    
+    //*
+    //* function MyApp_, Parameter list:$args=array()
+    //*
+    //* Overrides the main handler.
+    //*
+
+    function MyApp_Interface_Head($args=array())
+    {
+        parent::MyApp_Interface_Head($args);
+
+        $banner=$this->Event("HtmlIcon1");
+        if (!empty($banner))
+        {
+            $args=
+                array
+                (
+                    "ModuleName" => "Events",
+                    "Action" => "Download",
+                    "Unit" => $this->Unit("ID"),
+                    "Event" => $this->Event("ID"),
+                    "Data" => "HtmlIcon1",
+                );
+            
+            echo
+                $this->Htmls_Text
+                (
+                    $this->Htmls_DIV
+                    (
+                        $this->Html_IMG
+                        (
+                            "?".$this->CGI_Hash2URI($args),
+                            $this->Event("Name")." banner",
+                            array
+                            (
+                                "BORDER" => 0,
+                                "HEIGHT" => $this->Event("HtmlIcon1_Height"),
+                                "WIDTH" => $this->Event("HtmlIcon1_Width"),
+                                "TITLE" => $this->Event("Name")." banner",
+                                "ALT" => 'Logo',
+                            )
+                        ),
+                        #DIV options
+                        array
+                        (
+                            "CLASS" => 'center',
+                        )
+                    )
+                );
+        }
     }
     
     //*
@@ -62,7 +116,6 @@ class App_Override extends App_Handle
         parent::MyApp_Handle($args);
     }
 
-    
     //*
     //* function MyApp_Handle_Logon, Parameter list: 
     //*
@@ -75,41 +128,6 @@ class App_Override extends App_Handle
         $this->EventsObj()->ShowEvents();
     }
 
-    //*
-    //* function MyApp_Interface_LeftMenu, Parameter list:
-    //*
-    //* Overrides parent, calling it and adding sponsor table.
-    //*
-
-    function MyApp_Interface_LeftMenu()
-    {
-        $this->SponsorsObj()->Sql_Table_Structure_Update();
-        
-        return
-            parent::MyApp_Interface_LeftMenu().
-            $this->SponsorsObj()->ShowSponsors(1).
-            "";
-    }
-
-    //*
-    //* function MyApp_Interface_Tail_Center(), Parameter list:
-    //*
-    //* Overrides parent, calling it and adding sponsor table.
-    //*
-
-    function MyApp_Interface_Tail_Center()
-    {
-        $html="";
-        
-        if ( TRUE) //!empty($this->CGI_GETint("Unit")) )
-        {
-            $html.=$this->SponsorsObj()->ShowSponsors(2);
-        }
-        
-        $html.=parent::MyApp_Interface_Tail_Center();
-
-        return $html;
-    }
     
     //*
     //* sub MyApp_Interface_Status, Parameter list: 
@@ -120,12 +138,6 @@ class App_Override extends App_Handle
     function MyApp_Interface_Messages_Status()
     {
         $html=parent::MyApp_Interface_Messages_Status();
-
-        $unit=$this->CGI_GETint("Unit");
-        if ( !empty($unit) )
-        {
-            $html.=$this->SponsorsObj()->ShowSponsors(3);
-        }
 
         return $html;
     }
@@ -148,75 +160,60 @@ class App_Override extends App_Handle
     //* Returns post message to Login form.
     //*
 
-    function MyApp_Login_PostMessage()
+    function MyApp_Login_Form_Post_Messages()
     {
-        return
+        $message=
             preg_replace
             (
                '/#Unit/',
                $this->Unit("ID"),
-               $this->FrameIt
-               (
-                 $this->Div
-                 (
-                     $this->Center
-                     (
-                         $this->MyLanguage_GetMessage("Sivent_Inscribe_Message").
-                         $this->MyLanguage_GetMessage("Sivent_Old_Message")
-                     ),
-                     array
-                     (
+               $this->MyLanguage_GetMessage("Sivent_Inscribe_Message").
+               $this->MyLanguage_GetMessage("Sivent_Old_Message")
+            );
+        
+        return array
+        (
+            parent::MyApp_Login_Form_Post_Messages(),
+            $this->BR(),
+            $this->Htmls_Tag
+            (
+                "CENTER",
+                $this->Htmls_DIV
+                (
+                    $message,
+                    array
+                    (
+                        "ALIGN" => 'center',
                         "CLASS" => 'postloginmsg',
-                     )
-                 ),
-                 array
-                 (
-                    "BORDER" => 1,
-                    "WIDTH" => '80%',
-                    "ALIGN" => 'center',
-                 )
+                    )
                 )
-            ).
-            "<BR>".
-            parent::MyApp_Login_PostMessage();
+            )
+        );
     }
     
 
     //*
-    //* function MyApp_Interface_Head, Parameter list: 
-    //*
-    //* Overrides Application::MyApp_Interface_Head.
-    //*
-
-    function MyApp_Interface_Head()
-    {
-        parent::MyApp_Interface_Head();
-        
-        echo
-            $this->AppInfo();        
-    }
-
-    //*
     //* function MyApp_Interface_Phrase, Parameter list: 
     //*
-    //* Initializes loggin, if no.
+    //* Prints Tail phrase.
     //*
 
-    function MyApp_Interface_Tail_Phrase()
+    function MyApp_Interface_Phrase()
     {
         return
-            $this->BR().
-            $this->DIV
+            array
             (
-               "This system is Free Software, download: ".
-               $this->A("https://github.com/olesmith/SiVent2").
-               "",
-               array("ALIGN" => 'center')
-            ).
-            $this->BR().
-            $this->Html_HR('75%').
-            parent::MyApp_Interface_Tail_Phrase().
-            "";
+                $this->DIV
+                (
+                    "This system is Free Software, download: ".
+                    $this->A("https://github.com/olesmith/SiVent2").
+                    "",
+                    array("ALIGN" => 'center')
+                ),
+                $this->BR(),
+                $this->Html_HR('75%'),
+                parent::MyApp_Interface_Phrase(),
+            );
      }
     
      //*
@@ -235,39 +232,6 @@ class App_Override extends App_Handle
             );
     }
     
-    //*
-    //* sub PostHandle, Parameter list: 
-    //*
-    //* Runs after modules has finished: prints event post ifno.
-    //*
-    //*
-
-    function MyApp_Interface_Post_Row()
-    {
-        $event=$this->CGI_GETint("Event");
-        if (empty($event)) { return ""; }
-        $event=$this->Event();
-
-        
-        chdir(dirname($_SERVER[ "SCRIPT_FILENAME" ]));
-
-        return
-            
-            //$html.
-            $this->HtmlTags
-            (
-               "TR",
-               $this->HtmlTags("TD").
-               $this->HtmlTags
-               (
-                  "TD",
-                  $this->Html_Table("",$this->ApplicationObj()->AppEventInfoPostTable(),array("WIDTH" => '100%'))
-               ).
-               $this->HtmlTags("TD")
-             ).
-            "";
-    }
-
     //*
     //* function MyApp_Interface_LeftMenu_Read, Parameter list: 
     //*

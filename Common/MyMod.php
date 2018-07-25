@@ -33,6 +33,7 @@ include_once("MyMod/Latex.php");
 include_once("MyMod/Language.php");
 include_once("MyMod/Mail.php");
 include_once("MyMod/Messages.php");
+include_once("MyMod/Icons.php");
 
 trait MyMod
 {    
@@ -57,7 +58,8 @@ trait MyMod
         MyMod_Access,MyMod_Mail,
         MyMod_Items,MyMod_Search,MyMod_Paging,
         MyMod_Latex,MyMod_Language,
-        MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,MyMod_Messages;
+        MyMod_Profiles,MyMod_Setup,MyMod_Sort,MyMod_Globals,
+        MyMod_Messages,MyMod_Icons;
 
     var $Application="";
     
@@ -87,6 +89,7 @@ trait MyMod
     var $ItemDataSGroupsCommon=array();
     var $ItemDataSGroupNames=array();
 
+    var $MyMod_Add_Reload_Action="Edit";
 
     var $MyMod_Defaults=array
     (
@@ -104,7 +107,7 @@ trait MyMod
         //"SqlVars" => array(),
         "System" => "System",
 
-        "ActionPaths" => array("../MySql2/Actions","../#System/#Module"),
+        "ActionPaths" => array("../Common/System","../#System/#Module"),
         "ActionFiles" => array("Actions.php"),
         "Actions" => array(), 
 
@@ -237,6 +240,20 @@ trait MyMod
             header('Last-Modified: '.gmdate('D, d M Y H:i:s \G\M\T',$filemtime));
         }
 
+    }
+    
+    //*
+    //* function MyMod_EvenOdd_Class, Parameter list: $even
+    //*
+    //* Returns names of even, resp odd class (table rows/cells).
+    //*
+
+    function MyMod_EvenOdd_Class($even)
+    {
+        $class='odd';
+        if ($even) { $class='even'; }
+
+        return $class;
     }
 }
 

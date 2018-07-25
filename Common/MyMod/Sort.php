@@ -3,16 +3,18 @@
 include_once("Sort/Titles.php");
 include_once("Sort/Items.php");
 include_once("Sort/List.php");
+include_once("Sort/Icons.php");
 
 trait MyMod_Sort
 {
     use
         MyMod_Sort_Titles,
         MyMod_Sort_Items,
-        MyMod_Sort_List;
+        MyMod_Sort_List,
+        MyMod_Sort_Icons;
     
     var $Sort=array("Name");
-    var $Reverse=FALSE;
+    var $Reverse=0;
 
     //*
     //* function MyMod_Sort_Detect, Parameter list: $group=""
@@ -126,13 +128,15 @@ trait MyMod_Sort
         $reverse=$this->Reverse;
         if ($reverse=="")
         {
-            if ($this->GetCGIVarValue($this->ModuleName."_Reverse")!="")
+            $value=$this->CGI_GETint($this->ModuleName."_Reversed");
+            
+            if (!empty($value))
             {
-                $reverse=$this->GetCGIVarValue($this->ModuleName."_Reverse");
+                $reverse=$value;
             }
             else
             {
-                $reverse=FALSE;
+                $reverse=0;
             }
         }
 

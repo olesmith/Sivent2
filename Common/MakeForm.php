@@ -1,10 +1,13 @@
 <?php
 
 include_once("MakeHtml.php");
+include_once("Htmls.php");
 
 trait MakeForm
 {
-    use MakeHtml;
+    use
+        MakeHtml,
+        Htmls;
 
     var $Form_Number=1;
    
@@ -90,10 +93,13 @@ trait MakeForm
     function Form_Generate($args)
     {
         return
-            $this->Form_Start($args).
-            $this->Form_Contents($args).
-            $this->Form_End($args).
-            "";
+            
+            array
+            (
+                $this->Form_Start($args),
+                $this->Form_Contents($args),
+                $this->Form_End($args),
+            );
     }
 
     //*
@@ -175,7 +181,7 @@ trait MakeForm
         return
             $this->Form_POSTs($args).
             $args[ "EndButtons" ].
-            $this->Html_CloseTag("FORM").
+            $this->Html_Tag_Close("FORM").
             "";
     }
 

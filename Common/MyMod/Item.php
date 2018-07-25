@@ -4,6 +4,8 @@
 include_once("Item/Form.php");
 include_once("Item/Update.php");
 include_once("Item/Group.php");
+include_once("Item/SGroup.php");
+include_once("Item/Html.php");
 include_once("Item/Table.php");
 include_once("Item/Row.php");
 include_once("Item/Cells.php");
@@ -21,6 +23,8 @@ trait MyMod_Item
         MyMod_Item_Form,
         MyMod_Item_Update,
         MyMod_Item_Group,
+        MyMod_Item_SGroup,
+        MyMod_Item_Html,
         MyMod_Item_Table,
         MyMod_Item_Row,
         MyMod_Item_Cells,
@@ -202,6 +206,50 @@ trait MyMod_Item
 
         return $name;
     }
+    //*
+    //* 
+    //*
+
+    function MyMod_Item_Anchor($item=array(),$anchor="",$text="")
+    {
+        if ($this->LatexMode) { return ""; }
+        if (count($item)==0)
+        {
+            $item=$this->ItemHash;
+        }
+
+        if ($anchor=="" && isset($item[ "ID" ]))
+        {
+            $anchor=$this->ModuleName."_".$item[ "ID" ];
+        }
+
+        return $this->Span($text,array("ID" => $anchor));
+    }
+
+
+    /* //\* */
+    /* //\*  */
+    /* //\* */
+
+    /* function MyMod_Item_Anchor_Link($item=array(),$anchor="",$text="") */
+    /* { */
+    /*     if (count($item)==0) */
+    /*     { */
+    /*         $item=$this->ItemHash; */
+    /*     } */
+
+    /*     if ($anchor=="") */
+    /*     { */
+    /*         $anchor=$this->ModuleName."_".$item[ "ID" ]; */
+    /*     } */
+
+    /*     if ($text=="") */
+    /*     { */
+    /*         $text=$this->IMG("../icons/forward.gif"); */
+    /*     } */
+
+    /*     return $this->Span("<A HREF='#".$anchor."'>".$text."</A>"; */
+    /* } */
 }
 
 ?>

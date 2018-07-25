@@ -51,13 +51,13 @@ class Caravans extends Caravans_Statistics
 
     
     //*
-    //* function MyMod_Setup_ProfilesDataFile, Parameter list:
+    //* function MyMod_Setup_Profiles_File, Parameter list:
     //*
     //* Returns name of file with Permissions and Accesses to Modules.
     //* Overrides trait!
     //*
 
-    function MyMod_Setup_ProfilesDataFile()
+    function MyMod_Setup_Profiles_File()
     {
         return "System/Caravans/Profiles.php";
     }
@@ -143,12 +143,12 @@ class Caravans extends Caravans_Statistics
     }
     
     //*
-    //* function AddForm_PostText, Parameter list:
+    //* function MyMod_Handle_Add_Form_Text_Post, Parameter list:
     //*
     //* Pretext function. Shows add inscriptions form.
     //*
 
-    function AddForm_PostText()
+    function MyMod_Handle_Add_Form_Text_Post()
     {
         if (!preg_match("(Coordinator|Admin)",$this->Profile()))
         {

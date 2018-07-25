@@ -26,11 +26,16 @@ trait MyMod_Item_Data
             $title="DD/MM/YYYY";
             if ($plural)
             {
-                $value=$this->Span($value,array("TITLE" => $title));
+                $value=
+                    $this->Htmls_SPAN
+                    (
+                        $value,
+                        array("TITLE" => $title)
+                    );
             }
             else
             {
-                $value.=" ".$title;
+                #$value.=" ".$title;
             }
         }
         
@@ -40,12 +45,24 @@ trait MyMod_Item_Data
               && $this->LoginType!="Public"
            )
         {
-            $value.=
-                $this->Span($value,array("CLASS" => 'errors')).
-                $item[ $data."_Message" ];
+            $value=
+                $this->Htmls_SPAN
+                (
+                    array
+                    (
+                        $value,
+                        $item[ $data."_Message" ]
+                    ),
+                    array("CLASS" => 'errors')
+                );
         }
 
-        return $this->Span($value,array("CLASS" => 'data'));
+        return
+            $this->Htmls_SPAN
+            (
+                $value,
+                array("CLASS" => 'data')
+            );
     }
    
     //*

@@ -85,7 +85,7 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
-      "Icon"    => "print_dark.png",
+      "Icon"    => "fas fa-certificate",
       
       "AccessMethod"    => "CheckGenerateAccess",
       "Handler"    => "Certificates_Generate_Handle_ByCode",

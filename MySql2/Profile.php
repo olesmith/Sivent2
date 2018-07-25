@@ -241,24 +241,24 @@ class Profile extends ProfileInit
 
 
 
-    //*
-    //* function ReadModuleProfiles, Parameter list:
-    //*
-    //* Reads all profiles for module.
-    //*
+    /* //\* */
+    /* //\* function ReadModuleProfiles, Parameter list: */
+    /* //\* */
+    /* //\* Reads all profiles for module. */
+    /* //\* */
 
-    function ReadModuleProfiles()
-    {
-        $file=$this->ApplicationObj->MyMod_Setup_ProfilesDataFile();
-        if (!file_exists($file))
-        {
-            print "No Module Profile file: ".$file."<BR>\n";
-            exit();
-        }
+    /* function ReadModuleProfiles() */
+    /* { */
+    /*     $file=$this->ApplicationObj->MyMod_Setup_Profiles_File(); */
+    /*     if (!file_exists($file)) */
+    /*     { */
+    /*         print "No Module Profile file: ".$file."<BR>\n"; */
+    /*         exit(); */
+    /*     } */
 
 
-        $this->ModuleProfiles=$this->ReadPHPArray($file);
-    }
+    /*     $this->ModuleProfiles=$this->ReadPHPArray($file); */
+    /* } */
 
     //*
     //* function UpdateProfilesActions, Parameter list:
@@ -398,7 +398,7 @@ class Profile extends ProfileInit
 
         if (isset($this->DBHash[ "Mod" ]) && $this->DBHash[ "Mod" ])
         {
-            $file=$this->ApplicationObj->MyMod_Setup_ProfilesDataFile();
+            $file=$this->ApplicationObj->MyMod_Setup_Profiles_File();
             $this->WritePHPArray($file,$this->ModuleProfiles);
 
             print $this->H(4,"Profiles written to ".$file);

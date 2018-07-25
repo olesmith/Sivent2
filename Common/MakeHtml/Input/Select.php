@@ -136,7 +136,7 @@ trait Html_Input_Select
     //* Genrates option title.
     //*
 
-    function Html_Option_Title($titlekey,$item)
+    function Html_Option_Title($titlekey,$item,$namekey="")
     {
         $title="";
         if (preg_match('/#/',$titlekey))
@@ -146,6 +146,11 @@ trait Html_Input_Select
         elseif (!empty($item[ $titlekey ]))
         {
             $title=$item[ $titlekey ];
+        }
+
+        if (empty($title) && !empty($namekey))
+        {
+            $title=$this->Html_Option_Title($namekey,$item);
         }
         
         return $title;
@@ -180,64 +185,82 @@ trait Html_Input_Select
             $emptytext=""
         )
     {
-        $optionsoptions[ "VALUE" ]=" 0";
-        $selects=
-            array
-            (
-                $this->Html_Tags
-                (
-                    "OPTION",
-                    $emptytext,
-                    $optionsoptions
-                )
-            );
-
-        foreach ($items as $rid => $item)
-        {
-            //Copy of options, preventing mixing option options.
-            $roptionsoptions=$optionsoptions;
-            
-            $id=$item[ $idkey ];
-            if ($id==$selected)
-            {
-                $roptionsoptions[ "SELECTED" ]="";
-                $roptionsoptions[ "CLASS" ]="selected";
-                $selectoptions[ "TITLE" ]=$this->Html_Option_Title($titlekey,$item);
-            }
-
-            $roptionsoptions[ "VALUE" ]=$id;
-
-            $roptionsoptions[ "TITLE" ]=$this->Html_Option_Title($titlekey,$item);
-
-            if (!empty($item[ "Disabled" ]))
-            {
-                $roptionsoptions[ "DISABLED" ]=" ";
-                $roptionsoptions[ "CLASS" ]= "disabled";
-            }
-
-            array_push
-            (
-                $selects,
-                $this->Html_Tags
-                (
-                   "OPTION",
-                   $item[ $namekey ],
-                   $roptionsoptions
-                )
-            );
-        }
-        
-        $selectoptions[ "NAME" ]=$fieldname;
-
         return
-            "\n".
-            $this->Html_Tags
+            $this->Htmls_Text
             (
-                "SELECT",
-                join("\n",$selects),
-                $selectoptions
-            ).
-            "\n";
+                $this->Htmls_Select_Hashes_Field
+                (
+                    $fieldname,$items,
+                    array
+                    (
+                        "Selected" => $selected,
+                        "Name_Key" => $namekey,
+                        "Title_Key" => $titlekey,
+                        "ID_Key" => $idkey,
+                        "Empty_Text" => $emptytext,
+                    ),
+                    $selectoptions,$optionsoptions
+                )
+            );
+        /* $optionsoptions[ "VALUE" ]=" 0"; */
+        /* $selects= */
+        /*     array */
+        /*     ( */
+        /*         $this->Html_Tags */
+        /*         ( */
+        /*             "OPTION", */
+        /*             $emptytext, */
+        /*             $optionsoptions */
+        /*         ) */
+        /*     ); */
+
+        /* foreach ($items as $rid => $item) */
+        /* { */
+        /*     //Copy of options, preventing mixing option options. */
+        /*     $roptionsoptions=$optionsoptions; */
+            
+        /*     $id=$item[ $idkey ]; */
+        /*     $title=$this->Html_Option_Title($titlekey,$item,$namekey);; */
+        /*     if ($id==$selected) */
+        /*     { */
+        /*         $roptionsoptions[ "SELECTED" ]=""; */
+        /*         $roptionsoptions[ "CLASS" ]="selected"; */
+        /*         $selectoptions[ "TITLE" ]=$title; */
+        /*     } */
+
+        /*     $roptionsoptions[ "VALUE" ]=$id; */
+
+        /*     $roptionsoptions[ "TITLE" ]=$title; */
+
+        /*     if (!empty($item[ "Disabled" ])) */
+        /*     { */
+        /*         $roptionsoptions[ "DISABLED" ]=" "; */
+        /*         $roptionsoptions[ "CLASS" ]= "disabled"; */
+        /*     } */
+
+        /*     array_push */
+        /*     ( */
+        /*         $selects, */
+        /*         $this->Html_Tags */
+        /*         ( */
+        /*            "OPTION", */
+        /*            $item[ $namekey ], */
+        /*            $roptionsoptions */
+        /*         ) */
+        /*     ); */
+        /* } */
+        
+        /* $selectoptions[ "NAME" ]=$fieldname; */
+
+        /* return */
+        /*     "\n". */
+        /*     $this->Html_Tags */
+        /*     ( */
+        /*         "SELECT", */
+        /*         join("\n",$selects), */
+        /*         $selectoptions */
+        /*     ). */
+        /*     "\n"; */
     }
     
     //*

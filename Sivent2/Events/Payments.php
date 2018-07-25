@@ -27,7 +27,7 @@ class EventsPayments extends EventsCaravans
     //* Generates Event Payments Group table
     //*
 
-    function Event_Payments_Datas($group,$item=array())
+    function Event_Payments_Datas0000000000($group,$item=array())
     {
         if (empty($item)) { $item=$this->ItemHash; }
         

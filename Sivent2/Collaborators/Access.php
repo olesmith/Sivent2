@@ -10,14 +10,14 @@ class Collaborators_Access extends ModulesCommon
     );
 
     //*
-    //* function HasModuleAccess, Parameter list: $item=array()
+    //* function HasModuleAccess, Parameter list: $event=array()
     //*
     //* Determines if we have access to module.
     //*
 
-    function HasModuleAccess()
+    function HasModuleAccess($event=array())
     {
-        $res=$this->CollaborationsObj()->HasModuleAccess();
+        $res=$this->CollaborationsObj()->HasModuleAccess($event);
 
         return $res;
     }

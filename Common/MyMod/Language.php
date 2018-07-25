@@ -2,6 +2,20 @@
 
 trait MyMod_Language
 {
+    //*
+    //* function MyMod_Language_Data_Tabled, Parameter list: 
+    //*
+    //* Tries a good guess on whether to show languaged values.
+    //*
+
+    function MyMod_Language_Data_Tabled()
+    {
+        $trust=intval($this->Profiles($this->Profile(),"Trust"));
+
+        $res=($trust<5);
+
+        return $res;
+    }
     
     //*
     //* function MyMod_Language_Read, Parameter list: 

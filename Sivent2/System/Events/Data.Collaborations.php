@@ -34,6 +34,7 @@ array
       "Sql" => "ENUM",
       "Values" => array("Não","Sim"),
       "Values_UK" => array("No","Yes"),
+      "SelectCheckBoxes"  => 2,
       
       "Public"   => 1,
       "Person"   => 0,

@@ -9,6 +9,7 @@ include_once("Search/Options.php");
 include_once("Search/Table.php");
 include_once("Search/HTML.php");
 include_once("Search/Form.php");
+include_once("Search/Wheres.php");
 
 
 trait MyMod_Search
@@ -33,7 +34,8 @@ trait MyMod_Search
         MyMod_Search_Options,
         MyMod_Search_Table,
         MyMod_Search_HTML,
-        MyMod_Search_Form;
+        MyMod_Search_Form,
+        MyMod_Search_Wheres;
 
      //*
     //* function MyMod_Search_Items, Parameter list: $datas

@@ -62,8 +62,11 @@ class AssessorsInscriptionAssessorsRows extends AssessorsInscriptionAssessorsRea
                 ),
                 array
                 (
-                    $this->Assessor_Inscription_Assessment_Link($assessor).
-                    $this->Anchor("ASSESS_".$assessor[ "ID" ])
+                    $this->Assessor_Inscription_Assessment_Link
+                    (
+                        $assessor,
+                        "ASSESS_".$assessor[ "ID" ]
+                    )
                 )
             );
     }

@@ -85,7 +85,7 @@ array
       "Handler"   => "Caravaneer_Handle_Certificate_Generate",
       "AccessMethod"  => "CheckCertAccess",
 
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-certificate",
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
@@ -121,11 +121,29 @@ array
        
       "Handler"   => "Caravaneers_Handle_Certificates_Generate",
 
-      "Icon"   => "print_dark.png",
+      "Icon"   => "fas fa-file-pdf",
       "Public"   => 0,
       "Person"   => 0,
       "Friend"     => 1,
       "Coordinator" => 1,
       "Admin"    => 1,
    ),
+    "Import" => array
+    (
+        "Href"     => "",
+        "HrefArgs" => "",
+        "Title"    => "Importar #ItemsName de outro Evento",
+        "Title_UK" => "Import #ItemsName_UK from other Event",
+        "Title_ES"    => "Importar #ItemsName_ES de outro Evento",
+        "Name"     => "Importar",
+        "Name_UK"  => "Import",
+        "Name_ES"     => "Importar",
+        //"Icon"     => "rubik.png",
+        "Public"   => 0,
+        "Person"   => 0,
+        "Admin"   => 1,
+        "Coordinator"   => 1,
+        "Handler"   => "EventMod_Import_Events_Handle",
+        "Singular"   => FALSE,
+    ),
 );

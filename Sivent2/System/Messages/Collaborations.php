@@ -1,5 +1,25 @@
 array
 (
+   "Collaborations_Inscriptions_Message" => array
+   (
+      "Name" => "Este evento tem Inscrições para Voluntários:",
+      "Name_ES" => "Este evento tem Inscriciónes para Voluntários:",
+      "Name_UK" => "This events has Inscriptions for Volunteers:",
+   ),
+   "Collaborations_Inscriptions_New_Link_Title" => array
+   (
+      "Name" => "Candidatar-me como Voluntário",
+      "Name_ES" => "Candidatar-me como Voluntário",
+      "Name_UK" => "Candidate as a Volunteer",
+   ),
+   "Collaborations_Inscriptions_Period_Message" => array
+   (
+      "Name" => "Período de Inscrições",
+      "Name_ES" => "Periodo de las Inscriciónes",
+      "Name_UK" => "Period of Inscription",
+   ),
+
+   
    "Collaborations_Inscribe_Link" => array
    (
       "Name" => "Propor ou Editar Colaborações",
@@ -29,18 +49,18 @@ array
    ),
    "Collaborations_Collaborators_Cell_Noof_Title" => array
    (
-      "Name" => "Colaborações Inscritas",
-      "Name_ES" => "Colaboraciones Inscritas",
-      "Name_UK" => "Inscribed Collaborations",
+      "Name" => "Inscritas",
+      "Name_ES" => "Inscritas",
+      "Name_UK" => "Inscribed",
       "Title" => "Colaborações Inscritas",
       "Title_ES" => "Colaboraciones Inscritas",
       "Title_UK" => "Inscribed Collaborations",
    ),
    "Collaborations_Collaborators_Cell_NHomologated_Title" => array
    (
-      "Name" => "Colaborações Homologadas",
-      "Name_ES" => "Colaboraciones Homologadas",
-      "Name_UK" => "Homologated Collaborations",
+      "Name" => "Homologadas",
+      "Name_ES" => "Homologadas",
+      "Name_UK" => "Homologated",
       "Title" => "Colaborações Homologadas",
       "Title_ES" => "Colaboraciones Homologadas",
       "Title_UK" => "Homologated Collaborations",

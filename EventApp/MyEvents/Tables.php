@@ -78,21 +78,6 @@ class MyEventsTables extends MyEventsTablesEvents
         return $table;
     }
 
-    //*
-    //* function Events_Html_Table, Parameter list: $edit,$events
-    //*
-    //* Generates events table as html.
-    //*
-
-    function Events_Html_Table($edit,$events)
-    {
-        return 
-            $this->Html_Table
-            (
-                "",
-                $this->Events_Table($edit,$events)
-            );
-    }
     
     //*
     //* function Events_Form, Parameter list: $edit,$events
@@ -106,20 +91,27 @@ class MyEventsTables extends MyEventsTablesEvents
         if ($edit==1)
         {
             $prehtml=$this->StartForm();
-            $posthtml=$this->StartForm();
+            $posthtml=$this->EndForm();
 
             #Update: implement
         }
         
-        return
-            $prehtml.
-            $this->Html_Table
+        return 
+            $this->Htmls_Form
             (
-                "",
-                $this->Events_Table($edit,$events)
-            ).
-            $posthtml.
-            "";
+                $edit,
+                "Events_Form",
+                $action="",
+                $this->Htmls_Table
+                (
+                    "",
+                    $this->Events_Table($edit,$events),
+                    $options=array(),$troptions=array(),$tdoptions=array(),
+                    $evenodd=True,$hover=True
+                ),
+                $args=array(),
+                $options=array()
+            );
 
         
     }
@@ -153,6 +145,29 @@ class MyEventsTables extends MyEventsTablesEvents
     }
     
     //*
+    //* function ShowEvent, Parameter list:
+    //*
+    //* Generates events table matrix.
+    //*
+
+    function ShowEvent($event)
+    {
+        echo
+            $this->Htmls_Text
+            (
+                $this->Htmls_Frame
+                (
+                    $this->InscriptionsObj()->Inscription_Handle_Form_Tables(0,array(),array()),
+                    array
+                    (
+                        "CLASS" => 'frame',
+                        "ALIGN" => 'center',
+                    )
+                )
+            );
+    }
+    
+    //*
     //* function ShowEvents, Parameter list:
     //*
     //* Generates events table matrix.
@@ -160,14 +175,37 @@ class MyEventsTables extends MyEventsTablesEvents
 
     function ShowEvents()
     {
+        /* $event=$this->Event(); */
+        /* if (!empty($event)) */
+        /* { */
+        /*     $this->ShowEvent($event); */
+        /*     return; */
+        /* } */
+        
         echo
-            $this->H(1,$this->MyLanguage_GetMessage("Events_Table_Title")).
-            $this->Events_Form
+            $this->Htmls_Text
             (
-                0,
-                $this->Events_Read(True)
-            ),
-            "";
+                array
+                (
+                    $this->Htmls_Comment_Section
+                    (
+                        "Show Events",
+                        array_merge
+                        (
+                            $this->Htmls_H
+                            (
+                                1,
+                                $this->MyLanguage_GetMessage("Events_Table_Title")
+                            ),
+                            $this->Events_Form
+                            (
+                                0,
+                                $this->Events_Read(True)
+                            )
+                        )
+                    )
+                )
+            );
     }
 }
 

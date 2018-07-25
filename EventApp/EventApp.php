@@ -40,17 +40,6 @@ class EventApp extends MyEventApp_Mail
 
     var $EventGroup="Inscriptions";
     
-    var $Unit2MailInfo=array
-    (
-       "Auth","Secure","Port","Host","User","Password",
-       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
-    );
-    
-    var $Event2MailInfo=array
-    (
-       "Auth","Secure","Port","Host","User","Password",
-       "FromEmail","FromName","ReplyTo","CCEmail","BCCEmail",
-    );
     
     var $Pertains=1; //Questionary: 1, Asssessment: 2
     var $PertainsSetup=array
@@ -133,99 +122,6 @@ class EventApp extends MyEventApp_Mail
     {
     }
 
-    //*
-    //* sub MyApp_Titles, Parameter list:
-    //*
-    //* Returns titles to use in interface top center cell, when no unit specified.
-    //*
-    //*
-
-    function MyApp_Titles()
-    {
-        return array
-        (
-           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationName"),
-           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationTitle").
-           ", Ver. ".
-           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationVersion"),
-           $this->A
-           (
-              $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationURL"),
-              $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationURL"),
-              array
-              (
-                 "CLASS" => 'applicationlink',
-              )
-           )
-        );
-    }
-    
-    //*
-    //* sub MyApp_Interface_Icon_Get, Parameter list: $n
-    //* 
-    //* Returns left ($n=1) resp. right ($n=2) icons. 
-    //*
-
-    function MyApp_Interface_Icon_Get($n)
-    {
-        $unit=$this->Unit();
-        if (!empty($unit))
-        {
-            $args=array
-            (
-               "ModuleName" => "Units",
-               "Action" => "Download",
-               "Unit" => $unit[ "ID" ],
-               "Data" => "HtmlIcon".$n,
-            );
-            $icon="?".$this->CGI_Hash2URI($args);
-
-            return $icon;    
-        }
-        
-        return parent::MyApp_Interface_Icon_Get($n);
-    }
-    
-    //*
-    //* sub MyApp_Interface_Titles, Parameter list:
-    //*
-    //* Returns titles to use in interface top center cell.
-    //*
-    //*
-
-    function MyApp_Interface_Titles()
-    {
-        $this->UnitsObj()->Sql_Table_Structure_Update();
-        $unit=$this->Unit();
-        if (empty($unit))
-        {
-            return $this->MyApp_Titles();
-        }
-
-        $contacts=array($unit[ "Url" ],$unit[ "Phone" ],$unit[ "Email" ]);
-        $contacts=preg_grep('/\S/',$contacts);
-
-        $address=
-            array
-            (
-               $unit[ "Area" ],
-               $unit[ "City" ],
-               $this->UnitsObj()->MyMod_Data_Fields_Show("State",$unit),
-               $unit[ "ZIP" ]
-            );
-        $address=preg_grep('/\S/',$address);
-
-        return array
-        (
-           $unit[ "Name" ],
-           $unit[ "Title" ],
-           $unit[ "Address" ],
-                      
-           join(" - ",$address),
-           join(" - ",$contacts)
-        );
-    }
-   
 
     //*
     //* sub DetectEventGET, Parameter list:
@@ -412,8 +308,8 @@ class EventApp extends MyEventApp_Mail
         $imgs=array();
         for ($no=1;$no<=2;$no++)
         {
-            $unit[ "HtmlLogoHeight" ]=$this->Interface_Icons[ $no ][ "Height" ];
-            $unit[ "HtmlLogoWidth" ]=$this->Interface_Icons[ $no ][ "Width" ];
+            $unit[ "HtmlLogoHeight" ]=$this->Interface_Logos[ $no ][ "Height" ];
+            $unit[ "HtmlLogoWidth" ]=$this->Interface_Logos[ $no ][ "Width" ];
             
             $img=$this->UnitsObj()->MyMod_Data_Field_Logo($unit,"HtmlIcon".$no);
             if (!empty($img))
@@ -482,21 +378,6 @@ class EventApp extends MyEventApp_Mail
 
 
     //*
-    //* function ApplicationWindowTitle, Parameter list: 
-    //*
-    //* Overrides title maker, including Unit title.
-    //*
-
-    function ApplicationWindowTitle()
-    {
-        $comps=preg_split('/::/',parent::ApplicationWindowTitle());
-        $name=$this->Unit("Name");
-        array_push($comps,$name);
-
-        return join("::",$comps);            
-    }
-
-    //*
     //* function HandleShowUnits, Parameter list: $head=TRUE
     //*
     //* Displays Units in DB.
@@ -524,6 +405,17 @@ class EventApp extends MyEventApp_Mail
         return $this->EventsObj()->Event_DateSpan($event);
     }
     
+    //*
+    //* function Event_Place, Parameter list: $edit
+    //*
+    //* Returns event place.
+    //*
+
+    function Event_Place($event=array())
+    {
+        return $this->EventsObj()->Event_Place($event);
+    }
+
     //*
     //* function MyApp_Globals_Upload_Paths, Parameter list: 
     //*
@@ -557,6 +449,7 @@ class EventApp extends MyEventApp_Mail
         sort($paths);
         return $paths;
     }
- }
+    
+}
 
 ?>

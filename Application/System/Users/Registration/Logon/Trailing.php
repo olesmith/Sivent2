@@ -7,7 +7,7 @@
                   (
                      array
                      (
-                        $this->MyActions_Entry("Recover"),
+                         $this->Htmls_Text($this->MyActions_Entry("Recover")),
                      )
                   ),
                )

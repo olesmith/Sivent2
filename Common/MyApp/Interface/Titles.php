@@ -8,6 +8,30 @@ trait MyApp_Interface_Titles
     //use MyApp_Interface_Head_Thanks;
 
     //*
+    //* sub MyApp_Name, Parameter list:
+    //*
+    //* Returns titles to use in interface top center cell.
+    //*
+    //*
+
+    function MyApp_Name()
+    {
+        return $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationName");
+    }
+    
+    //*
+    //* sub MyApp_Title, Parameter list:
+    //*
+    //* Returns titles to use in interface top center cell.
+    //*
+    //*
+
+    function MyApp_Title()
+    {
+        return $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationTitle");
+    }
+    
+    //*
     //* sub MyApp_Interface_Titles, Parameter list:
     //*
     //* Returns titles to use in interface top center cell.
@@ -31,6 +55,22 @@ trait MyApp_Interface_Titles
         );
     }
 
+    //*
+    //* sub MyApp_Interface_Title_Classes, Parameter list:
+    //*
+    //* Returns titles to use in interface top center cell.
+    //*
+    //*
+
+    function MyApp_Interface_Title_Classes()
+    {
+        return array
+        (
+           "headinst","headdept","headaddress",
+           "headcity","headcontacts","headcontacts",
+        );
+    }
+
 
     //*
     //* sub MyApp_Interface_Titles_Latex, Parameter list:
@@ -41,7 +81,7 @@ trait MyApp_Interface_Titles
 
     function MyApp_Interface_Titles_Latex()
     {
-        return MyApp_Interface_Titles();
+        return $this->MyApp_Interface_Titles();
     }
 
 
@@ -94,6 +134,33 @@ trait MyApp_Interface_Titles
               "Height" => "",
               "Width"  => "",
            ),
+        );
+    }
+
+    
+    //*
+    //* sub MyApp_Info, Parameter list:
+    //*
+    //* Info line for application.
+    //*
+
+    function MyApp_Info()
+    {
+        return array
+        (
+           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationName"),
+           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationTitle").
+           ", Ver. ".
+           $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationVersion"),
+           $this->A
+           (
+              $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationURL"),
+              $this->GetRealNameKey($this->HtmlSetupHash,"ApplicationURL"),
+              array
+              (
+                 "CLASS" => 'applicationlink',
+              )
+           )
         );
     }
 }

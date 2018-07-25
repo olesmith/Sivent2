@@ -159,23 +159,22 @@ trait MyApp_Profiles
 
     function MyApp_Profile_Cookie_Send()
     {
-        $this->SetCookie("Profile",$this->Profile,time()+$this->CookieTTL);
+        $this->SetCookie("Profile",$this->Profile(),time()+$this->CookieTTL);
     }
 
     //*
     //* function MyApp_Profile_Trust, Parameter list:
     //*
-    //* Returns trust value of Profile.
+    //* Detects $profile trust value.
     //*
 
     function MyApp_Profile_Trust($profile="")
     {
         if (empty($profile)) { $profile=$this->Profile(); }
-       
-        return $this->Profiles[ $profile ][ "Trust" ];
+        
+        return intval($this->Profiles($profile,"Trust"));
     }
-
-    
+   
     //*
     //* function MyApp_Profile_Set, Parameter list: $profile
     //*

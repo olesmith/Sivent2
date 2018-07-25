@@ -58,7 +58,7 @@ trait MyMod_Search_CGI
 
     function MyMod_Search_CGI_Vars_Defined_Has()
     {
-        foreach ($this->MyMod_Items_Search_Vars() as $data)
+        foreach ($this->MyMod_Search_Vars() as $data)
         {
             if ($this->MyMod_Data_Access($data)>=1)
             {
@@ -86,7 +86,7 @@ trait MyMod_Search_CGI
 
     function MyMod_Search_Vars_Hash($datas=array())
     {
-        if (empty($datas)) { $datas=$this->MyMod_Items_Search_Vars(); }
+        if (empty($datas)) { $datas=$this->MyMod_Search_Vars(); }
 
         $searchvars=array();
         foreach ($datas as $data)

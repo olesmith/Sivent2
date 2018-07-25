@@ -7,12 +7,12 @@
                   (
                      array
                      (
-                        $this->MyActions_Entry("ResendConfirm"),
+                         $this->Htmls_Text($this->MyActions_Entry("ResendConfirm")),
                         preg_replace
                         (
                            '/ModuleName=Friends&/',
                            "",
-                           $this->MyActions_Entry("Logon")
+                           $this->Htmls_Text($this->MyActions_Entry("Logon"))
                         ),
                      )
                   )

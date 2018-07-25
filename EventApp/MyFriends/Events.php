@@ -54,42 +54,44 @@ class MyFriends_Events extends MyFriends_Events_Table
         {
             $omit[ $event[ "ID" ] ]=$event;
         }
-        
+
         $n=1;
         echo
-            $this->Html_Table
+            $this->Htmls_Text
             (
-                "",
-                array_merge
+                $this->Htmls_Table
                 (
-                    $this->Friend_Events_Type_Rows
+                    "",
+                    array_merge
                     (
-                        $friend,
-                        "Friend_Events_Open_Table_Title",
-                        $n,
-                        $opens
-                    ),
-                    array($this->HR(array("WIDTH" => "50%")).$this->BR()),
-                    $this->Friend_Events_Type_Rows
-                    (
-                        $friend,
-                        "Friend_Events_Inscribed_Table_Title",
-                        $n,
-                        $inscribeds,
-                        $opens
-                    ),
-                    array($this->HR(array("WIDTH" => "50%")).$this->BR()),
-                    $this->Friend_Events_Type_Rows
-                    (
-                        $friend,
-                        "Friend_Events_Table_Title",
-                        $n,
-                        $all,
-                        $omit
+                        $this->Friend_Events_Type_Rows
+                        (
+                            $friend,
+                            "Friend_Events_Open_Table_Title",
+                            $n,
+                            $opens
+                        ),
+                        array($this->HR(array("WIDTH" => "50%")).$this->BR()),
+                        $this->Friend_Events_Type_Rows
+                        (
+                            $friend,
+                            "Friend_Events_Inscribed_Table_Title",
+                            $n,
+                            $inscribeds,
+                            $opens
+                        ),
+                        array($this->HR(array("WIDTH" => "50%")).$this->BR()),
+                        $this->Friend_Events_Type_Rows
+                        (
+                            $friend,
+                            "Friend_Events_Table_Title",
+                            $n,
+                            $all,
+                            $omit
+                        )
                     )
                 )
-            ).
-            "";
+            );
     }
 }
 

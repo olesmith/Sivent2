@@ -70,20 +70,6 @@ trait MyMod_Profiles
         }
     }
 
-    //*
-    //* function MyMod_Profiles_File, Parameter list: 
-    //*
-    //* Returns name of Module profile file (Profiles.php)
-    //* to read. Calls $this->ApplicationObj->MyMod_Setup_ProfilesDataFile($module)
-    //* for the task. Supposed as a mean to redirect this behaviour, when
-    //* needed.
-    //*
-
-    function MyMod_Profiles_File()
-    {
-       return $this->MyMod_Setup_ProfilesDataFile();
-    }
-
 
     //*
     //* function MyMod_Profiles_Read, Parameter list: $module=""
@@ -93,7 +79,7 @@ trait MyMod_Profiles
 
     function MyMod_Profiles_Read()
     {
-        $file=$this->MyMod_Setup_ProfilesDataFile();
+        $file=$this->MyMod_Setup_Profiles_File();
         if (!file_exists($file))
         {
             $this->DoDie("No Module Profile file: ".$file."<BR>\n");
@@ -112,7 +98,7 @@ trait MyMod_Profiles
 
     function MyMod_Profiles_Init()
     {
-        $modfile=$this->MyMod_Setup_ProfilesDataFile();
+        $modfile=$this->MyMod_Setup_Profiles_File();
 
         $profiles=$this->ReadPHPArray($modfile);
 

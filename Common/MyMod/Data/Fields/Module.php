@@ -241,13 +241,15 @@ trait MyMod_Data_Fields_Module
         $emptytext="";
         if (!empty($empty)) { $emptytext=$empty; }
 
-        return $this->Html_Select_Hashes2Field
+        return $this->Htmls_Select_Hashes_Field
         (
            $rdata,
            $this->MyMod_Data_Fields_Module_Options($data,$item),
-           $id,
-           "Name","Title","ID",array(),array(),
-           $this->MyMod_Data_EmptyText($data)
+           array
+           (
+               "Selected"   => $id,
+               "Empty_Text" => $this->MyMod_Data_EmptyText($data)
+           )
         );
     }
 

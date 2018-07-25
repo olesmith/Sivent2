@@ -2,7 +2,7 @@ array
 (
     'Export' => array
     (
-        'Public' => 1,
+        'Public' => 0,
         'Person' => 0,
         "Admin" => 1,
         "Friend"     => 0,
@@ -11,7 +11,7 @@ array
     ),
     'Search' => array
     (
-        'Public' => 0,
+        'Public' => 1,
         'Person' => 0,
         "Admin" => 1,
         "Friend"     => 1,
@@ -85,7 +85,7 @@ array
         "Handler"   => "Collaborator_Handle_Certificate_Generate",
         "AccessMethod"  => "CheckCertAccess",
 
-        "Icon"   => "print_dark.png",
+        "Icon"   => "fas fa-certificate",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -106,7 +106,7 @@ array
         "AccessMethod"  => "CheckCertAccess",
         "Target"   => "_blank",
 
-        "Icon"   => "copy_dark.png",
+        "Icon"   => "fas fa-envelope-square",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -125,7 +125,7 @@ array
        
         "Handler"   => "Collaborator_Handle_Certificates_Generate",
 
-        "Icon"   => "print_dark.png",
+        "Icon"   => "fas fa-file-pdf",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
@@ -141,30 +141,30 @@ array
         "Name"     => "Registration",
         "Name_UK"   => "Collaborator Registration",
       
-        "Icon"   => "people_dark.png",
+        "Icon"   => "fas fa-users-cog",
         "Public"   => 0,
         "Person"   => 0,
         "Friend"     => 1,
         "Coordinator" => 1,
         "Admin"    => 1,
     ),
-    "Collaborations" => array
-    (
-        "Href"     => "",
-        "HrefArgs" => "?ModuleName=Collaborations&Action=Search&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Colaborações",
-        "Title_UK" => "Manage Collaborations",
-        "Name"     => "Colaborações",
-        "Name_UK"     => "Collaborations",
+    /* "Collaborations" => array */
+    /* ( */
+    /*     "Href"     => "", */
+    /*     "HrefArgs" => "?ModuleName=Collaborations&Action=Search&Event=".$this->Event("ID"), */
+    /*     "Title"    => "Gerenciar Colaborações", */
+    /*     "Title_UK" => "Manage Collaborations", */
+    /*     "Name"     => "Colaborações", */
+    /*     "Name_UK"     => "Collaborations", */
 
-        "Public"   => 0,
-        "Person"   => 0,
-        "Admin"    => 1,
-        "Friend"   => 0,
-        "Coordinator"   => 1,
-        "Advisor"    => 0,
-        "AccessMethod"    => "Event_Collaborations_Has",
-    ),
+    /*     "Public"   => 0, */
+    /*     "Person"   => 0, */
+    /*     "Admin"    => 1, */
+    /*     "Friend"   => 0, */
+    /*     "Coordinator"   => 1, */
+    /*     "Advisor"    => 0, */
+    /*     "AccessMethod"    => "Event_Collaborations_Has", */
+    /* ), */
     "Event" => array
     (
         "Href"     => "",
@@ -224,9 +224,9 @@ array
         "Title"    => "Importar #ItemsName de outro Evento",
         "Title_UK" => "Import #ItemsName_UK from other Event",
         "Title_ES"    => "Importar #ItemsName_ES de outro Evento",
-        "Name"     => "Importar #ItemsName",
-        "Name_UK"  => "Import #ItemsName_UK",
-        "Name_ES"     => "Importar #ItemsName_ES",
+        "Name"     => "Importar",
+        "Name_UK"  => "Import",
+        "Name_ES"     => "Importar",
         //"Icon"     => "rubik.png",
         "Public"   => 0,
         "Person"   => 0,

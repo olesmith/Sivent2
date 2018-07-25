@@ -165,15 +165,15 @@ trait MyMod_Item_Update
                 (
                     $rdatanames,
                     $this->MyMod_Data_Title($rdata).
-                    " => ".
-                    "'".$this->MyMod_Data_Fields_Show($rdata,$item)."'"
+                    " => ",
+                    $this->MyMod_Data_Fields_Show($rdata,$item)
                 );
             }
 
             $this->ApplicationObj()->AddHtmlStatusMessage
             (
                $this->B($this->MyLanguage_GetMessage("Altered").": ").
-               $this->HtmlList($rdatanames)
+               $this->Htmls_Text($this->Htmls_List($rdatanames))
             );
 
             $this->ApplicationObj()->AddHtmlStatusMessage

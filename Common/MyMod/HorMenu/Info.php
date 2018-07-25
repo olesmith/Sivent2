@@ -34,17 +34,17 @@ trait MyMod_HorMenu_Info
             ).
             "";
     }
-
+        
     //*
     //* function MyMod_HorMenu_Table, Parameter list: 
     //*
-    //* Handles module object sys info.
+    //* Generates horisontal menues as table matrix of links.
     //*
 
     function MyMod_HorMenu_Table()
     {
         $table=array();
-        $hash=$this->ReadPHPArray("System/".$this->ModuleName."/Profiles.php");
+        $hash=$this->ReadPHPArray( $this->MyMod_Setup_Profiles_File() );
         
         foreach ($hash[ "Menues" ] as $menu => $rhash)
         {

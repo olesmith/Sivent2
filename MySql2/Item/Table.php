@@ -7,7 +7,6 @@ class ItemTable extends ItemRow
     //*
 
     var $ItemEditData=array();
-    var $Item_Data_Edit_Control=array();
 
     //*
     //* function HtmlItemTable, Parameter list: $edit,$datas,$item=array(),$table=array(),$plural=FALSE
@@ -72,7 +71,7 @@ class ItemTable extends ItemRow
                (
                   $this->MultiCell
                   (
-                     $this->ItemAnchor($item).
+                     $this->MyMod_Item_Anchor($item).
                      $this->H(5,$this->MyMod_Item_Name_Get($item)),
                      2
                   )
@@ -88,22 +87,7 @@ class ItemTable extends ItemRow
         $compulsories=0;
         foreach ($rdatalist as $data)
         {
-            $redit=$edit;
-            if ($edit==1)
-            {
-                if (!empty($item[ "ID" ] ))
-                {
-                    if (empty($this->Item_Data_Edit_Control[ $item[ "ID" ] ][ $data ]))
-                    {
-                        $this->Item_Data_Edit_Control[ $item[ "ID" ] ][ $data ]=True;
-                    }
-                    else
-                    {
-                        $redit=0;
-                    }
-                }
-            }
-        
+            $redit=$this->MyMod_Item_Table_Edit($item,$edit,$data);
             $hidden=FALSE;
             if (
                 isset($this->ItemData[ $data ][ "Hidden" ]) &&
@@ -113,6 +97,7 @@ class ItemTable extends ItemRow
                 $hidden=TRUE;
             }
 
+            $this->MyMod_Item_Table_Edit_Control_Set($item,$data);
             if (
                 !$hidden &&
                 $data!="No" &&
@@ -157,7 +142,7 @@ class ItemTable extends ItemRow
                $tbl,
                array
                (
-                  $this->CompulsoryMessage()
+                  $this->MyMod_Data_Compulsory_Message()
                )
              );
         }
@@ -166,64 +151,6 @@ class ItemTable extends ItemRow
         return $tbl;
     }
 
-    //*
-    //* 
-    //*
-
-    function ItemAnchor($item=array(),$anchor="",$text="")
-    {
-        if ($this->LatexMode) { return ""; }
-        if (count($item)==0)
-        {
-            $item=$this->ItemHash;
-        }
-
-        if ($anchor=="" && isset($item[ "ID" ]))
-        {
-            $anchor=$this->ModuleName."_".$item[ "ID" ];
-        }
-
-        return "<A NAME='".$anchor."'>".$text."</A>";
-    }
-
-    //*
-    //* 
-    //*
-
-    function CompulsoryMessage()
-    {
-        return $this->Center
-        (
-           "&gt;&gt; ".
-           $this->GetMessage($this->ItemDataMessages,"CompulsoryMessage").
-           " &lt;&lt;",
-           array("CLASS" => 'datatitlelink')
-        );
-    }
-
-    //*
-    //* 
-    //*
-
-    function ItemAnchorLink($item=array(),$anchor="",$text="")
-    {
-        if (count($item)==0)
-        {
-            $item=$this->ItemHash;
-        }
-
-        if ($anchor=="")
-        {
-            $anchor=$this->ModuleName."_".$item[ "ID" ];
-        }
-
-        if ($text=="")
-        {
-            $text=$this->IMG("../icons/forward.gif");
-        }
-
-        return "<A HREF='#".$anchor."'>".$text."</A>";
-    }
 
 
 }

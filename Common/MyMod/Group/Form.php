@@ -128,8 +128,14 @@ trait MyMod_Group_Form
                '/&'.$argsfield.'=\d+/',
                "",
                $this->StartForm("?".$this->CGI_Hash2Query($args))
-            )."\n".
-            $this->Anchor($nameref,"Selecionar ".$title.":")."\n".
+            ).
+            "\n".
+            $this->Span
+            (
+                "Selecionar ".$title.":",
+                array("ID" => $nameref)
+            ).
+            "\n".
             "[ "."\n".
             join(" &nbsp;\n ",$prelinks)."\n".
             $this->MakeSelectfield

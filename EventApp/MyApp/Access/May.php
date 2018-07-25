@@ -148,7 +148,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
         $res=
             $this->Current_User_Event_Type_May_Edit("Inscriptions",$event)
             &&
-            $this->HasCertificates($event);
+            $this->Event_Certificates_Has($event);
 
         return $res;
     }
@@ -166,7 +166,22 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
         $res=
             $this->Current_User_Event_Type_May_Edit("Collaborations",$event)
             &&
-            $this->HasCollaborations($event);
+            $this->Event_Collaborations_Has($event);
+
+        return $res;
+    }
+
+    //*
+    //* sub Current_User_Event_Collaborations_May_Show, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Collaborations.
+    //*
+    //*
+
+    function Current_User_Event_Collaborations_May_Show($event=array())
+    {
+        $res=
+            $this->Event_Collaborations_Has($event);
 
         return $res;
     }
@@ -186,7 +201,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
         $res=
             $this->Current_User_Event_Type_May_Edit("Submissions",$event)
             &&
-            $this->HasSubmissions($event);
+            $this->Event_Submissions_Has($event);
 
         return $res;
     }
@@ -202,17 +217,36 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
     {
         $event=$this->Event();
         
-        $res=
-            $this->Current_User_Event_Type_May_Edit("Submissions",$event)
-            &&
-            $this->HasSubmissions($event);
-
-        $res=
-            $res
+        return
+            (
+                $this->Current_User_Event_Type_May_Edit("Submissions",$event)
+                &&
+                $this->Event_Submissions_Has($event)
+            )
             ||
             $this->EventsObj()->Event_Submissions_Public($event);
+    }
 
-        return $res;
+    
+    //*
+    //* sub Current_User_Event_Schedule_May_Show, Parameter list: $event=array()
+    //*
+    //* Checks whether coordinator (current login) has access to edit Submissions.
+    //*
+    //*
+
+    function Current_User_Event_Schedule_May_Show($item=array())
+    {
+        $event=$this->Event();
+        
+        return
+            (
+                $this->Current_User_Event_Type_May_Edit("Schedule",$event)
+                &&
+                $this->Event_Submissions_Has($event)
+            )
+            ||
+            $this->EventsObj()->Event_Schedule_Public($event);
     }
     
     //*
@@ -227,7 +261,7 @@ class MyEventApp_Access_May extends MyEventApp_Accessors
         $res=
             $this->Current_User_Event_Type_May_Edit("Caravans",$event)
             &&
-            $this->HasCaravans($event);
+            $this->Event_Caravans_Has($event);
 
         return $res;
     }

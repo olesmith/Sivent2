@@ -196,8 +196,12 @@ class App_Head_Table extends App_Events
     function EventTitleCell($event=array())
     {
         $titlecell=
-            $this->Anchor("Top").
-            $this->H(3,$this->GetRealNameKey($event,"Title")).
+            $this->H
+            (
+                3,
+                $this->GetRealNameKey($event,"Title"),
+                array("ID" => "Top")
+            ).
             $this->H(4,$this->Event_DateSpan($event)).
             $this->H(5,$this->EventPlaceCell($event)).
             "";
@@ -312,33 +316,5 @@ class App_Head_Table extends App_Events
         }
 
         return $count;
-    }
-    
-    //*
-    //* function EventLogos_obsolete, Parameter list: $event=array()
-    //*
-    //* Returns event logo as list of (2) imgs.
-    //*
-
-    function EventLogos_obsolete($event=array())
-    {
-        if (empty($event)) { $event=$this->Event(); }
-        
-        $imgs=array();
-        for ($no=1;$no<=2;$no++)
-        {
-            $img=$this->EventsObj()->MyMod_Data_Field_Logo($event,"HtmlIcon".$no);
-            if (!empty($img))
-            {
-                array_push($imgs,$img);
-            }
-        }
-
-        //Double if no second
-        if (count($imgs)==0) { $imgs=array(); }
-        //if (count($imgs)==1) { array_push($imgs,$imsgs[0]); }
-
-        return $imgs;
-    }
-    
+    }    
 }

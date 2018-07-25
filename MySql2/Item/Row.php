@@ -118,7 +118,21 @@ class ItemRow extends ItemEdits
 
             if (!$this->LatexMode() && isset($item[ $data."_Message" ]) && $item[ $data."_Message" ]!="" && $this->LoginType!="Public")
             {
-                $value.="<FONT CLASS='errors'>".$item[ $data."_Message" ]."</FONT>";
+                $msg=
+                    $this->FONT
+                    (
+                        $item[ $data."_Message" ],array("CLASS" => 'errors')
+                    );
+                array_push
+                (
+                    $value,
+                    $this->Htmls_SPAN
+                    (
+                        $item[ $data."_Message" ],
+                        array("CLASS" => 'errors')
+                    )
+                );
+                
             }
 
             $action=$this->MyActions_Detect();
@@ -160,7 +174,7 @@ class ItemRow extends ItemEdits
                ).
                $add,
                
-               $this->Span($value,array("CLASS" => 'data'))
+               $this->Htmls_SPAN($value,array("CLASS" => 'data'))
             );
         }
 

@@ -100,7 +100,7 @@ class LoginPasswordRecover extends LoginPasswordRecoverMail
     function Login_Password_Recover_Has_Code()
     {
         $code=$this->CGI_GETOrPOST("Code");
-        if (!empty($code) && preg_match('/^\S+\@\S+$/',$code))
+        if (!empty($code) && preg_match('/^[0-9]+$/',$code))
         {
             return True;;
         }

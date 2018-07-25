@@ -89,6 +89,36 @@ trait MyMod_Item_PostProcess
         return $item;
     }
 
+     //*
+    //* function MyMod_Item_PostProcess_Languaged, Parameter list: &$item
+    //*
+    //* Will take default values for languaged values.
+    //*
+
+    function MyMod_Item_PostProcess_Languaged(&$item)
+    {
+        $updatedatas=array();
+        foreach ($this->DatasRead as $data)
+        {
+            if (!empty($this->ItemData[ $data ][ "Languaged" ]))
+            {
+                foreach ($this->MyMod_Languaged_Data_Get($data) as $langdata)
+                {
+                    if (empty($item[ $langdata ]))
+                    {
+                        $item[ $langdata ]=$item[ $data ];
+                        array_push($updatedatas,$langdata);
+                    }
+                }
+            }
+        }
+
+        if (count($updatedatas)>0)
+        {
+            $this->Sql_Update_Item_Values_Set($updatedatas,$item);
+        }
+    }
+
    
     //*
     //* function MyMod_Item_PostProcess_Files, Parameter list: $item
@@ -196,7 +226,7 @@ trait MyMod_Item_PostProcess
         
         $item=$this->MyMod_Item_PostProcess_Trim($item);
         $item=$this->MyMod_Item_PostProcess_Files($item);
-
+        $this->MyMod_Item_PostProcess_Languaged($item);
         $post=$this->ItemPostProcessor;
         if (empty($post))
         {
@@ -220,7 +250,7 @@ trait MyMod_Item_PostProcess
         }
 
         $this->Sql_Table_Index_Set($item);
-        
+
         return $item;
     }
 }

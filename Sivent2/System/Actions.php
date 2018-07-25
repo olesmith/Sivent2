@@ -339,47 +339,10 @@ array
         "Advisor"    => 0,
         "Handler"    => "ShowDir_Handle",
       ),
-     /* "Messages" => array */
-     /* ( */
-     /*    "Href"     => "", */
-     /*    "HrefArgs" => "?Action=Messages&Event=".$this->Event("ID"), */
-     /*    "Title"    => "Gerenciar Mensagens dos Sistema", */
-     /*    "Title_UK" => "Manage System Messages", */
-     /*    "Name"     => "Mensagens dos Sistema", */
-     /*    "Name_UK"     => "System Messages", */
-
-     /*    "Public"   => 0, */
-     /*    "Person"   => 0, */
-     /*    "Admin"    => 1, */
-     /*    "Friend"   => 0, */
-     /*    "Coordinator"   => 0, */
-     /*    "Advisor"    => 0, */
-     /*    "Handler"    => "MyApp_Messages_Edit_Handle", */
-     /*  ), */
-
-     
-     /* "Inscriptions" => array //Move to App/Actions.php? */
-     /* ( */
-     /*    "Href"     => "", */
-     /*    "HrefArgs" => "?ModuleName=Inscriptions&Action=Inscriptions&Event=#Event", */
-     /*    "Title"    => "Gerenciar Inscrições", */
-     /*    "Title_UK" => "Manage Inscriptions", */
-     /*    "Name"     => "Inscrições", */
-     /*    "Name_UK"     => "Inscriptions", */
-
-     /*    "Public"   => 0, */
-     /*    "Person"   => 0, */
-     /*    "Admin"    => 1, */
-     /*    "Friend"   => 0, */
-     /*    "Coordinator"   => 1, */
-     /*    "Advisor"    => 0, */
-     /*  ), */
-
-
-     "Event_Configuration" => array
+     "Config" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Event&Action=Edit&Event=".$this->Event("ID"),
+        "HrefArgs" => "?ModuleName=Events&Action=Config&Event=".$this->Event("ID"),
         "Title"    => "Configuração do Evento",
         "Title_UK" => "Event Configuration",
         "Name"     => "Configuração",
@@ -556,9 +519,9 @@ array
      (
         "Href"     => "",
         "HrefArgs" => "?ModuleName=Areas&Action=EditList&Event=".$this->Event("ID"),
-        "Title"    => "Gerenciar Trilhas",
+        "Title"    => "Gerenciar Áreas de Interesse",
         "Title_UK" => "Manage Areas of Interest",
-        "Name"     => "Trilhas",
+        "Name"     => "Áreas de Interesse",
         "Name_UK"     => "Areas of Interest",
 
         "Public"   => 0,
@@ -764,39 +727,39 @@ array
      "Collaborations" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Collaborations&Action=EditList&Event=".$this->Event("ID"),
+        "HrefArgs" => "?ModuleName=Collaborations&Action=Search&Event=".$this->Event("ID"),
         "Title"    => "Gerenciar Colaborações",
         "Title_UK" => "Manage Collaborations",
         "Name"     => "Colaborações",
         "Name_UK"  => "Collaborations",
 
-        "Public"   => 0,
+        "Public"   => 1,
         "Person"   => 0,
         "Admin"    => 1,
-        "Friend"   => 0,
+        "Friend"   => 1,
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array(),
-        'AccessMethod'    => "Current_User_Event_Collaborations_May_Edit",
+        'AccessMethod'    => "Event_Collaborations_Has",
       ),
 
      "Collaborators" => array
      (
         "Href"     => "",
-        "HrefArgs" => "?ModuleName=Collaborators&Action=EditList&Event=".$this->Event("ID"),
+        "HrefArgs" => "?ModuleName=Collaborators&Action=Search&Event=".$this->Event("ID"),
         "Title"    => "Gerenciar Colaboradores",
         "Title_UK" => "Manage Collaborators",
         "Name"     => "Colaboradores",
         "Name_UK"  => "Collaborators",
 
-        "Public"   => 0,
+        "Public"   => 1,
         "Person"   => 0,
         "Admin"    => 1,
-        "Friend"   => 0,
+        "Friend"   => 1,
         "Coordinator"   => 1,
         "Advisor"    => 0,
         "NonGetVars" => array(),
-        'AccessMethod'    => "Current_User_Event_Collaborations_May_Edit",
+        'AccessMethod'    => "Event_Collaborations_Has",
       ),
 
      "Collaborators_Certificates" => array

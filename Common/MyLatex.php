@@ -43,7 +43,6 @@ trait MyLatex
 
         return $latex;
     }
-
     //*
     //* Runs pdflatex, saving cntent of $latex to $path."/".$texfilename.
     //*
@@ -56,6 +55,21 @@ trait MyLatex
             $texfilename;
 
         return $command;
+    }
+
+    //*
+    //* Removes or substitutes anything unwanted in a file name.
+    //*
+
+    function Latex_File_Name($texfilename)
+    {
+        $texfilename=$this->Html2Text($texfilename);
+        $texfilename=$this->Html2Sort($texfilename);
+        $texfilename=preg_replace('/&#\d+;/',"",$texfilename);
+        $texfilename=preg_replace('/[^a-zA-Z0-9\._\-]/',"_",$texfilename);
+        $texfilename=preg_replace('/_+/',"_",$texfilename);
+
+        return $texfilename;
     }
 
     
@@ -72,7 +86,8 @@ trait MyLatex
         }
 
         $cwd=getcwd();
-        $texfilename=$this->Html2Sort($texfilename);
+
+        $texfilename=$this->Latex_File_Name($texfilename);
 
         $path=$this->LatexTmpPath();
 

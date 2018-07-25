@@ -61,6 +61,10 @@ trait MakeCGI
         {
             $uri="?".$this->CGI_Hash2URI($uri);
         }
+        elseif (!preg_match('/\?/',$uri))
+        {
+            $uri="/".$uri;
+        }
 
         if (!empty($callerinfo))
         {
@@ -68,7 +72,7 @@ trait MakeCGI
             exit();
         }
 
-        header( 'Location: '.$uri.$callerinfo);
+        header('Location: '.$uri.$callerinfo);
     }
 
     //*
@@ -513,14 +517,12 @@ trait MakeCGI
 
     function CGI_Hash2URI($hash)
     {
+        if (!is_array($hash)) { return $hash; }
+        
         $queries=array();
         foreach ($hash as $arg => $value)
         {
-            if (!empty($value))
-            {
-                $string=$arg."=".$value;
-                array_push($queries,$arg."=".$value);
-            }
+            array_push($queries,$arg."=".$value);
         }
 
         return join("&",$queries);
@@ -646,6 +648,62 @@ trait MakeCGI
 
         return $hash;
     }
+    
+    function CGI_Hiddens_Hash($tabmovesdown=FALSE)
+    {
+        $fields=array();
+        if ($tabmovesdown)
+        {
+            $var=$this->ModuleName."_TabMovesDown";
+            $value=$this->CGI_GETOrPOST($var);
+            if (!empty($value))
+            {
+                $fields[ $var ]=$value;
+            }
+        }
+
+        if (is_array($this->HiddenVars))
+        {
+            foreach ($this->HiddenVars as $var)
+            {
+                $value=$this->CGI_GETOrPOST($var);
+                if (!empty($value))
+                {
+                    $fields[ $var ]=$value;
+                }
+            }
+        }
+
+        if (is_array($this->CGI_Split_Vars))
+        {
+            foreach ($this->CGI_Split_Vars as $var => $def)
+            {
+                $var=$this->ItemName."_".$var."_Only";
+                $value=$this->CGI_GETOrPOST($var);
+           
+                if (!empty($value))
+                {
+                    $fields[ $var ]=$value;
+                }
+            }
+        }
+      
+        if (is_array($this->CGI_SearchVars))
+        {
+            foreach ($this->CGI_SearchVars as $var => $def)
+            {
+                $var=$this->ItemName."_".$var."_Search";
+                $value=$this->CGI_GETOrPOST($var);
+                if (!empty($value))
+                {
+                    $fields[ $var ]=$value;
+                }
+            }
+        }
+
+        return $fields;
+    }
+    
   function CGI_MakeHiddenFields($tabmovesdown=FALSE)
   {
       $fields=array();
@@ -701,6 +759,6 @@ trait MakeCGI
 
 
       return join("",$fields);
-  }
+  }  
 }
 ?>

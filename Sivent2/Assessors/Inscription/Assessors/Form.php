@@ -145,8 +145,11 @@ class AssessorsInscriptionAssessorsForm extends AssessorsInscriptionAssessorsTab
         }
 
         return
-            $this->Anchor("CondMenu").
-            $this->Center("[".join(" | ",$hrefs)." ]");
+            $this->Center
+            (
+                "[".join(" | ",$hrefs)." ]",
+                array("ID" => "CondMenu")
+            );
     }
     
     //*

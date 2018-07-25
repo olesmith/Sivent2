@@ -29,7 +29,7 @@ trait MyApp_Module
             }
 
             $this->LoadMTime=time();
-            if (file_exists($this->MyMod_Setup_ItemDataFile($this->ModuleName)))
+            if (file_exists($this->MyMod_Setup_Item_Data_File($this->ModuleName)))
             {
                $this->MyMod_SubModules_Load();
             }

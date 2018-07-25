@@ -14,7 +14,7 @@ trait MyApp_Interface_LeftMenu
         MyApp_Interface_LeftMenu_Top,
         MyApp_Interface_LeftMenu_Profile;
 
-
+    
     //*
     //* function MyApp_Interface_LeftMenu, Parameter list:
     //*
@@ -23,38 +23,27 @@ trait MyApp_Interface_LeftMenu
 
     function MyApp_Interface_LeftMenu()
     {
-        if (method_exists($this,"InitLeftMenu"))
-        {
-            $this->InitLeftMenu();
-        }
-
-        $html=$this->MyApp_Interface_LeftMenu_Top_Welcome();
-
-        if (!empty($this->Period))
-        {
-            $title=$this->Period[ "Name" ];
-            if (!empty($this->Period[ "Title" ])) { $title=$this->Period[ "Title" ]; }
-            
-            $per="";
-            if (is_array($this->Period))
-            {
-                $per="Período Atual: ".$title;
-            }
-            else
-            {
-                $per="Período Atual: ".$this->Period;
-            }
-            $html.=$this->DIV($per,array("CLASS" => "periodtitle"));
-        }
-
-        $html.=
-            $this->MyApp_Interface_LeftMenu_Top_UserInfo().
-            $this->MyApp_Interface_LeftMenu_Top_ReadOnlyMessage().
-            $this->MyApp_Interface_LeftMenu_Top_AdminInfo().
-            $this->MyApp_Interface_LeftMenu_Generate().
-            "";
-        
-        return $html;
+        return
+            array
+            (
+                $this->Htmls_Comment_Section
+                (
+                    "Left Menu Start",
+                    $this->Htmls_Tag
+                    (
+                        "ASIDE",
+                        array
+                        (
+                            $this->MyApp_Interface_LeftMenu_Top_Welcome(),
+                            $this->MyApp_Interface_LeftMenu_Top_Period(),
+                            $this->MyApp_Interface_LeftMenu_Top_UserInfo(),
+                            $this->MyApp_Interface_LeftMenu_Top_ReadOnlyMessage(),
+                            $this->MyApp_Interface_LeftMenu_Top_AdminInfo(),
+                            $this->MyApp_Interface_LeftMenu_Generate()
+                        )                
+                    )
+                ),
+            );
     }
 
     //*
@@ -65,7 +54,12 @@ trait MyApp_Interface_LeftMenu
 
     function MyApp_Setup_LeftMenu_DataFiles()
     {
-        return $this->MyApp_Setup_Files2Hash($this->SystemPath(),$this->LeftMenuFile);
+        return
+            $this->MyApp_Setup_Files2Hash
+            (
+                $this->SystemPath(),
+                $this->LeftMenuFile
+            );
     }
 
 
@@ -81,14 +75,12 @@ trait MyApp_Interface_LeftMenu
         //Read menus
         if ($this->Profile=="") { $this->Profile="Public"; }
 
-        $menu=
+        return 
             $this->MyApp_Setup_Files2Hash
             (
                 $this->MyApp_Setup_Path(),
                 "LeftMenu.php"
             );
-
-        return $menu;
     }
 
 
@@ -100,9 +92,24 @@ trait MyApp_Interface_LeftMenu
 
     function MyApp_Interface_LeftMenu_Bullet($bullet)
     {
-        return $this->Span($bullet,array("STYLE" => 'color:black;'))." ";
+        $icon="fas fa-plus fa-xs";
+        if ($bullet=="-")
+        {
+            $icon="fas fa-minus fa-xs";
+        }
+        
+        return $this->MyMod_Interface_Icon($icon);
+            $this->Span
+            (
+                $bullet,
+                array
+                (
+                    "STYLE" => 'color:black;',
+                )
+            );
     }
     
+
 
 }
 

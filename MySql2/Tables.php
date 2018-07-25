@@ -246,7 +246,7 @@ class Tables extends Table
     //* if so, calls data group on subobject, otherwise passes on to parent.
     //*
 
-    function ItemTableDataSGroup($edit,$item,$group,$datas=array())
+    function MyMod_Item_SGroup_Html_Row($edit,$item,$group,$datas=array())
     {
         if ($group=="") { $group=$this->MyMod_Data_Group_Actual_Get(); }
 
@@ -261,7 +261,7 @@ class Tables extends Table
             {
                 $object=$this->OtherObjects[ $this->ItemDataSGroups[ $group ][ "OtherClass" ] ];
 
-                return $object->ItemTableDataSGroup
+                return $object->MyMod_Item_SGroup_Html_Row
                 (
                    $edit,
                    $object->ItemHash,
@@ -271,7 +271,7 @@ class Tables extends Table
             else { return array(); }
         }
 
-        return parent::ItemTableDataSGroup($edit,$item,$group,$datas);
+        return parent::MyMod_Item_SGroup_Html_Row($edit,$item,$group,$datas);
     }
 
     //*

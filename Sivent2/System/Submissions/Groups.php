@@ -19,6 +19,24 @@ array
       "Friend"     => 1,
       "Coordinator" => 1,
    ),
+   "Inscription" => array
+   (
+      "Name" => "Inscrição",
+      "Name_UK" => "",
+      "Data" => array
+      (
+          "No","Edit",
+          #"Edit","Copy","Delete","Print","GenCert","Assessments",
+          "Title",
+          "Status",
+         "Type","Area","Level","Vacancies",
+      ),
+      "Admin" => 1,
+      "Person" => 0,
+      "Public" => 1,
+      "Friend"     => 1,
+      "Coordinator" => 1,
+   ),
    "Timess" => array
    (
       "Name" => "Tempos",
@@ -97,13 +115,13 @@ array
          "Type","Area","Level",
          "Title","File",
       ),
-      "Data_UK" => array
-      (
-         "No","Edit","Copy","Delete","GenCert","Assessments",
-         "Author","Status",
-         "Type","Area","Level",
-         "Name","Title_UK","File",
-      ),
+      /* "Data_UK" => array */
+      /* ( */
+      /*    "No","Edit","Copy","Delete","GenCert","Assessments", */
+      /*    "Author","Status", */
+      /*    "Type","Area","Level", */
+      /*    "Name","Title_UK","File", */
+      /* ), */
       "Admin" => 1,
       "Person" => 0,
       "Public" => 1,

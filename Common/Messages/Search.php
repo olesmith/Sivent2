@@ -51,7 +51,7 @@ array
       "Name_ES" => "Alterado",
       "Title_ES" => "Alterado",
    ),
-   "OrderBy" => array
+   "Sort_OrderBy" => array
    (
       "Name" => "Ordenar por",
       "Name_UK" => "Order By",
@@ -60,7 +60,7 @@ array
       "Name_ES" => "Ordenar por",
       "Title_ES" => "Ordenar por",
    ),
-   "Reverse" => array
+   "Sort_Reverse" => array
    (
       "Name" => "Reversar",
       "Name_UK" => "Reverse",

@@ -1,0 +1,142 @@
+*.config
+{
+    color: #3366ff;
+}
+*.config_title
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 20px;
+	text-decoration: none;
+    text-align: center;
+}
+*.config_event_table
+{
+    text-align: center;
+}
+*.config_event_title
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 18px;
+	text-decoration: none;
+    text-align: center;
+}
+*.config_groups_title
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 18px;
+	text-decoration: none;
+    text-align: center;
+}
+*.config_group_title
+{
+	font-style: Italic;
+	font-weight: Bold;
+	font-size: 16px;
+	text-decoration: none;
+    text-align: center;
+}
+*.config_group_text
+{
+	font-style: none;
+	font-weight: none;
+	font-size: 14px;
+	text-decoration: none;
+    text-align: left;
+}
+*.config_modules_title
+{
+	font-style: none;
+	font-weight: none;
+	font-size: 16px;
+	text-decoration: none;
+    text-align: center;
+}
+*.config_modules_text
+{
+	font-style: none;
+	font-weight: none;
+	font-size: 14px;
+	text-decoration: none;
+    text-align: left;
+}
+*.config_datas_text
+{
+	font-style: none;
+	font-weight: none;
+	font-size: 14px;
+	text-decoration: none;
+    text-align: left;
+}
+*.group
+{
+	color: gray;
+    padding: 6px 0px;
+}
+*.group_leading
+{
+	text-decoration: none;
+	text-align: left;
+	font-size: 14px;
+    font-style: none;
+	font-weight: none;
+}
+*.group_text
+{
+	text-decoration: none;
+	text-align: center;
+	font-size: 12px;
+    font-style: none;
+	font-weight: none;
+}
+*.group_message
+{
+	text-decoration: none;
+	text-align: left;
+	font-size: 14px;
+    font-style: none;
+	font-weight: none;
+}
+*.group_table
+{
+    /* border-style: solid; */
+    /* border-width: 1px; */
+}
+*.group_table_title
+{
+	text-decoration: none;
+	text-align: left;
+	font-size: 14px;
+    font-style: none;
+	font-weight: none;
+}
+*.group_table_none
+{
+	text-decoration: none;
+	text-align: left;
+	font-size: 18px;
+    font-style: none;
+	font-weight: none;
+}
+*.group_table_row
+{
+    /* border-style: solid; */
+    /* border-width: 1px; */
+}
+*.group_table_rows
+{
+    /* border-style: solid; */
+    /* border-width: 1px; */
+}
+*.group_table_cells
+{
+	text-decoration: none;
+	text-align: left;
+	font-size: 12px;
+    font-style: none;
+	font-weight: none;
+    /* border-style: solid; */
+    /* border-width: 1px; */
+}

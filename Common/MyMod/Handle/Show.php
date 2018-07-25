@@ -22,7 +22,7 @@ trait MyMod_Handle_Show
 
       if (count($this->ItemHash)>0)
       {
-          return $this->EditForm
+          return $this->MyMod_Handle_Edit_Form
           (
              $title,
              $this->ItemHash,

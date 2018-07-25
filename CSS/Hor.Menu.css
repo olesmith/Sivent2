@@ -1,0 +1,52 @@
+*.inactivemenuitem
+{
+	color: #CCCCCC;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	text-decoration: None;
+	font-weight: Bold;
+}
+div.hormenu
+{
+    padding: 4px 0px;
+    margin: auto;
+}
+*.tablemenu
+{
+    padding: 6px 0px;
+    margin: auto;
+}
+a.ptablemenu
+{
+	color: #3366ff;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	text-decoration: None;
+	font-weight: Bold;
+	font-family: Roman;
+}
+a.stablemenu
+{
+	color: #3366ff;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	text-decoration: None;
+	font-weight: Bold;
+}
+a.atablemenu
+{
+	color: #3366ff;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	text-decoration: None;
+	font-weight: Bold;
+}
+a.sptablemenu
+{
+	color: #3366ff;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	text-decoration: None;
+	font-weight: Bold;
+	font-family: Roman;
+}

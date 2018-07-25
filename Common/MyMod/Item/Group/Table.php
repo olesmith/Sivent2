@@ -51,22 +51,25 @@ trait MyMod_Item_Group_Table
     //* Create item Group table (matrix).
     //*
 
-    function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="",$title="")
+    function MyMod_Item_Group_Table($edit,$group,$item,$plural=FALSE,$precgikey="",$title="",$precols=array(),$postcols=array())
     {
-        var_dump($this->MyMod_Item_Group_Table_Datas($group));
         $table=
-            $this->ItemTable
+            $this->Html_Table_Pad
             (
-               $edit,
-               $item,
-               TRUE,
-               $this->MyMod_Item_Group_Table_Datas($group),
-               array(),
-               $plural,
-               FALSE,
-               FALSE,
-               $precgikey
-             );
+                $this->ItemTable
+                (
+                    $edit,
+                    $item,
+                    TRUE,
+                    $this->MyMod_Item_Group_Table_Datas($group),
+                    array(),
+                    $plural,
+                    FALSE,
+                    FALSE,
+                    $precgikey
+                ),
+                $precols,$postcols
+            );
 
         if ($this->SGroups_NumberItems)
         {
@@ -122,57 +125,7 @@ trait MyMod_Item_Group_Table
         return $pre;
     }
     
-    //*
-    //* Create item Group html table.
-    //*
 
-    function MyMod_Item_Group_Table_HTML($edit,$group,$item,$plural=FALSE,$precgikey="",$options=array(),$title="",$prerows=array(),$postrows=array())
-    {
-        if (!empty($this->ItemDataSGroups[ $group ][ "GenTableMethod" ]))
-        {
-            $method=$this->ItemDataSGroups[ $group ][ "GenTableMethod" ];
-
-            return $this->$method($edit,$item,$group);
-        }
-
-        $method="Html_Table";
-        if ($this->LatexMode())
-        {
-            $method="Latex_Table";
-        }
-
-        $gtable=
-            array_merge
-            (
-                $prerows,
-                $this->MyMod_Item_Group_Table($edit,$group,$item,$plural,$precgikey,$title),
-                $postrows
-            );
-        
-        $table="";
-        if (!empty($this->ItemDataSGroups[ $group ][ "Data" ]))
-        {
-            $table=
-               $this->$method
-               (
-                  "",
-                  $gtable,
-                  $options,
-                  array(),
-                  array(),
-                  False,
-                  False
-               );
-        }
-
-        
-
-        return 
-            $this->MyMod_Item_Group_Table_Text_Pre($group).
-            $table.
-            $this->MyMod_Item_Group_Table_Text_Post($group).
-            "";
-    }
 }
 
 ?>
