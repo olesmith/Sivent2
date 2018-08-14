@@ -119,8 +119,7 @@ trait MyApp_Login_Form
                     ),
                     array
                     (
-                        "ALIGN" => 'center',
-                        "CLASS" => 'postloginmsg',
+                        "CLASS" => 'postloginmsg notification',
                     )
                 )
             );

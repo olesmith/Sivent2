@@ -29,8 +29,8 @@
                array
                (
                   'ALIGN' => 'center',
-                  'WIDTH' => '60%',
-                  'CLASS' => 'inactiveinfo',
+                  'WIDTH' => '80%',
+                  'CLASS' => 'content inactiveinfo',
                )
              ).
             "\n<P></P>\n";

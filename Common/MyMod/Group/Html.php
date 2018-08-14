@@ -31,7 +31,7 @@ trait MyMod_Group_Html
                         $sumvars,
                         $cgiupdatevar
                     ),
-                    array(),
+                    array("CLASS"=> "teste1"),
                     array(),
                     array(),
                     TRUE,TRUE

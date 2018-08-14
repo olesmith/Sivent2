@@ -143,11 +143,16 @@ trait Htmls_Select
         }
         
         return
-            $this->Htmls_Tag
-            (
-                "SELECT",
-                $options,
-                $htmloptions
+            $this->Htmls_DIV(
+                $this->Htmls_Tag
+                (
+                    "SELECT",
+                    $options,
+                    $htmloptions
+                ),
+                array(
+                    "CLASS" => "select"
+                )
             );
     }
     
@@ -222,6 +227,7 @@ trait Htmls_Select
                 array($selects),
                 $selectoptions
             );
+
     }
 }
 

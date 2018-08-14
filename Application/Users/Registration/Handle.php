@@ -16,12 +16,12 @@ class UsersRegistrationHandle extends UsersRegistrationHandlers
         $options=array
         (
            "ALIGN" => 'center',
-           "WIDTH" => '60%',
-           "CLASS" => 'activeinfo',
+           "WIDTH" => '80%',
+           "CLASS" => 'content activeinfo card',
         );
 
         $poptions=$options;
-        $poptions[ "CLASS" ]='inactiveinfo';
+        $poptions[ "CLASS" ]='content inactiveinfo';
 
         echo
              $this->SystemLeadingTable($poptions).

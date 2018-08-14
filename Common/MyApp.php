@@ -129,7 +129,7 @@ trait MyApp
 
 
     var $MyApp_Interface_Head_DocType=
-        '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+        '<!DOCTYPE html>';
 
     var $MyApp_Interface_Head_Scripts_OnLine=
         array
@@ -152,6 +152,11 @@ trait MyApp
                 "HREF" => 'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
                 "INTEGRITY" => 'sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp',
                 "CROSSORIGIN" => 'anonymous',
+            ),
+            array
+            (
+                "REL" => 'stylesheet',
+                "HREF" => 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css',
             ),
         );
     

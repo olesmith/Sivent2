@@ -33,7 +33,7 @@ trait MyMod_Search_Rows
                     ),
                     array
                     (
-                        "CLASS" => 'searchdata',
+                        "CLASS" => 'searchdata select',
                     )
                 ),
             );

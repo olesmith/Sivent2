@@ -130,6 +130,7 @@ trait MakeHtml_Tags
     function Html_IMG($src,$alttext="",$options=array())
     {
         $options[ "SRC" ]=$src;
+        $options[ "CLASS" ]="image";
         if (!empty($alttext))
         {
             $options[ "ALT" ]=$alttext;

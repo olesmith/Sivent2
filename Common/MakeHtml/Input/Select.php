@@ -48,11 +48,16 @@ trait Html_Input_Select
 
         $selectoptions[ "NAME" ]=$fieldname;
         return
-            $this->Html_Tags
-            (
-                "SELECT",
-                $select,
-                $selectoptions
+            $this->Htmls_DIV(
+                $this->Html_Tags
+                (
+                    "SELECT",
+                    $select,
+                    $selectoptions
+                ),
+                array(
+                    "CLASS" => "select"
+                )
             );
     }
 

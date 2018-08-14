@@ -69,7 +69,7 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
                 (
                     $menu,
                     
-                    $this->MyApp_Interface_LeftMenu_Bullet("-"),
+                    // $this->MyApp_Interface_LeftMenu_Bullet("-"),
                     
                     $title,
                     $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List($submenu,$unit)
@@ -133,7 +133,7 @@ class MyEventApp_Menues_Unit extends MyEventApp_Overrides
                    $links,
                    array
                    (
-                       $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                    //    $this->MyApp_Interface_LeftMenu_Bullet("+"),
                        $this->Htmls_Tag
                        (
                            "A",

@@ -39,7 +39,7 @@ trait MyApp_Interface_Body_Middle
                             array
                             (
                                 "VALIGN" => 'top',
-                                "CLASS" => 'ModuleCell',
+                                "CLASS" => 'section ModuleCell',
                             )
                         ),
                     )

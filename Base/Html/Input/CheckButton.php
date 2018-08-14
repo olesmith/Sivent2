@@ -104,6 +104,7 @@ class HtmlCheckButton extends HtmlHref
         $options[ "TYPE" ]="checkbox";
         $options[ "NAME" ]=$name;
         $options[ "VALUE" ]=$value;
+
         if ($value==$cgivalue) { $options[ "CHECKED" ]=""; }
 
  
@@ -113,7 +114,7 @@ class HtmlCheckButton extends HtmlHref
                "INPUT",
                "",
                $options
-             )."\n";
+            )."\n";
     }
 }
 

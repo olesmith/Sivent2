@@ -65,7 +65,7 @@ trait MyApp_Interface_LeftMenu_Generate
                     $this->Htmls_DIV
                     (
                         $this->MyApp_Interface_LeftMenu_SubMenu_Name($submenu),
-                        array("CLASS" => 'leftmenutitle')
+                        array("CLASS" => 'menu-label')
                     )
                 );
                 
@@ -140,7 +140,7 @@ trait MyApp_Interface_LeftMenu_Generate
                 array_merge($list,$postlist),
                 array
                 (
-                    "CLASS" => 'leftmenulist',
+                    "CLASS" => 'menu-list',
                 )
             );
     }
@@ -182,7 +182,7 @@ trait MyApp_Interface_LeftMenu_Generate
             $url=
                 array
                 (
-                    $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                    // $this->MyApp_Interface_LeftMenu_Bullet("+"),
                     $this->Htmls_HRef
                     (
                         $this->FilterHash($url,$item),
@@ -203,7 +203,7 @@ trait MyApp_Interface_LeftMenu_Generate
             $url=
                 array
                 (
-                    $this->MyApp_Interface_LeftMenu_Bullet("*").
+                    // $this->MyApp_Interface_LeftMenu_Bullet("*").
                     $this->Span
                     (
                         $this->GetRealNameKey($submenuitem,"Name"),

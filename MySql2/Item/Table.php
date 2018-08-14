@@ -33,7 +33,7 @@ class ItemTable extends ItemRow
               TRUE,
               $precgikey
            ),
-           array("ALIGN" => 'center')
+           array( "ALIGN" => 'center' )
         );
     }
 

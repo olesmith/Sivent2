@@ -172,6 +172,7 @@ trait MyMod_Handle_Edit
                (
                    #"ALIGN" => 'center',
                    #"BORDER" => 1,
+                   "WIDTH" => "100%",
                    "CLASS" => 'sgroupstable'
                ),
                array(),

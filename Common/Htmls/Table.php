@@ -82,6 +82,7 @@ trait Htmls_Table
             else       { $even=True; }
         }
 
+        $options["CLASS"] = $options["CLASS"]. " table";
         return $this->Htmls_Tag
         (
             "TABLE",

@@ -41,7 +41,7 @@ trait MyMod_Item_Group_Tables
                            $prekey,
                            array
                            (
-                               "WIDTH" => '100%'
+                                "WIDTH" => '100%'
                            )
                        )
                     );

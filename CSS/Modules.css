@@ -1,41 +1,38 @@
 	  	*.ModuleCell
         {
-          background-color: #CEECF5;
-          text-align: center;
-	  	}
-
+        	background-color: #f3f3f3;
+			box-shadow: 0px 0px 12px -10px #000 inset;
+		}
         /* Search Table */
 	  	*.searchrow
         {
 	  		color: #FFFFFF;
 	  		font-size: 12px;
 	  		text-decoration: None;
-	  		font-weight: Bold;
+			font-weight: Bold;
+			font-style: normal;
 	  	}
 	  	*.searchtable
 	  	{
-	  		font-size: 16px;
-	  		text-decoration: None;
-	  		text-align: center;
-	  		font-weight: Bold;
-            padding: 6px 0px;
-            margin: auto;
-            border-style: solid;
-            border-width: 1px;
+			font-size: 16px;
+			text-decoration: None;
+			text-align: center;
+			font-weight: Bold;
+			font-style: normal;
 	  	}
 	  	*.searchtabletitle
 	  	{
-  	  		color: #3399ff;
-	  		font-size: 16px;
-	  		text-decoration: None;
-	  		text-align: center;
-	  		font-weight: Bold;
+			color: #3399ff;
+			font-size: 16px;
+			text-decoration: None;
+			text-align: center;
+			font-weight: Bold;
 	  	}
 	  	*.searchtitle
 	  	{
 	  		font-size: 12px;
 	  		text-decoration: None;
-	  		text-align: left;
+	  		text-align: right;
 	  		font-weight: Bold;
 	  	}
 	  	*.searchdata
@@ -86,17 +83,15 @@
 	  		text-align: left;
 
 	  		color: blue;
-	  		background-color: #CCCCCC;
 	  	}
 	  	*.head /* head cells in items horisontal table */
 	    {
-	  		font-size: 14px;
-	  		text-decoration:  None;
-            font-weight: bold;
-	  		text-align: center;
-
-	  		color: #000000;
-	  		background-color: #CCCCCC;
+			font-size: 13px;
+			text-decoration:  None;
+		  	font-weight: bold;
+			text-align: center;
+			color: #000000;
+		  	background-color: #fbfbfb;
 	  	}
 	  	*.title  /* title cell in item vertical table */
 	    {

@@ -38,6 +38,8 @@ trait Htmls_Form_Options
             $options[ "ID" ]=$anchor;
         }
 
+        $options[ "CLASS" ] = "form";
+
         return $options;
     }
 
