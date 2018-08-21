@@ -183,8 +183,7 @@ class App_Override extends App_Handle
                     $message,
                     array
                     (
-                        "ALIGN" => 'center',
-                        "CLASS" => 'postloginmsg',
+                        "CLASS" => 'postloginmsg notification',
                     )
                 )
             )

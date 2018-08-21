@@ -2,10 +2,10 @@ array
 (
    'ServType' => 'mysql',
    'Type' => "PDO",
-   'Host' => '127.0.0.1',
+   'Host' => 'localhost',
    'DB' => 'sivent2',
-   'User' => 'sivent2',
-   'Password' => 'your-password',
+   'User' => 'root',
+   'Password' => 'mateus2602',
    
    'Mod' => TRUE,
    'Debug' => 2,

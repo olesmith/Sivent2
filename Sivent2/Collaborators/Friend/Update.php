@@ -29,7 +29,7 @@ class Collaborators_Friend_Update extends Collaborators_Friend_Read
     function Collaborators_Friend_Collaboration_Update($userid,$collaboration)
     {
         $nchanged=0;        
-        if ($collaboration[ "Inscriptions" ]!=2) { continue; }
+        if ($collaboration[ "Inscriptions" ]!=2) { return; }
             
         $value=$this->CGI_POSTint($this->Collaborators_Friend_Collaborations_Cell_Name($collaboration));
 
