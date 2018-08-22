@@ -6,10 +6,35 @@ img
 {
     text-align: center;
     border-collapse: collapse;
-    border: 1px solid black;
+	background-color: #f3f3f3;
+	border-bottom: none !important;
+}
+*.sgroupstable h3
+{
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+}
+*.sgroupstabledata {
+	background-color: transparent;
+}
+*.sgroupstabledata>table {
+	box-shadow: 0 2px 3px rgba(10,10,10,.1),0 1px 1px 1px rgba(10,10,10,.1);
+	color: #4a4a4a;
+	max-width: 100%;
+	position: relative;
+	border-radius: 0px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+.sgroupstabledata>table td[colspan='2'],
+.sgroupstabledata>table td[colspan='9'], 
+.sgroupstabledata>table td[colspan='11']  {
+	background-color: #dcebf8;
+	border-bottom: 2px solid #0064b4 !important;
 }
 *.applicationtop
 {
+	border: none !important;
     vertical-align: middle;   
 }
 *.applicationmiddle
@@ -20,26 +45,73 @@ img
 {
     vertical-align: top;   
 }
+.website-header-row {
+	border-bottom: 2px solid orange;
+}
+*.website-footer-row {
+	border-top: 2px solid orange;
+	background-color:#0064b4;
+}
+*.website-footer-row td{
+	border: none !important;
+	color: white;
+}
+*.website-footer-row table, 
+*.website-footer-row tr,
+*.website-footer-row td{
+	background-color:#0064b4;
+	color: white;
+}
+*.website-footer-row hr{
+	background-color: #0d78b1;
+	margin: 1.0rem auto;
+}
+*.website-footer-row a{
+	background-color: transparent;
+	color: #ffcd83;
+	text-decoration: none;
+}
+*.website-footer-row a:hover{
+	background-color: transparent;
+	color: #9ce7ff;
+	text-decoration: underline;
+}
 *.applicationleft
 {
     text-align: center;
-    width: 20%;
+	width: 20%;
+	min-width: 20%;
+	border-right: 1px solid #dddddd;
 }
 *.applicationright
 {
     text-align: center;
-    width: 10%;
+	width: 10%;
+	min-width: 10%;
+	border-left: 1px solid #dddddd;
 }
 *.applicationcenter
 {
-    text-align: center;
-    width: 70%;
+	text-align: center;
+	width: 70%;
+    max-width: 70%;
 }
-
+*.applicationtop.applicationleft	.image,
+*.applicationtop.applicationright .image
+{
+	max-width: 200px !important; 
+	margin: 0.5rem auto;
+}
+*.applicationbottom.applicationleft	.image,
+*.applicationbottom.applicationright .image
+{
+	max-width: 36px !important; 
+	margin: 2rem auto;
+}
 
 *.applicationtitle
 {
-	color: #3399ff: 
+	color: #3399ff;
 	font-size: 18px;
 	text-decoration: None;
 	font-weight: Bold;
@@ -65,32 +137,52 @@ a.applicationlink
 }
 *.supporttable
 {
-    align: center;
-    text-align: center;
-    vertical-align: middle;
+    color: #000000;
+	background-color: #CEECF5;
 }
 *.collaboratorstable
 {
-    text-align: center;
-    vertical-align: middle;
+    color: #000000;
+	background-color: #3399ff;
 }
 *.collaboratorstitle
 {
-	color: #000000;
-	background-color: #ffffff;
-	text-decoration: underline;
 	font-weight: Bold;
-    text-align: left;
+	text-align: left;
+	padding: 8px 18px;
 }
 
+tr.some td {
+	padding: 12px 24px;
+}
 td.center
 {
 	vertical-align: middle;
 	text-align: center;
 }
 
-
-
+/* Used mainly by FrametIt Function */
+*.card {
+	border-radius: 3px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	margin-left: auto;
+	margin-right: auto;
+}
+*.card table {
+	margin-top: 0.2rem !important;
+	margin-bottom: 1rem !important;
+}
+*.inactiveinfo
+{
+	background: white;
+	border: 1px solid #e0e0e0;
+	padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+}
+*.inactiveinfo table
+*.notification table,  {
+	margin: 12px;
+}
 *.pagingtitle
 {
   	color: #007700;
@@ -145,18 +237,17 @@ td.center
 	text-align: center;
 	font-weight: Bold;
 }
-
-*.postloginmsg
+/* Messages */
+.message-body { 
+	box-shadow: 0px 0px 5px -4px #000; 
+}
+.postloginmsg
 {
-	background-color: #FFFFFF;
-	color: #555555;
-	font-size: 14px;
+	/* color: #222222;
+	font-size: 12px;
 	font-weight: Bold;
-    width: 60%;
-    border-style: solid;
-    border-width: 1px;
-	text-align: center;
-    padding: 10px;
+	margin-top: 12px; */
+	text-align: center !important;
 }
 *.spammsg
 {
@@ -227,14 +318,18 @@ td.eventicons
 	align: center;
 	text-align: center;
 }
+*.sponsorstable td
+{
+	border: none;
+}
 *.sponsorstitle
 {
-    background-color: #CEECF5;
-	color: #333333;
-	font-size: 12px;
+    color: #0064b4;
+	font-size: 14px;
 	text-decoration: None;
 	font-weight: Bold;
-    font-style: Italic;
+	font-style: Italic;
+	padding: 0.75rem;
 }
 *.sponsortitle
 {
@@ -265,7 +360,8 @@ td.eventicons
     vertical-align: middle;
     font-size: 12px;
     text-decoration: none;
-    font-weight: Bold;
+	font-weight: Bold;
+	padding: 0.75rem;
 }
 *.sponsorlink:hover
 {

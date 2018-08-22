@@ -7,9 +7,8 @@ trait MyMod_Icons
         array
         (
             '',
-            'fa-lg',
             'fa-2x',
-            
+            'fa-lg',
             'fa-xs','fa-sm',
             'fa-3x','fa-5x','fa-7x','fa-10x',            
         );

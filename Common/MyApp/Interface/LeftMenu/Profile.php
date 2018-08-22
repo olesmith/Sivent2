@@ -42,7 +42,7 @@ trait MyApp_Interface_LeftMenu_Profile
                    $links,
                    array
                    (
-                       $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                    //    $this->MyApp_Interface_LeftMenu_Bullet("+"),
                        $this->Htmls_Href
                        (
                            "?".$this->CGI_Hash2Query($args),

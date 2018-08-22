@@ -26,9 +26,9 @@ array
     ),
     "LM_Admin_Notice" => array
     (
-        "Name"    => " >> Admin << ",
-        "Name_ES" => " >> Admin << ",
-        "Name_UK" => " >> Admin << ",
+        "Name"    => "Admin",
+        "Name_ES" => "Admin",
+        "Name_UK" => "Admin",
     ),
     "LM_Read_Only_Notice" => array
     (

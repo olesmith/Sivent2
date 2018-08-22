@@ -24,7 +24,7 @@ class Friends_Handle extends Friends_Statistics
     //* Prints list of $friend inscriptions and call parent.
     //*
 
-    function MyMod_Handle_Edit($title="",$formurl=NULL,$title="",$noupdate=FALSE)
+    function MyMod_Handle_Edit($echo=TRUE,$formurl=NULL,$title="",$noupdate=FALSE)
     {
         echo parent::MyMod_Handle_Edit($title,$formurl,$title,$noupdate);
         

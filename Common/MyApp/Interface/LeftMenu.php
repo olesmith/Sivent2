@@ -40,6 +40,9 @@ trait MyApp_Interface_LeftMenu
                             $this->MyApp_Interface_LeftMenu_Top_ReadOnlyMessage(),
                             $this->MyApp_Interface_LeftMenu_Top_AdminInfo(),
                             $this->MyApp_Interface_LeftMenu_Generate()
+                        ),
+                        array(
+                            "CLASS" => "menu"
                         )                
                     )
                 ),

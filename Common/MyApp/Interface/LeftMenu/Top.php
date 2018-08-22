@@ -19,13 +19,6 @@ trait MyApp_Interface_LeftMenu_Top
                     array
                     (
                         $this->MyLanguage_GetMessage("LMWelcomeMessage").": ",
-                    ),
-                    array("CLASS" => "welcomemessage")
-                ),
-                $this->Htmls_DIV
-                (
-                    array
-                    (
                         preg_replace
                         (
                             '/\s*:\s*/',
@@ -33,7 +26,7 @@ trait MyApp_Interface_LeftMenu_Top
                             $this->HtmlSetupHash[ "ApplicationName"  ]
                         ),
                     ),
-                    array("CLASS" => "userinfotable")
+                    array("CLASS" => "welcomemessage")
                 )
             );
     }
@@ -143,7 +136,7 @@ trait MyApp_Interface_LeftMenu_Top
                 $this->DIV
                 (
                     $this->MyLanguage_GetMessage("LM_Admin_Notice"),
-                    array("CLASS" => 'adminnotice')
+                    array("CLASS" => 'adminnotice tag is-danger is-flex')
                 ),
                 $this->BR()
             );

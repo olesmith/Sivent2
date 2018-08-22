@@ -109,7 +109,7 @@ trait MyApp_Login_Form
         return
             $this->Htmls_Tag
             (
-                "CENTER",
+                "DIV",
                 $this->Htmls_DIV
                 (
                     $this->GetMessage
@@ -119,9 +119,12 @@ trait MyApp_Login_Form
                     ),
                     array
                     (
-                        "ALIGN" => 'center',
-                        "CLASS" => 'postloginmsg',
+                        "CLASS" => 'postloginmsg message-body',
                     )
+                ),
+                array
+                (
+                    "CLASS" => "message is-warning"
                 )
             );
     }

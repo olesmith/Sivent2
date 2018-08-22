@@ -15,7 +15,7 @@ trait Htmls_Table_Frame
             $options=
                 array
                 (
-                    "STYLE" => 'border-style: solid;border-width: 1px;',
+                    "CLASS" => 'card',
                     "ALIGN" => 'center',
                 );
         }

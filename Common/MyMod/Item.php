@@ -110,26 +110,30 @@ trait MyMod_Item
             echo
                 $this->Div
                 (
-                   $message.
-                   ": ".
-                   $this->Href
-                   (
-                      "?".$this->CGI_Hash2URI
-                      (
-                         array
-                         (
-                            "Unit" => $this->Unit("ID"),
-                            "Event" => $this->Event("ID"),
-                            "ModuleName" => $othermodule,
-                            "Action" => "Add",
-                         )                         
-                      ),
-                      $this->MyLanguage_GetMessage("Add_Action_Name").
-                      " ".
-                      $obj->MyMod_ItemName(),
-                      "","","",$noqueryargs=FALSE,$options=array(),"HorMenu"
-                   ),
-                   array("CLASS" => 'warning')
+                    $this->Div
+                    (
+                        $message.
+                        ": ".
+                        $this->Href
+                        (
+                            "?".$this->CGI_Hash2URI
+                            (
+                                array
+                                (
+                                    "Unit" => $this->Unit("ID"),
+                                    "Event" => $this->Event("ID"),
+                                    "ModuleName" => $othermodule,
+                                    "Action" => "Add",
+                                )                         
+                            ),
+                            $this->MyLanguage_GetMessage("Add_Action_Name").
+                            " ".
+                            $obj->MyMod_ItemName(),
+                            "","","",$noqueryargs=FALSE,$options=array(),"HorMenu"
+                        ),
+                        array("CLASS" => "message-body")
+                    ),
+                   array("CLASS" => 'warning message is-warning')
                 ).
                 $this->BR();
 

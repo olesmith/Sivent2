@@ -56,6 +56,7 @@ function MakeInput($name,$value="",$size=10,$options=array())
     $options[ "ID" ]="Input".$NFields;
     $options[ "VALUE" ]=$value;
     $options[ "SIZE" ]=$size;
+    $options[ "CLASS" ]="input is-small";
 
     return "<INPUT".$this->Hash2Options($options).">";
 }
@@ -77,6 +78,7 @@ function MakePassword($name,$value,$size=8,$maxsize=0,$options=array())
     $options[ "ID" ]="Input".$NFields;
     $options[ "VALUE" ]=$value;
     $options[ "SIZE" ]=$size;
+    $options[ "CLASS" ]="input is-small";
     if ($maxsize>0)
     {
         $options[ "MAXSIZE" ]=$maxsize;
@@ -104,6 +106,7 @@ function MakeHidden($name,$value="",$options=array())
     $options[ "TYPE" ]='hidden';
     $options[ "NAME" ]=$name;
     $options[ "VALUE" ]=$value;
+    $options[ "CLASS" ]="input is-small";
 
     return "<INPUT".$this->Hash2Options($options).">";
 }
@@ -153,6 +156,7 @@ function MakeFileField($name,$options=array())
     {
         $options[ "SIZE" ]=25;
     }
+    $options["CLASS"]= $options["CLASS"]. " file-input";
 
     return "<INPUT TYPE='FILE' NAME='".$name."'".$this->Hash2Options($options).">";
 }
@@ -182,6 +186,7 @@ function MakeTextArea($name,$rows,$cols,$value,$wrap="physical",$options=array()
         "COLS='".$cols."' ".
         "ROWS='".$rows."' ".
         "WRAP='".$wrap."' ".
+        "CLASS='textarea is-small'".
         $this->Hash2Options($options).
         ">\n";
 

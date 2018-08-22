@@ -24,8 +24,8 @@ trait MyApp_Interface_Head_METAs
                   "CONTENT"    => "text/html; charset=".$this->HtmlSetupHash[ "CharSet"  ],
                )
             ),
-             $this->HtmlTag
-             (
+            $this->HtmlTag
+            (
                 "META",
                 "",
                 array
@@ -33,7 +33,26 @@ trait MyApp_Interface_Head_METAs
                    "NAME"    => 'Autor',
                    "CONTENT" => $this->HtmlSetupHash[ "Author"  ],
                 )
-             )
+            ),
+            $this->HtmlTag
+            (
+                "META",
+                "",
+                array
+                (
+                    "CHARSET"    => 'utf8'
+                )
+            ),
+            $this->HtmlTag
+            (
+                "META",
+                "",
+                array
+                (
+                    "NAME"    => 'viewport',
+                    "CONTENT" => 'width=device-width, initial-scale=1',
+                )
+            )
         );
     }
     

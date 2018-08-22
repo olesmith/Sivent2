@@ -53,7 +53,7 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
         return
             array
             (
-                $this->MyApp_Interface_LeftMenu_Bullet("-").
+                // $this->MyApp_Interface_LeftMenu_Bullet("-").
                 $name,
                 $this->MyApp_Interface_LeftMenu_Generate_SubMenu_List
                 (
@@ -163,7 +163,7 @@ class MyEventApp_Menues_Event extends MyEventApp_Menues_Unit
             (
                 array
                 (
-                    $this->MyApp_Interface_LeftMenu_Bullet("+"),
+                    // $this->MyApp_Interface_LeftMenu_Bullet("+"),
                 ),
                 $this->Htmls_HRef
                 (

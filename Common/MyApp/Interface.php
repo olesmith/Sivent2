@@ -166,13 +166,13 @@ trait MyApp_Interface
                         (
                             array
                             (
-                                $this->U($this->B("Author:")),
+                                $this->B("Author:"),
                                 $this->HtmlSetupHash[ "Author"  ],
                                 join(" - ",$links)
                             ),
                             array
                             (
-                                $this->U($this->B("Support:")),
+                                $this->B("Support:"),
                                 $this->IconText
                                 (
                                     $this->HtmlSetupHash[ "SupportEmail" ].".png",

@@ -5,47 +5,68 @@
 	text-decoration: None;
 	text-align: left;
 	font-weight: Bold;
-	padding: 5px;
+	font-style: italic;
 }
 *.userinfotable
 {
-  	color: #333333;
+	color: #333333;
 	font-size: 12px;
 	text-decoration: None;
-	text-align: center;
-	font-weight: Bold;
-	padding: 5px;
+	text-align: left;
+	font-weight: normal;
+	margin-top: 1rem;
+}
+.userinfotable td {
+	border: none;
+	padding: 0 0.75rem 0 0;
 }
 *.anonymous
 {
   	color: #777777;
 	font-size: 12px;
 	text-decoration: None;
-	text-align: center;
+	text-align: left;
 	font-weight: Bold;
-	padding: 5px;
+	margin-bottom: 1rem;
 }
 *.leftmenu
 {
-    font-size: 14px;
-    text-decoration: None;
-    font-weight: Bold;
+	font-size: 14px;
+	text-decoration: None;
+	font-weight: Bold;
+	background-color: #ffffff;
+	border-right: 1px solid #dddddd;
+	padding: 2.0rem 1.5rem 2.0rem 3% !important;
+}
+@media only screen and (max-width: 1024px) {
+	*.leftmenu
+	{
+		padding: 2rem 1rem !important;
+	}
+}
+.leftmenu .menu-label {
+	font-size: 1.0em;
+	color: orange;
+	margin-bottom: 0.125rem;
+	word-wrap: break-word;
 }
 a.leftmenulinks
 {
-	color: #3366ff;
-	background-color: #FFFFFF;
+	background-color: white;
+	color: #0064b4;
 	font-size: 12px;
-	text-decoration: underline;
-	font-weight: Bold;
+	text-decoration: none;
+	word-wrap: break-word;
+	transition: background 0.2s, color 0.2s;
 }
 a.leftmenulinks:hover
-                    {
-	  		            background-color: #F5BCA9;
-	  	            }
+{
+	background-color: #ff9900 !important;
+	color: white !important;
+}
 *.leftmenuperiod
 {
-  	color: #990000;
+	color: #990000;
 	font-size: 12px;
 	text-decoration: None;
 	text-align: center;
@@ -53,20 +74,22 @@ a.leftmenulinks:hover
 }
 *.leftmenulist
 {
-    background-color: #FFFFFF;
+	background-color: #ffffff;
 	color: #333333;
 	font-size: 12px;
 	text-decoration: None;
 	font-weight: Bold;
-    font-style: Italic;
-    list-style-type: none;
+	list-style-type: none;
+}
+*.leftmenulist>li
+{
+	margin-left: 0.5em;
 }
 *.leftmenutitle
 {
-    background-color: #CEECF5;
-	color: #333333;
+	color: #0064b4 !important;
 	font-size: 12px;
 	text-decoration: None;
 	font-weight: Bold;
-    font-style: Italic;
+	padding-top: 16px;
 }

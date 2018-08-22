@@ -48,60 +48,15 @@ trait Htmls_Hrefs_Menu
             $hrefs=$links;
         }
 
-        $hhrefs=array();
-        $rhrefs=array();
-        for ($n=0;$n<count($hrefs);$n++)
-        {
-            if ($nperline>0 && ($n%$nperline)==($nperline-1))
-            {
-                $list=$rhrefs;
-                array_push($list,$hrefs[$n]);
-                array_push($hhrefs,$list);
-
-                $rhrefs=array();
-            }
-            else
-            {
-                array_push($rhrefs,$hrefs[$n]);                
-            }
-        }
-
-        if (count($rhrefs)>0)
-        {
-            array_push($hhrefs,$rhrefs);
-        }
-
-        ##$hhrefs is now list of lists, max nperline in each
-        $html=array();
-
-        foreach ($hhrefs as $hrid => $rhrefs)
-        {
-            $rhtml=array();
-            array_push($html,"[");
-            
-            $first=True;
-            foreach ($rhrefs as $rhref)
-            {
-                if (!$first)
-                {
-                    array_push($html,"|");
-                }
-                array_push($html,$rhref);
-                $first=False;
-            }
-
-            #array_push($html,$rhtml);            
-            array_push($html,"]");
-        }
-
         return
             $this->Htmls_Tag
             (
-                "CENTER",
-                $html,
+                "DIV",
+                $this->Htmls_List($hrefs),
                 array
                 (
                     "ID" => $id,
+                    "CLASS" => "tabs is-centered is-fullwidth"
                 )
             );
     }

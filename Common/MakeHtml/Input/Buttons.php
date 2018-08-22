@@ -152,6 +152,12 @@ trait Html_Input_Buttons
         if (empty($type)) { return $this->Html_Tags("BUTTON",$title,$options); }
 
         $options[ "TYPE" ]=$type;
+        $options[ "CLASS" ]="button";
+
+        if ($type == "submit") {
+            $options[ "CLASS" ]="button is-info";
+        }
+
         return $this->Html_Tags("BUTTON",$title,$options);
     }
     

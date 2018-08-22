@@ -40,7 +40,7 @@ class MyEventApp_Menues_Friend extends MyEventApp_Menues_Event
         return
             array
             (
-                $this->MyApp_Interface_LeftMenu_Bullet("-"),
+                // $this->MyApp_Interface_LeftMenu_Bullet("-"),
                 $this->InscriptionsObj()->MyMod_ItemName(),
                 array
                 (

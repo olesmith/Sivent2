@@ -26,6 +26,9 @@ trait MyApp_Interface_Body_Top
                             $this->MyApp_Interface_Body_Top_Left(),
                             $this->MyApp_Interface_Body_Top_Center(),
                             $this->MyApp_Interface_Body_Top_Right()
+                        ),
+                        array(
+                            "CLASS" => "website-header-row"
                         )
                     )
                 );

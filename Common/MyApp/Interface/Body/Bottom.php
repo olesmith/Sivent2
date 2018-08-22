@@ -30,6 +30,10 @@ trait MyApp_Interface_Body_Bottom
                                 $this->MyApp_Interface_Body_Bottom_Left(),
                                 $this->MyApp_Interface_Body_Bottom_Center(),
                                 $this->MyApp_Interface_Body_Bottom_Right(),
+                            ),
+                            array
+                            (
+                                "CLASS" => "website-footer-row"
                             )
                         )
                     ),
@@ -120,11 +124,11 @@ trait MyApp_Interface_Body_Bottom
                             (
                                 $this->Htmls_HR('100%'),
                                 $this->MyApp_Interface_Cookies_Message(),
-                                $this->Htmls_HR('75%'),
+                                $this->Htmls_HR('100%'),
                                 $this->MyApp_Interface_Support(),
-                                $this->Htmls_HR('75%'),
+                                // $this->Htmls_HR('75%'),
                                 $this->MyApp_Interface_Thanks(),
-                                $this->Htmls_HR('75%'),
+                                $this->Htmls_HR('100%'),
                                 $this->MyApp_Interface_Phrase(),
                                 $this->Htmls_HR('75%'),
                                 $this->MyApp_Interface_Messages_System(),

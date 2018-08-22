@@ -23,6 +23,7 @@ trait MakeHtml_Input
         $options[ "TYPE" ]=strtolower($type);
         $options[ "NAME" ]=$name;
         $options[ "VALUE" ]=$value;
+        $options[ "CLASS" ]="input is-small";
         return $this->Html_Tag
         (
            "INPUT",
@@ -71,7 +72,7 @@ trait MakeHtml_Input
         
         $options[ "NAME" ]=$name;
         $options[ "VALUE" ]=$value;
-        
+        $options[ "CLASS" ]="input is-small";
         return $this->Html_Tag
         (
            "INPUT",

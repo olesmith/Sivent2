@@ -64,15 +64,11 @@ trait MyMod_Paging_Menu
                         "Paging",
                         $this->MyMod_Paging_N." Páginas: ",
                         $rpages,
-                        array(),
-                        array
-                        (
-                            "CLASS" => 'ptablemenu',
-                        )
+                        array()
                     ),
                     array
                     (
-                        "CLASS" => 'ptablemenu center',
+                        "CLASS" => 'center',
                         "ID" => 'PagingMenu',
                     )
                 )
@@ -199,7 +195,7 @@ trait MyMod_Paging_Menu
                       
                 $page,
                 $this->MyMod_Paging_Menu_Page_Item_Title($page),
-                "ptablemenu",
+                "",
                 array
                 (
                     "Anchor" => "PagingMenu",
