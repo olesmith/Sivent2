@@ -11,19 +11,26 @@ img
 }
 *.sgroupstable h3
 {
-	margin-top: 0.75rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
 }
-*.sgroupstable>table {
-	box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.1);
+*.sgroupstabledata {
+	background-color: transparent;
+}
+*.sgroupstabledata>table {
+	box-shadow: 0 2px 3px rgba(10,10,10,.1),0 1px 1px 1px rgba(10,10,10,.1);
 	color: #4a4a4a;
 	max-width: 100%;
 	position: relative;
-	border-radius: 3px;
+	border-radius: 0px;
 	margin-top: 12px;
 	margin-bottom: 12px;
 }
-*.website-header-row {
-	border-bottom: 2px solid orange;
+.sgroupstabledata>table td[colspan='2'],
+.sgroupstabledata>table td[colspan='9'], 
+.sgroupstabledata>table td[colspan='11']  {
+	background-color: #dcebf8;
+	border-bottom: 2px solid #0064b4 !important;
 }
 *.applicationtop
 {
@@ -37,6 +44,9 @@ img
 *.applicationbottom
 {
     vertical-align: top;   
+}
+.website-header-row {
+	border-bottom: 2px solid orange;
 }
 *.website-footer-row {
 	border-top: 2px solid orange;
@@ -156,6 +166,8 @@ td.center
 	border-radius: 3px;
 	margin-top: 12px;
 	margin-bottom: 12px;
+	margin-left: auto;
+	margin-right: auto;
 }
 *.card table {
 	margin-top: 0.2rem !important;
@@ -225,13 +237,17 @@ td.center
 	text-align: center;
 	font-weight: Bold;
 }
-
-*.postloginmsg
+/* Messages */
+.message-body { 
+	box-shadow: 0px 0px 5px -4px #000; 
+}
+.postloginmsg
 {
-	color: #222222;
+	/* color: #222222;
 	font-size: 12px;
 	font-weight: Bold;
-	margin-top: 12px;
+	margin-top: 12px; */
+	text-align: center !important;
 }
 *.spammsg
 {
@@ -302,14 +318,18 @@ td.eventicons
 	align: center;
 	text-align: center;
 }
+*.sponsorstable td
+{
+	border: none;
+}
 *.sponsorstitle
 {
-    background-color: #CEECF5;
-	color: #333333;
-	font-size: 12px;
+    color: #0064b4;
+	font-size: 14px;
 	text-decoration: None;
 	font-weight: Bold;
-    font-style: Italic;
+	font-style: Italic;
+	padding: 0.75rem;
 }
 *.sponsortitle
 {
@@ -340,7 +360,8 @@ td.eventicons
     vertical-align: middle;
     font-size: 12px;
     text-decoration: none;
-    font-weight: Bold;
+	font-weight: Bold;
+	padding: 0.75rem;
 }
 *.sponsorlink:hover
 {

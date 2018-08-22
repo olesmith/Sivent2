@@ -177,14 +177,18 @@ class App_Override extends App_Handle
             $this->BR(),
             $this->Htmls_Tag
             (
-                "CENTER",
+                "DIV",
                 $this->Htmls_DIV
                 (
                     $message,
                     array
                     (
-                        "CLASS" => 'postloginmsg notification',
+                        "CLASS" => 'postloginmsg message-body',
                     )
+                ),
+                array
+                (
+                    "CLASS" => 'message is-primary',
                 )
             )
         );

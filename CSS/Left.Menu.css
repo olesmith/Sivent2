@@ -5,6 +5,7 @@
 	text-decoration: None;
 	text-align: left;
 	font-weight: Bold;
+	font-style: italic;
 }
 *.userinfotable
 {
@@ -12,7 +13,12 @@
 	font-size: 12px;
 	text-decoration: None;
 	text-align: left;
-  	font-weight: Bold;
+	font-weight: normal;
+	margin-top: 1rem;
+}
+.userinfotable td {
+	border: none;
+	padding: 0 0.75rem 0 0;
 }
 *.anonymous
 {
@@ -30,7 +36,7 @@
 	font-weight: Bold;
 	background-color: #ffffff;
 	border-right: 1px solid #dddddd;
-	padding: 2.0rem 1.5rem 2.0rem 4% !important;
+	padding: 2.0rem 1.5rem 2.0rem 3% !important;
 }
 @media only screen and (max-width: 1024px) {
 	*.leftmenu

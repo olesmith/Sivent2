@@ -63,8 +63,8 @@
 	  	}
 	  	h5
 	  	{
-  	  		color: #3366ff;
-	  		font-size: 12px;
+  	  		color: #0064b4;
+	  		font-size: 13px;
 	  		text-decoration: None;
 	  		text-align: center;
 	  		font-weight: Bold;
@@ -93,6 +93,10 @@
 	  		/* font-size: 12px; */
 	  		text-decoration: None;
 	  		text-align: left;
+		}
+		button[type=reset]
+	  	{
+  	  		margin-left: 1rem;
 	  	}
 	  	/*select
 	  	{
@@ -178,4 +182,14 @@
 		  }
 		form.form table td{
 			border: none !important;
+		}
+		form.form>table {
+			background-color: #fff;
+			box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.1);
+			color: #4a4a4a;
+			max-width: 100%;
+			position: relative;
+		}
+		*.borderless-table td {
+			border: none;
 		}

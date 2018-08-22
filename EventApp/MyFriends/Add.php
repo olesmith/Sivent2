@@ -182,11 +182,15 @@ class MyFriends_Add extends MyFriends_Add_Search
         //else { $html.="???"; }
 
         $html.=
-            $this->H
+            $this->DIV
             (
-               5,
-               $this->MyLanguage_GetMessage("Friend_Select_Table_Info_Msg")
-            ).                
+                $this->DIV
+                (
+                    $this->MyLanguage_GetMessage("Friend_Select_Table_Info_Msg"),
+                    array("CLASS" => "message-body has-text-centered")
+                ),
+                array("CLASS" => "message is-primary")
+            ).
             "";
 
         return $html;

@@ -173,13 +173,13 @@ trait MyMod_Handle_Edit
                    #"ALIGN" => 'center',
                    #"BORDER" => 1,
                    "WIDTH" => "100%",
-                   "CLASS" => 'sgroupstable'
+                   "CLASS" => 'sgroupstable borderless-table'
                ),
                array(),
                array
                (
                    "WIDTH" => '50%',
-                   "CLASS" => 'sgroupstable'
+                   "CLASS" => 'sgroupstabledata'
                )
             );
 
@@ -251,7 +251,10 @@ trait MyMod_Handle_Edit
                 (
                     "",
                     $this->MyMod_Handle_Edit_Info_Matrix($item),
-                    array("ALIGN" => 'center',"FRAME" => 'box')
+                    array(
+                        "ALIGN" => 'center', 
+                        "FRAME" => 'box'
+                    )
                 ),
                 $this->BR()
             );

@@ -1,7 +1,6 @@
 *.inactivemenuitem
 {
 	color: #CCCCCC;
-	background-color: #FFFFFF;
 	font-size: 12px;
 	text-decoration: None;
 	font-weight: Bold;
@@ -11,6 +10,14 @@ div.hormenu
     padding: 4px 0px;
     margin: auto;
 }
+.tabs, .tabs a {
+	background-color: transparent;
+	text-decoration: none;
+} 
+.tabs a:hover {
+    border-bottom-color: orange;
+    color: orange;
+}
 *.tablemenu
 {
     padding: 6px 0px;
@@ -18,35 +25,35 @@ div.hormenu
 }
 a.ptablemenu
 {
-	color: #3366ff;
+	/* color: #3366ff;
 	background-color: #FFFFFF;
-	font-size: 12px;
+	font-size: 12px; */
 	text-decoration: None;
-	font-weight: Bold;
-	font-family: Roman;
+	/* font-weight: Bold;
+	font-family: Roman; */
 }
 a.stablemenu
 {
-	color: #3366ff;
+	/* color: #3366ff;
 	background-color: #FFFFFF;
-	font-size: 12px;
+	font-size: 12px; */
 	text-decoration: None;
-	font-weight: Bold;
+	/* font-weight: Bold; */
 }
 a.atablemenu
 {
-	color: #3366ff;
+	/* color: #3366ff;
 	background-color: #FFFFFF;
-	font-size: 12px;
+	font-size: 12px; */
 	text-decoration: None;
-	font-weight: Bold;
+	/* font-weight: Bold; */
 }
 a.sptablemenu
 {
-	color: #3366ff;
+	/* color: #3366ff;
 	background-color: #FFFFFF;
-	font-size: 12px;
+	font-size: 12px; */
 	text-decoration: None;
-	font-weight: Bold;
-	font-family: Roman;
+	/* font-weight: Bold;
+	font-family: Roman; */
 }

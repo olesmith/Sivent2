@@ -190,7 +190,8 @@ trait MyMod_Handle_Add
            array
            (
               "ALIGN" => 'center',
-              "BORDER" => 1
+              "BORDER" => 0,
+              "CLASS" => "card"
            ),
            array(),
            array(),

@@ -35,7 +35,11 @@ class InscriptionsHandle extends Inscriptions_Handle_Collaborations
                 $this->Htmls_Table
                 (
                     "",
-                    $this->Inscription_Handle_Form_Tables($edit,$this->Friend,$this->Inscription)
+                    $this->Inscription_Handle_Form_Tables($edit,$this->Friend,$this->Inscription),
+                    array(
+                        "CLASS" => "card borderless-table"
+                    )
+               
                 )
             );
     }
